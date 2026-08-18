@@ -1,0 +1,175 @@
+{
+  "question": "What award was an actor born in 1955 that acted in the movie Ransom nominated for?",
+  "final_answer": "Golden Globe Award",
+  "best_node": {
+    "node_id": "state_1",
+    "node_type": "state",
+    "content": "What award was an actor born in 1955 that acted in the movie Ransom nominated for?",
+    "depth": 0,
+    "parent_id": null,
+    "value": 0.8923726988015844,
+    "temperature": 1.4907633855820963,
+    "expanded": true,
+    "visit_count": 1,
+    "persistent": false,
+    "score_breakdown": {
+      "task_progress": 0.9941066543057262,
+      "evidence_support": 0.9826666303109591,
+      "memory_usefulness": 0.7841237535759132,
+      "answerability": 0.8913333151554796,
+      "uncertainty": 0.12312000654402735
+    },
+    "metadata": {
+      "diffusion_delta": 0.04363359430308589,
+      "diffusion_gain": 0.04363359430308589
+    }
+  },
+  "final_synthesis_node_ids": [
+    "state_3",
+    "state_5",
+    "state_9",
+    "memory_mem_5",
+    "state_1"
+  ],
+  "answer_history": [
+    {
+      "node_id": "memory_mem_4",
+      "content": "Conclusion: The answer to 'Who is an actor born in 1955 that acted in the movie Ransom' is Ron Howard.",
+      "answer_text": "Ron Howard",
+      "value": 0.49999998838330695,
+      "evidence_ids": [
+        "doc_4"
+      ],
+      "step": 1
+    },
+    {
+      "node_id": "memory_mem_5",
+      "content": "Conclusion: The answer to 'What award was Gary Sinise nominated for' is Tirunelveli.",
+      "answer_text": "Tirunelveli",
+      "value": 0.9193957059933775,
+      "evidence_ids": [
+        "doc_9",
+        "doc_6"
+      ],
+      "step": 2
+    },
+    {
+      "node_id": "state_3",
+      "answer_text": "Tirunelveli",
+      "previous_answer": "",
+      "confidence": 0.9993431586884538,
+      "score": 0.9038107953207781,
+      "source": "expansion_candidate",
+      "step": 1,
+      "evidence_ids": [
+        "doc_9",
+        "doc_6",
+        "doc_7",
+        "doc_10"
+      ],
+      "kind": "anytime_answer"
+    },
+    {
+      "node_id": "state_3",
+      "answer_text": "Tirunelveli",
+      "previous_answer": "Tirunelveli",
+      "confidence": 0.9993431586884538,
+      "score": 1.0,
+      "source": "grounded",
+      "step": 1,
+      "evidence_ids": [
+        "doc_9",
+        "doc_6",
+        "doc_7",
+        "doc_10"
+      ],
+      "kind": "anytime_answer"
+    },
+    {
+      "node_id": "memory_mem_6",
+      "content": "Conclusion: The answer to 'Which actor born in 1955 acted in the movie Ransom' is Sirvel.",
+      "answer_text": "Sirvel",
+      "value": 0.6958300458509051,
+      "evidence_ids": [
+        "doc_4"
+      ],
+      "step": 4
+    },
+    {
+      "node_id": "memory_mem_7",
+      "content": "Conclusion: The answer to 'For which role or film was Gary Sinise nominated for an Academy Award' is Academy Award.",
+      "answer_text": "Academy Award",
+      "value": 0.9999999972929339,
+      "confidence": 0.9510037596071199,
+      "evidence_ids": [
+        "doc_6",
+        "doc_9"
+      ],
+      "step": 5,
+      "kind": "intermediate_answer"
+    },
+    {
+      "node_id": "memory_mem_8",
+      "content": "Conclusion: The answer to 'Who is the actor born in 1955 that acted in the movie Ransom (1996)' is Sirvel.",
+      "answer_text": "Sirvel",
+      "value": 0.7940520080081483,
+      "evidence_ids": [
+        "doc_9"
+      ],
+      "step": 6
+    },
+    {
+      "node_id": "memory_mem_9",
+      "content": "Conclusion: The answer to 'Who is the actor born in 1955 that acted in Ransom (1996)' is Tirunelveli.",
+      "answer_text": "Tirunelveli",
+      "value": 0.6849326060357435,
+      "evidence_ids": [
+        "doc_9"
+      ],
+      "step": 7
+    },
+    {
+      "node_id": "memory_mem_10",
+      "content": "Conclusion: The answer to 'What award was an actor born in 1955 that acted in the movie Ransom nominated for' is Golden Globe Award.",
+      "answer_text": "Golden Globe Award",
+      "value": 0.0,
+      "evidence_ids": [],
+      "step": 8
+    },
+    {
+      "node_id": "state_1",
+      "answer_text": "Golden Globe Award",
+      "source": "answer_judge",
+      "choice": "C",
+      "candidate_source": "final_synthesis",
+      "base_score": 0.8953233559568364,
+      "judge_confidence": 0.0,
+      "judge_reason": "Gary Sinise (born 1955, in Ransom) was nominated for a Golden Globe Award.",
+      "step": 7,
+      "kind": "final_answer_selection"
+    }
+  ],
+  "anytime_answer": "Tirunelveli",
+  "anytime_answer_score": 1.0,
+  "anytime_answer_source": "grounded",
+  "anytime_answer_node_id": "state_3",
+  "stats": {
+    "steps": 7,
+    "llm_calls": 11,
+    "generated_tokens": 1006,
+    "token_budget_remaining": 194,
+    "total_nodes": 32,
+    "kg_nodes": 8,
+    "memory_nodes": 10,
+    "state_nodes": 14,
+    "deleted_state_nodes": 1,
+    "scheduler_mode": "tdca",
+    "scoring_mode": "hybrid",
+    "stop_reason": "final_synthesis_reserve",
+    "goal_kind": "bridge",
+    "goal_completion": 0.0,
+    "anytime_answer": "Tirunelveli",
+    "anytime_answer_score": 1.0,
+    "anytime_answer_source": "grounded"
+  }
+}

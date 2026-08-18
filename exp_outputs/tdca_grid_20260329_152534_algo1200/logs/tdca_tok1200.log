@@ -1,0 +1,25 @@
+[TDCA-BATCH] project_root = /workspace/TDCA
+[TDCA-BATCH] dataset      = /workspace/TDCA/data/hotpot_dev_distractor_v1.jsonl
+[TDCA-BATCH] outputs      = /workspace/TDCA/batch_outputs/hotpot_dev_distractor_v1_20260329_152537
+[TDCA-BATCH] backend      = local
+[TDCA] Using local transformers backend.
+[TDCA] CUDA visible. free=23.30 GiB / total=23.56 GiB
+[TDCA] LocalLLM device = cuda (CUDA selected, free VRAM 23.30 GiB)
+Loading checkpoint shards:   0%|          | 0/3 [00:00<?, ?it/s]Loading checkpoint shards: 100%|██████████| 3/3 [00:00<00:00, 56.98it/s]
+
+[1/30] Were Scott Derrickson and Ed Wood of the same nationality?
+Traceback (most recent call last):
+  File "/workspace/TDCA/tdca_batch_hotpotqa.py", line 365, in <module>
+    main()
+  File "/workspace/TDCA/tdca_batch_hotpotqa.py", line 299, in main
+    result = scheduler.solve(question=question, output_dir=str(run_dir))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/TDCA/tdca_scheduler.py", line 1623, in solve
+    root_value, root_metrics = self.evaluator.evaluate(
+                               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/TDCA/llm_evaluator.py", line 353, in evaluate
+    if node.node_type == NodeType.EVIDENCE:
+                         ^^^^^^^^^^^^^^^^^
+  File "/opt/conda/lib/python3.11/enum.py", line 786, in __getattr__
+    raise AttributeError(name) from None
+AttributeError: EVIDENCE

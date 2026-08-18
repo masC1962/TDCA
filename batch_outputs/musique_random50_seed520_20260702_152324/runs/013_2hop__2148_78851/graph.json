@@ -1,0 +1,2001 @@
+{
+  "nodes": [
+    {
+      "node_id": "state_1",
+      "node_type": "state",
+      "content": "Which professional sports team does not play their home games at the same location where the Amateur Boxing Golden Gloves event is held?",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.6340760015998956,
+      "temperature": 0.0787538640855999,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.8299999921658285,
+        "evidence_support": 0.499999976958319,
+        "memory_usefulness": 0.5139667766205794,
+        "answerability": 0.7499999884791595,
+        "uncertainty": 0.21000000414750258
+      },
+      "metadata": {
+        "diffusion_delta": -0.004885576583280121,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "kg_doc_14",
+      "node_type": "kg",
+      "content": "The annual United States Open Tennis Championships is one of the world's four Grand Slam tennis tournaments and is held at the National Tennis Center in Flushing Meadows-Corona Park, Queens. The New York Marathon is one of the world's largest, and the 2004–2006 events hold the top three places in the marathons with the largest number of finishers, including 37,866 finishers in 2006. The Millrose Games is an annual track and field meet whose featured event is the Wanamaker Mile. Boxing is also a prominent part of the city's sporting scene, with events like the Amateur Boxing Golden Gloves being held at Madison Square Garden each year. The city is also considered the host of the Belmont Stakes, the last, longest and oldest of horse racing's Triple Crown races, held just over the city's border at Belmont Park on the first or second Sunday of June. The city also hosted the 1932 U.S. Open golf tournament and the 1930 and 1939 PGA Championships, and has been host city for both events several times, most notably for nearby Winged Foot Golf Club.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999811288296,
+      "temperature": 0.9999999811288296,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "New York City",
+        "raw_score": 0.08207113985184487,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_6",
+      "node_type": "kg",
+      "content": "Buvik Idrettslag is a multi-sports team from Buvik in Skaun, Norway. In 2012, the club's first football team played in the Second Division, having won their Third Division conference in 2011. The team was, however, relegated after only one season in the Second Division. They play their home games at Buvik Stadion.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0,
+      "temperature": 0.0,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Buvik IL",
+        "raw_score": 0.16490907013553954,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_5",
+      "node_type": "kg",
+      "content": "The Men's 2013 European Amateur Boxing Championships were held in Minsk, Belarus from June 1 to June 8, 2013. It is the 40th edition of this biennial competition organised by the European governing body for amateur boxing, the EUBC.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0,
+      "temperature": 0.0,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "2013 European Amateur Boxing Championships",
+        "raw_score": 0.126405281054958,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_13",
+      "node_type": "kg",
+      "content": "Vermont Lady Voltage was a professional American women’s soccer team, founded in 2005, which is a member of the United Soccer Leagues W-League. Voltage played in the Northern Division of the Central Conference. They play their home games at the Collins-Perley Sports Complex in the city of St. Albans, Vermont, 27 miles north of the state's largest city, Burlington. The team's colors are black and white, and gold and blue. The team was a sister organization of the men's Vermont Voltage team, which plays in the USL Premier Development League.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.6702328959305706,
+      "temperature": 0.6702328959305706,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Vermont Lady Voltage",
+        "raw_score": 0.12765496895323256,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "memory_mem_1",
+      "node_type": "memory",
+      "content": "Template: for compositional multi-hop questions, first solve the intermediate entity and then ask for the final attribute.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9599999038694302,
+      "temperature": 1.7367221242796211,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.96,
+        "tag": "compositional_template",
+        "memory_kind": "template",
+        "raw_score": 0.10739597118782387,
+        "source": "memory",
+        "diffusion_delta": 0.3062606359193094,
+        "diffusion_gain": 0.3062606359193094
+      }
+    },
+    {
+      "node_id": "memory_mem_3",
+      "node_type": "memory",
+      "content": "Template: when evidence already grounds the answer, switch from branching to short verification and synthesis.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.06793364937172863,
+      "temperature": 0.12370811607664892,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.88,
+        "tag": "verification_then_stop",
+        "memory_kind": "template",
+        "raw_score": 0.08158013495733625,
+        "source": "memory",
+        "diffusion_delta": 0.021081695071543213,
+        "diffusion_gain": 0.021081695071543213
+      }
+    },
+    {
+      "node_id": "state_2",
+      "node_type": "state",
+      "content": "Where is the Amateur Boxing Golden Gloves event held?",
+      "depth": 1,
+      "parent_id": "state_1",
+      "value": 0.6851257740280795,
+      "temperature": 1.916558405888858,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.7111761325003434,
+        "evidence_support": 0.810945844252347,
+        "memory_usefulness": 0.5139667251540021,
+        "answerability": 0.7872911039443552,
+        "uncertainty": 0.15402974803457753
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_14",
+          "doc_11",
+          "doc_5",
+          "doc_19"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "goal_slot_name": "golden_gloves_location",
+        "goal_slot_role": "generic",
+        "goal_terminal": false,
+        "diffusion_delta": 0.07689826590750926,
+        "diffusion_gain": 0.07689826590750926
+      }
+    },
+    {
+      "node_id": "kg_doc_11",
+      "node_type": "kg",
+      "content": "Floyd Joy Mayweather Jr. (born Floyd Joy Sinclair; February 24, 1977) is an American professional boxing promoter and former professional boxer. He competed from 1996 to 2007 and 2009 to 2015, and made a one - fight comeback in 2017. During his career, he held 15 world titles in five weight classes and the lineal championship in four different weight classes (twice at welterweight), and retired with an undefeated record of 50 -- 0, surpassing Rocky Marciano's record of 49 -- 0. As an amateur, Mayweather won a bronze medal in the featherweight division at the 1996 Olympics, three U.S. Golden Gloves championships (at light flyweight, flyweight, and featherweight), and the U.S. national championship at featherweight.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.8342704639505091,
+      "temperature": 0.8342704639505091,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Floyd Mayweather Jr.",
+        "raw_score": 0.07747803012595295,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_19",
+      "node_type": "kg",
+      "content": "Soccer in the United States is governed by the United States Soccer Federation. The organization governs most levels of soccer in the country, including the national teams, professional leagues, and the amateur game with the exception of colleges and high schools. As of May 2015, over 24.4 million people play soccer in the United States. In 2017, Gallup reported that soccer was the third-most played team sport in the U.S., behind only basketball and American football. The popularity of the sport in the U.S. has been growing since the 1960s and 1970s, and received a significant boost when the United States hosted the 1994 FIFA World Cup and 1999 FIFA Women's World Cup. It is the fourth most popular sport in the United States behind American football, baseball and basketball, and is the second fastest growing sport in America, surpassed only by lacrosse.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0,
+      "temperature": 0.0,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Soccer in the United States",
+        "raw_score": 0.0857722169630207,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "state_3",
+      "node_type": "state",
+      "content": "Which professional sports teams play their home games in New York City?",
+      "depth": 2,
+      "parent_id": "state_2",
+      "value": 0.6367085116128096,
+      "temperature": 1.085356763941505,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.7080340066179918,
+        "evidence_support": 0.9033085756144141,
+        "memory_usefulness": 0.0,
+        "answerability": 0.7152906514435707,
+        "uncertainty": 0.13740445638940546
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_20",
+          "doc_14",
+          "doc_10",
+          "doc_13"
+        ],
+        "memory_ids": [],
+        "diffusion_delta": 0.772132728720075,
+        "diffusion_gain": 0.772132728720075
+      }
+    },
+    {
+      "node_id": "kg_doc_20",
+      "node_type": "kg",
+      "content": "At Madison Square Garden, New Yorkers can watch the New York Knicks play NBA basketball, while the New York Liberty play in the WNBA. The Barclays Center in Brooklyn is home to the Brooklyn Nets NBA basketball team. The Nets began playing in Brooklyn in 2012, the first major professional sports team to play in the historic borough in half a century. Before the merger of the defunct American Basketball Association with the NBA during the 1976 -- 1977 season, the New York Nets, who shared the same home stadium (Nassau Veterans Memorial Coliseum) on Long Island with the NHL's New York Islanders, were a two - time champion in the ABA and starred the famous Hall of Fame forward Julius Erving. During the first season of the merger (1976 -- 77), the Nets continued to play on Long Island, although Erving's contract had by then been sold to the Philadelphia 76ers. The Nets transferred to New Jersey then next season and became known as the New Jersey Nets, and later moved to Brooklyn prior to the 2012 -- 2013 NBA season.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999832685126,
+      "temperature": 0.9999999832685126,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Sports in the New York metropolitan area",
+        "raw_score": 0.12920331397159115,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_10",
+      "node_type": "kg",
+      "content": "The city is home to many professional franchises/teams in national competitions including: cricket clubs Melbourne Stars, Melbourne Renegades and Victorian Bushrangers, which play in the Big Bash League and other domestic cricket competitions; soccer clubs Melbourne Victory and Melbourne City FC (known until June 2014 as Melbourne Heart), which play in the A-League competition, both teams play their home games at AAMI Park, with the Victory also playing home games at Etihad Stadium. Rugby league club Melbourne Storm which plays in the NRL competition; rugby union clubs Melbourne Rebels and Melbourne Rising, which play in the Super Rugby and National Rugby Championship competitions respectively; netball club Melbourne Vixens, which plays in the trans-Tasman trophy ANZ Championship; basketball club Melbourne United, which plays in the NBL competition; Bulleen Boomers and Dandenong Rangers, which play in the WNBL; ice hockey teams Melbourne Ice and Melbourne Mustangs, who play in the Australian Ice Hockey League; and baseball club Melbourne Aces, which plays in the Australian Baseball League. Rowing is also a large part of Melbourne's sporting identity, with a number of clubs located on the Yarra River, out of which many Australian Olympians trained. The city previously held the nation's premier long distance swimming event the annual Race to Prince's Bridge, in the Yarra River.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999997692299776,
+      "temperature": 0.9999997692299776,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Melbourne",
+        "raw_score": 0.1487487343456757,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "memory_mem_4",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'Where is the Amateur Boxing Golden Gloves event held' is June.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.7460701767121592,
+      "temperature": 1.7435545099004188,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "derived_fact",
+        "target_question": "Where is the Amateur Boxing Golden Gloves event held?",
+        "target_question_norm": "where is the amateur boxing golden gloves event held",
+        "slot_key": "generic|location|generic|amateur boxing golden gloves|where is the amateur boxing golden gloves event held",
+        "slot_type": "location",
+        "relation_signature": "generic",
+        "answer_text": "June",
+        "support_score": 0.810945844252347,
+        "evidence_ids": [
+          "doc_14",
+          "doc_11"
+        ],
+        "slot_name": "golden_gloves_location",
+        "slot_role": "generic",
+        "terminal": false,
+        "path_terminal": false,
+        "composition_kind": "",
+        "derived_from_state": "state_2",
+        "diffusion_delta": 0.06899532554123677,
+        "diffusion_gain": 0.06899532554123677
+      }
+    },
+    {
+      "node_id": "state_4",
+      "node_type": "state",
+      "content": "Where does the New York City professional sports team play their home games?",
+      "depth": 1,
+      "parent_id": "state_1",
+      "value": 0.6493253151734365,
+      "temperature": 0.7435923781736348,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.7506655829714638,
+        "evidence_support": 0.8762891477770324,
+        "memory_usefulness": 0.015714224342706522,
+        "answerability": 0.7290536647976071,
+        "uncertainty": 0.14226795340013418
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_20",
+          "doc_14",
+          "doc_6",
+          "doc_13"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "diffusion_delta": -0.018799290459873164,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "state_5",
+      "node_type": "state",
+      "content": "Which professional sports teams play their home games at that location?",
+      "depth": 1,
+      "parent_id": "state_1",
+      "value": 0.6127100168119851,
+      "temperature": 0.18145089118907548,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.7154060310154691,
+        "evidence_support": 0.8233867222380105,
+        "memory_usefulness": 0.0,
+        "answerability": 0.693511542937187,
+        "uncertainty": 0.1517903899971581
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_10",
+          "doc_13",
+          "doc_1",
+          "doc_2"
+        ],
+        "memory_ids": [],
+        "diffusion_delta": -0.01698630631878348,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "kg_doc_1",
+      "node_type": "kg",
+      "content": "The club also owned and operated a professional basketball team, by the name of Everton Tigers, who compete in the elite British Basketball League. The team was launched in the summer of 2007 as part of the clubs' Community programme, and play their home games at the Greenbank Sports Academy. The team was an amalgam of the Toxteth Tigers community youth programme which started in 1968. The team quickly became one of the most successful in the league winning the BBL Cup in 2009 and the play-offs in 2010. However Everton withdrew funding before the 2010–11 season and the team was re launched as the Mersey Tigers.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.48994613793134284,
+      "temperature": 0.48994613793134284,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Everton F.C.",
+        "raw_score": 0.10366348055496308,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_2",
+      "node_type": "kg",
+      "content": "De Herdgang is a football training facility in Eindhoven, Netherlands. It serves as the training ground and youth academy of PSV Eindhoven and also accommodates its amateur teams. As of the 2014/2015 season Jong PSV play their home games at this facility.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0,
+      "temperature": 0.0,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "De Herdgang",
+        "raw_score": 0.11279654711520601,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "state_6",
+      "node_type": "state",
+      "content": "Which professional sports teams do not play their home games at that location?",
+      "depth": 1,
+      "parent_id": "state_1",
+      "value": 0.6267214294364776,
+      "temperature": 0.17978835091000017,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.7366668135013055,
+        "evidence_support": 0.835116296394214,
+        "memory_usefulness": 0.0,
+        "answerability": 0.708467239106198,
+        "uncertainty": 0.14967906664904146
+      },
+      "metadata": {
+        "kind": "comparison",
+        "evidence_ids": [
+          "doc_10",
+          "doc_13",
+          "doc_1",
+          "doc_2"
+        ],
+        "memory_ids": [],
+        "diffusion_delta": -0.017908544110235763,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "state_7",
+      "node_type": "state",
+      "content": "Which professional sports teams are based in New York City?",
+      "depth": 2,
+      "parent_id": "state_4",
+      "value": 0.6311689680744231,
+      "temperature": 0.4048416590440442,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.645630138133824,
+        "evidence_support": 0.9229763421048297,
+        "memory_usefulness": 0.0,
+        "answerability": 0.7887608983251421,
+        "uncertainty": 0.13386425842113064
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_20",
+          "doc_14",
+          "doc_16",
+          "doc_10"
+        ],
+        "memory_ids": [],
+        "diffusion_delta": -0.01007924263587312,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "kg_doc_16",
+      "node_type": "kg",
+      "content": "The Sacramento Kings are an American professional basketball team based in Sacramento, California. The Kings compete in the National Basketball Association (NBA) as a member of the Western Conference's Pacific Division. The Kings are the only team in the major professional North American sports leagues located in Sacramento. The team plays its home games at the Golden 1 Center.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.6446500974896145,
+      "temperature": 0.6446500974896145,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Sacramento Kings",
+        "raw_score": 0.11208126250328207,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "state_8",
+      "node_type": "state",
+      "content": "Do any New York City professional sports teams play at the same location as the Amateur Boxing Golden Gloves event?",
+      "depth": 2,
+      "parent_id": "state_4",
+      "value": 0.6839668672576336,
+      "temperature": 0.3780452185631847,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.7984120114050546,
+        "evidence_support": 0.9151155415656684,
+        "memory_usefulness": 0.006430298605817273,
+        "answerability": 0.7666486798737433,
+        "uncertainty": 0.13527920251817968
+      },
+      "metadata": {
+        "kind": "comparison",
+        "evidence_ids": [
+          "doc_20",
+          "doc_11",
+          "doc_14",
+          "doc_5"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "diffusion_delta": 0.009961443723687513,
+        "diffusion_gain": 0.009961443723687513
+      }
+    },
+    {
+      "node_id": "memory_mem_5",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'Where does the New York City professional sports team play their home games' is New York City.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.8061860159548698,
+      "temperature": 0.5030856532004278,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "derived_fact",
+        "target_question": "Where does the New York City professional sports team play their home games?",
+        "target_question_norm": "where does the new york city professional sports team play their home games",
+        "slot_key": "generic|location|generic|new york city|where does the new york city professional sports team play their home games",
+        "slot_type": "location",
+        "relation_signature": "generic",
+        "answer_text": "New York City",
+        "support_score": 0.8762891477770324,
+        "evidence_ids": [
+          "doc_20",
+          "doc_14"
+        ],
+        "slot_name": "team_home_location",
+        "slot_role": "generic",
+        "terminal": false,
+        "path_terminal": false,
+        "composition_kind": "",
+        "derived_from_state": "state_4",
+        "diffusion_delta": -0.014285785508465265,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "state_9",
+      "node_type": "state",
+      "content": "Which professional sports teams play in New York City?",
+      "depth": 3,
+      "parent_id": "state_8",
+      "value": 0.6427065016444129,
+      "temperature": 0.5760601584773426,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.6494243828526629,
+        "evidence_support": 0.8833337463580995,
+        "memory_usefulness": 0.0,
+        "answerability": 0.6780305095426862,
+        "uncertainty": 0.1409999256555421
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_20",
+          "doc_14",
+          "doc_10",
+          "doc_13"
+        ],
+        "memory_ids": [],
+        "diffusion_delta": 0.044313882498994484,
+        "diffusion_gain": 0.044313882498994484
+      }
+    },
+    {
+      "node_id": "state_10",
+      "node_type": "state",
+      "content": "Do any of those New York City professional sports teams play at the same venue as the Amateur Boxing Golden Gloves event?",
+      "depth": 3,
+      "parent_id": "state_8",
+      "value": 0.6765331596256978,
+      "temperature": 1.097552512667478,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.7818259760234094,
+        "evidence_support": 0.9171352235982628,
+        "memory_usefulness": 0.0035892925920980112,
+        "answerability": 0.7585676117991315,
+        "uncertainty": 0.13491565975231268
+      },
+      "metadata": {
+        "kind": "comparison",
+        "evidence_ids": [
+          "doc_20",
+          "doc_11",
+          "doc_14",
+          "doc_5"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "diffusion_delta": 0.04077716485202387,
+        "diffusion_gain": 0.04077716485202387
+      }
+    },
+    {
+      "node_id": "state_11",
+      "node_type": "state",
+      "content": "Do any New York City professional sports teams share a home venue with the Amateur Boxing Golden Gloves event?",
+      "depth": 4,
+      "parent_id": "state_10",
+      "value": 0.6320393098006617,
+      "temperature": 0.39963475961310346,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.7283204430135679,
+        "evidence_support": 0.8613702869383013,
+        "memory_usefulness": 0.001799693595752745,
+        "answerability": 0.7125033252873325,
+        "uncertainty": 0.14495334835110577
+      },
+      "metadata": {
+        "kind": "comparison",
+        "evidence_ids": [
+          "doc_14",
+          "doc_20",
+          "doc_11",
+          "doc_5"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "diffusion_delta": 0.06614805911563582,
+        "diffusion_gain": 0.06614805911563582
+      }
+    },
+    {
+      "node_id": "memory_mem_6",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'Do any of those New York City professional sports teams play at the same venue as the Amateur Boxing Golden Gloves event' is No.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999832460167,
+      "temperature": 0.7043064939285968,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "intermediate_answer",
+        "target_question": "Do any of those New York City professional sports teams play at the same venue as the Amateur Boxing Golden Gloves event?",
+        "target_question_norm": "do any of those new york city professional sports teams play at the same venue as the amateur boxing golden gloves event",
+        "relation_signature": "comparison",
+        "answer_text": "No",
+        "support_score": 0.9999999832460167,
+        "evidence_ids": [
+          "doc_20",
+          "doc_11",
+          "doc_14"
+        ],
+        "slot_name": "",
+        "slot_type": "",
+        "slot_role": "",
+        "terminal": false,
+        "path_terminal": false,
+        "composition_kind": "",
+        "derived_from_state": "state_10",
+        "diffusion_delta": -0.03959829779954249,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "state_12",
+      "node_type": "state",
+      "content": "Which professional sports teams play their home games at Madison Square Garden?",
+      "depth": 3,
+      "parent_id": "state_3",
+      "value": 0.6866787854511252,
+      "temperature": 0.6044433468031054,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.753591316951006,
+        "evidence_support": 0.9864985257917287,
+        "memory_usefulness": 0.0,
+        "answerability": 0.7659765356231372,
+        "uncertainty": 0.12243026535748883
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_14",
+          "doc_20",
+          "doc_10",
+          "doc_2"
+        ],
+        "memory_ids": [],
+        "diffusion_delta": -0.2984787677212506,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "state_13",
+      "node_type": "state",
+      "content": "Which professional sports teams play their home games at the Barclays Center?",
+      "depth": 3,
+      "parent_id": "state_3",
+      "value": 0.6124093893003236,
+      "temperature": 0.5157209773673599,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.7150450583100028,
+        "evidence_support": 0.8223250378101683,
+        "memory_usefulness": 0.0019467674369052052,
+        "answerability": 0.692980700723266,
+        "uncertainty": 0.1519814931941697
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_20",
+          "doc_16",
+          "doc_10",
+          "doc_13"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "diffusion_delta": -0.24645443938435563,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "memory_mem_7",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'Which professional sports teams play their home games in New York City' is Sports in the New York metropolitan area.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.831043889565261,
+      "temperature": 0.7217913328883713,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "derived_fact",
+        "target_question": "Which professional sports teams play their home games in New York City?",
+        "target_question_norm": "which professional sports teams play their home games in new york city",
+        "slot_key": "generic|generic|generic|new york city|which professional sports teams play their home games in new york city",
+        "slot_type": "",
+        "relation_signature": "generic",
+        "answer_text": "Sports in the New York metropolitan area",
+        "support_score": 0.9033085756144141,
+        "evidence_ids": [
+          "doc_20",
+          "doc_14"
+        ],
+        "slot_name": "",
+        "slot_role": "",
+        "terminal": false,
+        "path_terminal": false,
+        "composition_kind": "",
+        "derived_from_state": "state_3",
+        "diffusion_delta": -0.33188286189440797,
+        "diffusion_gain": 0.0
+      }
+    }
+  ],
+  "edges": [
+    {
+      "source": "state_1",
+      "target": "kg_doc_14",
+      "edge_type": "supports",
+      "weight": 0.999999953916638
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_13",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.007177714888023573
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.0005099368903981697
+    },
+    {
+      "source": "state_1",
+      "target": "state_2",
+      "edge_type": "refines",
+      "weight": 1.0
+    },
+    {
+      "source": "state_1",
+      "target": "state_4",
+      "edge_type": "refines",
+      "weight": 0.94
+    },
+    {
+      "source": "state_1",
+      "target": "state_5",
+      "edge_type": "refines",
+      "weight": 0.8
+    },
+    {
+      "source": "state_1",
+      "target": "state_6",
+      "edge_type": "refines",
+      "weight": 0.7
+    },
+    {
+      "source": "kg_doc_14",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.999999953916638
+    },
+    {
+      "source": "kg_doc_14",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.9999999811288296
+    },
+    {
+      "source": "kg_doc_14",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.8066171778050114
+    },
+    {
+      "source": "kg_doc_14",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.9999999811288296
+    },
+    {
+      "source": "kg_doc_14",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.7525783196547325
+    },
+    {
+      "source": "kg_doc_14",
+      "target": "state_7",
+      "edge_type": "supports",
+      "weight": 0.8459527122033716
+    },
+    {
+      "source": "kg_doc_14",
+      "target": "state_8",
+      "edge_type": "supports",
+      "weight": 0.3976993601170434
+    },
+    {
+      "source": "kg_doc_14",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.7525783196547325
+    },
+    {
+      "source": "kg_doc_14",
+      "target": "state_9",
+      "edge_type": "supports",
+      "weight": 0.7666675174332181
+    },
+    {
+      "source": "kg_doc_14",
+      "target": "state_10",
+      "edge_type": "supports",
+      "weight": 0.39902309915102063
+    },
+    {
+      "source": "kg_doc_14",
+      "target": "state_11",
+      "edge_type": "supports",
+      "weight": 0.9999999785399863
+    },
+    {
+      "source": "kg_doc_14",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.39902309915102063
+    },
+    {
+      "source": "kg_doc_14",
+      "target": "state_12",
+      "edge_type": "supports",
+      "weight": 0.99999997444008
+    },
+    {
+      "source": "kg_doc_14",
+      "target": "memory_mem_7",
+      "edge_type": "supports",
+      "weight": 0.8066171778050114
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "state_8",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "state_10",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "state_11",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_13",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_13",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_13",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_13",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.6467736752460433
+    },
+    {
+      "source": "kg_doc_13",
+      "target": "state_6",
+      "edge_type": "supports",
+      "weight": 0.6702328959305706
+    },
+    {
+      "source": "kg_doc_13",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_13",
+      "target": "state_9",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_13",
+      "target": "state_13",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_13",
+      "target": "memory_mem_7",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.007177714888023573
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_2",
+      "edge_type": "recalls",
+      "weight": 0.9599998077388796
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "memory_mem_4",
+      "edge_type": "recalls",
+      "weight": 0.9599998077388796
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_4",
+      "edge_type": "recalls",
+      "weight": 0.029343738574366864
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_8",
+      "edge_type": "recalls",
+      "weight": 0.006707674515442894
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "memory_mem_5",
+      "edge_type": "recalls",
+      "weight": 0.029343738574366864
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_10",
+      "edge_type": "recalls",
+      "weight": 0.006707674515442894
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_11",
+      "edge_type": "recalls",
+      "weight": 0.001979846719924471
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "memory_mem_6",
+      "edge_type": "recalls",
+      "weight": 0.006707674515442894
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_13",
+      "edge_type": "recalls",
+      "weight": 0.0036433190831709
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.0005099368903981697
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_2",
+      "edge_type": "recalls",
+      "weight": 0.0679336425691247
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "memory_mem_4",
+      "edge_type": "recalls",
+      "weight": 0.0679336425691247
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_4",
+      "edge_type": "recalls",
+      "weight": 0.0020847101110461827
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_8",
+      "edge_type": "recalls",
+      "weight": 0.00047091066875312824
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "memory_mem_5",
+      "edge_type": "recalls",
+      "weight": 0.0020847101110461827
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_10",
+      "edge_type": "recalls",
+      "weight": 0.00047091066875312824
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_11",
+      "edge_type": "recalls",
+      "weight": 0.0001359718709951118
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "memory_mem_6",
+      "edge_type": "recalls",
+      "weight": 0.00047091066875312824
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_13",
+      "edge_type": "recalls",
+      "weight": 0.0002502157906395103
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_14",
+      "edge_type": "supports",
+      "weight": 0.9999999811288296
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_11",
+      "edge_type": "supports",
+      "weight": 0.6218917073758644
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_19",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_2",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.9599998077388796
+    },
+    {
+      "source": "state_2",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.0679336425691247
+    },
+    {
+      "source": "state_2",
+      "target": "state_3",
+      "edge_type": "refines",
+      "weight": 0.8
+    },
+    {
+      "source": "state_2",
+      "target": "memory_mem_4",
+      "edge_type": "derives",
+      "weight": 0.810945844252347
+    },
+    {
+      "source": "kg_doc_11",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.6218917073758644
+    },
+    {
+      "source": "kg_doc_11",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.6218917073758644
+    },
+    {
+      "source": "kg_doc_11",
+      "target": "state_8",
+      "edge_type": "supports",
+      "weight": 0.8302310998628242
+    },
+    {
+      "source": "kg_doc_11",
+      "target": "state_10",
+      "edge_type": "supports",
+      "weight": 0.8342704639505091
+    },
+    {
+      "source": "kg_doc_11",
+      "target": "state_11",
+      "edge_type": "supports",
+      "weight": 0.5376872007987487
+    },
+    {
+      "source": "kg_doc_11",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.8342704639505091
+    },
+    {
+      "source": "kg_doc_19",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_19",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_20",
+      "edge_type": "supports",
+      "weight": 0.9999999734238169
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_14",
+      "edge_type": "supports",
+      "weight": 0.8066171778050114
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_10",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_13",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_3",
+      "target": "state_12",
+      "edge_type": "refines",
+      "weight": 0.85
+    },
+    {
+      "source": "state_3",
+      "target": "state_13",
+      "edge_type": "refines",
+      "weight": 0.8
+    },
+    {
+      "source": "state_3",
+      "target": "memory_mem_7",
+      "edge_type": "derives",
+      "weight": 0.9033085756144141
+    },
+    {
+      "source": "kg_doc_20",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.9999999734238169
+    },
+    {
+      "source": "kg_doc_20",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.9999999758993322
+    },
+    {
+      "source": "kg_doc_20",
+      "target": "state_7",
+      "edge_type": "supports",
+      "weight": 0.9999999720062878
+    },
+    {
+      "source": "kg_doc_20",
+      "target": "state_8",
+      "edge_type": "supports",
+      "weight": 0.9999999832685126
+    },
+    {
+      "source": "kg_doc_20",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.9999999758993322
+    },
+    {
+      "source": "kg_doc_20",
+      "target": "state_9",
+      "edge_type": "supports",
+      "weight": 0.9999999752829809
+    },
+    {
+      "source": "kg_doc_20",
+      "target": "state_10",
+      "edge_type": "supports",
+      "weight": 0.9999999832460167
+    },
+    {
+      "source": "kg_doc_20",
+      "target": "state_11",
+      "edge_type": "supports",
+      "weight": 0.7227405953366164
+    },
+    {
+      "source": "kg_doc_20",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.9999999832460167
+    },
+    {
+      "source": "kg_doc_20",
+      "target": "state_12",
+      "edge_type": "supports",
+      "weight": 0.9729970771433772
+    },
+    {
+      "source": "kg_doc_20",
+      "target": "state_13",
+      "edge_type": "supports",
+      "weight": 0.9999999781307222
+    },
+    {
+      "source": "kg_doc_20",
+      "target": "memory_mem_7",
+      "edge_type": "supports",
+      "weight": 0.9999999734238169
+    },
+    {
+      "source": "kg_doc_10",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_10",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.9999997692299776
+    },
+    {
+      "source": "kg_doc_10",
+      "target": "state_6",
+      "edge_type": "supports",
+      "weight": 0.9999996968578576
+    },
+    {
+      "source": "kg_doc_10",
+      "target": "state_7",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_10",
+      "target": "state_9",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_10",
+      "target": "state_12",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_10",
+      "target": "state_13",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_10",
+      "target": "memory_mem_7",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "state_2",
+      "edge_type": "recalls",
+      "weight": 0.810945844252347
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_14",
+      "edge_type": "supports",
+      "weight": 0.9999999811288296
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_11",
+      "edge_type": "supports",
+      "weight": 0.6218917073758644
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_19",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.9599998077388796
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.0679336425691247
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_20",
+      "edge_type": "supports",
+      "weight": 0.9999999758993322
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_14",
+      "edge_type": "supports",
+      "weight": 0.7525783196547325
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_13",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_4",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.029343738574366864
+    },
+    {
+      "source": "state_4",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.0020847101110461827
+    },
+    {
+      "source": "state_4",
+      "target": "state_7",
+      "edge_type": "refines",
+      "weight": 0.8
+    },
+    {
+      "source": "state_4",
+      "target": "state_8",
+      "edge_type": "refines",
+      "weight": 0.7
+    },
+    {
+      "source": "state_4",
+      "target": "memory_mem_5",
+      "edge_type": "derives",
+      "weight": 0.8762891477770324
+    },
+    {
+      "source": "state_5",
+      "target": "kg_doc_10",
+      "edge_type": "supports",
+      "weight": 0.9999997692299776
+    },
+    {
+      "source": "state_5",
+      "target": "kg_doc_13",
+      "edge_type": "supports",
+      "weight": 0.6467736752460433
+    },
+    {
+      "source": "state_5",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.48994613793134284
+    },
+    {
+      "source": "state_5",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.48994613793134284
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "state_6",
+      "edge_type": "supports",
+      "weight": 0.4562450272200812
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "state_6",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "state_12",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_6",
+      "target": "kg_doc_10",
+      "edge_type": "supports",
+      "weight": 0.9999996968578576
+    },
+    {
+      "source": "state_6",
+      "target": "kg_doc_13",
+      "edge_type": "supports",
+      "weight": 0.6702328959305706
+    },
+    {
+      "source": "state_6",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.4562450272200812
+    },
+    {
+      "source": "state_6",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_7",
+      "target": "kg_doc_20",
+      "edge_type": "supports",
+      "weight": 0.9999999720062878
+    },
+    {
+      "source": "state_7",
+      "target": "kg_doc_14",
+      "edge_type": "supports",
+      "weight": 0.8459527122033716
+    },
+    {
+      "source": "state_7",
+      "target": "kg_doc_16",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_7",
+      "target": "kg_doc_10",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_16",
+      "target": "state_7",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_16",
+      "target": "state_13",
+      "edge_type": "supports",
+      "weight": 0.6446500974896145
+    },
+    {
+      "source": "state_8",
+      "target": "kg_doc_20",
+      "edge_type": "supports",
+      "weight": 0.9999999832685126
+    },
+    {
+      "source": "state_8",
+      "target": "kg_doc_11",
+      "edge_type": "supports",
+      "weight": 0.8302310998628242
+    },
+    {
+      "source": "state_8",
+      "target": "kg_doc_14",
+      "edge_type": "supports",
+      "weight": 0.3976993601170434
+    },
+    {
+      "source": "state_8",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_8",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.006707674515442894
+    },
+    {
+      "source": "state_8",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.00047091066875312824
+    },
+    {
+      "source": "state_8",
+      "target": "state_9",
+      "edge_type": "refines",
+      "weight": 0.8
+    },
+    {
+      "source": "state_8",
+      "target": "state_10",
+      "edge_type": "refines",
+      "weight": 0.7
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "state_4",
+      "edge_type": "recalls",
+      "weight": 0.8762891477770324
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_20",
+      "edge_type": "supports",
+      "weight": 0.9999999758993322
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_14",
+      "edge_type": "supports",
+      "weight": 0.7525783196547325
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_13",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.029343738574366864
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.0020847101110461827
+    },
+    {
+      "source": "state_9",
+      "target": "kg_doc_20",
+      "edge_type": "supports",
+      "weight": 0.9999999752829809
+    },
+    {
+      "source": "state_9",
+      "target": "kg_doc_14",
+      "edge_type": "supports",
+      "weight": 0.7666675174332181
+    },
+    {
+      "source": "state_9",
+      "target": "kg_doc_10",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_9",
+      "target": "kg_doc_13",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_10",
+      "target": "kg_doc_20",
+      "edge_type": "supports",
+      "weight": 0.9999999832460167
+    },
+    {
+      "source": "state_10",
+      "target": "kg_doc_11",
+      "edge_type": "supports",
+      "weight": 0.8342704639505091
+    },
+    {
+      "source": "state_10",
+      "target": "kg_doc_14",
+      "edge_type": "supports",
+      "weight": 0.39902309915102063
+    },
+    {
+      "source": "state_10",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_10",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.006707674515442894
+    },
+    {
+      "source": "state_10",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.00047091066875312824
+    },
+    {
+      "source": "state_10",
+      "target": "state_9",
+      "edge_type": "refines",
+      "weight": 0.8
+    },
+    {
+      "source": "state_10",
+      "target": "state_11",
+      "edge_type": "refines",
+      "weight": 0.7
+    },
+    {
+      "source": "state_10",
+      "target": "memory_mem_6",
+      "edge_type": "derives",
+      "weight": 0.9999999832460167
+    },
+    {
+      "source": "state_11",
+      "target": "kg_doc_14",
+      "edge_type": "supports",
+      "weight": 0.9999999785399863
+    },
+    {
+      "source": "state_11",
+      "target": "kg_doc_20",
+      "edge_type": "supports",
+      "weight": 0.7227405953366164
+    },
+    {
+      "source": "state_11",
+      "target": "kg_doc_11",
+      "edge_type": "supports",
+      "weight": 0.5376872007987487
+    },
+    {
+      "source": "state_11",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_11",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.001979846719924471
+    },
+    {
+      "source": "state_11",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.0001359718709951118
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "state_10",
+      "edge_type": "recalls",
+      "weight": 0.9999999832460167
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_20",
+      "edge_type": "supports",
+      "weight": 0.9999999832460167
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_11",
+      "edge_type": "supports",
+      "weight": 0.8342704639505091
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_14",
+      "edge_type": "supports",
+      "weight": 0.39902309915102063
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.006707674515442894
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.00047091066875312824
+    },
+    {
+      "source": "state_12",
+      "target": "kg_doc_14",
+      "edge_type": "supports",
+      "weight": 0.99999997444008
+    },
+    {
+      "source": "state_12",
+      "target": "kg_doc_20",
+      "edge_type": "supports",
+      "weight": 0.9729970771433772
+    },
+    {
+      "source": "state_12",
+      "target": "kg_doc_10",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_12",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_13",
+      "target": "kg_doc_20",
+      "edge_type": "supports",
+      "weight": 0.9999999781307222
+    },
+    {
+      "source": "state_13",
+      "target": "kg_doc_16",
+      "edge_type": "supports",
+      "weight": 0.6446500974896145
+    },
+    {
+      "source": "state_13",
+      "target": "kg_doc_10",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_13",
+      "target": "kg_doc_13",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_13",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.0036433190831709
+    },
+    {
+      "source": "state_13",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.0002502157906395103
+    },
+    {
+      "source": "memory_mem_7",
+      "target": "state_3",
+      "edge_type": "recalls",
+      "weight": 0.9033085756144141
+    },
+    {
+      "source": "memory_mem_7",
+      "target": "kg_doc_20",
+      "edge_type": "supports",
+      "weight": 0.9999999734238169
+    },
+    {
+      "source": "memory_mem_7",
+      "target": "kg_doc_14",
+      "edge_type": "supports",
+      "weight": 0.8066171778050114
+    },
+    {
+      "source": "memory_mem_7",
+      "target": "kg_doc_10",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_7",
+      "target": "kg_doc_13",
+      "edge_type": "supports",
+      "weight": 0.0
+    }
+  ]
+}

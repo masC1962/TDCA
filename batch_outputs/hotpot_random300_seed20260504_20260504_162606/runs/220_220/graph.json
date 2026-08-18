@@ -1,0 +1,662 @@
+{
+  "nodes": [
+    {
+      "node_id": "state_1",
+      "node_type": "state",
+      "content": "Have Marc Rosset and Max Mirnyi both been professional tennis players?",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.8010319052482799,
+      "temperature": 1.0056660498900065,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.924448454253832,
+        "evidence_support": 0.7777895713347999,
+        "memory_usefulness": 0.8820682746050714,
+        "answerability": 0.7888947856674,
+        "uncertainty": 0.159997877159736
+      },
+      "metadata": {
+        "diffusion_delta": -0.08214766893644687,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "kg_doc_8",
+      "node_type": "kg",
+      "content": "The 2004 Canada Masters – Doubles was the men's singles event of the one hundred and fifteenth edition of the Canada Masters; a WTA Tier I tournament and the most prestigious men's tennis tournament held in Canada. Mahesh Bhupathi and Max Mirnyi were the defending champions. They were both present but did not compete together. Mirnyi partnered with Jonas Björkman, but Bhupathi and partner Leander Paes defeated them 6–4, 6–2, in the final.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999614110732,
+      "temperature": 0.9999999614110732,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "2004 Canada Masters – Doubles",
+        "raw_score": 3.2729759167671135,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_6",
+      "node_type": "kg",
+      "content": "Andrea Hlaváčková (] ; born 10 August 1986) is a professional tennis player from the Czech Republic. Her highest singles ranking is world No. 58, which she reached in September 2012, and her highest doubles ranking is No. 3, reached on 22 October 2012. In her career, Hlaváčková has won 22 WTA doubles titles, as well as 19 ITF doubles and eight ITF singles titles. She has won two Grand Slam doubles titles, the 2011 French Open and the 2013 US Open, both times partnered with Lucie Hradecká. The pair are also the 2012 Olympic silver medallists. Hlaváčková was part of the winning Czech team in Fed Cup 2012 and also won the mixed doubles title at the 2013 US Open paired with Max Mirnyi.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.5555791812585266,
+      "temperature": 0.5555791812585266,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Andrea Hlaváčková",
+        "raw_score": 2.334380789872771,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_7",
+      "node_type": "kg",
+      "content": "Jonas Björkman and Todd Woodbridge were the defending champions, but did not participate together this year. Björkman partnered Max Mirnyi, losing in the first round. Woodbridge retired from professional tennis earlier in the year.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.2725893732666998,
+      "temperature": 0.2725893732666998,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "2005 BNP Paribas Masters – Doubles",
+        "raw_score": 2.2398167349854954,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_1",
+      "node_type": "kg",
+      "content": "Marc Rosset (born 7 November 1970) is a former professional tennis player from Switzerland who is best remembered for winning the men's singles gold medal at the 1992 Olympic Games. He also won one Grand Slam doubles title at the French Open in 1992 partnering compatriot Jakob Hlasek.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999802537204,
+      "temperature": 0.9999999802537204,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Marc Rosset",
+        "raw_score": 4.3925619455177305,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "memory_mem_1",
+      "node_type": "memory",
+      "content": "Template: for compositional multi-hop questions, first solve the intermediate entity and then ask for the final attribute.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.8841365672456091,
+      "temperature": 0.21066836142052953,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.96,
+        "tag": "compositional_template",
+        "memory_kind": "template",
+        "raw_score": 0.12385465896964483,
+        "source": "memory",
+        "diffusion_delta": -0.05619868274831752,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "memory_mem_3",
+      "node_type": "memory",
+      "content": "Template: when evidence already grounds the answer, switch from branching to short verification and synthesis.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.8799999819645339,
+      "temperature": 0.3525242139216035,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.88,
+        "tag": "verification_then_stop",
+        "memory_kind": "template",
+        "raw_score": 1.5855406371432565,
+        "source": "memory",
+        "diffusion_delta": -0.06305622690079538,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "state_2",
+      "node_type": "state",
+      "content": "Was Marc Rosset a professional tennis player?",
+      "depth": 1,
+      "parent_id": "state_1",
+      "value": 0.6194760233155435,
+      "temperature": 1.6268234269004371,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.6310247046718239,
+        "evidence_support": 0.6260084896764873,
+        "memory_usefulness": 0.0,
+        "answerability": 0.5857315175655164,
+        "uncertainty": 0.1873184718582323
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_1",
+          "doc_3",
+          "doc_9",
+          "doc_4"
+        ],
+        "memory_ids": [],
+        "diffusion_delta": 0.4105494523242208,
+        "diffusion_gain": 0.4105494523242208
+      }
+    },
+    {
+      "node_id": "kg_doc_3",
+      "node_type": "kg",
+      "content": "Marc Rosset was the defending champion at the Milan Indoor tennis tournament but lost in the second round to Greg Rusedski.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.28500791923070523,
+      "temperature": 0.28500791923070523,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "2001 Milan Indoor – Singles",
+        "raw_score": 3.480344188521795,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_9",
+      "node_type": "kg",
+      "content": "The 2000 AXA Cup was a men's tennis tournament played on indoor hard courts in London and was part of the International Series Gold of the 2000 ATP Tour. It was the 23rd edition of the tournament and ran from February 21 through February 27, 2000. Marc Rosset won the singles title.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.1559136707288119,
+      "temperature": 0.1559136707288119,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "2000 AXA Cup",
+        "raw_score": 3.2489192478268953,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_4",
+      "node_type": "kg",
+      "content": "The 1995 Gerry Weber Open was a men's tennis tournament played on outdoor grass courts. It was the 3rd edition of the Gerry Weber Open, and was part of the World Series of the 1995 ATP Tour. It took place at the Gerry Weber Stadion in Halle, North Rhine-Westphalia, Germany, from 19 June through 26 June 1995. Marc Rosset won the singles title.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0,
+      "temperature": 0.0,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "1995 Gerry Weber Open",
+        "raw_score": 3.0286190769404135,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "state_3",
+      "node_type": "state",
+      "content": "Was Max Mirnyi a professional tennis player?",
+      "depth": 1,
+      "parent_id": "state_1",
+      "value": 0.6520800245426774,
+      "temperature": 1.4091043959057319,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.7302137757966494,
+        "evidence_support": 0.9177410518083267,
+        "memory_usefulness": 0.0,
+        "answerability": 0.7315977986314361,
+        "uncertainty": 0.1348066106745012
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_2",
+          "doc_5",
+          "doc_6",
+          "doc_7"
+        ],
+        "memory_ids": [],
+        "diffusion_delta": 0.09965882945311066,
+        "diffusion_gain": 0.09965882945311066
+      }
+    },
+    {
+      "node_id": "kg_doc_2",
+      "node_type": "kg",
+      "content": "This is a list of the main career statistics of Belarusian professional tennis player, Victoria Azarenka. To date, Azarenka has won twenty WTA singles titles including two grand slam singles titles, six WTA Premier Mandatory singles titles and three WTA Premier 5 singles titles. She was also the runner-up at the 2011 WTA Tour Championships, 2012 US Open and 2013 US Open. Among other achievements, Azarenka was the bronze medalist in women's singles and Gold medalist in mixed doubles with her compatriot, Max Mirnyi at the 2012 London Olympics.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.999999970197122,
+      "temperature": 0.999999970197122,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Victoria Azarenka career statistics",
+        "raw_score": 2.974592522716046,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_5",
+      "node_type": "kg",
+      "content": "Maksim \"Max\" Mirnyi (Belarusian: Максім Мікалаевіч Мірны ] ) (Russian: Максим Николаевич Мирный ] ) (born 6 July 1977, in Minsk) is a Belarusian professional tennis player.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.8354821334195313,
+      "temperature": 0.8354821334195313,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Max Mirnyi",
+        "raw_score": 4.406071244875398,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "memory_mem_4",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'Was Max Mirnyi a professional tennis player' is Max Mirnyi is a Belarusian professional tennis player.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.999999970197122,
+      "temperature": 0.8300368997206897,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "intermediate_answer",
+        "target_question": "Was Max Mirnyi a professional tennis player?",
+        "target_question_norm": "was max mirnyi a professional tennis player",
+        "relation_signature": "generic",
+        "answer_text": "Max Mirnyi is a Belarusian professional tennis player",
+        "support_score": 0.999999970197122,
+        "evidence_ids": [
+          "doc_2"
+        ],
+        "slot_name": "mirnyi_professional_status",
+        "slot_role": "generic",
+        "terminal": false,
+        "derived_from_state": "state_3",
+        "diffusion_delta": 0.028218554946614516,
+        "diffusion_gain": 0.028218554946614516
+      }
+    },
+    {
+      "node_id": "memory_mem_5",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'Was Marc Rosset a professional tennis player' is Yes, Marc Rosset was a professional tennis player.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.874,
+      "temperature": 0.8680534859491842,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "derived_fact",
+        "target_question": "Was Marc Rosset a professional tennis player?",
+        "target_question_norm": "was marc rosset a professional tennis player",
+        "relation_signature": "generic",
+        "answer_text": "Yes, Marc Rosset was a professional tennis player",
+        "support_score": 0.6260084896764873,
+        "evidence_ids": [
+          "doc_1"
+        ],
+        "derived_from_state": "state_2",
+        "diffusion_delta": 0.10902020990843897,
+        "diffusion_gain": 0.10902020990843897
+      }
+    }
+  ],
+  "edges": [
+    {
+      "source": "state_1",
+      "target": "kg_doc_8",
+      "edge_type": "supports",
+      "weight": 0.9999999614110732
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.5555791812585266
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.2725893732666998
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.8841365672456091
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.8799999819645339
+    },
+    {
+      "source": "state_1",
+      "target": "state_2",
+      "edge_type": "refines",
+      "weight": 0.94
+    },
+    {
+      "source": "state_1",
+      "target": "state_3",
+      "edge_type": "refines",
+      "weight": 0.94
+    },
+    {
+      "source": "kg_doc_8",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.9999999614110732
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.5555791812585266
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.3512747946730925
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.3512747946730925
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.2725893732666998
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.9999999802537204
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.9999999802537204
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.8841365672456091
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.8799999819645339
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.9999999802537204
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.252016999099254
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.14808274577733932
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_2",
+      "target": "memory_mem_5",
+      "edge_type": "derives",
+      "weight": 0.95
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.252016999099254
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.252016999099254
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.14808274577733932
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.14808274577733932
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.999999970197122
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.8354821334195313
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.3512747946730925
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_3",
+      "target": "state_2",
+      "edge_type": "refines",
+      "weight": 0.84
+    },
+    {
+      "source": "state_3",
+      "target": "memory_mem_4",
+      "edge_type": "derives",
+      "weight": 0.999999970197122
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.999999970197122
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.999999970197122
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.8354821334195313
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.8354821334195313
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "state_3",
+      "edge_type": "recalls",
+      "weight": 0.999999970197122
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.999999970197122
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.3512747946730925
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.8354821334195313
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "state_2",
+      "edge_type": "recalls",
+      "weight": 0.95
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.9999999802537204
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.252016999099254
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.14808274577733932
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    }
+  ]
+}

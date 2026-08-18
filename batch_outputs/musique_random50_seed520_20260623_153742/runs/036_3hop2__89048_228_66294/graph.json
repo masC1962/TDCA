@@ -1,0 +1,97 @@
+{
+  "nodes": [
+    {
+      "node_id": "state_1",
+      "node_type": "state",
+      "content": "Who played who sang is she really going out with him in the who influenced Beyonce movie?",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.3824760070184803,
+      "temperature": 0.6227680254119299,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.66,
+        "evidence_support": 0.0,
+        "memory_usefulness": 0.5139667251540021,
+        "answerability": 0.5,
+        "uncertainty": 0.3
+      },
+      "metadata": {
+        "diffusion_delta": 0.04261346761278628,
+        "diffusion_gain": 0.04261346761278628
+      }
+    },
+    {
+      "node_id": "memory_mem_1",
+      "node_type": "memory",
+      "content": "Template: for compositional multi-hop questions, first solve the intermediate entity and then ask for the final attribute.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9599998077388796,
+      "temperature": 0.4240198550916091,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.96,
+        "tag": "compositional_template",
+        "memory_kind": "template",
+        "raw_score": 0.36940229999162205,
+        "source": "memory",
+        "diffusion_delta": -0.14785476789528473,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "memory_mem_3",
+      "node_type": "memory",
+      "content": "Template: when evidence already grounds the answer, switch from branching to short verification and synthesis.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.8799999914225256,
+      "temperature": 0.6017786962902087,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.88,
+        "tag": "verification_then_stop",
+        "memory_kind": "template",
+        "raw_score": 1.295481141414784,
+        "source": "memory",
+        "diffusion_delta": -0.27822129513231686,
+        "diffusion_gain": 0.0
+      }
+    }
+  ],
+  "edges": [
+    {
+      "source": "state_1",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.9599998077388796
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.0679336425691247
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.9599998077388796
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.0679336425691247
+    }
+  ]
+}

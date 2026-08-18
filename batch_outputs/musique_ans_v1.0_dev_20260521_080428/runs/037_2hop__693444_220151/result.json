@@ -1,0 +1,147 @@
+{
+  "question": "Who is the spouse of Young Man Luther's author?",
+  "final_answer": "Joan Erikson",
+  "best_node": {
+    "node_id": "memory_mem_5",
+    "node_type": "memory",
+    "content": "Conclusion: The answer to 'Who is the spouse of Erik Erikson' is Joan Erikson.",
+    "depth": 0,
+    "parent_id": null,
+    "value": 0.9999999949610737,
+    "temperature": 0.865105503053641,
+    "expanded": false,
+    "visit_count": 0,
+    "persistent": true,
+    "score_breakdown": {},
+    "metadata": {
+      "source": "memory",
+      "memory_kind": "intermediate_answer",
+      "target_question": "Who is the spouse of Erik Erikson?",
+      "target_question_norm": "who is the spouse of erik erikson",
+      "relation_signature": "spouse",
+      "answer_text": "Joan Erikson",
+      "support_score": 0.9999999949610737,
+      "evidence_ids": [
+        "doc_20",
+        "doc_13"
+      ],
+      "slot_name": "spouse_of_author",
+      "slot_role": "target_attribute",
+      "terminal": true,
+      "derived_from_state": "state_3",
+      "diffusion_delta": 0.05262704459028533,
+      "diffusion_gain": 0.05262704459028533
+    }
+  },
+  "final_synthesis_node_ids": [
+    "state_4",
+    "state_3",
+    "state_2",
+    "state_5",
+    "state_1"
+  ],
+  "answer_history": [
+    {
+      "node_id": "memory_mem_4",
+      "content": "Conclusion: The answer to 'Who is the author of 'Young Man Luther'' is Erik Erikson.",
+      "answer_text": "Erik Erikson",
+      "value": 0.9999999774407408,
+      "confidence": 0.95,
+      "evidence_ids": [
+        "doc_5"
+      ],
+      "step": 1,
+      "kind": "intermediate_answer"
+    },
+    {
+      "node_id": "memory_mem_5",
+      "content": "Conclusion: The answer to 'Who is the spouse of Erik Erikson' is Joan Erikson.",
+      "answer_text": "Joan Erikson",
+      "value": 0.9999999949610737,
+      "confidence": 0.9612719814227841,
+      "evidence_ids": [
+        "doc_20",
+        "doc_13"
+      ],
+      "step": 2,
+      "kind": "intermediate_answer"
+    },
+    {
+      "node_id": "memory_mem_6",
+      "content": "Conclusion: The answer to 'Who is Erik Erikson's spouse' is Joan Erikson.",
+      "answer_text": "Joan Erikson",
+      "value": 1.0,
+      "confidence": 1.0,
+      "evidence_ids": [
+        "doc_20",
+        "doc_13"
+      ],
+      "step": 4,
+      "kind": "intermediate_answer"
+    },
+    {
+      "node_id": "memory_mem_7",
+      "content": "Conclusion: The answer to 'Who is Joan Erikson's spouse' is Erik Erikson.",
+      "answer_text": "Erik Erikson",
+      "value": 0.9999999950559755,
+      "confidence": 0.95,
+      "evidence_ids": [
+        "doc_20"
+      ],
+      "step": 5,
+      "kind": "intermediate_answer"
+    },
+    {
+      "node_id": "state_1",
+      "answer_text": "Joan Erikson",
+      "previous_answer": "",
+      "confidence": 0.8780945927700522,
+      "score": 0.8501090366176037,
+      "source": "final_synthesis",
+      "step": 5,
+      "evidence_ids": [
+        "doc_5",
+        "doc_12",
+        "doc_13",
+        "doc_1"
+      ],
+      "kind": "anytime_answer"
+    },
+    {
+      "node_id": "memory_mem_5",
+      "answer_text": "Joan Erikson",
+      "source": "answer_judge",
+      "choice": "A",
+      "candidate_source": "memory",
+      "base_score": 0.9704798343610235,
+      "rerank_score": 0.7270015301595278,
+      "judge_confidence": 0.0,
+      "judge_reason": "Erik Erikson authored 'Young Man Luther'; his spouse was Joan Erikson.",
+      "step": 5,
+      "kind": "final_answer_selection"
+    }
+  ],
+  "anytime_answer": "Joan Erikson",
+  "anytime_answer_score": 0.8501090366176037,
+  "anytime_answer_source": "final_synthesis",
+  "anytime_answer_node_id": "state_1",
+  "stats": {
+    "steps": 5,
+    "llm_calls": 13,
+    "generated_tokens": 963,
+    "token_budget_remaining": 237,
+    "total_nodes": 18,
+    "kg_nodes": 7,
+    "memory_nodes": 6,
+    "state_nodes": 5,
+    "deleted_state_nodes": 0,
+    "scheduler_mode": "tdca",
+    "scoring_mode": "hybrid",
+    "stop_reason": "frontier_empty",
+    "goal_kind": "bridge",
+    "goal_completion": 0.5,
+    "anytime_answer": "Joan Erikson",
+    "anytime_answer_score": 0.8501090366176037,
+    "anytime_answer_source": "final_synthesis"
+  }
+}

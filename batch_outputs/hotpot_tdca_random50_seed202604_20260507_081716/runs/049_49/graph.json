@@ -1,0 +1,572 @@
+{
+  "nodes": [
+    {
+      "node_id": "state_1",
+      "node_type": "state",
+      "content": "Did both Alan Crosland and Chris Columbus work as stage actor?",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.8241530883951097,
+      "temperature": 0.5675493280189084,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.9400708752989873,
+        "evidence_support": 0.8237378685264329,
+        "memory_usefulness": 0.8820682746050714,
+        "answerability": 0.8118689342632164,
+        "uncertainty": 0.15172718366524207
+      },
+      "metadata": {
+        "diffusion_delta": -0.07284136836610255,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "kg_doc_2",
+      "node_type": "kg",
+      "content": "Chris Joseph Columbus (born September 10, 1958) is an American filmmaker. Columbus is known for directing movies such as \"Home Alone\" (1990), \"\" (1992), \"Mrs. Doubtfire\" (1993), \"Harry Potter and the Sorcerer's Stone\" (2001), and \"Harry Potter and the Chamber of Secrets\" (2002), and for writing movies such as \"Gremlins\" (1984) and \"The Goonies\" (1985).",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.999999996220556,
+      "temperature": 0.999999996220556,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Chris Columbus (filmmaker)",
+        "raw_score": 7.149681839772162,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_1",
+      "node_type": "kg",
+      "content": "Alan Crosland (August 10, 1894 – July 16, 1936) was an American stage actor and film director.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999929141732,
+      "temperature": 0.9999999929141732,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Alan Crosland",
+        "raw_score": 4.181836876466235,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_9",
+      "node_type": "kg",
+      "content": "Under the Red Robe is a 1923 silent historical drama directed by Alan Crosland based upon the Stanley Weyman novel \"Under the Red Robe\". The film marks the last motion picture appearance by stage actor Robert B. Mantell who plays Cardinal Richelieu and the only silent screen performance of opera singer John Charles Thomas.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.49410476660020697,
+      "temperature": 0.49410476660020697,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Under the Red Robe (1923 film)",
+        "raw_score": 2.9680360032115707,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_6",
+      "node_type": "kg",
+      "content": "Contraband is a lost 1925 silent film produced by Famous Players-Lasky and distributed by Paramount Pictures. Alan Crosland directed and Lois Wilson stars. The film is taken from a novel, \"Contraband\", by Charles Buddington Kelland. The last film directed by Alan Crosland the cooperation with distributor Paramount Pictures.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0,
+      "temperature": 0.0,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Contraband (1925 film)",
+        "raw_score": 0.7676292426798903,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "memory_mem_1",
+      "node_type": "memory",
+      "content": "Template: for compositional multi-hop questions, first solve the intermediate entity and then ask for the final attribute.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.8841365672456091,
+      "temperature": 0.09282340426413428,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.96,
+        "tag": "compositional_template",
+        "memory_kind": "template",
+        "raw_score": 0.6411217287969168,
+        "source": "memory",
+        "diffusion_delta": -0.06869034011425725,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "memory_mem_3",
+      "node_type": "memory",
+      "content": "Template: when evidence already grounds the answer, switch from branching to short verification and synthesis.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.8799999819645339,
+      "temperature": 0.09240749258418263,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.88,
+        "tag": "verification_then_stop",
+        "memory_kind": "template",
+        "raw_score": 0.6982985634047343,
+        "source": "memory",
+        "diffusion_delta": -0.06836153304169168,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "state_2",
+      "node_type": "state",
+      "content": "Was Alan Crosland a stage actor?",
+      "depth": 1,
+      "parent_id": "state_1",
+      "value": 0.5661894847665454,
+      "temperature": 1.380913539334612,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.6721796272992628,
+        "evidence_support": 0.7470523797571901,
+        "memory_usefulness": 0.0,
+        "answerability": 0.6462534626058678,
+        "uncertainty": 0.16553057164370577
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_1",
+          "doc_9",
+          "doc_8",
+          "doc_4"
+        ],
+        "memory_ids": [],
+        "goal_slot_name": "alan_crosland_stage_actor",
+        "goal_slot_role": "generic",
+        "goal_terminal": false,
+        "diffusion_delta": 0.04332857528268175,
+        "diffusion_gain": 0.04332857528268175
+      }
+    },
+    {
+      "node_id": "kg_doc_8",
+      "node_type": "kg",
+      "content": "The Personality Kid is a 1934 American drama film directed by Alan Crosland, starring Pat O'Brien and Glenda Farrell. The film was based on a story by Gene Towne and C. Graham Baker. It was released by Warner Bros. in July 7, 1934. A young prizefighter's success corrupts him and leads him to neglect his wife.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.016182203212010023,
+      "temperature": 0.016182203212010023,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "The Personality Kid",
+        "raw_score": 0.40183458847632453,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_4",
+      "node_type": "kg",
+      "content": "The Flapper is a 1920 American silent comedy film starring Olive Thomas. Directed by Alan Crosland, the film was the first in the United States to portray the \"flapper\" lifestyle which would soon become a 1920s fad.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0,
+      "temperature": 0.0,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "The Flapper",
+        "raw_score": 1.2853275993334754,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "state_3",
+      "node_type": "state",
+      "content": "Was Chris Columbus a stage actor?",
+      "depth": 1,
+      "parent_id": "state_1",
+      "value": 0.7829454339753542,
+      "temperature": 1.6462660215162217,
+      "expanded": true,
+      "visit_count": 2,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.7207651691112158,
+        "evidence_support": 0.8899510321452868,
+        "memory_usefulness": 0.0,
+        "answerability": 0.7177027887999161,
+        "uncertainty": 0.13980881421384836
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_2",
+          "doc_1",
+          "doc_9",
+          "doc_8"
+        ],
+        "memory_ids": [],
+        "goal_slot_name": "chris_columbus_stage_actor",
+        "goal_slot_role": "generic",
+        "goal_terminal": false,
+        "diffusion_delta": 0.1067559110851155,
+        "diffusion_gain": 0.1067559110851155,
+        "goal_retry": 1
+      }
+    },
+    {
+      "node_id": "memory_mem_4",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'Was Alan Crosland a stage actor' is Yes.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 1.0,
+      "temperature": 0.8328909166676709,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "intermediate_answer",
+        "target_question": "Was Alan Crosland a stage actor?",
+        "target_question_norm": "was alan crosland a stage actor",
+        "relation_signature": "generic",
+        "answer_text": "Yes",
+        "support_score": 1.0,
+        "evidence_ids": [
+          "doc_1",
+          "doc_9"
+        ],
+        "slot_name": "alan_crosland_stage_actor",
+        "slot_role": "generic",
+        "terminal": false,
+        "derived_from_state": "state_2",
+        "diffusion_delta": -0.0003313060323508754,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "memory_mem_5",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'Did both Alan Crosland and Chris Columbus work as stage actor' is No.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.82,
+      "temperature": 1.1,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "answer_candidate",
+        "target_question": "Did both Alan Crosland and Chris Columbus work as stage actor?",
+        "target_question_norm": "did both alan crosland and chris columbus work as stage actor",
+        "relation_signature": "generic",
+        "answer_text": "No",
+        "support_score": 0.0,
+        "derived_from_state": "state_1",
+        "composed_from": [
+          null,
+          null
+        ],
+        "slot_role": "final_boolean",
+        "terminal": true,
+        "coverage_count": 2,
+        "coverage_ratio": 1.0,
+        "composition_kind": "compare_yesno"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "source": "state_1",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.9999999955700761
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.6474757414827899
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.3882216736790208
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.11554488954871397
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.11536201503318821
+    },
+    {
+      "source": "state_1",
+      "target": "state_2",
+      "edge_type": "refines",
+      "weight": 1.0
+    },
+    {
+      "source": "state_1",
+      "target": "state_3",
+      "edge_type": "refines",
+      "weight": 1.0
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_5",
+      "edge_type": "derives",
+      "weight": 0.2
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.9999999955700761
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.999999994164002
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.6474757414827899
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.9999999929141732
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.7799020701265715
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.9999999929141732
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.3882216736790208
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.49410476660020697
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.39173501062151644
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.49410476660020697
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.11554488954871397
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.11536201503318821
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.9999999929141732
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.49410476660020697
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_8",
+      "edge_type": "supports",
+      "weight": 0.016182203212010023
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_2",
+      "target": "state_3",
+      "edge_type": "refines",
+      "weight": 0.84
+    },
+    {
+      "source": "state_2",
+      "target": "memory_mem_4",
+      "edge_type": "derives",
+      "weight": 1.0
+    },
+    {
+      "source": "kg_doc_8",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.016182203212010023
+    },
+    {
+      "source": "kg_doc_8",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_8",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.016182203212010023
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.999999994164002
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.7799020701265715
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.39173501062151644
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_8",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "state_2",
+      "edge_type": "recalls",
+      "weight": 1.0
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.9999999929141732
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.49410476660020697
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_8",
+      "edge_type": "supports",
+      "weight": 0.016182203212010023
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.2
+    }
+  ]
+}

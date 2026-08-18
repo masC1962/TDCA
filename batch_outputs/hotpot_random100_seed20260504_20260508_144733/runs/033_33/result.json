@@ -1,0 +1,148 @@
+{
+  "question": "The castle where \"Spook Squad\" was filmed is in what part of Scotland?",
+  "final_answer": "Spook Squad",
+  "best_node": {
+    "node_id": "state_2",
+    "node_type": "state",
+    "content": "What castle was used to film 'Spook Squad'?",
+    "depth": 1,
+    "parent_id": "state_1",
+    "value": 0.5756590646949524,
+    "temperature": 1.1133516397745387,
+    "expanded": true,
+    "visit_count": 1,
+    "persistent": false,
+    "score_breakdown": {
+      "task_progress": 0.6126698469083447,
+      "evidence_support": 0.5485764728073483,
+      "memory_usefulness": 0.8799999913575839,
+      "answerability": 0.5512113133267511,
+      "uncertainty": 0.2012562348946773
+    },
+    "metadata": {
+      "kind": "retrieval",
+      "evidence_ids": [
+        "doc_6",
+        "doc_4",
+        "doc_5",
+        "doc_1"
+      ],
+      "memory_ids": [
+        "mem_3"
+      ],
+      "goal_slot_name": "filming_location_castle",
+      "goal_slot_role": "target_attribute",
+      "goal_terminal": true,
+      "diffusion_delta": 0.12075187322960135,
+      "diffusion_gain": 0.12075187322960135
+    }
+  },
+  "final_synthesis_node_ids": [
+    "state_3",
+    "state_2",
+    "memory_mem_5",
+    "memory_mem_4",
+    "state_1"
+  ],
+  "answer_history": [
+    {
+      "node_id": "memory_mem_4",
+      "content": "Conclusion: The answer to 'What castle was used to film 'Spook Squad'' is Spook Squad.",
+      "answer_text": "Spook Squad",
+      "value": 0.782,
+      "evidence_ids": [
+        "doc_6"
+      ],
+      "step": 1
+    },
+    {
+      "node_id": "memory_mem_5",
+      "content": "Conclusion: The answer to 'The castle where \"Spook Squad\" was filmed is in what part of Scotland' is Spook Squad.",
+      "answer_text": "Spook Squad",
+      "value": 0.82,
+      "evidence_ids": [
+        "doc_6"
+      ],
+      "step": 1
+    },
+    {
+      "node_id": "state_2",
+      "answer_text": "Spook Squad",
+      "previous_answer": "",
+      "confidence": 0.85,
+      "score": 0.7492872380299896,
+      "source": "expansion_candidate",
+      "step": 0,
+      "evidence_ids": [
+        "doc_6",
+        "doc_4",
+        "doc_5",
+        "doc_1"
+      ],
+      "kind": "anytime_answer"
+    },
+    {
+      "node_id": "state_2",
+      "answer_text": "Spook Squad",
+      "previous_answer": "Spook Squad",
+      "confidence": 0.85,
+      "score": 0.8492872380299896,
+      "source": "grounded",
+      "step": 0,
+      "evidence_ids": [
+        "doc_6",
+        "doc_4",
+        "doc_5",
+        "doc_1"
+      ],
+      "kind": "anytime_answer"
+    },
+    {
+      "node_id": "memory_mem_6",
+      "content": "Conclusion: The answer to 'Where is Fyvie Castle located in Scotland' is Lancashire whose father bought R.",
+      "answer_text": "Lancashire whose father bought R",
+      "value": 0.92,
+      "evidence_ids": [
+        "doc_10",
+        "doc_6"
+      ],
+      "step": 3
+    },
+    {
+      "node_id": "state_2",
+      "answer_text": "Spook Squad",
+      "source": "answer_judge",
+      "choice": "A",
+      "candidate_source": "expansion_candidate",
+      "base_score": 1.0,
+      "rerank_score": 0.8393999997558981,
+      "judge_confidence": 0.0,
+      "judge_reason": "",
+      "step": 3,
+      "kind": "final_answer_selection"
+    }
+  ],
+  "anytime_answer": "Spook Squad",
+  "anytime_answer_score": 0.8492872380299896,
+  "anytime_answer_source": "grounded",
+  "anytime_answer_node_id": "state_2",
+  "stats": {
+    "steps": 3,
+    "llm_calls": 5,
+    "generated_tokens": 328,
+    "token_budget_remaining": 872,
+    "total_nodes": 18,
+    "kg_nodes": 9,
+    "memory_nodes": 5,
+    "state_nodes": 4,
+    "deleted_state_nodes": 0,
+    "scheduler_mode": "tdca",
+    "scoring_mode": "hybrid",
+    "stop_reason": "llm_stop_with_root_memory",
+    "goal_kind": "bridge",
+    "goal_completion": 1.0,
+    "anytime_answer": "Spook Squad",
+    "anytime_answer_score": 0.8492872380299896,
+    "anytime_answer_source": "grounded"
+  }
+}

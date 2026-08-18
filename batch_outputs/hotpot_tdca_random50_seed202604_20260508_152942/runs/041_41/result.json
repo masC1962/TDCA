@@ -1,0 +1,114 @@
+{
+  "question": "What son of Larry Johnson was born on November 19, 1979?",
+  "final_answer": "Larry Alphonso Johnson Jr",
+  "best_node": {
+    "node_id": "state_1",
+    "node_type": "state",
+    "content": "What son of Larry Johnson was born on November 19, 1979?",
+    "depth": 0,
+    "parent_id": null,
+    "value": 0.6986986828696246,
+    "temperature": 0.8175251204562406,
+    "expanded": true,
+    "visit_count": 1,
+    "persistent": false,
+    "score_breakdown": {
+      "task_progress": 0.9268234343713679,
+      "evidence_support": 0.7847748069746114,
+      "memory_usefulness": 0.0,
+      "answerability": 0.7923874034873057,
+      "uncertainty": 0.15874053474456995
+    },
+    "metadata": {
+      "diffusion_delta": 0.4610945142229724,
+      "diffusion_gain": 0.4610945142229724
+    }
+  },
+  "final_synthesis_node_ids": [
+    "state_2",
+    "memory_mem_4",
+    "state_1"
+  ],
+  "answer_history": [
+    {
+      "node_id": "memory_mem_4",
+      "content": "Conclusion: The answer to 'What son of Larry Johnson was born on November 19, 1979' is Racine.",
+      "answer_text": "Racine",
+      "value": 0.874,
+      "evidence_ids": [
+        "doc_7",
+        "doc_3",
+        "doc_2"
+      ],
+      "step": 1
+    },
+    {
+      "node_id": "state_1",
+      "answer_text": "Larry Alphonso Johnson Jr",
+      "previous_answer": "",
+      "confidence": 0.95,
+      "score": 0.8389264385213238,
+      "source": "expansion_candidate",
+      "step": 0,
+      "evidence_ids": [
+        "doc_7",
+        "doc_3",
+        "doc_2",
+        "doc_4"
+      ],
+      "kind": "anytime_answer"
+    },
+    {
+      "node_id": "state_1",
+      "answer_text": "Racine",
+      "previous_answer": "Larry Alphonso Johnson Jr",
+      "confidence": 0.95,
+      "score": 0.9389264385213237,
+      "source": "grounded",
+      "step": 0,
+      "evidence_ids": [
+        "doc_7",
+        "doc_3",
+        "doc_2",
+        "doc_4"
+      ],
+      "kind": "anytime_answer"
+    },
+    {
+      "node_id": "state_1",
+      "answer_text": "Larry Alphonso Johnson Jr",
+      "source": "answer_judge",
+      "choice": "A",
+      "candidate_source": "expansion_candidate",
+      "base_score": 0.9918574577468581,
+      "rerank_score": 0.9695801318116916,
+      "judge_confidence": 0.0,
+      "judge_reason": "Larry Alphonso Johnson Jr. is explicitly named with birthdate Nov 19, 1979, matching the question.",
+      "step": 1,
+      "kind": "final_answer_selection"
+    }
+  ],
+  "anytime_answer": "Racine",
+  "anytime_answer_score": 0.9389264385213237,
+  "anytime_answer_source": "grounded",
+  "anytime_answer_node_id": "state_1",
+  "stats": {
+    "steps": 1,
+    "llm_calls": 3,
+    "generated_tokens": 127,
+    "token_budget_remaining": 1073,
+    "total_nodes": 10,
+    "kg_nodes": 5,
+    "memory_nodes": 3,
+    "state_nodes": 2,
+    "deleted_state_nodes": 0,
+    "scheduler_mode": "tdca",
+    "scoring_mode": "hybrid",
+    "stop_reason": "llm_stop_with_root_memory",
+    "goal_kind": "single_hop",
+    "goal_completion": 1.0,
+    "anytime_answer": "Racine",
+    "anytime_answer_score": 0.9389264385213237,
+    "anytime_answer_source": "grounded"
+  }
+}

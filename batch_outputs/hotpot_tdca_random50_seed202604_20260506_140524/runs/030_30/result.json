@@ -1,0 +1,106 @@
+{
+  "question": "Spill.com gave their final review for a movie directed by who?",
+  "final_answer": "John Lee Hancock",
+  "best_node": {
+    "node_id": "state_4",
+    "node_type": "state",
+    "content": "Who is the director of that movie?",
+    "depth": 1,
+    "parent_id": "state_1",
+    "value": 0.6023297076173268,
+    "temperature": 0.8056078727265261,
+    "expanded": true,
+    "visit_count": 1,
+    "persistent": false,
+    "score_breakdown": {
+      "task_progress": 0.5708773372092749,
+      "evidence_support": 0.6692470702233575,
+      "memory_usefulness": 0.5139667251540021,
+      "answerability": 0.6679568684450121,
+      "uncertainty": 0.17953552735979564
+    },
+    "metadata": {
+      "kind": "retrieval",
+      "evidence_ids": [
+        "doc_4",
+        "doc_6",
+        "doc_1",
+        "doc_8"
+      ],
+      "memory_ids": [
+        "mem_1",
+        "mem_3"
+      ],
+      "diffusion_delta": 0.4234204070941689,
+      "diffusion_gain": 0.4234204070941689
+    }
+  },
+  "final_synthesis_node_ids": [
+    "state_2",
+    "state_4",
+    "state_3",
+    "memory_mem_4",
+    "state_1"
+  ],
+  "answer_history": [
+    {
+      "node_id": "memory_mem_4",
+      "content": "Conclusion: The director of that movie is John Lee Hancock.",
+      "answer_text": "John Lee Hancock",
+      "value": 0.7023297076173268,
+      "evidence_ids": [],
+      "step": 5
+    },
+    {
+      "node_id": "state_4",
+      "answer_text": "John Lee Hancock",
+      "previous_answer": "",
+      "confidence": 0.7023297076173268,
+      "score": 0.7015158974216944,
+      "source": "expansion_candidate",
+      "step": 4,
+      "evidence_ids": [
+        "doc_6",
+        "doc_4",
+        "doc_1",
+        "doc_8"
+      ],
+      "kind": "anytime_answer"
+    },
+    {
+      "node_id": "state_4",
+      "answer_text": "John Lee Hancock",
+      "source": "answer_judge",
+      "choice": "A",
+      "candidate_source": "expansion_candidate",
+      "base_score": 0.9421385573390706,
+      "judge_confidence": 0.0,
+      "judge_reason": "",
+      "step": 5,
+      "kind": "final_answer_selection"
+    }
+  ],
+  "anytime_answer": "John Lee Hancock",
+  "anytime_answer_score": 0.7015158974216944,
+  "anytime_answer_source": "expansion_candidate",
+  "anytime_answer_node_id": "state_4",
+  "stats": {
+    "steps": 5,
+    "llm_calls": 10,
+    "generated_tokens": 800,
+    "token_budget_remaining": 400,
+    "total_nodes": 14,
+    "kg_nodes": 6,
+    "memory_nodes": 4,
+    "state_nodes": 4,
+    "deleted_state_nodes": 0,
+    "scheduler_mode": "tdca",
+    "scoring_mode": "hybrid",
+    "stop_reason": "frontier_empty",
+    "goal_kind": "bridge",
+    "goal_completion": 0.0,
+    "anytime_answer": "John Lee Hancock",
+    "anytime_answer_score": 0.7015158974216944,
+    "anytime_answer_source": "expansion_candidate"
+  }
+}

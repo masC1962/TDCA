@@ -1,0 +1,134 @@
+{
+  "question": "Who was the husband of the prominent Walton family member who died after John died in 2005?",
+  "final_answer": "Sam Walton",
+  "best_node": {
+    "node_id": "state_7",
+    "node_type": "state",
+    "content": "Who was the husband of Helen Walton?",
+    "depth": 1,
+    "parent_id": "state_1",
+    "value": 0.6108284733675828,
+    "temperature": 1.148618103302567,
+    "expanded": true,
+    "visit_count": 1,
+    "persistent": false,
+    "score_breakdown": {
+      "task_progress": 0.7186100451227151,
+      "evidence_support": 0.8110379478399183,
+      "memory_usefulness": 0.0071419596449415115,
+      "answerability": 0.6912332596342449,
+      "uncertainty": 0.1540131693888147
+    },
+    "metadata": {
+      "kind": "retrieval",
+      "evidence_ids": [
+        "doc_1",
+        "doc_2",
+        "doc_9",
+        "doc_3"
+      ],
+      "memory_ids": [
+        "mem_1",
+        "mem_3"
+      ],
+      "diffusion_delta": 0.03812378965424257,
+      "diffusion_gain": 0.03812378965424257
+    }
+  },
+  "final_synthesis_node_ids": [
+    "state_5",
+    "state_2",
+    "state_7",
+    "state_3",
+    "state_1"
+  ],
+  "answer_history": [
+    {
+      "node_id": "memory_mem_4",
+      "content": "Conclusion: The answer to 'Which prominent Walton family member died after John Walton died in 2005' is Helen.",
+      "answer_text": "Helen",
+      "value": 0.99999999526979,
+      "confidence": 0.95,
+      "evidence_ids": [
+        "doc_1"
+      ],
+      "step": 1,
+      "kind": "intermediate_answer"
+    },
+    {
+      "node_id": "memory_mem_5",
+      "content": "Conclusion: The answer to 'Who was the husband of Helen Walton' is Sam Walton.",
+      "answer_text": "Sam Walton",
+      "value": 0.874,
+      "evidence_ids": [
+        "doc_1",
+        "doc_2"
+      ],
+      "step": 5
+    },
+    {
+      "node_id": "state_7",
+      "answer_text": "Sam Walton",
+      "previous_answer": "",
+      "confidence": 0.95,
+      "score": 0.8052594377454462,
+      "source": "expansion_candidate",
+      "step": 4,
+      "evidence_ids": [
+        "doc_1",
+        "doc_2",
+        "doc_9",
+        "doc_3"
+      ],
+      "kind": "anytime_answer"
+    },
+    {
+      "node_id": "memory_mem_6",
+      "content": "Conclusion: The answer to 'Who was Helen Walton's husband' is Sam Walton.",
+      "answer_text": "Sam Walton",
+      "value": 1.0,
+      "confidence": 1.0,
+      "evidence_ids": [
+        "doc_1",
+        "doc_2"
+      ],
+      "step": 6,
+      "kind": "intermediate_answer"
+    },
+    {
+      "node_id": "state_7",
+      "answer_text": "Sam Walton",
+      "source": "answer_judge",
+      "choice": "A",
+      "candidate_source": "expansion_candidate",
+      "base_score": 0.9204089095630851,
+      "judge_confidence": 0.0,
+      "judge_reason": "",
+      "step": 7,
+      "kind": "final_answer_selection"
+    }
+  ],
+  "anytime_answer": "Sam Walton",
+  "anytime_answer_score": 0.8052594377454462,
+  "anytime_answer_source": "expansion_candidate",
+  "anytime_answer_node_id": "state_7",
+  "stats": {
+    "steps": 7,
+    "llm_calls": 11,
+    "generated_tokens": 947,
+    "token_budget_remaining": 253,
+    "total_nodes": 19,
+    "kg_nodes": 7,
+    "memory_nodes": 5,
+    "state_nodes": 7,
+    "deleted_state_nodes": 1,
+    "scheduler_mode": "tdca",
+    "scoring_mode": "hybrid",
+    "stop_reason": "final_synthesis_reserve",
+    "goal_kind": "bridge",
+    "goal_completion": 0.0,
+    "anytime_answer": "Sam Walton",
+    "anytime_answer_score": 0.8052594377454462,
+    "anytime_answer_source": "expansion_candidate"
+  }
+}

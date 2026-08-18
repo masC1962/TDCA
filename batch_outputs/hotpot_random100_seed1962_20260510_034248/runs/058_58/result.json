@@ -1,0 +1,160 @@
+{
+  "question": "Are John le Carré and Tim Winton both novelists?",
+  "final_answer": "Yes",
+  "best_node": {
+    "node_id": "memory_mem_6",
+    "node_type": "memory",
+    "content": "Conclusion: The answer to 'Are John le Carré and Tim Winton both novelists' is Yes.",
+    "depth": 0,
+    "parent_id": null,
+    "value": 1.0,
+    "temperature": 1.645950596162745,
+    "expanded": false,
+    "visit_count": 0,
+    "persistent": true,
+    "score_breakdown": {},
+    "metadata": {
+      "source": "tdca_run",
+      "memory_kind": "answer_candidate",
+      "target_question": "Are John le Carré and Tim Winton both novelists?",
+      "target_question_norm": "are john le carr and tim winton both novelists",
+      "relation_signature": "generic",
+      "answer_text": "Yes",
+      "support_score": 1.0,
+      "derived_from_state": "state_1",
+      "composed_from": [
+        "memory_mem_5",
+        "memory_mem_4"
+      ],
+      "slot_role": "final_boolean",
+      "terminal": true,
+      "coverage_count": 2,
+      "coverage_ratio": 1.0,
+      "composition_kind": "compare_yesno",
+      "diffusion_delta": 0.16592922103962593,
+      "diffusion_gain": 0.16592922103962593,
+      "score": 1.0,
+      "raw_score": 10.302709755175156,
+      "evidence_ids": [
+        "doc_4",
+        "doc_9"
+      ]
+    }
+  },
+  "final_synthesis_node_ids": [
+    "state_2",
+    "state_3",
+    "memory_mem_6",
+    "state_5",
+    "state_1"
+  ],
+  "answer_history": [
+    {
+      "node_id": "memory_mem_4",
+      "content": "Conclusion: The answer to 'Is Tim Winton a novelist' is Yes.",
+      "answer_text": "Yes",
+      "value": 1.0,
+      "confidence": 1.0,
+      "evidence_ids": [
+        "doc_9",
+        "doc_4",
+        "doc_6"
+      ],
+      "step": 1,
+      "kind": "intermediate_answer"
+    },
+    {
+      "node_id": "memory_mem_5",
+      "content": "Conclusion: The answer to 'Is John le Carré a novelist' is Yes.",
+      "answer_text": "Yes",
+      "value": 1.0,
+      "confidence": 1.0,
+      "evidence_ids": [
+        "doc_3",
+        "doc_10"
+      ],
+      "step": 2,
+      "kind": "intermediate_answer"
+    },
+    {
+      "node_id": "memory_mem_6",
+      "content": "Conclusion: The answer to 'Are John le Carré and Tim Winton both novelists' is Yes.",
+      "answer_text": "Yes",
+      "value": 1.0,
+      "score": 1.0,
+      "source": "composed_root_memory",
+      "evidence_ids": [
+        "doc_3",
+        "doc_10",
+        "doc_9",
+        "doc_4",
+        "doc_6"
+      ],
+      "step": 2,
+      "kind": "composed_root_memory"
+    },
+    {
+      "node_id": "memory_mem_6",
+      "content": "Conclusion: The answer to 'Are John le Carré and Tim Winton both novelists' is Yes.",
+      "answer_text": "Yes",
+      "value": 0.9999999990293815,
+      "evidence_ids": [
+        "doc_4",
+        "doc_9"
+      ],
+      "step": 3
+    },
+    {
+      "node_id": "state_1",
+      "answer_text": "Yes",
+      "previous_answer": "",
+      "confidence": 0.9916338257773413,
+      "score": 1.0,
+      "source": "expansion_candidate",
+      "step": 2,
+      "evidence_ids": [
+        "doc_4",
+        "doc_9",
+        "doc_6",
+        "doc_1"
+      ],
+      "kind": "anytime_answer"
+    },
+    {
+      "node_id": "memory_mem_6",
+      "answer_text": "Yes",
+      "source": "answer_judge",
+      "choice": "A",
+      "candidate_source": "final_synthesis",
+      "base_score": 1.0,
+      "rerank_score": 0.82,
+      "judge_confidence": 0.0,
+      "judge_reason": "",
+      "step": 3,
+      "kind": "final_answer_selection"
+    }
+  ],
+  "anytime_answer": "Yes",
+  "anytime_answer_score": 1.0,
+  "anytime_answer_source": "expansion_candidate",
+  "anytime_answer_node_id": "state_1",
+  "stats": {
+    "steps": 3,
+    "llm_calls": 7,
+    "generated_tokens": 494,
+    "token_budget_remaining": 706,
+    "total_nodes": 19,
+    "kg_nodes": 9,
+    "memory_nodes": 5,
+    "state_nodes": 5,
+    "deleted_state_nodes": 0,
+    "scheduler_mode": "tdca",
+    "scoring_mode": "hybrid",
+    "stop_reason": "llm_stop_with_root_memory",
+    "goal_kind": "comparison",
+    "goal_completion": 1.0,
+    "anytime_answer": "Yes",
+    "anytime_answer_score": 1.0,
+    "anytime_answer_source": "expansion_candidate"
+  }
+}

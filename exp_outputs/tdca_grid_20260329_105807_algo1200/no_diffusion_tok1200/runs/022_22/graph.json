@@ -1,0 +1,986 @@
+{
+  "nodes": [
+    {
+      "node_id": "state_1",
+      "node_type": "state",
+      "content": "Aside from the Apple Remote, what other device can control the program Apple Remote was originally designed to interact with?",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.6398861059116875,
+      "temperature": 0.33883149914489924,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.8378023562379955,
+        "evidence_support": 0.5494509895499874,
+        "memory_usefulness": 0.5414665953258656,
+        "answerability": 0.6547254947749936,
+        "uncertainty": 0.17208784167200203
+      },
+      "metadata": {
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "kg_doc_3",
+      "node_type": "kg",
+      "content": "Title: Apple Remote. The Apple Remote is a remote control device released in or after October 2005 by Apple Inc. for use with a number of its products which use infrared capabilities. The device was originally designed to interact with the Front Row media program on the iSight iMac G5 and is compatible with some later desktop and portable Macintosh computers. The first three generations of Apple TV used the Apple Remote as their primary control mechanism. It has now been replaced with the Siri Remote in the fourth generation. Prior to the Apple Remote, Apple produced several nameless IR remotes for products such as the Macintosh TV, TV tuner expansion boards, and the PowerCD drive.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.99999999561595,
+      "temperature": 0.99999999561595,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Apple Remote",
+        "raw_score": 2.836365474397822,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_4",
+      "node_type": "kg",
+      "content": "Title: Siri Remote. The Siri Remote is a remote control device released in tandem with the 4th Generation Apple TV at an Apple Keynote Address by CEO Tim Cook on October 26, 2015 by Apple Inc. The Remote is designed specifically to work with the always-on Siri capable Apple TV. The device is a successor of the original Apple Remote. It is also compatible with the Apple TV 4K.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999894358956,
+      "temperature": 0.9999999894358956,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Siri Remote",
+        "raw_score": 4.717980457430283,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_7",
+      "node_type": "kg",
+      "content": "Title: Apple Watch. Apple Watch (stylized as WATCH) is a line of smartwatches developed, designed, and marketed by Apple Inc. It incorporates fitness tracking and health-oriented capabilities with integration with iOS and other Apple products and services. The original generation of the device was available in four variants: Apple Watch Sport, Apple Watch, Apple Watch Hermès, and Apple Watch Edition; each distinguished by different combinations of cases and first- or third-party interchangeable bands. Apple Watch relies on a wirelessly connected iPhone to perform many of its default functions such as calling and texting. It is compatible with the iPhone 5 or later models running iOS 8.2 or later, through the use of Wi-Fi or Bluetooth. Announced by Apple CEO Tim Cook in September 2014, the device was released in April 24, 2015. The Apple Watch quickly became the best-selling wearable device with the supply of 4.2 million smartwatches in the second quarter of the 2015 fiscal year. The second generation of Apple Watch, released in September 2016, includes two tiers: Apple Watch Series 2 and Apple Watch Series 1, which includes the S1P chip, but is otherwise identical to the original. The Series 3 was announced at a presentation at Apple Park on September 12, 2017 and was released on September 22, 2017.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.7214942870994064,
+      "temperature": 0.7214942870994064,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Apple Watch",
+        "raw_score": 4.422006881601043,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_2",
+      "node_type": "kg",
+      "content": "Title: Remote control. In electronics, a remote control is a component of an electronic device used to operate the device wirelessly from a distance. For example, in consumer electronics, a remote control can be used to operate devices such as a television set, DVD player, or other home appliance, from a short distance. A remote control is primarily a convenience feature for the user, and can allow operation of devices that are out of convenient reach for direct operation of controls. In some cases, remote controls allow a person to operate a device that they otherwise would not be able to reach, as when a garage door opener is triggered from outside or when a Digital Light Processing projector that is mounted on a high ceiling is controlled by a person from the floor level.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999896915769,
+      "temperature": 0.9999999896915769,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Remote control",
+        "raw_score": 7.056713519285651,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "memory_tmpl_3",
+      "node_type": "memory",
+      "content": "Template: when evidence already grounds the answer, switch from branching to short verification and synthesis.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.8799999974022505,
+      "temperature": 0.8799999974022505,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.88,
+        "tag": "verification_then_stop",
+        "memory_kind": "template",
+        "raw_score": 2.275942503844848,
+        "source": "memory"
+      }
+    },
+    {
+      "node_id": "memory_tmpl_4",
+      "node_type": "memory",
+      "content": "Template: for nested relation questions, solve the intermediate relation first, then query the target attribute, then verify the chain.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.758776425066481,
+      "temperature": 0.758776425066481,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.758776433441565,
+        "source": "tdca_run",
+        "kind": "strategy_template",
+        "memory_kind": "template",
+        "raw_score": 1.358988931213934
+      }
+    },
+    {
+      "node_id": "memory_tmpl_1",
+      "node_type": "memory",
+      "content": "Template: for compositional multi-hop questions, first solve the intermediate entity and then ask for the final attribute.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.8261152570497154,
+      "temperature": 0.8261152570497154,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.96,
+        "tag": "compositional_template",
+        "memory_kind": "template",
+        "raw_score": 1.1694598985721316,
+        "source": "memory"
+      }
+    },
+    {
+      "node_id": "memory_tmpl_2",
+      "node_type": "memory",
+      "content": "Template: for comparison questions, split the problem into one sub-question per entity before comparing them.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.5617102682097569,
+      "temperature": 0.5617102682097569,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.9,
+        "tag": "comparison_template",
+        "memory_kind": "template",
+        "raw_score": 0.8481756060799154,
+        "source": "memory"
+      }
+    },
+    {
+      "node_id": "state_2",
+      "node_type": "state",
+      "content": "What is the primary function of the Apple Remote?",
+      "depth": 1,
+      "parent_id": "state_1",
+      "value": 0.7132917735182114,
+      "temperature": 0.40705091281327543,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.6533253442247693,
+        "evidence_support": 0.8866880476831829,
+        "memory_usefulness": 0.7924458410580982,
+        "answerability": 0.7504028473710033,
+        "uncertainty": 0.11812991237069075
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_3",
+          "doc_6",
+          "doc_4",
+          "doc_7"
+        ],
+        "memory_ids": [
+          "tmpl_4",
+          "tmpl_1",
+          "tmpl_3",
+          "tmpl_2"
+        ]
+      }
+    },
+    {
+      "node_id": "kg_doc_6",
+      "node_type": "kg",
+      "content": "Title: Front Row (software). Front Row is a discontinued media center software application for Apple's Macintosh computers and Apple TV for navigating and viewing video, photos, podcasts, and music from a computer, optical disc, or the Internet through a 10-foot user interface (similar to Windows Media Center and Kodi). The software relies on iTunes and iPhoto and is controlled by an Apple Remote or the keyboard function keys. The first version was released October 2005, with two major revisions since. Front Row was removed and discontinued in Mac OS X 10.7.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.7733761057199987,
+      "temperature": 0.7733761057199987,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Front Row (software)",
+        "raw_score": 1.7586830868608652,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "state_3",
+      "node_type": "state",
+      "content": "What devices can the Siri Remote be used with?",
+      "depth": 1,
+      "parent_id": "state_1",
+      "value": 0.5878343847610316,
+      "temperature": 0.8453968609498793,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.5901394105517772,
+        "evidence_support": 0.6458120881340217,
+        "memory_usefulness": 0.7924458323113844,
+        "answerability": 0.5617295734787755,
+        "uncertainty": 0.15667006589855653
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_2",
+          "doc_1",
+          "doc_3",
+          "doc_4"
+        ],
+        "memory_ids": [
+          "tmpl_4",
+          "tmpl_1",
+          "tmpl_3",
+          "tmpl_2"
+        ]
+      }
+    },
+    {
+      "node_id": "kg_doc_1",
+      "node_type": "kg",
+      "content": "Title: Universal remote. A universal remote is a remote control that can be programmed to operate various brands of one or more types of consumer electronics devices. Low-end universal remotes can only control a set number of devices determined by their manufacturer, while mid- and high-end universal remotes allow the user to program in new control codes to the remote. Many remotes sold with various electronic include universal remote capabilities for other types of devices, which allow the remote to control other devices beyond the device it came with. For example, a VCR remote may be programmed to operate various brands of televisions.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.29162418657646655,
+      "temperature": 0.29162418657646655,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Universal remote",
+        "raw_score": 6.682650161100874,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "state_4",
+      "node_type": "state",
+      "content": "What is the original purpose of the Apple Remote?",
+      "depth": 1,
+      "parent_id": "state_1",
+      "value": 0.7000670978981732,
+      "temperature": 0.4474553391908115,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.6439866168351779,
+        "evidence_support": 0.860747138267651,
+        "memory_usefulness": 0.7924458410580982,
+        "answerability": 0.7374323926632372,
+        "uncertainty": 0.12228045787717584
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_4",
+          "doc_7",
+          "doc_3",
+          "doc_6"
+        ],
+        "memory_ids": [
+          "tmpl_4",
+          "tmpl_1",
+          "tmpl_3",
+          "tmpl_2"
+        ]
+      }
+    },
+    {
+      "node_id": "kg_doc_8",
+      "node_type": "kg",
+      "content": "Title: MacScan. MacScan is an anti-malware utility for Apple's Mac OS X developed by SecureMac. It is aimed at removing malware (including spyware, Trojan horses, keystroke loggers, and tracking cookies). It was the first anti-spyware program released for Mac OS X. In addition, the application scans for remote administration programs, like Apple Remote Desktop, allowing users to verify that such programs are installed only with their authorization.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0,
+      "temperature": 0.0,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "MacScan",
+        "raw_score": 2.839919235504667,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "state_6",
+      "node_type": "state",
+      "content": "Does the evidence support that What is the original purpose of the Apple Remote?",
+      "depth": 2,
+      "parent_id": "state_4",
+      "value": 0.641598456470693,
+      "temperature": 0.4213738787930817,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.6322458227496874,
+        "evidence_support": 0.8281338213635108,
+        "memory_usefulness": 0.666536645640288,
+        "answerability": 0.7211257342111671,
+        "uncertainty": 0.12749858858183827
+      },
+      "metadata": {
+        "kind": "verification",
+        "evidence_ids": [
+          "doc_4",
+          "doc_7",
+          "doc_3",
+          "doc_8"
+        ],
+        "memory_ids": [
+          "tmpl_3",
+          "tmpl_4",
+          "tmpl_1",
+          "tmpl_2"
+        ]
+      }
+    },
+    {
+      "node_id": "memory_mem_6",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'What is the primary function of the Apple Remote' is Apple TV.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.7912,
+      "temperature": 1.0984562255315287,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "derived_fact",
+        "target_question": "What is the primary function of the Apple Remote?",
+        "target_question_norm": "what is the primary function of the apple remote",
+        "relation_signature": "generic",
+        "answer_text": "Apple TV",
+        "support_score": 0.8866880476831829,
+        "evidence_ids": [
+          "doc_3",
+          "doc_6"
+        ],
+        "derived_from_state": "state_2",
+        "diffusion_gain": 0.0
+      }
+    }
+  ],
+  "edges": [
+    {
+      "source": "state_1",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.99999999561595
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.09890198348402487
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.01050840272489742
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_1",
+      "target": "memory_tmpl_3",
+      "edge_type": "recalls",
+      "weight": 0.8799999974022505
+    },
+    {
+      "source": "state_1",
+      "target": "memory_tmpl_4",
+      "edge_type": "recalls",
+      "weight": 0.2029331932494806
+    },
+    {
+      "source": "state_1",
+      "target": "memory_tmpl_1",
+      "edge_type": "recalls",
+      "weight": 0.22094282527363152
+    },
+    {
+      "source": "state_1",
+      "target": "memory_tmpl_2",
+      "edge_type": "recalls",
+      "weight": 0.15022825517917332
+    },
+    {
+      "source": "state_1",
+      "target": "state_2",
+      "edge_type": "refines",
+      "weight": 0.8
+    },
+    {
+      "source": "state_1",
+      "target": "state_3",
+      "edge_type": "refines",
+      "weight": 0.6
+    },
+    {
+      "source": "state_1",
+      "target": "state_4",
+      "edge_type": "refines",
+      "weight": 0.5
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.99999999561595
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.9999999896463672
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.016926535404818085
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.29621495926817004
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "state_6",
+      "edge_type": "supports",
+      "weight": 0.12307285244067166
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.9999999896463672
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.09890198348402487
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.22638604065876344
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.9999999894358956
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "state_6",
+      "edge_type": "supports",
+      "weight": 0.9999999866406751
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.22638604065876344
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.01050840272489742
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.7214942870994064
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "state_6",
+      "edge_type": "supports",
+      "weight": 0.6562676560863463
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.9999999896915769
+    },
+    {
+      "source": "memory_tmpl_3",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.8799999974022505
+    },
+    {
+      "source": "memory_tmpl_3",
+      "target": "state_2",
+      "edge_type": "recalls",
+      "weight": 0.5654664852172043
+    },
+    {
+      "source": "memory_tmpl_3",
+      "target": "state_3",
+      "edge_type": "recalls",
+      "weight": 0.5654664789758016
+    },
+    {
+      "source": "memory_tmpl_3",
+      "target": "state_4",
+      "edge_type": "recalls",
+      "weight": 0.5654664852172043
+    },
+    {
+      "source": "memory_tmpl_3",
+      "target": "state_6",
+      "edge_type": "recalls",
+      "weight": 0.87999999613347
+    },
+    {
+      "source": "memory_tmpl_4",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.2029331932494806
+    },
+    {
+      "source": "memory_tmpl_4",
+      "target": "state_2",
+      "edge_type": "recalls",
+      "weight": 0.758776425066481
+    },
+    {
+      "source": "memory_tmpl_4",
+      "target": "state_3",
+      "edge_type": "recalls",
+      "weight": 0.7587764166913973
+    },
+    {
+      "source": "memory_tmpl_4",
+      "target": "state_4",
+      "edge_type": "recalls",
+      "weight": 0.758776425066481
+    },
+    {
+      "source": "memory_tmpl_4",
+      "target": "state_6",
+      "edge_type": "recalls",
+      "weight": 0.453073295147106
+    },
+    {
+      "source": "memory_tmpl_4",
+      "target": "memory_mem_6",
+      "edge_type": "recalls",
+      "weight": 0.758776425066481
+    },
+    {
+      "source": "memory_tmpl_1",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.22094282527363152
+    },
+    {
+      "source": "memory_tmpl_1",
+      "target": "state_2",
+      "edge_type": "recalls",
+      "weight": 0.8261152570497154
+    },
+    {
+      "source": "memory_tmpl_1",
+      "target": "state_3",
+      "edge_type": "recalls",
+      "weight": 0.8261152479313716
+    },
+    {
+      "source": "memory_tmpl_1",
+      "target": "state_4",
+      "edge_type": "recalls",
+      "weight": 0.8261152570497154
+    },
+    {
+      "source": "memory_tmpl_1",
+      "target": "state_6",
+      "edge_type": "recalls",
+      "weight": 0.49328201208942307
+    },
+    {
+      "source": "memory_tmpl_1",
+      "target": "memory_mem_6",
+      "edge_type": "recalls",
+      "weight": 0.8261152570497154
+    },
+    {
+      "source": "memory_tmpl_2",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.15022825517917332
+    },
+    {
+      "source": "memory_tmpl_2",
+      "target": "state_2",
+      "edge_type": "recalls",
+      "weight": 0.5617102682097569
+    },
+    {
+      "source": "memory_tmpl_2",
+      "target": "state_3",
+      "edge_type": "recalls",
+      "weight": 0.5617102620098141
+    },
+    {
+      "source": "memory_tmpl_2",
+      "target": "state_4",
+      "edge_type": "recalls",
+      "weight": 0.5617102682097569
+    },
+    {
+      "source": "memory_tmpl_2",
+      "target": "state_6",
+      "edge_type": "recalls",
+      "weight": 0.3354030432791336
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.9999999896463672
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.7733761057199987
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.22638604065876344
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_2",
+      "target": "memory_tmpl_4",
+      "edge_type": "recalls",
+      "weight": 0.758776425066481
+    },
+    {
+      "source": "state_2",
+      "target": "memory_tmpl_1",
+      "edge_type": "recalls",
+      "weight": 0.8261152570497154
+    },
+    {
+      "source": "state_2",
+      "target": "memory_tmpl_3",
+      "edge_type": "recalls",
+      "weight": 0.5654664852172043
+    },
+    {
+      "source": "state_2",
+      "target": "memory_tmpl_2",
+      "edge_type": "recalls",
+      "weight": 0.5617102682097569
+    },
+    {
+      "source": "state_2",
+      "target": "memory_mem_6",
+      "edge_type": "derives",
+      "weight": 0.8866880476831829
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.7733761057199987
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.7733761057199987
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.9999999896915769
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.29162418657646655
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.016926535404818085
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_3",
+      "target": "memory_tmpl_4",
+      "edge_type": "recalls",
+      "weight": 0.7587764166913973
+    },
+    {
+      "source": "state_3",
+      "target": "memory_tmpl_1",
+      "edge_type": "recalls",
+      "weight": 0.8261152479313716
+    },
+    {
+      "source": "state_3",
+      "target": "memory_tmpl_3",
+      "edge_type": "recalls",
+      "weight": 0.5654664789758016
+    },
+    {
+      "source": "state_3",
+      "target": "memory_tmpl_2",
+      "edge_type": "recalls",
+      "weight": 0.5617102620098141
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.29162418657646655
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.9999999894358956
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.7214942870994064
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.29621495926817004
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_4",
+      "target": "memory_tmpl_4",
+      "edge_type": "recalls",
+      "weight": 0.758776425066481
+    },
+    {
+      "source": "state_4",
+      "target": "memory_tmpl_1",
+      "edge_type": "recalls",
+      "weight": 0.8261152570497154
+    },
+    {
+      "source": "state_4",
+      "target": "memory_tmpl_3",
+      "edge_type": "recalls",
+      "weight": 0.5654664852172043
+    },
+    {
+      "source": "state_4",
+      "target": "memory_tmpl_2",
+      "edge_type": "recalls",
+      "weight": 0.5617102682097569
+    },
+    {
+      "source": "state_4",
+      "target": "state_6",
+      "edge_type": "verifies",
+      "weight": 0.38
+    },
+    {
+      "source": "kg_doc_8",
+      "target": "state_6",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_6",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.9999999866406751
+    },
+    {
+      "source": "state_6",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.6562676560863463
+    },
+    {
+      "source": "state_6",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.12307285244067166
+    },
+    {
+      "source": "state_6",
+      "target": "kg_doc_8",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_6",
+      "target": "memory_tmpl_3",
+      "edge_type": "recalls",
+      "weight": 0.87999999613347
+    },
+    {
+      "source": "state_6",
+      "target": "memory_tmpl_4",
+      "edge_type": "recalls",
+      "weight": 0.453073295147106
+    },
+    {
+      "source": "state_6",
+      "target": "memory_tmpl_1",
+      "edge_type": "recalls",
+      "weight": 0.49328201208942307
+    },
+    {
+      "source": "state_6",
+      "target": "memory_tmpl_2",
+      "edge_type": "recalls",
+      "weight": 0.3354030432791336
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "state_2",
+      "edge_type": "recalls",
+      "weight": 0.8866880476831829
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.9999999896463672
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.7733761057199987
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.22638604065876344
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "memory_tmpl_1",
+      "edge_type": "recalls",
+      "weight": 0.8261152570497154
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "memory_tmpl_4",
+      "edge_type": "recalls",
+      "weight": 0.758776425066481
+    }
+  ]
+}

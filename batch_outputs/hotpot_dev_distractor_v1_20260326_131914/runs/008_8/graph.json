@@ -1,0 +1,312 @@
+{
+  "nodes": [
+    {
+      "node_id": "state_1",
+      "node_type": "state",
+      "content": "Who is older, Annie Morton or Terry Richardson?",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.6523480472990743,
+      "temperature": 0.16803286051381344,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.8828821048012293,
+        "evidence_support": 0.674672513336748,
+        "memory_usefulness": 0.0,
+        "answerability": 0.797336256668374,
+        "uncertainty": 0.15205239786612032
+      },
+      "metadata": {}
+    },
+    {
+      "node_id": "kg_doc_1",
+      "node_type": "kg",
+      "content": "Title: Annie Morton. Annie Morton (born October 8, 1970) is an American model born in Pennsylvania. She has appeared on the covers of \"British Vogue\", \"ID\", \"Marie Claire\", and other magazines. She has been photographed by Helmut Newton; Peter Lindbergh; Annie Leibovitz; Richard Avedon; Juergen Teller; Paul Jasmin, Mary Ellen Mark and Terry Richardson, and modeled for Donna Karan, Givenchy, Guerlain, Chanel, \"Harper's Bazaar\", \"Sports Illustrated\" and Victoria's Secret. A long time vegetarian, an advocate for organic lifestyle choices and natural healthcare. She co-founded Tsi-La Organics, a \"Green Luxury\" company that creates and sells vegan, organic perfume and skin care products.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999940147396,
+      "temperature": 0.9999999940147396,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Annie Morton",
+        "raw_score": 7.358513211450795,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_5",
+      "node_type": "kg",
+      "content": "Title: Gumbo (PJ Morton album). Gumbo is the fourth and first self-released studio album by American singer-songwriter PJ Morton. It was released on April 14, 2017, by Morton Records, as the follow-up to his third studio album \"New Orleans\" (2013). The record incorporates R&B styles with elements of older soul music; its lyrics discuss themes of romance and explores political and personal themes. The album is entirely produced by Morton himself and features guest appearances by Pell, BJ the Chicago Kid and R&B singer Anthony Hamilton's back-up group, The HamilTones. The album features a cover of the Bee Gees' \"How Deep Is Your Love\".",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.34934503735308065,
+      "temperature": 0.34934503735308065,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Gumbo (PJ Morton album)",
+        "raw_score": 4.55615925639715,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_10",
+      "node_type": "kg",
+      "content": "Title: Kenton Richardson. Kenton Terry Richardson (born 26 July 1999) is an English professional footballer who plays as a defender for League Two side Hartlepool United.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.07001686736073569,
+      "temperature": 0.07001686736073569,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Kenton Richardson",
+        "raw_score": 3.0475647952827893,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_3",
+      "node_type": "kg",
+      "content": "Title: Terry Richardson. Terrence \"Uncle Terry\" Richardson (born August 14, 1965) is an American fashion and portrait photographer who has shot advertising campaigns for Marc Jacobs, Aldo, Supreme, Sisley, Tom Ford, and Yves Saint Laurent among others. He has also done work for magazines such as \"Rolling Stone\", \"GQ\", \"Vogue\", \"Vanity Fair\", \"Harper's Bazaar\", \"i-D\", and \"Vice\".",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0,
+      "temperature": 0.0,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Terry Richardson",
+        "raw_score": 2.5802272992974165,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "memory_tmpl_3",
+      "node_type": "memory",
+      "content": "Template: when evidence already grounds the answer, switch from branching to short verification and synthesis.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.8799999948045011,
+      "temperature": 0.619880070496634,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.88,
+        "tag": "verification_then_stop",
+        "memory_kind": "template",
+        "raw_score": 1.693773789553465,
+        "source": "memory"
+      }
+    },
+    {
+      "node_id": "memory_tmpl_4",
+      "node_type": "memory",
+      "content": "Template: for nested relation questions, solve the intermediate relation first, then query the target attribute, then verify the chain.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.20293319265042423,
+      "temperature": 0.14294800285106607,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.758776433441565,
+        "source": "tdca_run",
+        "kind": "strategy_template",
+        "memory_kind": "template",
+        "raw_score": 0.45299631040464466
+      }
+    },
+    {
+      "node_id": "memory_tmpl_1",
+      "node_type": "memory",
+      "content": "Template: for compositional multi-hop questions, first solve the intermediate entity and then ask for the final attribute.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.2209428246214109,
+      "temperature": 0.15563415285300305,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.96,
+        "tag": "compositional_template",
+        "memory_kind": "template",
+        "raw_score": 0.38981996619071047,
+        "source": "memory"
+      }
+    },
+    {
+      "node_id": "memory_tmpl_2",
+      "node_type": "memory",
+      "content": "Template: for comparison questions, split the problem into one sub-question per entity before comparing them.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.1502282547357013,
+      "temperature": 0.10582216100676334,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.9,
+        "tag": "comparison_template",
+        "memory_kind": "template",
+        "raw_score": 0.2827252020266385,
+        "source": "memory"
+      }
+    },
+    {
+      "node_id": "memory_mem_6",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'Who is older, Annie Morton or Terry Richardson' is Terry Richardson is older than Annie Morton.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.7912,
+      "temperature": 1.0467770212017056,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "answer_candidate",
+        "target_question": "Who is older, Annie Morton or Terry Richardson?",
+        "target_question_norm": "who is older annie morton or terry richardson",
+        "relation_signature": "generic",
+        "answer_text": "Terry Richardson is older than Annie Morton",
+        "support_score": 0.674672513336748,
+        "evidence_ids": [
+          "doc_1"
+        ],
+        "derived_from_state": "state_1"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "source": "state_1",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.9999999893204154
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.34934503735308065
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_10",
+      "edge_type": "supports",
+      "weight": 0.07001686736073569
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_6",
+      "edge_type": "derives",
+      "weight": 0.86
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.9999999893204154
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.9999999893204154
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.34934503735308065
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.34934503735308065
+    },
+    {
+      "source": "kg_doc_10",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.07001686736073569
+    },
+    {
+      "source": "kg_doc_10",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.07001686736073569
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.86
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.9999999893204154
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.34934503735308065
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_10",
+      "edge_type": "supports",
+      "weight": 0.07001686736073569
+    }
+  ]
+}

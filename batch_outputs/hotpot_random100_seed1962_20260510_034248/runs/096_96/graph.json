@@ -1,0 +1,2555 @@
+{
+  "nodes": [
+    {
+      "node_id": "state_1",
+      "node_type": "state",
+      "content": "Whose real-life story was the inspiration of the film which included the song \"We All Die Young\"?",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.7487394903307347,
+      "temperature": 1.1995117387274126,
+      "expanded": true,
+      "visit_count": 2,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.9189618074848661,
+        "evidence_support": 0.7616523749554884,
+        "memory_usefulness": 0.5139667937761075,
+        "answerability": 0.7808261874777442,
+        "uncertainty": 0.16290257250801207
+      },
+      "metadata": {
+        "diffusion_delta": -0.028083253445801537,
+        "diffusion_gain": 0.0,
+        "composition_retry": 2,
+        "goal_retry": 1
+      }
+    },
+    {
+      "node_id": "kg_doc_1",
+      "node_type": "kg",
+      "content": "\"We All Die Young\" is a song by Michael Matijevic of Steelheart, and Kenny Kanowski formerly of Steelheart. It is the first song from the 1996 album \"Wait\". The song was covered by the fictional band Steel Dragon in the 2001 film \"Rock Star\", with Miljenko Matijevic on vocals, Zakk Wylde on guitar, Jeff Pilson on bass and Jason Bonham on drums. For the movie, Matijevic performed the vocals for Mark Wahlberg's character, Chris \"Izzy\" Cole.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999973710194,
+      "temperature": 0.9999999973710194,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "We All Die Young",
+        "raw_score": 11.372559486525649,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_2",
+      "node_type": "kg",
+      "content": "The Band Perry is the self-titled debut album of the American country music group The Band Perry. The album includes five songs from the band's digital EP \"The Band Perry EP\", which was released in April 2010. The album has produced five singles: \"Hip to My Heart\", \"If I Die Young\", \"You Lie\", \"All Your Life\", and \"Postcard from Paris\". Of these, \"If I Die Young\" and \"All Your Life\" were number one hits on the \"Billboard\" Hot Country Songs chart.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.70328143547591,
+      "temperature": 0.70328143547591,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "The Band Perry (album)",
+        "raw_score": 5.9825428797643125,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_6",
+      "node_type": "kg",
+      "content": "\"Rather Die Young\" is a song recorded by American singer Beyoncé for her fourth studio album, \"4\" (2011). Composed by Beyoncé, Jeff Bhasker, Luke Steele, the song's development was motivated by the fact that Beyoncé wanted a song that would help people through both their painful and happy moments. \"Rather Die Young\" is an R&B-soul power ballad that is instrumentally complete with synthesizers, a piano, a strummy guitar, and heavy drums, which were inspired by the work of the American band Earth, Wind & Fire. Lyrically, the song talks about the inability to fight what the heart wants. The female protagonist sings to an indifferent love interest, whom she likens to American actor James Dean and tells him that she prefers to die rather than live without him.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.7896469996774206,
+      "temperature": 0.7896469996774206,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Rather Die Young",
+        "raw_score": 2.528928020276317,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_5",
+      "node_type": "kg",
+      "content": "Father (Major General) Francis L. Sampson, USA (February 29, 1912 – January 28, 1996) was a Catholic priest from Archdiocese for the Military Services and an American Army officer who served as the 12th Chief of Chaplains of the United States Army from 1967 to 1971. Notably, his real-life story of rescuing a young soldier became the inspiration for the film \"Saving Private Ryan\".",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.25819457170577154,
+      "temperature": 0.25819457170577154,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Francis L. Sampson",
+        "raw_score": 1.776476977591215,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "memory_mem_1",
+      "node_type": "memory",
+      "content": "Template: for compositional multi-hop questions, first solve the intermediate entity and then ask for the final attribute.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9599999359129513,
+      "temperature": 4.502356053686165,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.96,
+        "tag": "compositional_template",
+        "memory_kind": "template",
+        "raw_score": 1.882157958465547,
+        "source": "memory",
+        "diffusion_delta": 0.38863867427148246,
+        "diffusion_gain": 0.38863867427148246
+      }
+    },
+    {
+      "node_id": "memory_mem_3",
+      "node_type": "memory",
+      "content": "Template: when evidence already grounds the answer, switch from branching to short verification and synthesis.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.1599536460547291,
+      "temperature": 0.6324591770880706,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.88,
+        "tag": "verification_then_stop",
+        "memory_kind": "template",
+        "raw_score": 0.07150195810198047,
+        "source": "memory",
+        "diffusion_delta": 0.10584755318913586,
+        "diffusion_gain": 0.10584755318913586
+      }
+    },
+    {
+      "node_id": "state_2",
+      "node_type": "state",
+      "content": "What is the title of the film that includes the song 'We All Die Young'?",
+      "depth": 1,
+      "parent_id": "state_1",
+      "value": 0.7435511994826441,
+      "temperature": 3.857624352867084,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.7742399893442643,
+        "evidence_support": 0.8948234980713655,
+        "memory_usefulness": 0.5139667937761075,
+        "answerability": 0.8474117490356827,
+        "uncertainty": 0.1389317703471542
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_1",
+          "doc_6",
+          "doc_2",
+          "doc_10"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "goal_slot_name": "film_title",
+        "goal_slot_role": "target_attribute",
+        "goal_terminal": true,
+        "diffusion_delta": 0.24615850648911852,
+        "diffusion_gain": 0.24615850648911852
+      }
+    },
+    {
+      "node_id": "kg_doc_10",
+      "node_type": "kg",
+      "content": "I Can Make You Love Me, also known as Stalking Laura, is an American made-for-television film starring Richard Thomas and Brooke Shields. The film is based on the real-life story of American mass murderer Richard Farley, a former employee of ESL Incorporated whose romantic obsession and subsequent stalking of co-worker Laura Black culminated in the mass murder of several co-workers at ESL's headquarters in California, resulting in the first anti-stalking laws to be enacted in the United States. The first half of the film covers the events of the stalking and Black's unrequited love that led to the shootings, while the second half deals with Farley's rampage on the ESL offices.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.5642433199600938,
+      "temperature": 0.5642433199600938,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "I Can Make You Love Me",
+        "raw_score": 2.4119334421908434,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "state_3",
+      "node_type": "state",
+      "content": "What is the real-life story that inspired the film 'Rock Star'?",
+      "depth": 2,
+      "parent_id": "state_2",
+      "value": 0.6260659111249413,
+      "temperature": 1.8039052468830081,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.646209390493562,
+        "evidence_support": 0.7278217367457704,
+        "memory_usefulness": 0.5139667766205794,
+        "answerability": 0.7264108683728853,
+        "uncertainty": 0.16899208738576132
+      },
+      "metadata": {
+        "kind": "bridge",
+        "evidence_ids": [
+          "doc_3",
+          "doc_1",
+          "doc_6",
+          "doc_10"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "diffusion_delta": 0.1598938546200115,
+        "diffusion_gain": 0.1598938546200115
+      }
+    },
+    {
+      "node_id": "kg_doc_3",
+      "node_type": "kg",
+      "content": "Rock Star is a 2001 American musical comedy-drama film directed by Stephen Herek and starring Mark Wahlberg and Jennifer Aniston. It tells the story of Chris \"Izzy\" Cole, a tribute band singer whose ascendance to the position of lead vocalist of his favorite band was inspired by the real-life story of Tim \"Ripper\" Owens, singer in a Judas Priest tribute band who was chosen to replace singer Rob Halford when he left the band.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999979901742,
+      "temperature": 0.9999999979901742,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Rock Star (2001 film)",
+        "raw_score": 8.758055021711787,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "state_4",
+      "node_type": "state",
+      "content": "Who was the real-life singer whose career inspired the character Chris 'Izzy' Cole in 'Rock Star'?",
+      "depth": 2,
+      "parent_id": "state_2",
+      "value": 0.6639568189460473,
+      "temperature": 0.9623103077172627,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.6832978417240392,
+        "evidence_support": 0.8369054168354091,
+        "memory_usefulness": 0.5139667766205794,
+        "answerability": 0.6809527084177045,
+        "uncertainty": 0.14935702496962636
+      },
+      "metadata": {
+        "kind": "bridge",
+        "evidence_ids": [
+          "doc_3",
+          "doc_1",
+          "doc_9",
+          "doc_6"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "diffusion_delta": 0.11082485671673215,
+        "diffusion_gain": 0.11082485671673215
+      }
+    },
+    {
+      "node_id": "kg_doc_9",
+      "node_type": "kg",
+      "content": "Maria Anne Hirschmann is a teacher in America whose real-life story was adapted in the Hansi, the Girl who Loved the Swastika, a comic published by Spire Christian Comics.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.1678106647585587,
+      "temperature": 0.1678106647585587,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Maria Anne Hirschmann",
+        "raw_score": 4.477907501801132,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "memory_mem_4",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'What is the title of the film that includes the song 'We All Die Young'' is We All Die Young.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.8232376182256563,
+      "temperature": 3.1053353789205103,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "derived_fact",
+        "target_question": "What is the title of the film that includes the song 'We All Die Young'?",
+        "target_question_norm": "what is the title of the film that includes the song we all die young",
+        "relation_signature": "generic",
+        "answer_text": "We All Die Young",
+        "support_score": 0.8948234980713655,
+        "evidence_ids": [
+          "doc_1",
+          "doc_6",
+          "doc_2"
+        ],
+        "derived_from_state": "state_2",
+        "diffusion_delta": 0.17119058542316967,
+        "diffusion_gain": 0.17119058542316967
+      }
+    },
+    {
+      "node_id": "state_5",
+      "node_type": "state",
+      "content": "Whose real-life story inspired the film 'Rock Star'?",
+      "depth": 1,
+      "parent_id": "state_1",
+      "value": 0.711302515814198,
+      "temperature": 1.0419328905884877,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.6674941466117543,
+        "evidence_support": 0.7205710194463362,
+        "memory_usefulness": 0.01811294205306802,
+        "answerability": 0.635285509723168,
+        "uncertainty": 0.17029721649965948
+      },
+      "metadata": {
+        "kind": "bridge",
+        "evidence_ids": [
+          "doc_3",
+          "doc_1",
+          "doc_7",
+          "doc_9"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "diffusion_delta": 0.07965862208842933,
+        "diffusion_gain": 0.07965862208842933
+      }
+    },
+    {
+      "node_id": "kg_doc_7",
+      "node_type": "kg",
+      "content": "The French Connection is a 1971 American crime thriller film directed by William Friedkin and produced by Philip D'Antoni. It stars Gene Hackman, Fernando Rey, and Roy Scheider. The film was adapted and fictionalized by Ernest Tidyman from the 1969 non-fiction book by Robin Moore. It tells the story of New York Police Department detectives Jimmy \"Popeye\" Doyle and Buddy \"Cloudy\" Russo, whose real-life counterparts were Narcotics Detectives Eddie Egan and Sonny Grosso. Don Ellis scored the film.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.06263357444612325,
+      "temperature": 0.06263357444612325,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "The French Connection (film)",
+        "raw_score": 2.992817266282886,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "state_6",
+      "node_type": "state",
+      "content": "What film included the song 'We All Die Young'?",
+      "depth": 1,
+      "parent_id": "state_1",
+      "value": 0.6035668337635312,
+      "temperature": 0.3452795607794927,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.7326414552977594,
+        "evidence_support": 0.7724748685228217,
+        "memory_usefulness": 0.0021456660237275656,
+        "answerability": 0.6862374342614108,
+        "uncertainty": 0.16095452366589208
+      },
+      "metadata": {
+        "kind": "bridge",
+        "evidence_ids": [
+          "doc_1",
+          "doc_6",
+          "doc_2",
+          "doc_5"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "diffusion_delta": -0.003958231450547467,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "state_7",
+      "node_type": "state",
+      "content": "Whose real-life story inspired that film?",
+      "depth": 1,
+      "parent_id": "state_1",
+      "value": 0.5747136139333543,
+      "temperature": 0.46229711995534484,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.6646713607657799,
+        "evidence_support": 0.7821216493111172,
+        "memory_usefulness": 0.0,
+        "answerability": 0.6535608246555586,
+        "uncertainty": 0.15921810312399892
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_3",
+          "doc_10",
+          "doc_6",
+          "doc_7"
+        ],
+        "memory_ids": [],
+        "diffusion_delta": 0.06283570467136612,
+        "diffusion_gain": 0.06283570467136612
+      }
+    },
+    {
+      "node_id": "memory_mem_5",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'Whose real-life story was the inspiration of the film which included the song \"We All Die Young\"' is Rock Star.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999943684554,
+      "temperature": 0.34910767657807673,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "tdca_run",
+        "memory_kind": "intermediate_answer",
+        "target_question": "Whose real-life story was the inspiration of the film which included the song \"We All Die Young\"?",
+        "target_question_norm": "whose real life story was the inspiration of the film which included the song we all die young",
+        "relation_signature": "generic",
+        "answer_text": "Rock Star",
+        "support_score": 0.9999999943684554,
+        "evidence_ids": [
+          "doc_1",
+          "doc_2"
+        ],
+        "slot_name": "",
+        "slot_role": "",
+        "terminal": false,
+        "derived_from_state": "state_1",
+        "diffusion_delta": -0.014929159746564336,
+        "diffusion_gain": 0.0,
+        "score": 0.9999999943684554,
+        "raw_score": 15.768637532473484
+      }
+    },
+    {
+      "node_id": "state_8",
+      "node_type": "state",
+      "content": "Whose real-life story was the inspiration of the film 'Rock Star'?",
+      "depth": 1,
+      "parent_id": "state_1",
+      "value": 0.6088330580281617,
+      "temperature": 0.31912196884558447,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.7523535006203148,
+        "evidence_support": 0.76059853123622,
+        "memory_usefulness": 0.0029156425841308795,
+        "answerability": 0.6927992656181101,
+        "uncertainty": 0.1630922643774804
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_3",
+          "doc_1",
+          "doc_5",
+          "doc_7"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "diffusion_delta": -0.004192687984120758,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "state_9",
+      "node_type": "state",
+      "content": "Which film featured the song 'We All Die Young'?",
+      "depth": 1,
+      "parent_id": "state_1",
+      "value": 0.635507304784521,
+      "temperature": 0.9599476902370426,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.754180846912031,
+        "evidence_support": 0.8358260203295029,
+        "memory_usefulness": 0.0026637612892927254,
+        "answerability": 0.7179130101647514,
+        "uncertainty": 0.14955131634068947
+      },
+      "metadata": {
+        "kind": "bridge",
+        "evidence_ids": [
+          "doc_1",
+          "doc_2",
+          "doc_6",
+          "doc_5"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "diffusion_delta": 0.6683909037537634,
+        "diffusion_gain": 0.6683909037537634
+      }
+    },
+    {
+      "node_id": "state_10",
+      "node_type": "state",
+      "content": "Who is the real-life person whose story inspired the film 'Rock Star'?",
+      "depth": 3,
+      "parent_id": "state_3",
+      "value": 0.5491168808054773,
+      "temperature": 0.5988413855926139,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.6518052877930557,
+        "evidence_support": 0.674427317038399,
+        "memory_usefulness": 0.0037087905979569093,
+        "answerability": 0.7122136585191995,
+        "uncertainty": 0.1786030829330882
+      },
+      "metadata": {
+        "kind": "bridge",
+        "evidence_ids": [
+          "doc_3",
+          "doc_1",
+          "doc_9",
+          "doc_5"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "diffusion_delta": 0.13988412476279777,
+        "diffusion_gain": 0.13988412476279777
+      }
+    },
+    {
+      "node_id": "state_11",
+      "node_type": "state",
+      "content": "Did the song 'We All Die Young' appear in the film 'Rock Star'?",
+      "depth": 3,
+      "parent_id": "state_3",
+      "value": 0.4840970590118154,
+      "temperature": 0.5013754209499668,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.6491291341021184,
+        "evidence_support": 0.5967033355944655,
+        "memory_usefulness": 0.004638761106993082,
+        "answerability": 0.5858516677972327,
+        "uncertainty": 0.1925933995929962
+      },
+      "metadata": {
+        "kind": "verification",
+        "evidence_ids": [
+          "doc_1",
+          "doc_2",
+          "doc_3",
+          "doc_6"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "diffusion_delta": 0.04948666664094031,
+        "diffusion_gain": 0.04948666664094031
+      }
+    },
+    {
+      "node_id": "memory_mem_6",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'What is the real-life story that inspired the film 'Rock Star'' is Rock Star.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.874,
+      "temperature": 0.7180211622144612,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "derived_fact",
+        "target_question": "What is the real-life story that inspired the film 'Rock Star'?",
+        "target_question_norm": "what is the real life story that inspired the film rock star",
+        "relation_signature": "generic",
+        "answer_text": "Rock Star",
+        "support_score": 0.7278217367457704,
+        "evidence_ids": [
+          "doc_3",
+          "doc_1"
+        ],
+        "derived_from_state": "state_3",
+        "diffusion_delta": 0.034948707956430125,
+        "diffusion_gain": 0.034948707956430125
+      }
+    },
+    {
+      "node_id": "state_12",
+      "node_type": "state",
+      "content": "Whose real-life story inspired the film that featured 'We All Die Young'?",
+      "depth": 3,
+      "parent_id": "state_4",
+      "value": 0.6407711278910735,
+      "temperature": 0.5937451354816952,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.7902480610793684,
+        "evidence_support": 0.802200179645201,
+        "memory_usefulness": 0.0016999791134029718,
+        "answerability": 0.7261000898226004,
+        "uncertainty": 0.1556039676638638
+      },
+      "metadata": {
+        "kind": "bridge",
+        "evidence_ids": [
+          "doc_1",
+          "doc_2",
+          "doc_6",
+          "doc_3"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "diffusion_delta": 0.013172850559147409,
+        "diffusion_gain": 0.013172850559147409
+      }
+    },
+    {
+      "node_id": "state_13",
+      "node_type": "state",
+      "content": "Does the evidence support that Whose real-life story inspired the film 'Rock Star'?",
+      "depth": 2,
+      "parent_id": "state_5",
+      "value": 0.5267793212027541,
+      "temperature": 0.5775340370568045,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.6566160781143819,
+        "evidence_support": 0.6885767003364174,
+        "memory_usefulness": 0.08280553314097462,
+        "answerability": 0.6192883501682087,
+        "uncertainty": 0.17605619393944485
+      },
+      "metadata": {
+        "kind": "verification",
+        "evidence_ids": [
+          "doc_3",
+          "doc_1",
+          "doc_10",
+          "doc_6"
+        ],
+        "memory_ids": [
+          "mem_3",
+          "mem_1"
+        ],
+        "diffusion_delta": 0.11110802183031943,
+        "diffusion_gain": 0.11110802183031943
+      }
+    },
+    {
+      "node_id": "memory_mem_7",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'Whose real-life story inspired the film 'Rock Star'' is Tim \"Ripper\" Owens.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 1.0,
+      "temperature": 0.8198953892583685,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "intermediate_answer",
+        "target_question": "Whose real-life story inspired the film 'Rock Star'?",
+        "target_question_norm": "whose real life story inspired the film rock star",
+        "relation_signature": "generic",
+        "answer_text": "Tim \"Ripper\" Owens",
+        "support_score": 1.0,
+        "evidence_ids": [
+          "doc_3",
+          "doc_1"
+        ],
+        "slot_name": "inspiration_person",
+        "slot_role": "bridge_entity",
+        "terminal": false,
+        "derived_from_state": "state_5",
+        "diffusion_delta": 0.0377542997531769,
+        "diffusion_gain": 0.0377542997531769
+      }
+    },
+    {
+      "node_id": "state_14",
+      "node_type": "state",
+      "content": "Which film features the song 'We All Die Young'?",
+      "depth": 4,
+      "parent_id": "state_10",
+      "value": 0.6353807913113859,
+      "temperature": 0.4806013625293618,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.754180846912031,
+        "evidence_support": 0.8358260203295029,
+        "memory_usefulness": 0.0016094823465006187,
+        "answerability": 0.7179130101647514,
+        "uncertainty": 0.14955131634068947
+      },
+      "metadata": {
+        "kind": "bridge",
+        "evidence_ids": [
+          "doc_1",
+          "doc_2",
+          "doc_6",
+          "doc_5"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "diffusion_delta": -0.10699470115032206,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "state_15",
+      "node_type": "state",
+      "content": "Which real-life person's story inspired the film 'Rock Star'?",
+      "depth": 2,
+      "parent_id": "state_9",
+      "value": 0.6039186349393655,
+      "temperature": 0.5389244990332058,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.7004683972904895,
+        "evidence_support": 0.81755410967791,
+        "memory_usefulness": 0.0018783912453422705,
+        "answerability": 0.683777054838955,
+        "uncertainty": 0.1528402602579762
+      },
+      "metadata": {
+        "kind": "bridge",
+        "evidence_ids": [
+          "doc_3",
+          "doc_1",
+          "doc_10",
+          "doc_6"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "diffusion_delta": -0.25873817486201756,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "state_16",
+      "node_type": "state",
+      "content": "What is the real-life basis for the character Chris 'Izzy' Cole in 'Rock Star'?",
+      "depth": 2,
+      "parent_id": "state_9",
+      "value": 0.6478045542370704,
+      "temperature": 0.8943945424355029,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.6515212759435102,
+        "evidence_support": 0.8831508115985591,
+        "memory_usefulness": 0.22960888200562823,
+        "answerability": 0.7790754057992795,
+        "uncertainty": 0.14103285391225934
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_1",
+          "doc_3",
+          "doc_6",
+          "doc_10"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_2"
+        ],
+        "diffusion_delta": 0.033167646553343144,
+        "diffusion_gain": 0.033167646553343144
+      }
+    },
+    {
+      "node_id": "memory_mem_2",
+      "node_type": "memory",
+      "content": "Template: for comparison questions, split the problem into one sub-question per entity before comparing them.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.18506846536056748,
+      "temperature": 0.2579742815486936,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.9,
+        "tag": "comparison_template",
+        "memory_kind": "template",
+        "raw_score": 1.395314521988963,
+        "source": "memory",
+        "diffusion_delta": 0.07290581618812614,
+        "diffusion_gain": 0.07290581618812614
+      }
+    },
+    {
+      "node_id": "memory_mem_8",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'Which film featured the song 'We All Die Young'' is We All Die Young.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.7689599387031427,
+      "temperature": 0.7001562744892214,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "derived_fact",
+        "target_question": "Which film featured the song 'We All Die Young'?",
+        "target_question_norm": "which film featured the song we all die young",
+        "relation_signature": "generic",
+        "answer_text": "We All Die Young",
+        "support_score": 0.8358260203295029,
+        "evidence_ids": [
+          "doc_1",
+          "doc_2"
+        ],
+        "derived_from_state": "state_9",
+        "diffusion_delta": -0.29766118290815713,
+        "diffusion_gain": 0.0
+      }
+    }
+  ],
+  "edges": [
+    {
+      "source": "state_1",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.9999999943684554
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.5233047555425214
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.12400783478390781
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.006100773566902363
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.0008209367047232167
+    },
+    {
+      "source": "state_1",
+      "target": "state_2",
+      "edge_type": "refines",
+      "weight": 1.0
+    },
+    {
+      "source": "state_1",
+      "target": "state_5",
+      "edge_type": "refines",
+      "weight": 0.94
+    },
+    {
+      "source": "state_1",
+      "target": "state_6",
+      "edge_type": "refines",
+      "weight": 0.9
+    },
+    {
+      "source": "state_1",
+      "target": "state_7",
+      "edge_type": "refines",
+      "weight": 0.8
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_5",
+      "edge_type": "recalls",
+      "weight": 0.9999999937226309
+    },
+    {
+      "source": "state_1",
+      "target": "state_8",
+      "edge_type": "refines",
+      "weight": 0.84
+    },
+    {
+      "source": "state_1",
+      "target": "state_9",
+      "edge_type": "refines",
+      "weight": 0.9
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.9999999943684554
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.9999999964653105
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.45564347885498746
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.673810835680644
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.9999999964653105
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.44114204315785155
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "state_6",
+      "edge_type": "supports",
+      "weight": 0.9999999966986985
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.9999999943684554
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "state_8",
+      "edge_type": "supports",
+      "weight": 0.5211970681164453
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "state_9",
+      "edge_type": "supports",
+      "weight": 0.9999999966986985
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "state_10",
+      "edge_type": "supports",
+      "weight": 0.34885463800455785
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "state_11",
+      "edge_type": "supports",
+      "weight": 0.9999999967748021
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.45564347885498746
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "state_12",
+      "edge_type": "supports",
+      "weight": 0.9999999919538568
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "state_13",
+      "edge_type": "supports",
+      "weight": 0.3771534055683071
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "memory_mem_7",
+      "edge_type": "supports",
+      "weight": 0.44114204315785155
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "state_14",
+      "edge_type": "supports",
+      "weight": 0.9999999966986985
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "state_15",
+      "edge_type": "supports",
+      "weight": 0.6351082243952422
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "state_16",
+      "edge_type": "supports",
+      "weight": 0.9999999973710194
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "memory_mem_8",
+      "edge_type": "supports",
+      "weight": 0.9999999966986985
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.5233047555425214
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.70328143547591
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.70328143547591
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "state_6",
+      "edge_type": "supports",
+      "weight": 0.5071552030684499
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.5233047555425214
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "state_9",
+      "edge_type": "supports",
+      "weight": 0.6716520439603072
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "state_11",
+      "edge_type": "supports",
+      "weight": 0.19340667441412898
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "state_12",
+      "edge_type": "supports",
+      "weight": 0.6044003673365451
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "state_14",
+      "edge_type": "supports",
+      "weight": 0.6716520439603072
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "memory_mem_8",
+      "edge_type": "supports",
+      "weight": 0.6716520439603072
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.12400783478390781
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.7896469996774206
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.32039917168080434
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.7896469996774206
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "state_6",
+      "edge_type": "supports",
+      "weight": 0.5449497403469448
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "state_7",
+      "edge_type": "supports",
+      "weight": 0.19705359739333167
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.12400783478390781
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "state_9",
+      "edge_type": "supports",
+      "weight": 0.5023489108764532
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "state_11",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.32039917168080434
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "state_12",
+      "edge_type": "supports",
+      "weight": 0.4780621959235555
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "state_13",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "state_14",
+      "edge_type": "supports",
+      "weight": 0.5023489108764532
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "state_15",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "state_16",
+      "edge_type": "supports",
+      "weight": 0.002946227044017874
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "memory_mem_8",
+      "edge_type": "supports",
+      "weight": 0.5023489108764532
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "state_6",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "state_8",
+      "edge_type": "supports",
+      "weight": 0.25819457170577154
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "state_9",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "state_10",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "state_14",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "memory_mem_8",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.006100773566902363
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_2",
+      "edge_type": "recalls",
+      "weight": 0.9599999359129513
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_3",
+      "edge_type": "recalls",
+      "weight": 0.00803834044107468
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_4",
+      "edge_type": "recalls",
+      "weight": 0.008010289932229298
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "memory_mem_4",
+      "edge_type": "recalls",
+      "weight": 0.9599999359129513
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_5",
+      "edge_type": "recalls",
+      "weight": 0.003194435942524433
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_6",
+      "edge_type": "recalls",
+      "weight": 0.004013736257615908
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "memory_mem_5",
+      "edge_type": "recalls",
+      "weight": 0.011869860918509292
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_8",
+      "edge_type": "recalls",
+      "weight": 0.0054597665420219755
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_9",
+      "edge_type": "recalls",
+      "weight": 0.0030128200257594265
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_10",
+      "edge_type": "recalls",
+      "weight": 0.005787766449276221
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_11",
+      "edge_type": "recalls",
+      "weight": 0.008686439423761953
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "memory_mem_6",
+      "edge_type": "recalls",
+      "weight": 0.00803834044107468
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_12",
+      "edge_type": "recalls",
+      "weight": 0.0031830979475697537
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_13",
+      "edge_type": "recalls",
+      "weight": 0.00565742022722016
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "memory_mem_7",
+      "edge_type": "recalls",
+      "weight": 0.003194435942524433
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_14",
+      "edge_type": "recalls",
+      "weight": 0.0030128200257594265
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_15",
+      "edge_type": "recalls",
+      "weight": 0.003516195609403787
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_16",
+      "edge_type": "recalls",
+      "weight": 0.274149298650689
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "memory_mem_8",
+      "edge_type": "recalls",
+      "weight": 0.0030128200257594265
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.0008209367047232167
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_2",
+      "edge_type": "recalls",
+      "weight": 0.06793365163926388
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_3",
+      "edge_type": "recalls",
+      "weight": 0.0005469818489363055
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_4",
+      "edge_type": "recalls",
+      "weight": 0.0005457305241870874
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "memory_mem_4",
+      "edge_type": "recalls",
+      "weight": 0.06793365163926388
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_5",
+      "edge_type": "recalls",
+      "weight": 0.0002176327219295499
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_6",
+      "edge_type": "recalls",
+      "weight": 0.0002775957898392227
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "memory_mem_5",
+      "edge_type": "recalls",
+      "weight": 0.0008209367047232167
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_8",
+      "edge_type": "recalls",
+      "weight": 0.00037151862623978327
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_9",
+      "edge_type": "recalls",
+      "weight": 0.00020614466724181086
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_10",
+      "edge_type": "recalls",
+      "weight": 0.00039601342880035483
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_11",
+      "edge_type": "recalls",
+      "weight": 0.0005910827902242099
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "memory_mem_6",
+      "edge_type": "recalls",
+      "weight": 0.0005469818489363055
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_12",
+      "edge_type": "recalls",
+      "weight": 0.00021686027923618965
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_13",
+      "edge_type": "recalls",
+      "weight": 0.1599536460547291
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "memory_mem_7",
+      "edge_type": "recalls",
+      "weight": 0.0002176327219295499
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_14",
+      "edge_type": "recalls",
+      "weight": 0.00020614466724181086
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_15",
+      "edge_type": "recalls",
+      "weight": 0.00024058688128075355
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "memory_mem_8",
+      "edge_type": "recalls",
+      "weight": 0.00020614466724181086
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.9999999964653105
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.7896469996774206
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.70328143547591
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_10",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_2",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.9599999359129513
+    },
+    {
+      "source": "state_2",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.06793365163926388
+    },
+    {
+      "source": "state_2",
+      "target": "state_3",
+      "edge_type": "refines",
+      "weight": 0.95
+    },
+    {
+      "source": "state_2",
+      "target": "state_4",
+      "edge_type": "refines",
+      "weight": 0.9
+    },
+    {
+      "source": "state_2",
+      "target": "memory_mem_4",
+      "edge_type": "derives",
+      "weight": 0.8948234980713655
+    },
+    {
+      "source": "kg_doc_10",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_10",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_10",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_10",
+      "target": "state_7",
+      "edge_type": "supports",
+      "weight": 0.5642433199600938
+    },
+    {
+      "source": "kg_doc_10",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_10",
+      "target": "state_13",
+      "edge_type": "supports",
+      "weight": 0.06122880726610397
+    },
+    {
+      "source": "kg_doc_10",
+      "target": "state_15",
+      "edge_type": "supports",
+      "weight": 0.07568531794056198
+    },
+    {
+      "source": "kg_doc_10",
+      "target": "state_16",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.9999999946365535
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.45564347885498746
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.32039917168080434
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_10",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_3",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.00803834044107468
+    },
+    {
+      "source": "state_3",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.0005469818489363055
+    },
+    {
+      "source": "state_3",
+      "target": "state_10",
+      "edge_type": "refines",
+      "weight": 0.9
+    },
+    {
+      "source": "state_3",
+      "target": "state_11",
+      "edge_type": "verifies",
+      "weight": 0.8
+    },
+    {
+      "source": "state_3",
+      "target": "memory_mem_6",
+      "edge_type": "derives",
+      "weight": 0.95
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.9999999946365535
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.9999999979901742
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.9999999957348207
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "state_7",
+      "edge_type": "supports",
+      "weight": 0.9999999786621404
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "state_8",
+      "edge_type": "supports",
+      "weight": 0.9999999943559947
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "state_10",
+      "edge_type": "supports",
+      "weight": 0.99999999607224
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "state_11",
+      "edge_type": "supports",
+      "weight": 0.14091186342739345
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.9999999946365535
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "state_12",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "state_13",
+      "edge_type": "supports",
+      "weight": 0.9999999951045278
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "memory_mem_7",
+      "edge_type": "supports",
+      "weight": 0.9999999957348207
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "state_15",
+      "edge_type": "supports",
+      "weight": 0.9999999949605777
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "state_16",
+      "edge_type": "supports",
+      "weight": 0.7663016258260988
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.9999999979901742
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.673810835680644
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.1678106647585587
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_4",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.008010289932229298
+    },
+    {
+      "source": "state_4",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.0005457305241870874
+    },
+    {
+      "source": "state_4",
+      "target": "state_12",
+      "edge_type": "refines",
+      "weight": 1.0
+    },
+    {
+      "source": "state_4",
+      "target": "state_9",
+      "edge_type": "refines",
+      "weight": 0.9
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.1678106647585587
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "state_10",
+      "edge_type": "supports",
+      "weight": 0.15399336247541345
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "memory_mem_7",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "state_2",
+      "edge_type": "recalls",
+      "weight": 0.8948234980713655
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.9999999964653105
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.7896469996774206
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.70328143547591
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_10",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.9599999359129513
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.06793365163926388
+    },
+    {
+      "source": "state_5",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.9999999957348207
+    },
+    {
+      "source": "state_5",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.44114204315785155
+    },
+    {
+      "source": "state_5",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.06263357444612325
+    },
+    {
+      "source": "state_5",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_5",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.003194435942524433
+    },
+    {
+      "source": "state_5",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.0002176327219295499
+    },
+    {
+      "source": "state_5",
+      "target": "state_13",
+      "edge_type": "verifies",
+      "weight": 0.38
+    },
+    {
+      "source": "state_5",
+      "target": "memory_mem_7",
+      "edge_type": "derives",
+      "weight": 1.0
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.06263357444612325
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "state_7",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "state_8",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "memory_mem_7",
+      "edge_type": "supports",
+      "weight": 0.06263357444612325
+    },
+    {
+      "source": "state_6",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.9999999966986985
+    },
+    {
+      "source": "state_6",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.5449497403469448
+    },
+    {
+      "source": "state_6",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.5071552030684499
+    },
+    {
+      "source": "state_6",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_6",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.004013736257615908
+    },
+    {
+      "source": "state_6",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.0002775957898392227
+    },
+    {
+      "source": "state_7",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.9999999786621404
+    },
+    {
+      "source": "state_7",
+      "target": "kg_doc_10",
+      "edge_type": "supports",
+      "weight": 0.5642433199600938
+    },
+    {
+      "source": "state_7",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.19705359739333167
+    },
+    {
+      "source": "state_7",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.9999999937226309
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.9999999943684554
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.5233047555425214
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.12400783478390781
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.011869860918509292
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.0008209367047232167
+    },
+    {
+      "source": "state_8",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.9999999943559947
+    },
+    {
+      "source": "state_8",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.5211970681164453
+    },
+    {
+      "source": "state_8",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.25819457170577154
+    },
+    {
+      "source": "state_8",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_8",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.0054597665420219755
+    },
+    {
+      "source": "state_8",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.00037151862623978327
+    },
+    {
+      "source": "state_9",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.9999999966986985
+    },
+    {
+      "source": "state_9",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.6716520439603072
+    },
+    {
+      "source": "state_9",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.5023489108764532
+    },
+    {
+      "source": "state_9",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_9",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.0030128200257594265
+    },
+    {
+      "source": "state_9",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.00020614466724181086
+    },
+    {
+      "source": "state_9",
+      "target": "state_15",
+      "edge_type": "refines",
+      "weight": 0.9
+    },
+    {
+      "source": "state_9",
+      "target": "state_16",
+      "edge_type": "refines",
+      "weight": 0.85
+    },
+    {
+      "source": "state_9",
+      "target": "memory_mem_8",
+      "edge_type": "derives",
+      "weight": 0.8358260203295029
+    },
+    {
+      "source": "state_10",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.99999999607224
+    },
+    {
+      "source": "state_10",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.34885463800455785
+    },
+    {
+      "source": "state_10",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.15399336247541345
+    },
+    {
+      "source": "state_10",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_10",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.005787766449276221
+    },
+    {
+      "source": "state_10",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.00039601342880035483
+    },
+    {
+      "source": "state_10",
+      "target": "state_7",
+      "edge_type": "refines",
+      "weight": 1.0
+    },
+    {
+      "source": "state_10",
+      "target": "state_14",
+      "edge_type": "refines",
+      "weight": 0.9
+    },
+    {
+      "source": "state_11",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.9999999967748021
+    },
+    {
+      "source": "state_11",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.19340667441412898
+    },
+    {
+      "source": "state_11",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.14091186342739345
+    },
+    {
+      "source": "state_11",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_11",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.008686439423761953
+    },
+    {
+      "source": "state_11",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.0005910827902242099
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "state_3",
+      "edge_type": "recalls",
+      "weight": 0.95
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.9999999946365535
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.45564347885498746
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.32039917168080434
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_10",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.00803834044107468
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.0005469818489363055
+    },
+    {
+      "source": "state_12",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.9999999919538568
+    },
+    {
+      "source": "state_12",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.6044003673365451
+    },
+    {
+      "source": "state_12",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.4780621959235555
+    },
+    {
+      "source": "state_12",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_12",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.0031830979475697537
+    },
+    {
+      "source": "state_12",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.00021686027923618965
+    },
+    {
+      "source": "state_13",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.9999999951045278
+    },
+    {
+      "source": "state_13",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.3771534055683071
+    },
+    {
+      "source": "state_13",
+      "target": "kg_doc_10",
+      "edge_type": "supports",
+      "weight": 0.06122880726610397
+    },
+    {
+      "source": "state_13",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_13",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.1599536460547291
+    },
+    {
+      "source": "state_13",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.00565742022722016
+    },
+    {
+      "source": "memory_mem_7",
+      "target": "state_5",
+      "edge_type": "recalls",
+      "weight": 1.0
+    },
+    {
+      "source": "memory_mem_7",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.9999999957348207
+    },
+    {
+      "source": "memory_mem_7",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.44114204315785155
+    },
+    {
+      "source": "memory_mem_7",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.06263357444612325
+    },
+    {
+      "source": "memory_mem_7",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_7",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.003194435942524433
+    },
+    {
+      "source": "memory_mem_7",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.0002176327219295499
+    },
+    {
+      "source": "state_14",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.9999999966986985
+    },
+    {
+      "source": "state_14",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.6716520439603072
+    },
+    {
+      "source": "state_14",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.5023489108764532
+    },
+    {
+      "source": "state_14",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_14",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.0030128200257594265
+    },
+    {
+      "source": "state_14",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.00020614466724181086
+    },
+    {
+      "source": "state_15",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.9999999949605777
+    },
+    {
+      "source": "state_15",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.6351082243952422
+    },
+    {
+      "source": "state_15",
+      "target": "kg_doc_10",
+      "edge_type": "supports",
+      "weight": 0.07568531794056198
+    },
+    {
+      "source": "state_15",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_15",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.003516195609403787
+    },
+    {
+      "source": "state_15",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.00024058688128075355
+    },
+    {
+      "source": "state_16",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.9999999973710194
+    },
+    {
+      "source": "state_16",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.7663016258260988
+    },
+    {
+      "source": "state_16",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.002946227044017874
+    },
+    {
+      "source": "state_16",
+      "target": "kg_doc_10",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_16",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.274149298650689
+    },
+    {
+      "source": "state_16",
+      "target": "memory_mem_2",
+      "edge_type": "recalls",
+      "weight": 0.18506846536056748
+    },
+    {
+      "source": "memory_mem_2",
+      "target": "state_16",
+      "edge_type": "recalls",
+      "weight": 0.18506846536056748
+    },
+    {
+      "source": "memory_mem_8",
+      "target": "state_9",
+      "edge_type": "recalls",
+      "weight": 0.8358260203295029
+    },
+    {
+      "source": "memory_mem_8",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.9999999966986985
+    },
+    {
+      "source": "memory_mem_8",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.6716520439603072
+    },
+    {
+      "source": "memory_mem_8",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.5023489108764532
+    },
+    {
+      "source": "memory_mem_8",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_8",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.0030128200257594265
+    },
+    {
+      "source": "memory_mem_8",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.00020614466724181086
+    }
+  ]
+}

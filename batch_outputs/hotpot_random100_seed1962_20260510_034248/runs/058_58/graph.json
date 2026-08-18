@@ -1,0 +1,968 @@
+{
+  "nodes": [
+    {
+      "node_id": "state_1",
+      "node_type": "state",
+      "content": "Are John le Carré and Tim Winton both novelists?",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9214284752149251,
+      "temperature": 1.4096385536143934,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.9943110015285922,
+        "evidence_support": 0.9832676515546828,
+        "memory_usefulness": 0.8820682746050714,
+        "answerability": 0.9916338257773413,
+        "uncertainty": 0.1230118227201571
+      },
+      "metadata": {
+        "diffusion_delta": 0.4785101064984506,
+        "diffusion_gain": 0.4785101064984506
+      }
+    },
+    {
+      "node_id": "kg_doc_4",
+      "node_type": "kg",
+      "content": "An Open Swimmer was the first novel by multi-award-winning Australian author, Tim Winton. Winton wrote this novel while attending a creative writing course at Curtin University. In 1981 it won The Australian/Vogel Literary Award, and thereby kick-started Tim Winton's successful writing career.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999795855053,
+      "temperature": 0.9999999795855053,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "An Open Swimmer",
+        "raw_score": 3.6417920213110127,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_9",
+      "node_type": "kg",
+      "content": "The Collected Shorter Novels of Tim Winton is a collection of early short novels by award-winning Australian author Tim Winton. Published in 1995, it includes \"An Open Swimmer\", \"That Eye, The Sky\" and \"In the Winter Dark\".",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.999999994225854,
+      "temperature": 0.999999994225854,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "The Collected Shorter Novels of Tim Winton",
+        "raw_score": 3.7466868714492607,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_6",
+      "node_type": "kg",
+      "content": "Tim (Timothy John) Winton (born 4 August 1960) is a multi-award-winning Australian writer of novels, children's books, non-fiction books and short stories.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.8019580301630063,
+      "temperature": 0.8019580301630063,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Tim Winton",
+        "raw_score": 3.1425879860159025,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_1",
+      "node_type": "kg",
+      "content": "David John Moore Cornwell (born 19 October 1931), known by the pseudonym John le Carré ( ), is a British author of espionage novels. During the 1950s and the 1960s, he worked for both the Security Service and the Secret Intelligence Service, and began writing novels under his pen name. His third novel, \"The Spy Who Came in from the Cold\" (1963), became an international best-seller and remains one of his best-known works. Following the success of this novel, he left MI6 to become a full-time author.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0,
+      "temperature": 0.0,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "John le Carré",
+        "raw_score": 2.6352166720649124,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "memory_mem_1",
+      "node_type": "memory",
+      "content": "Template: for compositional multi-hop questions, first solve the intermediate entity and then ask for the final attribute.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.8841365672456091,
+      "temperature": 0.8278617385420707,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.96,
+        "tag": "compositional_template",
+        "memory_kind": "template",
+        "raw_score": 0.44936932357153264,
+        "source": "memory",
+        "diffusion_delta": -0.05627482870353839,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "memory_mem_3",
+      "node_type": "memory",
+      "content": "Template: when evidence already grounds the answer, switch from branching to short verification and synthesis.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.8799999819645339,
+      "temperature": 0.1933162958377322,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.88,
+        "tag": "verification_then_stop",
+        "memory_kind": "template",
+        "raw_score": 0.6825557974953621,
+        "source": "memory",
+        "diffusion_delta": -0.15563342078821268,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "state_2",
+      "node_type": "state",
+      "content": "Is John le Carré a novelist?",
+      "depth": 1,
+      "parent_id": "state_1",
+      "value": 0.6661819574012635,
+      "temperature": 1.2489337819062734,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.7203932144603132,
+        "evidence_support": 0.9227251405695487,
+        "memory_usefulness": 0.0,
+        "answerability": 0.8280292369514409,
+        "uncertainty": 0.13390947469748124
+      },
+      "metadata": {
+        "kind": "comparison",
+        "evidence_ids": [
+          "doc_3",
+          "doc_10",
+          "doc_8",
+          "doc_2"
+        ],
+        "memory_ids": [],
+        "goal_slot_name": "left_value",
+        "goal_slot_role": "left_value",
+        "goal_terminal": true,
+        "diffusion_delta": 0.1112651871645276,
+        "diffusion_gain": 0.1112651871645276
+      }
+    },
+    {
+      "node_id": "kg_doc_3",
+      "node_type": "kg",
+      "content": "John le Carré: The Biography is a 2015 biography of John le Carré written by Adam Sisman and published by Harper.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999324711576,
+      "temperature": 0.9999999324711576,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "John le Carré: The Biography",
+        "raw_score": 2.0089845031477136,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_10",
+      "node_type": "kg",
+      "content": "Bill Haydon is a fictional character created by John le Carré in le Carré's \"Tinker Tailor Soldier Spy\".",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.8454503486679398,
+      "temperature": 0.8454503486679398,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Bill Haydon",
+        "raw_score": 1.9401296706146551,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_8",
+      "node_type": "kg",
+      "content": "Connie Sachs is a fictional character created by John le Carré. Sachs plays a key supporting role in le Carré's \"Karla Trilogy\" of spy novels including \"Tinker Tailor Soldier Spy\"; \"The Honourable Schoolboy\"; and \"Smiley's People\".",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.21334972264535818,
+      "temperature": 0.21334972264535818,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Connie Sachs",
+        "raw_score": 1.6571917570836723,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_2",
+      "node_type": "kg",
+      "content": "Call for the Dead is John le Carré's first novel, published in 1961. It introduces George Smiley, the most famous of le Carré's recurring characters, in a story about East German spies inside Great Britain. It also introduces a fictional version of British Intelligence, called \"the Circus\" because of its location in Cambridge Circus, that is apparently based on MI6 and that recurs throughout le Carré's spy novels.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0,
+      "temperature": 0.0,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Call for the Dead",
+        "raw_score": 1.5775582472764862,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "state_3",
+      "node_type": "state",
+      "content": "Is Tim Winton a novelist?",
+      "depth": 1,
+      "parent_id": "state_1",
+      "value": 0.6740391990577639,
+      "temperature": 1.0321739486602857,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.6968733326966873,
+        "evidence_support": 0.9777320242713023,
+        "memory_usefulness": 0.0,
+        "answerability": 0.8333104565800955,
+        "uncertainty": 0.12400823563116557
+      },
+      "metadata": {
+        "kind": "comparison",
+        "evidence_ids": [
+          "doc_9",
+          "doc_4",
+          "doc_6",
+          "doc_5"
+        ],
+        "memory_ids": [],
+        "goal_slot_name": "right_value",
+        "goal_slot_role": "right_value",
+        "goal_terminal": true,
+        "diffusion_delta": -0.15656510293031367,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "kg_doc_5",
+      "node_type": "kg",
+      "content": "Control is a fictional character created by John le Carré. Control is an intelligence officer who acts as the head of \"the Circus\", the British overseas intelligence agency. He is a character in the novels \"The Spy Who Came in from the Cold\", \"The Looking Glass War\", and \"Tinker Tailor Soldier Spy\", and is referred to in several others, usually by association with le Carré's recurring protagonist George Smiley, who has served as Control's right-hand man.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0,
+      "temperature": 0.0,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Control (fictional character)",
+        "raw_score": 0.24082992080896806,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "memory_mem_4",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'Is Tim Winton a novelist' is Yes.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 1.0,
+      "temperature": 0.5183947661476878,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "intermediate_answer",
+        "target_question": "Is Tim Winton a novelist?",
+        "target_question_norm": "is tim winton a novelist",
+        "relation_signature": "generic",
+        "answer_text": "Yes",
+        "support_score": 1.0,
+        "evidence_ids": [
+          "doc_9",
+          "doc_4",
+          "doc_6"
+        ],
+        "slot_name": "right_value",
+        "slot_role": "right_value",
+        "terminal": true,
+        "derived_from_state": "state_3",
+        "diffusion_delta": 0.15722014451860133,
+        "diffusion_gain": 0.15722014451860133
+      }
+    },
+    {
+      "node_id": "memory_mem_5",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'Is John le Carré a novelist' is Yes.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 1.0,
+      "temperature": 0.7002951747308007,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "intermediate_answer",
+        "target_question": "Is John le Carré a novelist?",
+        "target_question_norm": "is john le carr a novelist",
+        "relation_signature": "generic",
+        "answer_text": "Yes",
+        "support_score": 1.0,
+        "evidence_ids": [
+          "doc_3",
+          "doc_10"
+        ],
+        "slot_name": "left_value",
+        "slot_role": "left_value",
+        "terminal": true,
+        "derived_from_state": "state_2",
+        "diffusion_delta": 0.33823706098285233,
+        "diffusion_gain": 0.33823706098285233
+      }
+    },
+    {
+      "node_id": "memory_mem_6",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'Are John le Carré and Tim Winton both novelists' is Yes.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 1.0,
+      "temperature": 1.645950596162745,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "tdca_run",
+        "memory_kind": "answer_candidate",
+        "target_question": "Are John le Carré and Tim Winton both novelists?",
+        "target_question_norm": "are john le carr and tim winton both novelists",
+        "relation_signature": "generic",
+        "answer_text": "Yes",
+        "support_score": 1.0,
+        "derived_from_state": "state_1",
+        "composed_from": [
+          "memory_mem_5",
+          "memory_mem_4"
+        ],
+        "slot_role": "final_boolean",
+        "terminal": true,
+        "coverage_count": 2,
+        "coverage_ratio": 1.0,
+        "composition_kind": "compare_yesno",
+        "diffusion_delta": 0.16592922103962593,
+        "diffusion_gain": 0.16592922103962593,
+        "score": 1.0,
+        "raw_score": 10.302709755175156,
+        "evidence_ids": [
+          "doc_4",
+          "doc_9"
+        ]
+      }
+    },
+    {
+      "node_id": "state_4",
+      "node_type": "state",
+      "content": "Is John le Carré novelists?",
+      "depth": 1,
+      "parent_id": "state_1",
+      "value": 0.6847339626447588,
+      "temperature": 0.6360090427477755,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.7617571819671793,
+        "evidence_support": 0.9202008619949721,
+        "memory_usefulness": 0.0,
+        "answerability": 0.8489893198863749,
+        "uncertainty": 0.13436384484090502
+      },
+      "metadata": {
+        "kind": "comparison",
+        "evidence_ids": [
+          "doc_3",
+          "doc_10",
+          "doc_8",
+          "doc_2"
+        ],
+        "memory_ids": [],
+        "diffusion_delta": -0.2629956198726613,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "state_5",
+      "node_type": "state",
+      "content": "Is Tim Winton novelists?",
+      "depth": 1,
+      "parent_id": "state_1",
+      "value": 0.6924171774254486,
+      "temperature": 0.6831133637941557,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.7381197144766545,
+        "evidence_support": 0.9748619053234935,
+        "memory_usefulness": 0.0,
+        "answerability": 0.8540976193284134,
+        "uncertainty": 0.12452485704177117
+      },
+      "metadata": {
+        "kind": "comparison",
+        "evidence_ids": [
+          "doc_9",
+          "doc_4",
+          "doc_6",
+          "doc_5"
+        ],
+        "memory_ids": [],
+        "diffusion_delta": -0.2583505242525761,
+        "diffusion_gain": 0.0
+      }
+    }
+  ],
+  "edges": [
+    {
+      "source": "state_1",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.9999999795855053
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.9665353235238601
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.5375808331924345
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.8841365672456091
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.05830010895058024
+    },
+    {
+      "source": "state_1",
+      "target": "state_2",
+      "edge_type": "refines",
+      "weight": 0.99
+    },
+    {
+      "source": "state_1",
+      "target": "state_3",
+      "edge_type": "refines",
+      "weight": 0.97
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_6",
+      "edge_type": "derives",
+      "weight": 0.99
+    },
+    {
+      "source": "state_1",
+      "target": "state_4",
+      "edge_type": "refines",
+      "weight": 0.95
+    },
+    {
+      "source": "state_1",
+      "target": "state_5",
+      "edge_type": "refines",
+      "weight": 0.93
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.9999999795855053
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.9554640543167509
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.9554640543167509
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.9497238165159669
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.9999999795855053
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.9665353235238601
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.999999994225854
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.999999994225854
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.9999999941310199
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.9665353235238601
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.5375808331924345
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.8019580301630063
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.8019580301630063
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.7972891639764924
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.5375808331924345
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.8841365672456091
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "memory_mem_6",
+      "edge_type": "recalls",
+      "weight": 0.8841365672456091
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.05830010895058024
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.9999999324711576
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_10",
+      "edge_type": "supports",
+      "weight": 0.8454503486679398
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_8",
+      "edge_type": "supports",
+      "weight": 0.21334972264535818
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_2",
+      "target": "memory_mem_5",
+      "edge_type": "derives",
+      "weight": 1.0
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.9999999324711576
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.9999999324711576
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.9999999318266742
+    },
+    {
+      "source": "kg_doc_10",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.8454503486679398
+    },
+    {
+      "source": "kg_doc_10",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.8454503486679398
+    },
+    {
+      "source": "kg_doc_10",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.8404017921632699
+    },
+    {
+      "source": "kg_doc_8",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.21334972264535818
+    },
+    {
+      "source": "kg_doc_8",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.21334972264535818
+    },
+    {
+      "source": "kg_doc_8",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.1845819610989873
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.999999994225854
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.9554640543167509
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.8019580301630063
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_3",
+      "target": "state_2",
+      "edge_type": "refines",
+      "weight": 0.84
+    },
+    {
+      "source": "state_3",
+      "target": "memory_mem_4",
+      "edge_type": "derives",
+      "weight": 1.0
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "state_3",
+      "edge_type": "recalls",
+      "weight": 1.0
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.999999994225854
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.9554640543167509
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.8019580301630063
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "memory_mem_6",
+      "edge_type": "derives",
+      "weight": 1.0
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "state_2",
+      "edge_type": "recalls",
+      "weight": 1.0
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.9999999324711576
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_10",
+      "edge_type": "supports",
+      "weight": 0.8454503486679398
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_8",
+      "edge_type": "supports",
+      "weight": 0.21334972264535818
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "memory_mem_6",
+      "edge_type": "derives",
+      "weight": 1.0
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.99
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.9999999795855053
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.9665353235238601
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.5375808331924345
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.8841365672456091
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.9999999318266742
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_10",
+      "edge_type": "supports",
+      "weight": 0.8404017921632699
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_8",
+      "edge_type": "supports",
+      "weight": 0.1845819610989873
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_5",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.9999999941310199
+    },
+    {
+      "source": "state_5",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.9497238165159669
+    },
+    {
+      "source": "state_5",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.7972891639764924
+    },
+    {
+      "source": "state_5",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.0
+    }
+  ]
+}

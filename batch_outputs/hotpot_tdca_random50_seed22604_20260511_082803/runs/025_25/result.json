@@ -1,0 +1,148 @@
+{
+  "question": "What city does Paul Clyne and David Soares have in common?",
+  "final_answer": "Albany",
+  "best_node": {
+    "node_id": "memory_mem_5",
+    "node_type": "memory",
+    "content": "Conclusion: The answer to 'What city does Paul Clyne and David Soares have in common' is District Attorney.",
+    "depth": 0,
+    "parent_id": null,
+    "value": 1.0,
+    "temperature": 1.28,
+    "expanded": false,
+    "visit_count": 0,
+    "persistent": true,
+    "score_breakdown": {},
+    "metadata": {
+      "source": "tdca_run",
+      "memory_kind": "answer_candidate",
+      "target_question": "What city does Paul Clyne and David Soares have in common?",
+      "target_question_norm": "what city does paul clyne and david soares have in common",
+      "relation_signature": "generic",
+      "answer_text": "Albany County, New York, District Attorney",
+      "support_score": 1.0,
+      "derived_from_state": "state_1",
+      "composed_from": [
+        null,
+        "memory_mem_4"
+      ],
+      "slot_role": "target_attribute",
+      "terminal": true,
+      "coverage_count": 2,
+      "coverage_ratio": 1.0,
+      "composition_kind": "attribute_after_bridge",
+      "diffusion_delta": -0.13664506214591632,
+      "diffusion_gain": 0.0,
+      "score": 1.0,
+      "raw_score": 11.873863035950006
+    }
+  },
+  "final_synthesis_node_ids": [
+    "state_3",
+    "memory_mem_4",
+    "state_5",
+    "memory_mem_5",
+    "state_1"
+  ],
+  "answer_history": [
+    {
+      "node_id": "memory_mem_4",
+      "content": "Conclusion: The answer to 'What county and position does David Soares hold' is District Attorney.",
+      "answer_text": "District Attorney",
+      "value": 1.0,
+      "confidence": 1.0,
+      "evidence_ids": [
+        "doc_6",
+        "doc_2"
+      ],
+      "step": 1,
+      "kind": "intermediate_answer"
+    },
+    {
+      "node_id": "memory_mem_5",
+      "content": "Conclusion: The answer to 'What city does Paul Clyne and David Soares have in common' is District Attorney.",
+      "answer_text": "District Attorney",
+      "value": 1.0,
+      "score": 1.0,
+      "source": "composed_root_memory",
+      "evidence_ids": [
+        "doc_6",
+        "doc_2"
+      ],
+      "step": 1,
+      "kind": "composed_root_memory"
+    },
+    {
+      "node_id": "memory_mem_6",
+      "content": "Conclusion: The answer to 'What county and position did Paul Clyne hold' is Albany County, New York, District Attorney.",
+      "answer_text": "Albany County, New York, District Attorney",
+      "value": 0.9999999881888677,
+      "confidence": 0.95,
+      "evidence_ids": [
+        "doc_2"
+      ],
+      "step": 2,
+      "kind": "intermediate_answer"
+    },
+    {
+      "node_id": "memory_mem_7",
+      "content": "Conclusion: The answer to 'What city was Paul Clyne the District Attorney of' is Albany.",
+      "answer_text": "Albany",
+      "value": 0.9999999957971812,
+      "confidence": 0.95,
+      "evidence_ids": [
+        "doc_2",
+        "doc_6"
+      ],
+      "step": 4,
+      "kind": "intermediate_answer"
+    },
+    {
+      "node_id": "memory_mem_5",
+      "answer_text": "Albany",
+      "previous_answer": "",
+      "confidence": 1.0,
+      "score": 0.8735999999999999,
+      "source": "final_synthesis",
+      "step": 4,
+      "evidence_ids": [],
+      "kind": "anytime_answer"
+    },
+    {
+      "node_id": "memory_mem_5",
+      "answer_text": "Albany",
+      "source": "answer_judge",
+      "choice": "B",
+      "candidate_source": "final_synthesis",
+      "base_score": 1.0,
+      "rerank_score": 0.7864,
+      "judge_confidence": 0.0,
+      "judge_reason": "Original question asks for a city; 'Albany' is the city both served as DA.",
+      "step": 4,
+      "kind": "final_answer_selection"
+    }
+  ],
+  "anytime_answer": "Albany",
+  "anytime_answer_score": 0.8735999999999999,
+  "anytime_answer_source": "final_synthesis",
+  "anytime_answer_node_id": "memory_mem_5",
+  "stats": {
+    "steps": 4,
+    "llm_calls": 11,
+    "generated_tokens": 939,
+    "token_budget_remaining": 261,
+    "total_nodes": 27,
+    "kg_nodes": 9,
+    "memory_nodes": 6,
+    "state_nodes": 12,
+    "deleted_state_nodes": 0,
+    "scheduler_mode": "tdca",
+    "scoring_mode": "hybrid",
+    "stop_reason": "root_memory_plateau",
+    "goal_kind": "bridge",
+    "goal_completion": 1.0,
+    "anytime_answer": "Albany",
+    "anytime_answer_score": 0.8735999999999999,
+    "anytime_answer_source": "final_synthesis"
+  }
+}

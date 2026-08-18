@@ -1,0 +1,128 @@
+{
+  "question": "Where is the company that Sachin Warrier worked for as a software engineer headquartered?",
+  "final_answer": "Mumbai, Maharashtra",
+  "best_node": {
+    "node_id": "state_1",
+    "node_type": "state",
+    "content": "Where is the company that Sachin Warrier worked for as a software engineer headquartered?",
+    "depth": 0,
+    "parent_id": null,
+    "value": 0.9074565564106745,
+    "temperature": 0.822266415882529,
+    "expanded": true,
+    "visit_count": 1,
+    "persistent": false,
+    "score_breakdown": {
+      "task_progress": 0.9928119635010574,
+      "evidence_support": 0.9788587161795803,
+      "memory_usefulness": 0.7841237535759132,
+      "answerability": 0.98942935808979,
+      "uncertainty": 0.12380543108767554
+    },
+    "metadata": {
+      "diffusion_delta": 0.001995218269426613,
+      "diffusion_gain": 0.001995218269426613
+    }
+  },
+  "final_synthesis_node_ids": [
+    "state_2",
+    "state_3",
+    "memory_mem_5",
+    "state_1"
+  ],
+  "answer_history": [
+    {
+      "node_id": "",
+      "answer_text": "Bengaluru, India",
+      "previous_answer": "",
+      "confidence": 0.28,
+      "score": 0.16880000000000003,
+      "source": "closed_book_initial",
+      "step": 0,
+      "evidence_ids": [],
+      "kind": "anytime_answer"
+    },
+    {
+      "node_id": "state_1",
+      "answer_text": "Kerala",
+      "previous_answer": "Bengaluru, India",
+      "confidence": 0.9788587161795803,
+      "score": 1.0,
+      "source": "grounded",
+      "step": 0,
+      "evidence_ids": [
+        "doc_6",
+        "doc_3",
+        "doc_5",
+        "doc_7"
+      ],
+      "kind": "anytime_answer"
+    },
+    {
+      "node_id": "memory_mem_4",
+      "content": "Conclusion: The answer to 'Which company did Sachin Warrier work for as a software engineer' is Tata Consultancy Services.",
+      "answer_text": "Tata Consultancy Services",
+      "value": 1.0,
+      "confidence": 1.0,
+      "evidence_ids": [
+        "doc_5"
+      ],
+      "step": 2,
+      "kind": "intermediate_answer"
+    },
+    {
+      "node_id": "memory_mem_5",
+      "content": "Conclusion: The answer to 'Where is Tata Consultancy Services headquartered' is Kerala.",
+      "answer_text": "Kerala",
+      "value": 0.92,
+      "evidence_ids": [
+        "doc_7",
+        "doc_5"
+      ],
+      "step": 3
+    },
+    {
+      "node_id": "memory_mem_6",
+      "content": "Conclusion: The answer to 'Where is the company that Sachin Warrier worked for as a software engineer headquartered' is Mumbai, Maharashtra.",
+      "answer_text": "Mumbai, Maharashtra",
+      "value": 0.0,
+      "evidence_ids": [],
+      "step": 4
+    },
+    {
+      "node_id": "state_1",
+      "answer_text": "Mumbai, Maharashtra",
+      "source": "answer_judge",
+      "choice": "B",
+      "candidate_source": "final_synthesis",
+      "base_score": 0.937485113541391,
+      "judge_confidence": 0.0,
+      "judge_reason": "TCS is headquartered in Mumbai, Maharashtra, per doc_4; Kerala is where Sachin worked, not where TCS is headquartered.",
+      "step": 3,
+      "kind": "final_answer_selection"
+    }
+  ],
+  "anytime_answer": "Kerala",
+  "anytime_answer_score": 1.0,
+  "anytime_answer_source": "grounded",
+  "anytime_answer_node_id": "state_1",
+  "stats": {
+    "steps": 3,
+    "llm_calls": 9,
+    "generated_tokens": 608,
+    "token_budget_remaining": 592,
+    "total_nodes": 14,
+    "kg_nodes": 6,
+    "memory_nodes": 5,
+    "state_nodes": 3,
+    "deleted_state_nodes": 0,
+    "scheduler_mode": "tdca",
+    "scoring_mode": "hybrid",
+    "stop_reason": "frontier_empty",
+    "goal_kind": "bridge",
+    "goal_completion": 0.5,
+    "anytime_answer": "Kerala",
+    "anytime_answer_score": 1.0,
+    "anytime_answer_source": "grounded"
+  }
+}

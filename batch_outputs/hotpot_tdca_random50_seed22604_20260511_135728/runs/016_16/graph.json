@@ -1,0 +1,2418 @@
+{
+  "nodes": [
+    {
+      "node_id": "state_1",
+      "node_type": "state",
+      "content": "What's the common ingredient to a Gimlet and Pink Gin?",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.8502510108117837,
+      "temperature": 1.739713989944788,
+      "expanded": true,
+      "visit_count": 2,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.9806790623290883,
+        "evidence_support": 0.9431737127326125,
+        "memory_usefulness": 0.5987166547061086,
+        "answerability": 0.8715868563663063,
+        "uncertainty": 0.13022873170812974
+      },
+      "metadata": {
+        "diffusion_delta": 0.12201077461546261,
+        "diffusion_gain": 0.12201077461546261,
+        "composition_retry": 2,
+        "goal_retry": 1
+      }
+    },
+    {
+      "node_id": "kg_doc_5",
+      "node_type": "kg",
+      "content": "The gimlet (pronounced with a hard 'g') is a cocktail made of gin and lime juice. A 1928 description of the drink was: \"gin, a spot of lime, and soda\". The description in the 1953 Raymond Chandler novel \"The Long Goodbye\" stated that \"a real gimlet is half gin and half Rose's lime juice and nothing else\". This is in line with the proportions suggested by \"The Savoy Cocktail Book\" (1930) which specifies one half Plymouth Gin and one half Rose's Lime Juice Cordial. However, modern tastes are less sweet, and generally provide for at least two parts gin to one part of the lime and other non alcoholic elements (see recipes below).",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.999999994278983,
+      "temperature": 0.999999994278983,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Gimlet (cocktail)",
+        "raw_score": 7.422513969227271,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_8",
+      "node_type": "kg",
+      "content": "Pink Gin or Pink Plymouth is a cocktail made fashionable in England in the mid-19th century, consisting of Plymouth gin and a dash of Angostura bitters, a dark red bitters that makes the whole drink pinkish. Lemon rind is also commonly used as a garnish, with the citrus oils subtly complementing the flavour.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999966307908,
+      "temperature": 0.9999999966307908,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Pink Gin",
+        "raw_score": 7.538398543863056,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_6",
+      "node_type": "kg",
+      "content": "Gin is a spirit which derives its predominant flavour from juniper berries (\"Juniperus communis\"). From its earliest origins in the Middle Ages, gin has evolved from use in herbal medicine to an object of commerce in the spirits industry. Gin was developed on the basis of the older jenever, and became popular in Great Britain (particularly in London) when William of Orange, leader of the Dutch Republic, occupied the English, Scottish, and Irish thrones with his wife Mary. Gin is one of the broadest categories of spirits, represented by products of various origins, styles, and flavour profiles that all revolve around juniper as a common ingredient.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999934640326,
+      "temperature": 0.9999999934640326,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Gin",
+        "raw_score": 4.551216357636636,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_9",
+      "node_type": "kg",
+      "content": "Weisslacker (German for \"whitewashed\" due to the rind color), also known as bierkäse and beer cheese, is a type of cow's milk cheese that originated in Germany, but is now known worldwide. Also produced in the United States, mostly in Wisconsin, it is a pungent and salted surface-ripened cheese that starts out much like brick cheese. It ripens for seven months in highly humid conditions and is related to Limburger cheese, and has a similarly powerful smell, but paradoxically mild taste. Connoisseurs of this delicacy often take it with beer (sometimes dipping the cheese directly in their drinks), hence the name. Many find it too overpowering to serve with wine. This cheese is also served on small slices of rye or pumpernickel bread often with some sliced onion. It is a common item on pub and restaurant menus in the Czech Republic, the country with the highest per-capita beer consumption in the world. This cheese is a common ingredient in various breads, soups, and dips.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0,
+      "temperature": 0.0,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Weisslacker",
+        "raw_score": 1.7164925475438049,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "memory_mem_3",
+      "node_type": "memory",
+      "content": "Template: when evidence already grounds the answer, switch from branching to short verification and synthesis.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.8799999941722468,
+      "temperature": 1.2760051391249538,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.88,
+        "tag": "verification_then_stop",
+        "memory_kind": "template",
+        "raw_score": 0.592014554241607,
+        "source": "memory",
+        "diffusion_delta": -0.036044612044097146,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "memory_mem_1",
+      "node_type": "memory",
+      "content": "Template: for compositional multi-hop questions, first solve the intermediate entity and then ask for the final attribute.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9599999807731368,
+      "temperature": 4.615630053960653,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.96,
+        "tag": "compositional_template",
+        "memory_kind": "template",
+        "raw_score": 0.5447234507962715,
+        "source": "memory",
+        "diffusion_delta": 0.9138639118080016,
+        "diffusion_gain": 0.9138639118080016
+      }
+    },
+    {
+      "node_id": "state_2",
+      "node_type": "state",
+      "content": "What is the primary spirit in a Gimlet?",
+      "depth": 1,
+      "parent_id": "state_1",
+      "value": 0.6896829072626155,
+      "temperature": 2.044087146324236,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.7022962324516355,
+        "evidence_support": 0.8356306302053448,
+        "memory_usefulness": 0.5139667251540021,
+        "answerability": 0.7905425878299451,
+        "uncertainty": 0.14958648656303794
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_5",
+          "doc_6",
+          "doc_2",
+          "doc_9"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "goal_slot_name": "gimlet_ingredient",
+        "goal_slot_role": "target_attribute",
+        "goal_terminal": true,
+        "diffusion_delta": 0.16568260042593974,
+        "diffusion_gain": 0.16568260042593974
+      }
+    },
+    {
+      "node_id": "kg_doc_2",
+      "node_type": "kg",
+      "content": "Bagoong Terong or bagoong, and bugguong in the Ilocano language, is a common ingredient used in the Philippines and particularly in Northern Ilocano cuisine. It is made by salting and fermenting the bonnet mouth fish. This bagoong is coarser than Bagoong Monamon, and contains fragments of the salted and fermented fish ; they are similar in flavor. The odor is distinct and unique. Those who are unfamiliar with this condiment may find the smell repulsive. Bagoong is an essential ingredient in many curries and sauces. Fish sauce, common throughout Southeast Asian cuisine, is a by-product of the bagoong process. Known in the Philippines as \"patis\", it is distinguished as the clear refined layer floating on the thicker bagoong. Patis and bagoong can be interchanged in recipes, depending on personal taste and preference.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0,
+      "temperature": 0.0,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Bagoong terong",
+        "raw_score": 0.6751617915469743,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "state_3",
+      "node_type": "state",
+      "content": "What is the primary spirit in a Pink Gin?",
+      "depth": 1,
+      "parent_id": "state_1",
+      "value": 0.7259820076448584,
+      "temperature": 2.5889356855065597,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.7505753075485355,
+        "evidence_support": 0.8760236318272435,
+        "memory_usefulness": 0.5139667251540021,
+        "answerability": 0.8289209068227127,
+        "uncertainty": 0.14231574627109617
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_8",
+          "doc_6",
+          "doc_5",
+          "doc_2"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "goal_slot_name": "pink_gin_ingredient",
+        "goal_slot_role": "target_attribute",
+        "goal_terminal": true,
+        "diffusion_delta": 0.32036582832563276,
+        "diffusion_gain": 0.32036582832563276
+      }
+    },
+    {
+      "node_id": "state_4",
+      "node_type": "state",
+      "content": "Do Gimlet and Pink Gin share the same primary spirit?",
+      "depth": 2,
+      "parent_id": "state_3",
+      "value": 0.778005151955561,
+      "temperature": 1.9442200676919,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.7648282136671134,
+        "evidence_support": 0.9179439439407077,
+        "memory_usefulness": 0.9133737522807308,
+        "answerability": 0.7498810628794448,
+        "uncertainty": 0.13477009009067262
+      },
+      "metadata": {
+        "kind": "comparison",
+        "evidence_ids": [
+          "doc_8",
+          "doc_6",
+          "doc_5",
+          "doc_2"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "diffusion_delta": 0.21066274825356857,
+        "diffusion_gain": 0.21066274825356857
+      }
+    },
+    {
+      "node_id": "memory_mem_4",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'What is the primary spirit in a Pink Gin' is Plymouth gin.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999958427838,
+      "temperature": 1.910426987859746,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "intermediate_answer",
+        "target_question": "What is the primary spirit in a Pink Gin?",
+        "target_question_norm": "what is the primary spirit in a pink gin",
+        "relation_signature": "generic",
+        "answer_text": "Plymouth gin",
+        "support_score": 0.9999999958427838,
+        "evidence_ids": [
+          "doc_8",
+          "doc_6"
+        ],
+        "slot_name": "pink_gin_ingredient",
+        "slot_role": "target_attribute",
+        "terminal": true,
+        "derived_from_state": "state_3",
+        "diffusion_delta": 0.23471445766451127,
+        "diffusion_gain": 0.23471445766451127
+      }
+    },
+    {
+      "node_id": "state_5",
+      "node_type": "state",
+      "content": "What is the common ingredient between Gimlet and Pink Gin?",
+      "depth": 2,
+      "parent_id": "state_2",
+      "value": 0.7059233894190592,
+      "temperature": 0.9939164168976992,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.8405169142392261,
+        "evidence_support": 0.8357449349282049,
+        "memory_usefulness": 0.11025903014776553,
+        "answerability": 0.863327012918648,
+        "uncertainty": 0.1495659117129231
+      },
+      "metadata": {
+        "kind": "comparison",
+        "evidence_ids": [
+          "doc_8",
+          "doc_5",
+          "doc_6",
+          "doc_2"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "diffusion_delta": 0.207976436725001,
+        "diffusion_gain": 0.207976436725001
+      }
+    },
+    {
+      "node_id": "memory_mem_5",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'What is the primary spirit in a Gimlet' is gin.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 1.0,
+      "temperature": 1.0145681142870384,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "intermediate_answer",
+        "target_question": "What is the primary spirit in a Gimlet?",
+        "target_question_norm": "what is the primary spirit in a gimlet",
+        "relation_signature": "generic",
+        "answer_text": "gin",
+        "support_score": 1.0,
+        "evidence_ids": [],
+        "slot_name": "gimlet_ingredient",
+        "slot_role": "target_attribute",
+        "terminal": true,
+        "derived_from_state": "state_2",
+        "diffusion_delta": 0.061627493317154225,
+        "diffusion_gain": 0.061627493317154225
+      }
+    },
+    {
+      "node_id": "state_6",
+      "node_type": "state",
+      "content": "What is the main spirit in a Gimlet?",
+      "depth": 1,
+      "parent_id": "state_1",
+      "value": 0.6825795218340636,
+      "temperature": 0.44970836034440037,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.739126648041977,
+        "evidence_support": 0.9439553819416435,
+        "memory_usefulness": 0.0025703864025096094,
+        "answerability": 0.8447049636980944,
+        "uncertainty": 0.13008803125050417
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_5",
+          "doc_3",
+          "doc_6",
+          "doc_2"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "diffusion_delta": 0.018449069833067655,
+        "diffusion_gain": 0.018449069833067655
+      }
+    },
+    {
+      "node_id": "kg_doc_3",
+      "node_type": "kg",
+      "content": "This is a list of notable sesame seed dishes and foods, which are prepared using sesame seed as a main ingredient. Sesame seed is a common ingredient in various cuisines, and is used whole in cooking for its rich, nutty flavor.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999880307288,
+      "temperature": 0.9999999880307288,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "List of sesame seed dishes",
+        "raw_score": 3.460015253990948,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "state_7",
+      "node_type": "state",
+      "content": "What is the main spirit in a Pink Gin?",
+      "depth": 1,
+      "parent_id": "state_1",
+      "value": 0.6377307348986632,
+      "temperature": 0.39345923126541044,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.7324359077692388,
+        "evidence_support": 0.8226724560057828,
+        "memory_usefulness": 0.0022587162137018245,
+        "answerability": 0.8022453189119823,
+        "uncertainty": 0.1519189579189591
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_8",
+          "doc_6",
+          "doc_5",
+          "doc_3"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "diffusion_delta": 0.020264437307335625,
+        "diffusion_gain": 0.020264437307335625
+      }
+    },
+    {
+      "node_id": "memory_mem_6",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'What's the common ingredient to a Gimlet and Pink Gin' is gin.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 1.0,
+      "temperature": 0.9288834455465852,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "tdca_run",
+        "memory_kind": "intermediate_answer",
+        "target_question": "What's the common ingredient to a Gimlet and Pink Gin?",
+        "target_question_norm": "what s the common ingredient to a gimlet and pink gin",
+        "relation_signature": "generic",
+        "answer_text": "gin",
+        "support_score": 1.0,
+        "evidence_ids": [
+          "doc_8"
+        ],
+        "slot_name": "",
+        "slot_role": "",
+        "terminal": false,
+        "derived_from_state": "state_1",
+        "diffusion_delta": 0.025103002532471885,
+        "diffusion_gain": 0.025103002532471885,
+        "score": 1.0,
+        "raw_score": 10.213632024848202
+      }
+    },
+    {
+      "node_id": "state_9",
+      "node_type": "state",
+      "content": "What is the primary spirit in Pink Gin?",
+      "depth": 3,
+      "parent_id": "state_4",
+      "value": 0.6483437722686533,
+      "temperature": 0.6876670399819416,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.7160337621677599,
+        "evidence_support": 0.8760351293704168,
+        "memory_usefulness": 0.002084732472768965,
+        "answerability": 0.8107448374124812,
+        "uncertainty": 0.14231367671332495
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_8",
+          "doc_6",
+          "doc_5",
+          "doc_2"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "diffusion_delta": 0.021747418430057897,
+        "diffusion_gain": 0.021747418430057897
+      }
+    },
+    {
+      "node_id": "state_10",
+      "node_type": "state",
+      "content": "Do both cocktails use gin as their primary spirit?",
+      "depth": 3,
+      "parent_id": "state_4",
+      "value": 0.42874153225956124,
+      "temperature": 0.4219872458369731,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.5085477183571975,
+        "evidence_support": 0.5705948935639497,
+        "memory_usefulness": 0.0,
+        "answerability": 0.503479264963793,
+        "uncertainty": 0.19729291915848907
+      },
+      "metadata": {
+        "kind": "comparison",
+        "evidence_ids": [
+          "doc_6",
+          "doc_8",
+          "doc_5",
+          "doc_9"
+        ],
+        "memory_ids": [],
+        "diffusion_delta": 0.015054842764716914,
+        "diffusion_gain": 0.015054842764716914
+      }
+    },
+    {
+      "node_id": "memory_mem_7",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'Do Gimlet and Pink Gin share the same primary spirit' is Yes.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999951310745,
+      "temperature": 1.1027265435310347,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "intermediate_answer",
+        "target_question": "Do Gimlet and Pink Gin share the same primary spirit?",
+        "target_question_norm": "do gimlet and pink gin share the same primary spirit",
+        "relation_signature": "comparison",
+        "answer_text": "Yes",
+        "support_score": 0.9999999951310745,
+        "evidence_ids": [
+          "doc_8",
+          "doc_6"
+        ],
+        "slot_name": "",
+        "slot_role": "",
+        "terminal": false,
+        "derived_from_state": "state_4",
+        "diffusion_delta": 0.024997365009394867,
+        "diffusion_gain": 0.024997365009394867
+      }
+    },
+    {
+      "node_id": "state_11",
+      "node_type": "state",
+      "content": "What is the common non-spirit ingredient in Gimlet and Pink Gin?",
+      "depth": 3,
+      "parent_id": "state_4",
+      "value": 0.7725692537775698,
+      "temperature": 0.7809458143342085,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.8888016839555233,
+        "evidence_support": 0.9777589635055496,
+        "memory_usefulness": 0.07012907330102244,
+        "answerability": 0.9343340272073203,
+        "uncertainty": 0.12400338656900108
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_8",
+          "doc_5",
+          "doc_6",
+          "doc_2"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "diffusion_delta": 0.011640333702184757,
+        "diffusion_gain": 0.011640333702184757
+      }
+    },
+    {
+      "node_id": "state_12",
+      "node_type": "state",
+      "content": "What are the ingredients of a Gimlet?",
+      "depth": 3,
+      "parent_id": "state_5",
+      "value": 0.4680420037630639,
+      "temperature": 0.39155601782650723,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.5939995538259714,
+        "evidence_support": 0.5171109871886856,
+        "memory_usefulness": 0.004658564474916293,
+        "answerability": 0.6312827663216155,
+        "uncertainty": 0.20692002230603657
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_5",
+          "doc_4",
+          "doc_10",
+          "doc_2"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "diffusion_delta": -0.04342569415211556,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "kg_doc_4",
+      "node_type": "kg",
+      "content": "Animal digest is a common ingredient used in pet foods. As defined by the Association of American Feed Control Officials, digest is produced by the chemical or enzymatic hydrolysis of clean animal tissue that has not undergone decomposition. These animal tissues may not include hair, horns, teeth, hooves, and feathers, with the exclusion of trace amounts that are unavoidable even after acceptable processing methods.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.03422198539979656,
+      "temperature": 0.03422198539979656,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Animal digest",
+        "raw_score": 1.3360075198061125,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_10",
+      "node_type": "kg",
+      "content": "The potato doughnut, sometimes called a Spudnut, is a doughnut, typically sweet, made with either mashed potatoes or potato starch instead of flour, the most common ingredient used for doughnut dough. Potato doughnuts were introduced in the mid-1900s, and a recipe was published in 1938. Potato doughnuts tend to be lighter than flour doughnuts, and are prepared in a similar method to other doughnuts. A chain of Spudnut Shops was established across the United States in the 1950s before declining to a few dozen more recently. Fried ube dough is also eaten in East Asia. Much like flour doughnuts, potato doughnuts are often accompanied with coffee.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.030986049988079162,
+      "temperature": 0.030986049988079162,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Potato doughnut",
+        "raw_score": 1.4252218611867256,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "state_13",
+      "node_type": "state",
+      "content": "What are the ingredients of Pink Gin?",
+      "depth": 3,
+      "parent_id": "state_5",
+      "value": 0.5768966913913897,
+      "temperature": 0.49040720204612465,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.6675264152849343,
+        "evidence_support": 0.7333664620679885,
+        "memory_usefulness": 0.004949670050421138,
+        "answerability": 0.7394105037612669,
+        "uncertainty": 0.16799403682776207
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_8",
+          "doc_6",
+          "doc_5",
+          "doc_4"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "diffusion_delta": -0.07532218384355815,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "state_14",
+      "node_type": "state",
+      "content": "What ingredient is present in both Gimlet and Pink Gin?",
+      "depth": 3,
+      "parent_id": "state_5",
+      "value": 0.6737169920147964,
+      "temperature": 0.4535093644154857,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.7734269557990764,
+        "evidence_support": 0.8416300839010267,
+        "memory_usefulness": 0.08749702405590666,
+        "answerability": 0.8299059510414225,
+        "uncertainty": 0.1485065848978152
+      },
+      "metadata": {
+        "kind": "comparison",
+        "evidence_ids": [
+          "doc_8",
+          "doc_5",
+          "doc_6",
+          "doc_3"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "diffusion_delta": 0.13813930786461254,
+        "diffusion_gain": 0.13813930786461254
+      }
+    },
+    {
+      "node_id": "state_15",
+      "node_type": "state",
+      "content": "What is the main spirit ingredient in Pink Gin?",
+      "depth": 4,
+      "parent_id": "state_14",
+      "value": 0.6543737997084516,
+      "temperature": 0.5946707999866913,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.7436753581542845,
+        "evidence_support": 0.8557296630206227,
+        "memory_usefulness": 0.0023310348797088687,
+        "answerability": 0.8187739224194023,
+        "uncertainty": 0.1459686606562879
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_8",
+          "doc_6",
+          "doc_3",
+          "doc_5"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "diffusion_delta": -0.2910289249470551,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "state_16",
+      "node_type": "state",
+      "content": "What is the main spirit ingredient in Gimlet?",
+      "depth": 4,
+      "parent_id": "state_14",
+      "value": 0.6858140868943517,
+      "temperature": 0.638131479197644,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.7413090207219384,
+        "evidence_support": 0.9503741251180005,
+        "memory_usefulness": 0.002609165518721836,
+        "answerability": 0.8479143352862729,
+        "uncertainty": 0.12893265747875993
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_3",
+          "doc_5",
+          "doc_6",
+          "doc_2"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "diffusion_delta": -0.2847281353968638,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "state_17",
+      "node_type": "state",
+      "content": "Is gin present in both Pink Gin and Gimlet?",
+      "depth": 4,
+      "parent_id": "state_14",
+      "value": 0.6429727349716023,
+      "temperature": 0.510365095063872,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.7211772997031654,
+        "evidence_support": 0.8911631809451388,
+        "memory_usefulness": 0.11714354725914955,
+        "answerability": 0.8183088631998422,
+        "uncertainty": 0.13959062742987502
+      },
+      "metadata": {
+        "kind": "verification",
+        "evidence_ids": [
+          "doc_8",
+          "doc_5",
+          "doc_6",
+          "doc_2"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "diffusion_delta": 0.027545551363379217,
+        "diffusion_gain": 0.027545551363379217
+      }
+    }
+  ],
+  "edges": [
+    {
+      "source": "state_1",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.999999994278983
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_8",
+      "edge_type": "supports",
+      "weight": 0.8863474311862419
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.44073919390507554
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.10154059054584397
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.1664654166649831
+    },
+    {
+      "source": "state_1",
+      "target": "state_2",
+      "edge_type": "refines",
+      "weight": 1.0
+    },
+    {
+      "source": "state_1",
+      "target": "state_3",
+      "edge_type": "refines",
+      "weight": 1.0
+    },
+    {
+      "source": "state_1",
+      "target": "state_6",
+      "edge_type": "refines",
+      "weight": 0.9
+    },
+    {
+      "source": "state_1",
+      "target": "state_7",
+      "edge_type": "refines",
+      "weight": 0.9
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_6",
+      "edge_type": "recalls",
+      "weight": 0.9999999990137604
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.999999994278983
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.9999999879166569
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.3037079018907811
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.7612867007750274
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.3037079018907811
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.6714898744558204
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.9999999879166569
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "state_6",
+      "edge_type": "supports",
+      "weight": 0.9999999879166569
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "state_7",
+      "edge_type": "supports",
+      "weight": 0.004070134654735059
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.999999994278983
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "state_9",
+      "edge_type": "supports",
+      "weight": 0.29180736414552594
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "state_10",
+      "edge_type": "supports",
+      "weight": 0.07225758484774396
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "memory_mem_7",
+      "edge_type": "supports",
+      "weight": 0.7612867007750274
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "state_11",
+      "edge_type": "supports",
+      "weight": 0.9555179316205563
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "state_12",
+      "edge_type": "supports",
+      "weight": 0.9999999889775748
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "state_13",
+      "edge_type": "supports",
+      "weight": 0.3466904980650498
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "state_14",
+      "edge_type": "supports",
+      "weight": 0.6832601721871101
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "state_15",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "state_16",
+      "edge_type": "supports",
+      "weight": 0.9007482622052723
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "state_17",
+      "edge_type": "supports",
+      "weight": 0.7823263652594868
+    },
+    {
+      "source": "kg_doc_8",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.8863474311862419
+    },
+    {
+      "source": "kg_doc_8",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.9999999958427838
+    },
+    {
+      "source": "kg_doc_8",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.9999999951310745
+    },
+    {
+      "source": "kg_doc_8",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.9999999958427838
+    },
+    {
+      "source": "kg_doc_8",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.9999999954005894
+    },
+    {
+      "source": "kg_doc_8",
+      "target": "state_7",
+      "edge_type": "supports",
+      "weight": 0.9999999940537947
+    },
+    {
+      "source": "kg_doc_8",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.8863474311862419
+    },
+    {
+      "source": "kg_doc_8",
+      "target": "state_9",
+      "edge_type": "supports",
+      "weight": 0.9999999957730051
+    },
+    {
+      "source": "kg_doc_8",
+      "target": "state_10",
+      "edge_type": "supports",
+      "weight": 0.14118979366386675
+    },
+    {
+      "source": "kg_doc_8",
+      "target": "memory_mem_7",
+      "edge_type": "supports",
+      "weight": 0.9999999951310745
+    },
+    {
+      "source": "kg_doc_8",
+      "target": "state_11",
+      "edge_type": "supports",
+      "weight": 0.9999999953905429
+    },
+    {
+      "source": "kg_doc_8",
+      "target": "state_13",
+      "edge_type": "supports",
+      "weight": 0.9999999955678602
+    },
+    {
+      "source": "kg_doc_8",
+      "target": "state_14",
+      "edge_type": "supports",
+      "weight": 0.9999999956149432
+    },
+    {
+      "source": "kg_doc_8",
+      "target": "state_15",
+      "edge_type": "supports",
+      "weight": 0.9999999940213798
+    },
+    {
+      "source": "kg_doc_8",
+      "target": "state_17",
+      "edge_type": "supports",
+      "weight": 0.9999999966307908
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.44073919390507554
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.6712612724940327
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.7520472678117033
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.8358878927503408
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.7520472678117033
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.5311976229567921
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.6712612724940327
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "state_6",
+      "edge_type": "supports",
+      "weight": 0.6712612724940327
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "state_7",
+      "edge_type": "supports",
+      "weight": 0.6453449179577708
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.44073919390507554
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "state_9",
+      "edge_type": "supports",
+      "weight": 0.7520702629678285
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "state_10",
+      "edge_type": "supports",
+      "weight": 0.9999999934640326
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "memory_mem_7",
+      "edge_type": "supports",
+      "weight": 0.8358878927503408
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "state_11",
+      "edge_type": "supports",
+      "weight": 0.8289758795584968
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "state_13",
+      "edge_type": "supports",
+      "weight": 0.4667329285681168
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "state_14",
+      "edge_type": "supports",
+      "weight": 0.5093259554950562
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "state_15",
+      "edge_type": "supports",
+      "weight": 0.7114593320198656
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "state_16",
+      "edge_type": "supports",
+      "weight": 0.7119494611314147
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "state_17",
+      "edge_type": "supports",
+      "weight": 0.6022170247878886
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "state_10",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.10154059054584397
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_2",
+      "edge_type": "recalls",
+      "weight": 0.000341797849824809
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_3",
+      "edge_type": "recalls",
+      "weight": 0.0679336425691247
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_4",
+      "edge_type": "recalls",
+      "weight": 0.15313422404080257
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "memory_mem_4",
+      "edge_type": "recalls",
+      "weight": 0.0679336425691247
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_5",
+      "edge_type": "recalls",
+      "weight": 0.06859009011441318
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "memory_mem_5",
+      "edge_type": "recalls",
+      "weight": 0.000341797849824809
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_6",
+      "edge_type": "recalls",
+      "weight": 0.00034175131886655306
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_7",
+      "edge_type": "recalls",
+      "weight": 0.00030031253053011735
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "memory_mem_6",
+      "edge_type": "recalls",
+      "weight": 0.2583832009057782
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_9",
+      "edge_type": "recalls",
+      "weight": 0.00027656871698060817
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "memory_mem_7",
+      "edge_type": "recalls",
+      "weight": 0.15313422404080257
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_11",
+      "edge_type": "recalls",
+      "weight": 0.06859009011441318
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_12",
+      "edge_type": "recalls",
+      "weight": 0.0006180232795471131
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_13",
+      "edge_type": "recalls",
+      "weight": 0.0006566424772498962
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_14",
+      "edge_type": "recalls",
+      "weight": 0.08733260011808348
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_15",
+      "edge_type": "recalls",
+      "weight": 0.0003092441521102424
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_16",
+      "edge_type": "recalls",
+      "weight": 0.0003461420442808593
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_17",
+      "edge_type": "recalls",
+      "weight": 0.1169234117340988
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.1664654166649831
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_2",
+      "edge_type": "recalls",
+      "weight": 0.004825318314899874
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_3",
+      "edge_type": "recalls",
+      "weight": 0.9599998077388796
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_4",
+      "edge_type": "recalls",
+      "weight": 0.15971207077393312
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "memory_mem_4",
+      "edge_type": "recalls",
+      "weight": 0.9599998077388796
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_5",
+      "edge_type": "recalls",
+      "weight": 0.07166805648763169
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "memory_mem_5",
+      "edge_type": "recalls",
+      "weight": 0.004825318314899874
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_6",
+      "edge_type": "recalls",
+      "weight": 0.0047990214861526655
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_7",
+      "edge_type": "recalls",
+      "weight": 0.004217119896873531
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "memory_mem_6",
+      "edge_type": "recalls",
+      "weight": 0.1664654166649831
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_9",
+      "edge_type": "recalls",
+      "weight": 0.0038928962285573227
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "memory_mem_7",
+      "edge_type": "recalls",
+      "weight": 0.15971207077393312
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_11",
+      "edge_type": "recalls",
+      "weight": 0.07166805648763169
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_12",
+      "edge_type": "recalls",
+      "weight": 0.008699105670285473
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_13",
+      "edge_type": "recalls",
+      "weight": 0.00924269762359238
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_14",
+      "edge_type": "recalls",
+      "weight": 0.08766144799372984
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_15",
+      "edge_type": "recalls",
+      "weight": 0.004352825607307495
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_16",
+      "edge_type": "recalls",
+      "weight": 0.004872188993162813
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_17",
+      "edge_type": "recalls",
+      "weight": 0.1173636827842003
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.9999999879166569
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.6712612724940327
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_2",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.004825318314899874
+    },
+    {
+      "source": "state_2",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.000341797849824809
+    },
+    {
+      "source": "state_2",
+      "target": "state_5",
+      "edge_type": "refines",
+      "weight": 0.8
+    },
+    {
+      "source": "state_2",
+      "target": "memory_mem_5",
+      "edge_type": "derives",
+      "weight": 1.0
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "state_6",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "state_9",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "memory_mem_7",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "state_11",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "state_12",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "state_16",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "state_17",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_8",
+      "edge_type": "supports",
+      "weight": 0.9999999958427838
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.7520472678117033
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.3037079018907811
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_3",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.9599998077388796
+    },
+    {
+      "source": "state_3",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.0679336425691247
+    },
+    {
+      "source": "state_3",
+      "target": "state_2",
+      "edge_type": "refines",
+      "weight": 0.84
+    },
+    {
+      "source": "state_3",
+      "target": "state_4",
+      "edge_type": "refines",
+      "weight": 0.8
+    },
+    {
+      "source": "state_3",
+      "target": "memory_mem_4",
+      "edge_type": "derives",
+      "weight": 0.9999999958427838
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_8",
+      "edge_type": "supports",
+      "weight": 0.9999999951310745
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.8358878927503408
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.7612867007750274
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_4",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.15971207077393312
+    },
+    {
+      "source": "state_4",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.15313422404080257
+    },
+    {
+      "source": "state_4",
+      "target": "state_9",
+      "edge_type": "refines",
+      "weight": 0.9
+    },
+    {
+      "source": "state_4",
+      "target": "state_10",
+      "edge_type": "refines",
+      "weight": 0.8
+    },
+    {
+      "source": "state_4",
+      "target": "memory_mem_7",
+      "edge_type": "derives",
+      "weight": 0.9999999951310745
+    },
+    {
+      "source": "state_4",
+      "target": "state_11",
+      "edge_type": "refines",
+      "weight": 0.84
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "state_3",
+      "edge_type": "recalls",
+      "weight": 0.9999999958427838
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_8",
+      "edge_type": "supports",
+      "weight": 0.9999999958427838
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.7520472678117033
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.3037079018907811
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.9599998077388796
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.0679336425691247
+    },
+    {
+      "source": "state_5",
+      "target": "kg_doc_8",
+      "edge_type": "supports",
+      "weight": 0.9999999954005894
+    },
+    {
+      "source": "state_5",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.6714898744558204
+    },
+    {
+      "source": "state_5",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.5311976229567921
+    },
+    {
+      "source": "state_5",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_5",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.07166805648763169
+    },
+    {
+      "source": "state_5",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.06859009011441318
+    },
+    {
+      "source": "state_5",
+      "target": "state_12",
+      "edge_type": "refines",
+      "weight": 0.9
+    },
+    {
+      "source": "state_5",
+      "target": "state_13",
+      "edge_type": "refines",
+      "weight": 0.9
+    },
+    {
+      "source": "state_5",
+      "target": "state_14",
+      "edge_type": "refines",
+      "weight": 0.8
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "state_2",
+      "edge_type": "recalls",
+      "weight": 1.0
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.9999999879166569
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.6712612724940327
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.004825318314899874
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.000341797849824809
+    },
+    {
+      "source": "state_6",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.9999999879166569
+    },
+    {
+      "source": "state_6",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.8879107759666303
+    },
+    {
+      "source": "state_6",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.6712612724940327
+    },
+    {
+      "source": "state_6",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_6",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.0047990214861526655
+    },
+    {
+      "source": "state_6",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.00034175131886655306
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "state_6",
+      "edge_type": "supports",
+      "weight": 0.8879107759666303
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "state_7",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "state_14",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "state_15",
+      "edge_type": "supports",
+      "weight": 0.09928265141508871
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "state_16",
+      "edge_type": "supports",
+      "weight": 0.9999999880307288
+    },
+    {
+      "source": "state_7",
+      "target": "kg_doc_8",
+      "edge_type": "supports",
+      "weight": 0.9999999940537947
+    },
+    {
+      "source": "state_7",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.6453449179577708
+    },
+    {
+      "source": "state_7",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.004070134654735059
+    },
+    {
+      "source": "state_7",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_7",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.004217119896873531
+    },
+    {
+      "source": "state_7",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.00030031253053011735
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.9999999990137604
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_8",
+      "edge_type": "supports",
+      "weight": 0.8863474311862419
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.999999994278983
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.44073919390507554
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.2583832009057782
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.1664654166649831
+    },
+    {
+      "source": "state_9",
+      "target": "kg_doc_8",
+      "edge_type": "supports",
+      "weight": 0.9999999957730051
+    },
+    {
+      "source": "state_9",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.7520702629678285
+    },
+    {
+      "source": "state_9",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.29180736414552594
+    },
+    {
+      "source": "state_9",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_9",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.0038928962285573227
+    },
+    {
+      "source": "state_9",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.00027656871698060817
+    },
+    {
+      "source": "state_10",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.9999999934640326
+    },
+    {
+      "source": "state_10",
+      "target": "kg_doc_8",
+      "edge_type": "supports",
+      "weight": 0.14118979366386675
+    },
+    {
+      "source": "state_10",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.07225758484774396
+    },
+    {
+      "source": "state_10",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_7",
+      "target": "state_4",
+      "edge_type": "recalls",
+      "weight": 0.9999999951310745
+    },
+    {
+      "source": "memory_mem_7",
+      "target": "kg_doc_8",
+      "edge_type": "supports",
+      "weight": 0.9999999951310745
+    },
+    {
+      "source": "memory_mem_7",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.8358878927503408
+    },
+    {
+      "source": "memory_mem_7",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.7612867007750274
+    },
+    {
+      "source": "memory_mem_7",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_7",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.15971207077393312
+    },
+    {
+      "source": "memory_mem_7",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.15313422404080257
+    },
+    {
+      "source": "state_11",
+      "target": "kg_doc_8",
+      "edge_type": "supports",
+      "weight": 0.9999999953905429
+    },
+    {
+      "source": "state_11",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.9555179316205563
+    },
+    {
+      "source": "state_11",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.8289758795584968
+    },
+    {
+      "source": "state_11",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_11",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.07166805648763169
+    },
+    {
+      "source": "state_11",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.06859009011441318
+    },
+    {
+      "source": "state_12",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.9999999889775748
+    },
+    {
+      "source": "state_12",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.03422198539979656
+    },
+    {
+      "source": "state_12",
+      "target": "kg_doc_10",
+      "edge_type": "supports",
+      "weight": 0.030986049988079162
+    },
+    {
+      "source": "state_12",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_12",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.008699105670285473
+    },
+    {
+      "source": "state_12",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.0006180232795471131
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "state_12",
+      "edge_type": "supports",
+      "weight": 0.03422198539979656
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "state_13",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_10",
+      "target": "state_12",
+      "edge_type": "supports",
+      "weight": 0.030986049988079162
+    },
+    {
+      "source": "state_13",
+      "target": "kg_doc_8",
+      "edge_type": "supports",
+      "weight": 0.9999999955678602
+    },
+    {
+      "source": "state_13",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.4667329285681168
+    },
+    {
+      "source": "state_13",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.3466904980650498
+    },
+    {
+      "source": "state_13",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_13",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.00924269762359238
+    },
+    {
+      "source": "state_13",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.0006566424772498962
+    },
+    {
+      "source": "state_14",
+      "target": "kg_doc_8",
+      "edge_type": "supports",
+      "weight": 0.9999999956149432
+    },
+    {
+      "source": "state_14",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.6832601721871101
+    },
+    {
+      "source": "state_14",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.5093259554950562
+    },
+    {
+      "source": "state_14",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_14",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.08766144799372984
+    },
+    {
+      "source": "state_14",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.08733260011808348
+    },
+    {
+      "source": "state_14",
+      "target": "state_15",
+      "edge_type": "refines",
+      "weight": 0.9
+    },
+    {
+      "source": "state_14",
+      "target": "state_16",
+      "edge_type": "refines",
+      "weight": 0.9
+    },
+    {
+      "source": "state_14",
+      "target": "state_17",
+      "edge_type": "verifies",
+      "weight": 0.7
+    },
+    {
+      "source": "state_15",
+      "target": "kg_doc_8",
+      "edge_type": "supports",
+      "weight": 0.9999999940213798
+    },
+    {
+      "source": "state_15",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.7114593320198656
+    },
+    {
+      "source": "state_15",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.09928265141508871
+    },
+    {
+      "source": "state_15",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_15",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.004352825607307495
+    },
+    {
+      "source": "state_15",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.0003092441521102424
+    },
+    {
+      "source": "state_16",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.9999999880307288
+    },
+    {
+      "source": "state_16",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.9007482622052723
+    },
+    {
+      "source": "state_16",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.7119494611314147
+    },
+    {
+      "source": "state_16",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_16",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.004872188993162813
+    },
+    {
+      "source": "state_16",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.0003461420442808593
+    },
+    {
+      "source": "state_17",
+      "target": "kg_doc_8",
+      "edge_type": "supports",
+      "weight": 0.9999999966307908
+    },
+    {
+      "source": "state_17",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.7823263652594868
+    },
+    {
+      "source": "state_17",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.6022170247878886
+    },
+    {
+      "source": "state_17",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_17",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.1173636827842003
+    },
+    {
+      "source": "state_17",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.1169234117340988
+    }
+  ]
+}

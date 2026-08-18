@@ -1,0 +1,119 @@
+{
+  "question": "What county was Tim Dubois born in?",
+  "final_answer": "McDonald County",
+  "best_node": {
+    "node_id": "state_3",
+    "node_type": "state",
+    "content": "What county is Southwest City, Missouri in?",
+    "depth": 2,
+    "parent_id": "state_2",
+    "value": 0.6173647651345161,
+    "temperature": 1.3371518244581784,
+    "expanded": true,
+    "visit_count": 1,
+    "persistent": false,
+    "score_breakdown": {
+      "task_progress": 0.712119049801314,
+      "evidence_support": 0.7919467851299151,
+      "memory_usefulness": 0.0,
+      "answerability": 0.7816876782792432,
+      "uncertainty": 0.15744957867661527
+    },
+    "metadata": {
+      "kind": "bridge",
+      "evidence_ids": [
+        "doc_18",
+        "doc_7",
+        "doc_20",
+        "doc_9"
+      ],
+      "memory_ids": [],
+      "diffusion_delta": 0.3294177277338899,
+      "diffusion_gain": 0.3294177277338899
+    }
+  },
+  "final_synthesis_node_ids": [
+    "state_3",
+    "state_2",
+    "memory_mem_4",
+    "memory_mem_5",
+    "state_1"
+  ],
+  "answer_history": [
+    {
+      "node_id": "memory_mem_4",
+      "content": "Conclusion: Tim DuBois was born in Southwest City, Missouri.",
+      "answer_text": "Southwest City, Missouri",
+      "value": 1.0,
+      "confidence": 1.0,
+      "evidence_ids": [
+        "doc_7"
+      ],
+      "step": 1,
+      "kind": "intermediate_answer"
+    },
+    {
+      "node_id": "memory_mem_5",
+      "content": "Conclusion: The answer to 'What county is Southwest City, Missouri in' is McDonald County.",
+      "answer_text": "McDonald County",
+      "value": 0.92,
+      "evidence_ids": [
+        "doc_18",
+        "doc_7"
+      ],
+      "step": 2
+    },
+    {
+      "node_id": "state_3",
+      "answer_text": "McDonald County",
+      "previous_answer": "",
+      "confidence": 1.0,
+      "score": 0.8213793298968879,
+      "source": "expansion_candidate",
+      "step": 1,
+      "evidence_ids": [
+        "doc_18",
+        "doc_7",
+        "doc_20",
+        "doc_9"
+      ],
+      "kind": "anytime_answer"
+    },
+    {
+      "node_id": "state_3",
+      "answer_text": "McDonald County",
+      "source": "answer_judge",
+      "choice": "A",
+      "candidate_source": "expansion_candidate",
+      "base_score": 1.0,
+      "rerank_score": 0.8148181817069021,
+      "judge_confidence": 0.0,
+      "judge_reason": "",
+      "step": 3,
+      "kind": "final_answer_selection"
+    }
+  ],
+  "anytime_answer": "McDonald County",
+  "anytime_answer_score": 0.8213793298968879,
+  "anytime_answer_source": "expansion_candidate",
+  "anytime_answer_node_id": "state_3",
+  "stats": {
+    "steps": 3,
+    "llm_calls": 7,
+    "generated_tokens": 525,
+    "token_budget_remaining": 675,
+    "total_nodes": 12,
+    "kg_nodes": 7,
+    "memory_nodes": 2,
+    "state_nodes": 3,
+    "deleted_state_nodes": 0,
+    "scheduler_mode": "tdca",
+    "scoring_mode": "hybrid",
+    "stop_reason": "frontier_empty",
+    "goal_kind": "bridge",
+    "goal_completion": 0.0,
+    "anytime_answer": "McDonald County",
+    "anytime_answer_score": 0.8213793298968879,
+    "anytime_answer_source": "expansion_candidate"
+  }
+}

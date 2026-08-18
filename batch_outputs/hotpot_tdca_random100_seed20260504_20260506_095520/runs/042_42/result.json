@@ -1,0 +1,140 @@
+{
+  "question": "Are Wake Forest University and Pennsylvania State University both located in the US?",
+  "final_answer": "Yes",
+  "best_node": {
+    "node_id": "memory_mem_6",
+    "node_type": "memory",
+    "content": "Conclusion: The answer to 'Are Wake Forest University and Pennsylvania State University both located in the US' is Yes.",
+    "depth": 0,
+    "parent_id": null,
+    "value": 0.9999999938330696,
+    "temperature": 1.475304514668235,
+    "expanded": false,
+    "visit_count": 0,
+    "persistent": true,
+    "score_breakdown": {},
+    "metadata": {
+      "source": "memory",
+      "memory_kind": "answer_candidate",
+      "target_question": "Are Wake Forest University and Pennsylvania State University both located in the US?",
+      "target_question_norm": "are wake forest university and pennsylvania state university both located in the us",
+      "relation_signature": "generic",
+      "answer_text": "Yes",
+      "support_score": 0.9999999938330696,
+      "derived_from_state": "state_1",
+      "composed_from": [
+        "memory_mem_4",
+        "memory_mem_5"
+      ],
+      "slot_role": "final_boolean",
+      "terminal": true,
+      "diffusion_delta": 0.03939397317992532,
+      "diffusion_gain": 0.03939397317992532
+    }
+  },
+  "final_synthesis_node_ids": [
+    "state_2",
+    "state_5",
+    "memory_mem_6",
+    "memory_mem_4",
+    "state_1"
+  ],
+  "answer_history": [
+    {
+      "node_id": "memory_mem_4",
+      "content": "Conclusion: The answer to 'Is Wake Forest University a located in the U' is Yes.",
+      "answer_text": "Yes",
+      "value": 0.9999999867685752,
+      "confidence": 0.99,
+      "evidence_ids": [
+        "doc_1",
+        "doc_2"
+      ],
+      "step": 2,
+      "kind": "intermediate_answer"
+    },
+    {
+      "node_id": "memory_mem_5",
+      "content": "Conclusion: The answer to 'Is Pennsylvania State University a located in the U' is Yes.",
+      "answer_text": "Yes",
+      "value": 0.9999999938330696,
+      "confidence": 0.95,
+      "evidence_ids": [
+        "doc_4"
+      ],
+      "step": 3,
+      "kind": "intermediate_answer"
+    },
+    {
+      "node_id": "memory_mem_6",
+      "content": "Conclusion: The answer to 'Are Wake Forest University and Pennsylvania State University both located in the US' is Yes.",
+      "answer_text": "Yes",
+      "value": 0.9999999938330696,
+      "evidence_ids": [
+        "doc_1",
+        "doc_2",
+        "doc_4"
+      ],
+      "step": 3
+    },
+    {
+      "node_id": "memory_mem_7",
+      "content": "Conclusion: The answer to 'Is Pennsylvania State University located in the United States' is Yes.",
+      "answer_text": "Yes",
+      "value": 1.0,
+      "confidence": 1.0,
+      "evidence_ids": [
+        "doc_4",
+        "doc_8"
+      ],
+      "step": 6,
+      "kind": "intermediate_answer"
+    },
+    {
+      "node_id": "memory_mem_6",
+      "answer_text": "Yes",
+      "previous_answer": "",
+      "confidence": 0.9999999938330696,
+      "score": 0.8970365379366915,
+      "source": "final_synthesis",
+      "step": 6,
+      "evidence_ids": [],
+      "kind": "anytime_answer"
+    },
+    {
+      "node_id": "memory_mem_6",
+      "answer_text": "Yes",
+      "source": "answer_judge",
+      "choice": "A",
+      "candidate_source": "final_synthesis",
+      "base_score": 1.0,
+      "judge_confidence": 0.0,
+      "judge_reason": "",
+      "step": 6,
+      "kind": "final_answer_selection"
+    }
+  ],
+  "anytime_answer": "Yes",
+  "anytime_answer_score": 0.8970365379366915,
+  "anytime_answer_source": "final_synthesis",
+  "anytime_answer_node_id": "memory_mem_6",
+  "stats": {
+    "steps": 6,
+    "llm_calls": 11,
+    "generated_tokens": 812,
+    "token_budget_remaining": 388,
+    "total_nodes": 20,
+    "kg_nodes": 8,
+    "memory_nodes": 6,
+    "state_nodes": 6,
+    "deleted_state_nodes": 1,
+    "scheduler_mode": "tdca",
+    "scoring_mode": "hybrid",
+    "stop_reason": "high_confidence_root_memory",
+    "goal_kind": "comparison",
+    "goal_completion": 1.0,
+    "anytime_answer": "Yes",
+    "anytime_answer_score": 0.8970365379366915,
+    "anytime_answer_source": "final_synthesis"
+  }
+}

@@ -1,0 +1,295 @@
+{
+  "question": "Which years did the war with Antigone's spouse occur?",
+  "final_answer": "",
+  "best_node": {
+    "node_id": "state_1",
+    "node_type": "state",
+    "content": "Which years did the war with Antigone's spouse occur?",
+    "depth": 0,
+    "parent_id": null,
+    "value": 0.6170759919793511,
+    "temperature": 0.09226748085819272,
+    "expanded": true,
+    "visit_count": 1,
+    "persistent": false,
+    "score_breakdown": {
+      "task_progress": 0.8299999898384263,
+      "evidence_support": 0.4999999701130185,
+      "memory_usefulness": 0.5139667251540021,
+      "answerability": 0.6499999850565092,
+      "uncertainty": 0.21000000537965668
+    },
+    "metadata": {
+      "diffusion_delta": -0.013094211052769866,
+      "diffusion_gain": 0.0
+    }
+  },
+  "final_chain_node_ids": [],
+  "answer_history": [
+    {
+      "node_id": "memory_mem_4",
+      "content": "Conclusion: The answer to 'Did Ptolemy (son of Pyrrhus) engage in any wars, and if so, during which years' is Yes.",
+      "answer_text": "Yes",
+      "value": 0.9999999773720457,
+      "confidence": 0.9537084127939796,
+      "evidence_ids": [
+        "doc_20",
+        "doc_11"
+      ],
+      "step": 3,
+      "kind": "intermediate_answer"
+    },
+    {
+      "node_id": "memory_mem_5",
+      "content": "Conclusion: The answer to 'Which years did the war with Pyrrhus occur' is 272 BC.",
+      "answer_text": "272 BC",
+      "value": 0.9999999798976325,
+      "confidence": 0.95,
+      "evidence_ids": [
+        "doc_11",
+        "doc_20"
+      ],
+      "step": 7,
+      "kind": "intermediate_answer"
+    }
+  ],
+  "anytime_answer": "",
+  "anytime_answer_score": 0.0,
+  "anytime_answer_source": "",
+  "anytime_answer_node_id": "",
+  "final_diagnostics": {
+    "root_memory_exists": false,
+    "root_memory_answer": "",
+    "goal_terminal_ready": false,
+    "goal_completion": 0.0,
+    "final_candidate_count": 0,
+    "anytime_answer": "",
+    "anytime_answer_score": 0.0,
+    "has_composed_root_memory": false,
+    "best_composed_root_answer": "",
+    "terminal_reject_reasons": [
+      "no_root_memory"
+    ],
+    "final_empty_reason": "no_root_memory_or_final_candidates",
+    "anytime_fallback_triggered": false,
+    "final_chain_buffer_enabled": true,
+    "score_based_final_admission_enabled": true,
+    "score_admission_precondition_passed": false,
+    "score_admission_precondition_fail_reasons": [
+      "precondition_failed_bridge_entity",
+      "precondition_failed_last_hop_support"
+    ],
+    "final_chain_score_old": 0.6595909050704356,
+    "final_chain_score_v2": 0.6474090899039726,
+    "final_chain_score_v2_components": {
+      "root_alignment": 0.6363636363636364,
+      "dependency_satisfaction": 0.75,
+      "last_hop_support": 0.3,
+      "answer_type_match": 1.0,
+      "evidence_support": 0.9999999798976325,
+      "chain_compactness": 0.88,
+      "slot_coverage": 0.0
+    },
+    "last_hop_verification": {
+      "last_hop_support": 0.3,
+      "last_hop_reason": "bridge_entity_candidate",
+      "root_relation": "spouse",
+      "candidate_role_guess": "date",
+      "support_anchor_found": true,
+      "support_bridge_found": false,
+      "support_relation_match": true
+    },
+    "bridge_entity_check": {
+      "is_likely_bridge_entity": true,
+      "bridge_reasons": [
+        "memory_consumed_by_successor",
+        "answer_used_as_target_anchor"
+      ]
+    },
+    "expected_answer_type": "date",
+    "candidate_answer_type": "date",
+    "inferred_hop_count": 2,
+    "is_longhop": false,
+    "active_dependency_floor": 0.4,
+    "active_last_hop_floor": 0.5,
+    "floor_check_passed": false,
+    "floor_check_fail_reasons": [
+      "last_hop_support_below_active_floor"
+    ],
+    "terminal_chain_closure_enabled": true,
+    "terminal_chain_closure_score": 0.64083333016331,
+    "terminal_chain_closure_info": {
+      "path_completeness": 0.82,
+      "dependency_closure": 0.75,
+      "last_hop_entailment": 0.58,
+      "terminality": 0.25,
+      "root_consistency": 0.72,
+      "evidence_grounding": 0.9999999798976325,
+      "closure_fail_reasons": [
+        "tcc_candidate_not_terminal"
+      ],
+      "candidate_chain": [
+        {
+          "node_id": "memory_mem_5",
+          "role": "target_attribute",
+          "text": "Conclusion: The answer to 'Which years did the war with Pyrrhus occur' is 272 BC.",
+          "answer": "272 BC"
+        },
+        {
+          "node_id": "memory_mem_4",
+          "role": "depends_on",
+          "text": "Conclusion: The answer to 'Did Ptolemy (son of Pyrrhus) engage in any wars, and if so, during which years' is Yes.",
+          "answer": "Yes"
+        }
+      ],
+      "root_anchor_found": true,
+      "bridge_slots_covered": 0,
+      "bridge_slots_total": 1,
+      "candidate_is_consumed_as_bridge": true,
+      "candidate_is_terminal_leaf": false,
+      "chain_node_ids": [
+        "memory_mem_4",
+        "memory_mem_5"
+      ],
+      "tcc_score_threshold": 0.7,
+      "tcc_dimension_floors": {
+        "path_completeness": 0.45,
+        "dependency_closure": 0.45,
+        "last_hop_entailment": 0.5,
+        "terminality": 0.6,
+        "root_consistency": 0.55
+      }
+    },
+    "terminal_chain_closure_gate_passed": false,
+    "terminal_chain_closure_reject_reasons": [
+      "tcc_score_below_threshold",
+      "tcc_terminality_below_floor",
+      "tcc_candidate_not_terminal"
+    ]
+  },
+  "root_memory_exists": false,
+  "root_memory_answer": "",
+  "goal_terminal_ready": false,
+  "goal_completion": 0.0,
+  "final_candidate_count": 0,
+  "has_composed_root_memory": false,
+  "best_composed_root_answer": "",
+  "terminal_reject_reasons": [
+    "no_root_memory"
+  ],
+  "final_empty_reason": "no_root_memory_or_final_candidates",
+  "anytime_fallback_triggered": false,
+  "final_chain_buffer_enabled": true,
+  "score_based_final_admission_enabled": true,
+  "score_admission_precondition_passed": false,
+  "score_admission_precondition_fail_reasons": [
+    "precondition_failed_bridge_entity",
+    "precondition_failed_last_hop_support"
+  ],
+  "final_chain_score_old": 0.6595909050704356,
+  "final_chain_score_v2": 0.6474090899039726,
+  "final_chain_score_v2_components": {
+    "root_alignment": 0.6363636363636364,
+    "dependency_satisfaction": 0.75,
+    "last_hop_support": 0.3,
+    "answer_type_match": 1.0,
+    "evidence_support": 0.9999999798976325,
+    "chain_compactness": 0.88,
+    "slot_coverage": 0.0
+  },
+  "last_hop_verification": {
+    "last_hop_support": 0.3,
+    "last_hop_reason": "bridge_entity_candidate",
+    "root_relation": "spouse",
+    "candidate_role_guess": "date",
+    "support_anchor_found": true,
+    "support_bridge_found": false,
+    "support_relation_match": true
+  },
+  "bridge_entity_check": {
+    "is_likely_bridge_entity": true,
+    "bridge_reasons": [
+      "memory_consumed_by_successor",
+      "answer_used_as_target_anchor"
+    ]
+  },
+  "expected_answer_type": "date",
+  "candidate_answer_type": "date",
+  "inferred_hop_count": 2,
+  "is_longhop": false,
+  "active_dependency_floor": 0.4,
+  "active_last_hop_floor": 0.5,
+  "floor_check_passed": false,
+  "floor_check_fail_reasons": [
+    "last_hop_support_below_active_floor"
+  ],
+  "terminal_chain_closure_enabled": true,
+  "terminal_chain_closure_score": 0.64083333016331,
+  "terminal_chain_closure_info": {
+    "path_completeness": 0.82,
+    "dependency_closure": 0.75,
+    "last_hop_entailment": 0.58,
+    "terminality": 0.25,
+    "root_consistency": 0.72,
+    "evidence_grounding": 0.9999999798976325,
+    "closure_fail_reasons": [
+      "tcc_candidate_not_terminal"
+    ],
+    "candidate_chain": [
+      {
+        "node_id": "memory_mem_5",
+        "role": "target_attribute",
+        "text": "Conclusion: The answer to 'Which years did the war with Pyrrhus occur' is 272 BC.",
+        "answer": "272 BC"
+      },
+      {
+        "node_id": "memory_mem_4",
+        "role": "depends_on",
+        "text": "Conclusion: The answer to 'Did Ptolemy (son of Pyrrhus) engage in any wars, and if so, during which years' is Yes.",
+        "answer": "Yes"
+      }
+    ],
+    "root_anchor_found": true,
+    "bridge_slots_covered": 0,
+    "bridge_slots_total": 1,
+    "candidate_is_consumed_as_bridge": true,
+    "candidate_is_terminal_leaf": false,
+    "chain_node_ids": [
+      "memory_mem_4",
+      "memory_mem_5"
+    ],
+    "tcc_score_threshold": 0.7,
+    "tcc_dimension_floors": {
+      "path_completeness": 0.45,
+      "dependency_closure": 0.45,
+      "last_hop_entailment": 0.5,
+      "terminality": 0.6,
+      "root_consistency": 0.55
+    }
+  },
+  "terminal_chain_closure_gate_passed": false,
+  "terminal_chain_closure_reject_reasons": [
+    "tcc_score_below_threshold",
+    "tcc_terminality_below_floor",
+    "tcc_candidate_not_terminal"
+  ],
+  "stats": {
+    "steps": 8,
+    "llm_calls": 13,
+    "generated_tokens": 1154,
+    "token_budget_remaining": 46,
+    "total_nodes": 25,
+    "kg_nodes": 9,
+    "memory_nodes": 4,
+    "state_nodes": 12,
+    "deleted_state_nodes": 1,
+    "scheduler_mode": "tdca",
+    "scoring_mode": "hybrid",
+    "stop_reason": "final_rerank_reserve",
+    "goal_kind": "bridge",
+    "goal_completion": 0.0,
+    "anytime_answer": "",
+    "anytime_answer_score": 0.0,
+    "anytime_answer_source": ""
+  }
+}

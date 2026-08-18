@@ -1,0 +1,1266 @@
+{
+  "nodes": [
+    {
+      "node_id": "state_1",
+      "node_type": "state",
+      "content": "How long are city council terms in the city located in the county that also contains Allen?",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.6340760072757933,
+      "temperature": 1.252604764785932,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.8299999960008945,
+        "evidence_support": 0.49999998823792485,
+        "memory_usefulness": 0.5139667766205794,
+        "answerability": 0.7499999941189625,
+        "uncertainty": 0.2100000021171735
+      },
+      "metadata": {
+        "diffusion_delta": 0.10175186723008056,
+        "diffusion_gain": 0.10175186723008056
+      }
+    },
+    {
+      "node_id": "kg_doc_6",
+      "node_type": "kg",
+      "content": "Allen, also known as Allen City is a ghost town in Pima County in southern Arizona. It was founded fifty miles southeast of Ajo, c. 1880. By 1886, the post office closed and the town has been abandoned since.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.99999997852205,
+      "temperature": 0.99999997852205,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Allen, Arizona",
+        "raw_score": 0.0881651755731652,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_7",
+      "node_type": "kg",
+      "content": "The City of Toowoomba was a local government area in the Darling Downs region of Queensland, Australia, encompassing the centre and inner suburbs of the regional city of Toowoomba. The City covered an area of , and existed as a local government entity in various forms from 1860 until 2008, when it amalgamated with several other councils in the surrounding area to form the Toowoomba Region.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0,
+      "temperature": 0.0,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "City of Toowoomba",
+        "raw_score": 0.19898332873120195,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_12",
+      "node_type": "kg",
+      "content": "Gmina Tarnów is a rural gmina (administrative district) in Tarnów County, Lesser Poland Voivodeship, in southern Poland. Its seat is the city of Tarnów, although the city is not part of the territory of the gmina.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999998780184011,
+      "temperature": 0.9999998780184011,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Gmina Tarnów",
+        "raw_score": 0.17927079514073688,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_14",
+      "node_type": "kg",
+      "content": "Both the council members and the mayor serve four-year terms; none face term limits. Council members are nominated by their wards via a ward-level primary held in September. The top vote-earners from each party then compete at-large for their ward's seat on the November ballot. In other words, on election day the whole city votes on all the council races up for that year. Council elections are severed: Wards 1, 2, and 4 (as well as the mayor) are up for election in the same year (most recently 2011), while Wards 3, 5, and 6 share another year (most recently 2013).",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0,
+      "temperature": 0.0,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Tucson, Arizona",
+        "raw_score": 0.08908083724366453,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "memory_mem_1",
+      "node_type": "memory",
+      "content": "Template: for compositional multi-hop questions, first solve the intermediate entity and then ask for the final attribute.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9599999038694302,
+      "temperature": 1.3118459335262838,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.96,
+        "tag": "compositional_template",
+        "memory_kind": "template",
+        "raw_score": 0.10555145451511794,
+        "source": "memory",
+        "diffusion_delta": 0.10259966336334214,
+        "diffusion_gain": 0.10259966336334214
+      }
+    },
+    {
+      "node_id": "memory_mem_3",
+      "node_type": "memory",
+      "content": "Template: when evidence already grounds the answer, switch from branching to short verification and synthesis.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.10496610658319666,
+      "temperature": 0.19560224119081598,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.88,
+        "tag": "verification_then_stop",
+        "memory_kind": "template",
+        "raw_score": 0.07981432330597117,
+        "source": "memory",
+        "diffusion_delta": -0.01675941966921249,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "state_2",
+      "node_type": "state",
+      "content": "Which county contains Allen, Arizona?",
+      "depth": 1,
+      "parent_id": "state_1",
+      "value": 0.6436900077595248,
+      "temperature": 0.9004088133187395,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.677541369122992,
+        "evidence_support": 0.9297435226306487,
+        "memory_usefulness": 0.0,
+        "answerability": 0.7077289041724671,
+        "uncertainty": 0.13264616592648323
+      },
+      "metadata": {
+        "kind": "bridge",
+        "evidence_ids": [
+          "doc_6",
+          "doc_3",
+          "doc_9",
+          "doc_1"
+        ],
+        "memory_ids": [],
+        "diffusion_delta": 0.1614617925652041,
+        "diffusion_gain": 0.1614617925652041
+      }
+    },
+    {
+      "node_id": "kg_doc_3",
+      "node_type": "kg",
+      "content": "Pima County Natural Resources, Parks and Recreation is the agency within Pima County, Arizona that manages the natural resources, parks, and recreation offerings within Pima County including Tucson, AZ.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.8594870667392476,
+      "temperature": 0.8594870667392476,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Pima County Natural Resources, Parks and Recreation",
+        "raw_score": 0.21754790036776325,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_9",
+      "node_type": "kg",
+      "content": "Biłgoraj County () is a unit of territorial administration and local government (powiat) in Lublin Voivodeship, eastern Poland. It was established on January 1, 1999, as a result of the Polish local government reforms passed in 1998. Its administrative seat and largest town is Biłgoraj, which lies south of the regional capital Lublin. The county contains three other towns: Tarnogród, lying south of Biłgoraj, Józefów, lying east of Biłgoraj, and Frampol, north of Biłgoraj.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999998346750822,
+      "temperature": 0.9999998346750822,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Biłgoraj County",
+        "raw_score": 0.1820343263131297,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_1",
+      "node_type": "kg",
+      "content": "A Nigerian State is a federated political entity, which shares sovereignty with the Federal Government of Nigeria, There are 36 States in Nigeria, which are bound together by a federal agreement. There is also a territory called the Federal Capital Territory (FCT), which is not a state, but a territory, under the direct control of the Federal Government. The States are further divided into a total of 774 Local Government Areas. Under the Nigerian Constitution, states have the power to ratify constitutional amendments.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0,
+      "temperature": 0.0,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "States of Nigeria",
+        "raw_score": 0.05784207166141894,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "state_3",
+      "node_type": "state",
+      "content": "What is the city located in that county?",
+      "depth": 1,
+      "parent_id": "state_1",
+      "value": 0.6004593625482092,
+      "temperature": 1.0255727671269876,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.6590235027710523,
+        "evidence_support": 0.6357834115114984,
+        "memory_usefulness": 0.5139667251540021,
+        "answerability": 0.703605991470035,
+        "uncertainty": 0.1855589859279303
+      },
+      "metadata": {
+        "kind": "bridge",
+        "evidence_ids": [
+          "doc_12",
+          "doc_6",
+          "doc_3",
+          "doc_10"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "diffusion_delta": 0.027666701158169715,
+        "diffusion_gain": 0.027666701158169715
+      }
+    },
+    {
+      "node_id": "kg_doc_10",
+      "node_type": "kg",
+      "content": "Each state and major mainland territory has its own parliament — unicameral in the Northern Territory, the ACT and Queensland, and bicameral in the other states. The states are sovereign entities, although subject to certain powers of the Commonwealth as defined by the Constitution. The lower houses are known as the Legislative Assembly (the House of Assembly in South Australia and Tasmania); the upper houses are known as the Legislative Council. The head of the government in each state is the Premier and in each territory the Chief Minister. The Queen is represented in each state by a governor; and in the Northern Territory, the Administrator. In the Commonwealth, the Queen's representative is the Governor-General.The Commonwealth Parliament also directly administers the following external territories: Ashmore and Cartier Islands; Australian Antarctic Territory; Christmas Island; Cocos (Keeling) Islands; Coral Sea Islands; Heard Island and McDonald Islands; and Jervis Bay Territory, a naval base and sea port for the national capital in land that was formerly part of New South Wales. The external territory of Norfolk Island previously exercised considerable autonomy under the Norfolk Island Act 1979 through its own legislative assembly and an Administrator to represent the Queen. In 2015, the Commonwealth Parliament abolished self-government, integrating Norfolk Island into the Australian tax and welfare systems and replacing its legislative assembly with a council. Macquarie Island is administered by Tasmania, and Lord Howe Island by New South Wales.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0,
+      "temperature": 0.0,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Australia",
+        "raw_score": 0.10681103342427967,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "state_4",
+      "node_type": "state",
+      "content": "How long are city council terms in that city?",
+      "depth": 1,
+      "parent_id": "state_1",
+      "value": 0.24434285714285714,
+      "temperature": 0.24340298509209032,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.49714285714285716,
+        "evidence_support": 0.0,
+        "memory_usefulness": 0.0,
+        "answerability": 0.41428571428571426,
+        "uncertainty": 0.3
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [],
+        "memory_ids": [],
+        "diffusion_delta": 0.02300064221119738,
+        "diffusion_gain": 0.02300064221119738
+      }
+    },
+    {
+      "node_id": "memory_mem_4",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'How long are city council terms in the city located in the county that also contains Allen' is Pima County.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999764758497,
+      "temperature": 1.0520809343884905,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "intermediate_answer",
+        "target_question": "How long are city council terms in the city located in the county that also contains Allen?",
+        "target_question_norm": "how long are city council terms in the city located in the county that also contains allen",
+        "relation_signature": "generic",
+        "answer_text": "Pima County",
+        "support_score": 0.9999999764758497,
+        "evidence_ids": [
+          "doc_6"
+        ],
+        "slot_name": "",
+        "slot_type": "",
+        "slot_role": "",
+        "terminal": false,
+        "path_terminal": false,
+        "composition_kind": "",
+        "derived_from_state": "state_1",
+        "diffusion_delta": 0.04803621791840995,
+        "diffusion_gain": 0.04803621791840995
+      }
+    },
+    {
+      "node_id": "state_5",
+      "node_type": "state",
+      "content": "What city is located in that county and serves as its seat?",
+      "depth": 2,
+      "parent_id": "state_3",
+      "value": 0.5667896733287627,
+      "temperature": 1.107983947300928,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.6525304358093985,
+        "evidence_support": 0.6965180885150374,
+        "memory_usefulness": 0.08489571228091813,
+        "answerability": 0.7196876156860901,
+        "uncertainty": 0.17462674406729325
+      },
+      "metadata": {
+        "kind": "bridge",
+        "evidence_ids": [
+          "doc_12",
+          "doc_9",
+          "doc_6",
+          "doc_10"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "diffusion_delta": 0.23314312264005432,
+        "diffusion_gain": 0.23314312264005432
+      }
+    },
+    {
+      "node_id": "memory_mem_5",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'What is the city located in that county' is Pima County.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999998780184011,
+      "temperature": 0.6094626632054739,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "intermediate_answer",
+        "target_question": "What is the city located in that county?",
+        "target_question_norm": "what is the city located in that county",
+        "relation_signature": "generic",
+        "answer_text": "Pima County",
+        "support_score": 0.9999998780184011,
+        "evidence_ids": [
+          "doc_12"
+        ],
+        "slot_name": "",
+        "slot_type": "",
+        "slot_role": "",
+        "terminal": false,
+        "path_terminal": false,
+        "composition_kind": "",
+        "derived_from_state": "state_3",
+        "diffusion_delta": -0.054059750280972874,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "state_6",
+      "node_type": "state",
+      "content": "What city serves as the county seat of that county?",
+      "depth": 3,
+      "parent_id": "state_5",
+      "value": 0.6775684292205525,
+      "temperature": 0.3483617455371843,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.7269923074683676,
+        "evidence_support": 0.9953555261674677,
+        "memory_usefulness": 0.002784165680451248,
+        "answerability": 0.754820620226591,
+        "uncertainty": 0.12083600528985582
+      },
+      "metadata": {
+        "kind": "bridge",
+        "evidence_ids": [
+          "doc_9",
+          "doc_12",
+          "doc_6",
+          "doc_14"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "diffusion_delta": 0.08039894908895884,
+        "diffusion_gain": 0.08039894908895884
+      }
+    },
+    {
+      "node_id": "memory_mem_6",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'What city is located in that county and serves as its seat' is Pima County.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999997907686116,
+      "temperature": 0.7697303268849229,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "intermediate_answer",
+        "target_question": "What city is located in that county and serves as its seat?",
+        "target_question_norm": "what city is located in that county and serves as its seat",
+        "relation_signature": "generic",
+        "answer_text": "Pima County",
+        "support_score": 0.9999997907686116,
+        "evidence_ids": [
+          "doc_12"
+        ],
+        "slot_name": "",
+        "slot_type": "",
+        "slot_role": "",
+        "terminal": false,
+        "path_terminal": false,
+        "composition_kind": "",
+        "derived_from_state": "state_5",
+        "diffusion_delta": -0.09586882124097718,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "state_7",
+      "node_type": "state",
+      "content": "What is the county seat of that county?",
+      "depth": 4,
+      "parent_id": "state_6",
+      "value": 0.6802026145449799,
+      "temperature": 0.629788169983399,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.6987877455606497,
+        "evidence_support": 0.9922328650943478,
+        "memory_usefulness": 0.0023538783411044344,
+        "answerability": 0.8389735754043167,
+        "uncertainty": 0.12139808428301739
+      },
+      "metadata": {
+        "kind": "bridge",
+        "evidence_ids": [
+          "doc_9",
+          "doc_12",
+          "doc_3",
+          "doc_6"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "diffusion_delta": -0.282195023870379,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "state_8",
+      "node_type": "state",
+      "content": "How long are city council terms in that county seat?",
+      "depth": 4,
+      "parent_id": "state_6",
+      "value": 0.2570857142857143,
+      "temperature": 0.2221466737057829,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.5242857142857144,
+        "evidence_support": 0.0,
+        "memory_usefulness": 0.0,
+        "answerability": 0.4285714285714286,
+        "uncertainty": 0.3
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [],
+        "memory_ids": [],
+        "diffusion_delta": -0.1189817352540034,
+        "diffusion_gain": 0.0
+      }
+    }
+  ],
+  "edges": [
+    {
+      "source": "state_1",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.9999999764758497
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_12",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_14",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.9599999038694302
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.06793364937172863
+    },
+    {
+      "source": "state_1",
+      "target": "state_2",
+      "edge_type": "refines",
+      "weight": 1.0
+    },
+    {
+      "source": "state_1",
+      "target": "state_3",
+      "edge_type": "refines",
+      "weight": 0.9
+    },
+    {
+      "source": "state_1",
+      "target": "state_4",
+      "edge_type": "refines",
+      "weight": 0.8
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_4",
+      "edge_type": "derives",
+      "weight": 0.9999999764758497
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.9999999764758497
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.99999997852205
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.27156694500459566
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.9999999764758497
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.21308137269729663
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.27156694500459566
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "state_6",
+      "edge_type": "supports",
+      "weight": 0.2818895333059956
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.21308137269729663
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "state_7",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_12",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_12",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.9999998780184011
+    },
+    {
+      "source": "kg_doc_12",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_12",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.9999997907686116
+    },
+    {
+      "source": "kg_doc_12",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.9999998780184011
+    },
+    {
+      "source": "kg_doc_12",
+      "target": "state_6",
+      "edge_type": "supports",
+      "weight": 0.9907114270739218
+    },
+    {
+      "source": "kg_doc_12",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.9999997907686116
+    },
+    {
+      "source": "kg_doc_12",
+      "target": "state_7",
+      "edge_type": "supports",
+      "weight": 0.9844658955136134
+    },
+    {
+      "source": "kg_doc_14",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_14",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_14",
+      "target": "state_6",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.9599999038694302
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_3",
+      "edge_type": "recalls",
+      "weight": 0.004815964118193938
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "memory_mem_4",
+      "edge_type": "recalls",
+      "weight": 0.9599999038694302
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_5",
+      "edge_type": "recalls",
+      "weight": 0.10581407901596818
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "memory_mem_5",
+      "edge_type": "recalls",
+      "weight": 0.004815964118193938
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_6",
+      "edge_type": "recalls",
+      "weight": 0.003048473525348866
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "memory_mem_6",
+      "edge_type": "recalls",
+      "weight": 0.10581407901596818
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_7",
+      "edge_type": "recalls",
+      "weight": 0.004401795739357896
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.06793364937172863
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_3",
+      "edge_type": "recalls",
+      "weight": 0.00033307902598002115
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "memory_mem_4",
+      "edge_type": "recalls",
+      "weight": 0.06793364937172863
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_5",
+      "edge_type": "recalls",
+      "weight": 0.10496610658319666
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "memory_mem_5",
+      "edge_type": "recalls",
+      "weight": 0.00033307902598002115
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_6",
+      "edge_type": "recalls",
+      "weight": 0.0002118939381335368
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "memory_mem_6",
+      "edge_type": "recalls",
+      "weight": 0.10496610658319666
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_7",
+      "edge_type": "recalls",
+      "weight": 0.0003059609428509728
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.99999997852205
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.8594870667392476
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.8594870667392476
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.18368320379690706
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.18368320379690706
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "state_7",
+      "edge_type": "supports",
+      "weight": 0.7272664030650821
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.39303638626146314
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "state_6",
+      "edge_type": "supports",
+      "weight": 0.9999996252610136
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.39303638626146314
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "state_7",
+      "edge_type": "supports",
+      "weight": 0.9999998346750822
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_12",
+      "edge_type": "supports",
+      "weight": 0.9999998780184011
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.27156694500459566
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.18368320379690706
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_10",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_3",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.004815964118193938
+    },
+    {
+      "source": "state_3",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.00033307902598002115
+    },
+    {
+      "source": "state_3",
+      "target": "state_2",
+      "edge_type": "refines",
+      "weight": 0.9
+    },
+    {
+      "source": "state_3",
+      "target": "state_5",
+      "edge_type": "refines",
+      "weight": 0.8
+    },
+    {
+      "source": "state_3",
+      "target": "memory_mem_5",
+      "edge_type": "derives",
+      "weight": 0.9999998780184011
+    },
+    {
+      "source": "kg_doc_10",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_10",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_10",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_10",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.9999999764758497
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.9999999764758497
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_12",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_14",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.9599999038694302
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.06793364937172863
+    },
+    {
+      "source": "state_5",
+      "target": "kg_doc_12",
+      "edge_type": "supports",
+      "weight": 0.9999997907686116
+    },
+    {
+      "source": "state_5",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.39303638626146314
+    },
+    {
+      "source": "state_5",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.21308137269729663
+    },
+    {
+      "source": "state_5",
+      "target": "kg_doc_10",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_5",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.10581407901596818
+    },
+    {
+      "source": "state_5",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.10496610658319666
+    },
+    {
+      "source": "state_5",
+      "target": "state_2",
+      "edge_type": "refines",
+      "weight": 0.9
+    },
+    {
+      "source": "state_5",
+      "target": "state_6",
+      "edge_type": "refines",
+      "weight": 0.8
+    },
+    {
+      "source": "state_5",
+      "target": "memory_mem_6",
+      "edge_type": "derives",
+      "weight": 0.9999997907686116
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "state_3",
+      "edge_type": "recalls",
+      "weight": 0.9999998780184011
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_12",
+      "edge_type": "supports",
+      "weight": 0.9999998780184011
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.27156694500459566
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.18368320379690706
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_10",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.004815964118193938
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.00033307902598002115
+    },
+    {
+      "source": "state_6",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.9999996252610136
+    },
+    {
+      "source": "state_6",
+      "target": "kg_doc_12",
+      "edge_type": "supports",
+      "weight": 0.9907114270739218
+    },
+    {
+      "source": "state_6",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.2818895333059956
+    },
+    {
+      "source": "state_6",
+      "target": "kg_doc_14",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_6",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.003048473525348866
+    },
+    {
+      "source": "state_6",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.0002118939381335368
+    },
+    {
+      "source": "state_6",
+      "target": "state_2",
+      "edge_type": "refines",
+      "weight": 0.9
+    },
+    {
+      "source": "state_6",
+      "target": "state_7",
+      "edge_type": "refines",
+      "weight": 0.8
+    },
+    {
+      "source": "state_6",
+      "target": "state_8",
+      "edge_type": "refines",
+      "weight": 0.7
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "state_5",
+      "edge_type": "recalls",
+      "weight": 0.9999997907686116
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_12",
+      "edge_type": "supports",
+      "weight": 0.9999997907686116
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.39303638626146314
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.21308137269729663
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_10",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.10581407901596818
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.10496610658319666
+    },
+    {
+      "source": "state_7",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.9999998346750822
+    },
+    {
+      "source": "state_7",
+      "target": "kg_doc_12",
+      "edge_type": "supports",
+      "weight": 0.9844658955136134
+    },
+    {
+      "source": "state_7",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.7272664030650821
+    },
+    {
+      "source": "state_7",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_7",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.004401795739357896
+    },
+    {
+      "source": "state_7",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.0003059609428509728
+    }
+  ]
+}

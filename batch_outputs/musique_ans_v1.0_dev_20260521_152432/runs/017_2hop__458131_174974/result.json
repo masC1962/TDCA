@@ -1,0 +1,136 @@
+{
+  "question": "Who is the spouse of the Rabbit Hole's producer?",
+  "final_answer": "Jack Smight",
+  "best_node": {
+    "node_id": "memory_mem_4",
+    "node_type": "memory",
+    "content": "Conclusion: The answer to 'Who is the producer of the film 'Rabbit, Run'' is Jack Smight.",
+    "depth": 0,
+    "parent_id": null,
+    "value": 0.7552100195025069,
+    "temperature": 0.30119288732075933,
+    "expanded": false,
+    "visit_count": 0,
+    "persistent": true,
+    "score_breakdown": {},
+    "metadata": {
+      "source": "memory",
+      "memory_kind": "derived_fact",
+      "target_question": "Who is the producer of the film 'Rabbit, Run'?",
+      "target_question_norm": "who is the producer of the film rabbit run",
+      "relation_signature": "generic",
+      "answer_text": "Jack Smight",
+      "support_score": 0.7552100195025069,
+      "evidence_ids": [
+        "doc_8",
+        "doc_17"
+      ],
+      "slot_type": "person",
+      "slot_role": "target_attribute",
+      "slot_name": "producer_of_rabbit_hole",
+      "depends_on": [],
+      "terminal": true,
+      "path_terminal": false,
+      "composition_kind": "",
+      "derived_from_state": "state_1",
+      "diffusion_delta": 0.007117494308527095,
+      "diffusion_gain": 0.007117494308527095
+    }
+  },
+  "final_synthesis_node_ids": [
+    "state_3",
+    "state_2",
+    "state_4",
+    "state_8",
+    "state_1"
+  ],
+  "answer_history": [
+    {
+      "node_id": "memory_mem_4",
+      "content": "Conclusion: The answer to 'Who is the producer of the film 'Rabbit, Run'' is Jack Smight.",
+      "answer_text": "Jack Smight",
+      "value": 0.7552100195025069,
+      "evidence_ids": [
+        "doc_8",
+        "doc_17"
+      ],
+      "step": 1
+    },
+    {
+      "node_id": "memory_mem_5",
+      "content": "Conclusion: The answer to 'Who is the producer of the film 'Rabbit Hole'' is Nicole Kidman.",
+      "answer_text": "Nicole Kidman",
+      "value": 0.9999999940019055,
+      "confidence": 0.95,
+      "evidence_ids": [
+        "doc_8",
+        "doc_10"
+      ],
+      "step": 5,
+      "kind": "intermediate_answer"
+    },
+    {
+      "node_id": "state_1",
+      "answer_text": "Keith Urban",
+      "previous_answer": "",
+      "confidence": 0.7790551216465555,
+      "score": 0.8820741795999116,
+      "source": "final_synthesis",
+      "step": 8,
+      "evidence_ids": [
+        "doc_8",
+        "doc_16",
+        "doc_19",
+        "doc_17"
+      ],
+      "kind": "anytime_answer"
+    },
+    {
+      "node_id": "memory_mem_6",
+      "content": "Conclusion: The answer to 'Who is the producer of the film 'Rabbit Hole'' is Keith Urban.",
+      "answer_text": "Keith Urban",
+      "value": 0.7912,
+      "evidence_ids": [
+        "doc_8",
+        "doc_10"
+      ],
+      "step": 9
+    },
+    {
+      "node_id": "memory_mem_4",
+      "answer_text": "Jack Smight",
+      "source": "answer_judge",
+      "choice": "A",
+      "candidate_source": "memory",
+      "base_score": 0.8331571099462786,
+      "rerank_score": 0.616325986177437,
+      "judge_confidence": 0.0,
+      "judge_reason": "Nicole Kidman produced 'Rabbit Hole'; her spouse is Keith Urban.",
+      "step": 8,
+      "kind": "final_answer_selection"
+    }
+  ],
+  "anytime_answer": "Keith Urban",
+  "anytime_answer_score": 0.8820741795999116,
+  "anytime_answer_source": "final_synthesis",
+  "anytime_answer_node_id": "state_1",
+  "stats": {
+    "steps": 8,
+    "llm_calls": 16,
+    "generated_tokens": 1074,
+    "token_budget_remaining": 126,
+    "total_nodes": 21,
+    "kg_nodes": 7,
+    "memory_nodes": 5,
+    "state_nodes": 9,
+    "deleted_state_nodes": 0,
+    "scheduler_mode": "tdca",
+    "scoring_mode": "hybrid",
+    "stop_reason": "final_synthesis_reserve",
+    "goal_kind": "bridge",
+    "goal_completion": 0.92,
+    "anytime_answer": "Keith Urban",
+    "anytime_answer_score": 0.8820741795999116,
+    "anytime_answer_source": "final_synthesis"
+  }
+}

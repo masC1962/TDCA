@@ -1,0 +1,892 @@
+{
+  "nodes": [
+    {
+      "node_id": "state_1",
+      "node_type": "state",
+      "content": "What is the seat of the county sharing a border with the county where Tenement was founded?",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.6858876123198258,
+      "temperature": 1.021809606070773,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.8650078358558736,
+        "evidence_support": 0.6029642231055103,
+        "memory_usefulness": 0.5139667937761075,
+        "answerability": 0.8014821115527552,
+        "uncertainty": 0.19146643984100814
+      },
+      "metadata": {
+        "diffusion_delta": 0.27283077472935124,
+        "diffusion_gain": 0.27283077472935124
+      }
+    },
+    {
+      "node_id": "kg_doc_14",
+      "node_type": "kg",
+      "content": "The county lies in southern Hungary, on the border with Croatia. The River Drava forms part of its southern border, and the River Danube its eastern border. It shares borders with the Hungarian counties Somogy, Tolna, and Bács-Kiskun. The capital of Baranya county is Pécs.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999895053745,
+      "temperature": 0.9999999895053745,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Baranya County",
+        "raw_score": 4.995333100508537,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_8",
+      "node_type": "kg",
+      "content": "Born in Green Bay, Wisconsin, Quinn was a realtor and served on the Green Bay Common Council, the Brown County, Wisconsin Board of Supervisors, the local Board of Education, and the Wisconsin State Assembly from 1955 until 1973. He was a Republican.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.8976531031980997,
+      "temperature": 0.8976531031980997,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Jerome Quinn",
+        "raw_score": 4.508818525796697,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_2",
+      "node_type": "kg",
+      "content": "John C. Petersen (November 2, 1842 – July 10, 1887) was an American butcher and farmer from Appleton, Wisconsin who served as a member of the Wisconsin State Assembly from Outagamie County. He was elected in 1878 as a Greenbacker, and was re-elected the next year as a \"Greenback Democrat\" (even though he was opposed by a Democrat).",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999809403683,
+      "temperature": 0.9999999809403683,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "John C. Petersen",
+        "raw_score": 4.622616848334916,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_19",
+      "node_type": "kg",
+      "content": "The Western Region is located in south Ghana, spreads from the Ivory Coast border in the west to the Central region in the east, includes the capital and large twin city of Sekondi - Takoradi on the coast, coastal Axim, and a hilly inland area including Elubo. It includes Ghana's southernmost location, Cape Three Points, where crude oil was discovered in commercial quantities in June 2007. The Western Region enjoys a long coastline that stretches from South Ghana's border with Ivory Coast to the Western region's boundary with the Central Region on the east.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0,
+      "temperature": 0.0,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Western Region (Ghana)",
+        "raw_score": 4.42834941926303,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "memory_mem_1",
+      "node_type": "memory",
+      "content": "Template: for compositional multi-hop questions, first solve the intermediate entity and then ask for the final attribute.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9599999359129513,
+      "temperature": 1.8292260167701817,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.96,
+        "tag": "compositional_template",
+        "memory_kind": "template",
+        "raw_score": 0.15118069077191792,
+        "source": "memory",
+        "diffusion_delta": 0.2638834939328105,
+        "diffusion_gain": 0.2638834939328105
+      }
+    },
+    {
+      "node_id": "memory_mem_3",
+      "node_type": "memory",
+      "content": "Template: when evidence already grounds the answer, switch from branching to short verification and synthesis.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.06793365163926388,
+      "temperature": 0.12965215815799744,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.88,
+        "tag": "verification_then_stop",
+        "memory_kind": "template",
+        "raw_score": 0.11453935432645308,
+        "source": "memory",
+        "diffusion_delta": 0.01833479521126241,
+        "diffusion_gain": 0.01833479521126241
+      }
+    },
+    {
+      "node_id": "state_2",
+      "node_type": "state",
+      "content": "In which county was Tenement founded?",
+      "depth": 1,
+      "parent_id": "state_1",
+      "value": 0.6538209445406672,
+      "temperature": 0.6055204274258877,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.7111724528749681,
+        "evidence_support": 0.948826542069234,
+        "memory_usefulness": 0.0,
+        "answerability": 0.7315561281774742,
+        "uncertainty": 0.12921122242753788
+      },
+      "metadata": {
+        "kind": "bridge",
+        "evidence_ids": [
+          "doc_2",
+          "doc_8",
+          "doc_18",
+          "doc_20"
+        ],
+        "memory_ids": [],
+        "diffusion_delta": -0.083614773132488,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "kg_doc_18",
+      "node_type": "kg",
+      "content": "Tenement is a three piece rock band from Appleton, Wisconsin formed in 2006. They are often associated with the American hardcore punk scene. Their recorded output has been described as everything from \"noise pop\" to \"fuzz punk\", while in a live setting they are often known for experimentation, improvisation, and high-energy performance. The visual art of singer/guitarist Amos Pitsch is associated with most of their records, as well as several records by other notable punk and hardcore bands. In 2016, they were included in \"Rolling Stone's\" \"10 Great Modern Punk Bands\".",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.8192604163487684,
+      "temperature": 0.8192604163487684,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Tenement (band)",
+        "raw_score": 2.427062972145643,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_20",
+      "node_type": "kg",
+      "content": "Capital Talk is a flagship Geo News program which is a one-hour debate on current events hosted by Hamid Mir. Capital Talk looks at the challenges, issues and concerns facing Pakistan on a daily basis. The format includes a panelist who participate in a dialogue.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0,
+      "temperature": 0.0,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Capital Talk",
+        "raw_score": 3.2216493338975534,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "state_3",
+      "node_type": "state",
+      "content": "Which counties border the county where Tenement was founded?",
+      "depth": 1,
+      "parent_id": "state_1",
+      "value": 0.5399198601658012,
+      "temperature": 0.2748653114417938,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.6481377386130547,
+        "evidence_support": 0.5239345253325136,
+        "memory_usefulness": 0.5139667251540021,
+        "answerability": 0.5619672626662569,
+        "uncertainty": 0.20569178544014755
+      },
+      "metadata": {
+        "kind": "bridge",
+        "evidence_ids": [
+          "doc_14",
+          "doc_2",
+          "doc_15",
+          "doc_19"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "diffusion_delta": -0.012087879385254574,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "kg_doc_15",
+      "node_type": "kg",
+      "content": "Pulaski High School is a public high school in Pulaski, Wisconsin, in Brown County, Wisconsin (school district also serves parts of Shawano, Outagamie and Oconto counties), that serves students in grades 9 through 12. Its mascot is the Red Raider.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.999999992518638,
+      "temperature": 0.999999992518638,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Pulaski High School",
+        "raw_score": 6.258938366919993,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "state_4",
+      "node_type": "state",
+      "content": "What is the seat of each of those bordering counties?",
+      "depth": 1,
+      "parent_id": "state_1",
+      "value": 0.7539026422788601,
+      "temperature": 0.9527994053923305,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.7441685759481331,
+        "evidence_support": 0.966042030099551,
+        "memory_usefulness": 0.5139667251540021,
+        "answerability": 0.8544495864783469,
+        "uncertainty": 0.12611243458208082
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_15",
+          "doc_14",
+          "doc_3",
+          "doc_4"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "diffusion_delta": 0.06367375362901062,
+        "diffusion_gain": 0.06367375362901062
+      }
+    },
+    {
+      "node_id": "kg_doc_3",
+      "node_type": "kg",
+      "content": "Washington, D.C. is the current federal capital city of the United States, as it has been since 1800. Each U.S. state has its own capital city, as do many of its Insular areas. Historically, most states have not changed their capital city since becoming a state, but the capital cities of their respective preceding colonies, territories, kingdoms, and republics typically changed multiple times. There have also been other governments within the current borders of the United States with their own capitals, such as the Republic of Texas, Native American nations, and other unrecognized governments.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.837562113103602,
+      "temperature": 0.837562113103602,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "List of capitals in the United States",
+        "raw_score": 2.747061968996143,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_4",
+      "node_type": "kg",
+      "content": "Potes is a municipality in the autonomous community of Cantabria in Spain. It is the capital of the Comarca of Liébana and is located in the centre of it. It is bordered to the north by Cillorigo de Liébana, to the west by Camaleño, to the south by Vega de Liébana and to the east by Cabezón de Liébana.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0,
+      "temperature": 0.0,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Potes",
+        "raw_score": 0.6625342270508516,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "memory_mem_4",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'What is the seat of the county sharing a border with the county where Tenement was founded' is Pécs.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999895053745,
+      "temperature": 0.9989089653570193,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "intermediate_answer",
+        "target_question": "What is the seat of the county sharing a border with the county where Tenement was founded?",
+        "target_question_norm": "what is the seat of the county sharing a border with the county where tenement was founded",
+        "relation_signature": "generic",
+        "answer_text": "Pécs",
+        "support_score": 0.9999999895053745,
+        "evidence_ids": [],
+        "slot_name": "",
+        "slot_type": "",
+        "slot_role": "",
+        "terminal": false,
+        "path_terminal": false,
+        "composition_kind": "",
+        "derived_from_state": "state_1",
+        "diffusion_delta": 0.0287325063817776,
+        "diffusion_gain": 0.0287325063817776
+      }
+    },
+    {
+      "node_id": "state_5",
+      "node_type": "state",
+      "content": "What are the counties bordering that county?",
+      "depth": 2,
+      "parent_id": "state_3",
+      "value": 0.5984907188407438,
+      "temperature": 0.5347304069791582,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.6431536010738934,
+        "evidence_support": 0.8286030283685939,
+        "memory_usefulness": 0.007575862809131856,
+        "answerability": 0.7571586570414397,
+        "uncertainty": 0.1508514548936531
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_15",
+          "doc_14",
+          "doc_13",
+          "doc_12"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "diffusion_delta": -0.25527280544914055,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "kg_doc_13",
+      "node_type": "kg",
+      "content": "Chol Kiri District () is a district (\"srok\") in the east of Kampong Chhnang Province, in central Cambodia. The district capital is Chol Kiri town located around 8 kilometres south of the provincial capital of Kampong Chhnang by road. Chol Kiri District is the easternmost district of Kampong Chhnang. The district shares a border with Kampong Thom and Kampong Cham provinces to the east. Most of the district is low lying floodplain and the Tonlé Sap river runs through the district roughly from north to south. This proximity to the river and the lack of high land make Chol Kiri one of the most flood prone districts in the country. The Kampong Chhnang Department of Development has estimated that both Chol Kiri and Kampong Leaeng districts are flooded for six months of the year and that after the floodwaters have receded drinking water sources are left contaminated.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.24829222266751086,
+      "temperature": 0.24829222266751086,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Chol Kiri District",
+        "raw_score": 3.3877544770523422,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_12",
+      "node_type": "kg",
+      "content": "Krouch Chhmar District () is a district (\"srok\") located in Tboung Khmum Province, Cambodia. The district capital is Krouch Chhmar town located around 35 kilometres north east of the provincial capital of Kampong Cham by water. The Mekong River forms western and northern borders of the districts and includes the Mekong island of Koh Pir in its area. Not surprisingly, communities in this isolated district are mostly clustered along the banks of the river and boats are an important form of transport.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0,
+      "temperature": 0.0,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Krouch Chhmar District",
+        "raw_score": 2.4956673800401945,
+        "source": "kg"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "source": "state_1",
+      "target": "kg_doc_14",
+      "edge_type": "supports",
+      "weight": 0.9999999895053745
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_8",
+      "edge_type": "supports",
+      "weight": 0.2059284567056463
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.1757553022687912
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_19",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.9599999359129513
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.06793365163926388
+    },
+    {
+      "source": "state_1",
+      "target": "state_2",
+      "edge_type": "refines",
+      "weight": 0.9
+    },
+    {
+      "source": "state_1",
+      "target": "state_3",
+      "edge_type": "refines",
+      "weight": 0.8
+    },
+    {
+      "source": "state_1",
+      "target": "state_4",
+      "edge_type": "refines",
+      "weight": 0.7
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_4",
+      "edge_type": "derives",
+      "weight": 0.9999999895053745
+    },
+    {
+      "source": "kg_doc_14",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.9999999895053745
+    },
+    {
+      "source": "kg_doc_14",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.9999999890781479
+    },
+    {
+      "source": "kg_doc_14",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.9320840716574612
+    },
+    {
+      "source": "kg_doc_14",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.9999999895053745
+    },
+    {
+      "source": "kg_doc_14",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.6572060642185499
+    },
+    {
+      "source": "kg_doc_8",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.2059284567056463
+    },
+    {
+      "source": "kg_doc_8",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.8976531031980997
+    },
+    {
+      "source": "kg_doc_8",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.2059284567056463
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.1757553022687912
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.9999999809403683
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.04786906158687927
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.1757553022687912
+    },
+    {
+      "source": "kg_doc_19",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_19",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_19",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.9599999359129513
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_3",
+      "edge_type": "recalls",
+      "weight": 0.005511901954981836
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_4",
+      "edge_type": "recalls",
+      "weight": 0.9599998077388796
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "memory_mem_4",
+      "edge_type": "recalls",
+      "weight": 0.9599999359129513
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_5",
+      "edge_type": "recalls",
+      "weight": 0.014171597491631471
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.06793365163926388
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_3",
+      "edge_type": "recalls",
+      "weight": 0.00038121109074027224
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_4",
+      "edge_type": "recalls",
+      "weight": 0.0679336425691247
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "memory_mem_4",
+      "edge_type": "recalls",
+      "weight": 0.06793365163926388
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_5",
+      "edge_type": "recalls",
+      "weight": 0.000980128126632242
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.9999999809403683
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_8",
+      "edge_type": "supports",
+      "weight": 0.8976531031980997
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_18",
+      "edge_type": "supports",
+      "weight": 0.8192604163487684
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_20",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_18",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.8192604163487684
+    },
+    {
+      "source": "kg_doc_20",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_14",
+      "edge_type": "supports",
+      "weight": 0.9999999890781479
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.04786906158687927
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_15",
+      "edge_type": "supports",
+      "weight": 0.03674936273564678
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_19",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_3",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.005511901954981836
+    },
+    {
+      "source": "state_3",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.00038121109074027224
+    },
+    {
+      "source": "state_3",
+      "target": "state_2",
+      "edge_type": "refines",
+      "weight": 0.9
+    },
+    {
+      "source": "state_3",
+      "target": "state_5",
+      "edge_type": "refines",
+      "weight": 0.8
+    },
+    {
+      "source": "state_3",
+      "target": "state_4",
+      "edge_type": "refines",
+      "weight": 0.7
+    },
+    {
+      "source": "kg_doc_15",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.03674936273564678
+    },
+    {
+      "source": "kg_doc_15",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.9999999885416408
+    },
+    {
+      "source": "kg_doc_15",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.999999992518638
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_15",
+      "edge_type": "supports",
+      "weight": 0.9999999885416408
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_14",
+      "edge_type": "supports",
+      "weight": 0.9320840716574612
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.837562113103602
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_4",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.9599998077388796
+    },
+    {
+      "source": "state_4",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.0679336425691247
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.837562113103602
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.9999999895053745
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_14",
+      "edge_type": "supports",
+      "weight": 0.9999999895053745
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_8",
+      "edge_type": "supports",
+      "weight": 0.2059284567056463
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.1757553022687912
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_19",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.9599999359129513
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.06793365163926388
+    },
+    {
+      "source": "state_5",
+      "target": "kg_doc_15",
+      "edge_type": "supports",
+      "weight": 0.999999992518638
+    },
+    {
+      "source": "state_5",
+      "target": "kg_doc_14",
+      "edge_type": "supports",
+      "weight": 0.6572060642185499
+    },
+    {
+      "source": "state_5",
+      "target": "kg_doc_13",
+      "edge_type": "supports",
+      "weight": 0.24829222266751086
+    },
+    {
+      "source": "state_5",
+      "target": "kg_doc_12",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_5",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.014171597491631471
+    },
+    {
+      "source": "state_5",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.000980128126632242
+    },
+    {
+      "source": "kg_doc_13",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.24829222266751086
+    },
+    {
+      "source": "kg_doc_12",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.0
+    }
+  ]
+}

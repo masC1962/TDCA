@@ -1,0 +1,1910 @@
+{
+  "nodes": [
+    {
+      "node_id": "state_1",
+      "node_type": "state",
+      "content": "When did the team that Jamie Ward is a member of win the FA Cup?",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.807471161244372,
+      "temperature": 0.47197479172968476,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.9493678656253463,
+        "evidence_support": 0.8510819577216064,
+        "memory_usefulness": 0.48672266765716377,
+        "answerability": 0.9255409788608032,
+        "uncertainty": 0.14680524761011082
+      },
+      "metadata": {
+        "diffusion_delta": 0.023894197952709917,
+        "diffusion_gain": 0.023894197952709917
+      }
+    },
+    {
+      "node_id": "kg_doc_11",
+      "node_type": "kg",
+      "content": "Current manager, Roberto Martínez, is the fourteenth permanent holder of the position since it was established in 1939. There have also been four caretaker managers, and before 1939 the team was selected by either the club secretary or by committee. The club's longest-serving manager has been Harry Catterick, who was in charge of the team from 1961–73, taking in 594 first team matches. The Everton manager to win most domestic and international trophies is Howard Kendall, who won two Division One championships, the 1984 FA Cup, the 1984 UEFA Cup Winners' Cup, and three Charity Shields.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999990977568612,
+      "temperature": 0.9999990977568612,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Everton F.C.",
+        "raw_score": 0.06619799979937396,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_2",
+      "node_type": "kg",
+      "content": "The club has been a member of the Premier League for all but three years of the competition's history, spending 85 seasons in the top tier as of May 2016, and has never dropped below English football's second tier since joining the Football League in 1893. They have won four League Championship titles, six FA Cups and a Charity Shield, as well as the 1969 Inter-Cities Fairs Cup and the 2006 UEFA Intertoto Cup. Newcastle United has the ninth highest total of trophies won by an English club. The club's most successful period was between 1904 and 1910, when they won an FA Cup and three of their First Division titles. The club were highly successful in the Premier League in the 1990s and early 2000s without winning any trophies, but have been mostly struggling since the 2006 -- 07 season, and were relegated in 2009 and 2016. They returned to the Premiership for the 2017 -- 18 season after winning the Championship title the preceding year.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999996846246207,
+      "temperature": 0.9999996846246207,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Newcastle United F.C.",
+        "raw_score": 0.09926969186411301,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_1",
+      "node_type": "kg",
+      "content": "The 2005 FA Cup Final was a football match played between Arsenal and Manchester United on 21 May 2005 at the Millennium Stadium, Cardiff. It was the final match of the 2004 -- 05 FA Cup, the 124th season of English football's primary cup competition, the FA Cup. Arsenal became the first team to win the FA Cup via a penalty shoot - out, despite being outplayed throughout the game, after neither side managed to score in the initial 90 minutes or in 30 minutes of extra time. The shoot - out finished 5 -- 4 to Arsenal, with Patrick Vieira scoring the winning penalty after Paul Scholes' shot was saved by Arsenal goalkeeper Jens Lehmann.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999997686306552,
+      "temperature": 0.9999997686306552,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "2005 FA Cup Final",
+        "raw_score": 0.14455716324554296,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_5",
+      "node_type": "kg",
+      "content": "After the Singapore Cup and League Cup, the Singapore FA Cup is the next major cup competition in Singapore. For a number of years, the FA Cup was solely restricted to NFL Clubs. In 2006, S.League clubs were once again allowed in the competition, but were only permitted to field their developmental Prime League teams. The team matchups were drawn out of a hat against one another for the initial 2006 and 2007 seasons before being seeded into two groups after 2008.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0,
+      "temperature": 0.0,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Singapore FA Cup",
+        "raw_score": 0.13690269742258546,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "memory_mem_3",
+      "node_type": "memory",
+      "content": "Template: when evidence already grounds the answer, switch from branching to short verification and synthesis.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.8799999929610504,
+      "temperature": 0.988973166174521,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.88,
+        "tag": "verification_then_stop",
+        "memory_kind": "template",
+        "raw_score": 1.646073570840367,
+        "source": "memory",
+        "diffusion_delta": -0.2164464254058479,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "memory_mem_1",
+      "node_type": "memory",
+      "content": "Template: for compositional multi-hop questions, first solve the intermediate entity and then ask for the final attribute.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9599998077388796,
+      "temperature": 1.1652915457267576,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.96,
+        "tag": "compositional_template",
+        "memory_kind": "template",
+        "raw_score": 1.4036870952143417,
+        "source": "memory",
+        "diffusion_delta": -0.07436711046496858,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "state_2",
+      "node_type": "state",
+      "content": "Which football club is Jamie Ward a member of?",
+      "depth": 1,
+      "parent_id": "state_1",
+      "value": 0.47045713531909095,
+      "temperature": 1.0538081566331483,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.6128571377638645,
+        "evidence_support": 0.49999998501976944,
+        "memory_usefulness": 0.0,
+        "answerability": 0.6357142782241705,
+        "uncertainty": 0.2100000026964415
+      },
+      "metadata": {
+        "kind": "bridge",
+        "evidence_ids": [
+          "doc_8",
+          "doc_3",
+          "doc_2",
+          "doc_20"
+        ],
+        "memory_ids": [],
+        "goal_slot_name": "jamie_ward_team",
+        "goal_slot_role": "bridge_entity",
+        "goal_terminal": false,
+        "diffusion_delta": -0.03856211517149877,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "kg_doc_8",
+      "node_type": "kg",
+      "content": "Jamie John Ward (born 12 May 1986) is an English-born Northern Irish professional footballer who plays as a striker or a winger. Born in Birmingham he began his career with his home-town club Aston Villa but failed to break into the first team and following a spell on loan at Stockport County he joined Torquay United. From there Ward had signed first for Chesterfield and then Sheffield United before joining Derby County in 2011 and later Nottingham Forest in 2015. Qualifying through his grandfather, he plays for the Northern Ireland national team.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999790847288,
+      "temperature": 0.9999999790847288,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Jamie Ward",
+        "raw_score": 0.11208166859649035,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_3",
+      "node_type": "kg",
+      "content": "Barcelona is one of three founding members of the Primera División that have never been relegated from the top division, along with Athletic Bilbao and Real Madrid. In 2009, Barcelona became the first Spanish club to win the continental treble consisting of La Liga, Copa del Rey, and the UEFA Champions League, and also became the first football club to win six out of six competitions in a single year, completing the sextuple in also winning the Spanish Super Cup, UEFA Super Cup and FIFA Club World Cup. In 2011, the club became European champions again and won five trophies. This Barcelona team, which reached a record six consecutive Champions League semi-finals and won 14 trophies in just four years under Pep Guardiola, is considered by some in the sport to be the greatest team of all time. In June 2015, Barcelona became the first European club in history to achieve the continental treble twice.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0,
+      "temperature": 0.0,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "FC Barcelona",
+        "raw_score": 0.11487387901674,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_20",
+      "node_type": "kg",
+      "content": "Formed in 1878, Everton were founding members of The Football League in 1888 and won their first league championship two seasons later. Following four league titles and two FA Cup wins, Everton experienced a lull in the immediate post World War Two period until a revival in the 1960s which saw the club win two league championships and an FA Cup. The mid-1980s represented their most recent period of sustained success, with two League Championship successes, an FA Cup, and the 1985 European Cup Winners' Cup. The club's most recent major trophy was the 1995 FA Cup. The club's supporters are known as Evertonians.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999994930029799,
+      "temperature": 0.9999994930029799,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Everton F.C.",
+        "raw_score": 0.05723125021429021,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "state_3",
+      "node_type": "state",
+      "content": "Which football club did Jamie Ward join after Derby County in 2015?",
+      "depth": 2,
+      "parent_id": "state_2",
+      "value": 0.4152285661662893,
+      "temperature": 0.42426418370709934,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.5314285678729753,
+        "evidence_support": 0.4999999895423644,
+        "memory_usefulness": 0.0,
+        "answerability": 0.4928571376283251,
+        "uncertainty": 0.21000000188237442
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_8",
+          "doc_3",
+          "doc_20",
+          "doc_2"
+        ],
+        "memory_ids": [],
+        "diffusion_delta": -0.015472830994258446,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "state_4",
+      "node_type": "state",
+      "content": "Has Nottingham Forest ever won the FA Cup?",
+      "depth": 2,
+      "parent_id": "state_2",
+      "value": 0.6075925348491532,
+      "temperature": 1.4300770847566284,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.6197312446732346,
+        "evidence_support": 0.7597137448372444,
+        "memory_usefulness": 0.5139667251540021,
+        "answerability": 0.622714015275765,
+        "uncertainty": 0.163251525929296
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_13",
+          "doc_2",
+          "doc_17",
+          "doc_11"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "diffusion_delta": 0.029054502385324366,
+        "diffusion_gain": 0.029054502385324366
+      }
+    },
+    {
+      "node_id": "kg_doc_13",
+      "node_type": "kg",
+      "content": "Forest were founder members of the Football Alliance in 1889 before joining the Football League in 1892. They have since mostly competed in the top two League tiers except five seasons in the third tier. Forest won the FA Cup in 1898 and 1959. Their most successful period was in the management reign of Brian Clough and Peter Taylor between 1976 and 1982. With Forest they won the 1977 -- 78 Football League title followed by the 1979 and 1980 European Cups. They also won two Football League Cups at Forest together. After Taylor left Clough won two more League Cups and two Full Members Cups.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.999999738165743,
+      "temperature": 0.999999738165743,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Nottingham Forest F.C.",
+        "raw_score": 0.13154328318313874,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_17",
+      "node_type": "kg",
+      "content": "Terry made his Chelsea debut on 28 October 1998 as a late substitute in a League Cup tie with Aston Villa; his first start came later that season in an FA Cup third round match, a 2 -- 0 win over Oldham Athletic. He spent a brief period on loan with Nottingham Forest in 2000 to build up his first team experience and was the subject of interest from both Forest manager David Platt and Huddersfield Town manager Steve Bruce.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999998292897556,
+      "temperature": 0.9999998292897556,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "John Terry",
+        "raw_score": 0.1520005035165081,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "memory_mem_4",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'Which football club is Jamie Ward a member of' is Nottingham Forest.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999700395389,
+      "temperature": 0.5131257375081295,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "intermediate_answer",
+        "target_question": "Which football club is Jamie Ward a member of?",
+        "target_question_norm": "which football club is jamie ward a member of",
+        "relation_signature": "generic",
+        "answer_text": "Nottingham Forest",
+        "support_score": 0.9999999700395389,
+        "evidence_ids": [
+          "doc_8"
+        ],
+        "slot_name": "jamie_ward_team",
+        "slot_type": "",
+        "slot_role": "bridge_entity",
+        "terminal": false,
+        "path_terminal": false,
+        "composition_kind": "",
+        "derived_from_state": "state_2",
+        "diffusion_delta": -0.020289146512725065,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "state_5",
+      "node_type": "state",
+      "content": "When did Nottingham Forest win the FA Cup?",
+      "depth": 2,
+      "parent_id": "state_2",
+      "value": 0.5075930242857026,
+      "temperature": 0.6345577699912482,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.6304089945175538,
+        "evidence_support": 0.5516230931188559,
+        "memory_usefulness": 0.234659508092929,
+        "answerability": 0.5615258322737137,
+        "uncertainty": 0.2007078432386059
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_17",
+          "doc_1",
+          "doc_13",
+          "doc_18"
+        ],
+        "memory_ids": [
+          "mem_3",
+          "mem_1"
+        ],
+        "diffusion_delta": 0.15643548664708223,
+        "diffusion_gain": 0.15643548664708223
+      }
+    },
+    {
+      "node_id": "kg_doc_18",
+      "node_type": "kg",
+      "content": "The 1963 -- 72 seasons saw Chelsea regularly challenge for honours for the first time, although they often narrowly missed out. The League Cup was won in 1965, the FA Cup in 1970 and the UEFA Cup Winners' Cup in 1971; they were also FA Cup runners - up in 1967 and League Cup runners - up in 1972. Several problems over the next decade, principally the debt burden caused by an ambitious attempt to redevelop Stamford Bridge, brought the club to the brink of extinction, before a revival under John Neal in the mid-1980s saw the club win the Second Division title and ultimately re-establish itself in the top flight.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.19071443870898247,
+      "temperature": 0.19071443870898247,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "History of Chelsea F.C.",
+        "raw_score": 0.12676878991333995,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "state_6",
+      "node_type": "state",
+      "content": "Which team is Jamie Ward currently a member of?",
+      "depth": 3,
+      "parent_id": "state_4",
+      "value": 0.7670976031821534,
+      "temperature": 0.46293020179346145,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.639999994993983,
+        "evidence_support": 0.4999999852764202,
+        "memory_usefulness": 0.0,
+        "answerability": 0.6499999926382101,
+        "uncertainty": 0.21000000265024435
+      },
+      "metadata": {
+        "kind": "bridge",
+        "evidence_ids": [
+          "doc_8",
+          "doc_3",
+          "doc_11",
+          "doc_2"
+        ],
+        "memory_ids": [],
+        "diffusion_delta": 0.007534385450559178,
+        "diffusion_gain": 0.007534385450559178
+      }
+    },
+    {
+      "node_id": "state_7",
+      "node_type": "state",
+      "content": "When did that team win the FA Cup?",
+      "depth": 3,
+      "parent_id": "state_4",
+      "value": 0.7670976031821534,
+      "temperature": 1.230274856771932,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.7501773607188649,
+        "evidence_support": 0.7442191281647285,
+        "memory_usefulness": 0.4551212668891621,
+        "answerability": 0.6863952783680786,
+        "uncertainty": 0.16604055693034886
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_1",
+          "doc_11",
+          "doc_18",
+          "doc_19"
+        ],
+        "memory_ids": [
+          "mem_3",
+          "mem_1"
+        ],
+        "diffusion_delta": 0.10880428536817144,
+        "diffusion_gain": 0.10880428536817144
+      }
+    },
+    {
+      "node_id": "kg_doc_19",
+      "node_type": "kg",
+      "content": "The 1923 FA Cup Final was an association football match between Bolton Wanderers and West Ham United on 28 April 1923 at the original Wembley Stadium in London. The showpiece match of English football's primary cup competition, the Football Association Challenge Cup (better known as the FA Cup), it was the first football match to be played at Wembley Stadium. King George V was in attendance to present the trophy to the winning team.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0,
+      "temperature": 0.0,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "1923 FA Cup Final",
+        "raw_score": 0.11204331097772163,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "memory_mem_5",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'Has Nottingham Forest ever won the FA Cup' is Yes.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 1.0,
+      "temperature": 0.8377894568308801,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "intermediate_answer",
+        "target_question": "Has Nottingham Forest ever won the FA Cup?",
+        "target_question_norm": "has nottingham forest ever won the fa cup",
+        "relation_signature": "generic",
+        "answer_text": "Yes",
+        "support_score": 1.0,
+        "evidence_ids": [
+          "doc_13",
+          "doc_2",
+          "doc_17"
+        ],
+        "slot_name": "",
+        "slot_type": "",
+        "slot_role": "",
+        "terminal": false,
+        "path_terminal": false,
+        "composition_kind": "",
+        "derived_from_state": "state_4",
+        "diffusion_delta": 0.023134751809606557,
+        "diffusion_gain": 0.023134751809606557
+      }
+    },
+    {
+      "node_id": "state_8",
+      "node_type": "state",
+      "content": "Which FA Cup wins were by Nottingham Forest while Jamie Ward was a member of the team?",
+      "depth": 3,
+      "parent_id": "state_4",
+      "value": 0.6854783862132635,
+      "temperature": 0.5654470029881585,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.8250915457389656,
+        "evidence_support": 0.8847230336860332,
+        "memory_usefulness": 0.0016670114728100155,
+        "answerability": 0.7709329454144451,
+        "uncertainty": 0.140749853936514
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_20",
+          "doc_2",
+          "doc_17",
+          "doc_5"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "diffusion_delta": 0.010949423056824226,
+        "diffusion_gain": 0.010949423056824226
+      }
+    },
+    {
+      "node_id": "state_9",
+      "node_type": "state",
+      "content": "In which year did Jamie Ward's team win the FA Cup?",
+      "depth": 1,
+      "parent_id": "state_1",
+      "value": 0.6934899929855411,
+      "temperature": 0.3618375053906298,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.811779906721299,
+        "evidence_support": 0.9254030869954171,
+        "memory_usefulness": 0.004035853888251296,
+        "answerability": 0.7769872577834229,
+        "uncertainty": 0.13342744434082493
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_1",
+          "doc_20",
+          "doc_11",
+          "doc_19"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "diffusion_delta": 0.025241871735198707,
+        "diffusion_gain": 0.025241871735198707
+      }
+    },
+    {
+      "node_id": "state_10",
+      "node_type": "state",
+      "content": "Which team is Jamie Ward a member of?",
+      "depth": 4,
+      "parent_id": "state_7",
+      "value": 0.7287427230230457,
+      "temperature": 1.6743289195446884,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.6399999951906785,
+        "evidence_support": 0.49999998585493677,
+        "memory_usefulness": 0.0,
+        "answerability": 0.6499999929274684,
+        "uncertainty": 0.21000000254611137
+      },
+      "metadata": {
+        "kind": "bridge",
+        "evidence_ids": [
+          "doc_8",
+          "doc_3",
+          "doc_11",
+          "doc_2"
+        ],
+        "memory_ids": [],
+        "diffusion_delta": 0.4111394828408914,
+        "diffusion_gain": 0.4111394828408914
+      }
+    },
+    {
+      "node_id": "state_11",
+      "node_type": "state",
+      "content": "Which team was Jamie Ward a member of during an FA Cup-winning season?",
+      "depth": 2,
+      "parent_id": "state_9",
+      "value": 0.5108357223753734,
+      "temperature": 0.2644474281996737,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.6886920904080709,
+        "evidence_support": 0.563380097838864,
+        "memory_usefulness": 0.0,
+        "answerability": 0.5959757632051463,
+        "uncertainty": 0.19859158238900448
+      },
+      "metadata": {
+        "kind": "bridge",
+        "evidence_ids": [
+          "doc_2",
+          "doc_1",
+          "doc_17",
+          "doc_20"
+        ],
+        "memory_ids": [],
+        "diffusion_delta": -0.06007837270123928,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "state_12",
+      "node_type": "state",
+      "content": "In which year did that team win the FA Cup?",
+      "depth": 2,
+      "parent_id": "state_9",
+      "value": 0.6724105472057603,
+      "temperature": 0.5191472097279948,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.7788750437173123,
+        "evidence_support": 0.9084560109332713,
+        "memory_usefulness": 0.005629020867818044,
+        "answerability": 0.7542280054666356,
+        "uncertainty": 0.13647791803201115
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_1",
+          "doc_17",
+          "doc_20",
+          "doc_11"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "diffusion_delta": -0.048999470083296415,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "memory_mem_6",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'Which team is Jamie Ward a member of' is Nottingham Forest.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999717098735,
+      "temperature": 1.1350792684484439,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "intermediate_answer",
+        "target_question": "Which team is Jamie Ward a member of?",
+        "target_question_norm": "which team is jamie ward a member of",
+        "relation_signature": "generic",
+        "answer_text": "Nottingham Forest",
+        "support_score": 0.9999999717098735,
+        "evidence_ids": [
+          "doc_8"
+        ],
+        "slot_name": "",
+        "slot_type": "",
+        "slot_role": "",
+        "terminal": false,
+        "path_terminal": false,
+        "composition_kind": "",
+        "derived_from_state": "state_10",
+        "diffusion_delta": 0.2502719517303611,
+        "diffusion_gain": 0.2502719517303611
+      }
+    },
+    {
+      "node_id": "state_13",
+      "node_type": "state",
+      "content": "Memory repair goal: find supporting memory for this missing dependency: Which football club is Jamie Ward a member of?",
+      "depth": 1,
+      "parent_id": "state_1",
+      "value": 0.7670976031821534,
+      "temperature": 0.7914940836363507,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.6128571370240605,
+        "evidence_support": 0.4999999828438754,
+        "memory_usefulness": 0.11154940484886285,
+        "answerability": 0.6357142771362234,
+        "uncertainty": 0.2100000030881024
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_8",
+          "doc_3",
+          "doc_2",
+          "doc_20"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_2"
+        ]
+      }
+    },
+    {
+      "node_id": "memory_mem_2",
+      "node_type": "memory",
+      "content": "Template: for comparison questions, split the problem into one sub-question per entity before comparing them.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0903923154094266,
+      "temperature": 0.0903923154094266,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.9,
+        "tag": "comparison_template",
+        "memory_kind": "template",
+        "raw_score": 1.0198548494734339,
+        "source": "memory"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "source": "state_1",
+      "target": "kg_doc_11",
+      "edge_type": "supports",
+      "weight": 0.9999990977568612
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.7021648176863515
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.5697134144355018
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.1539505830261046
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.007658114450196627
+    },
+    {
+      "source": "state_1",
+      "target": "state_2",
+      "edge_type": "refines",
+      "weight": 1.0
+    },
+    {
+      "source": "state_1",
+      "target": "state_9",
+      "edge_type": "refines",
+      "weight": 0.94
+    },
+    {
+      "source": "state_1",
+      "target": "state_6",
+      "edge_type": "refines",
+      "weight": 0.9
+    },
+    {
+      "source": "state_1",
+      "target": "state_7",
+      "edge_type": "refines",
+      "weight": 0.8
+    },
+    {
+      "source": "state_1",
+      "target": "state_13",
+      "edge_type": "refines",
+      "weight": 0.92
+    },
+    {
+      "source": "kg_doc_11",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.9999990977568612
+    },
+    {
+      "source": "kg_doc_11",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_11",
+      "target": "state_6",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_11",
+      "target": "state_7",
+      "edge_type": "supports",
+      "weight": 0.48843848769880177
+    },
+    {
+      "source": "kg_doc_11",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_11",
+      "target": "state_9",
+      "edge_type": "supports",
+      "weight": 0.4640181892063594
+    },
+    {
+      "source": "kg_doc_11",
+      "target": "state_10",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_11",
+      "target": "state_12",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_11",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.7021648176863515
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.519427751508746
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "state_6",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.519427751508746
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "state_8",
+      "edge_type": "supports",
+      "weight": 0.7694465743690865
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "state_10",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "state_11",
+      "edge_type": "supports",
+      "weight": 0.9999996846246207
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "state_13",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.5697134144355018
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.10324635694795618
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "state_7",
+      "edge_type": "supports",
+      "weight": 0.9999997686306552
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "state_9",
+      "edge_type": "supports",
+      "weight": 0.9999996746170025
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "state_11",
+      "edge_type": "supports",
+      "weight": 0.12676051105310734
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "state_12",
+      "edge_type": "supports",
+      "weight": 0.9999994526515849
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "state_8",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.1539505830261046
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_4",
+      "edge_type": "recalls",
+      "weight": 0.0011045176496374094
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_5",
+      "edge_type": "recalls",
+      "weight": 0.2927130453867295
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_7",
+      "edge_type": "recalls",
+      "weight": 0.4218001344268896
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "memory_mem_5",
+      "edge_type": "recalls",
+      "weight": 0.0011045176496374094
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_8",
+      "edge_type": "recalls",
+      "weight": 0.0002216411387962002
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_9",
+      "edge_type": "recalls",
+      "weight": 0.0005365957381800422
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_12",
+      "edge_type": "recalls",
+      "weight": 0.000748418721646647
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.007658114450196627
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_4",
+      "edge_type": "recalls",
+      "weight": 0.015592986458683991
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_5",
+      "edge_type": "recalls",
+      "weight": 0.005609486887343384
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_7",
+      "edge_type": "recalls",
+      "weight": 0.01050962301398944
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "memory_mem_5",
+      "edge_type": "recalls",
+      "weight": 0.015592986458683991
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_8",
+      "edge_type": "recalls",
+      "weight": 0.003112381806823831
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_9",
+      "edge_type": "recalls",
+      "weight": 0.00753511203832255
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_12",
+      "edge_type": "recalls",
+      "weight": 0.01050962301398944
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_13",
+      "edge_type": "recalls",
+      "weight": 0.1327064942882991
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_8",
+      "edge_type": "supports",
+      "weight": 0.9999999700395389
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_20",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_2",
+      "target": "state_3",
+      "edge_type": "refines",
+      "weight": 0.9
+    },
+    {
+      "source": "state_2",
+      "target": "state_4",
+      "edge_type": "refines",
+      "weight": 0.8
+    },
+    {
+      "source": "state_2",
+      "target": "memory_mem_4",
+      "edge_type": "derives",
+      "weight": 0.9999999700395389
+    },
+    {
+      "source": "state_2",
+      "target": "state_5",
+      "edge_type": "refines",
+      "weight": 0.84
+    },
+    {
+      "source": "kg_doc_8",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.9999999700395389
+    },
+    {
+      "source": "kg_doc_8",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.9999999790847288
+    },
+    {
+      "source": "kg_doc_8",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.9999999700395389
+    },
+    {
+      "source": "kg_doc_8",
+      "target": "state_6",
+      "edge_type": "supports",
+      "weight": 0.9999999705528404
+    },
+    {
+      "source": "kg_doc_8",
+      "target": "state_10",
+      "edge_type": "supports",
+      "weight": 0.9999999717098735
+    },
+    {
+      "source": "kg_doc_8",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.9999999717098735
+    },
+    {
+      "source": "kg_doc_8",
+      "target": "state_13",
+      "edge_type": "supports",
+      "weight": 0.9999999656877508
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "state_6",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "state_10",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "state_13",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_20",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_20",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_20",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_20",
+      "target": "state_8",
+      "edge_type": "supports",
+      "weight": 0.9999994930029799
+    },
+    {
+      "source": "kg_doc_20",
+      "target": "state_9",
+      "edge_type": "supports",
+      "weight": 0.8508064993738316
+    },
+    {
+      "source": "kg_doc_20",
+      "target": "state_11",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_20",
+      "target": "state_12",
+      "edge_type": "supports",
+      "weight": 0.721644513827125
+    },
+    {
+      "source": "kg_doc_20",
+      "target": "state_13",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_8",
+      "edge_type": "supports",
+      "weight": 0.9999999790847288
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_20",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_13",
+      "edge_type": "supports",
+      "weight": 0.999999738165743
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.519427751508746
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_17",
+      "edge_type": "supports",
+      "weight": 0.39196627798594874
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_11",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_4",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.015592986458683991
+    },
+    {
+      "source": "state_4",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.0011045176496374094
+    },
+    {
+      "source": "state_4",
+      "target": "state_6",
+      "edge_type": "refines",
+      "weight": 0.9
+    },
+    {
+      "source": "state_4",
+      "target": "state_7",
+      "edge_type": "refines",
+      "weight": 0.8
+    },
+    {
+      "source": "state_4",
+      "target": "memory_mem_5",
+      "edge_type": "derives",
+      "weight": 1.0
+    },
+    {
+      "source": "state_4",
+      "target": "state_8",
+      "edge_type": "refines",
+      "weight": 0.84
+    },
+    {
+      "source": "kg_doc_13",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.999999738165743
+    },
+    {
+      "source": "kg_doc_13",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.027711867025348856
+    },
+    {
+      "source": "kg_doc_13",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.999999738165743
+    },
+    {
+      "source": "kg_doc_17",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.39196627798594874
+    },
+    {
+      "source": "kg_doc_17",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.9999998292897556
+    },
+    {
+      "source": "kg_doc_17",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.39196627798594874
+    },
+    {
+      "source": "kg_doc_17",
+      "target": "state_8",
+      "edge_type": "supports",
+      "weight": 0.5051252467082323
+    },
+    {
+      "source": "kg_doc_17",
+      "target": "state_11",
+      "edge_type": "supports",
+      "weight": 0.01982665367866145
+    },
+    {
+      "source": "kg_doc_17",
+      "target": "state_12",
+      "edge_type": "supports",
+      "weight": 0.8169125692149578
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "state_2",
+      "edge_type": "recalls",
+      "weight": 0.9999999700395389
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_8",
+      "edge_type": "supports",
+      "weight": 0.9999999700395389
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_20",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_5",
+      "target": "kg_doc_17",
+      "edge_type": "supports",
+      "weight": 0.9999998292897556
+    },
+    {
+      "source": "state_5",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.10324635694795618
+    },
+    {
+      "source": "state_5",
+      "target": "kg_doc_13",
+      "edge_type": "supports",
+      "weight": 0.027711867025348856
+    },
+    {
+      "source": "state_5",
+      "target": "kg_doc_18",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_5",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.2927130453867295
+    },
+    {
+      "source": "state_5",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.005609486887343384
+    },
+    {
+      "source": "kg_doc_18",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_18",
+      "target": "state_7",
+      "edge_type": "supports",
+      "weight": 0.19071443870898247
+    },
+    {
+      "source": "state_6",
+      "target": "kg_doc_8",
+      "edge_type": "supports",
+      "weight": 0.9999999705528404
+    },
+    {
+      "source": "state_6",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_6",
+      "target": "kg_doc_11",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_6",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_7",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.9999997686306552
+    },
+    {
+      "source": "state_7",
+      "target": "kg_doc_11",
+      "edge_type": "supports",
+      "weight": 0.48843848769880177
+    },
+    {
+      "source": "state_7",
+      "target": "kg_doc_18",
+      "edge_type": "supports",
+      "weight": 0.19071443870898247
+    },
+    {
+      "source": "state_7",
+      "target": "kg_doc_19",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_7",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.4218001344268896
+    },
+    {
+      "source": "state_7",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.01050962301398944
+    },
+    {
+      "source": "state_7",
+      "target": "state_10",
+      "edge_type": "refines",
+      "weight": 0.84
+    },
+    {
+      "source": "kg_doc_19",
+      "target": "state_7",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_19",
+      "target": "state_9",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "state_4",
+      "edge_type": "recalls",
+      "weight": 1.0
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_13",
+      "edge_type": "supports",
+      "weight": 0.999999738165743
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.519427751508746
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_17",
+      "edge_type": "supports",
+      "weight": 0.39196627798594874
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_11",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.015592986458683991
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.0011045176496374094
+    },
+    {
+      "source": "state_8",
+      "target": "kg_doc_20",
+      "edge_type": "supports",
+      "weight": 0.9999994930029799
+    },
+    {
+      "source": "state_8",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.7694465743690865
+    },
+    {
+      "source": "state_8",
+      "target": "kg_doc_17",
+      "edge_type": "supports",
+      "weight": 0.5051252467082323
+    },
+    {
+      "source": "state_8",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_8",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.003112381806823831
+    },
+    {
+      "source": "state_8",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.0002216411387962002
+    },
+    {
+      "source": "state_9",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.9999996746170025
+    },
+    {
+      "source": "state_9",
+      "target": "kg_doc_20",
+      "edge_type": "supports",
+      "weight": 0.8508064993738316
+    },
+    {
+      "source": "state_9",
+      "target": "kg_doc_11",
+      "edge_type": "supports",
+      "weight": 0.4640181892063594
+    },
+    {
+      "source": "state_9",
+      "target": "kg_doc_19",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_9",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.00753511203832255
+    },
+    {
+      "source": "state_9",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.0005365957381800422
+    },
+    {
+      "source": "state_9",
+      "target": "state_11",
+      "edge_type": "refines",
+      "weight": 0.9
+    },
+    {
+      "source": "state_9",
+      "target": "state_12",
+      "edge_type": "refines",
+      "weight": 0.8
+    },
+    {
+      "source": "state_9",
+      "target": "state_10",
+      "edge_type": "refines",
+      "weight": 0.84
+    },
+    {
+      "source": "state_10",
+      "target": "kg_doc_8",
+      "edge_type": "supports",
+      "weight": 0.9999999717098735
+    },
+    {
+      "source": "state_10",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_10",
+      "target": "kg_doc_11",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_10",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_10",
+      "target": "memory_mem_6",
+      "edge_type": "derives",
+      "weight": 0.9999999717098735
+    },
+    {
+      "source": "state_11",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.9999996846246207
+    },
+    {
+      "source": "state_11",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.12676051105310734
+    },
+    {
+      "source": "state_11",
+      "target": "kg_doc_17",
+      "edge_type": "supports",
+      "weight": 0.01982665367866145
+    },
+    {
+      "source": "state_11",
+      "target": "kg_doc_20",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_12",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.9999994526515849
+    },
+    {
+      "source": "state_12",
+      "target": "kg_doc_17",
+      "edge_type": "supports",
+      "weight": 0.8169125692149578
+    },
+    {
+      "source": "state_12",
+      "target": "kg_doc_20",
+      "edge_type": "supports",
+      "weight": 0.721644513827125
+    },
+    {
+      "source": "state_12",
+      "target": "kg_doc_11",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_12",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.01050962301398944
+    },
+    {
+      "source": "state_12",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.000748418721646647
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "state_10",
+      "edge_type": "recalls",
+      "weight": 0.9999999717098735
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_8",
+      "edge_type": "supports",
+      "weight": 0.9999999717098735
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_11",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_13",
+      "target": "kg_doc_8",
+      "edge_type": "supports",
+      "weight": 0.9999999656877508
+    },
+    {
+      "source": "state_13",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_13",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_13",
+      "target": "kg_doc_20",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_13",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.1327064942882991
+    },
+    {
+      "source": "state_13",
+      "target": "memory_mem_2",
+      "edge_type": "recalls",
+      "weight": 0.0903923154094266
+    },
+    {
+      "source": "memory_mem_2",
+      "target": "state_13",
+      "edge_type": "recalls",
+      "weight": 0.0903923154094266
+    }
+  ]
+}

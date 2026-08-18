@@ -1,0 +1,342 @@
+{
+  "nodes": [
+    {
+      "node_id": "state_1",
+      "node_type": "state",
+      "content": "Are the Laleli Mosque and Esma Sultan Mansion located in the same neighborhood?",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.7782697248923813,
+      "temperature": 0.43421081657764937,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.9198358080858883,
+        "evidence_support": 0.7642229649584948,
+        "memory_usefulness": 0.607606074377223,
+        "answerability": 0.8821114824792474,
+        "uncertainty": 0.16243986630747093
+      },
+      "metadata": {}
+    },
+    {
+      "node_id": "kg_doc_4",
+      "node_type": "kg",
+      "content": "For a composition question, identify the intermediate entity before retrieving its attribute.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999923767798,
+      "temperature": 0.9999999923767798,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Reasoning Pattern",
+        "raw_score": 3.7772988152849662,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_3",
+      "node_type": "kg",
+      "content": "Leonardo DiCaprio starred in Inception and was born in Los Angeles.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.5284459411800978,
+      "temperature": 0.5284459411800978,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Leonardo DiCaprio Fact",
+        "raw_score": 2.517205073536731,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_2",
+      "node_type": "kg",
+      "content": "Christopher Nolan is a film director born in London.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0,
+      "temperature": 0.0,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Christopher Nolan Biography",
+        "raw_score": 0.908855256998752,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "memory_mem_18",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'What science fantasy young adult series, told in first person, has a set of companion books narrating the stories of enslaved worlds and alien species' is Leonardo DiCaprio Fact.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.745734454964475,
+      "temperature": 0.745734454964475,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.7457344696248972,
+        "source": "tdca_run",
+        "memory_kind": "answer_candidate",
+        "target_question": "What science fantasy young adult series, told in first person, has a set of companion books narrating the stories of enslaved worlds and alien species?",
+        "target_question_norm": "what science fantasy young adult series told in first person has a set of companion books narrating the stories of enslaved worlds and alien species",
+        "relation_signature": "generic",
+        "answer_text": "Leonardo DiCaprio Fact",
+        "support_score": 0.6698787014290118,
+        "evidence_ids": [
+          "doc_3"
+        ],
+        "derived_from_state": "state_1",
+        "raw_score": 2.3398257929472526
+      }
+    },
+    {
+      "node_id": "memory_mem_3",
+      "node_type": "memory",
+      "content": "Template: when evidence already grounds the answer, switch from branching to short verification and synthesis.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.8799999969765909,
+      "temperature": 0.8799999969765909,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.88,
+        "tag": "verification_then_stop",
+        "memory_kind": "template",
+        "raw_score": 4.747619802440292,
+        "source": "memory"
+      }
+    },
+    {
+      "node_id": "memory_mem_1",
+      "node_type": "memory",
+      "content": "Template: for compositional multi-hop questions, first solve the intermediate entity and then ask for the final attribute.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.5080449782243673,
+      "temperature": 0.5080449782243673,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.96,
+        "tag": "compositional_template",
+        "memory_kind": "template",
+        "raw_score": 2.157043311424199,
+        "source": "memory"
+      }
+    },
+    {
+      "node_id": "memory_mem_8",
+      "node_type": "memory",
+      "content": "Conclusion: the director of Inception was born in London.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.2850665268857211,
+      "temperature": 0.2850665268857211,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.6074120836858105,
+        "source": "tdca_run",
+        "memory_kind": "derived_fact",
+        "target_question": "Where was the director of Inception born?",
+        "target_question_norm": "where was the director of inception born",
+        "relation_signature": "director",
+        "answer_text": "London",
+        "support_score": 0.7097352070985521,
+        "evidence_ids": [
+          "doc_1",
+          "doc_3"
+        ],
+        "derived_from_state": "state_3",
+        "raw_score": 2.1040360757307477
+      }
+    },
+    {
+      "node_id": "memory_mem_11",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'What city was the director of Inception born in' is London.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.11463466139813439,
+      "temperature": 0.11463466139813439,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 1.0,
+        "source": "tdca_run",
+        "memory_kind": "derived_fact",
+        "target_question": "What city was the director of Inception born in?",
+        "target_question_norm": "what city was the director of inception born in",
+        "relation_signature": "director",
+        "answer_text": "London",
+        "support_score": 0.6581956575095751,
+        "evidence_ids": [
+          "doc_1",
+          "doc_3"
+        ],
+        "derived_from_state": "state_3",
+        "raw_score": 1.961841380999016
+      }
+    },
+    {
+      "node_id": "memory_mem_12",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'What city was Christopher Nolan born in' is London.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0,
+      "temperature": 0.0,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.5553977956102122,
+        "source": "tdca_run",
+        "memory_kind": "derived_fact",
+        "target_question": "What city was Christopher Nolan born in?",
+        "target_question_norm": "what city was christopher nolan born in",
+        "relation_signature": "birth",
+        "answer_text": "London",
+        "support_score": 0.620662193268994,
+        "evidence_ids": [
+          "doc_2"
+        ],
+        "derived_from_state": "state_6",
+        "raw_score": 1.8369981814021497
+      }
+    }
+  ],
+  "edges": [
+    {
+      "source": "state_1",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.999999988736892
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.5284459411800978
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_18",
+      "edge_type": "recalls",
+      "weight": 0.745734454964475
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.469477693789971
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.5080449782243673
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_8",
+      "edge_type": "recalls",
+      "weight": 0.2850665268857211
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_11",
+      "edge_type": "recalls",
+      "weight": 0.11463466139813439
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_12",
+      "edge_type": "recalls",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.999999988736892
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.5284459411800978
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_18",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.745734454964475
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.469477693789971
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.5080449782243673
+    },
+    {
+      "source": "memory_mem_8",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.2850665268857211
+    },
+    {
+      "source": "memory_mem_11",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.11463466139813439
+    },
+    {
+      "source": "memory_mem_12",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.0
+    }
+  ]
+}

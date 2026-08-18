@@ -1,0 +1,336 @@
+{
+  "nodes": [
+    {
+      "node_id": "state_1",
+      "node_type": "state",
+      "content": "Which writer was from England, Henry Roth or Robert Erskine Childers?",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.7019299647999057,
+      "temperature": 0.3966439064133958,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.8529281828148063,
+        "evidence_support": 0.5914671744855731,
+        "memory_usefulness": 0.8799999937263376,
+        "answerability": 0.6757335872427865,
+        "uncertainty": 0.16536525208230832
+      },
+      "metadata": {}
+    },
+    {
+      "node_id": "kg_doc_2",
+      "node_type": "kg",
+      "content": "Title: Henry Roth. Henry Roth (February 8, 1906 – October 13, 1995) was an American novelist and short story writer.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999951252916,
+      "temperature": 0.9999999951252916,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Henry Roth",
+        "raw_score": 8.325067671173144,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_9",
+      "node_type": "kg",
+      "content": "Title: Erskine Barton Childers. Erskine Barton Childers (11 March 1929 – 25 August 1996) was an Irish writer, BBC correspondent and United Nations senior civil servant. He was the eldest son of Erskine Hamilton Childers (Ireland's fourth President) and Ruth Ellen Dow Childers. His grandparents Mary Alden Childers and Robert Erskine Childers and the latter's double first cousin Robert Barton were all Irish nationalists involved heavily with the negotiation of Irish independence; which ultimately led to his grandfather's execution during the Irish Civil War. His great aunt was Gretchen Osgood Warren.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.1829343538458545,
+      "temperature": 0.1829343538458545,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Erskine Barton Childers",
+        "raw_score": 3.531419876094716,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_5",
+      "node_type": "kg",
+      "content": "Title: Gretchen Osgood Warren. Gretchen Osgood Warren (19 March 1868 – September 1961), the wife of Fiske Warren, was an actress, singer and poet. The daughter of Dr. Hamilton Osgood and Margaret Cushing Osgood of Beacon Hill, Boston, Massachusetts, her younger sister was Mary Alden Childers, the wife of writer and Irish nationalist Robert Erskine Childers. Her nephew Erskine Hamilton Childers served as the fourth President of Ireland from 1973-74.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.12240158575070653,
+      "temperature": 0.12240158575070653,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Gretchen Osgood Warren",
+        "raw_score": 3.1838996021844914,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_8",
+      "node_type": "kg",
+      "content": "Title: Irish Bulletin. The Irish Bulletin was the official gazette of the government of the Irish Republic. It was produced by the Department of Propaganda during the Irish War of Independence. and its offices were originally located at No. 6 Harcourt Street, Dublin. The paper's first editor was Desmond FitzGerald, until his arrest and replacement by Robert Erskine Childers. \"The Bulletin\" appeared in weekly editions from 11 November 1919 to 11 July 1921.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0,
+      "temperature": 0.0,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Irish Bulletin",
+        "raw_score": 2.540565464135044,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "memory_tmpl_3",
+      "node_type": "memory",
+      "content": "Template: when evidence already grounds the answer, switch from branching to short verification and synthesis.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.879999997158048,
+      "temperature": 0.879999997158048,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.88,
+        "tag": "verification_then_stop",
+        "memory_kind": "template",
+        "raw_score": 3.0964632219612387,
+        "source": "memory"
+      }
+    },
+    {
+      "node_id": "memory_tmpl_4",
+      "node_type": "memory",
+      "content": "Template: for nested relation questions, solve the intermediate relation first, then query the target attribute, then verify the chain.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.11100500765620816,
+      "temperature": 0.11100500765620816,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.758776433441565,
+        "source": "tdca_run",
+        "kind": "strategy_template",
+        "memory_kind": "template",
+        "raw_score": 0.45299631040464466
+      }
+    },
+    {
+      "node_id": "memory_tmpl_1",
+      "node_type": "memory",
+      "content": "Template: for compositional multi-hop questions, first solve the intermediate entity and then ask for the final attribute.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.12085632526824933,
+      "temperature": 0.12085632526824933,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.96,
+        "tag": "compositional_template",
+        "memory_kind": "template",
+        "raw_score": 0.38981996619071047,
+        "source": "memory"
+      }
+    },
+    {
+      "node_id": "memory_tmpl_2",
+      "node_type": "memory",
+      "content": "Template: for comparison questions, split the problem into one sub-question per entity before comparing them.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.08217526344170711,
+      "temperature": 0.08217526344170711,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.9,
+        "tag": "comparison_template",
+        "memory_kind": "template",
+        "raw_score": 0.2827252020266385,
+        "source": "memory"
+      }
+    },
+    {
+      "node_id": "memory_mem_6",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'Which writer was from England, Henry Roth or Robert Erskine Childers' is Robert Erskine Childers.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.7912,
+      "temperature": 1.1290757226087202,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "answer_candidate",
+        "target_question": "Which writer was from England, Henry Roth or Robert Erskine Childers?",
+        "target_question_norm": "which writer was from england henry roth or robert erskine childers",
+        "relation_signature": "generic",
+        "answer_text": "Robert Erskine Childers",
+        "support_score": 0.5914671744855731,
+        "evidence_ids": [
+          "doc_2"
+        ],
+        "derived_from_state": "state_1"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "source": "state_1",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.9999999951252916
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.1829343538458545
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.12240158575070653
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_8",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_1",
+      "target": "memory_tmpl_3",
+      "edge_type": "recalls",
+      "weight": 0.8799999937263376
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_6",
+      "edge_type": "derives",
+      "weight": 0.86
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.9999999951252916
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.9999999951252916
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.1829343538458545
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.1829343538458545
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.12240158575070653
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.12240158575070653
+    },
+    {
+      "source": "kg_doc_8",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_8",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_tmpl_3",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.8799999937263376
+    },
+    {
+      "source": "memory_tmpl_3",
+      "target": "memory_mem_6",
+      "edge_type": "recalls",
+      "weight": 0.8799999937263376
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.86
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.9999999951252916
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.1829343538458545
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.12240158575070653
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_8",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "memory_tmpl_3",
+      "edge_type": "recalls",
+      "weight": 0.8799999937263376
+    }
+  ]
+}

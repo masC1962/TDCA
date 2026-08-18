@@ -1,0 +1,632 @@
+{
+  "nodes": [
+    {
+      "node_id": "state_1",
+      "node_type": "state",
+      "content": "What district is the headquarter of Julia's House located?",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.7128396426768204,
+      "temperature": 1.2691500704138603,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.8832186727421217,
+        "evidence_support": 0.6565255080650637,
+        "memory_usefulness": 0.5139667251540021,
+        "answerability": 0.8282627540325319,
+        "uncertainty": 0.18182540854828852
+      },
+      "metadata": {
+        "diffusion_delta": 0.1590546996747595,
+        "diffusion_gain": 0.1590546996747595
+      }
+    },
+    {
+      "node_id": "kg_doc_8",
+      "node_type": "kg",
+      "content": "Julia's House is a children's hospice located in Corfe Mullen, Dorset, England. It is a hospice in Dorset for children with life-limiting conditions. The majority of the children who are cared for by Julia's House are unlikely to live beyond the age of 18. The hospice costs £1.9 million to be maintained. Only 3% of this cost is provided by the government.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999953988631,
+      "temperature": 0.9999999953988631,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Julia's House",
+        "raw_score": 7.510973227849455,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_7",
+      "node_type": "kg",
+      "content": "Julia Claire Irwin (born 8 November 1951), Australian politician, was an Australian Labor Party member of the Australian House of Representatives from October 1998 to July 2010, representing the Division of Fowler, New South Wales. Irwin was born in Sydney and was variously a bank officer, trade union administration officer and electorate officer before entering politics.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.3130510207312644,
+      "temperature": 0.3130510207312644,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Julia Irwin",
+        "raw_score": 3.8008634526332177,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_10",
+      "node_type": "kg",
+      "content": "The Mount Meigs Campus is a juvenile corrections facility of the Alabama Department of Youth Services located in Mount Meigs, unincorporated Montgomery County; the campus serves as the agency's administrative headquarters. The campus, which can house 264 boys, is next to Interstate 85 North and about east of Downtown Montgomery. Since 2015, the separate J. Walter Wood Treatment facility for 24 girls is also located in the Mount Meigs Campus.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.005452431188851158,
+      "temperature": 0.005452431188851158,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Mount Meigs Campus",
+        "raw_score": 3.3640182803689935,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_18",
+      "node_type": "kg",
+      "content": "Each state and major mainland territory has its own parliament — unicameral in the Northern Territory, the ACT and Queensland, and bicameral in the other states. The states are sovereign entities, although subject to certain powers of the Commonwealth as defined by the Constitution. The lower houses are known as the Legislative Assembly (the House of Assembly in South Australia and Tasmania); the upper houses are known as the Legislative Council. The head of the government in each state is the Premier and in each territory the Chief Minister. The Queen is represented in each state by a governor; and in the Northern Territory, the Administrator. In the Commonwealth, the Queen's representative is the Governor-General.The Commonwealth Parliament also directly administers the following external territories: Ashmore and Cartier Islands; Australian Antarctic Territory; Christmas Island; Cocos (Keeling) Islands; Coral Sea Islands; Heard Island and McDonald Islands; and Jervis Bay Territory, a naval base and sea port for the national capital in land that was formerly part of New South Wales. The external territory of Norfolk Island previously exercised considerable autonomy under the Norfolk Island Act 1979 through its own legislative assembly and an Administrator to represent the Queen. In 2015, the Commonwealth Parliament abolished self-government, integrating Norfolk Island into the Australian tax and welfare systems and replacing its legislative assembly with a council. Macquarie Island is administered by Tasmania, and Lord Howe Island by New South Wales.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0,
+      "temperature": 0.0,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Australia",
+        "raw_score": 1.329164802450323,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "memory_mem_1",
+      "node_type": "memory",
+      "content": "Template: for compositional multi-hop questions, first solve the intermediate entity and then ask for the final attribute.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9599998077388796,
+      "temperature": 0.8351512372077402,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.96,
+        "tag": "compositional_template",
+        "memory_kind": "template",
+        "raw_score": 0.24003138479897848,
+        "source": "memory",
+        "diffusion_delta": -0.13208152614645352,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "memory_mem_3",
+      "node_type": "memory",
+      "content": "Template: when evidence already grounds the answer, switch from branching to short verification and synthesis.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.16538559576087244,
+      "temperature": 0.27704629158519256,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.88,
+        "tag": "verification_then_stop",
+        "memory_kind": "template",
+        "raw_score": 1.614121153550845,
+        "source": "memory",
+        "diffusion_delta": -0.03569508129758403,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "state_2",
+      "node_type": "state",
+      "content": "What is the administrative district of Corfe Mullen, Dorset?",
+      "depth": 1,
+      "parent_id": "state_1",
+      "value": 0.7624278646254044,
+      "temperature": 1.2340446121047624,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.7869944983830568,
+        "evidence_support": 0.9323367599501671,
+        "memory_usefulness": 0.5139667251540021,
+        "answerability": 0.8661683799750834,
+        "uncertainty": 0.13217938320896994
+      },
+      "metadata": {
+        "kind": "bridge",
+        "evidence_ids": [
+          "doc_11",
+          "doc_8",
+          "doc_15",
+          "doc_9"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "diffusion_delta": 0.24739300954178223,
+        "diffusion_gain": 0.24739300954178223
+      }
+    },
+    {
+      "node_id": "kg_doc_11",
+      "node_type": "kg",
+      "content": "Corfe Mullen is a village in Dorset, England, on the north-western urban fringe of the South East Dorset conurbation and is part of the rural district of East Dorset. The village has a population of 10,133 (2011) and is served by six churches, five pubs, five schools, a library, various shops and local businesses, a village hall, and many community and sports organisations. There are three electoral wards within the village (Central,North and South).",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999964827926,
+      "temperature": 0.9999999964827926,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Corfe Mullen",
+        "raw_score": 8.57606989281738,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_15",
+      "node_type": "kg",
+      "content": "Alamnagar (community development block) is one of the administrative divisions of Madhepura district in the Indian state of Bihar. The block headquarters are located at a distance of 58 km from the district headquarters, namely, Madhepura. The name of Alamnagar is named for Shah Alamgir.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.012214450297877162,
+      "temperature": 0.012214450297877162,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Alamnagar",
+        "raw_score": 2.509501643687467,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_9",
+      "node_type": "kg",
+      "content": "Kiri Territory is an administrative region in the Mai-Ndombe District of Bandundu Province, Democratic Republic of the Congo. The headquarters is the town of Kiri.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0,
+      "temperature": 0.0,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Kiri Territory",
+        "raw_score": 2.358314536196776,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "memory_mem_4",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'What district is the headquarter of Julia's House located' is Dorset.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999953988631,
+      "temperature": 1.2357385665738398,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "intermediate_answer",
+        "target_question": "What district is the headquarter of Julia's House located?",
+        "target_question_norm": "what district is the headquarter of julia s house located",
+        "relation_signature": "generic",
+        "answer_text": "Dorset",
+        "support_score": 0.9999999953988631,
+        "evidence_ids": [
+          "doc_8"
+        ],
+        "slot_name": "",
+        "slot_role": "",
+        "terminal": false,
+        "derived_from_state": "state_1",
+        "diffusion_delta": 0.07907590579572221,
+        "diffusion_gain": 0.07907590579572221
+      }
+    },
+    {
+      "node_id": "kg_doc_16",
+      "node_type": "kg",
+      "content": "The Majura Training Area (MTA) is a facility belonging to the Australian Department of Defence located to the east of Mount Majura in the Majura district in the Australian Capital Territory, Australia. The MTA is used primarily by the Australian Army for the conduct of field exercises and weapon qualification shoots. The MTA is located near to the Royal Military College, Duntroon and the Australian Defence Force Academy and is frequently used by these training establishments. Accommodation and support on the range is through 'Camp Blake', which consists of headquarters buildings, Q-Store, Mess, Staff accommodation and amenities and trainee accommodation and amenities.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.08434105145761274,
+      "temperature": 0.08434105145761274,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Majura Training Area",
+        "raw_score": 3.2024384066153893,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "memory_mem_5",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'What is the administrative district of Corfe Mullen, Dorset' is East Dorset.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 1.0,
+      "temperature": 0.8948657762510028,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "intermediate_answer",
+        "target_question": "What is the administrative district of Corfe Mullen, Dorset?",
+        "target_question_norm": "what is the administrative district of corfe mullen dorset",
+        "relation_signature": "generic",
+        "answer_text": "East Dorset",
+        "support_score": 1.0,
+        "evidence_ids": [
+          "doc_11",
+          "doc_8"
+        ],
+        "slot_name": "",
+        "slot_role": "",
+        "terminal": false,
+        "derived_from_state": "state_2",
+        "diffusion_delta": 0.010852442136422669,
+        "diffusion_gain": 0.010852442136422669
+      }
+    }
+  ],
+  "edges": [
+    {
+      "source": "state_1",
+      "target": "kg_doc_8",
+      "edge_type": "supports",
+      "weight": 0.9999999953988631
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.3130510207312644
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_10",
+      "edge_type": "supports",
+      "weight": 0.005452431188851158
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_18",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.9599998077388796
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.0679336425691247
+    },
+    {
+      "source": "state_1",
+      "target": "state_2",
+      "edge_type": "refines",
+      "weight": 0.95
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_4",
+      "edge_type": "derives",
+      "weight": 0.9999999953988631
+    },
+    {
+      "source": "kg_doc_8",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.9999999953988631
+    },
+    {
+      "source": "kg_doc_8",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.8646735234175416
+    },
+    {
+      "source": "kg_doc_8",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.9999999953988631
+    },
+    {
+      "source": "kg_doc_8",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.8646735234175416
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.3130510207312644
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.3130510207312644
+    },
+    {
+      "source": "kg_doc_10",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.005452431188851158
+    },
+    {
+      "source": "kg_doc_10",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.005452431188851158
+    },
+    {
+      "source": "kg_doc_18",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_18",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.9599998077388796
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_2",
+      "edge_type": "recalls",
+      "weight": 0.005708592917812229
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "memory_mem_4",
+      "edge_type": "recalls",
+      "weight": 0.9599998077388796
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "memory_mem_5",
+      "edge_type": "recalls",
+      "weight": 0.005708592917812229
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.0679336425691247
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_2",
+      "edge_type": "recalls",
+      "weight": 0.00040436395228235635
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "memory_mem_4",
+      "edge_type": "recalls",
+      "weight": 0.0679336425691247
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "memory_mem_5",
+      "edge_type": "recalls",
+      "weight": 0.00040436395228235635
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_11",
+      "edge_type": "supports",
+      "weight": 0.9999999964827926
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_8",
+      "edge_type": "supports",
+      "weight": 0.8646735234175416
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_15",
+      "edge_type": "supports",
+      "weight": 0.012214450297877162
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_2",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.005708592917812229
+    },
+    {
+      "source": "state_2",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.00040436395228235635
+    },
+    {
+      "source": "state_2",
+      "target": "memory_mem_5",
+      "edge_type": "derives",
+      "weight": 1.0
+    },
+    {
+      "source": "kg_doc_11",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.9999999964827926
+    },
+    {
+      "source": "kg_doc_11",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.9999999964827926
+    },
+    {
+      "source": "kg_doc_15",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.012214450297877162
+    },
+    {
+      "source": "kg_doc_15",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.012214450297877162
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.9999999953988631
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_8",
+      "edge_type": "supports",
+      "weight": 0.9999999953988631
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.3130510207312644
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_18",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_10",
+      "edge_type": "supports",
+      "weight": 0.005452431188851158
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.9599998077388796
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.0679336425691247
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "state_2",
+      "edge_type": "recalls",
+      "weight": 1.0
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_11",
+      "edge_type": "supports",
+      "weight": 0.9999999964827926
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_8",
+      "edge_type": "supports",
+      "weight": 0.8646735234175416
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_15",
+      "edge_type": "supports",
+      "weight": 0.012214450297877162
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.005708592917812229
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.00040436395228235635
+    }
+  ]
+}

@@ -1,0 +1,1845 @@
+{
+  "nodes": [
+    {
+      "node_id": "state_1",
+      "node_type": "state",
+      "content": "Who won the Indy car race in the largest city and the state capital of the death state of Cochise?",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.8912804037941168,
+      "temperature": 0.23680272761662546,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.9903624213832111,
+        "evidence_support": 0.971654180538856,
+        "memory_usefulness": 0.8212001678913687,
+        "answerability": 0.8858270902694281,
+        "uncertainty": 0.12510224750300591
+      },
+      "metadata": {
+        "diffusion_delta": 0.0038126976656397693,
+        "diffusion_gain": 0.0038126976656397693
+      }
+    },
+    {
+      "node_id": "kg_doc_3",
+      "node_type": "kg",
+      "content": "After a hiatus of eleven years, the race was revived by the Verizon IndyCar Series in 2016. It was held on Saturday night under the lights. Long considered a popular Indy car track, Phoenix has a rich history of open wheel races, including a spectacular crash involving Johnny Rutherford (1980), and the final career victory for Indy legend Mario Andretti (1993).",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999796375938,
+      "temperature": 0.9999999796375938,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Desert Diamond West Valley Phoenix Grand Prix",
+        "raw_score": 0.1605042460484608,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_8",
+      "node_type": "kg",
+      "content": "Cochise (; in Apache: Shi-ka-She or A-da-tli-chi – \"having the quality or strength of an oak\", after the whites called him \"Cochise\", the Apache adopted it as \"K'uu-ch'ish\" or \"Cheis\" \"oak\"; c. 1805 – June 8, 1874) was leader of the \"Chihuicahui\" local group of the Chokonen (\"central\" or \"real\" Chiricahua) and principal chief (or \"nantan\") of the Chokonen band of the Chiricahua Apache. A key war leader during the Apache Wars, he led an uprising against the U.S. government which began in 1861, and persisted until a peace treaty in 1872. Cochise County, Arizona is named after him.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999798754681,
+      "temperature": 0.9999999798754681,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Cochise",
+        "raw_score": 0.13306739514234203,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_7",
+      "node_type": "kg",
+      "content": "Tallahassee / ˌtæləˈhæsi / is the capital of the U.S. state of Florida. It is the county seat and only incorporated municipality in Leon County. Tallahassee became the capital of Florida, then the Florida Territory, in 1824. In 2016, the population was 190,894, making it the 7th - largest city in the U.S state of Florida, and the 126th - largest city in the United States. The population of the Tallahassee metropolitan area was 379,627 as of 2016. Tallahassee is the largest city in the Florida Panhandle region, and the main center for trade and agriculture in the Florida Big Bend and Southwest Georgia regions.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9460488924505884,
+      "temperature": 0.9460488924505884,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Tallahassee, Florida",
+        "raw_score": 0.2643225152391313,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_17",
+      "node_type": "kg",
+      "content": "Fresno (/ˈfrɛznoʊ/ FREZ-noh), the county seat of Fresno County, is a city in the U.S. state of California. As of 2015, the city's population was 520,159, making it the fifth-largest city in California, the largest inland city in California and the 34th-largest in the nation. Fresno is in the center of the San Joaquin Valley and is the largest city in the Central Valley, which contains the San Joaquin Valley. It is approximately 220 miles (350 km) northwest of Los Angeles, 170 miles (270 km) south of the state capital, Sacramento, or 185 miles (300 km) south of San Francisco. The name Fresno means \"ash tree\" in Spanish, and an ash leaf is featured on the city's flag.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.7057923800268987,
+      "temperature": 0.7057923800268987,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Fresno, California",
+        "raw_score": 0.26957473616707983,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "memory_mem_1",
+      "node_type": "memory",
+      "content": "Template: for compositional multi-hop questions, first solve the intermediate entity and then ask for the final attribute.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9599999852102378,
+      "temperature": 3.8996269020283094,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.96,
+        "tag": "compositional_template",
+        "memory_kind": "template",
+        "raw_score": 0.1224710052554526,
+        "source": "memory",
+        "diffusion_delta": 0.06023490378216101,
+        "diffusion_gain": 0.06023490378216101
+      }
+    },
+    {
+      "node_id": "memory_mem_3",
+      "node_type": "memory",
+      "content": "Template: when evidence already grounds the answer, switch from branching to short verification and synthesis.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.7941255153231627,
+      "temperature": 1.2709460700012434,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.88,
+        "tag": "verification_then_stop",
+        "memory_kind": "template",
+        "raw_score": 0.09232545861947136,
+        "source": "memory",
+        "diffusion_delta": 0.0909557507600518,
+        "diffusion_gain": 0.0909557507600518
+      }
+    },
+    {
+      "node_id": "state_2",
+      "node_type": "state",
+      "content": "What is the largest city and state capital of the state where Cochise County is located?",
+      "depth": 1,
+      "parent_id": "state_1",
+      "value": 0.7804786231976343,
+      "temperature": 3.1822107157028667,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.7783993873830939,
+        "evidence_support": 0.8698021197541974,
+        "memory_usefulness": 0.8770627489221289,
+        "answerability": 0.8415677265437654,
+        "uncertainty": 0.14343561844424446
+      },
+      "metadata": {
+        "kind": "bridge",
+        "evidence_ids": [
+          "doc_8",
+          "doc_15",
+          "doc_7",
+          "doc_17"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "goal_slot_name": "largest_city_and_state_capital_of_cochise_state",
+        "goal_slot_role": "bridge_entity",
+        "goal_terminal": false,
+        "diffusion_delta": 0.45211569704358867,
+        "diffusion_gain": 0.45211569704358867
+      }
+    },
+    {
+      "node_id": "kg_doc_15",
+      "node_type": "kg",
+      "content": "Klaipėda (, ; , Samogitian: \"Klaipieda\", ) is a city in Lithuania on the Baltic Sea coast. It is the third largest city in Lithuania and the capital of Klaipėda County.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.7396042629709006,
+      "temperature": 0.7396042629709006,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Klaipėda",
+        "raw_score": 0.05607937337551329,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "state_3",
+      "node_type": "state",
+      "content": "In which U.S. state is Cochise County located?",
+      "depth": 2,
+      "parent_id": "state_2",
+      "value": 0.5439764437487115,
+      "temperature": 0.5868434126786304,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.6032273268572375,
+        "evidence_support": 0.7271391966389336,
+        "memory_usefulness": 0.0,
+        "answerability": 0.7035695983194669,
+        "uncertainty": 0.16911494460499196
+      },
+      "metadata": {
+        "kind": "bridge",
+        "evidence_ids": [
+          "doc_8",
+          "doc_15",
+          "doc_6",
+          "doc_17"
+        ],
+        "memory_ids": [],
+        "diffusion_delta": 0.07913404288556691,
+        "diffusion_gain": 0.07913404288556691
+      }
+    },
+    {
+      "node_id": "kg_doc_6",
+      "node_type": "kg",
+      "content": "Blue Springs is a city located in the U.S. state of Missouri and within Jackson County. Blue Springs is located 19 miles (31 km) east of downtown Kansas City, Missouri and is the eighth largest city in the Kansas City Metropolitan Area. As of the 2010 United States Census the population was 52,575, tying it for 10th largest city in the state of Missouri with St. Peters. In 2010, CNN / Money Magazine ranked Blue Springs 49th on its list of the 100 Best Places to Live in the United States.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0,
+      "temperature": 0.0,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Blue Springs, Missouri",
+        "raw_score": 0.20214308051156998,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "state_4",
+      "node_type": "state",
+      "content": "What is the largest city in that state?",
+      "depth": 2,
+      "parent_id": "state_2",
+      "value": 0.6927199590457345,
+      "temperature": 0.5902501665747708,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.6966513189373339,
+        "evidence_support": 0.8528960360901976,
+        "memory_usefulness": 0.5139667251540021,
+        "answerability": 0.7931146847117655,
+        "uncertainty": 0.14647871350376443
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_12",
+          "doc_17",
+          "doc_7",
+          "doc_6"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "diffusion_delta": 0.028342471023574012,
+        "diffusion_gain": 0.028342471023574012
+      }
+    },
+    {
+      "node_id": "kg_doc_12",
+      "node_type": "kg",
+      "content": "Oklahoma City is the capital and largest city of the state of Oklahoma. The county seat of Oklahoma County, the city ranks 27th among United States cities in population. The population grew following the 2010 Census, with the population estimated to have increased to 620,602 as of July 2014. As of 2014, the Oklahoma City metropolitan area had a population of 1,322,429, and the Oklahoma City-Shawnee Combined Statistical Area had a population of 1,459,758 (Chamber of Commerce) residents, making it Oklahoma's largest metropolitan area. Oklahoma City's city limits extend into Canadian, Cleveland, and Pottawatomie counties, though much of those areas outside of the core Oklahoma County area are suburban or rural (watershed). The city ranks as the eighth-largest city in the United States by land area (including consolidated city-counties; it is the largest city in the United States by land area whose government is not consolidated with that of a county or borough).",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999776024459,
+      "temperature": 0.9999999776024459,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Oklahoma City",
+        "raw_score": 0.22820124149739365,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "state_5",
+      "node_type": "state",
+      "content": "What is the state capital of that state?",
+      "depth": 2,
+      "parent_id": "state_2",
+      "value": 0.7412750506653641,
+      "temperature": 1.2796640148045804,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.7121615159776242,
+        "evidence_support": 0.9730240666008556,
+        "memory_usefulness": 0.5139667251540021,
+        "answerability": 0.8398453666337611,
+        "uncertainty": 0.12485566801184599
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_12",
+          "doc_7",
+          "doc_20",
+          "doc_13"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "diffusion_delta": 0.07875476541052429,
+        "diffusion_gain": 0.07875476541052429
+      }
+    },
+    {
+      "node_id": "kg_doc_20",
+      "node_type": "kg",
+      "content": "Oklahoma had 598 incorporated places in 2010, including four cities over 100,000 in population and 43 over 10,000. Two of the fifty largest cities in the United States are located in Oklahoma, Oklahoma City and Tulsa, and 65 percent of Oklahomans live within their metropolitan areas, or spheres of economic and social influence defined by the United States Census Bureau as a metropolitan statistical area. Oklahoma City, the state's capital and largest city, had the largest metropolitan area in the state in 2010, with 1,252,987 people, and the metropolitan area of Tulsa had 937,478 residents. Between 2000 and 2010, the cities that led the state in population growth were Blanchard (172.4%), Elgin (78.2%), Jenks (77.0%), Piedmont (56.7%), Bixby (56.6%), and Owasso (56.3%).",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9549244523490658,
+      "temperature": 0.9549244523490658,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Oklahoma",
+        "raw_score": 0.169009477504138,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_13",
+      "node_type": "kg",
+      "content": "Saint Paul (abbreviated St. Paul) is the capital and second-most populous city of the U.S. state of Minnesota. As of 2017, the city's estimated population was 309,180. Saint Paul is the county seat of Ramsey County, the smallest and most densely populated county in Minnesota. The city lies mostly on the east bank of the Mississippi River in the area surrounding its point of confluence with the Minnesota River, and adjoins Minneapolis, the state's largest city. Known as the ``Twin Cities '', the two form the core of Minneapolis -- Saint Paul, the 16th - largest metropolitan area in the United States, with about 3.6 million residents.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0,
+      "temperature": 0.0,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Saint Paul, Minnesota",
+        "raw_score": 0.1972526328354526,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "memory_mem_4",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'What is the largest city and state capital of the state where Cochise County is located' is Phoenix.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999765374942,
+      "temperature": 2.7328595594705107,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "intermediate_answer",
+        "target_question": "What is the largest city and state capital of the state where Cochise County is located?",
+        "target_question_norm": "what is the largest city and state capital of the state where cochise county is located",
+        "relation_signature": "generic",
+        "answer_text": "Phoenix",
+        "support_score": 0.9999999765374942,
+        "evidence_ids": [
+          "doc_8",
+          "doc_15"
+        ],
+        "slot_name": "largest_city_and_state_capital_of_cochise_state",
+        "slot_type": "",
+        "slot_role": "bridge_entity",
+        "terminal": false,
+        "path_terminal": false,
+        "composition_kind": "",
+        "derived_from_state": "state_2",
+        "diffusion_delta": 0.37438348973714053,
+        "diffusion_gain": 0.37438348973714053
+      }
+    },
+    {
+      "node_id": "state_6",
+      "node_type": "state",
+      "content": "Who won the Indy car race in Phoenix?",
+      "depth": 2,
+      "parent_id": "state_2",
+      "value": 0.6540428776374051,
+      "temperature": 0.4976983020775917,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.7568296968466335,
+        "evidence_support": 0.8808716573920593,
+        "memory_usefulness": 0.0177910525365625,
+        "answerability": 0.733769162029363,
+        "uncertainty": 0.1414431016694293
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_3",
+          "doc_4",
+          "doc_11",
+          "doc_1"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "diffusion_delta": 0.0533664694711844,
+        "diffusion_gain": 0.0533664694711844
+      }
+    },
+    {
+      "node_id": "kg_doc_4",
+      "node_type": "kg",
+      "content": "Arizona ( (listen); Navajo: Hoozdo Hahoodzo Navajo pronunciation: [xòːztò xɑ̀xòːtsò]; O'odham: Alĭ ṣonak Uto-Aztecan pronunciation: [ˡaɺi ˡʂonak]) is a state in the southwestern region of the United States. It is also part of the Western and the Mountain states. It is the sixth largest and the 14th most populous of the 50 states. Its capital and largest city is Phoenix. Arizona shares the Four Corners region with Utah, Colorado, and New Mexico; its other neighboring states are Nevada and California to the west and the Mexican states of Sonora and Baja California to the south and southwest.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999809244295,
+      "temperature": 0.9999999809244295,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Arizona",
+        "raw_score": 0.06360877386874417,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_11",
+      "node_type": "kg",
+      "content": "Logan Gomez (born December 16, 1988) is an American race car driver from Crown Point, Indiana who most notably competed in the Firestone Indy Lights Series (formerly the Indy Pro Series).",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0,
+      "temperature": 0.0,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Logan Gomez",
+        "raw_score": 0.12240673789012302,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_1",
+      "node_type": "kg",
+      "content": "Homero Richards (born June 8, 1976) is a Mexican race car driver from Mexico City. Richards won back-to-back championships in the Panam GP Series (Latin American Formula Renault championship), in 2004 and 2005. He made his first and only Champ Car World Series start in 2005 at Autódromo Hermanos Rodríguez.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0,
+      "temperature": 0.0,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Homero Richards",
+        "raw_score": 0.11449218270153637,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_19",
+      "node_type": "kg",
+      "content": "Anthony James \"Tony\" Renna (November 23, 1976 – October 22, 2003) was an American race car driver who raced in the Indy Racing League IndyCar Series. He made seven starts for Kelley Racing in 2002 and 2003 including the 2003 Indianapolis 500. His best finish was fourth place at Michigan International Speedway in 2002. Renna signed to drive for Chip Ganassi Racing for the 2004 IndyCar Series season alongside Scott Dixon, but during an offseason tire test at Indianapolis Motor Speedway on October 22, 2003, his car spun and became airborne, smashed into the catch fence and shredded apart. Renna died instantly.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0,
+      "temperature": 0.0,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Tony Renna",
+        "raw_score": 0.11390610511029986,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "state_10",
+      "node_type": "state",
+      "content": "Who won the 2016 Desert Diamond West Valley Phoenix Grand Prix?",
+      "depth": 2,
+      "parent_id": "state_7",
+      "value": 0.6619492572785265,
+      "temperature": 0.3415874969353642,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.35600000000000004,
+        "evidence_support": 0.0,
+        "memory_usefulness": 0.0177910525365625,
+        "answerability": 0.24000000000000002,
+        "uncertainty": 0.3
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "diffusion_delta": 0.0742405125375949,
+        "diffusion_gain": 0.0742405125375949
+      }
+    },
+    {
+      "node_id": "state_11",
+      "node_type": "state",
+      "content": "Was there an IndyCar race in Phoenix after 2016? If so, who won the most recent one?",
+      "depth": 2,
+      "parent_id": "state_7",
+      "value": 0.6967886918721332,
+      "temperature": 0.9368843627027159,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.7149407336553211,
+        "evidence_support": 0.9066884323195716,
+        "memory_usefulness": 0.4639700505188173,
+        "answerability": 0.7200108828264524,
+        "uncertainty": 0.1367960821824771
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_3",
+          "doc_4",
+          "doc_11",
+          "doc_19"
+        ],
+        "memory_ids": [
+          "mem_2",
+          "mem_1"
+        ],
+        "diffusion_delta": 0.3784684706678194,
+        "diffusion_gain": 0.3784684706678194
+      }
+    },
+    {
+      "node_id": "memory_mem_2",
+      "node_type": "memory",
+      "content": "Template: for comparison questions, split the problem into one sub-question per entity before comparing them.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.8999999937007191,
+      "temperature": 0.6066253311964673,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.9,
+        "tag": "comparison_template",
+        "memory_kind": "template",
+        "raw_score": 1.5210599457073077,
+        "source": "memory",
+        "diffusion_delta": -0.4322553084492582,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "state_12",
+      "node_type": "state",
+      "content": "What is the 'death state of Cochise'?",
+      "depth": 3,
+      "parent_id": "state_5",
+      "value": 0.7042112981320959,
+      "temperature": 0.6094135393662945,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.5766666630119652,
+        "evidence_support": 0.4999999892508779,
+        "memory_usefulness": 0.002985832251433103,
+        "answerability": 0.6166666612921056,
+        "uncertainty": 0.21000000193484197
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_8",
+          "doc_7",
+          "doc_13",
+          "doc_2"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "diffusion_delta": 0.07921201462429561,
+        "diffusion_gain": 0.07921201462429561
+      }
+    },
+    {
+      "node_id": "kg_doc_2",
+      "node_type": "kg",
+      "content": "Saint Paul (abbreviated St. Paul) is the capital and second-most populous city of the U.S. state of Minnesota. As of 2016, the city's estimated population was 304,442. Saint Paul is the county seat of Ramsey County, the smallest and most densely populated county in Minnesota. The city lies mostly on the east bank of the Mississippi River in the area surrounding its point of confluence with the Minnesota River, and adjoins Minneapolis, the state's largest city. Known as the ``Twin Cities '', the two form the core of Minneapolis -- Saint Paul, the 16th - largest metropolitan area in the United States, with about 3.52 million residents.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0,
+      "temperature": 0.0,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Saint Paul, Minnesota",
+        "raw_score": 0.19672739470426606,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "state_13",
+      "node_type": "state",
+      "content": "What is the largest city and state capital of that state?",
+      "depth": 3,
+      "parent_id": "state_5",
+      "value": 0.6905825128642336,
+      "temperature": 0.6350087011314212,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.7688028991340663,
+        "evidence_support": 0.9160869582374496,
+        "memory_usefulness": 0.03295185121512906,
+        "answerability": 0.8513768124520582,
+        "uncertainty": 0.13510434751725908
+      },
+      "metadata": {
+        "kind": "bridge",
+        "evidence_ids": [
+          "doc_12",
+          "doc_7",
+          "doc_20",
+          "doc_17"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "diffusion_delta": 0.011036270807980753,
+        "diffusion_gain": 0.011036270807980753
+      }
+    },
+    {
+      "node_id": "memory_mem_5",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'What is the state capital of that state' is Oklahoma City.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 1.0,
+      "temperature": 0.6707453450082682,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "intermediate_answer",
+        "target_question": "What is the state capital of that state?",
+        "target_question_norm": "what is the state capital of that state",
+        "relation_signature": "generic",
+        "answer_text": "Oklahoma City",
+        "support_score": 1.0,
+        "evidence_ids": [
+          "doc_12",
+          "doc_7"
+        ],
+        "slot_name": "",
+        "slot_type": "",
+        "slot_role": "",
+        "terminal": false,
+        "path_terminal": false,
+        "composition_kind": "",
+        "derived_from_state": "state_5",
+        "diffusion_delta": -0.046280608715412286,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "state_14",
+      "node_type": "state",
+      "content": "What state is known as the 'death state of Cochise'?",
+      "depth": 3,
+      "parent_id": "state_4",
+      "value": 0.4537765183887744,
+      "temperature": 0.4520935538471895,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.5766666627707476,
+        "evidence_support": 0.4999999885414146,
+        "memory_usefulness": 0.0025821457338992275,
+        "answerability": 0.616666660937374,
+        "uncertainty": 0.21000000206254538
+      },
+      "metadata": {
+        "kind": "bridge",
+        "evidence_ids": [
+          "doc_8",
+          "doc_13",
+          "doc_2",
+          "doc_5"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "diffusion_delta": -0.06013510999418059,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "kg_doc_5",
+      "node_type": "kg",
+      "content": "Jakarta (/ dʒ əˈkɑːrtə /, Indonesian pronunciation: (dʒaˈkarta)), officially the Special Capital Region of Jakarta, is the capital of Indonesia, which was formerly known as Batavia during Dutch East Indies and Sunda Kelapa during Sunda Kingdom. Located on the northwest coast of the world's most populous island of Java, Jakarta is the center of economics, culture and politics of Indonesia, with a population of 10,075,310 as of 2014. Greater Jakarta metropolitan area, which is known as Jabodetabek (a name formed by combining the initial syllables of Jakarta, Bogor, Depok, Tangerang and Bekasi), is the second largest urban agglomeration and 2nd largest city area in the world after Tokyo, with a population of 30,214,303 inhabitants as of 2010 census. Jakarta's business opportunities, as well as its potential to offer a higher standard of living, attract migrants from all over the Indonesian archipelago, making it a melting pot of many communities and cultures. Jakarta is officially a province with special capital region status, yet is commonly referred to as a city. The Jakarta provincial government administers five administrative cities and one administrative regency.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0,
+      "temperature": 0.0,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Jakarta",
+        "raw_score": 0.1674298554310215,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "state_15",
+      "node_type": "state",
+      "content": "Who won the Indy car race in Oklahoma City?",
+      "depth": 3,
+      "parent_id": "state_4",
+      "value": 0.7181212173402114,
+      "temperature": 0.6256892272073992,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.8183085463931532,
+        "evidence_support": 0.9871819991955485,
+        "memory_usefulness": 0.0068714056528709965,
+        "answerability": 0.800257666264441,
+        "uncertainty": 0.12230724014480127
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_12",
+          "doc_3",
+          "doc_20",
+          "doc_11"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "diffusion_delta": -0.12173301237952472,
+        "diffusion_gain": 0.0
+      }
+    }
+  ],
+  "edges": [
+    {
+      "source": "state_1",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.9999999764290102
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_8",
+      "edge_type": "supports",
+      "weight": 0.9433083846487018
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_17",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.047982882770376475
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.033918766899249414
+    },
+    {
+      "source": "state_1",
+      "target": "state_2",
+      "edge_type": "refines",
+      "weight": 1.0
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.9999999764290102
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "state_6",
+      "edge_type": "supports",
+      "weight": 0.9999999796375938
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "state_11",
+      "edge_type": "supports",
+      "weight": 0.9999999766730715
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "state_15",
+      "edge_type": "supports",
+      "weight": 0.9743640207886511
+    },
+    {
+      "source": "kg_doc_8",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.9433083846487018
+    },
+    {
+      "source": "kg_doc_8",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.9999999765374942
+    },
+    {
+      "source": "kg_doc_8",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.9999999798754681
+    },
+    {
+      "source": "kg_doc_8",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.9999999765374942
+    },
+    {
+      "source": "kg_doc_8",
+      "target": "state_12",
+      "edge_type": "supports",
+      "weight": 0.9999999785017558
+    },
+    {
+      "source": "kg_doc_8",
+      "target": "state_14",
+      "edge_type": "supports",
+      "weight": 0.9999999770828292
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.6508185332018722
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.9460488924505884
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "state_12",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "state_13",
+      "edge_type": "supports",
+      "weight": 0.832174742336915
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.9460488924505884
+    },
+    {
+      "source": "kg_doc_17",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_17",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_17",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_17",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.7057923800268987
+    },
+    {
+      "source": "kg_doc_17",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_17",
+      "target": "state_13",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.047982882770376475
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_2",
+      "edge_type": "recalls",
+      "weight": 0.9599999825210951
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_4",
+      "edge_type": "recalls",
+      "weight": 0.005242196744842265
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_5",
+      "edge_type": "recalls",
+      "weight": 0.004522125340244271
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "memory_mem_4",
+      "edge_type": "recalls",
+      "weight": 0.9599999825210951
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_6",
+      "edge_type": "recalls",
+      "weight": 0.0332674337449049
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_10",
+      "edge_type": "recalls",
+      "weight": 0.0332674337449049
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_11",
+      "edge_type": "recalls",
+      "weight": 0.02025549521589162
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_12",
+      "edge_type": "recalls",
+      "weight": 0.0055831984304366075
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_13",
+      "edge_type": "recalls",
+      "weight": 0.034704835191669475
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "memory_mem_5",
+      "edge_type": "recalls",
+      "weight": 0.004522125340244271
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_14",
+      "edge_type": "recalls",
+      "weight": 0.004826272542247363
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_15",
+      "edge_type": "recalls",
+      "weight": 0.012843301597472443
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.033918766899249414
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_2",
+      "edge_type": "recalls",
+      "weight": 0.7941255153231627
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_4",
+      "edge_type": "recalls",
+      "weight": 0.0003671491188506109
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_5",
+      "edge_type": "recalls",
+      "weight": 0.0003146390535544121
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "memory_mem_4",
+      "edge_type": "recalls",
+      "weight": 0.7941255153231627
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_6",
+      "edge_type": "recalls",
+      "weight": 0.0023146713282201025
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_10",
+      "edge_type": "recalls",
+      "weight": 0.0023146713282201025
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_12",
+      "edge_type": "recalls",
+      "weight": 0.00038846607242959836
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_13",
+      "edge_type": "recalls",
+      "weight": 0.031198867238588633
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "memory_mem_5",
+      "edge_type": "recalls",
+      "weight": 0.0003146390535544121
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_14",
+      "edge_type": "recalls",
+      "weight": 0.00033801892555109246
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_15",
+      "edge_type": "recalls",
+      "weight": 0.0008995097082695498
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_8",
+      "edge_type": "supports",
+      "weight": 0.9999999765374942
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_15",
+      "edge_type": "supports",
+      "weight": 0.7396042629709006
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_17",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_2",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.9599999825210951
+    },
+    {
+      "source": "state_2",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.7941255153231627
+    },
+    {
+      "source": "state_2",
+      "target": "state_3",
+      "edge_type": "refines",
+      "weight": 0.95
+    },
+    {
+      "source": "state_2",
+      "target": "state_4",
+      "edge_type": "refines",
+      "weight": 0.85
+    },
+    {
+      "source": "state_2",
+      "target": "state_5",
+      "edge_type": "refines",
+      "weight": 0.85
+    },
+    {
+      "source": "state_2",
+      "target": "memory_mem_4",
+      "edge_type": "derives",
+      "weight": 0.9999999765374942
+    },
+    {
+      "source": "state_2",
+      "target": "state_6",
+      "edge_type": "refines",
+      "weight": 0.84
+    },
+    {
+      "source": "kg_doc_15",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.7396042629709006
+    },
+    {
+      "source": "kg_doc_15",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.45427841340239916
+    },
+    {
+      "source": "kg_doc_15",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.7396042629709006
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_8",
+      "edge_type": "supports",
+      "weight": 0.9999999798754681
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_15",
+      "edge_type": "supports",
+      "weight": 0.45427841340239916
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_17",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_12",
+      "edge_type": "supports",
+      "weight": 0.9999996921534965
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_17",
+      "edge_type": "supports",
+      "weight": 0.7057923800268987
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.6508185332018722
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_4",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.005242196744842265
+    },
+    {
+      "source": "state_4",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.0003671491188506109
+    },
+    {
+      "source": "state_4",
+      "target": "state_14",
+      "edge_type": "refines",
+      "weight": 0.9
+    },
+    {
+      "source": "state_4",
+      "target": "state_15",
+      "edge_type": "refines",
+      "weight": 0.8
+    },
+    {
+      "source": "kg_doc_12",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.9999996921534965
+    },
+    {
+      "source": "kg_doc_12",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.9999992407511227
+    },
+    {
+      "source": "kg_doc_12",
+      "target": "state_13",
+      "edge_type": "supports",
+      "weight": 0.999999174137984
+    },
+    {
+      "source": "kg_doc_12",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.9999992407511227
+    },
+    {
+      "source": "kg_doc_12",
+      "target": "state_15",
+      "edge_type": "supports",
+      "weight": 0.9999999776024459
+    },
+    {
+      "source": "state_5",
+      "target": "kg_doc_12",
+      "edge_type": "supports",
+      "weight": 0.9999992407511227
+    },
+    {
+      "source": "state_5",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.9460488924505884
+    },
+    {
+      "source": "state_5",
+      "target": "kg_doc_20",
+      "edge_type": "supports",
+      "weight": 0.009793118929107385
+    },
+    {
+      "source": "state_5",
+      "target": "kg_doc_13",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_5",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.004522125340244271
+    },
+    {
+      "source": "state_5",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.0003146390535544121
+    },
+    {
+      "source": "state_5",
+      "target": "state_12",
+      "edge_type": "refines",
+      "weight": 0.84
+    },
+    {
+      "source": "state_5",
+      "target": "state_13",
+      "edge_type": "refines",
+      "weight": 0.8
+    },
+    {
+      "source": "state_5",
+      "target": "memory_mem_5",
+      "edge_type": "derives",
+      "weight": 1.0
+    },
+    {
+      "source": "kg_doc_20",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.009793118929107385
+    },
+    {
+      "source": "kg_doc_20",
+      "target": "state_13",
+      "edge_type": "supports",
+      "weight": 0.30380650972850676
+    },
+    {
+      "source": "kg_doc_20",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.009793118929107385
+    },
+    {
+      "source": "kg_doc_20",
+      "target": "state_15",
+      "edge_type": "supports",
+      "weight": 0.9549244523490658
+    },
+    {
+      "source": "kg_doc_13",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_13",
+      "target": "state_12",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_13",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_13",
+      "target": "state_14",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "state_2",
+      "edge_type": "recalls",
+      "weight": 0.9999999765374942
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_8",
+      "edge_type": "supports",
+      "weight": 0.9999999765374942
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_15",
+      "edge_type": "supports",
+      "weight": 0.7396042629709006
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_17",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.9599999825210951
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.7941255153231627
+    },
+    {
+      "source": "state_6",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.9999999796375938
+    },
+    {
+      "source": "state_6",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.7617433351465248
+    },
+    {
+      "source": "state_6",
+      "target": "kg_doc_11",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_6",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_6",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.0332674337449049
+    },
+    {
+      "source": "state_6",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.0023146713282201025
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "state_6",
+      "edge_type": "supports",
+      "weight": 0.7617433351465248
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "state_11",
+      "edge_type": "supports",
+      "weight": 0.8133768879660718
+    },
+    {
+      "source": "kg_doc_11",
+      "target": "state_6",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_11",
+      "target": "state_11",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_11",
+      "target": "state_15",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "state_6",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_19",
+      "target": "state_11",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_10",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.0332674337449049
+    },
+    {
+      "source": "state_10",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.0023146713282201025
+    },
+    {
+      "source": "state_11",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.9999999766730715
+    },
+    {
+      "source": "state_11",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.8133768879660718
+    },
+    {
+      "source": "state_11",
+      "target": "kg_doc_11",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_11",
+      "target": "kg_doc_19",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_11",
+      "target": "memory_mem_2",
+      "edge_type": "recalls",
+      "weight": 0.8999999937007191
+    },
+    {
+      "source": "state_11",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.02025549521589162
+    },
+    {
+      "source": "state_11",
+      "target": "state_10",
+      "edge_type": "refines",
+      "weight": 1.0
+    },
+    {
+      "source": "state_11",
+      "target": "state_12",
+      "edge_type": "refines",
+      "weight": 0.9
+    },
+    {
+      "source": "memory_mem_2",
+      "target": "state_11",
+      "edge_type": "recalls",
+      "weight": 0.8999999937007191
+    },
+    {
+      "source": "state_12",
+      "target": "kg_doc_8",
+      "edge_type": "supports",
+      "weight": 0.9999999785017558
+    },
+    {
+      "source": "state_12",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_12",
+      "target": "kg_doc_13",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_12",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_12",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.0055831984304366075
+    },
+    {
+      "source": "state_12",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.00038846607242959836
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "state_12",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "state_14",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_13",
+      "target": "kg_doc_12",
+      "edge_type": "supports",
+      "weight": 0.999999174137984
+    },
+    {
+      "source": "state_13",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.832174742336915
+    },
+    {
+      "source": "state_13",
+      "target": "kg_doc_20",
+      "edge_type": "supports",
+      "weight": 0.30380650972850676
+    },
+    {
+      "source": "state_13",
+      "target": "kg_doc_17",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_13",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.034704835191669475
+    },
+    {
+      "source": "state_13",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.031198867238588633
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "state_5",
+      "edge_type": "recalls",
+      "weight": 1.0
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_12",
+      "edge_type": "supports",
+      "weight": 0.9999992407511227
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.9460488924505884
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_20",
+      "edge_type": "supports",
+      "weight": 0.009793118929107385
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_13",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.004522125340244271
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.0003146390535544121
+    },
+    {
+      "source": "state_14",
+      "target": "kg_doc_8",
+      "edge_type": "supports",
+      "weight": 0.9999999770828292
+    },
+    {
+      "source": "state_14",
+      "target": "kg_doc_13",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_14",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_14",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_14",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.004826272542247363
+    },
+    {
+      "source": "state_14",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.00033801892555109246
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "state_14",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_15",
+      "target": "kg_doc_12",
+      "edge_type": "supports",
+      "weight": 0.9999999776024459
+    },
+    {
+      "source": "state_15",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.9743640207886511
+    },
+    {
+      "source": "state_15",
+      "target": "kg_doc_20",
+      "edge_type": "supports",
+      "weight": 0.9549244523490658
+    },
+    {
+      "source": "state_15",
+      "target": "kg_doc_11",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_15",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.012843301597472443
+    },
+    {
+      "source": "state_15",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.0008995097082695498
+    }
+  ]
+}

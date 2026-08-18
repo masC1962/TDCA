@@ -1,0 +1,155 @@
+{
+  "question": "The non-fiction book \"Finding Chandra\" is about an affair between the victim and a congressman that holds a B.B.A from what school?",
+  "final_answer": "USC",
+  "best_node": {
+    "node_id": "memory_mem_6",
+    "node_type": "memory",
+    "content": "Conclusion: The answer to 'What university awarded that congressman a B.B.A. degree' is USC.",
+    "depth": 0,
+    "parent_id": null,
+    "value": 0.92,
+    "temperature": 1.911134396175192,
+    "expanded": false,
+    "visit_count": 0,
+    "persistent": true,
+    "score_breakdown": {},
+    "metadata": {
+      "source": "memory",
+      "memory_kind": "derived_fact",
+      "target_question": "What university awarded that congressman a B.B.A. degree?",
+      "target_question_norm": "what university awarded that congressman a b b a degree",
+      "relation_signature": "generic",
+      "answer_text": "USC",
+      "support_score": 0.6147216502263531,
+      "evidence_ids": [
+        "doc_10"
+      ],
+      "derived_from_state": "state_5",
+      "diffusion_delta": 0.3119024689207919,
+      "diffusion_gain": 0.3119024689207919
+    }
+  },
+  "final_synthesis_node_ids": [
+    "state_5",
+    "memory_mem_6",
+    "state_3",
+    "state_4",
+    "state_1"
+  ],
+  "answer_history": [
+    {
+      "node_id": "",
+      "answer_text": "University of Texas at Austin",
+      "previous_answer": "",
+      "confidence": 0.28,
+      "score": 0.16880000000000003,
+      "source": "closed_book_initial",
+      "step": 0,
+      "evidence_ids": [],
+      "kind": "anytime_answer"
+    },
+    {
+      "node_id": "memory_mem_4",
+      "content": "Conclusion: The answer to 'Who is the congressman involved in the affair with Chandra Levy' is Gary Condit.",
+      "answer_text": "Gary Condit",
+      "value": 0.9999999969467864,
+      "confidence": 0.95,
+      "evidence_ids": [
+        "doc_7"
+      ],
+      "step": 3,
+      "kind": "intermediate_answer"
+    },
+    {
+      "node_id": "memory_mem_5",
+      "content": "Conclusion: The answer to 'What school awarded a B.B.A. to Gary Condit' is USC Marshall School of Business.",
+      "answer_text": "USC Marshall School of Business",
+      "value": 0.92,
+      "evidence_ids": [
+        "doc_10"
+      ],
+      "step": 4
+    },
+    {
+      "node_id": "state_3",
+      "answer_text": "USC Marshall School of Business",
+      "previous_answer": "University of Texas at Austin",
+      "confidence": 1.0,
+      "score": 0.8179152368348498,
+      "source": "expansion_candidate",
+      "step": 3,
+      "evidence_ids": [
+        "doc_10",
+        "doc_7",
+        "doc_5",
+        "doc_8"
+      ],
+      "kind": "anytime_answer"
+    },
+    {
+      "node_id": "memory_mem_6",
+      "content": "Conclusion: The answer to 'What university awarded that congressman a B.B.A. degree' is USC.",
+      "answer_text": "USC",
+      "value": 0.92,
+      "evidence_ids": [
+        "doc_10"
+      ],
+      "step": 6
+    },
+    {
+      "node_id": "memory_mem_7",
+      "content": "Conclusion: The answer to 'What school awarded Gary Condit his B.B.A.' is USC Marshall School of Business.",
+      "answer_text": "USC Marshall School of Business",
+      "value": 0.92,
+      "evidence_ids": [
+        "doc_10"
+      ],
+      "step": 7
+    },
+    {
+      "node_id": "memory_mem_8",
+      "content": "Conclusion: The answer to 'What school granted Gary Condit his B.B.A. degree' is USC Marshall School of Business.",
+      "answer_text": "USC Marshall School of Business",
+      "value": 0.92,
+      "evidence_ids": [
+        "doc_10"
+      ],
+      "step": 10
+    },
+    {
+      "node_id": "memory_mem_6",
+      "answer_text": "USC",
+      "source": "answer_judge",
+      "choice": "B",
+      "candidate_source": "memory",
+      "base_score": 0.8577999992114336,
+      "judge_confidence": 0.0,
+      "judge_reason": "ORIGINAL QUESTION asks for the school; 'USC' is the correct, concise answer.",
+      "step": 11,
+      "kind": "final_answer_selection"
+    }
+  ],
+  "anytime_answer": "USC Marshall School of Business",
+  "anytime_answer_score": 0.8179152368348498,
+  "anytime_answer_source": "expansion_candidate",
+  "anytime_answer_node_id": "state_3",
+  "stats": {
+    "steps": 11,
+    "llm_calls": 15,
+    "generated_tokens": 912,
+    "token_budget_remaining": 288,
+    "total_nodes": 24,
+    "kg_nodes": 8,
+    "memory_nodes": 7,
+    "state_nodes": 9,
+    "deleted_state_nodes": 3,
+    "scheduler_mode": "tdca",
+    "scoring_mode": "hybrid",
+    "stop_reason": "final_synthesis_reserve",
+    "goal_kind": "bridge",
+    "goal_completion": 0.0,
+    "anytime_answer": "USC Marshall School of Business",
+    "anytime_answer_score": 0.8179152368348498,
+    "anytime_answer_source": "expansion_candidate"
+  }
+}

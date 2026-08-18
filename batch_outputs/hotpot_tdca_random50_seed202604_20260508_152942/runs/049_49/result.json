@@ -1,0 +1,117 @@
+{
+  "question": "Did both Alan Crosland and Chris Columbus work as stage actor?",
+  "final_answer": "No",
+  "best_node": {
+    "node_id": "memory_mem_5",
+    "node_type": "memory",
+    "content": "Conclusion: The answer to 'Did both Alan Crosland and Chris Columbus work as stage actor' is No.",
+    "depth": 0,
+    "parent_id": null,
+    "value": 0.82,
+    "temperature": 1.1,
+    "expanded": false,
+    "visit_count": 0,
+    "persistent": true,
+    "score_breakdown": {},
+    "metadata": {
+      "source": "memory",
+      "memory_kind": "answer_candidate",
+      "target_question": "Did both Alan Crosland and Chris Columbus work as stage actor?",
+      "target_question_norm": "did both alan crosland and chris columbus work as stage actor",
+      "relation_signature": "generic",
+      "answer_text": "No",
+      "support_score": 0.0,
+      "derived_from_state": "state_1",
+      "composed_from": [
+        null,
+        null
+      ],
+      "slot_role": "final_boolean",
+      "terminal": true,
+      "coverage_count": 2,
+      "coverage_ratio": 1.0,
+      "composition_kind": "compare_yesno"
+    }
+  },
+  "final_synthesis_node_ids": [
+    "state_3",
+    "state_2",
+    "memory_mem_4",
+    "state_1"
+  ],
+  "answer_history": [
+    {
+      "node_id": "memory_mem_4",
+      "content": "Conclusion: The answer to 'Was Alan Crosland a stage actor' is Yes.",
+      "answer_text": "Yes",
+      "value": 1.0,
+      "confidence": 1.0,
+      "evidence_ids": [
+        "doc_1",
+        "doc_9"
+      ],
+      "step": 3,
+      "kind": "intermediate_answer"
+    },
+    {
+      "node_id": "state_1",
+      "answer_text": "No",
+      "previous_answer": "",
+      "confidence": 0.8241530883951097,
+      "score": 0.8730195586390374,
+      "source": "final_synthesis",
+      "step": 5,
+      "evidence_ids": [
+        "doc_2",
+        "doc_1",
+        "doc_9",
+        "doc_6"
+      ],
+      "kind": "anytime_answer"
+    },
+    {
+      "node_id": "memory_mem_5",
+      "content": "Conclusion: The answer to 'Did both Alan Crosland and Chris Columbus work as stage actor' is No.",
+      "answer_text": "No",
+      "value": 0.82,
+      "evidence_ids": [],
+      "step": 6
+    },
+    {
+      "node_id": "memory_mem_5",
+      "answer_text": "No",
+      "source": "answer_judge",
+      "choice": "A",
+      "candidate_source": "root_memory",
+      "base_score": 0.9541999999999999,
+      "rerank_score": 0.8007639999999999,
+      "judge_confidence": 0.0,
+      "judge_reason": "",
+      "step": 5,
+      "kind": "final_answer_selection"
+    }
+  ],
+  "anytime_answer": "No",
+  "anytime_answer_score": 0.8730195586390374,
+  "anytime_answer_source": "final_synthesis",
+  "anytime_answer_node_id": "state_1",
+  "stats": {
+    "steps": 5,
+    "llm_calls": 12,
+    "generated_tokens": 872,
+    "token_budget_remaining": 328,
+    "total_nodes": 13,
+    "kg_nodes": 6,
+    "memory_nodes": 4,
+    "state_nodes": 3,
+    "deleted_state_nodes": 1,
+    "scheduler_mode": "tdca",
+    "scoring_mode": "hybrid",
+    "stop_reason": "frontier_empty",
+    "goal_kind": "comparison",
+    "goal_completion": 0.5,
+    "anytime_answer": "No",
+    "anytime_answer_score": 0.8730195586390374,
+    "anytime_answer_source": "final_synthesis"
+  }
+}

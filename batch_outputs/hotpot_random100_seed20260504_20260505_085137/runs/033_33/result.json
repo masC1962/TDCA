@@ -1,0 +1,154 @@
+{
+  "question": "The castle where \"Spook Squad\" was filmed is in what part of Scotland?",
+  "final_answer": "Aberdeenshire",
+  "best_node": {
+    "node_id": "state_2",
+    "node_type": "state",
+    "content": "Where was 'Spook Squad' filmed?",
+    "depth": 1,
+    "parent_id": "state_1",
+    "value": 0.4626153837953897,
+    "temperature": 1.1966392436934765,
+    "expanded": true,
+    "visit_count": 1,
+    "persistent": false,
+    "score_breakdown": {
+      "task_progress": 0.5961538455997956,
+      "evidence_support": 0.49999999837043924,
+      "memory_usefulness": 0.0,
+      "answerability": 0.6269230761082966,
+      "uncertainty": 0.21000000029332092
+    },
+    "metadata": {
+      "kind": "bridge",
+      "evidence_ids": [
+        "doc_6",
+        "doc_7",
+        "doc_4",
+        "doc_2"
+      ],
+      "memory_ids": [],
+      "diffusion_delta": 0.11069205476199451,
+      "diffusion_gain": 0.11069205476199451
+    }
+  },
+  "final_synthesis_node_ids": [
+    "state_2",
+    "state_3",
+    "memory_mem_5",
+    "state_1"
+  ],
+  "answer_history": [
+    {
+      "node_id": "",
+      "answer_text": "North East Scotland",
+      "previous_answer": "",
+      "confidence": 0.28,
+      "score": 0.16880000000000003,
+      "source": "closed_book_initial",
+      "step": 0,
+      "evidence_ids": [],
+      "kind": "anytime_answer"
+    },
+    {
+      "node_id": "memory_mem_4",
+      "content": "Conclusion: The answer to 'Where was 'Spook Squad' filmed' is Fyvie Castle.",
+      "answer_text": "Fyvie Castle",
+      "value": 1.0,
+      "confidence": 1.0,
+      "evidence_ids": [
+        "doc_6"
+      ],
+      "step": 2,
+      "kind": "intermediate_answer"
+    },
+    {
+      "node_id": "state_2",
+      "answer_text": "Aberdeenshire",
+      "previous_answer": "North East Scotland",
+      "confidence": 0.95,
+      "score": 0.7390215396041007,
+      "source": "expansion_candidate",
+      "step": 1,
+      "evidence_ids": [
+        "doc_6",
+        "doc_7",
+        "doc_4",
+        "doc_2"
+      ],
+      "kind": "anytime_answer"
+    },
+    {
+      "node_id": "state_4",
+      "answer_text": "Fyvie Castle",
+      "previous_answer": "Aberdeenshire",
+      "confidence": 1.0,
+      "score": 0.8053352648006253,
+      "source": "expansion_candidate",
+      "step": 2,
+      "evidence_ids": [
+        "doc_6",
+        "doc_5",
+        "doc_7",
+        "doc_8"
+      ],
+      "kind": "anytime_answer"
+    },
+    {
+      "node_id": "memory_mem_5",
+      "content": "Conclusion: The answer to 'Where is Fyvie Castle located in Scotland' is Lancashire whose father bought R.",
+      "answer_text": "Lancashire whose father bought R",
+      "value": 0.874,
+      "evidence_ids": [
+        "doc_10",
+        "doc_6"
+      ],
+      "step": 4
+    },
+    {
+      "node_id": "memory_mem_6",
+      "content": "Conclusion: The answer to 'What castle was 'Spook Squad' filmed in' is Spook Squad.",
+      "answer_text": "Spook Squad",
+      "value": 0.9999999968107086,
+      "evidence_ids": [
+        "doc_6"
+      ],
+      "step": 5
+    },
+    {
+      "node_id": "state_2",
+      "answer_text": "Aberdeenshire",
+      "source": "answer_judge",
+      "choice": "B",
+      "candidate_source": "expansion_candidate",
+      "base_score": 0.7260524304167706,
+      "judge_confidence": 0.0,
+      "judge_reason": "Aberdeenshire is the correct part of Scotland where Fyvie Castle (filming location) is located.",
+      "step": 4,
+      "kind": "final_answer_selection"
+    }
+  ],
+  "anytime_answer": "Fyvie Castle",
+  "anytime_answer_score": 0.8053352648006253,
+  "anytime_answer_source": "expansion_candidate",
+  "anytime_answer_node_id": "state_4",
+  "stats": {
+    "steps": 4,
+    "llm_calls": 9,
+    "generated_tokens": 506,
+    "token_budget_remaining": 694,
+    "total_nodes": 16,
+    "kg_nodes": 8,
+    "memory_nodes": 5,
+    "state_nodes": 3,
+    "deleted_state_nodes": 1,
+    "scheduler_mode": "tdca",
+    "scoring_mode": "hybrid",
+    "stop_reason": "frontier_empty",
+    "goal_kind": "bridge",
+    "goal_completion": 0.0,
+    "anytime_answer": "Fyvie Castle",
+    "anytime_answer_score": 0.8053352648006253,
+    "anytime_answer_source": "expansion_candidate"
+  }
+}

@@ -1,0 +1,140 @@
+{
+  "question": "Are both Dictyosperma, and Huernia described as a genus?",
+  "final_answer": "Yes",
+  "best_node": {
+    "node_id": "state_1",
+    "node_type": "state",
+    "content": "Are both Dictyosperma, and Huernia described as a genus?",
+    "depth": 0,
+    "parent_id": null,
+    "value": 0.6782481893326132,
+    "temperature": 0.9838536499226486,
+    "expanded": true,
+    "visit_count": 1,
+    "persistent": false,
+    "score_breakdown": {
+      "task_progress": 0.8299999975540572,
+      "evidence_support": 0.49999999280605034,
+      "memory_usefulness": 0.8820682746050714,
+      "answerability": 0.7499999964030252,
+      "uncertainty": 0.21000000129491092
+    },
+    "metadata": {
+      "diffusion_delta": 0.011162326311324411,
+      "diffusion_gain": 0.011162326311324411
+    }
+  },
+  "final_synthesis_node_ids": [
+    "state_2",
+    "memory_mem_5",
+    "state_6",
+    "state_3",
+    "state_1"
+  ],
+  "answer_history": [
+    {
+      "node_id": "",
+      "answer_text": "Yes",
+      "previous_answer": "",
+      "confidence": 0.28,
+      "score": 0.16880000000000003,
+      "source": "closed_book_initial",
+      "step": 0,
+      "evidence_ids": [],
+      "kind": "anytime_answer"
+    },
+    {
+      "node_id": "memory_mem_4",
+      "content": "Conclusion: The answer to 'Is Huernia described as a genus' is The genus Huernia.",
+      "answer_text": "The genus Huernia",
+      "value": 1.0,
+      "confidence": 1.0,
+      "evidence_ids": [
+        "doc_2"
+      ],
+      "step": 2,
+      "kind": "intermediate_answer"
+    },
+    {
+      "node_id": "memory_mem_5",
+      "content": "Conclusion: The answer to 'Is Dictyosperma described as a genus' is Dictyosperma is a monotypic genus.",
+      "answer_text": "Dictyosperma is a monotypic genus",
+      "value": 1.0,
+      "confidence": 1.0,
+      "evidence_ids": [
+        "doc_1"
+      ],
+      "step": 3,
+      "kind": "intermediate_answer"
+    },
+    {
+      "node_id": "memory_mem_6",
+      "content": "Conclusion: The answer to 'Is Huernia described as a genus in the evidence' is first described as a genus in 1810.",
+      "answer_text": "first described as a genus in 1810",
+      "value": 1.0,
+      "confidence": 1.0,
+      "evidence_ids": [
+        "doc_2"
+      ],
+      "step": 5,
+      "kind": "intermediate_answer"
+    },
+    {
+      "node_id": "state_1",
+      "answer_text": "Yes",
+      "previous_answer": "Yes",
+      "confidence": 0.7499999964030252,
+      "score": 0.8615821447589006,
+      "source": "final_synthesis",
+      "step": 7,
+      "evidence_ids": [
+        "doc_2",
+        "doc_1"
+      ],
+      "kind": "anytime_answer"
+    },
+    {
+      "node_id": "memory_mem_7",
+      "content": "Conclusion: The answer to 'Are both Dictyosperma, and Huernia described as a genus' is Yes.",
+      "answer_text": "Yes",
+      "value": 0.0,
+      "evidence_ids": [],
+      "step": 8
+    },
+    {
+      "node_id": "state_1",
+      "answer_text": "Yes",
+      "source": "answer_judge",
+      "choice": "A",
+      "candidate_source": "final_synthesis",
+      "base_score": 0.8722846719936249,
+      "judge_confidence": 0.0,
+      "judge_reason": "",
+      "step": 7,
+      "kind": "final_answer_selection"
+    }
+  ],
+  "anytime_answer": "Yes",
+  "anytime_answer_score": 0.8615821447589006,
+  "anytime_answer_source": "final_synthesis",
+  "anytime_answer_node_id": "state_1",
+  "stats": {
+    "steps": 7,
+    "llm_calls": 14,
+    "generated_tokens": 1078,
+    "token_budget_remaining": 122,
+    "total_nodes": 13,
+    "kg_nodes": 2,
+    "memory_nodes": 6,
+    "state_nodes": 5,
+    "deleted_state_nodes": 2,
+    "scheduler_mode": "tdca",
+    "scoring_mode": "hybrid",
+    "stop_reason": "frontier_empty",
+    "goal_kind": "comparison",
+    "goal_completion": 0.0,
+    "anytime_answer": "Yes",
+    "anytime_answer_score": 0.8615821447589006,
+    "anytime_answer_source": "final_synthesis"
+  }
+}

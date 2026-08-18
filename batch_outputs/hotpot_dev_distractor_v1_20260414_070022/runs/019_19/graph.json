@@ -1,0 +1,842 @@
+{
+  "nodes": [
+    {
+      "node_id": "state_1",
+      "node_type": "state",
+      "content": "Which writer was from England, Henry Roth or Robert Erskine Childers?",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.7182344990066502,
+      "temperature": 0.5278704366068699,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.8686719594890135,
+        "evidence_support": 0.6137410573206279,
+        "memory_usefulness": 0.8799999913575839,
+        "answerability": 0.7068705286603139,
+        "uncertainty": 0.18952660968228696
+      },
+      "metadata": {
+        "diffusion_delta": 0.005961128571761343,
+        "diffusion_gain": 0.005961128571761343
+      }
+    },
+    {
+      "node_id": "kg_doc_2",
+      "node_type": "kg",
+      "content": "Henry Roth (February 8, 1906 – October 13, 1995) was an American novelist and short story writer.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999959914674,
+      "temperature": 0.9999999959914674,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Henry Roth",
+        "raw_score": 6.160819010197716,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_9",
+      "node_type": "kg",
+      "content": "Erskine Barton Childers (11 March 1929 – 25 August 1996) was an Irish writer, BBC correspondent and United Nations senior civil servant. He was the eldest son of Erskine Hamilton Childers (Ireland's fourth President) and Ruth Ellen Dow Childers. His grandparents Mary Alden Childers and Robert Erskine Childers and the latter's double first cousin Robert Barton were all Irish nationalists involved heavily with the negotiation of Irish independence; which ultimately led to his grandfather's execution during the Irish Civil War. His great aunt was Gretchen Osgood Warren.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.22748212093912404,
+      "temperature": 0.22748212093912404,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Erskine Barton Childers",
+        "raw_score": 3.230627865740359,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_5",
+      "node_type": "kg",
+      "content": "Gretchen Osgood Warren (19 March 1868 – September 1961), the wife of Fiske Warren, was an actress, singer and poet. The daughter of Dr. Hamilton Osgood and Margaret Cushing Osgood of Beacon Hill, Boston, Massachusetts, her younger sister was Mary Alden Childers, the wife of writer and Irish nationalist Robert Erskine Childers. Her nephew Erskine Hamilton Childers served as the fourth President of Ireland from 1973-74.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.1621443377376871,
+      "temperature": 0.1621443377376871,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Gretchen Osgood Warren",
+        "raw_score": 1.8779190288252132,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_8",
+      "node_type": "kg",
+      "content": "The Irish Bulletin was the official gazette of the government of the Irish Republic. It was produced by the Department of Propaganda during the Irish War of Independence. and its offices were originally located at No. 6 Harcourt Street, Dublin. The paper's first editor was Desmond FitzGerald, until his arrest and replacement by Robert Erskine Childers. \"The Bulletin\" appeared in weekly editions from 11 November 1919 to 11 July 1921.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.11753700346226867,
+      "temperature": 0.11753700346226867,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Irish Bulletin",
+        "raw_score": 1.9004847416630237,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "memory_mem_3",
+      "node_type": "memory",
+      "content": "Template: when evidence already grounds the answer, switch from branching to short verification and synthesis.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.8799999956950886,
+      "temperature": 2.0642085847898803,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.88,
+        "tag": "verification_then_stop",
+        "memory_kind": "template",
+        "raw_score": 2.3137148998379744,
+        "source": "memory",
+        "diffusion_delta": 0.061718202423239,
+        "diffusion_gain": 0.061718202423239
+      }
+    },
+    {
+      "node_id": "state_2",
+      "node_type": "state",
+      "content": "Is the answer Henry Roth?",
+      "depth": 1,
+      "parent_id": "state_1",
+      "value": 0.5396221065969291,
+      "temperature": 0.5750247560823178,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.5579907812448478,
+        "evidence_support": 0.614411388688055,
+        "memory_usefulness": 0.4634494347728014,
+        "answerability": 0.6435693307076639,
+        "uncertainty": 0.18940595003615007
+      },
+      "metadata": {
+        "kind": "comparison",
+        "evidence_ids": [
+          "doc_2",
+          "doc_1",
+          "doc_3",
+          "doc_7"
+        ],
+        "memory_ids": [
+          "mem_3",
+          "mem_1"
+        ],
+        "diffusion_delta": 0.05130546725450791,
+        "diffusion_gain": 0.05130546725450791
+      }
+    },
+    {
+      "node_id": "kg_doc_1",
+      "node_type": "kg",
+      "content": "Asgard is a 51 ft gaff rigged yacht. She was owned by the English-born writer and Irish nationalist Erskine Childers and his wife Molly Childers. She is most noted for her use in the Howth gun-running of 1914.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999789309277,
+      "temperature": 0.9999999789309277,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Asgard (yacht)",
+        "raw_score": 3.2427300732844175,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_3",
+      "node_type": "kg",
+      "content": "The R509 road, following part of the Childers Road (named after Erskine Childers), is a regional road in Ireland, running through the southeastern side of Limerick City. It forms what is somewhat akin to an inner ring road (albeit mostly two-lane only).",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999781980589,
+      "temperature": 0.9999999781980589,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "R509 road (Ireland)",
+        "raw_score": 3.248952605671112,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_7",
+      "node_type": "kg",
+      "content": "Robert Erskine Childers DSC (25 June 1870 – 24 November 1922), universally known as Erskine Childers, was a British writer, whose works included the influential novel \"The Riddle of the Sands\", and a Fenian revolutionary who smuggled guns to Ireland in his sailing yacht \"Asgard\". He was executed by the authorities of the nascent Irish Free State during the Irish Civil War. He was the son of British Orientalist scholar Robert Caesar Childers; the cousin of Hugh Childers and Robert Barton; and the father of the fourth President of Ireland, Erskine Hamilton Childers.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.011305859196512176,
+      "temperature": 0.011305859196512176,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Robert Erskine Childers",
+        "raw_score": 1.6406515298478412,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "memory_mem_1",
+      "node_type": "memory",
+      "content": "Template: for compositional multi-hop questions, first solve the intermediate entity and then ask for the final attribute.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.04689887838485243,
+      "temperature": 0.08085190294626365,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.96,
+        "tag": "compositional_template",
+        "memory_kind": "template",
+        "raw_score": 0.36940229999162205,
+        "source": "memory",
+        "diffusion_delta": 0.004462116047223824,
+        "diffusion_gain": 0.004462116047223824
+      }
+    },
+    {
+      "node_id": "state_3",
+      "node_type": "state",
+      "content": "Is the answer Robert Erskine Childers?",
+      "depth": 1,
+      "parent_id": "state_1",
+      "value": 0.745866247576317,
+      "temperature": 0.6462995827768377,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.7209321541424687,
+        "evidence_support": 0.992046442665015,
+        "memory_usefulness": 0.4634494347728014,
+        "answerability": 0.850568675877962,
+        "uncertainty": 0.1214316403202973
+      },
+      "metadata": {
+        "kind": "comparison",
+        "evidence_ids": [
+          "doc_1",
+          "doc_3",
+          "doc_6",
+          "doc_7"
+        ],
+        "memory_ids": [
+          "mem_3",
+          "mem_1"
+        ],
+        "diffusion_delta": 0.02226869766908568,
+        "diffusion_gain": 0.02226869766908568
+      }
+    },
+    {
+      "node_id": "kg_doc_6",
+      "node_type": "kg",
+      "content": "Robert Caesar Childers (1838 – 25 July 1876) was a British Orientalist scholar, compiler of the first Pāli-English dictionary. Childers was the husband of Anna Barton of Ireland. He was the father of Irish nationalist Robert Erskine Childers and grandfather to the fourth President of Ireland, Erskine Hamilton Childers.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.00839261346880128,
+      "temperature": 0.00839261346880128,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Robert Caesar Childers",
+        "raw_score": 1.625399435162696,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "state_4",
+      "node_type": "state",
+      "content": "Where was Henry Roth from?",
+      "depth": 1,
+      "parent_id": "state_1",
+      "value": 0.5856299947825958,
+      "temperature": 0.5681238500536583,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.6024772699027361,
+        "evidence_support": 0.5420454462379938,
+        "memory_usefulness": 0.8799999913575839,
+        "answerability": 0.6437499958462696,
+        "uncertainty": 0.20243181967716112
+      },
+      "metadata": {
+        "kind": "comparison",
+        "evidence_ids": [
+          "doc_2",
+          "doc_5",
+          "doc_8",
+          "doc_10"
+        ],
+        "memory_ids": [
+          "mem_3"
+        ],
+        "diffusion_delta": 0.09053762298350743,
+        "diffusion_gain": 0.09053762298350743
+      }
+    },
+    {
+      "node_id": "kg_doc_10",
+      "node_type": "kg",
+      "content": "Robert Childers Barton (4 March 1881 – 10 August 1975) was an Irish nationalist, politician and farmer who participated in the negotiations leading up to the signature of the Anglo-Irish Treaty. His father was Charles William Barton and his mother was Agnes Childers. His wife was Rachel Warren of Boston, daughter of Fiske Warren. His double first cousin and close friend was Robert Erskine Childers.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0,
+      "temperature": 0.0,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Robert Barton",
+        "raw_score": 0.27766338026252224,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "state_6",
+      "node_type": "state",
+      "content": "Does the evidence support that Is the answer Henry Roth?",
+      "depth": 2,
+      "parent_id": "state_2",
+      "value": 0.523937638596291,
+      "temperature": 0.6460202325820036,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.5621436641291815,
+        "evidence_support": 0.6266257501125656,
+        "memory_usefulness": 0.4634494370399705,
+        "answerability": 0.6496765114199191,
+        "uncertainty": 0.18720736497973817
+      },
+      "metadata": {
+        "kind": "verification",
+        "evidence_ids": [
+          "doc_2",
+          "doc_3",
+          "doc_1",
+          "doc_7"
+        ],
+        "memory_ids": [
+          "mem_3",
+          "mem_1"
+        ],
+        "diffusion_delta": 0.0857336398429861,
+        "diffusion_gain": 0.0857336398429861
+      }
+    },
+    {
+      "node_id": "state_7",
+      "node_type": "state",
+      "content": "Does the evidence support that Where was Henry Roth from?",
+      "depth": 2,
+      "parent_id": "state_4",
+      "value": 0.5209484740574807,
+      "temperature": 0.5861950499977111,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.6081631080721598,
+        "evidence_support": 0.5587684996774751,
+        "memory_usefulness": 0.451746868050914,
+        "answerability": 0.6521115225660102,
+        "uncertainty": 0.19942167005805447
+      },
+      "metadata": {
+        "kind": "verification",
+        "evidence_ids": [
+          "doc_2",
+          "doc_8",
+          "doc_5",
+          "doc_6"
+        ],
+        "memory_ids": [
+          "mem_3",
+          "mem_1"
+        ],
+        "diffusion_delta": 0.09715338309779487,
+        "diffusion_gain": 0.09715338309779487
+      }
+    }
+  ],
+  "edges": [
+    {
+      "source": "state_1",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.9999999937021318
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.22748212093912404
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.1621443377376871
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_8",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.8799999913575839
+    },
+    {
+      "source": "state_1",
+      "target": "state_2",
+      "edge_type": "refines",
+      "weight": 0.94
+    },
+    {
+      "source": "state_1",
+      "target": "state_3",
+      "edge_type": "refines",
+      "weight": 0.94
+    },
+    {
+      "source": "state_1",
+      "target": "state_4",
+      "edge_type": "refines",
+      "weight": 0.96
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.9999999937021318
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.9999999957989364
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.9999999959914674
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "state_6",
+      "edge_type": "supports",
+      "weight": 0.9999999957352331
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "state_7",
+      "edge_type": "supports",
+      "weight": 0.9999999958926815
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.22748212093912404
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.1621443377376871
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.08409089648452006
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "state_7",
+      "edge_type": "supports",
+      "weight": 0.11438572806863145
+    },
+    {
+      "source": "kg_doc_8",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_8",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.0815849260796497
+    },
+    {
+      "source": "kg_doc_8",
+      "target": "state_7",
+      "edge_type": "supports",
+      "weight": 0.11753700346226867
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.8799999913575839
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_2",
+      "edge_type": "recalls",
+      "weight": 0.8799999913901771
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_3",
+      "edge_type": "recalls",
+      "weight": 0.8799999913901771
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_4",
+      "edge_type": "recalls",
+      "weight": 0.8799999913575839
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_6",
+      "edge_type": "recalls",
+      "weight": 0.8799999956950886
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_7",
+      "edge_type": "recalls",
+      "weight": 0.8799999956869556
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.9999999957989364
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.22882278157717362
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.22688109673766343
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_2",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.8799999913901771
+    },
+    {
+      "source": "state_2",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.04689887815542571
+    },
+    {
+      "source": "state_2",
+      "target": "state_6",
+      "edge_type": "verifies",
+      "weight": 0.38
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.22882278157717362
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.9999999789309277
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "state_6",
+      "edge_type": "supports",
+      "weight": 0.25110046874964526
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.22688109673766343
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.9840929063991022
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "state_6",
+      "edge_type": "supports",
+      "weight": 0.2532515044898981
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "state_6",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_2",
+      "edge_type": "recalls",
+      "weight": 0.04689887815542571
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_3",
+      "edge_type": "recalls",
+      "weight": 0.04689887815542571
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_6",
+      "edge_type": "recalls",
+      "weight": 0.04689887838485243
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_7",
+      "edge_type": "recalls",
+      "weight": 0.023493740414872448
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.9999999789309277
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.9840929063991022
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.00839261346880128
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_3",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.8799999913901771
+    },
+    {
+      "source": "state_3",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.04689887815542571
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.00839261346880128
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "state_7",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.9999999959914674
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.08409089648452006
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_8",
+      "edge_type": "supports",
+      "weight": 0.0815849260796497
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_10",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_4",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.8799999913575839
+    },
+    {
+      "source": "state_4",
+      "target": "state_7",
+      "edge_type": "verifies",
+      "weight": 0.38
+    },
+    {
+      "source": "kg_doc_10",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_6",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.9999999957352331
+    },
+    {
+      "source": "state_6",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.2532515044898981
+    },
+    {
+      "source": "state_6",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.25110046874964526
+    },
+    {
+      "source": "state_6",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_6",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.8799999956950886
+    },
+    {
+      "source": "state_6",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.04689887838485243
+    },
+    {
+      "source": "state_7",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.9999999958926815
+    },
+    {
+      "source": "state_7",
+      "target": "kg_doc_8",
+      "edge_type": "supports",
+      "weight": 0.11753700346226867
+    },
+    {
+      "source": "state_7",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.11438572806863145
+    },
+    {
+      "source": "state_7",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_7",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.8799999956869556
+    },
+    {
+      "source": "state_7",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.023493740414872448
+    }
+  ]
+}

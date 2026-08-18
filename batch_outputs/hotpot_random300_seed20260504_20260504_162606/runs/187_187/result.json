@@ -1,0 +1,130 @@
+{
+  "question": "When was the younger brother of Farshid Karimi born ?",
+  "final_answer": "8 November 1978",
+  "best_node": {
+    "node_id": "state_3",
+    "node_type": "state",
+    "content": "When was Ali Karimi born?",
+    "depth": 1,
+    "parent_id": "state_1",
+    "value": 0.7456086182436578,
+    "temperature": 1.4377306857809848,
+    "expanded": true,
+    "visit_count": 1,
+    "persistent": false,
+    "score_breakdown": {
+      "task_progress": 0.7430238418563611,
+      "evidence_support": 0.8651028028455063,
+      "memory_usefulness": 0.8799999913575839,
+      "answerability": 0.721440290311642,
+      "uncertainty": 0.14428149548780886
+    },
+    "metadata": {
+      "kind": "retrieval",
+      "evidence_ids": [
+        "doc_8",
+        "doc_4",
+        "doc_6",
+        "doc_2"
+      ],
+      "memory_ids": [
+        "mem_3"
+      ],
+      "diffusion_delta": 0.33383276202145895,
+      "diffusion_gain": 0.33383276202145895
+    }
+  },
+  "final_synthesis_node_ids": [
+    "state_3",
+    "state_2",
+    "memory_mem_5",
+    "state_1"
+  ],
+  "answer_history": [
+    {
+      "node_id": "memory_mem_4",
+      "content": "Conclusion: The answer to 'Who is the younger brother of Farshid Karimi' is Ali Karimi.",
+      "answer_text": "Ali Karimi",
+      "value": 0.9999999952502904,
+      "confidence": 0.95,
+      "evidence_ids": [
+        "doc_8"
+      ],
+      "step": 2,
+      "kind": "intermediate_answer"
+    },
+    {
+      "node_id": "memory_mem_5",
+      "content": "Conclusion: The answer to 'When was Ali Karimi born' is 8 November 1978.",
+      "answer_text": "8 November 1978",
+      "value": 0.874,
+      "evidence_ids": [
+        "doc_8",
+        "doc_4"
+      ],
+      "step": 3
+    },
+    {
+      "node_id": "state_3",
+      "answer_text": "8 November 1978",
+      "previous_answer": "",
+      "confidence": 0.95,
+      "score": 0.8760879960918516,
+      "source": "expansion_candidate",
+      "step": 2,
+      "evidence_ids": [
+        "doc_8",
+        "doc_4",
+        "doc_6",
+        "doc_2"
+      ],
+      "kind": "anytime_answer"
+    },
+    {
+      "node_id": "memory_mem_5",
+      "content": "Conclusion: The answer to 'When was Ali Karimi born' is 8 November 1978.",
+      "answer_text": "8 November 1978",
+      "value": 0.95,
+      "evidence_ids": [
+        "doc_8",
+        "doc_4"
+      ],
+      "step": 5
+    },
+    {
+      "node_id": "state_3",
+      "answer_text": "8 November 1978",
+      "source": "answer_judge",
+      "choice": "A",
+      "candidate_source": "anytime",
+      "base_score": 0.9829661507904005,
+      "judge_confidence": 0.95,
+      "judge_reason": "Ali Karimi is the younger brother of Farshid Karimi; born 8 November 1978.",
+      "step": 4,
+      "kind": "final_answer_selection"
+    }
+  ],
+  "anytime_answer": "8 November 1978",
+  "anytime_answer_score": 0.8760879960918516,
+  "anytime_answer_source": "expansion_candidate",
+  "anytime_answer_node_id": "state_3",
+  "stats": {
+    "steps": 4,
+    "llm_calls": 10,
+    "generated_tokens": 695,
+    "token_budget_remaining": 505,
+    "total_nodes": 16,
+    "kg_nodes": 9,
+    "memory_nodes": 4,
+    "state_nodes": 3,
+    "deleted_state_nodes": 1,
+    "scheduler_mode": "tdca",
+    "scoring_mode": "hybrid",
+    "stop_reason": "frontier_empty",
+    "goal_kind": "bridge",
+    "goal_completion": 0.0,
+    "anytime_answer": "8 November 1978",
+    "anytime_answer_score": 0.8760879960918516,
+    "anytime_answer_source": "expansion_candidate"
+  }
+}

@@ -1,0 +1,149 @@
+{
+  "question": "Are The Datsuns and The Black Crowes both rock bands?",
+  "final_answer": "Yes",
+  "best_node": {
+    "node_id": "state_2",
+    "node_type": "state",
+    "content": "Is The Datsuns a rock band?",
+    "depth": 1,
+    "parent_id": "state_1",
+    "value": 0.6876834884227249,
+    "temperature": 2.029504219565484,
+    "expanded": true,
+    "visit_count": 1,
+    "persistent": false,
+    "score_breakdown": {
+      "task_progress": 0.5838826115727587,
+      "evidence_support": 0.5212233673708586,
+      "memory_usefulness": 0.5139667251540021,
+      "answerability": 0.627278350352096,
+      "uncertainty": 0.20617979387324545
+    },
+    "metadata": {
+      "kind": "comparison",
+      "evidence_ids": [
+        "doc_5",
+        "doc_6",
+        "doc_2",
+        "doc_9"
+      ],
+      "memory_ids": [
+        "mem_1",
+        "mem_3"
+      ],
+      "diffusion_delta": 0.19050544612916065,
+      "diffusion_gain": 0.19050544612916065
+    }
+  },
+  "final_synthesis_node_ids": [
+    "state_2",
+    "state_3",
+    "state_9",
+    "state_6",
+    "state_1"
+  ],
+  "answer_history": [
+    {
+      "node_id": "",
+      "answer_text": "Yes",
+      "previous_answer": "",
+      "confidence": 0.28,
+      "score": 0.16880000000000003,
+      "source": "closed_book_initial",
+      "step": 0,
+      "evidence_ids": [],
+      "kind": "anytime_answer"
+    },
+    {
+      "node_id": "memory_mem_4",
+      "content": "Conclusion: The answer to 'Is The Black Crowes a rock band' is American rock band.",
+      "answer_text": "American rock band",
+      "value": 1.0,
+      "confidence": 1.0,
+      "evidence_ids": [
+        "doc_6",
+        "doc_2",
+        "doc_9"
+      ],
+      "step": 2,
+      "kind": "intermediate_answer"
+    },
+    {
+      "node_id": "memory_mem_5",
+      "content": "Conclusion: The answer to 'Is The Datsuns a rock band' is a hard rock band.",
+      "answer_text": "a hard rock band",
+      "value": 1.0,
+      "confidence": 1.0,
+      "evidence_ids": [
+        "doc_5"
+      ],
+      "step": 3,
+      "kind": "intermediate_answer"
+    },
+    {
+      "node_id": "state_2",
+      "answer_text": "Yes",
+      "previous_answer": "Yes",
+      "confidence": 0.95,
+      "score": 0.8206101967136623,
+      "source": "expansion_candidate",
+      "step": 2,
+      "evidence_ids": [
+        "doc_5",
+        "doc_6",
+        "doc_2",
+        "doc_9"
+      ],
+      "kind": "anytime_answer"
+    },
+    {
+      "node_id": "memory_mem_6",
+      "content": "Conclusion: The answer to 'What genre is The Black Crowes' is rock band.",
+      "answer_text": "rock band",
+      "value": 1.0,
+      "confidence": 1.0,
+      "evidence_ids": [
+        "doc_6",
+        "doc_2",
+        "doc_9"
+      ],
+      "step": 5,
+      "kind": "intermediate_answer"
+    },
+    {
+      "node_id": "state_2",
+      "answer_text": "Yes",
+      "source": "answer_judge",
+      "choice": "A",
+      "candidate_source": "anytime",
+      "base_score": 0.7862954870138508,
+      "judge_confidence": 0.0,
+      "judge_reason": "",
+      "step": 7,
+      "kind": "final_answer_selection"
+    }
+  ],
+  "anytime_answer": "Yes",
+  "anytime_answer_score": 0.8206101967136623,
+  "anytime_answer_source": "expansion_candidate",
+  "anytime_answer_node_id": "state_2",
+  "stats": {
+    "steps": 7,
+    "llm_calls": 12,
+    "generated_tokens": 875,
+    "token_budget_remaining": 325,
+    "total_nodes": 24,
+    "kg_nodes": 9,
+    "memory_nodes": 5,
+    "state_nodes": 10,
+    "deleted_state_nodes": 0,
+    "scheduler_mode": "tdca",
+    "scoring_mode": "hybrid",
+    "stop_reason": "final_synthesis_reserve",
+    "goal_kind": "comparison",
+    "goal_completion": 0.0,
+    "anytime_answer": "Yes",
+    "anytime_answer_score": 0.8206101967136623,
+    "anytime_answer_source": "expansion_candidate"
+  }
+}

@@ -1,0 +1,187 @@
+{
+  "question": "W41AP is a station owned by the daily newspaper serving what nearby city in Erie County?",
+  "final_answer": "Sandusky",
+  "best_node": {
+    "node_id": "memory_mem_9",
+    "node_type": "memory",
+    "content": "Conclusion: The answer to 'W41AP is a station owned by the daily newspaper serving what nearby city in Erie County' is Sandusky.",
+    "depth": 0,
+    "parent_id": null,
+    "value": 0.7912,
+    "temperature": 1.0329048370582148,
+    "expanded": false,
+    "visit_count": 0,
+    "persistent": true,
+    "score_breakdown": {},
+    "metadata": {
+      "source": "memory",
+      "memory_kind": "answer_candidate",
+      "target_question": "W41AP is a station owned by the daily newspaper serving what nearby city in Erie County?",
+      "target_question_norm": "w41ap is a station owned by the daily newspaper serving what nearby city in erie county",
+      "relation_signature": "generic",
+      "answer_text": "Sandusky",
+      "support_score": 0.6627169910890436,
+      "evidence_ids": [],
+      "derived_from_state": "state_1"
+    }
+  },
+  "final_synthesis_node_ids": [
+    "state_3",
+    "state_7",
+    "state_5",
+    "state_11",
+    "state_1"
+  ],
+  "answer_history": [
+    {
+      "node_id": "",
+      "answer_text": "Erie",
+      "previous_answer": "",
+      "confidence": 0.28,
+      "score": 0.16880000000000003,
+      "source": "closed_book_initial",
+      "step": 0,
+      "evidence_ids": [],
+      "kind": "anytime_answer"
+    },
+    {
+      "node_id": "memory_mem_4",
+      "content": "Conclusion: The answer to 'What city does the Sandusky Register serve' is Sandusky, Ohio.",
+      "answer_text": "Sandusky, Ohio",
+      "value": 0.9999999940620495,
+      "confidence": 0.99,
+      "evidence_ids": [
+        "doc_5",
+        "doc_3"
+      ],
+      "step": 2,
+      "kind": "intermediate_answer"
+    },
+    {
+      "node_id": "state_3",
+      "answer_text": "Sandusky",
+      "previous_answer": "Erie",
+      "confidence": 0.98,
+      "score": 0.8559749590368001,
+      "source": "expansion_candidate",
+      "step": 1,
+      "evidence_ids": [
+        "doc_5",
+        "doc_3",
+        "doc_4",
+        "doc_1"
+      ],
+      "kind": "anytime_answer"
+    },
+    {
+      "node_id": "memory_mem_5",
+      "content": "Conclusion: The answer to 'What newspaper is published by Sandusky Newspapers, Inc.' is Sandusky Register.",
+      "answer_text": "Sandusky Register",
+      "value": 1.0,
+      "confidence": 1.0,
+      "evidence_ids": [
+        "doc_5"
+      ],
+      "step": 3,
+      "kind": "intermediate_answer"
+    },
+    {
+      "node_id": "memory_mem_6",
+      "content": "Conclusion: The answer to 'What is the daily newspaper published by Sandusky Newspapers, Inc.' is Sandusky Register.",
+      "answer_text": "Sandusky Register",
+      "value": 1.0,
+      "confidence": 1.0,
+      "evidence_ids": [
+        "doc_5"
+      ],
+      "step": 4,
+      "kind": "intermediate_answer"
+    },
+    {
+      "node_id": "memory_mem_7",
+      "content": "Conclusion: The answer to 'What city is Sandusky, Ohio located in' is Sandusky, Ohio.",
+      "answer_text": "Sandusky, Ohio",
+      "value": 1.0,
+      "confidence": 1.0,
+      "evidence_ids": [
+        "doc_5",
+        "doc_3"
+      ],
+      "step": 5,
+      "kind": "intermediate_answer"
+    },
+    {
+      "node_id": "memory_mem_8",
+      "content": "Conclusion: The answer to 'What city is the Sandusky Register's primary service area, and is it in Erie County' is Sandusky.",
+      "answer_text": "Sandusky",
+      "value": 0.9999999938350312,
+      "confidence": 0.95,
+      "evidence_ids": [
+        "doc_9",
+        "doc_3",
+        "doc_5"
+      ],
+      "step": 6,
+      "kind": "intermediate_answer"
+    },
+    {
+      "node_id": "memory_mem_5",
+      "answer_text": "Sandusky",
+      "previous_answer": "Sandusky",
+      "confidence": 1.0,
+      "score": 0.8768084683895662,
+      "source": "final_synthesis",
+      "step": 6,
+      "evidence_ids": [
+        "doc_5",
+        "doc_3",
+        "doc_4",
+        "doc_8"
+      ],
+      "kind": "anytime_answer"
+    },
+    {
+      "node_id": "memory_mem_9",
+      "content": "Conclusion: The answer to 'W41AP is a station owned by the daily newspaper serving what nearby city in Erie County' is Sandusky.",
+      "answer_text": "Sandusky",
+      "value": 0.7912,
+      "evidence_ids": [],
+      "step": 7
+    },
+    {
+      "node_id": "memory_mem_9",
+      "answer_text": "Sandusky",
+      "source": "answer_judge",
+      "choice": "A",
+      "candidate_source": "final_synthesis",
+      "base_score": 1.0,
+      "judge_confidence": 0.0,
+      "judge_reason": "Original question asks for the nearby city served; evidence confirms Sandusky Register serves Sandusky, Ohio in Erie County.",
+      "step": 6,
+      "kind": "final_answer_selection"
+    }
+  ],
+  "anytime_answer": "Sandusky",
+  "anytime_answer_score": 0.8768084683895662,
+  "anytime_answer_source": "final_synthesis",
+  "anytime_answer_node_id": "memory_mem_5",
+  "stats": {
+    "steps": 6,
+    "llm_calls": 15,
+    "generated_tokens": 959,
+    "token_budget_remaining": 241,
+    "total_nodes": 27,
+    "kg_nodes": 7,
+    "memory_nodes": 8,
+    "state_nodes": 12,
+    "deleted_state_nodes": 1,
+    "scheduler_mode": "tdca",
+    "scoring_mode": "hybrid",
+    "stop_reason": "final_synthesis_reserve",
+    "goal_kind": "bridge",
+    "goal_completion": 1.0,
+    "anytime_answer": "Sandusky",
+    "anytime_answer_score": 0.8768084683895662,
+    "anytime_answer_source": "final_synthesis"
+  }
+}

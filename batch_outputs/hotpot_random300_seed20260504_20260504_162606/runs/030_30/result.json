@@ -1,0 +1,199 @@
+{
+  "question": "What is the population of the city in which the first edition of the South American Youth Olympic Games were held?",
+  "final_answer": "10 million",
+  "best_node": {
+    "node_id": "state_1",
+    "node_type": "state",
+    "content": "What is the population of the city in which the first edition of the South American Youth Olympic Games were held?",
+    "depth": 0,
+    "parent_id": null,
+    "value": 0.7160715617191336,
+    "temperature": 0.5355670250661946,
+    "expanded": true,
+    "visit_count": 1,
+    "persistent": false,
+    "score_breakdown": {
+      "task_progress": 0.887672885773775,
+      "evidence_support": 0.6696261346287498,
+      "memory_usefulness": 0.4859640897828875,
+      "answerability": 0.8348130673143749,
+      "uncertainty": 0.17946729576682505
+    },
+    "metadata": {
+      "diffusion_delta": -0.03046792748910576,
+      "diffusion_gain": 0.0
+    }
+  },
+  "final_synthesis_node_ids": [
+    "state_5",
+    "state_2",
+    "state_4",
+    "state_3",
+    "state_1"
+  ],
+  "answer_history": [
+    {
+      "node_id": "",
+      "answer_text": "2,870,413",
+      "previous_answer": "",
+      "confidence": 0.28,
+      "score": 0.16880000000000003,
+      "source": "closed_book_initial",
+      "step": 0,
+      "evidence_ids": [],
+      "kind": "anytime_answer"
+    },
+    {
+      "node_id": "memory_mem_4",
+      "content": "Conclusion: The answer to 'In which city was the first edition of the South American Youth Olympic Games held' is Lima, Perú.",
+      "answer_text": "Lima, Perú",
+      "value": 1.0,
+      "confidence": 1.0,
+      "evidence_ids": [
+        "doc_5"
+      ],
+      "step": 2,
+      "kind": "intermediate_answer"
+    },
+    {
+      "node_id": "memory_mem_5",
+      "content": "Conclusion: The answer to 'What is the population of Lima' is 10 million.",
+      "answer_text": "10 million",
+      "value": 0.874,
+      "evidence_ids": [
+        "doc_6",
+        "doc_5"
+      ],
+      "step": 3
+    },
+    {
+      "node_id": "state_3",
+      "answer_text": "10 million",
+      "previous_answer": "2,870,413",
+      "confidence": 0.95,
+      "score": 0.8161919152142985,
+      "source": "expansion_candidate",
+      "step": 2,
+      "evidence_ids": [
+        "doc_6",
+        "doc_5",
+        "doc_1",
+        "doc_10"
+      ],
+      "kind": "anytime_answer"
+    },
+    {
+      "node_id": "memory_mem_6",
+      "content": "Conclusion: The answer to 'What is the population of Lima, Peru' is 10 million.",
+      "answer_text": "10 million",
+      "value": 0.874,
+      "evidence_ids": [
+        "doc_6",
+        "doc_5"
+      ],
+      "step": 4
+    },
+    {
+      "node_id": "state_4",
+      "answer_text": "10 million",
+      "previous_answer": "10 million",
+      "confidence": 0.95,
+      "score": 0.8324882158275002,
+      "source": "expansion_candidate",
+      "step": 3,
+      "evidence_ids": [
+        "doc_6",
+        "doc_5",
+        "doc_1",
+        "doc_10"
+      ],
+      "kind": "anytime_answer"
+    },
+    {
+      "node_id": "memory_mem_7",
+      "content": "Conclusion: The answer to 'What is the population of Lima, Perú' is 10 million.",
+      "answer_text": "10 million",
+      "value": 0.874,
+      "evidence_ids": [
+        "doc_6",
+        "doc_5"
+      ],
+      "step": 5
+    },
+    {
+      "node_id": "state_5",
+      "answer_text": "10 million",
+      "previous_answer": "10 million",
+      "confidence": 0.95,
+      "score": 0.8461458500476219,
+      "source": "expansion_candidate",
+      "step": 4,
+      "evidence_ids": [
+        "doc_6",
+        "doc_5",
+        "doc_1",
+        "doc_10"
+      ],
+      "kind": "anytime_answer"
+    },
+    {
+      "node_id": "state_1",
+      "answer_text": "10 million",
+      "previous_answer": "10 million",
+      "confidence": 0.8348130673143749,
+      "score": 0.8630310711093477,
+      "source": "final_synthesis",
+      "step": 8,
+      "evidence_ids": [
+        "doc_5",
+        "doc_10",
+        "doc_8",
+        "doc_6"
+      ],
+      "kind": "anytime_answer"
+    },
+    {
+      "node_id": "memory_mem_8",
+      "content": "Conclusion: The answer to 'What is the population of the city in which the first edition of the South American Youth Olympic Games were held' is 10 million.",
+      "answer_text": "10 million",
+      "value": 0.0,
+      "evidence_ids": [],
+      "step": 9
+    },
+    {
+      "node_id": "state_1",
+      "answer_text": "10 million",
+      "source": "answer_judge",
+      "choice": "A",
+      "candidate_source": "anytime",
+      "base_score": 1.0,
+      "judge_confidence": 0.0,
+      "judge_reason": "",
+      "step": 8,
+      "kind": "final_answer_selection"
+    }
+  ],
+  "anytime_answer": "10 million",
+  "anytime_answer_score": 0.8630310711093477,
+  "anytime_answer_source": "final_synthesis",
+  "anytime_answer_node_id": "state_1",
+  "stats": {
+    "steps": 8,
+    "llm_calls": 13,
+    "generated_tokens": 720,
+    "token_budget_remaining": 480,
+    "total_nodes": 19,
+    "kg_nodes": 6,
+    "memory_nodes": 8,
+    "state_nodes": 5,
+    "deleted_state_nodes": 3,
+    "scheduler_mode": "tdca",
+    "scoring_mode": "hybrid",
+    "stop_reason": "frontier_empty",
+    "goal_kind": "bridge",
+    "goal_completion": 0.0,
+    "anytime_answer": "10 million",
+    "anytime_answer_score": 0.8630310711093477,
+    "anytime_answer_source": "final_synthesis"
+  }
+}

@@ -1,0 +1,221 @@
+{
+  "nodes": [
+    {
+      "node_id": "state_1",
+      "node_type": "state",
+      "content": "In what county is located the city that shares a border with the capital of the state that won the 2017 NCAA Basketball Tournament?",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.8791289857806299,
+      "temperature": 0.8266226538205868,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.9955763307420036,
+        "evidence_support": 0.9869892080647165,
+        "memory_usefulness": 0.5139668023538719,
+        "answerability": 0.9934946040323581,
+        "uncertainty": 0.12234194254835103
+      },
+      "metadata": {
+        "diffusion_delta": 0.04479001685778505,
+        "diffusion_gain": 0.04479001685778505
+      }
+    },
+    {
+      "node_id": "kg_doc_1",
+      "node_type": "kg",
+      "content": "The 2017 NCAA Women's Division I Basketball Tournament was played from Friday, March 17 to Sunday, April 2, 2017, with the Final Four played at the American Airlines Center in Dallas, Texas on March 31 and April 2. This was the first time that the women's Final Four was played in Dallas and the first time since 2002 that the Final Four games were played on Friday and Sunday, rather than Sunday and Tuesday. South Carolina defeated Mississippi State to win the championship.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.999999751780831,
+      "temperature": 0.999999751780831,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "2017 NCAA Division I Women's Basketball Tournament",
+        "raw_score": 0.24497076763978792,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_18",
+      "node_type": "kg",
+      "content": "The NCAA Division I Men's Basketball Tournament (known informally as March Madness) is a single - elimination tournament played each spring in the United States, currently featuring 68 college basketball teams from the Division I level of the National Collegiate Athletic Association (NCAA), to determine the national championship. The tournament was created in 1939 by the National Association of Basketball Coaches, and was the idea of The Ohio State University coach Harold Olsen. Played mostly during March, it has become one of the most famous annual sporting events in the United States.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9739786731136576,
+      "temperature": 0.9739786731136576,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "NCAA Division I Men's Basketball Tournament",
+        "raw_score": 0.22990864177140444,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_8",
+      "node_type": "kg",
+      "content": "The NCAA Division I Men's Basketball Tournament, also informally known and branded as NCAA March Madness, is a single - elimination tournament played each spring in the United States, currently featuring 68 college basketball teams from the Division I level of the National Collegiate Athletic Association (NCAA), to determine the national championship. The tournament was created in 1939 by the National Association of Basketball Coaches, and was the idea of The Ohio State University coach Harold Olsen. Played mostly during March, it has become one of the most famous annual sporting events in the United States.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9568903712359199,
+      "temperature": 0.9568903712359199,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "NCAA Division I Men's Basketball Tournament",
+        "raw_score": 0.2275330475462935,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_4",
+      "node_type": "kg",
+      "content": "The 2018 Phillips 66 Big 12 Men's Basketball Tournament was a postseason men's basketball tournament for the Big 12 Conference. It was played from March 7 to 10, in Kansas City, Missouri at the Sprint Center. Kansas defeated West Virginia in the championship game to win the tournament and receive the conference's automatic bid to the NCAA Tournament.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0,
+      "temperature": 0.0,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "2018 Big 12 Men's Basketball Tournament",
+        "raw_score": 0.17763058280029437,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "memory_mem_1",
+      "node_type": "memory",
+      "content": "Template: for compositional multi-hop questions, first solve the intermediate entity and then ask for the final attribute.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9599999519347127,
+      "temperature": 0.5347526082204194,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.96,
+        "tag": "compositional_template",
+        "memory_kind": "template",
+        "raw_score": 0.9235057499790552,
+        "source": "memory",
+        "diffusion_delta": -0.12550242637396836,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "memory_mem_3",
+      "node_type": "memory",
+      "content": "Template: when evidence already grounds the answer, switch from branching to short verification and synthesis.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.8799999915181286,
+      "temperature": 0.6548864286238065,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.88,
+        "tag": "verification_then_stop",
+        "memory_kind": "template",
+        "raw_score": 1.7113522159021741,
+        "source": "memory",
+        "diffusion_delta": -0.22511356289432205,
+        "diffusion_gain": 0.0
+      }
+    }
+  ],
+  "edges": [
+    {
+      "source": "state_1",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.9999997430157752
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_18",
+      "edge_type": "supports",
+      "weight": 0.9739786731136576
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_8",
+      "edge_type": "supports",
+      "weight": 0.9568903712359199
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.9599999519347127
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.06793365277303111
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.9999997430157752
+    },
+    {
+      "source": "kg_doc_18",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.9739786731136576
+    },
+    {
+      "source": "kg_doc_8",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.9568903712359199
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.9599999519347127
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.06793365277303111
+    }
+  ]
+}

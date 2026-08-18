@@ -1,0 +1,41 @@
+[TDCA-BATCH] project_root = /workspace/TDCA
+[TDCA-BATCH] dataset      = /workspace/TDCA/data/hotpot_dev_distractor_v1.jsonl
+[TDCA-BATCH] outputs      = /workspace/TDCA/batch_outputs/hotpot_dev_distractor_v1_20260411_153917
+[TDCA-BATCH] backend      = openrouter
+[TDCA-BATCH] template memory seed = /workspace/TDCA/data/demo_memories.jsonl
+[TDCA-BATCH] api_base     = https://yh.m7ai.com/v1
+[TDCA-BATCH] model        = gpt-5.1
+[TDCA] Using OpenRouter backend @ https://yh.m7ai.com/v1
+[TDCA] served_model_name = gpt-5.1
+
+[1/30] Were Scott Derrickson and Ed Wood of the same nationality?
+Traceback (most recent call last):
+  File "/workspace/TDCA/tdca_batch_hotpotqa.py", line 592, in <module>
+    main()
+  File "/workspace/TDCA/tdca_batch_hotpotqa.py", line 521, in main
+    result = scheduler.solve(question=question, output_dir=str(run_dir))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/TDCA/tdca_scheduler.py", line 1685, in solve
+    expansion = self._expand_node(question, node)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/TDCA/tdca_scheduler.py", line 653, in _expand_node
+    result = self.llm.generate_json(
+             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/TDCA/llm_evaluator.py", line 33, in generate_json
+    raw = self.generate(
+          ^^^^^^^^^^^^^^
+  File "/workspace/TDCA/llm_evaluator.py", line 137, in generate
+    response = self.client.chat.completions.create(**request_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/conda/lib/python3.11/site-packages/openai/_utils/_utils.py", line 286, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/conda/lib/python3.11/site-packages/openai/resources/chat/completions/completions.py", line 1204, in create
+    return self._post(
+           ^^^^^^^^^^^
+  File "/opt/conda/lib/python3.11/site-packages/openai/_base_client.py", line 1297, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/conda/lib/python3.11/site-packages/openai/_base_client.py", line 1070, in request
+    raise self._make_status_error_from_response(err.response) from None
+openai.BadRequestError: Error code: 400 - {'error': {'message': 'Unsupported parameter: temperature', 'type': 'bad_response_status_code', 'param': '', 'code': 'bad_response_status_code'}}

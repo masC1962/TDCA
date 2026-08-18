@@ -1,0 +1,995 @@
+{
+  "nodes": [
+    {
+      "node_id": "state_1",
+      "node_type": "state",
+      "content": "Are both Elko Regional Airport and Gerald R. Ford International Airport located in Michigan?",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.8443244436166458,
+      "temperature": 1.5655892592773268,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.9422136828811063,
+        "evidence_support": 0.8300402437679595,
+        "memory_usefulness": 0.8820682746050714,
+        "answerability": 0.9150201218839796,
+        "uncertainty": 0.15059275612176728
+      },
+      "metadata": {
+        "diffusion_delta": 0.3236037199293531,
+        "diffusion_gain": 0.3236037199293531
+      }
+    },
+    {
+      "node_id": "kg_doc_5",
+      "node_type": "kg",
+      "content": "A pre-commissioning unit (PRECOMMUNIT) or (PCU) is used by the United States Navy to describe vessels under construction prior to their official commissioning. For example, prior to its commissioning, the aircraft carrier \"Gerald R. Ford\" (CVN-78) has been described by the Navy as \"pre-commissioning unit (PCU) \"Gerald R. Ford\" .\" However, \"PCU\" is only a descriptive term and is not a prefix or a part of the ship's official name. Until they are commissioned, U.S. Navy vessels are officially identified by their given name and hull number only with no prefix, such as \"Gerald R. Ford\" (CVN-78).",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999447239423,
+      "temperature": 0.9999999447239423,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Pre-Commissioning Unit",
+        "raw_score": 4.606052677676299,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_10",
+      "node_type": "kg",
+      "content": "The Gerald R. Ford Presidential Library is a repository located on the north campus of the University of Michigan in Ann Arbor. The library houses archival materials on the life, career, and presidency of Gerald Ford, the 38th President of the United States. The Gerald R. Ford Presidential Library is a part of the National Archives and Records Administration's presidential library system.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999889128499,
+      "temperature": 0.9999999889128499,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Gerald R. Ford Presidential Library",
+        "raw_score": 2.394382176708497,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_3",
+      "node_type": "kg",
+      "content": "Elko Regional Airport (IATA: EKO, ICAO: KEKO, FAA LID: EKO) , formerly Elko Municipal Airport, is a mile west of downtown Elko, in Elko County, Nevada.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999944277124,
+      "temperature": 0.9999999944277124,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Elko Regional Airport",
+        "raw_score": 6.612815219090197,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_9",
+      "node_type": "kg",
+      "content": "The Gerald R. Ford Freeway refers to Interstate Highways named for former President Gerald R. Ford in Omaha (where he was born) and Michigan (where he grew up and was a Congressman):",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.735298192098301,
+      "temperature": 0.735298192098301,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Gerald R. Ford Freeway",
+        "raw_score": 6.491277188285334,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "memory_mem_1",
+      "node_type": "memory",
+      "content": "Template: for compositional multi-hop questions, first solve the intermediate entity and then ask for the final attribute.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.8841365672456091,
+      "temperature": 0.22299929146836991,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.96,
+        "tag": "compositional_template",
+        "memory_kind": "template",
+        "raw_score": 0.44936932357153264,
+        "source": "memory",
+        "diffusion_delta": -0.10464489641443578,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "memory_mem_3",
+      "node_type": "memory",
+      "content": "Template: when evidence already grounds the answer, switch from branching to short verification and synthesis.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.8799999819645339,
+      "temperature": 0.22195595085680345,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.88,
+        "tag": "verification_then_stop",
+        "memory_kind": "template",
+        "raw_score": 0.487927496462734,
+        "source": "memory",
+        "diffusion_delta": -0.10415529723453062,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "state_2",
+      "node_type": "state",
+      "content": "In which state is Elko Regional Airport located?",
+      "depth": 1,
+      "parent_id": "state_1",
+      "value": 0.5619787691600651,
+      "temperature": 0.6958031817969155,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.612881198064634,
+        "evidence_support": 0.5491980938552581,
+        "memory_usefulness": 0.0,
+        "answerability": 0.651522123850706,
+        "uncertainty": 0.20114434310605356
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_3",
+          "doc_7",
+          "doc_6",
+          "doc_2"
+        ],
+        "memory_ids": [],
+        "diffusion_delta": 0.45180467774848854,
+        "diffusion_gain": 0.45180467774848854
+      }
+    },
+    {
+      "node_id": "kg_doc_7",
+      "node_type": "kg",
+      "content": "Raleigh Exec: The Raleigh Executive Jetport @ Sanford-Lee County or Raleigh Exec Jetport at Sanford-Lee CountyFAA Airport Master Record for TTA (Form 5010 ) (ICAO: KTTA, FAA LID: TTA) is a public use airport located seven nautical miles (8 mi, 13 km) northeast of the central business district of Sanford, a city in Lee County, North Carolina, United States. It is owned by the Sanford-Lee County Regional Airport Authority and was previously known as Sanford-Lee County Regional Airport. This airport is included in the National Plan of Integrated Airport Systems for 2011–2015, which categorized it as a \"reliever airport\" for Raleigh-Durham International Airport.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.09839619399606636,
+      "temperature": 0.09839619399606636,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Raleigh Executive Jetport",
+        "raw_score": 4.04985299802246,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_6",
+      "node_type": "kg",
+      "content": "John Glenn Columbus International Airport (IATA: CMH, ICAO: KCMH, FAA LID: CMH) , is an international airport located 6 mi east of downtown Columbus, Ohio. Formerly known as Port Columbus International Airport, it is managed by the Columbus Regional Airport Authority, which also oversees operations at Rickenbacker International Airport and Bolton Field. The airport code 'CMH' stands for \"Columbus Municipal Hangar,\" the original name for the airport.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0649214402673695,
+      "temperature": 0.0649214402673695,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "John Glenn Columbus International Airport",
+        "raw_score": 3.9667451116982395,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_2",
+      "node_type": "kg",
+      "content": "Pensacola International Airport (IATA: PNS, ICAO: KPNS, FAA LID: PNS) , formerly Pensacola Gulf Coast Regional Airport and Pensacola Regional Airport (Hagler Field), is a public use airport three nautical miles (6 km) northeast of the central business district of Pensacola, in Escambia County, Florida, United States. It is owned by the City of Pensacola. Despite the name, this airport does not offer direct international flights. This airport is one of the five major airports in North Florida, others being: Northwest Florida Beaches International Airport, Destin-Fort Walton Beach Airport Tallahassee International Airport, and Jacksonville International Airport.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.11253774355641577,
+      "temperature": 0.11253774355641577,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Pensacola International Airport",
+        "raw_score": 2.4188427355883784,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "state_3",
+      "node_type": "state",
+      "content": "In which state is Gerald R. Ford International Airport located?",
+      "depth": 1,
+      "parent_id": "state_1",
+      "value": 0.591556599115858,
+      "temperature": 0.8970970219109825,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.7231931283007357,
+        "evidence_support": 0.7016992461333853,
+        "memory_usefulness": 0.0,
+        "answerability": 0.7585419307590003,
+        "uncertainty": 0.17369413569599063
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_10",
+          "doc_9",
+          "doc_4",
+          "doc_5"
+        ],
+        "memory_ids": [],
+        "diffusion_delta": -0.052723897720450275,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "kg_doc_4",
+      "node_type": "kg",
+      "content": "Gerald R. Ford International Airport (IATA: GRR, ICAO: KGRR, FAA LID: GRR) is a commercial airport in Cascade Township approximately 13 mi southeast of Grand Rapids, Michigan. The facility is owned by the Kent County Board of Commissioners and managed by an independent authority. The Federal Aviation Administration (FAA) National Plan of Integrated Airport Systems for 2017–2021 categorized it as a small hub primary commercial service facility.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.5784933138752345,
+      "temperature": 0.5784933138752345,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Gerald R. Ford International Airport",
+        "raw_score": 2.225880669229693,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "state_4",
+      "node_type": "state",
+      "content": "Where is Elko Regional Airport located?",
+      "depth": 1,
+      "parent_id": "state_1",
+      "value": 0.4772068025691144,
+      "temperature": 0.3978354988688071,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.5860544923803788,
+        "evidence_support": 0.5562688689920641,
+        "memory_usefulness": 0.0,
+        "answerability": 0.6396728960344936,
+        "uncertainty": 0.19987160358142847
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_3",
+          "doc_2",
+          "doc_9",
+          "doc_1"
+        ],
+        "memory_ids": [],
+        "diffusion_delta": -0.03174784819642279,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "kg_doc_1",
+      "node_type": "kg",
+      "content": "Grantley Adams International Airport (GAIA) (IATA: BGI, ICAO: TBPB) is the international airport of Barbados, located in Seawell, Christ Church. It is the only designated port of entry for persons arriving and departing by air in Barbados and operates as a major gateway to the Eastern Caribbean. The airport has direct service to destinations in the United States, Canada, Central America and Europe and serves as the second hub for LIAT. In 2016, the airport was the 8th busiest airport in the Caribbean region; and the third busiest airport in the Lesser Antilles; after Queen Beatrix International Airport located in Aruba, and Pointe-à-Pitre International Airport located in the Republic of France within the island of Guadeloupe. GAIA, also remains an important air-link for cruise ship passengers departing and arriving at the Port of Bridgetown, and a base of operations for the Regional Security System (RSS), and the Regional (Caribbean) Police Training Centre.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0,
+      "temperature": 0.0,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Grantley Adams International Airport",
+        "raw_score": 2.734420705600461,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "state_5",
+      "node_type": "state",
+      "content": "Is Gerald R. Ford International Airport located in Michigan?",
+      "depth": 2,
+      "parent_id": "state_3",
+      "value": 0.6612342122179402,
+      "temperature": 0.4396276191922862,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.8088468446180495,
+        "evidence_support": 0.8676490905055755,
+        "memory_usefulness": 0.0,
+        "answerability": 0.8569014683297108,
+        "uncertainty": 0.1438231637089964
+      },
+      "metadata": {
+        "kind": "verification",
+        "evidence_ids": [
+          "doc_10",
+          "doc_9",
+          "doc_4",
+          "doc_5"
+        ],
+        "memory_ids": [],
+        "diffusion_delta": 0.05180010625440917,
+        "diffusion_gain": 0.05180010625440917
+      }
+    },
+    {
+      "node_id": "memory_mem_4",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'In which state is Gerald R. Ford International Airport located' is Michigan.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 1.0,
+      "temperature": 0.6624205821573748,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "intermediate_answer",
+        "target_question": "In which state is Gerald R. Ford International Airport located?",
+        "target_question_norm": "in which state is gerald r ford international airport located",
+        "relation_signature": "generic",
+        "answer_text": "Michigan",
+        "support_score": 1.0,
+        "evidence_ids": [
+          "doc_10",
+          "doc_9",
+          "doc_4"
+        ],
+        "slot_name": "ford_location",
+        "slot_role": "generic",
+        "terminal": false,
+        "derived_from_state": "state_3",
+        "diffusion_delta": -0.1308799060137451,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "state_6",
+      "node_type": "state",
+      "content": "Is Elko Regional Airport located in Michigan?",
+      "depth": 2,
+      "parent_id": "state_2",
+      "value": 0.4952360344998126,
+      "temperature": 0.29400937948475225,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.6520957016901402,
+        "evidence_support": 0.5785620185456611,
+        "memory_usefulness": 0.0,
+        "answerability": 0.6815887015805229,
+        "uncertainty": 0.195858836661781
+      },
+      "metadata": {
+        "kind": "verification",
+        "evidence_ids": [
+          "doc_3",
+          "doc_8",
+          "doc_10",
+          "doc_4"
+        ],
+        "memory_ids": [],
+        "diffusion_delta": -0.07556399734136954,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "kg_doc_8",
+      "node_type": "kg",
+      "content": "Bishop International Airport (IATA: FNT, ICAO: KFNT, FAA LID: FNT) is a commercial and general aviation airport located in Flint, Michigan. It is named after banker and General Motors board member Arthur Giles Bishop (April 12, 1851 – January 22, 1944), who donated 220 acres of his farmland for the airport in 1928. The third busiest airport in Michigan, it surpassed competitor MBS International Airport in terms of airline operations in 2002. In 2007, 1,071,238 passengers used Bishop International Airport; in 2011, 938,914 passengers used the airport. It is included in the Federal Aviation Administration (FAA) National Plan of Integrated Airport Systems for 2017–2021, in which it is categorized as a small hub primary commercial service facility. The airport is currently served by several passenger airlines: Allegiant Air, Southwest Airlines and Delta Air Lines operate mainline service out of the airport, as well as affiliates of Delta Connection, United Express and American Eagle. Additionally, FedEx Express and a FedEx Feeder affiliate operate cargo services out of the airport. Accompanying the airlines is fixed-base operator Av Flight that handles both general aviation and airline operations and the flight school American Wings Aviation. Bishop International Airport is in southwestern Flint, and is surrounded by Flint Township to the north, east and west; and Mundy Township to the south.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.1571240436697105,
+      "temperature": 0.1571240436697105,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Bishop International Airport",
+        "raw_score": 2.8443436573427694,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "memory_mem_5",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'In which state is Elko Regional Airport located' is Nevada.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 1.0,
+      "temperature": 0.7873276668905104,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "intermediate_answer",
+        "target_question": "In which state is Elko Regional Airport located?",
+        "target_question_norm": "in which state is elko regional airport located",
+        "relation_signature": "generic",
+        "answer_text": "Nevada",
+        "support_score": 1.0,
+        "evidence_ids": [
+          "doc_3"
+        ],
+        "slot_name": "elko_location",
+        "slot_role": "generic",
+        "terminal": false,
+        "derived_from_state": "state_2",
+        "diffusion_delta": -0.38999683245544914,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "memory_mem_6",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'Are both Elko Regional Airport and Gerald R. Ford International Airport located in Michigan' is No.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 1.0,
+      "temperature": 1.3679937809813576,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "answer_candidate",
+        "target_question": "Are both Elko Regional Airport and Gerald R. Ford International Airport located in Michigan?",
+        "target_question_norm": "are both elko regional airport and gerald r ford international airport located in michigan",
+        "relation_signature": "generic",
+        "answer_text": "No",
+        "support_score": 1.0,
+        "derived_from_state": "state_1",
+        "composed_from": [
+          "memory_mem_5",
+          "memory_mem_4"
+        ],
+        "slot_role": "final_boolean",
+        "terminal": true,
+        "diffusion_delta": 0.3679937809813576,
+        "diffusion_gain": 0.3679937809813576
+      }
+    }
+  ],
+  "edges": [
+    {
+      "source": "state_1",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.9999999447239423
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_10",
+      "edge_type": "supports",
+      "weight": 0.6600805428119767
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.49315146141878724
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.8841365672456091
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.8799999819645339
+    },
+    {
+      "source": "state_1",
+      "target": "state_2",
+      "edge_type": "refines",
+      "weight": 0.94
+    },
+    {
+      "source": "state_1",
+      "target": "state_3",
+      "edge_type": "refines",
+      "weight": 0.94
+    },
+    {
+      "source": "state_1",
+      "target": "state_4",
+      "edge_type": "refines",
+      "weight": 0.95
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_6",
+      "edge_type": "derives",
+      "weight": 1.0
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.9999999447239423
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_10",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.6600805428119767
+    },
+    {
+      "source": "kg_doc_10",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.9999999807457871
+    },
+    {
+      "source": "kg_doc_10",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.9999999889128499
+    },
+    {
+      "source": "kg_doc_10",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.9999999807457871
+    },
+    {
+      "source": "kg_doc_10",
+      "target": "state_6",
+      "edge_type": "supports",
+      "weight": 0.03768792355831566
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.49315146141878724
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.9999999937144499
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.9999999944277124
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "state_6",
+      "edge_type": "supports",
+      "weight": 0.9999999934216117
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.9999999937144499
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.40339851152098344
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.057843880658790855
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.735298192098301
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.40339851152098344
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.8841365672456091
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.8799999819645339
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.9999999937144499
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.09839619399606636
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.0649214402673695
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_2",
+      "target": "state_6",
+      "edge_type": "verifies",
+      "weight": 0.8
+    },
+    {
+      "source": "state_2",
+      "target": "memory_mem_5",
+      "edge_type": "derives",
+      "weight": 1.0
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.09839619399606636
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.09839619399606636
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.0649214402673695
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.0649214402673695
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.11253774355641577
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_10",
+      "edge_type": "supports",
+      "weight": 0.9999999807457871
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.40339851152098344
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.28254550371219794
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_3",
+      "target": "state_5",
+      "edge_type": "verifies",
+      "weight": 1.0
+    },
+    {
+      "source": "state_3",
+      "target": "state_2",
+      "edge_type": "refines",
+      "weight": 0.84
+    },
+    {
+      "source": "state_3",
+      "target": "memory_mem_4",
+      "edge_type": "derives",
+      "weight": 1.0
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.28254550371219794
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.5784933138752345
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.28254550371219794
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "state_6",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.9999999944277124
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.11253774355641577
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.057843880658790855
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_5",
+      "target": "kg_doc_10",
+      "edge_type": "supports",
+      "weight": 0.9999999889128499
+    },
+    {
+      "source": "state_5",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.735298192098301
+    },
+    {
+      "source": "state_5",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.5784933138752345
+    },
+    {
+      "source": "state_5",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "state_3",
+      "edge_type": "recalls",
+      "weight": 1.0
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_10",
+      "edge_type": "supports",
+      "weight": 0.9999999807457871
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.40339851152098344
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.28254550371219794
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "memory_mem_6",
+      "edge_type": "derives",
+      "weight": 1.0
+    },
+    {
+      "source": "state_6",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.9999999934216117
+    },
+    {
+      "source": "state_6",
+      "target": "kg_doc_8",
+      "edge_type": "supports",
+      "weight": 0.1571240436697105
+    },
+    {
+      "source": "state_6",
+      "target": "kg_doc_10",
+      "edge_type": "supports",
+      "weight": 0.03768792355831566
+    },
+    {
+      "source": "state_6",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_8",
+      "target": "state_6",
+      "edge_type": "supports",
+      "weight": 0.1571240436697105
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "state_2",
+      "edge_type": "recalls",
+      "weight": 1.0
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.9999999937144499
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.09839619399606636
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.0649214402673695
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "memory_mem_6",
+      "edge_type": "derives",
+      "weight": 1.0
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 1.0
+    }
+  ]
+}

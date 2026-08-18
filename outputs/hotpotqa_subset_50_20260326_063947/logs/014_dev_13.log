@@ -1,0 +1,86 @@
+[TDCA] project_root = /workspace/TDCA
+[TDCA] llm_backend  = local
+[TDCA] model_path   = /workspace/models/Qwen3-4B
+[TDCA] evidence     = /workspace/TDCA/data/demo_corpus.jsonl
+[TDCA] memory       = /workspace/TDCA/data/demo_memories.jsonl
+[TDCA] outputs      = /workspace/TDCA/outputs/20260326_065324
+[TDCA] Using local transformers backend.
+[TDCA] CUDA visible. free=23.30 GiB / total=23.56 GiB
+[TDCA] LocalLLM device = cuda (CUDA selected, free VRAM 23.30 GiB)
+Loading checkpoint shards:   0%|          | 0/3 [00:00<?, ?it/s]Loading checkpoint shards: 100%|██████████| 3/3 [00:00<00:00, 83.18it/s]
+Traceback (most recent call last):
+  File "/workspace/TDCA/main.py", line 138, in <module>
+    main()
+  File "/workspace/TDCA/main.py", line 128, in main
+    result = scheduler.solve(question=args.query, output_dir=str(run_dir))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/TDCA/tdca_scheduler.py", line 981, in solve
+    expansion = self._expand_node(question, node)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/TDCA/tdca_scheduler.py", line 324, in _expand_node
+    result = self.llm.generate_json(
+             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/TDCA/llm_evaluator.py", line 33, in generate_json
+    raw = self.generate(
+          ^^^^^^^^^^^^^^
+  File "/workspace/TDCA/llm_evaluator.py", line 219, in generate
+    outputs = self.model.generate(
+              ^^^^^^^^^^^^^^^^^^^^
+  File "/opt/conda/lib/python3.11/site-packages/torch/utils/_contextlib.py", line 124, in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/conda/lib/python3.11/site-packages/transformers/generation/utils.py", line 2566, in generate
+    result = decoding_method(
+             ^^^^^^^^^^^^^^^^
+  File "/opt/conda/lib/python3.11/site-packages/transformers/generation/utils.py", line 2789, in _sample
+    outputs = model_forward(**model_inputs, return_dict=True)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/conda/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1776, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/conda/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1787, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/conda/lib/python3.11/site-packages/transformers/utils/generic.py", line 918, in wrapper
+    output = func(self, *args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/conda/lib/python3.11/site-packages/transformers/models/qwen3/modeling_qwen3.py", line 480, in forward
+    outputs: BaseModelOutputWithPast = self.model(
+                                       ^^^^^^^^^^^
+  File "/opt/conda/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1776, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/conda/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1787, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/conda/lib/python3.11/site-packages/transformers/utils/generic.py", line 1072, in wrapper
+    outputs = func(self, *args, **kwargs)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/conda/lib/python3.11/site-packages/transformers/models/qwen3/modeling_qwen3.py", line 410, in forward
+    hidden_states = decoder_layer(
+                    ^^^^^^^^^^^^^^
+  File "/opt/conda/lib/python3.11/site-packages/transformers/modeling_layers.py", line 94, in __call__
+    return super().__call__(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/conda/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1776, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/conda/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1787, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/conda/lib/python3.11/site-packages/transformers/utils/deprecation.py", line 172, in wrapped_func
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/conda/lib/python3.11/site-packages/transformers/models/qwen3/modeling_qwen3.py", line 274, in forward
+    hidden_states = self.post_attention_layernorm(hidden_states)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/conda/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1776, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/conda/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1787, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/conda/lib/python3.11/site-packages/transformers/models/qwen3/modeling_qwen3.py", line 63, in forward
+    hidden_states = hidden_states * torch.rsqrt(variance + self.variance_epsilon)
+                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt

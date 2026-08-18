@@ -1,0 +1,882 @@
+{
+  "nodes": [
+    {
+      "node_id": "state_1",
+      "node_type": "state",
+      "content": "The Vermont Catamounts men's soccer team currently competes in a conference that was formerly known as what from 1988 to 1996?",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.6435716860110138,
+      "temperature": 0.5046365206277922,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.8442999193016418,
+        "evidence_support": 0.5674997758378939,
+        "memory_usefulness": 0.49550250240712806,
+        "answerability": 0.663749887918947,
+        "uncertainty": 0.169200035865937
+      },
+      "metadata": {
+        "diffusion_delta": -0.02188873864563534,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "kg_doc_4",
+      "node_type": "kg",
+      "content": "Title: America East Conference. The America East Conference is a collegiate athletic conference affiliated with the NCAA Division I, whose members are located mainly in the Northeastern United States. The conference was known as the Eastern College Athletic Conference-North from 1979 to 1988 and the North Atlantic Conference from 1988 to 1996.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999978014338,
+      "temperature": 0.9999999978014338,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "America East Conference",
+        "raw_score": 14.926682999023043,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_5",
+      "node_type": "kg",
+      "content": "Title: Vermont Catamounts men's soccer. The Vermont Catamounts men's soccer team represents the University of Vermont in all NCAA Division I men's college soccer competitions. The team competes in the America East Conference.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999930372446,
+      "temperature": 0.9999999930372446,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Vermont Catamounts men's soccer",
+        "raw_score": 5.810407188286758,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_6",
+      "node_type": "kg",
+      "content": "Title: Vermont Catamounts men's ice hockey. The Vermont Catamounts men's ice hockey team is a National Collegiate Athletic Association (NCAA) Division I college ice hockey program that represents the University of Vermont. The Catamounts are a member of Hockey East, joining in 2005 after competing in ECAC Hockey from 1974-2005. They play home games at Gutterson Fieldhouse in Burlington, Vermont. Vermont has appeared in the NCAA Men's Hockey Championship five times since making the move to Division I in 1974-75 including trips to the Frozen Four in 1996 and 2009.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.28419582936503446,
+      "temperature": 0.28419582936503446,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Vermont Catamounts men's ice hockey",
+        "raw_score": 2.933848701204858,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_10",
+      "node_type": "kg",
+      "content": "Title: Vermont Catamounts men's basketball. The Vermont Catamounts Basketball team is the basketball team that represents the University of Vermont in Burlington, Vermont. The school's team currently competes in the America East Conference and plays its home games at Patrick Gym. The team has reached the NCAA Division I Men's Basketball Tournament six times, in 2003, 2004, 2005, 2010, 2012, and 2017. UVM famously upset Syracuse University in the first round of the 2005 tournament. The Catamounts are coached by John Becker.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9025617097775812,
+      "temperature": 0.9025617097775812,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Vermont Catamounts men's basketball",
+        "raw_score": 5.377068636866857,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "memory_tmpl_3",
+      "node_type": "memory",
+      "content": "Template: when evidence already grounds the answer, switch from branching to short verification and synthesis.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.8799999981629302,
+      "temperature": 1.1135311530542342,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.88,
+        "tag": "verification_then_stop",
+        "memory_kind": "template",
+        "raw_score": 1.9848581466991566,
+        "source": "memory",
+        "diffusion_delta": 0.05939621218117663,
+        "diffusion_gain": 0.05939621218117663
+      }
+    },
+    {
+      "node_id": "memory_tmpl_4",
+      "node_type": "memory",
+      "content": "Template: for nested relation questions, solve the intermediate relation first, then query the target attribute, then verify the chain.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.7587764166913973,
+      "temperature": 0.7587764166913973,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.758776433441565,
+        "source": "tdca_run",
+        "kind": "strategy_template",
+        "memory_kind": "template",
+        "raw_score": 0.9059926208092893,
+        "diffusion_delta": -0.0722554247490057,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "memory_tmpl_1",
+      "node_type": "memory",
+      "content": "Template: for compositional multi-hop questions, first solve the intermediate entity and then ask for the final attribute.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.8261152479313716,
+      "temperature": 0.8261152479313716,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.96,
+        "tag": "compositional_template",
+        "memory_kind": "template",
+        "raw_score": 0.7796399323814209,
+        "source": "memory",
+        "diffusion_delta": -0.07866784841731389,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "memory_tmpl_2",
+      "node_type": "memory",
+      "content": "Template: for comparison questions, split the problem into one sub-question per entity before comparing them.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.5617102620098141,
+      "temperature": 0.36523702098944916,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.9,
+        "tag": "comparison_template",
+        "memory_kind": "template",
+        "raw_score": 0.565450404053277,
+        "source": "memory",
+        "diffusion_delta": -0.05348955591473187,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "state_2",
+      "node_type": "state",
+      "content": "Does the evidence support that The Vermont Catamounts men's soccer team currently competes in a conference that was formerly known as what from 1988 to 1996?",
+      "depth": 1,
+      "parent_id": "state_1",
+      "value": 0.6290922268384214,
+      "temperature": 0.7067854577318187,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.8416041073131229,
+        "evidence_support": 0.560011409203119,
+        "memory_usefulness": 0.5117548878744913,
+        "answerability": 0.7400057046015595,
+        "uncertainty": 0.17039817452750097
+      },
+      "metadata": {
+        "kind": "verification",
+        "evidence_ids": [
+          "doc_4",
+          "doc_6",
+          "doc_10",
+          "doc_5"
+        ],
+        "memory_ids": [
+          "tmpl_3",
+          "tmpl_4",
+          "tmpl_1",
+          "tmpl_2"
+        ],
+        "diffusion_delta": 0.040103491962060644,
+        "diffusion_gain": 0.040103491962060644
+      }
+    },
+    {
+      "node_id": "state_3",
+      "node_type": "state",
+      "content": "What conference does the Vermont Catamounts men's soccer team currently compete in?",
+      "depth": 2,
+      "parent_id": "state_2",
+      "value": 0.6859178184582264,
+      "temperature": 1.2718841493259032,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.7147131319911921,
+        "evidence_support": 0.7630920333088669,
+        "memory_usefulness": 0.7924458323113844,
+        "answerability": 0.6615460166544335,
+        "uncertainty": 0.1379052746705813
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_5",
+          "doc_10",
+          "doc_1",
+          "doc_9"
+        ],
+        "memory_ids": [
+          "tmpl_4",
+          "tmpl_1",
+          "tmpl_3",
+          "tmpl_2"
+        ],
+        "diffusion_delta": 0.15970640531000324,
+        "diffusion_gain": 0.15970640531000324
+      }
+    },
+    {
+      "node_id": "kg_doc_1",
+      "node_type": "kg",
+      "content": "Title: 2010–11 Vermont Catamounts men's basketball team. The 2010–11 Vermont Catamounts men's basketball team represented the University of Vermont in the 2010–11 NCAA Division I men's basketball season. The Catamounts won their third consecutive America East Conference regular season Championship but lost in the semifinals of the conference tournament to Stony Brook. The Catamounts got invited to the National Invitation Tournament but lost in the first round to Cleveland State, 63–60.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.03336082064435621,
+      "temperature": 0.03336082064435621,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "2010–11 Vermont Catamounts men's basketball team",
+        "raw_score": 1.777171577268689,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_9",
+      "node_type": "kg",
+      "content": "Title: 2011–12 Vermont Catamounts men's basketball team. The 2011–12 Vermont Catamounts men's basketball team represented the University of Vermont during the 2011–12 NCAA Division I men's basketball season. The Catamounts, led by first year head coach John Becker, played their home games at Patrick Gym and are members of the America East Conference. They finished the season 24–12, 13–3 in America East play to finish in second place. They were champions of the America East Basketball Tournament and earned the conference's automatic bid into the 2012 NCAA Tournament. They defeated Lamar in the \"First Four\" round before falling to North Carolina in the second round.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0,
+      "temperature": 0.0,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "2011–12 Vermont Catamounts men's basketball team",
+        "raw_score": 1.5345114447084822,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "state_4",
+      "node_type": "state",
+      "content": "What was the conference known as from 1988 to 1996?",
+      "depth": 2,
+      "parent_id": "state_2",
+      "value": 0.5381606835140367,
+      "temperature": 0.7172647125999642,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.6233242122707154,
+        "evidence_support": 0.55973897347926,
+        "memory_usefulness": 0.49550250240712806,
+        "answerability": 0.550778577648721,
+        "uncertainty": 0.17044176424331842
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_4",
+          "doc_6",
+          "doc_8",
+          "doc_3"
+        ],
+        "memory_ids": [
+          "tmpl_3",
+          "tmpl_4",
+          "tmpl_1",
+          "tmpl_2"
+        ],
+        "diffusion_delta": -0.002352315230036983,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "kg_doc_8",
+      "node_type": "kg",
+      "content": "Title: 2016–17 Vermont Catamounts men's basketball team. The 2016–17 Vermont Catamounts men's basketball team represented the University of Vermont during the 2016–17 NCAA Division I men's basketball season. The Catamounts, led by sixth-year head coach John Becker, played their home games at Patrick Gym in Burlington, Vermont and were members of the America East Conference. They finished the season 29–6, 16–0 in America East play to win the America East regular season championship. In the America East Tournament, they defeated Maine, New Hampshire and Albany to win the tournament championship. As a result, they received the conference's automatic bid to the NCAA Tournament. As a No. 13 seed in the Midwest region, they lost to No. 4-seeded Purdue in the first round.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.025071792465669814,
+      "temperature": 0.025071792465669814,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "2016–17 Vermont Catamounts men's basketball team",
+        "raw_score": 2.17850129701651,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_3",
+      "node_type": "kg",
+      "content": "Title: 2013–14 Vermont Catamounts men's basketball team. The 2013–14 Vermont Catamounts men's basketball team represented the University of Vermont during the 2013–14 NCAA Division I men's basketball season. The Catamounts, led by third year head coach John Becker, played their home games at Patrick Gym and were members of the America East Conference. They finished the season 22–11, 15–1 in America East play to win the America East regular season championship. They advanced to the semifinals of the America East Conference Tournament where they lost to Albany. As a regular season conference champion who failed to win their conference tournament, the received an automatic bid to the National Invitation Tournament where they lost in the first round to Georgia.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0,
+      "temperature": 0.0,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "2013–14 Vermont Catamounts men's basketball team",
+        "raw_score": 1.843098319889296,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "memory_mem_6",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'What conference does the Vermont Catamounts men's soccer team currently compete in' is America East Conference.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.7912,
+      "temperature": 0.9776134437576549,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "derived_fact",
+        "target_question": "What conference does the Vermont Catamounts men's soccer team currently compete in?",
+        "target_question_norm": "what conference does the vermont catamounts men s soccer team currently compete in",
+        "relation_signature": "generic",
+        "answer_text": "America East Conference",
+        "support_score": 0.7630920333088669,
+        "evidence_ids": [
+          "doc_5",
+          "doc_10"
+        ],
+        "derived_from_state": "state_3"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "source": "state_1",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.9999999956411777
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.13499955603461
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.019613316687824765
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_10",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_1",
+      "target": "memory_tmpl_3",
+      "edge_type": "recalls",
+      "weight": 0.879999997158048
+    },
+    {
+      "source": "state_1",
+      "target": "memory_tmpl_4",
+      "edge_type": "recalls",
+      "weight": 0.11100500765620816
+    },
+    {
+      "source": "state_1",
+      "target": "memory_tmpl_1",
+      "edge_type": "recalls",
+      "weight": 0.12085632526824933
+    },
+    {
+      "source": "state_1",
+      "target": "memory_tmpl_2",
+      "edge_type": "recalls",
+      "weight": 0.08217526344170711
+    },
+    {
+      "source": "state_1",
+      "target": "state_2",
+      "edge_type": "verifies",
+      "weight": 0.38
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.9999999956411777
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.9999999949605161
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.9999999978014338
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.13499955603461
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.9999999930372446
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.9999999930372446
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.019613316687824765
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.12002282344572192
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.11947794915708633
+    },
+    {
+      "source": "kg_doc_10",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_10",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.11205741400498831
+    },
+    {
+      "source": "kg_doc_10",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.5261840735804891
+    },
+    {
+      "source": "kg_doc_10",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.5261840735804891
+    },
+    {
+      "source": "memory_tmpl_3",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.879999997158048
+    },
+    {
+      "source": "memory_tmpl_3",
+      "target": "state_2",
+      "edge_type": "recalls",
+      "weight": 0.8799999981629302
+    },
+    {
+      "source": "memory_tmpl_3",
+      "target": "state_3",
+      "edge_type": "recalls",
+      "weight": 0.5654664789758016
+    },
+    {
+      "source": "memory_tmpl_3",
+      "target": "state_4",
+      "edge_type": "recalls",
+      "weight": 0.879999997158048
+    },
+    {
+      "source": "memory_tmpl_4",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.11100500765620816
+    },
+    {
+      "source": "memory_tmpl_4",
+      "target": "state_2",
+      "edge_type": "recalls",
+      "weight": 0.14350977758605232
+    },
+    {
+      "source": "memory_tmpl_4",
+      "target": "state_3",
+      "edge_type": "recalls",
+      "weight": 0.7587764166913973
+    },
+    {
+      "source": "memory_tmpl_4",
+      "target": "state_4",
+      "edge_type": "recalls",
+      "weight": 0.11100500765620816
+    },
+    {
+      "source": "memory_tmpl_4",
+      "target": "memory_mem_6",
+      "edge_type": "recalls",
+      "weight": 0.7587764166913973
+    },
+    {
+      "source": "memory_tmpl_1",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.12085632526824933
+    },
+    {
+      "source": "memory_tmpl_1",
+      "target": "state_2",
+      "edge_type": "recalls",
+      "weight": 0.15624578318871957
+    },
+    {
+      "source": "memory_tmpl_1",
+      "target": "state_3",
+      "edge_type": "recalls",
+      "weight": 0.8261152479313716
+    },
+    {
+      "source": "memory_tmpl_1",
+      "target": "state_4",
+      "edge_type": "recalls",
+      "weight": 0.12085632526824933
+    },
+    {
+      "source": "memory_tmpl_1",
+      "target": "memory_mem_6",
+      "edge_type": "recalls",
+      "weight": 0.8261152479313716
+    },
+    {
+      "source": "memory_tmpl_2",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.08217526344170711
+    },
+    {
+      "source": "memory_tmpl_2",
+      "target": "state_2",
+      "edge_type": "recalls",
+      "weight": 0.10623803401841486
+    },
+    {
+      "source": "memory_tmpl_2",
+      "target": "state_3",
+      "edge_type": "recalls",
+      "weight": 0.5617102620098141
+    },
+    {
+      "source": "memory_tmpl_2",
+      "target": "state_4",
+      "edge_type": "recalls",
+      "weight": 0.08217526344170711
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.9999999949605161
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.12002282344572192
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_10",
+      "edge_type": "supports",
+      "weight": 0.11205741400498831
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_2",
+      "target": "memory_tmpl_3",
+      "edge_type": "recalls",
+      "weight": 0.8799999981629302
+    },
+    {
+      "source": "state_2",
+      "target": "memory_tmpl_4",
+      "edge_type": "recalls",
+      "weight": 0.14350977758605232
+    },
+    {
+      "source": "state_2",
+      "target": "memory_tmpl_1",
+      "edge_type": "recalls",
+      "weight": 0.15624578318871957
+    },
+    {
+      "source": "state_2",
+      "target": "memory_tmpl_2",
+      "edge_type": "recalls",
+      "weight": 0.10623803401841486
+    },
+    {
+      "source": "state_2",
+      "target": "state_3",
+      "edge_type": "refines",
+      "weight": 0.8
+    },
+    {
+      "source": "state_2",
+      "target": "state_4",
+      "edge_type": "refines",
+      "weight": 0.7
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.9999999930372446
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_10",
+      "edge_type": "supports",
+      "weight": 0.5261840735804891
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.03336082064435621
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_3",
+      "target": "memory_tmpl_4",
+      "edge_type": "recalls",
+      "weight": 0.7587764166913973
+    },
+    {
+      "source": "state_3",
+      "target": "memory_tmpl_1",
+      "edge_type": "recalls",
+      "weight": 0.8261152479313716
+    },
+    {
+      "source": "state_3",
+      "target": "memory_tmpl_3",
+      "edge_type": "recalls",
+      "weight": 0.5654664789758016
+    },
+    {
+      "source": "state_3",
+      "target": "memory_tmpl_2",
+      "edge_type": "recalls",
+      "weight": 0.5617102620098141
+    },
+    {
+      "source": "state_3",
+      "target": "memory_mem_6",
+      "edge_type": "derives",
+      "weight": 0.86
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.03336082064435621
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.03336082064435621
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.9999999978014338
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.11947794915708633
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_8",
+      "edge_type": "supports",
+      "weight": 0.025071792465669814
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_4",
+      "target": "memory_tmpl_3",
+      "edge_type": "recalls",
+      "weight": 0.879999997158048
+    },
+    {
+      "source": "state_4",
+      "target": "memory_tmpl_4",
+      "edge_type": "recalls",
+      "weight": 0.11100500765620816
+    },
+    {
+      "source": "state_4",
+      "target": "memory_tmpl_1",
+      "edge_type": "recalls",
+      "weight": 0.12085632526824933
+    },
+    {
+      "source": "state_4",
+      "target": "memory_tmpl_2",
+      "edge_type": "recalls",
+      "weight": 0.08217526344170711
+    },
+    {
+      "source": "kg_doc_8",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.025071792465669814
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "state_3",
+      "edge_type": "recalls",
+      "weight": 0.86
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.9999999930372446
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_10",
+      "edge_type": "supports",
+      "weight": 0.5261840735804891
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.03336082064435621
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "memory_tmpl_1",
+      "edge_type": "recalls",
+      "weight": 0.8261152479313716
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "memory_tmpl_4",
+      "edge_type": "recalls",
+      "weight": 0.7587764166913973
+    }
+  ]
+}

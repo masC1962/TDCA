@@ -1,0 +1,161 @@
+{
+  "question": "VEU, the American television channel owned by Golden West Broadcasting was similar to a defunct television servied owned by who?",
+  "final_answer": "Jerrold Perenchio",
+  "best_node": {
+    "node_id": "state_1",
+    "node_type": "state",
+    "content": "VEU, the American television channel owned by Golden West Broadcasting was similar to a defunct television servied owned by who?",
+    "depth": 0,
+    "parent_id": null,
+    "value": 0.7658638845061945,
+    "temperature": 0.7534763207809236,
+    "expanded": true,
+    "visit_count": 1,
+    "persistent": false,
+    "score_breakdown": {
+      "task_progress": 0.9346283461712557,
+      "evidence_support": 0.8077304299154577,
+      "memory_usefulness": 0.4634494347728014,
+      "answerability": 0.8038652149577288,
+      "uncertainty": 0.1546085226152176
+    },
+    "metadata": {
+      "diffusion_delta": 0.08352417354638275,
+      "diffusion_gain": 0.08352417354638275
+    }
+  },
+  "final_synthesis_node_ids": [
+    "state_3",
+    "state_2",
+    "state_4",
+    "memory_mem_5",
+    "state_1"
+  ],
+  "answer_history": [
+    {
+      "node_id": "",
+      "answer_text": "Westinghouse Broadcasting",
+      "previous_answer": "",
+      "confidence": 0.28,
+      "score": 0.16880000000000003,
+      "source": "closed_book_initial",
+      "step": 0,
+      "evidence_ids": [],
+      "kind": "anytime_answer"
+    },
+    {
+      "node_id": "memory_mem_4",
+      "content": "Conclusion: The answer to 'What was the name of the defunct television service similar to VEU' is National Subscription Television.",
+      "answer_text": "National Subscription Television",
+      "value": 0.8464,
+      "evidence_ids": [
+        "doc_8"
+      ],
+      "step": 2
+    },
+    {
+      "node_id": "state_2",
+      "answer_text": "National Subscription Television",
+      "previous_answer": "Westinghouse Broadcasting",
+      "confidence": 0.92,
+      "score": 0.8186943090820704,
+      "source": "expansion_candidate",
+      "step": 1,
+      "evidence_ids": [
+        "doc_8",
+        "doc_2",
+        "doc_5",
+        "doc_10"
+      ],
+      "kind": "anytime_answer"
+    },
+    {
+      "node_id": "memory_mem_5",
+      "content": "Conclusion: The answer to 'Who owned ONTV' is Jerrold Perenchio.",
+      "answer_text": "Jerrold Perenchio",
+      "value": 0.9999999861756705,
+      "confidence": 0.95,
+      "evidence_ids": [
+        "doc_2",
+        "doc_8"
+      ],
+      "step": 3,
+      "kind": "intermediate_answer"
+    },
+    {
+      "node_id": "memory_mem_6",
+      "content": "Conclusion: The answer to 'Who owned ONTV, the defunct television service similar to VEU' is Jerrold Perenchio.",
+      "answer_text": "Jerrold Perenchio",
+      "value": 0.999999996713477,
+      "confidence": 0.95,
+      "evidence_ids": [
+        "doc_8",
+        "doc_2"
+      ],
+      "step": 4,
+      "kind": "intermediate_answer"
+    },
+    {
+      "node_id": "state_1",
+      "answer_text": "Jerrold Perenchio",
+      "previous_answer": "National Subscription Television",
+      "confidence": 0.8038652149577288,
+      "score": 0.879197204435749,
+      "source": "final_synthesis",
+      "step": 7,
+      "evidence_ids": [
+        "doc_8",
+        "doc_2",
+        "doc_10",
+        "doc_5"
+      ],
+      "kind": "anytime_answer"
+    },
+    {
+      "node_id": "memory_mem_7",
+      "content": "Conclusion: The answer to 'VEU, the American television channel owned by Golden West Broadcasting was similar to a defunct television servied owned by who' is Jerrold Perenchio.",
+      "answer_text": "Jerrold Perenchio",
+      "value": 0.7912,
+      "evidence_ids": [
+        "doc_8",
+        "doc_2"
+      ],
+      "step": 8
+    },
+    {
+      "node_id": "state_1",
+      "answer_text": "Jerrold Perenchio",
+      "source": "answer_judge",
+      "choice": "A",
+      "candidate_source": "anytime",
+      "base_score": 1.0,
+      "judge_confidence": 0.0,
+      "judge_reason": "Original question asks who owned the defunct service; evidence shows Jerrold Perenchio was an owner of ONTV.",
+      "step": 7,
+      "kind": "final_answer_selection"
+    }
+  ],
+  "anytime_answer": "Jerrold Perenchio",
+  "anytime_answer_score": 0.879197204435749,
+  "anytime_answer_source": "final_synthesis",
+  "anytime_answer_node_id": "state_1",
+  "stats": {
+    "steps": 7,
+    "llm_calls": 14,
+    "generated_tokens": 963,
+    "token_budget_remaining": 237,
+    "total_nodes": 17,
+    "kg_nodes": 7,
+    "memory_nodes": 6,
+    "state_nodes": 4,
+    "deleted_state_nodes": 3,
+    "scheduler_mode": "tdca",
+    "scoring_mode": "hybrid",
+    "stop_reason": "frontier_empty",
+    "goal_kind": "bridge",
+    "goal_completion": 1.0,
+    "anytime_answer": "Jerrold Perenchio",
+    "anytime_answer_score": 0.879197204435749,
+    "anytime_answer_source": "final_synthesis"
+  }
+}

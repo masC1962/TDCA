@@ -1,0 +1,1207 @@
+{
+  "nodes": [
+    {
+      "node_id": "state_1",
+      "node_type": "state",
+      "content": "In what city did the \"Prince of tenors\" star in a film based on an opera by Giacomo Puccini?",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.8464761815099666,
+      "temperature": 0.6929232057720325,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.9850001178996529,
+        "evidence_support": 0.9558826997048613,
+        "memory_usefulness": 0.5139667251540021,
+        "answerability": 0.8779413498524307,
+        "uncertainty": 0.12794111405312497
+      },
+      "metadata": {
+        "diffusion_delta": 0.0695097713905446,
+        "diffusion_gain": 0.0695097713905446
+      }
+    },
+    {
+      "node_id": "kg_doc_4",
+      "node_type": "kg",
+      "content": "Franco Corelli (8 April 1921 – 29 October 2003) was an Italian tenor who had a major international opera career between 1951 and 1976. Associated in particular with the spinto and dramatic tenor roles of the Italian repertory, he was celebrated universally for his powerhouse voice, electrifying top notes, clear timbre, passionate singing and remarkable performances. Dubbed the \"Prince of tenors\", Corelli possessed handsome features and a charismatic stage presence which endeared him to audiences. He had a long and fruitful partnership with the Metropolitan Opera in New York City between 1961 and 1975. He also appeared on the stages of most of the major opera houses in Europe and with opera companies throughout North America.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.999999994921192,
+      "temperature": 0.999999994921192,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Franco Corelli",
+        "raw_score": 5.521914507972038,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_7",
+      "node_type": "kg",
+      "content": "Tosca is a 1956 Italian musical film directed by Carmine Gallone and starring Franca Duval, Afro Poli and Franco Corelli. It is based on the opera \"Tosca\" by Giacomo Puccini. It was made at Cinecittà in Rome.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.99999999687492,
+      "temperature": 0.99999999687492,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Tosca (1956 film)",
+        "raw_score": 2.8988566308040804,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_2",
+      "node_type": "kg",
+      "content": "La bohème (also known as \"La bohème de Puccini\") is a 1988 Italian-French film of an opera directed by Luigi Comencini. It is based on Giacomo Puccini's \"La bohème\".",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.7863666646480109,
+      "temperature": 0.7863666646480109,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "La Bohème (1988 film)",
+        "raw_score": 5.897820153960347,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_6",
+      "node_type": "kg",
+      "content": "La fanciulla del West (\"The Girl of the West\") is an opera in three acts by Giacomo Puccini to an Italian libretto by and , based on the play \"The Girl of the Golden West\" by the American author David Belasco. \"Fanciulla\" followed \"Madama Butterfly\", which was also based on a Belasco play. The opera has fewer of the show-stopping highlights that are characteristic of other Puccini works, but is admired for its impressive orchestration and for a score that is more melodically integrated than is typical of his previous work. \"Fanciulla\" displays influences from composers Claude Debussy and Richard Strauss, without being in any way imitative. Similarities between the libretto and the work of Richard Wagner have also been found, though some attribute this more to the original plot of the play, and have asserted that the opera remains quintessentially Italian.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.16417465003107437,
+      "temperature": 0.16417465003107437,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "La fanciulla del West",
+        "raw_score": 4.7186785931408535,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "memory_mem_1",
+      "node_type": "memory",
+      "content": "Template: for compositional multi-hop questions, first solve the intermediate entity and then ask for the final attribute.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9599998077388796,
+      "temperature": 1.686715630952422,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.96,
+        "tag": "compositional_template",
+        "memory_kind": "template",
+        "raw_score": 0.1447011373841392,
+        "source": "memory",
+        "diffusion_delta": 0.006785166562100375,
+        "diffusion_gain": 0.006785166562100375
+      }
+    },
+    {
+      "node_id": "memory_mem_3",
+      "node_type": "memory",
+      "content": "Template: when evidence already grounds the answer, switch from branching to short verification and synthesis.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.8799999914225256,
+      "temperature": 0.5213756239003767,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.88,
+        "tag": "verification_then_stop",
+        "memory_kind": "template",
+        "raw_score": 0.10840953379583419,
+        "source": "memory",
+        "diffusion_delta": -0.0005273241456963396,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "state_2",
+      "node_type": "state",
+      "content": "In which city was the 1956 film 'Tosca' produced?",
+      "depth": 1,
+      "parent_id": "state_1",
+      "value": 0.526003032292448,
+      "temperature": 1.287541736743422,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.5666624044643926,
+        "evidence_support": 0.5947587059410241,
+        "memory_usefulness": 0.5139667251540021,
+        "answerability": 0.5418237974149565,
+        "uncertainty": 0.19294343293061567
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_7",
+          "doc_4",
+          "doc_1",
+          "doc_6"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "diffusion_delta": 0.15136641264704886,
+        "diffusion_gain": 0.15136641264704886
+      }
+    },
+    {
+      "node_id": "kg_doc_1",
+      "node_type": "kg",
+      "content": "Ron Bottcher (11 May 1940 – 12 April 1991) was an American operatic baritone who was actively performing with both the New York City Opera (NYCO) and the Metropolitan Opera during the 1960s. A native of Sandpoint, Idaho, he earned music degrees from the University of Montana and the Curtis Institute of Music. He made his debut at the Santa Fe Opera in the summer of 1961, where he portrayed the roles of Leopold in Richard Strauss' \"Der Rosenkavalier\", Marcello in Giacomo Puccini's \"La bohème\", and the Head waiter in Paul Hindemith's \"Neues vom Tage\". His roles at the NYCO included Escamillo in Georges Bizet's \"Carmen\" and Sharpless in Puccini's \"Madama Butterfly\" among others. At the Met he created roles in the world premieres of Samuel Barber's \"Antony and Cleopatra\" and Marvin David Levy's \"Mourning Becomes Electra\". He died at the age of 50 at Lenox Hill Hospital in Manhattan of AIDS related illness.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.021913578857922715,
+      "temperature": 0.021913578857922715,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Ron Bottcher",
+        "raw_score": 1.2335858747599295,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "state_3",
+      "node_type": "state",
+      "content": "Who is known as the 'Prince of tenors'?",
+      "depth": 1,
+      "parent_id": "state_1",
+      "value": 0.6551815346240093,
+      "temperature": 0.8661664662648119,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.6424586898235557,
+        "evidence_support": 0.817688956997386,
+        "memory_usefulness": 0.5139667251540021,
+        "answerability": 0.7532889229431374,
+        "uncertainty": 0.1528159877404705
+      },
+      "metadata": {
+        "kind": "bridge",
+        "evidence_ids": [
+          "doc_4",
+          "doc_2",
+          "doc_9",
+          "doc_3"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "diffusion_delta": 0.08628900661927918,
+        "diffusion_gain": 0.08628900661927918
+      }
+    },
+    {
+      "node_id": "kg_doc_9",
+      "node_type": "kg",
+      "content": "Cesira Ferrani (May 8, 1863 in Turin – May 4, 1943 in Pollone) was an Italian operatic soprano who is best known for debuting two of the most iconic roles in opera history, Mimì in the original 1896 production of Giacomo Puccini's \"La bohème\" and the title role in Puccini's \"Manon Lescaut\" in its 1893 world premiere. Ferrani sang a wide repertoire that encompassed not only verismo opera but the works of composers like Verdi, Gounod, Wagner, and Debussy.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.18446254450463492,
+      "temperature": 0.18446254450463492,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Cesira Ferrani",
+        "raw_score": 1.830400155896128,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_3",
+      "node_type": "kg",
+      "content": "Gianni Schicchi (] ) is a comic opera in one act by Giacomo Puccini to an Italian libretto by Giovacchino Forzano, composed in 1917–18. The libretto is based on an incident mentioned in Dante's \"Divine Comedy\". The work is the third and final part of Puccini's \"Il trittico\" (The Triptych)—three one-act operas with contrasting themes, originally written to be presented together. Although it continues to be performed with one or both of the other \"trittico\" operas, \"Gianni Schicchi\" is now more frequently staged either alone or with short operas by other composers. The aria \"O mio babbino caro\" is one of Puccini's best known, and one of the most popular arias in opera.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.5642078688676866,
+      "temperature": 0.5642078688676866,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Gianni Schicchi",
+        "raw_score": 2.8015040227248496,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "state_4",
+      "node_type": "state",
+      "content": "In which film based on a Puccini opera did Franco Corelli star?",
+      "depth": 2,
+      "parent_id": "state_3",
+      "value": 0.563894470707414,
+      "temperature": 0.43816507276208844,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.7060097775050095,
+        "evidence_support": 0.6941464044264984,
+        "memory_usefulness": 0.0,
+        "answerability": 0.6470732022132492,
+        "uncertainty": 0.17505364720323027
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_7",
+          "doc_4",
+          "doc_2",
+          "doc_6"
+        ],
+        "memory_ids": [],
+        "diffusion_delta": 0.0055694660503658455,
+        "diffusion_gain": 0.0055694660503658455
+      }
+    },
+    {
+      "node_id": "state_5",
+      "node_type": "state",
+      "content": "In what city was that film shot or set?",
+      "depth": 2,
+      "parent_id": "state_3",
+      "value": 0.6036538858467738,
+      "temperature": 0.3767223452643176,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.660802175121694,
+        "evidence_support": 0.8716403843448517,
+        "memory_usefulness": 0.0,
+        "answerability": 0.6802646366168702,
+        "uncertainty": 0.14310473081792668
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_5",
+          "doc_7",
+          "doc_3",
+          "doc_6"
+        ],
+        "memory_ids": [],
+        "diffusion_delta": 0.0637860567670937,
+        "diffusion_gain": 0.0637860567670937
+      }
+    },
+    {
+      "node_id": "kg_doc_5",
+      "node_type": "kg",
+      "content": "\"O mio babbino caro \" (\"Oh My Beloved Father\") is a soprano aria from the opera \"Gianni Schicchi\" (1918) by Giacomo Puccini to a libretto by Giovacchino Forzano. It is sung by Lauretta after tensions between her father Schicchi and the family of Rinuccio, the boy she loves, have reached a breaking point that threatens to separate her from Rinuccio. It provides an interlude expressing lyrical simplicity and single-hearted love in contrast with the atmosphere of hypocrisy, jealousy, double-dealing, and feuding in the medieval Florence of Puccini's only comedy. It provides the only set-piece in the through-composed opera.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999676308559,
+      "temperature": 0.9999999676308559,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "O mio babbino caro",
+        "raw_score": 3.1321208678581938,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "memory_mem_4",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'In which city was the 1956 film 'Tosca' produced' is Rome.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.874,
+      "temperature": 1.1740604332225992,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "derived_fact",
+        "target_question": "In which city was the 1956 film 'Tosca' produced?",
+        "target_question_norm": "in which city was the 1956 film tosca produced",
+        "relation_signature": "generic",
+        "answer_text": "Rome",
+        "support_score": 0.5947587059410241,
+        "evidence_ids": [
+          "doc_7"
+        ],
+        "derived_from_state": "state_2",
+        "diffusion_delta": 0.12967189546407365,
+        "diffusion_gain": 0.12967189546407365
+      }
+    },
+    {
+      "node_id": "state_7",
+      "node_type": "state",
+      "content": "Who is the 'Prince of tenors'?",
+      "depth": 3,
+      "parent_id": "state_5",
+      "value": 0.46571886323919665,
+      "temperature": 0.22520375325218378,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.554842222737436,
+        "evidence_support": 0.5599934655676221,
+        "memory_usefulness": 0.015714224342706522,
+        "answerability": 0.6244411772282554,
+        "uncertainty": 0.199201176197828
+      },
+      "metadata": {
+        "kind": "bridge",
+        "evidence_ids": [
+          "doc_4",
+          "doc_9",
+          "doc_10",
+          "doc_1"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "diffusion_delta": 0.02763387815039345,
+        "diffusion_gain": 0.02763387815039345
+      }
+    },
+    {
+      "node_id": "kg_doc_10",
+      "node_type": "kg",
+      "content": "Jacopo (Giacomo) Puccini (] ; 26 January 1712 16 May 1781) was an 18th-century Italian composer who lived and worked primarily in Lucca, Tuscany. He was the first of five generations of composers, the most famous of whom was his great-great-grandson, the opera composer Giacomo Puccini.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999685773437,
+      "temperature": 0.9999999685773437,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Jacopo Puccini",
+        "raw_score": 3.67868550501537,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "state_8",
+      "node_type": "state",
+      "content": "Which film based on a Puccini opera starred the 'Prince of tenors'?",
+      "depth": 3,
+      "parent_id": "state_5",
+      "value": 0.5787830743489777,
+      "temperature": 0.40058680277960423,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.7298348291619237,
+        "evidence_support": 0.7021285825023895,
+        "memory_usefulness": 0.008007171022200941,
+        "answerability": 0.6621754023623059,
+        "uncertainty": 0.17361685514956987
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_4",
+          "doc_2",
+          "doc_7",
+          "doc_6"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "diffusion_delta": -0.11141819440191358,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "state_9",
+      "node_type": "state",
+      "content": "Which film based on an opera by Giacomo Puccini did Franco Corelli star in?",
+      "depth": 4,
+      "parent_id": "state_7",
+      "value": 0.5399334320692635,
+      "temperature": 0.4807076859259928,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.718648715362115,
+        "evidence_support": 0.6071367445290964,
+        "memory_usefulness": 0.0,
+        "answerability": 0.6257905944867704,
+        "uncertainty": 0.19071538598476265
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_7",
+          "doc_2",
+          "doc_4",
+          "doc_6"
+        ],
+        "memory_ids": [],
+        "diffusion_delta": -0.2346741304501926,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "state_10",
+      "node_type": "state",
+      "content": "In what city was that film shot or primarily set?",
+      "depth": 4,
+      "parent_id": "state_7",
+      "value": 0.5213267768375778,
+      "temperature": 0.4721300751348577,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.6051757501154805,
+        "evidence_support": 0.7080332519736354,
+        "memory_usefulness": 0.0,
+        "answerability": 0.5984610704312622,
+        "uncertainty": 0.17255401464474562
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_10",
+          "doc_5",
+          "doc_7",
+          "doc_3"
+        ],
+        "memory_ids": [],
+        "diffusion_delta": -0.22438541902934828,
+        "diffusion_gain": 0.0
+      }
+    }
+  ],
+  "edges": [
+    {
+      "source": "state_1",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.9999999870110234
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.911765412398699
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.7863666646480109
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.9599998077388796
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.0679336425691247
+    },
+    {
+      "source": "state_1",
+      "target": "state_2",
+      "edge_type": "refines",
+      "weight": 0.95
+    },
+    {
+      "source": "state_1",
+      "target": "state_3",
+      "edge_type": "refines",
+      "weight": 0.9
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.9999999870110234
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.18951741500712813
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.9999999937226429
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.38829281442739993
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.18951741500712813
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "state_7",
+      "edge_type": "supports",
+      "weight": 0.999999994921192
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "state_8",
+      "edge_type": "supports",
+      "weight": 0.9999999866259459
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "state_9",
+      "edge_type": "supports",
+      "weight": 0.13552250084026884
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.911765412398699
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.99999999687492
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.999999994425597
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.7432808010588474
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.99999999687492
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "state_8",
+      "edge_type": "supports",
+      "weight": 0.14211317626656014
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "state_9",
+      "edge_type": "supports",
+      "weight": 0.9999999944578098
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "state_10",
+      "edge_type": "supports",
+      "weight": 0.16685394910385465
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.7863666646480109
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.635377920272129
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.20943788026376728
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "state_8",
+      "edge_type": "supports",
+      "weight": 0.40425717837883324
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "state_9",
+      "edge_type": "supports",
+      "weight": 0.21427349460038295
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "state_8",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "state_9",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.9599998077388796
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_2",
+      "edge_type": "recalls",
+      "weight": 0.9599998077388796
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_3",
+      "edge_type": "recalls",
+      "weight": 0.9599998077388796
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "memory_mem_4",
+      "edge_type": "recalls",
+      "weight": 0.9599998077388796
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_7",
+      "edge_type": "recalls",
+      "weight": 0.029343738574366864
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_8",
+      "edge_type": "recalls",
+      "weight": 0.014952079598173929
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.0679336425691247
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_2",
+      "edge_type": "recalls",
+      "weight": 0.0679336425691247
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_3",
+      "edge_type": "recalls",
+      "weight": 0.0679336425691247
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "memory_mem_4",
+      "edge_type": "recalls",
+      "weight": 0.0679336425691247
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_7",
+      "edge_type": "recalls",
+      "weight": 0.0020847101110461827
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_8",
+      "edge_type": "recalls",
+      "weight": 0.0010622624462279543
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.99999999687492
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.18951741500712813
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.021913578857922715
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_2",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.9599998077388796
+    },
+    {
+      "source": "state_2",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.0679336425691247
+    },
+    {
+      "source": "state_2",
+      "target": "memory_mem_4",
+      "edge_type": "derives",
+      "weight": 0.95
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.021913578857922715
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.021913578857922715
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "state_7",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.9999999937226429
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.635377920272129
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.18446254450463492
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_3",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.9599998077388796
+    },
+    {
+      "source": "state_3",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.0679336425691247
+    },
+    {
+      "source": "state_3",
+      "target": "state_4",
+      "edge_type": "refines",
+      "weight": 0.9
+    },
+    {
+      "source": "state_3",
+      "target": "state_5",
+      "edge_type": "refines",
+      "weight": 0.8
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.18446254450463492
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "state_7",
+      "edge_type": "supports",
+      "weight": 0.1199869362140523
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.5642078688676866
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "state_10",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.999999994425597
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.38829281442739993
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.20943788026376728
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_5",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.9999999676308559
+    },
+    {
+      "source": "state_5",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.7432808010588474
+    },
+    {
+      "source": "state_5",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.5642078688676866
+    },
+    {
+      "source": "state_5",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_5",
+      "target": "state_7",
+      "edge_type": "refines",
+      "weight": 0.9
+    },
+    {
+      "source": "state_5",
+      "target": "state_8",
+      "edge_type": "refines",
+      "weight": 0.85
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.9999999676308559
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "state_10",
+      "edge_type": "supports",
+      "weight": 0.4160665353699271
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "state_2",
+      "edge_type": "recalls",
+      "weight": 0.95
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.99999999687492
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.18951741500712813
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.021913578857922715
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.9599998077388796
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.0679336425691247
+    },
+    {
+      "source": "state_7",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.999999994921192
+    },
+    {
+      "source": "state_7",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.1199869362140523
+    },
+    {
+      "source": "state_7",
+      "target": "kg_doc_10",
+      "edge_type": "supports",
+      "weight": 0.07624957188628398
+    },
+    {
+      "source": "state_7",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_7",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.029343738574366864
+    },
+    {
+      "source": "state_7",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.0020847101110461827
+    },
+    {
+      "source": "state_7",
+      "target": "state_9",
+      "edge_type": "refines",
+      "weight": 0.9
+    },
+    {
+      "source": "state_7",
+      "target": "state_10",
+      "edge_type": "refines",
+      "weight": 0.8
+    },
+    {
+      "source": "kg_doc_10",
+      "target": "state_7",
+      "edge_type": "supports",
+      "weight": 0.07624957188628398
+    },
+    {
+      "source": "kg_doc_10",
+      "target": "state_10",
+      "edge_type": "supports",
+      "weight": 0.9999999685773437
+    },
+    {
+      "source": "state_8",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.9999999866259459
+    },
+    {
+      "source": "state_8",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.40425717837883324
+    },
+    {
+      "source": "state_8",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.14211317626656014
+    },
+    {
+      "source": "state_8",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_8",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.014952079598173929
+    },
+    {
+      "source": "state_8",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.0010622624462279543
+    },
+    {
+      "source": "state_9",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.9999999944578098
+    },
+    {
+      "source": "state_9",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.21427349460038295
+    },
+    {
+      "source": "state_9",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.13552250084026884
+    },
+    {
+      "source": "state_9",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_10",
+      "target": "kg_doc_10",
+      "edge_type": "supports",
+      "weight": 0.9999999685773437
+    },
+    {
+      "source": "state_10",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.4160665353699271
+    },
+    {
+      "source": "state_10",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.16685394910385465
+    },
+    {
+      "source": "state_10",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.0
+    }
+  ]
+}

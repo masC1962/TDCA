@@ -1,0 +1,1498 @@
+{
+  "nodes": [
+    {
+      "node_id": "state_1",
+      "node_type": "state",
+      "content": "What city is the actress in Signora Enrica from?",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.6280139265353636,
+      "temperature": 0.8931976998526956,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.8299999961909645,
+        "evidence_support": 0.4999999887969543,
+        "memory_usefulness": 0.4634494347728014,
+        "answerability": 0.7499999943984771,
+        "uncertainty": 0.21000000201654823
+      },
+      "metadata": {
+        "diffusion_delta": -0.06297445229565724,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "kg_doc_9",
+      "node_type": "kg",
+      "content": "Signora Enrica () is a 2010 Italo-Turkish comedy-drama film, written and directed by Ali İlhan, starring Claudia Cardinale as an elderly Italian woman who takes in a young Turkish exchange student. The film, which is scheduled to go on nationwide general release across Turkey on , was selected for the 47th International Antalya Golden Orange Film Festival.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.999999981091608,
+      "temperature": 0.999999981091608,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Signora Enrica",
+        "raw_score": 0.13392893765246516,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_15",
+      "node_type": "kg",
+      "content": "Darwin (/ ˈdɑːrwɪn / (listen) DAR - win) is the capital city of the Northern Territory of Australia. Situated on the Timor Sea, Darwin is the largest city in the sparsely populated Northern Territory, with a population of 142,300. It is the smallest and most northerly of the Australian capital cities, and acts as the Top End's regional centre.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.25,
+      "temperature": 0.25,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Darwin, Northern Territory",
+        "raw_score": 0.05752047727471077,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_11",
+      "node_type": "kg",
+      "content": "In 1931, the Spanish Second Republic gave the castle to the city of Palma, along with the forest surrounding it. It became a museum in 1932, being restored in 1976 to become the city's History museum. Thanks to the parking lot and road built next to the castle, it currently welcomes a great number of visitors. The main yard is the seat to many different public ceremonies, such as protocollary and cultural acts, and concerts. Due to its location and visibility from the sea or any other point of the city, it has become one the city's symbols.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0,
+      "temperature": 0.0,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Bellver Castle",
+        "raw_score": 0.040418407613757125,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_19",
+      "node_type": "kg",
+      "content": "The Balloon Farm, an American musical act from New Jersey, took its name from a New York City nightclub. It is best known for its sole hit song, \"A Question of Temperature,\" which made the \"Billboard\" charts in February 1968, peaking in the top 40.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.25,
+      "temperature": 0.25,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "The Balloon Farm",
+        "raw_score": 0.07706987605658581,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "memory_mem_3",
+      "node_type": "memory",
+      "content": "Template: when evidence already grounds the answer, switch from branching to short verification and synthesis.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.8799999913901771,
+      "temperature": 0.45918685146960764,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.88,
+        "tag": "verification_then_stop",
+        "memory_kind": "template",
+        "raw_score": 0.778556783441037,
+        "source": "memory",
+        "diffusion_delta": 0.014905958955747312,
+        "diffusion_gain": 0.014905958955747312
+      }
+    },
+    {
+      "node_id": "memory_mem_1",
+      "node_type": "memory",
+      "content": "Template: for compositional multi-hop questions, first solve the intermediate entity and then ask for the final attribute.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9599998077388796,
+      "temperature": 0.7895475131476593,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.96,
+        "tag": "compositional_template",
+        "memory_kind": "template",
+        "raw_score": 0.18470114999581103,
+        "source": "memory",
+        "diffusion_delta": 0.015602971083075623,
+        "diffusion_gain": 0.015602971083075623
+      }
+    },
+    {
+      "node_id": "state_2",
+      "node_type": "state",
+      "content": "Who is the actress starring in Signora Enrica?",
+      "depth": 1,
+      "parent_id": "state_1",
+      "value": 0.5746093355944621,
+      "temperature": 1.765089432893806,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.7033333301189066,
+        "evidence_support": 0.499999990545804,
+        "memory_usefulness": 0.5139667251540021,
+        "answerability": 0.6833333286062353,
+        "uncertainty": 0.21000000170175526
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_9",
+          "doc_15",
+          "doc_11",
+          "doc_16"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "goal_slot_name": "actress_in_signora_enrica",
+        "goal_slot_role": "generic",
+        "goal_terminal": false,
+        "diffusion_delta": 0.05444940823244204,
+        "diffusion_gain": 0.05444940823244204
+      }
+    },
+    {
+      "node_id": "kg_doc_16",
+      "node_type": "kg",
+      "content": "In response to organized crime, on August 25, 1953, the FBI created the Top Hoodlum Program. The national office directed field offices to gather information on mobsters in their territories and to report it regularly to Washington for a centralized collection of intelligence on racketeers. After the Racketeer Influenced and Corrupt Organizations Act, or RICO Act, took effect, the FBI began investigating the former Prohibition-organized groups, which had become fronts for crime in major cities and small towns. All of the FBI work was done undercover and from within these organizations, using the provisions provided in the RICO Act. Gradually the agency dismantled many of the groups. Although Hoover initially denied the existence of a National Crime Syndicate in the United States, the Bureau later conducted operations against known organized crime syndicates and families, including those headed by Sam Giancana and John Gotti. The RICO Act is still used today for all organized crime and any individuals who might fall under the Act.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0,
+      "temperature": 0.0,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Federal Bureau of Investigation",
+        "raw_score": 0.06959326317910804,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "state_3",
+      "node_type": "state",
+      "content": "Where was Claudia Cardinale born?",
+      "depth": 2,
+      "parent_id": "state_2",
+      "value": 0.5966132302085954,
+      "temperature": 1.3338443510614808,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.4582330634099405,
+        "evidence_support": 0.5242148923821778,
+        "memory_usefulness": 0.0,
+        "answerability": 0.5621074461910889,
+        "uncertainty": 0.205641319371208
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_5",
+          "doc_9",
+          "doc_2",
+          "doc_13"
+        ],
+        "memory_ids": [],
+        "diffusion_delta": 0.15647150741616334,
+        "diffusion_gain": 0.15647150741616334
+      }
+    },
+    {
+      "node_id": "kg_doc_5",
+      "node_type": "kg",
+      "content": "Claudia Cardinale was born Claude Joséphine Rose Cardinale in La Goulette, a neighborhood of Tunis, French protectorate of Tunisia, on 15 April 1938. Her mother, Yolande Greco, was born in Tunisia to Sicilian emigrants from Trapani. Her maternal grandparents had a small shipbuilding firm in Trapani, but later settled in La Goulette, where a large Italian community existed. Her father, Francesco Cardinale, was a railway worker, born in Gela, Sicily. Her native languages were French, Tunisian Arabic, and the Sicilian language of her parents. She did not learn to speak Italian until she had already begun to be cast for Italian films.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999893644661,
+      "temperature": 0.9999999893644661,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Claudia Cardinale",
+        "raw_score": 0.23903960553559156,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_2",
+      "node_type": "kg",
+      "content": "Born in San Rafael, California into a family that was allegedly descended from one of the earliest Spanish families to settle in California, Marin Sais began her acting career as a teenager after travelling to New York City where she appeared in vaudeville.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.25,
+      "temperature": 0.25,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Marin Sais",
+        "raw_score": 0.08745247960936184,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_13",
+      "node_type": "kg",
+      "content": "Michael Anthony Petrelis (born January 26, 1959) is an American AIDS activist, LGBTQ rights activist, and blogger. He was diagnosed with Acquired Immunodeficiency Syndrome (AIDS) in 1985 in New York City, New York. As a member of the Lavender Hill Mob, a forerunner to the AIDS Coalition to Unleash Power (ACT UP), he was among the first AIDS activists to protest responses to the disease. He was a co-founding member of ACT UP in New York City, New York, and later helped organize ACT UP chapters in Portland, Oregon, Washington, D.C., and New Hampshire, as well as the ACT UP Presidential Project. Petrelis was also a founding member of Queer Nation/National Capital, the Washington D.C. chapter of the militant LGBTQ rights organization.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0,
+      "temperature": 0.0,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Michael Petrelis",
+        "raw_score": 0.04222835746571324,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "memory_mem_4",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'Who is the actress starring in Signora Enrica' is Claudia Cardinale.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 1.0,
+      "temperature": 1.2280693170384882,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "intermediate_answer",
+        "target_question": "Who is the actress starring in Signora Enrica?",
+        "target_question_norm": "who is the actress starring in signora enrica",
+        "relation_signature": "generic",
+        "answer_text": "Claudia Cardinale",
+        "support_score": 1.0,
+        "evidence_ids": [
+          "doc_9"
+        ],
+        "slot_name": "actress_in_signora_enrica",
+        "slot_type": "",
+        "slot_role": "generic",
+        "terminal": false,
+        "path_terminal": false,
+        "composition_kind": "",
+        "derived_from_state": "state_2",
+        "diffusion_delta": 0.03126997816289023,
+        "diffusion_gain": 0.03126997816289023
+      }
+    },
+    {
+      "node_id": "state_4",
+      "node_type": "state",
+      "content": "What city is Claudia Cardinale from?",
+      "depth": 2,
+      "parent_id": "state_2",
+      "value": 0.7554953956948617,
+      "temperature": 1.9379462409155006,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.7886867989422581,
+        "evidence_support": 0.9994056178040271,
+        "memory_usefulness": 0.2575466660582194,
+        "answerability": 0.8885916977909025,
+        "uncertainty": 0.12010698879527511
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_9",
+          "doc_5",
+          "doc_15",
+          "doc_19"
+        ],
+        "memory_ids": [
+          "mem_3"
+        ],
+        "diffusion_delta": 0.20371687370660352,
+        "diffusion_gain": 0.20371687370660352
+      }
+    },
+    {
+      "node_id": "memory_mem_5",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'What city is Claudia Cardinale from' is La Goulette.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.91908,
+      "temperature": 1.7929664495331776,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "answer_candidate",
+        "target_question": "What city is Claudia Cardinale from?",
+        "target_question_norm": "what city is claudia cardinale from",
+        "slot_key": "generic|location|target_attribute|claudia cardinale|what city is claudia cardinale from",
+        "slot_type": "location",
+        "relation_signature": "generic",
+        "answer_text": "La Goulette",
+        "support_score": 0.9994056178040271,
+        "evidence_ids": [
+          "doc_9",
+          "doc_5"
+        ],
+        "slot_name": "path_terminal",
+        "slot_role": "target_attribute",
+        "terminal": true,
+        "path_terminal": true,
+        "composition_kind": "path_terminal",
+        "derived_from_state": "state_4",
+        "diffusion_delta": 0.19886905348605333,
+        "diffusion_gain": 0.19886905348605333
+      }
+    },
+    {
+      "node_id": "memory_mem_6",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'What city is the actress in Signora Enrica from' is La Goulette.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.96,
+      "temperature": 0.5557847003135621,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "tdca_run",
+        "memory_kind": "answer_candidate",
+        "target_question": "What city is the actress in Signora Enrica from?",
+        "target_question_norm": "what city is the actress in signora enrica from",
+        "slot_key": "generic|location|root_answer|signora enrica|what city is the actress in signora enrica from",
+        "slot_type": "location",
+        "relation_signature": "generic",
+        "answer_text": "La Goulette",
+        "support_score": 0.96,
+        "evidence_ids": [
+          "doc_2",
+          "doc_5",
+          "doc_9",
+          "doc_15",
+          "doc_19"
+        ],
+        "slot_role": "target_attribute",
+        "terminal": true,
+        "path_terminal": true,
+        "coverage_count": 1,
+        "coverage_ratio": 1.0,
+        "composition_kind": "path_terminal",
+        "diffusion_delta": -0.0627357950491636,
+        "diffusion_gain": 0.0,
+        "score": 0.96,
+        "raw_score": 7.857382985167158
+      }
+    },
+    {
+      "node_id": "state_5",
+      "node_type": "state",
+      "content": "What city is La Goulette located in?",
+      "depth": 3,
+      "parent_id": "state_3",
+      "value": 0.47328888300140626,
+      "temperature": 1.2491250189537362,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.61888888491086,
+        "evidence_support": 0.4999999882999152,
+        "memory_usefulness": 0.0,
+        "answerability": 0.6388888830388465,
+        "uncertainty": 0.21000000210601527
+      },
+      "metadata": {
+        "kind": "bridge",
+        "evidence_ids": [
+          "doc_5",
+          "doc_7",
+          "doc_18",
+          "doc_15"
+        ],
+        "memory_ids": [],
+        "diffusion_delta": 0.2963752020407737,
+        "diffusion_gain": 0.2963752020407737
+      }
+    },
+    {
+      "node_id": "kg_doc_7",
+      "node_type": "kg",
+      "content": "Peppino e la vecchia signora (also known as \"Peppino e la nobile dama\") is a 1954 Italian comedy film directed by Emma Gramatica and Piero Ballerini.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0,
+      "temperature": 0.0,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Peppino e la vecchia signora",
+        "raw_score": 0.10633494873950063,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_18",
+      "node_type": "kg",
+      "content": "The Parliament of Great Britain was formed in 1707 following the ratification of the Acts of Union by both the Parliament of England and the Parliament of Scotland. The Acts created a new unified Kingdom of Great Britain and dissolved the separate English and Scottish parliaments in favour of a single parliament, located in the former home of the English parliament in the Palace of Westminster, near the City of London. This lasted nearly a century, until the Acts of Union 1800 merged the separate British and Irish Parliaments into a single Parliament of the United Kingdom with effect from 1 January 1801.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0,
+      "temperature": 0.0,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Parliament of Great Britain",
+        "raw_score": 0.07343723818012363,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "memory_mem_7",
+      "node_type": "memory",
+      "content": "Conclusion: Claudia Cardinale was born in Trapani.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.6966132302085953,
+      "temperature": 0.6484440414258053,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "answer_candidate",
+        "target_question": "Where was Claudia Cardinale born?",
+        "target_question_norm": "where was claudia cardinale born",
+        "slot_key": "birth|location|target_attribute|claudia cardinale|where was claudia cardinale born",
+        "slot_type": "location",
+        "relation_signature": "birth",
+        "answer_text": "Trapani",
+        "support_score": 0.5242148923821778,
+        "evidence_ids": [
+          "doc_5"
+        ],
+        "slot_name": "path_terminal",
+        "slot_role": "target_attribute",
+        "terminal": true,
+        "path_terminal": true,
+        "composition_kind": "path_terminal",
+        "derived_from_state": "state_3",
+        "diffusion_delta": 0.0567671335714075,
+        "diffusion_gain": 0.0567671335714075
+      }
+    },
+    {
+      "node_id": "state_6",
+      "node_type": "state",
+      "content": "What city is La Goulette a neighborhood of?",
+      "depth": 4,
+      "parent_id": "state_5",
+      "value": 0.45346666149262344,
+      "temperature": 0.9512924603935502,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.5766666631706915,
+        "evidence_support": 0.4999999897177201,
+        "memory_usefulness": 0.0,
+        "answerability": 0.6166666615255267,
+        "uncertainty": 0.21000000185081036
+      },
+      "metadata": {
+        "kind": "bridge",
+        "evidence_ids": [
+          "doc_5",
+          "doc_7",
+          "doc_15",
+          "doc_11"
+        ],
+        "memory_ids": [],
+        "diffusion_delta": 0.7608937924086018,
+        "diffusion_gain": 0.7608937924086018
+      }
+    },
+    {
+      "node_id": "memory_mem_8",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'What city is La Goulette located in' is Tunis.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 1.0,
+      "temperature": 0.6815574071506546,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "intermediate_answer",
+        "target_question": "What city is La Goulette located in?",
+        "target_question_norm": "what city is la goulette located in",
+        "relation_signature": "generic",
+        "answer_text": "Tunis",
+        "support_score": 1.0,
+        "evidence_ids": [
+          "doc_5"
+        ],
+        "slot_name": "",
+        "slot_type": "location",
+        "slot_role": "target_attribute",
+        "terminal": true,
+        "path_terminal": true,
+        "composition_kind": "path_terminal",
+        "derived_from_state": "state_5",
+        "diffusion_delta": -0.07851598788433445,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "memory_mem_9",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'What city is La Goulette a neighborhood of' is Tunis.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.92,
+      "temperature": 0.7622217313657151,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "answer_candidate",
+        "target_question": "What city is La Goulette a neighborhood of?",
+        "target_question_norm": "what city is la goulette a neighborhood of",
+        "slot_key": "generic|location|target_attribute|la goulette|what city is la goulette a neighborhood of",
+        "slot_type": "location",
+        "relation_signature": "generic",
+        "answer_text": "Tunis",
+        "support_score": 0.4999999897177201,
+        "evidence_ids": [
+          "doc_5"
+        ],
+        "slot_name": "path_terminal",
+        "slot_role": "target_attribute",
+        "terminal": true,
+        "path_terminal": true,
+        "composition_kind": "path_terminal",
+        "derived_from_state": "state_6",
+        "diffusion_delta": -0.32967341661505767,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "memory_mem_10",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'What city is the actress in Signora Enrica from' is Tunis.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 1.0,
+      "temperature": 1.28,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "tdca_run",
+        "memory_kind": "answer_candidate",
+        "target_question": "What city is the actress in Signora Enrica from?",
+        "target_question_norm": "what city is the actress in signora enrica from",
+        "slot_key": "generic|location|root_answer|signora enrica|what city is the actress in signora enrica from",
+        "slot_type": "location",
+        "relation_signature": "generic",
+        "answer_text": "Tunis",
+        "support_score": 1.0,
+        "evidence_ids": [
+          "doc_5"
+        ],
+        "derived_from_state": "state_1",
+        "composed_from": [
+          "memory_mem_8"
+        ],
+        "slot_role": "target_attribute",
+        "terminal": true,
+        "coverage_count": 1,
+        "coverage_ratio": 1.0,
+        "composition_kind": "inferred_final_chain",
+        "final_chain_score": 1.0,
+        "final_chain_strict": true,
+        "final_chain_source_node_id": "memory_mem_8",
+        "final_chain_predecessor_ids": [
+          "memory_mem_5",
+          "memory_mem_6"
+        ],
+        "final_chain_path_depth": 2,
+        "final_chain_dependency_backed": false,
+        "final_chain_textual_predecessor": true,
+        "final_chain_source_path_terminal": true
+      }
+    }
+  ],
+  "edges": [
+    {
+      "source": "state_1",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.9999999775939086
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_15",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_11",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_19",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.07975608024834992
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.04689887815542571
+    },
+    {
+      "source": "state_1",
+      "target": "state_2",
+      "edge_type": "refines",
+      "weight": 1.0
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_6",
+      "edge_type": "derives",
+      "weight": 0.96
+    },
+    {
+      "source": "state_1",
+      "target": "state_3",
+      "edge_type": "refines",
+      "weight": 0.95
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_10",
+      "edge_type": "derives",
+      "weight": 1.0
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.9999999775939086
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.999999981091608
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.048429795399889536
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.999999981091608
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.9999999770029115
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.9999999770029115
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.25
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "memory_mem_7",
+      "edge_type": "supports",
+      "weight": 0.048429795399889536
+    },
+    {
+      "source": "kg_doc_15",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_15",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_15",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_15",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_15",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_15",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.25
+    },
+    {
+      "source": "kg_doc_15",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_15",
+      "target": "state_6",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_15",
+      "target": "memory_mem_8",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_15",
+      "target": "memory_mem_9",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_11",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_11",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_11",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_11",
+      "target": "state_6",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_11",
+      "target": "memory_mem_9",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_19",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_19",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_19",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_19",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.25
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.07975608024834992
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_2",
+      "edge_type": "recalls",
+      "weight": 0.0679336425691247
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "memory_mem_4",
+      "edge_type": "recalls",
+      "weight": 0.0679336425691247
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_4",
+      "edge_type": "recalls",
+      "weight": 0.2575466660582194
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "memory_mem_5",
+      "edge_type": "recalls",
+      "weight": 0.2575466660582194
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.04689887815542571
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_2",
+      "edge_type": "recalls",
+      "weight": 0.9599998077388796
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "memory_mem_4",
+      "edge_type": "recalls",
+      "weight": 0.9599998077388796
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.999999981091608
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_15",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_11",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_16",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_2",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.9599998077388796
+    },
+    {
+      "source": "state_2",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.0679336425691247
+    },
+    {
+      "source": "state_2",
+      "target": "state_3",
+      "edge_type": "refines",
+      "weight": 0.95
+    },
+    {
+      "source": "state_2",
+      "target": "memory_mem_4",
+      "edge_type": "derives",
+      "weight": 1.0
+    },
+    {
+      "source": "state_2",
+      "target": "state_4",
+      "edge_type": "refines",
+      "weight": 0.84
+    },
+    {
+      "source": "kg_doc_16",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_16",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.9999999893644661
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.048429795399889536
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_13",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_3",
+      "target": "state_5",
+      "edge_type": "refines",
+      "weight": 0.9
+    },
+    {
+      "source": "state_3",
+      "target": "memory_mem_7",
+      "edge_type": "derives",
+      "weight": 0.6966132302085953
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.9999999893644661
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.9988112586051429
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.9988112586051429
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.55
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.9999999765998304
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "memory_mem_7",
+      "edge_type": "supports",
+      "weight": 0.9999999893644661
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "state_6",
+      "edge_type": "supports",
+      "weight": 0.9999999794354402
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "memory_mem_8",
+      "edge_type": "supports",
+      "weight": 0.9999999765998304
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "memory_mem_9",
+      "edge_type": "supports",
+      "weight": 0.9999999794354402
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.25
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "memory_mem_7",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_13",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_13",
+      "target": "memory_mem_7",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "state_2",
+      "edge_type": "recalls",
+      "weight": 1.0
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.999999981091608
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_15",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_11",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_16",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.9599998077388796
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.0679336425691247
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.9999999770029115
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.9988112586051429
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_15",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_19",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_4",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.2575466660582194
+    },
+    {
+      "source": "state_4",
+      "target": "memory_mem_5",
+      "edge_type": "derives",
+      "weight": 0.9994056178040271
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "state_4",
+      "edge_type": "recalls",
+      "weight": 0.9994056178040271
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.9999999770029115
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.9988112586051429
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_15",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_19",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.2575466660582194
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.96
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.25
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.55
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.25
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_15",
+      "edge_type": "supports",
+      "weight": 0.25
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_19",
+      "edge_type": "supports",
+      "weight": 0.25
+    },
+    {
+      "source": "state_5",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.9999999765998304
+    },
+    {
+      "source": "state_5",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_5",
+      "target": "kg_doc_18",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_5",
+      "target": "kg_doc_15",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_5",
+      "target": "state_6",
+      "edge_type": "refines",
+      "weight": 1.0
+    },
+    {
+      "source": "state_5",
+      "target": "memory_mem_8",
+      "edge_type": "derives",
+      "weight": 1.0
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "state_6",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "memory_mem_8",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "memory_mem_9",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_18",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_18",
+      "target": "memory_mem_8",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_7",
+      "target": "state_3",
+      "edge_type": "recalls",
+      "weight": 0.6966132302085953
+    },
+    {
+      "source": "memory_mem_7",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.9999999893644661
+    },
+    {
+      "source": "memory_mem_7",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.048429795399889536
+    },
+    {
+      "source": "memory_mem_7",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_7",
+      "target": "kg_doc_13",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_6",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.9999999794354402
+    },
+    {
+      "source": "state_6",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_6",
+      "target": "kg_doc_15",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_6",
+      "target": "kg_doc_11",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_6",
+      "target": "memory_mem_9",
+      "edge_type": "derives",
+      "weight": 1.0
+    },
+    {
+      "source": "memory_mem_8",
+      "target": "state_5",
+      "edge_type": "recalls",
+      "weight": 1.0
+    },
+    {
+      "source": "memory_mem_8",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.9999999765998304
+    },
+    {
+      "source": "memory_mem_8",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_8",
+      "target": "kg_doc_18",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_8",
+      "target": "kg_doc_15",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_8",
+      "target": "memory_mem_10",
+      "edge_type": "derives",
+      "weight": 1.0
+    },
+    {
+      "source": "memory_mem_9",
+      "target": "state_6",
+      "edge_type": "recalls",
+      "weight": 1.0
+    },
+    {
+      "source": "memory_mem_9",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.9999999794354402
+    },
+    {
+      "source": "memory_mem_9",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_9",
+      "target": "kg_doc_15",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_9",
+      "target": "kg_doc_11",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_10",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 1.0
+    }
+  ]
+}

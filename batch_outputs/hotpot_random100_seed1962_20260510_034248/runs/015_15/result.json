@@ -1,0 +1,187 @@
+{
+  "question": "The Meadowbrook State Parkway connects to the Southern State Parkway in a community with what population as of the 2010 census?",
+  "final_answer": "12,272",
+  "best_node": {
+    "node_id": "state_7",
+    "node_type": "state",
+    "content": "What is the population of North Merrick as of the 2010 census?",
+    "depth": 4,
+    "parent_id": "state_6",
+    "value": 0.6129708367321139,
+    "temperature": 1.2838795724164118,
+    "expanded": true,
+    "visit_count": 1,
+    "persistent": false,
+    "score_breakdown": {
+      "task_progress": 0.6519158170170086,
+      "evidence_support": 0.6336624375932778,
+      "memory_usefulness": 0.002696465530018243,
+      "answerability": 0.6991841599731095,
+      "uncertainty": 0.18594076123321
+    },
+    "metadata": {
+      "kind": "retrieval",
+      "evidence_ids": [
+        "doc_6",
+        "doc_8",
+        "doc_10",
+        "doc_1"
+      ],
+      "memory_ids": [
+        "mem_1",
+        "mem_3"
+      ],
+      "diffusion_delta": 0.9567570782235704,
+      "diffusion_gain": 0.9567570782235704
+    }
+  },
+  "final_synthesis_node_ids": [
+    "state_6",
+    "state_2",
+    "state_5",
+    "state_4",
+    "state_1"
+  ],
+  "answer_history": [
+    {
+      "node_id": "memory_mem_4",
+      "content": "Conclusion: The answer to 'Where does the Meadowbrook State Parkway connect to the Southern State Parkway' is North Merrick.",
+      "answer_text": "North Merrick",
+      "value": 0.9999999883303566,
+      "confidence": 0.95,
+      "evidence_ids": [
+        "doc_8",
+        "doc_3"
+      ],
+      "step": 1,
+      "kind": "intermediate_answer"
+    },
+    {
+      "node_id": "memory_mem_5",
+      "content": "Conclusion: The answer to 'What was the population of North Merrick as of the 2010 census' is 12,272.",
+      "answer_text": "12,272",
+      "value": 0.9108,
+      "evidence_ids": [
+        "doc_6"
+      ],
+      "step": 2
+    },
+    {
+      "node_id": "state_5",
+      "answer_text": "12,272",
+      "previous_answer": "",
+      "confidence": 0.99,
+      "score": 0.7628045139082841,
+      "source": "expansion_candidate",
+      "step": 1,
+      "evidence_ids": [
+        "doc_6",
+        "doc_8",
+        "doc_10",
+        "doc_4"
+      ],
+      "kind": "anytime_answer"
+    },
+    {
+      "node_id": "memory_mem_6",
+      "content": "Conclusion: The answer to 'What was the population of that community as of the 2010 census' is 12,272.",
+      "answer_text": "12,272",
+      "value": 0.9999999937289535,
+      "confidence": 0.8254226457526981,
+      "evidence_ids": [
+        "doc_10"
+      ],
+      "step": 3,
+      "kind": "intermediate_answer"
+    },
+    {
+      "node_id": "memory_mem_7",
+      "content": "Conclusion: The answer to 'Which community is at the junction of the Meadowbrook State Parkway and the Southern State Parkway' is North Merrick.",
+      "answer_text": "North Merrick",
+      "value": 0.9999999764729088,
+      "confidence": 0.95,
+      "evidence_ids": [
+        "doc_8",
+        "doc_2"
+      ],
+      "step": 4,
+      "kind": "intermediate_answer"
+    },
+    {
+      "node_id": "memory_mem_8",
+      "content": "Conclusion: The answer to 'What community is at the intersection of the Meadowbrook State Parkway and the Southern State Parkway' is North Merrick.",
+      "answer_text": "North Merrick",
+      "value": 0.9999999856689754,
+      "confidence": 0.95,
+      "evidence_ids": [
+        "doc_8",
+        "doc_2",
+        "doc_3"
+      ],
+      "step": 6,
+      "kind": "intermediate_answer"
+    },
+    {
+      "node_id": "memory_mem_9",
+      "content": "Conclusion: The answer to 'What is the population of North Merrick as of the 2010 census' is 12,272.",
+      "answer_text": "12,272",
+      "value": 0.9108,
+      "evidence_ids": [
+        "doc_6"
+      ],
+      "step": 7
+    },
+    {
+      "node_id": "state_7",
+      "answer_text": "12,272",
+      "previous_answer": "12,272",
+      "confidence": 0.99,
+      "score": 0.8246100975637023,
+      "source": "expansion_candidate",
+      "step": 6,
+      "evidence_ids": [
+        "doc_6",
+        "doc_8",
+        "doc_10",
+        "doc_1"
+      ],
+      "kind": "anytime_answer"
+    },
+    {
+      "node_id": "state_7",
+      "answer_text": "12,272",
+      "source": "answer_judge",
+      "choice": "A",
+      "candidate_source": "expansion_candidate",
+      "base_score": 0.9929458372578486,
+      "rerank_score": 0.6396372513655613,
+      "judge_confidence": 0.0,
+      "judge_reason": "",
+      "step": 7,
+      "kind": "final_answer_selection"
+    }
+  ],
+  "anytime_answer": "12,272",
+  "anytime_answer_score": 0.8246100975637023,
+  "anytime_answer_source": "expansion_candidate",
+  "anytime_answer_node_id": "state_7",
+  "stats": {
+    "steps": 7,
+    "llm_calls": 12,
+    "generated_tokens": 893,
+    "token_budget_remaining": 307,
+    "total_nodes": 25,
+    "kg_nodes": 9,
+    "memory_nodes": 8,
+    "state_nodes": 8,
+    "deleted_state_nodes": 0,
+    "scheduler_mode": "tdca",
+    "scoring_mode": "hybrid",
+    "stop_reason": "final_synthesis_reserve",
+    "goal_kind": "bridge",
+    "goal_completion": 0.0,
+    "anytime_answer": "12,272",
+    "anytime_answer_score": 0.8246100975637023,
+    "anytime_answer_source": "expansion_candidate"
+  }
+}

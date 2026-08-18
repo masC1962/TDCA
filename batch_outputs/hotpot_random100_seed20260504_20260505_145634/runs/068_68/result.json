@@ -1,0 +1,148 @@
+{
+  "question": "Charles Scribner's Sons publishes the books of what author whose books cover subjects such as the Cold War, mathematics, politics, and economics, and global terrorism?",
+  "final_answer": "Don DeLillo",
+  "best_node": {
+    "node_id": "state_1",
+    "node_type": "state",
+    "content": "Charles Scribner's Sons publishes the books of what author whose books cover subjects such as the Cold War, mathematics, politics, and economics, and global terrorism?",
+    "depth": 0,
+    "parent_id": null,
+    "value": 0.8037432954941944,
+    "temperature": 0.9795228510603864,
+    "expanded": true,
+    "visit_count": 1,
+    "persistent": false,
+    "score_breakdown": {
+      "task_progress": 0.9237421919749491,
+      "evidence_support": 0.7757123293380855,
+      "memory_usefulness": 0.9133737614272477,
+      "answerability": 0.7878561646690427,
+      "uncertainty": 0.1603717807191446
+    },
+    "metadata": {
+      "diffusion_delta": 0.0371233526148711,
+      "diffusion_gain": 0.0371233526148711
+    }
+  },
+  "final_synthesis_node_ids": [
+    "state_2",
+    "state_9",
+    "state_8",
+    "memory_mem_4",
+    "state_1"
+  ],
+  "answer_history": [
+    {
+      "node_id": "",
+      "answer_text": "Tom Clancy",
+      "previous_answer": "",
+      "confidence": 0.28,
+      "score": 0.16880000000000003,
+      "source": "closed_book_initial",
+      "step": 0,
+      "evidence_ids": [],
+      "kind": "anytime_answer"
+    },
+    {
+      "node_id": "state_1",
+      "answer_text": "Don DeLillo",
+      "previous_answer": "Tom Clancy",
+      "confidence": 0.95,
+      "score": 0.8785710709581762,
+      "source": "expansion_candidate",
+      "step": 0,
+      "evidence_ids": [
+        "doc_9",
+        "doc_6",
+        "doc_7",
+        "doc_1"
+      ],
+      "kind": "anytime_answer"
+    },
+    {
+      "node_id": "memory_mem_4",
+      "content": "Conclusion: The answer to 'Which author's books cover the Cold War, mathematics, politics, economics, and global terrorism' is Don DeLillo.",
+      "answer_text": "Don DeLillo",
+      "value": 0.8464,
+      "evidence_ids": [
+        "doc_9"
+      ],
+      "step": 2
+    },
+    {
+      "node_id": "memory_mem_5",
+      "content": "Conclusion: The answer to 'Does Charles Scribner's Sons publish the books of Don DeLillo' is Yes.",
+      "answer_text": "Yes",
+      "value": 1.0,
+      "confidence": 1.0,
+      "evidence_ids": [
+        "doc_10",
+        "doc_9"
+      ],
+      "step": 3,
+      "kind": "intermediate_answer"
+    },
+    {
+      "node_id": "memory_mem_6",
+      "content": "Conclusion: The answer to 'Which of Don DeLillo's books were published by Charles Scribner's Sons' is The Ice Palace.",
+      "answer_text": "The Ice Palace",
+      "value": 0.5912892955156399,
+      "evidence_ids": [
+        "doc_6",
+        "doc_10",
+        "doc_4"
+      ],
+      "step": 5
+    },
+    {
+      "node_id": "memory_mem_7",
+      "content": "Conclusion: The answer to 'Which books by Don DeLillo were published by Charles Scribner's Sons' is The Ice Palace.",
+      "answer_text": "The Ice Palace",
+      "value": 0.644,
+      "evidence_ids": [
+        "doc_6",
+        "doc_4",
+        "doc_10"
+      ],
+      "step": 6
+    },
+    {
+      "node_id": "state_1",
+      "answer_text": "Don DeLillo",
+      "source": "answer_judge",
+      "choice": "A",
+      "candidate_source": "expansion_candidate",
+      "base_score": 1.0,
+      "judge_confidence": 0.0,
+      "judge_reason": "Don DeLillo is directly supported by evidence as the author published by Scribner's whose works cover all listed subjects.",
+      "step": 7,
+      "kind": "final_answer_selection"
+    }
+  ],
+  "anytime_answer": "Don DeLillo",
+  "anytime_answer_score": 0.8785710709581762,
+  "anytime_answer_source": "expansion_candidate",
+  "anytime_answer_node_id": "state_1",
+  "root_state_synthesis_answer": "",
+  "root_state_synthesis_score": 0.0,
+  "root_state_synthesis_node_id": "",
+  "stats": {
+    "steps": 7,
+    "llm_calls": 11,
+    "generated_tokens": 931,
+    "token_budget_remaining": 269,
+    "total_nodes": 22,
+    "kg_nodes": 7,
+    "memory_nodes": 6,
+    "state_nodes": 9,
+    "deleted_state_nodes": 1,
+    "scheduler_mode": "tdca",
+    "scoring_mode": "hybrid",
+    "stop_reason": "final_synthesis_reserve",
+    "goal_kind": "bridge",
+    "goal_completion": 0.5,
+    "anytime_answer": "Don DeLillo",
+    "anytime_answer_score": 0.8785710709581762,
+    "anytime_answer_source": "expansion_candidate"
+  }
+}

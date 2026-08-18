@@ -1,0 +1,121 @@
+{
+  "question": "Who is the spouse of the Green performer?",
+  "final_answer": "Peter Hedges",
+  "best_node": {
+    "node_id": "memory_mem_4",
+    "node_type": "memory",
+    "content": "Conclusion: The director of the movie Inception is Peter Hedges.",
+    "depth": 0,
+    "parent_id": null,
+    "value": 0.72,
+    "temperature": 0.9382269652575191,
+    "expanded": false,
+    "visit_count": 0,
+    "persistent": true,
+    "score_breakdown": {},
+    "metadata": {
+      "source": "memory",
+      "memory_kind": "derived_fact",
+      "target_question": "Who is the director of the movie Inception?",
+      "target_question_norm": "who is the director of the movie inception",
+      "relation_signature": "director",
+      "answer_text": "Peter Hedges",
+      "support_score": 0.5429363675754875,
+      "evidence_ids": [
+        "doc_2"
+      ],
+      "slot_name": "",
+      "slot_role": "",
+      "terminal": false,
+      "derived_from_state": "state_2",
+      "diffusion_delta": -0.17795171676282984,
+      "diffusion_gain": 0.0
+    }
+  },
+  "final_synthesis_node_ids": [
+    "state_2",
+    "state_3",
+    "memory_mem_4",
+    "state_1"
+  ],
+  "answer_history": [
+    {
+      "node_id": "memory_mem_4",
+      "content": "Conclusion: The director of the movie Inception is Peter Hedges.",
+      "answer_text": "Peter Hedges",
+      "value": 0.72,
+      "evidence_ids": [
+        "doc_2"
+      ],
+      "step": 2
+    },
+    {
+      "node_id": "state_2",
+      "answer_text": "Peter Hedges",
+      "previous_answer": "",
+      "confidence": 0.72,
+      "score": 0.6927091110078618,
+      "source": "expansion_candidate",
+      "step": 1,
+      "evidence_ids": [
+        "doc_2",
+        "doc_10",
+        "doc_18",
+        "doc_8"
+      ],
+      "kind": "anytime_answer"
+    },
+    {
+      "node_id": "state_2",
+      "answer_text": "Peter Hedges",
+      "previous_answer": "Peter Hedges",
+      "confidence": 0.72,
+      "score": 0.7927091110078618,
+      "source": "grounded",
+      "step": 1,
+      "evidence_ids": [
+        "doc_2",
+        "doc_10",
+        "doc_18",
+        "doc_8"
+      ],
+      "kind": "anytime_answer"
+    },
+    {
+      "node_id": "memory_mem_4",
+      "answer_text": "Peter Hedges",
+      "source": "answer_judge",
+      "choice": "A",
+      "candidate_source": "final_synthesis",
+      "base_score": 1.0,
+      "rerank_score": 0.7866816561423498,
+      "judge_confidence": 0.0,
+      "judge_reason": "",
+      "step": 2,
+      "kind": "final_answer_selection"
+    }
+  ],
+  "anytime_answer": "Peter Hedges",
+  "anytime_answer_score": 0.7927091110078618,
+  "anytime_answer_source": "grounded",
+  "anytime_answer_node_id": "state_2",
+  "stats": {
+    "steps": 2,
+    "llm_calls": 4,
+    "generated_tokens": 320,
+    "token_budget_remaining": 180,
+    "total_nodes": 15,
+    "kg_nodes": 9,
+    "memory_nodes": 3,
+    "state_nodes": 3,
+    "deleted_state_nodes": 0,
+    "scheduler_mode": "tdca",
+    "scoring_mode": "hybrid",
+    "stop_reason": "anytime_token_guard",
+    "goal_kind": "single_hop",
+    "goal_completion": 1.0,
+    "anytime_answer": "Peter Hedges",
+    "anytime_answer_score": 0.7927091110078618,
+    "anytime_answer_source": "grounded"
+  }
+}

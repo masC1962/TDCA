@@ -1,0 +1,174 @@
+{
+  "question": "Where are Catcha Lake and Hedley Mascot Mine located?",
+  "final_answer": "Catcha Lake is in Nova Scotia, Canada; Hedley Mascot Mine is in Hedley, British Columbia, Canada",
+  "best_node": {
+    "node_id": "state_1",
+    "node_type": "state",
+    "content": "Where are Catcha Lake and Hedley Mascot Mine located?",
+    "depth": 0,
+    "parent_id": null,
+    "value": 0.9062374892382286,
+    "temperature": 1.1110351503443658,
+    "expanded": true,
+    "visit_count": 1,
+    "persistent": false,
+    "score_breakdown": {
+      "task_progress": 0.9840468218146081,
+      "evidence_support": 0.9530788876900237,
+      "memory_usefulness": 0.8820682746050714,
+      "answerability": 0.9765394438450118,
+      "uncertainty": 0.12844580021579574
+    },
+    "metadata": {
+      "diffusion_delta": 0.02387944231248107,
+      "diffusion_gain": 0.02387944231248107
+    }
+  },
+  "final_synthesis_node_ids": [
+    "state_6",
+    "state_8",
+    "state_2",
+    "state_3",
+    "state_1"
+  ],
+  "answer_history": [
+    {
+      "node_id": "",
+      "answer_text": "Both are located in British Columbia, Canada",
+      "previous_answer": "",
+      "confidence": 0.28,
+      "score": 0.16880000000000003,
+      "source": "closed_book_initial",
+      "step": 0,
+      "evidence_ids": [],
+      "kind": "anytime_answer"
+    },
+    {
+      "node_id": "memory_mem_4",
+      "content": "Conclusion: The answer to 'Where is the Hedley Mascot Mine located' is De Beers Victor Diamond Mine amounted to.",
+      "answer_text": "De Beers Victor Diamond Mine amounted to",
+      "value": 0.9138216004728301,
+      "evidence_ids": [
+        "doc_2",
+        "doc_7"
+      ],
+      "step": 2
+    },
+    {
+      "node_id": "state_3",
+      "answer_text": "De Beers Victor Diamond Mine amounted to",
+      "previous_answer": "Both are located in British Columbia, Canada",
+      "confidence": 0.9932843483400327,
+      "score": 0.9115298011278369,
+      "source": "expansion_candidate",
+      "step": 1,
+      "evidence_ids": [
+        "doc_2",
+        "doc_7",
+        "doc_9",
+        "doc_1"
+      ],
+      "kind": "anytime_answer"
+    },
+    {
+      "node_id": "memory_mem_5",
+      "content": "Conclusion: The answer to 'Where is Catcha Lake located' is central part of Nova Scotia's Halifax Regional Municipality.",
+      "answer_text": "central part of Nova Scotia's Halifax Regional Municipality",
+      "value": 1.0,
+      "confidence": 1.0,
+      "evidence_ids": [
+        "doc_8"
+      ],
+      "step": 3,
+      "kind": "intermediate_answer"
+    },
+    {
+      "node_id": "memory_mem_6",
+      "content": "Conclusion: The answer to 'Is Catcha Lake near Hedley, British Columbia' is No, Catcha Lake is in Nova Scotia, not near Hedley, British Columbia.",
+      "answer_text": "No, Catcha Lake is in Nova Scotia, not near Hedley, British Columbia",
+      "value": 0.9999999958564718,
+      "confidence": 0.9973808487455178,
+      "evidence_ids": [
+        "doc_2",
+        "doc_7",
+        "doc_8"
+      ],
+      "step": 5,
+      "kind": "intermediate_answer"
+    },
+    {
+      "node_id": "memory_mem_7",
+      "content": "Conclusion: The answer to 'Where is Hedley Mascot Mine located' is Hedley Mascot Mine is located in Hedley, British Columbia, Canada.",
+      "answer_text": "Hedley Mascot Mine is located in Hedley, British Columbia, Canada",
+      "value": 0.874,
+      "evidence_ids": [
+        "doc_2",
+        "doc_7"
+      ],
+      "step": 6
+    },
+    {
+      "node_id": "state_1",
+      "answer_text": "Catcha Lake is in Nova Scotia, Canada; Hedley Mascot Mine is in Hedley, British Columbia, Canada",
+      "previous_answer": "De Beers Victor Diamond Mine amounted to",
+      "confidence": 0.9765394438450118,
+      "score": 1.0,
+      "source": "final_synthesis",
+      "step": 8,
+      "evidence_ids": [
+        "doc_2",
+        "doc_8",
+        "doc_7",
+        "doc_1"
+      ],
+      "kind": "anytime_answer"
+    },
+    {
+      "node_id": "memory_mem_8",
+      "content": "Conclusion: The answer to 'Where are Catcha Lake and Hedley Mascot Mine located' is Catcha Lake is in Nova Scotia, Canada; Hedley Mascot Mine is in Hedley, British Columbia, Canada.",
+      "answer_text": "Catcha Lake is in Nova Scotia, Canada; Hedley Mascot Mine is in Hedley, British Columbia, Canada",
+      "value": 0.8337384900991703,
+      "evidence_ids": [
+        "doc_2",
+        "doc_8",
+        "doc_7"
+      ],
+      "step": 9
+    },
+    {
+      "node_id": "state_1",
+      "answer_text": "Catcha Lake is in Nova Scotia, Canada; Hedley Mascot Mine is in Hedley, British Columbia, Canada",
+      "source": "answer_judge",
+      "choice": "A",
+      "candidate_source": "final_synthesis",
+      "base_score": 1.0,
+      "judge_confidence": 0.0,
+      "judge_reason": "Directly answers location of both entities using evidence docs 1 and 3.",
+      "step": 8,
+      "kind": "final_answer_selection"
+    }
+  ],
+  "anytime_answer": "Catcha Lake is in Nova Scotia, Canada; Hedley Mascot Mine is in Hedley, British Columbia, Canada",
+  "anytime_answer_score": 1.0,
+  "anytime_answer_source": "final_synthesis",
+  "anytime_answer_node_id": "state_1",
+  "stats": {
+    "steps": 8,
+    "llm_calls": 14,
+    "generated_tokens": 991,
+    "token_budget_remaining": 209,
+    "total_nodes": 24,
+    "kg_nodes": 10,
+    "memory_nodes": 7,
+    "state_nodes": 7,
+    "deleted_state_nodes": 2,
+    "scheduler_mode": "tdca",
+    "scoring_mode": "hybrid",
+    "stop_reason": "final_synthesis_reserve",
+    "goal_kind": "multi_fact",
+    "goal_completion": 1.0,
+    "anytime_answer": "Catcha Lake is in Nova Scotia, Canada; Hedley Mascot Mine is in Hedley, British Columbia, Canada",
+    "anytime_answer_score": 1.0,
+    "anytime_answer_source": "final_synthesis"
+  }
+}

@@ -1,0 +1,615 @@
+{
+  "nodes": [
+    {
+      "node_id": "state_1",
+      "node_type": "state",
+      "content": "M.F.A. starred the actress known for starring in what E! reality series?",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.7629587275259292,
+      "temperature": 1.0047967346686097,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.9066647818221755,
+        "evidence_support": 0.725484652418163,
+        "memory_usefulness": 0.7841237535759132,
+        "answerability": 0.7627423262090816,
+        "uncertainty": 0.16941276256473065
+      },
+      "metadata": {
+        "diffusion_delta": -0.008805283591058366,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "kg_doc_5",
+      "node_type": "kg",
+      "content": "Francesca Ruth Fisher-Eastwood (born August 7, 1993) is an American actress, model, television personality and socialite. She is known for starring in \"Mrs. Eastwood & Company\", the E! reality series that she shares with her family.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999954064944,
+      "temperature": 0.9999999954064944,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Francesca Eastwood",
+        "raw_score": 7.006392353736606,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_2",
+      "node_type": "kg",
+      "content": "M.F.A. is a 2017 American thriller film directed by Natalia Leite and written by Leah McKendrick. The film stars Francesca Eastwood, Clifton Collins Jr., Leah McKendrick, Peter Vack, David Huynh, Marlon Young, David Sullivan, Michael Welch and Mike Manning.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.999999996557671,
+      "temperature": 0.999999996557671,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "M.F.A. (film)",
+        "raw_score": 3.94693694647251,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_1",
+      "node_type": "kg",
+      "content": "Life of Kylie (LOK) is an American reality television series starring Kylie Jenner. The eight-part half-hour series premiered on August 6, 2017, on the E! cable network. The reality series was greenlit on April 10, 2017. On May 11, 2017, E! released the first promo video of the series.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.1862578865815373,
+      "temperature": 0.1862578865815373,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Life of Kylie",
+        "raw_score": 2.446627961423682,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_4",
+      "node_type": "kg",
+      "content": "Jack Joseph Osbourne (born 8 November 1985) is an English media personality with dual American and British citizenship. As the son of heavy metal singer Ozzy Osbourne, he starred on MTV's reality series \"The Osbournes\" (2002–05), along with his father, mother Sharon, and sister Kelly. Osbourne has since pursued a career as a fitness and travel reporter, presenting shows such as \"\" (2005–09) and BBC's \"Saving Planet Earth\" (2007). He was diagnosed with relapsing remitting multiple sclerosis in 2012. As of summer 2016, he and father Ozzy are travelling the world in the History Channel reality series \"Ozzy & Jack's World Detour\".",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.2109429810133438,
+      "temperature": 0.2109429810133438,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Jack Osbourne",
+        "raw_score": 3.2303815902347846,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "memory_mem_1",
+      "node_type": "memory",
+      "content": "Template: for compositional multi-hop questions, first solve the intermediate entity and then ask for the final attribute.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.959999986210628,
+      "temperature": 0.3551374817431642,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.96,
+        "tag": "compositional_template",
+        "memory_kind": "template",
+        "raw_score": 1.096662930427841,
+        "source": "memory",
+        "diffusion_delta": -0.08040999150339145,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "memory_mem_2",
+      "node_type": "memory",
+      "content": "Template: for comparison questions, split the problem into one sub-question per entity before comparing them.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.6082475209411985,
+      "temperature": 0.1198499893225338,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.9,
+        "tag": "comparison_template",
+        "memory_kind": "template",
+        "raw_score": 0.7985076962177716,
+        "source": "memory",
+        "diffusion_delta": -0.08839986063437058,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "state_2",
+      "node_type": "state",
+      "content": "Who starred in the film M.F.A.?",
+      "depth": 1,
+      "parent_id": "state_1",
+      "value": 0.5682064030324905,
+      "temperature": 0.9797503932922736,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.6487174490442154,
+        "evidence_support": 0.6054714887855074,
+        "memory_usefulness": 0.5139667251540021,
+        "answerability": 0.5884500301070394,
+        "uncertainty": 0.19101513201860865
+      },
+      "metadata": {
+        "kind": "bridge",
+        "evidence_ids": [
+          "doc_2",
+          "doc_4",
+          "doc_3",
+          "doc_10"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "goal_slot_name": "actress_in_mfa",
+        "goal_slot_role": "bridge_entity",
+        "goal_terminal": false,
+        "diffusion_delta": 0.06780740901376392,
+        "diffusion_gain": 0.06780740901376392
+      }
+    },
+    {
+      "node_id": "kg_doc_3",
+      "node_type": "kg",
+      "content": "Theresa Qristina Ribohn Plückthun, better known as \"Farmen-Qristina\" (born 2October 1955 in Skånela, Sigtuna Municipality) is a Swedish reality television contestant, drug counselor and politician for the Swedish Social Democratic Party. She focuses on children and youths that has different problems such as with drugs, as part of the Children and Youth Committee in Karlshamn municipality. She became publicly known after participating as a contestant on the first season of the reality series \"The Farm\" in 2001, she participated again as a \"joker\" in the 2004 season. The series was broadcast on TV4. She has then participated three times in \"Fort Boyard\" also on TV4, she participated in \"The Bar\" in 2001, which was broadcast on TV3. She further participated in the stop smoking show \"Fimpa Nu!\" in 2004 on TV4 Plus. In 2005, Ribohn participated in the reality series \"Club Goa\" which was filmed in Goa in India, along with some of Sweden's best known reality series contestants. In 2016, Ribohn participated in the second series of the reality series \"Realitystjärnorna på godset\" along with television celebrities such as Victoria Silvstedt and Meral Tasbas.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0051431856112949155,
+      "temperature": 0.0051431856112949155,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Qristina Ribohn",
+        "raw_score": 1.1450112389936966,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_10",
+      "node_type": "kg",
+      "content": "Gene Simmons Family Jewels is an American reality television series that premiered on A&E on August 7, 2006. The show follows the life of Kiss bassist and vocalist Gene Simmons, his longtime partner and wife Shannon Tweed, and their two children, Nick and Sophie. Although it is presented as a reality series, it has been noted that some events shown on the show did not actually occur. One of these events was depicted in the finale of Season 3, where the viewer is led to believe that Gene purchased the Australian Football team Carlton Football Club, while in reality there is no record of the team being sold to him. In addition to this, the episode shows Gene convincing Brendan Fevola to join Carlton Football Club, while in reality Fevola had been playing for Carlton since he was drafted in 1998. Other events include casting biker extras, as well as a bit actor in the show.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.14568175712852266,
+      "temperature": 0.14568175712852266,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Gene Simmons Family Jewels",
+        "raw_score": 3.24869497414745,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "memory_mem_3",
+      "node_type": "memory",
+      "content": "Template: when evidence already grounds the answer, switch from branching to short verification and synthesis.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0679336425691247,
+      "temperature": 0.02308602442877859,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.88,
+        "tag": "verification_then_stop",
+        "memory_kind": "template",
+        "raw_score": 0.13862369149579673,
+        "source": "memory",
+        "diffusion_delta": -0.0050472001363596475,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "state_3",
+      "node_type": "state",
+      "content": "What E! reality series did Francesca Eastwood star in?",
+      "depth": 2,
+      "parent_id": "state_2",
+      "value": 0.7248107911496326,
+      "temperature": 1.32238498780568,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.6784755744773683,
+        "evidence_support": 0.7728273198914191,
+        "memory_usefulness": 0.0,
+        "answerability": 0.6578422313742809,
+        "uncertainty": 0.16089108241954456
+      },
+      "metadata": {
+        "kind": "bridge",
+        "evidence_ids": [
+          "doc_5",
+          "doc_2",
+          "doc_10",
+          "doc_1"
+        ],
+        "memory_ids": [],
+        "diffusion_delta": 0.9712697902767993,
+        "diffusion_gain": 0.9712697902767993
+      }
+    },
+    {
+      "node_id": "memory_mem_4",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'Who starred in the film M.F.A.' is Natalia Leite.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.999999996557671,
+      "temperature": 0.46964335284590175,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "derived_fact",
+        "target_question": "Who starred in the film M.F.A.?",
+        "target_question_norm": "who starred in the film m f a",
+        "relation_signature": "generic",
+        "answer_text": "Natalia Leite",
+        "support_score": 0.999999996557671,
+        "evidence_ids": [
+          "doc_2"
+        ],
+        "slot_type": "person",
+        "slot_role": "bridge_entity",
+        "slot_name": "actress_in_mfa",
+        "depends_on": [],
+        "terminal": false,
+        "derived_from_state": "state_1",
+        "diffusion_delta": -0.07254182913592999,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "memory_mem_5",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'What E! reality series did Francesca Eastwood star in' is Francesca Eastwood.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.92,
+      "temperature": 0.9282376935892026,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "derived_fact",
+        "target_question": "What E! reality series did Francesca Eastwood star in?",
+        "target_question_norm": "what e reality series did francesca eastwood star in",
+        "relation_signature": "generic",
+        "answer_text": "Francesca Eastwood",
+        "support_score": 0.7728273198914191,
+        "evidence_ids": [
+          "doc_5",
+          "doc_2"
+        ],
+        "derived_from_state": "state_3",
+        "diffusion_delta": -0.2963000569450981,
+        "diffusion_gain": 0.0
+      }
+    }
+  ],
+  "edges": [
+    {
+      "source": "state_1",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.9999999951252824
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.4509693097110435
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.1862578865815373
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.15205693039288196
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_2",
+      "edge_type": "recalls",
+      "weight": 0.09954513747935256
+    },
+    {
+      "source": "state_1",
+      "target": "state_2",
+      "edge_type": "refines",
+      "weight": 1.0
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_4",
+      "edge_type": "derives",
+      "weight": 0.999999996557671
+    },
+    {
+      "source": "state_1",
+      "target": "state_3",
+      "edge_type": "refines",
+      "weight": 0.94
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.9999999951252824
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.9999999954064944
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.9999999954064944
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.4509693097110435
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.999999996557671
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.5456546443763438
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.5456546443763438
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.1862578865815373
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.2109429810133438
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.15205693039288196
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_2",
+      "edge_type": "recalls",
+      "weight": 0.9599998077388796
+    },
+    {
+      "source": "memory_mem_2",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.09954513747935256
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.999999996557671
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.2109429810133438
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.0051431856112949155
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_10",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_2",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.9599998077388796
+    },
+    {
+      "source": "state_2",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.0679336425691247
+    },
+    {
+      "source": "state_2",
+      "target": "state_3",
+      "edge_type": "refines",
+      "weight": 0.95
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.0051431856112949155
+    },
+    {
+      "source": "kg_doc_10",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_10",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.14568175712852266
+    },
+    {
+      "source": "kg_doc_10",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.14568175712852266
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_2",
+      "edge_type": "recalls",
+      "weight": 0.0679336425691247
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.9999999954064944
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.5456546443763438
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_10",
+      "edge_type": "supports",
+      "weight": 0.14568175712852266
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_3",
+      "target": "memory_mem_5",
+      "edge_type": "derives",
+      "weight": 1.0
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.999999996557671
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "state_3",
+      "edge_type": "recalls",
+      "weight": 1.0
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.9999999954064944
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.5456546443763438
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_10",
+      "edge_type": "supports",
+      "weight": 0.14568175712852266
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.0
+    }
+  ]
+}

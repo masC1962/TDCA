@@ -1,0 +1,163 @@
+{
+  "question": "What is the name of the 1999 film directed by Roman Polanski and starring his wife Emmanuelle Seigner that was a world-wide success but critically and commercially unsuccessful in North America?",
+  "final_answer": "The Ninth Gate",
+  "best_node": {
+    "node_id": "state_2",
+    "node_type": "state",
+    "content": "What is the title of the 1999 film directed by Roman Polanski and starring Emmanuelle Seigner?",
+    "depth": 1,
+    "parent_id": "state_1",
+    "value": 0.8314288912905422,
+    "temperature": 2.1484466084564904,
+    "expanded": true,
+    "visit_count": 1,
+    "persistent": false,
+    "score_breakdown": {
+      "task_progress": 0.7955279469053289,
+      "evidence_support": 0.9946900399176339,
+      "memory_usefulness": 0.8770627489221289,
+      "answerability": 0.8906783532921503,
+      "uncertainty": 0.12095579281482588
+    },
+    "metadata": {
+      "kind": "retrieval",
+      "evidence_ids": [
+        "doc_10",
+        "doc_4",
+        "doc_7",
+        "doc_5"
+      ],
+      "memory_ids": [
+        "mem_1",
+        "mem_3"
+      ],
+      "goal_slot_name": "film_title",
+      "goal_slot_role": "target_attribute",
+      "goal_terminal": true,
+      "diffusion_delta": 0.31991975966907193,
+      "diffusion_gain": 0.31991975966907193
+    }
+  },
+  "final_synthesis_node_ids": [
+    "state_2",
+    "memory_mem_4",
+    "state_4",
+    "state_7",
+    "state_1"
+  ],
+  "answer_history": [
+    {
+      "node_id": "memory_mem_4",
+      "content": "Conclusion: The answer to 'What is the title of the 1999 film directed by Roman Polanski and starring Emmanuelle Seigner' is Frantic.",
+      "answer_text": "Frantic",
+      "value": 0.9151148367242232,
+      "evidence_ids": [
+        "doc_10",
+        "doc_4",
+        "doc_7"
+      ],
+      "step": 1
+    },
+    {
+      "node_id": "memory_mem_5",
+      "content": "Conclusion: The answer to 'What is the name of the 1999 film directed by Roman Polanski and starring his wife Emmanuelle Seigner that was a world-wide success but critically and commercially unsuccessful in North America' is Frantic.",
+      "answer_text": "Frantic",
+      "value": 0.9946900399176339,
+      "evidence_ids": [
+        "doc_10",
+        "doc_4",
+        "doc_7"
+      ],
+      "step": 1
+    },
+    {
+      "node_id": "state_2",
+      "answer_text": "The Ninth Gate",
+      "previous_answer": "",
+      "confidence": 0.9946900399176339,
+      "score": 0.9234839650608965,
+      "source": "expansion_candidate",
+      "step": 0,
+      "evidence_ids": [
+        "doc_10",
+        "doc_4",
+        "doc_7",
+        "doc_5"
+      ],
+      "kind": "anytime_answer"
+    },
+    {
+      "node_id": "state_2",
+      "answer_text": "The Ninth Gate",
+      "previous_answer": "The Ninth Gate",
+      "confidence": 0.9946900399176339,
+      "score": 1.0,
+      "source": "grounded",
+      "step": 0,
+      "evidence_ids": [
+        "doc_10",
+        "doc_4",
+        "doc_7",
+        "doc_5"
+      ],
+      "kind": "anytime_answer"
+    },
+    {
+      "node_id": "memory_mem_6",
+      "content": "Conclusion: The answer to 'How did 'The Ninth Gate' perform critically and commercially in North America compared to the rest of the world' is The Ninth Gate.",
+      "answer_text": "The Ninth Gate",
+      "value": 0.587025146814745,
+      "evidence_ids": [
+        "doc_10"
+      ],
+      "step": 4
+    },
+    {
+      "node_id": "memory_mem_7",
+      "content": "Conclusion: The answer to 'How did 'The Ninth Gate' perform critically and commercially outside North America' is The Ninth Gate.",
+      "answer_text": "The Ninth Gate",
+      "value": 0.6398855277153613,
+      "evidence_ids": [
+        "doc_10",
+        "doc_6"
+      ],
+      "step": 5
+    },
+    {
+      "node_id": "state_2",
+      "answer_text": "The Ninth Gate",
+      "source": "answer_judge",
+      "choice": "A",
+      "candidate_source": "grounded",
+      "base_score": 1.0,
+      "rerank_score": 0.8291290308976031,
+      "judge_confidence": 0.0,
+      "judge_reason": "The Ninth Gate matches year, director, star, and the described performance split.",
+      "step": 5,
+      "kind": "final_answer_selection"
+    }
+  ],
+  "anytime_answer": "The Ninth Gate",
+  "anytime_answer_score": 1.0,
+  "anytime_answer_source": "grounded",
+  "anytime_answer_node_id": "state_2",
+  "stats": {
+    "steps": 5,
+    "llm_calls": 7,
+    "generated_tokens": 711,
+    "token_budget_remaining": 489,
+    "total_nodes": 23,
+    "kg_nodes": 8,
+    "memory_nodes": 6,
+    "state_nodes": 9,
+    "deleted_state_nodes": 1,
+    "scheduler_mode": "tdca",
+    "scoring_mode": "hybrid",
+    "stop_reason": "high_confidence_root_memory",
+    "goal_kind": "bridge",
+    "goal_completion": 1.0,
+    "anytime_answer": "The Ninth Gate",
+    "anytime_answer_score": 1.0,
+    "anytime_answer_source": "grounded"
+  }
+}

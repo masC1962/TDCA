@@ -1,0 +1,173 @@
+{
+  "question": "Li Yitong played Huang Rong is a tv series directed by who?",
+  "final_answer": "Jeffrey Chiang",
+  "best_node": {
+    "node_id": "state_3",
+    "node_type": "state",
+    "content": "Who is the director of the 2017 TV series 'The Legend of the Condor Heroes'?",
+    "depth": 2,
+    "parent_id": "state_2",
+    "value": 0.6474474489664634,
+    "temperature": 2.169127143813679,
+    "expanded": true,
+    "visit_count": 1,
+    "persistent": false,
+    "score_breakdown": {
+      "task_progress": 0.6660617788405397,
+      "evidence_support": 0.7629268005113914,
+      "memory_usefulness": 0.5139668023538719,
+      "answerability": 0.7481300669223624,
+      "uncertainty": 0.16267317590794955
+    },
+    "metadata": {
+      "kind": "retrieval",
+      "evidence_ids": [
+        "doc_3",
+        "doc_8",
+        "doc_10",
+        "doc_6"
+      ],
+      "memory_ids": [
+        "mem_1",
+        "mem_3"
+      ],
+      "diffusion_delta": 0.11707611374009019,
+      "diffusion_gain": 0.11707611374009019
+    }
+  },
+  "final_synthesis_node_ids": [
+    "state_4",
+    "state_3",
+    "state_2",
+    "state_6",
+    "state_1"
+  ],
+  "answer_history": [
+    {
+      "node_id": "memory_mem_4",
+      "content": "Conclusion: The answer to 'Which TV series did Li Yitong play Huang Rong in' is Li Yitong (actress).",
+      "answer_text": "Li Yitong (actress)",
+      "value": 0.9999999897508454,
+      "confidence": 0.6712419044296595,
+      "evidence_ids": [
+        "doc_10",
+        "doc_3"
+      ],
+      "step": 1,
+      "kind": "intermediate_answer"
+    },
+    {
+      "node_id": "state_2",
+      "answer_text": "Li Yitong (actress)",
+      "previous_answer": "",
+      "confidence": 0.6712419044296595,
+      "score": 0.6613762273937722,
+      "source": "expansion_candidate",
+      "step": 0,
+      "evidence_ids": [
+        "doc_10",
+        "doc_3",
+        "doc_8",
+        "doc_1"
+      ],
+      "kind": "anytime_answer"
+    },
+    {
+      "node_id": "memory_mem_5",
+      "content": "Conclusion: The director of the 2017 TV series 'The Legend of the Condor Heroes' is Jeffrey Chiang.",
+      "answer_text": "Jeffrey Chiang",
+      "value": 0.95,
+      "evidence_ids": [
+        "doc_3"
+      ],
+      "step": 2
+    },
+    {
+      "node_id": "state_3",
+      "answer_text": "Jeffrey Chiang",
+      "previous_answer": "Li Yitong (actress)",
+      "confidence": 0.95,
+      "score": 0.8659973816807295,
+      "source": "expansion_candidate",
+      "step": 1,
+      "evidence_ids": [
+        "doc_3",
+        "doc_8",
+        "doc_6",
+        "doc_10"
+      ],
+      "kind": "anytime_answer"
+    },
+    {
+      "node_id": "memory_mem_6",
+      "content": "Conclusion: The answer to 'What is the 2017 TV series 'The Legend of the Condor Heroes'' is The Legend of the Condor Heroes (2017 TV series).",
+      "answer_text": "The Legend of the Condor Heroes (2017 TV series)",
+      "value": 0.874,
+      "evidence_ids": [
+        "doc_3",
+        "doc_10",
+        "doc_8"
+      ],
+      "step": 3
+    },
+    {
+      "node_id": "memory_mem_7",
+      "content": "Conclusion: The director of the 2017 television series 'The Legend of the Condor Heroes' in which Li Yitong played Huang Rong is Jeffrey Chiang.",
+      "answer_text": "Jeffrey Chiang",
+      "value": 0.95,
+      "evidence_ids": [
+        "doc_3",
+        "doc_10"
+      ],
+      "step": 5
+    },
+    {
+      "node_id": "memory_mem_8",
+      "content": "Conclusion: The answer to 'What is the 2017 television series 'The Legend of the Condor Heroes' in which Li Yitong played Huang Rong' is Li Yitong (actress).",
+      "answer_text": "Li Yitong (actress)",
+      "value": 0.874,
+      "evidence_ids": [
+        "doc_10",
+        "doc_3",
+        "doc_8"
+      ],
+      "step": 6
+    },
+    {
+      "node_id": "state_3",
+      "answer_text": "Jeffrey Chiang",
+      "source": "answer_judge",
+      "choice": "A",
+      "candidate_source": "expansion_candidate",
+      "base_score": 0.9451171956042137,
+      "rerank_score": 0.5867913271379831,
+      "judge_confidence": 0.0,
+      "judge_reason": "Original question asks for the director; 'Jeffrey Chiang' is the correct person.",
+      "step": 6,
+      "kind": "final_answer_selection"
+    }
+  ],
+  "anytime_answer": "Jeffrey Chiang",
+  "anytime_answer_score": 0.8659973816807295,
+  "anytime_answer_source": "expansion_candidate",
+  "anytime_answer_node_id": "state_3",
+  "stats": {
+    "steps": 6,
+    "llm_calls": 9,
+    "generated_tokens": 672,
+    "token_budget_remaining": 528,
+    "total_nodes": 20,
+    "kg_nodes": 7,
+    "memory_nodes": 7,
+    "state_nodes": 6,
+    "deleted_state_nodes": 0,
+    "scheduler_mode": "tdca",
+    "scoring_mode": "hybrid",
+    "stop_reason": "frontier_empty",
+    "goal_kind": "bridge",
+    "goal_completion": 0.0,
+    "anytime_answer": "Jeffrey Chiang",
+    "anytime_answer_score": 0.8659973816807295,
+    "anytime_answer_source": "expansion_candidate"
+  }
+}

@@ -1,0 +1,2013 @@
+{
+  "nodes": [
+    {
+      "node_id": "state_1",
+      "node_type": "state",
+      "content": "W41AP is a station owned by the daily newspaper serving what nearby city in Erie County?",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.7159551969344871,
+      "temperature": 0.715052674784468,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.8853237769702749,
+        "evidence_support": 0.6627169910890436,
+        "memory_usefulness": 0.5139667251540021,
+        "answerability": 0.8313584955445218,
+        "uncertainty": 0.18071094160397216
+      },
+      "metadata": {
+        "diffusion_delta": 0.03847086907939157,
+        "diffusion_gain": 0.03847086907939157
+      }
+    },
+    {
+      "node_id": "kg_doc_5",
+      "node_type": "kg",
+      "content": "W41AP channel 41 is an analog low power television station in Sandusky, Ohio. The station is owned by Sandusky Newspapers, Inc., the publishers of the \"Sandusky Register\", the local newspaper.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999965213853,
+      "temperature": 0.9999999965213853,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "W41AP",
+        "raw_score": 5.260670293230145,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_9",
+      "node_type": "kg",
+      "content": "The Erie County Holding Center in Buffalo, New York is a pre-trial, maximum security detention facility that serves Erie County. Capable of housing 680 inmates, it is the second largest detention facility in New York State outside of New York City. Inmate \"Over-flow\" is housed at the Holding Center Annex at the Erie County Correctional Facility in Alden, New York. The Jail Management Division of the Erie County Sheriff's Office conducts regularly scheduled tours of the facility for high school and college student groups, police academy classes and groups of \"At risk\" teens. According to a professor at University at Buffalo Law School, \"Erie County continues to operate the Holding Center with indifference to the basic medical needs of inmates.\"",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999938350312,
+      "temperature": 0.9999999938350312,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Erie County Holding Center",
+        "raw_score": 4.336440569596406,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_1",
+      "node_type": "kg",
+      "content": "The Macomb Daily is a daily newspaper with its headquarters in Clinton Township, Macomb County, Michigan in Metro Detroit. It is the only daily newspaper serving Macomb County, making the county the largest in Michigan in terms of population with only one daily newspaper. It is owned by the Journal Register Company.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.08072930845849033,
+      "temperature": 0.08072930845849033,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "The Macomb Daily",
+        "raw_score": 2.4968686361079038,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_4",
+      "node_type": "kg",
+      "content": "The Salem News (formerly the Salem Evening News) is an American daily newspaper serving southern Essex County, Massachusetts. Although the paper is named for the city of Salem, its offices are now in nearby Beverly, Massachusetts. The newspaper is published Monday through Saturday afternoons by Eagle-Tribune Publishing Company, a subsidiary of Community Newspaper Holdings Inc.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.2495172659895123,
+      "temperature": 0.2495172659895123,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "The Salem News",
+        "raw_score": 1.9745059820201414,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "memory_mem_1",
+      "node_type": "memory",
+      "content": "Template: for compositional multi-hop questions, first solve the intermediate entity and then ask for the final attribute.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9599998077388796,
+      "temperature": 2.1858509587401316,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.96,
+        "tag": "compositional_template",
+        "memory_kind": "template",
+        "raw_score": 0.08779655293597825,
+        "source": "memory",
+        "diffusion_delta": 0.3650510691077411,
+        "diffusion_gain": 0.3650510691077411
+      }
+    },
+    {
+      "node_id": "memory_mem_3",
+      "node_type": "memory",
+      "content": "Template: when evidence already grounds the answer, switch from branching to short verification and synthesis.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.8799999914225256,
+      "temperature": 1.2058873835567363,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.88,
+        "tag": "verification_then_stop",
+        "memory_kind": "template",
+        "raw_score": 0.06562219033577664,
+        "source": "memory",
+        "diffusion_delta": 0.08611185300942448,
+        "diffusion_gain": 0.08611185300942448
+      }
+    },
+    {
+      "node_id": "state_2",
+      "node_type": "state",
+      "content": "What newspaper is published by Sandusky Newspapers, Inc.?",
+      "depth": 1,
+      "parent_id": "state_1",
+      "value": 0.5013785432477418,
+      "temperature": 1.0135050074227492,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.5874179346268525,
+        "evidence_support": 0.6247586312554487,
+        "memory_usefulness": 0.0,
+        "answerability": 0.6623793156277243,
+        "uncertainty": 0.1875434463740192
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_5",
+          "doc_4",
+          "doc_3",
+          "doc_8"
+        ],
+        "memory_ids": [],
+        "diffusion_delta": -0.014166724663288388,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "kg_doc_3",
+      "node_type": "kg",
+      "content": "The Sandusky Register is a daily newspaper serving Sandusky, Ohio, as well as nearby Port Clinton and the Lake Erie Islands (collectively known regionally as Vacationland). It is considered the paper of record for the entire region.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999942466268,
+      "temperature": 0.9999999942466268,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Sandusky Register",
+        "raw_score": 5.726606146696261,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_8",
+      "node_type": "kg",
+      "content": "The Providence Journal, nicknamed the ProJo, is a daily newspaper serving the metropolitan area of Providence, Rhode Island and is the largest newspaper in Rhode Island. The newspaper was first published in 1829 and is the oldest continuously-published daily newspaper in the United States. The newspaper has won four Pulitzer Prizes.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0,
+      "temperature": 0.0,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "The Providence Journal",
+        "raw_score": 2.902223343968749,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "state_3",
+      "node_type": "state",
+      "content": "What city does the Sandusky Register serve?",
+      "depth": 1,
+      "parent_id": "state_1",
+      "value": 0.6964191012453088,
+      "temperature": 1.5377037240797733,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.6727993879911004,
+        "evidence_support": 0.9457334940914714,
+        "memory_usefulness": 0.5139667251540021,
+        "answerability": 0.7103667470457357,
+        "uncertainty": 0.12976797106353513
+      },
+      "metadata": {
+        "kind": "bridge",
+        "evidence_ids": [
+          "doc_5",
+          "doc_3",
+          "doc_4",
+          "doc_1"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "diffusion_delta": 0.12708175836192925,
+        "diffusion_gain": 0.12708175836192925
+      }
+    },
+    {
+      "node_id": "state_5",
+      "node_type": "state",
+      "content": "Does the evidence support that What city does the Sandusky Register serve?",
+      "depth": 2,
+      "parent_id": "state_3",
+      "value": 0.6647804214948152,
+      "temperature": 1.1744027964267079,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.6723465443276394,
+        "evidence_support": 0.9444016009636451,
+        "memory_usefulness": 0.48672266765716377,
+        "answerability": 0.7097008004818225,
+        "uncertainty": 0.1300077118265439
+      },
+      "metadata": {
+        "kind": "verification",
+        "evidence_ids": [
+          "doc_5",
+          "doc_3",
+          "doc_9",
+          "doc_4"
+        ],
+        "memory_ids": [
+          "mem_3",
+          "mem_1"
+        ],
+        "diffusion_delta": 0.10428500085601922,
+        "diffusion_gain": 0.10428500085601922
+      }
+    },
+    {
+      "node_id": "memory_mem_4",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'What city does the Sandusky Register serve' is Sandusky, Ohio.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999940620495,
+      "temperature": 1.4787899683968502,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "intermediate_answer",
+        "target_question": "What city does the Sandusky Register serve?",
+        "target_question_norm": "what city does the sandusky register serve",
+        "relation_signature": "generic",
+        "answer_text": "Sandusky, Ohio",
+        "support_score": 0.9999999940620495,
+        "evidence_ids": [
+          "doc_5",
+          "doc_3"
+        ],
+        "slot_name": "city_served_by_newspaper",
+        "slot_role": "bridge_entity",
+        "terminal": false,
+        "derived_from_state": "state_3",
+        "diffusion_delta": 0.11205043542218607,
+        "diffusion_gain": 0.11205043542218607
+      }
+    },
+    {
+      "node_id": "state_6",
+      "node_type": "state",
+      "content": "What is the daily newspaper published by Sandusky Newspapers, Inc.?",
+      "depth": 2,
+      "parent_id": "state_2",
+      "value": 0.5229505473511731,
+      "temperature": 1.04085421690957,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.6340511469857244,
+        "evidence_support": 0.6222092558403656,
+        "memory_usefulness": 0.0046237484358418865,
+        "answerability": 0.6861046279201827,
+        "uncertainty": 0.1880023339487342
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_5",
+          "doc_4",
+          "doc_3",
+          "doc_8"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "diffusion_delta": 0.035901157372655756,
+        "diffusion_gain": 0.035901157372655756
+      }
+    },
+    {
+      "node_id": "state_7",
+      "node_type": "state",
+      "content": "What city is Sandusky, Ohio located in?",
+      "depth": 2,
+      "parent_id": "state_2",
+      "value": 0.6342962723533464,
+      "temperature": 1.3666446884896999,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.6772272110495583,
+        "evidence_support": 0.8889035619104655,
+        "memory_usefulness": 0.0,
+        "answerability": 0.7944517809552328,
+        "uncertainty": 0.1399973588561162
+      },
+      "metadata": {
+        "kind": "bridge",
+        "evidence_ids": [
+          "doc_5",
+          "doc_3",
+          "doc_4",
+          "doc_9"
+        ],
+        "memory_ids": [],
+        "diffusion_delta": 0.3048864328319483,
+        "diffusion_gain": 0.3048864328319483
+      }
+    },
+    {
+      "node_id": "memory_mem_5",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'What newspaper is published by Sandusky Newspapers, Inc.' is Sandusky Register.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 1.0,
+      "temperature": 0.47340390614523,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "intermediate_answer",
+        "target_question": "What newspaper is published by Sandusky Newspapers, Inc.?",
+        "target_question_norm": "what newspaper is published by sandusky newspapers inc",
+        "relation_signature": "generic",
+        "answer_text": "Sandusky Register",
+        "support_score": 1.0,
+        "evidence_ids": [
+          "doc_5"
+        ],
+        "slot_name": "newspaper_owner",
+        "slot_role": "target_attribute",
+        "terminal": true,
+        "derived_from_state": "state_2",
+        "diffusion_delta": -0.0406158781193906,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "state_8",
+      "node_type": "state",
+      "content": "What city in Erie County is served by the Sandusky Register?",
+      "depth": 2,
+      "parent_id": "state_2",
+      "value": 0.6621823421113379,
+      "temperature": 0.43165097165759636,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.7606979561469774,
+        "evidence_support": 0.8549939886675806,
+        "memory_usefulness": 0.0029113917817615866,
+        "answerability": 0.8274969943337902,
+        "uncertainty": 0.1461010820398355
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_5",
+          "doc_3",
+          "doc_9",
+          "doc_1"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "diffusion_delta": -0.015515096817351581,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "memory_mem_6",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'What is the daily newspaper published by Sandusky Newspapers, Inc.' is Sandusky Register.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 1.0,
+      "temperature": 0.5754930915236502,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "intermediate_answer",
+        "target_question": "What is the daily newspaper published by Sandusky Newspapers, Inc.?",
+        "target_question_norm": "what is the daily newspaper published by sandusky newspapers inc",
+        "relation_signature": "generic",
+        "answer_text": "Sandusky Register",
+        "support_score": 1.0,
+        "evidence_ids": [
+          "doc_5"
+        ],
+        "slot_name": "",
+        "slot_role": "",
+        "terminal": false,
+        "derived_from_state": "state_6",
+        "diffusion_delta": -0.056717920908175845,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "state_9",
+      "node_type": "state",
+      "content": "What city in Erie County is Sandusky Register's primary service area?",
+      "depth": 3,
+      "parent_id": "state_6",
+      "value": 0.6493775156256189,
+      "temperature": 0.5109175299425007,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.7198496727200129,
+        "evidence_support": 0.8745578609412141,
+        "memory_usefulness": 0.0,
+        "answerability": 0.812278930470607,
+        "uncertainty": 0.14257958503058146
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_9",
+          "doc_3",
+          "doc_5",
+          "doc_1"
+        ],
+        "memory_ids": [],
+        "diffusion_delta": -0.0077142311511463335,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "state_10",
+      "node_type": "state",
+      "content": "Is Sandusky, Ohio in Erie County?",
+      "depth": 3,
+      "parent_id": "state_7",
+      "value": 0.6405774646694576,
+      "temperature": 0.44131929070074116,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.6995055353810935,
+        "evidence_support": 0.9544280452385101,
+        "memory_usefulness": 0.0,
+        "answerability": 0.8272140226192551,
+        "uncertainty": 0.12820295185706818
+      },
+      "metadata": {
+        "kind": "verification",
+        "evidence_ids": [
+          "doc_3",
+          "doc_5",
+          "doc_9",
+          "doc_1"
+        ],
+        "memory_ids": [],
+        "diffusion_delta": 0.05809685142814891,
+        "diffusion_gain": 0.05809685142814891
+      }
+    },
+    {
+      "node_id": "memory_mem_7",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'What city is Sandusky, Ohio located in' is Sandusky, Ohio.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 1.0,
+      "temperature": 0.6997327078922609,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "intermediate_answer",
+        "target_question": "What city is Sandusky, Ohio located in?",
+        "target_question_norm": "what city is sandusky ohio located in",
+        "relation_signature": "generic",
+        "answer_text": "Sandusky, Ohio",
+        "support_score": 1.0,
+        "evidence_ids": [
+          "doc_5",
+          "doc_3"
+        ],
+        "slot_name": "",
+        "slot_role": "",
+        "terminal": false,
+        "derived_from_state": "state_7",
+        "diffusion_delta": -0.10565717842020184,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "state_11",
+      "node_type": "state",
+      "content": "What city is the Sandusky Register's primary service area, and is it in Erie County?",
+      "depth": 3,
+      "parent_id": "state_7",
+      "value": 0.7034358008330074,
+      "temperature": 0.9821627357333405,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.7586383387533002,
+        "evidence_support": 0.9187892316273536,
+        "memory_usefulness": 0.17209216231769234,
+        "answerability": 0.8468946158136768,
+        "uncertainty": 0.13461793830707636
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_9",
+          "doc_3",
+          "doc_5",
+          "doc_1"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "diffusion_delta": 0.6548924442372333,
+        "diffusion_gain": 0.6548924442372333
+      }
+    },
+    {
+      "node_id": "state_12",
+      "node_type": "state",
+      "content": "What city is the Sandusky Register's primary service area?",
+      "depth": 4,
+      "parent_id": "state_11",
+      "value": 0.6614665426294254,
+      "temperature": 0.5936797729829598,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.6953450960719647,
+        "evidence_support": 0.9421914590351901,
+        "memory_usefulness": 0.0029650036909800617,
+        "answerability": 0.821095729517595,
+        "uncertainty": 0.13040553737366578
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_5",
+          "doc_3",
+          "doc_9",
+          "doc_10"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "diffusion_delta": -0.27619024864332076,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "kg_doc_10",
+      "node_type": "kg",
+      "content": "Times Publishing Company is a newspaper and magazine publisher. Its flagship publication is the \"Tampa Bay Times\" (formerly the \"St. Petersburg Times\"), a daily newspaper serving the Tampa Bay area. It also publishes the business magazine \"Florida Trend\" and the daily newspaper \"tbt*\".",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0,
+      "temperature": 0.0,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Times Publishing Company",
+        "raw_score": 1.7383552465299543,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "state_13",
+      "node_type": "state",
+      "content": "Is Sandusky, Ohio located in Erie County?",
+      "depth": 4,
+      "parent_id": "state_11",
+      "value": 0.6405169857185027,
+      "temperature": 0.3930088703221182,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.6994629685518741,
+        "evidence_support": 0.9543028486819825,
+        "memory_usefulness": 0.0,
+        "answerability": 0.8271514243409913,
+        "uncertainty": 0.12822548723724314
+      },
+      "metadata": {
+        "kind": "verification",
+        "evidence_ids": [
+          "doc_3",
+          "doc_5",
+          "doc_9",
+          "doc_1"
+        ],
+        "memory_ids": [],
+        "diffusion_delta": -0.09924183583716001,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "memory_mem_8",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'What city is the Sandusky Register's primary service area, and is it in Erie County' is Sandusky.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999938350312,
+      "temperature": 0.9679496124019454,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "intermediate_answer",
+        "target_question": "What city is the Sandusky Register's primary service area, and is it in Erie County?",
+        "target_question_norm": "what city is the sandusky register s primary service area and is it in erie county",
+        "relation_signature": "generic",
+        "answer_text": "Sandusky",
+        "support_score": 0.9999999938350312,
+        "evidence_ids": [
+          "doc_9",
+          "doc_3",
+          "doc_5"
+        ],
+        "slot_name": "",
+        "slot_role": "",
+        "terminal": false,
+        "derived_from_state": "state_11",
+        "diffusion_delta": -0.28461338103534073,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "memory_mem_9",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'W41AP is a station owned by the daily newspaper serving what nearby city in Erie County' is Sandusky.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.7912,
+      "temperature": 1.0329048370582148,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "answer_candidate",
+        "target_question": "W41AP is a station owned by the daily newspaper serving what nearby city in Erie County?",
+        "target_question_norm": "w41ap is a station owned by the daily newspaper serving what nearby city in erie county",
+        "relation_signature": "generic",
+        "answer_text": "Sandusky",
+        "support_score": 0.6627169910890436,
+        "evidence_ids": [],
+        "derived_from_state": "state_1"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "source": "state_1",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.9999999917111503
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.3254339904669369
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.08072930845849033
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.9599998077388796
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.0679336425691247
+    },
+    {
+      "source": "state_1",
+      "target": "state_2",
+      "edge_type": "refines",
+      "weight": 1.0
+    },
+    {
+      "source": "state_1",
+      "target": "state_3",
+      "edge_type": "refines",
+      "weight": 0.94
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_9",
+      "edge_type": "derives",
+      "weight": 0.86
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.9999999917111503
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.9999999965213853
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.9999999940620495
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.999999993947811
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.9999999940620495
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "state_6",
+      "edge_type": "supports",
+      "weight": 0.9999999963160666
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "state_7",
+      "edge_type": "supports",
+      "weight": 0.9999999949427
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.9999999965213853
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "state_8",
+      "edge_type": "supports",
+      "weight": 0.999999991065905
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.9999999963160666
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "state_9",
+      "edge_type": "supports",
+      "weight": 0.6434778245617823
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "state_10",
+      "edge_type": "supports",
+      "weight": 0.9088560962303933
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "memory_mem_7",
+      "edge_type": "supports",
+      "weight": 0.9999999949427
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "state_11",
+      "edge_type": "supports",
+      "weight": 0.46949720439483766
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "state_12",
+      "edge_type": "supports",
+      "weight": 0.9999999937183668
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "state_13",
+      "edge_type": "supports",
+      "weight": 0.9086057031331439
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "memory_mem_8",
+      "edge_type": "supports",
+      "weight": 0.46949720439483766
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "memory_mem_9",
+      "edge_type": "supports",
+      "weight": 0.9999999917111503
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.3254339904669369
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.15277032294180184
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "state_7",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "state_8",
+      "edge_type": "supports",
+      "weight": 0.688996551348759
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "state_9",
+      "edge_type": "supports",
+      "weight": 0.9999999937265791
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "state_10",
+      "edge_type": "supports",
+      "weight": 0.7280631843997288
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "memory_mem_7",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "state_11",
+      "edge_type": "supports",
+      "weight": 0.9999999938350312
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "state_12",
+      "edge_type": "supports",
+      "weight": 0.11775665469968534
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "state_13",
+      "edge_type": "supports",
+      "weight": 0.7273161119275368
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "memory_mem_8",
+      "edge_type": "supports",
+      "weight": 0.9999999938350312
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "memory_mem_9",
+      "edge_type": "supports",
+      "weight": 0.3254339904669369
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.08072930845849033
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "state_8",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "state_9",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "state_10",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "state_11",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "state_13",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "memory_mem_8",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "memory_mem_9",
+      "edge_type": "supports",
+      "weight": 0.08072930845849033
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.2495172659895123
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.014695120180697605
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.014695120180697605
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "state_6",
+      "edge_type": "supports",
+      "weight": 0.24441851536466444
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "state_7",
+      "edge_type": "supports",
+      "weight": 0.06648952837551862
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.2495172659895123
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.24441851536466444
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "memory_mem_7",
+      "edge_type": "supports",
+      "weight": 0.06648952837551862
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "memory_mem_9",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.9599998077388796
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_3",
+      "edge_type": "recalls",
+      "weight": 0.9599998077388796
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_5",
+      "edge_type": "recalls",
+      "weight": 0.09344534389180187
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "memory_mem_4",
+      "edge_type": "recalls",
+      "weight": 0.9599998077388796
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_6",
+      "edge_type": "recalls",
+      "weight": 0.0029704255818246996
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_8",
+      "edge_type": "recalls",
+      "weight": 0.0054348392652932235
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "memory_mem_6",
+      "edge_type": "recalls",
+      "weight": 0.0029704255818246996
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_11",
+      "edge_type": "recalls",
+      "weight": 0.17405662214455517
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_12",
+      "edge_type": "recalls",
+      "weight": 0.005534795052705555
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "memory_mem_8",
+      "edge_type": "recalls",
+      "weight": 0.17405662214455517
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "memory_mem_9",
+      "edge_type": "recalls",
+      "weight": 0.9599998077388796
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.0679336425691247
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_3",
+      "edge_type": "recalls",
+      "weight": 0.0679336425691247
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_5",
+      "edge_type": "recalls",
+      "weight": 0.8799999914225256
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "memory_mem_4",
+      "edge_type": "recalls",
+      "weight": 0.0679336425691247
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_6",
+      "edge_type": "recalls",
+      "weight": 0.00021203196847866692
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_8",
+      "edge_type": "recalls",
+      "weight": 0.00038794429822995005
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "memory_mem_6",
+      "edge_type": "recalls",
+      "weight": 0.00021203196847866692
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_11",
+      "edge_type": "recalls",
+      "weight": 0.1701277024908295
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_12",
+      "edge_type": "recalls",
+      "weight": 0.00039521232925456863
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "memory_mem_8",
+      "edge_type": "recalls",
+      "weight": 0.1701277024908295
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "memory_mem_9",
+      "edge_type": "recalls",
+      "weight": 0.0679336425691247
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.9999999965213853
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.2495172659895123
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.20688348067245246
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_8",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_2",
+      "target": "state_6",
+      "edge_type": "refines",
+      "weight": 1.0
+    },
+    {
+      "source": "state_2",
+      "target": "state_7",
+      "edge_type": "refines",
+      "weight": 0.9
+    },
+    {
+      "source": "state_2",
+      "target": "memory_mem_5",
+      "edge_type": "derives",
+      "weight": 1.0
+    },
+    {
+      "source": "state_2",
+      "target": "state_8",
+      "edge_type": "refines",
+      "weight": 0.84
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.20688348067245246
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.8914669941208934
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.8888032079794792
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.8914669941208934
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "state_6",
+      "edge_type": "supports",
+      "weight": 0.2091046258572857
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "state_7",
+      "edge_type": "supports",
+      "weight": 0.7778071288782311
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.20688348067245246
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "state_8",
+      "edge_type": "supports",
+      "weight": 0.7099879862692561
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.2091046258572857
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "state_9",
+      "edge_type": "supports",
+      "weight": 0.7491157281558491
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "state_10",
+      "edge_type": "supports",
+      "weight": 0.9999999942466268
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "memory_mem_7",
+      "edge_type": "supports",
+      "weight": 0.7778071288782311
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "state_11",
+      "edge_type": "supports",
+      "weight": 0.837578469419676
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "state_12",
+      "edge_type": "supports",
+      "weight": 0.8843829243520133
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "state_13",
+      "edge_type": "supports",
+      "weight": 0.999999994230821
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "memory_mem_8",
+      "edge_type": "supports",
+      "weight": 0.837578469419676
+    },
+    {
+      "source": "kg_doc_8",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_8",
+      "target": "state_6",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_8",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_8",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.9999999940620495
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.8914669941208934
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.014695120180697605
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_3",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.9599998077388796
+    },
+    {
+      "source": "state_3",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.0679336425691247
+    },
+    {
+      "source": "state_3",
+      "target": "state_5",
+      "edge_type": "verifies",
+      "weight": 0.38
+    },
+    {
+      "source": "state_3",
+      "target": "memory_mem_4",
+      "edge_type": "derives",
+      "weight": 0.9999999940620495
+    },
+    {
+      "source": "state_5",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.999999993947811
+    },
+    {
+      "source": "state_5",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.8888032079794792
+    },
+    {
+      "source": "state_5",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.15277032294180184
+    },
+    {
+      "source": "state_5",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_5",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.8799999914225256
+    },
+    {
+      "source": "state_5",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.09344534389180187
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "state_3",
+      "edge_type": "recalls",
+      "weight": 0.9999999940620495
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.9999999940620495
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.8914669941208934
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.014695120180697605
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.9599998077388796
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.0679336425691247
+    },
+    {
+      "source": "state_6",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.9999999963160666
+    },
+    {
+      "source": "state_6",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.24441851536466444
+    },
+    {
+      "source": "state_6",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.2091046258572857
+    },
+    {
+      "source": "state_6",
+      "target": "kg_doc_8",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_6",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.0029704255818246996
+    },
+    {
+      "source": "state_6",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.00021203196847866692
+    },
+    {
+      "source": "state_6",
+      "target": "state_7",
+      "edge_type": "refines",
+      "weight": 0.9
+    },
+    {
+      "source": "state_6",
+      "target": "memory_mem_6",
+      "edge_type": "derives",
+      "weight": 1.0
+    },
+    {
+      "source": "state_6",
+      "target": "state_9",
+      "edge_type": "refines",
+      "weight": 0.84
+    },
+    {
+      "source": "state_7",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.9999999949427
+    },
+    {
+      "source": "state_7",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.7778071288782311
+    },
+    {
+      "source": "state_7",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.06648952837551862
+    },
+    {
+      "source": "state_7",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_7",
+      "target": "state_10",
+      "edge_type": "verifies",
+      "weight": 0.8
+    },
+    {
+      "source": "state_7",
+      "target": "memory_mem_7",
+      "edge_type": "derives",
+      "weight": 1.0
+    },
+    {
+      "source": "state_7",
+      "target": "state_11",
+      "edge_type": "refines",
+      "weight": 0.84
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "state_2",
+      "edge_type": "recalls",
+      "weight": 1.0
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.9999999965213853
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.20688348067245246
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.2495172659895123
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_8",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_8",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.999999991065905
+    },
+    {
+      "source": "state_8",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.7099879862692561
+    },
+    {
+      "source": "state_8",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.688996551348759
+    },
+    {
+      "source": "state_8",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_8",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.0054348392652932235
+    },
+    {
+      "source": "state_8",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.00038794429822995005
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "state_6",
+      "edge_type": "recalls",
+      "weight": 1.0
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.9999999963160666
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.2091046258572857
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.24441851536466444
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_8",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.0029704255818246996
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.00021203196847866692
+    },
+    {
+      "source": "state_9",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.9999999937265791
+    },
+    {
+      "source": "state_9",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.7491157281558491
+    },
+    {
+      "source": "state_9",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.6434778245617823
+    },
+    {
+      "source": "state_9",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_10",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.9999999942466268
+    },
+    {
+      "source": "state_10",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.9088560962303933
+    },
+    {
+      "source": "state_10",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.7280631843997288
+    },
+    {
+      "source": "state_10",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_7",
+      "target": "state_7",
+      "edge_type": "recalls",
+      "weight": 1.0
+    },
+    {
+      "source": "memory_mem_7",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.9999999949427
+    },
+    {
+      "source": "memory_mem_7",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.7778071288782311
+    },
+    {
+      "source": "memory_mem_7",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.06648952837551862
+    },
+    {
+      "source": "memory_mem_7",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_11",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.9999999938350312
+    },
+    {
+      "source": "state_11",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.837578469419676
+    },
+    {
+      "source": "state_11",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.46949720439483766
+    },
+    {
+      "source": "state_11",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_11",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.17405662214455517
+    },
+    {
+      "source": "state_11",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.1701277024908295
+    },
+    {
+      "source": "state_11",
+      "target": "state_12",
+      "edge_type": "refines",
+      "weight": 0.9
+    },
+    {
+      "source": "state_11",
+      "target": "state_13",
+      "edge_type": "verifies",
+      "weight": 0.8
+    },
+    {
+      "source": "state_11",
+      "target": "memory_mem_8",
+      "edge_type": "derives",
+      "weight": 0.9999999938350312
+    },
+    {
+      "source": "state_12",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.9999999937183668
+    },
+    {
+      "source": "state_12",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.8843829243520133
+    },
+    {
+      "source": "state_12",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.11775665469968534
+    },
+    {
+      "source": "state_12",
+      "target": "kg_doc_10",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_12",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.005534795052705555
+    },
+    {
+      "source": "state_12",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.00039521232925456863
+    },
+    {
+      "source": "kg_doc_10",
+      "target": "state_12",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_13",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.999999994230821
+    },
+    {
+      "source": "state_13",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.9086057031331439
+    },
+    {
+      "source": "state_13",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.7273161119275368
+    },
+    {
+      "source": "state_13",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_8",
+      "target": "state_11",
+      "edge_type": "recalls",
+      "weight": 0.9999999938350312
+    },
+    {
+      "source": "memory_mem_8",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.9999999938350312
+    },
+    {
+      "source": "memory_mem_8",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.837578469419676
+    },
+    {
+      "source": "memory_mem_8",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.46949720439483766
+    },
+    {
+      "source": "memory_mem_8",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_8",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.17405662214455517
+    },
+    {
+      "source": "memory_mem_8",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.1701277024908295
+    },
+    {
+      "source": "memory_mem_9",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.86
+    },
+    {
+      "source": "memory_mem_9",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.3254339904669369
+    },
+    {
+      "source": "memory_mem_9",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.9999999917111503
+    },
+    {
+      "source": "memory_mem_9",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.08072930845849033
+    },
+    {
+      "source": "memory_mem_9",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_9",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.9599998077388796
+    },
+    {
+      "source": "memory_mem_9",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.0679336425691247
+    }
+  ]
+}

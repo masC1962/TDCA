@@ -1,0 +1,158 @@
+{
+  "question": "Which British racing driver has raced for 7 different teams and won the European Grand Prix in 1999?",
+  "final_answer": "Johnny Herbert",
+  "best_node": {
+    "node_id": "state_3",
+    "node_type": "state",
+    "content": "Who won the 1999 European Grand Prix?",
+    "depth": 1,
+    "parent_id": "state_1",
+    "value": 0.6026121671015869,
+    "temperature": 1.77628708872037,
+    "expanded": true,
+    "visit_count": 2,
+    "persistent": false,
+    "score_breakdown": {
+      "task_progress": 0.6472541622183153,
+      "evidence_support": 0.7076102810342606,
+      "memory_usefulness": 0.5139667251540021,
+      "answerability": 0.6204718071837969,
+      "uncertainty": 0.1726301494138331
+    },
+    "metadata": {
+      "kind": "retrieval",
+      "evidence_ids": [
+        "doc_2",
+        "doc_1",
+        "doc_5",
+        "doc_4"
+      ],
+      "memory_ids": [
+        "mem_1",
+        "mem_3"
+      ],
+      "goal_slot_name": "european_gp_1999_winner",
+      "goal_slot_role": "target_attribute",
+      "goal_terminal": true,
+      "diffusion_delta": 0.10311346889065787,
+      "diffusion_gain": 0.10311346889065787,
+      "goal_retry": 1
+    }
+  },
+  "final_synthesis_node_ids": [
+    "state_2",
+    "state_3",
+    "memory_mem_5",
+    "state_4",
+    "state_1"
+  ],
+  "answer_history": [
+    {
+      "node_id": "memory_mem_4",
+      "content": "Conclusion: The answer to 'Which British racing driver raced for exactly 7 different Formula One teams' is Johnny Herbert.",
+      "answer_text": "Johnny Herbert",
+      "value": 1.0,
+      "confidence": 1.0,
+      "evidence_ids": [
+        "doc_9"
+      ],
+      "step": 1,
+      "kind": "intermediate_answer"
+    },
+    {
+      "node_id": "memory_mem_5",
+      "content": "Conclusion: The answer to 'Who won the 1999 European Grand Prix' is Johnny Herbert.",
+      "answer_text": "Johnny Herbert",
+      "value": 1.0,
+      "confidence": 1.0,
+      "evidence_ids": [
+        "doc_2",
+        "doc_1"
+      ],
+      "step": 2,
+      "kind": "intermediate_answer"
+    },
+    {
+      "node_id": "memory_mem_5",
+      "content": "Conclusion: The answer to 'Who won the 1999 European Grand Prix' is Johnny Herbert.",
+      "answer_text": "Johnny Herbert",
+      "value": 0.9999999988831003,
+      "evidence_ids": [
+        "doc_2",
+        "doc_1"
+      ],
+      "step": 3
+    },
+    {
+      "node_id": "state_3",
+      "answer_text": "Johnny Herbert",
+      "previous_answer": "",
+      "confidence": 0.95,
+      "score": 0.8644744682286022,
+      "source": "expansion_candidate",
+      "step": 2,
+      "evidence_ids": [
+        "doc_2",
+        "doc_1",
+        "doc_4",
+        "doc_5"
+      ],
+      "kind": "anytime_answer"
+    },
+    {
+      "node_id": "memory_mem_6",
+      "content": "Conclusion: The answer to 'Which British racing driver won the European Grand Prix in 1999' is Johnny Herbert.",
+      "answer_text": "Johnny Herbert",
+      "value": 0.782,
+      "evidence_ids": [
+        "doc_2"
+      ],
+      "step": 4
+    },
+    {
+      "node_id": "memory_mem_7",
+      "content": "Conclusion: The answer to 'Which British racing driver has raced for exactly 7 different Formula One teams' is Johnny Herbert.",
+      "answer_text": "Johnny Herbert",
+      "value": 0.644,
+      "evidence_ids": [
+        "doc_9"
+      ],
+      "step": 6
+    },
+    {
+      "node_id": "state_3",
+      "answer_text": "Johnny Herbert",
+      "source": "answer_judge",
+      "choice": "A",
+      "candidate_source": "expansion_candidate",
+      "base_score": 1.0,
+      "judge_confidence": 0.0,
+      "judge_reason": "",
+      "step": 7,
+      "kind": "final_answer_selection"
+    }
+  ],
+  "anytime_answer": "Johnny Herbert",
+  "anytime_answer_score": 0.8644744682286022,
+  "anytime_answer_source": "expansion_candidate",
+  "anytime_answer_node_id": "state_3",
+  "stats": {
+    "steps": 7,
+    "llm_calls": 10,
+    "generated_tokens": 965,
+    "token_budget_remaining": 235,
+    "total_nodes": 30,
+    "kg_nodes": 10,
+    "memory_nodes": 7,
+    "state_nodes": 13,
+    "deleted_state_nodes": 1,
+    "scheduler_mode": "tdca",
+    "scoring_mode": "hybrid",
+    "stop_reason": "final_synthesis_reserve",
+    "goal_kind": "bridge",
+    "goal_completion": 0.0,
+    "anytime_answer": "Johnny Herbert",
+    "anytime_answer_score": 0.8644744682286022,
+    "anytime_answer_source": "expansion_candidate"
+  }
+}

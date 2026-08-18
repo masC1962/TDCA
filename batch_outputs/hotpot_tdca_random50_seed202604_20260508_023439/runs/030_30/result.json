@@ -1,0 +1,165 @@
+{
+  "question": "Spill.com gave their final review for a movie directed by who?",
+  "final_answer": "John Lee Hancock",
+  "best_node": {
+    "node_id": "memory_mem_6",
+    "node_type": "memory",
+    "content": "Conclusion: The director of that movie is John Lee Hancock.",
+    "depth": 0,
+    "parent_id": null,
+    "value": 0.7424824550122913,
+    "temperature": 1.8118072827342961,
+    "expanded": false,
+    "visit_count": 0,
+    "persistent": true,
+    "score_breakdown": {},
+    "metadata": {
+      "source": "memory",
+      "memory_kind": "derived_fact",
+      "target_question": "Who is the director of that movie?",
+      "target_question_norm": "who is the director of that movie",
+      "relation_signature": "director",
+      "answer_text": "John Lee Hancock",
+      "support_score": 0.6692470702233575,
+      "evidence_ids": [],
+      "derived_from_state": "state_4",
+      "diffusion_delta": 0.22927326579898644,
+      "diffusion_gain": 0.22927326579898644
+    }
+  },
+  "final_synthesis_node_ids": [
+    "state_4",
+    "state_2",
+    "state_10",
+    "memory_mem_6",
+    "state_1"
+  ],
+  "answer_history": [
+    {
+      "node_id": "memory_mem_4",
+      "content": "Conclusion: The answer to 'What movie did Spill.com give their final review for' is Spill.com.",
+      "answer_text": "Spill.com",
+      "value": 0.6351549377419639,
+      "evidence_ids": [
+        "doc_4"
+      ],
+      "step": 1
+    },
+    {
+      "node_id": "memory_mem_5",
+      "content": "Conclusion: The answer to 'Spill.com gave their final review for a movie directed by who' is Spill.com.",
+      "answer_text": "Spill.com",
+      "value": 0.82,
+      "evidence_ids": [
+        "doc_4"
+      ],
+      "step": 1
+    },
+    {
+      "node_id": "state_2",
+      "answer_text": "Spill.com",
+      "previous_answer": "",
+      "confidence": 0.6903858018934389,
+      "score": 0.6911120862048166,
+      "source": "expansion_candidate",
+      "step": 0,
+      "evidence_ids": [
+        "doc_4",
+        "doc_3",
+        "doc_8",
+        "doc_9"
+      ],
+      "kind": "anytime_answer"
+    },
+    {
+      "node_id": "state_2",
+      "answer_text": "Spill.com",
+      "previous_answer": "Spill.com",
+      "confidence": 0.6903858018934389,
+      "score": 0.7911120862048165,
+      "source": "grounded",
+      "step": 0,
+      "evidence_ids": [
+        "doc_4",
+        "doc_3",
+        "doc_8",
+        "doc_9"
+      ],
+      "kind": "anytime_answer"
+    },
+    {
+      "node_id": "memory_mem_6",
+      "content": "Conclusion: The director of that movie is John Lee Hancock.",
+      "answer_text": "John Lee Hancock",
+      "value": 0.7424824550122913,
+      "evidence_ids": [],
+      "step": 3
+    },
+    {
+      "node_id": "memory_mem_7",
+      "content": "Conclusion: The answer to 'What movie did Spill.com review last before shutting down' is Spill.com.",
+      "answer_text": "Spill.com",
+      "value": 0.5945407830071893,
+      "evidence_ids": [
+        "doc_4"
+      ],
+      "step": 5
+    },
+    {
+      "node_id": "memory_mem_8",
+      "content": "Conclusion: The director of the final reviewed movie on Spill.com is John Lee Hancock.",
+      "answer_text": "John Lee Hancock",
+      "value": 0.6525496096834633,
+      "evidence_ids": [
+        "doc_4"
+      ],
+      "step": 6
+    },
+    {
+      "node_id": "memory_mem_9",
+      "content": "Conclusion: The director of the final movie reviewed by Spill.com is John Lee Hancock.",
+      "answer_text": "John Lee Hancock",
+      "value": 0.6755287103819996,
+      "evidence_ids": [
+        "doc_4"
+      ],
+      "step": 7
+    },
+    {
+      "node_id": "memory_mem_6",
+      "answer_text": "John Lee Hancock",
+      "source": "answer_judge",
+      "choice": "B",
+      "candidate_source": "memory",
+      "base_score": 0.6066610489060946,
+      "rerank_score": 0.5384763257535446,
+      "judge_confidence": 0.9,
+      "judge_reason": "Original question asks for the director; 'John Lee Hancock' is the correct person, supported by bridge states and memory.",
+      "step": 8,
+      "kind": "final_answer_selection"
+    }
+  ],
+  "anytime_answer": "Spill.com",
+  "anytime_answer_score": 0.7911120862048165,
+  "anytime_answer_source": "grounded",
+  "anytime_answer_node_id": "state_2",
+  "stats": {
+    "steps": 8,
+    "llm_calls": 11,
+    "generated_tokens": 1002,
+    "token_budget_remaining": 198,
+    "total_nodes": 30,
+    "kg_nodes": 10,
+    "memory_nodes": 9,
+    "state_nodes": 11,
+    "deleted_state_nodes": 0,
+    "scheduler_mode": "tdca",
+    "scoring_mode": "hybrid",
+    "stop_reason": "final_synthesis_reserve",
+    "goal_kind": "bridge",
+    "goal_completion": 1.0,
+    "anytime_answer": "Spill.com",
+    "anytime_answer_score": 0.7911120862048165,
+    "anytime_answer_source": "grounded"
+  }
+}

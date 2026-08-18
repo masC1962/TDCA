@@ -1,0 +1,150 @@
+{
+  "question": "Are Wake Forest University and Pennsylvania State University both located in the US?",
+  "final_answer": "Yes",
+  "best_node": {
+    "node_id": "state_7",
+    "node_type": "state",
+    "content": "Is Wake Forest University located in the US?",
+    "depth": 2,
+    "parent_id": "state_4",
+    "value": 0.6875449515101358,
+    "temperature": 0.534145834827688,
+    "expanded": true,
+    "visit_count": 1,
+    "persistent": false,
+    "score_breakdown": {
+      "task_progress": 0.7994966782639361,
+      "evidence_support": 0.87597062234491,
+      "memory_usefulness": 0.0024155639959200685,
+      "answerability": 0.8546519778391216,
+      "uncertainty": 0.14232528797791621
+    },
+    "metadata": {
+      "kind": "retrieval",
+      "evidence_ids": [
+        "doc_7",
+        "doc_1",
+        "doc_2",
+        "doc_3"
+      ],
+      "memory_ids": [
+        "mem_1",
+        "mem_3"
+      ],
+      "diffusion_delta": 0.17091329656463916,
+      "diffusion_gain": 0.17091329656463916
+    }
+  },
+  "final_synthesis_node_ids": [
+    "state_2",
+    "state_5",
+    "state_3",
+    "memory_mem_4",
+    "state_1"
+  ],
+  "answer_history": [
+    {
+      "node_id": "",
+      "answer_text": "Yes",
+      "previous_answer": "",
+      "confidence": 0.28,
+      "score": 0.16880000000000003,
+      "source": "closed_book_initial",
+      "step": 0,
+      "evidence_ids": [],
+      "kind": "anytime_answer"
+    },
+    {
+      "node_id": "memory_mem_4",
+      "content": "Conclusion: The answer to 'Is Wake Forest University a located in the U' is Winston-Salem, North Carolina.",
+      "answer_text": "Winston-Salem, North Carolina",
+      "value": 0.9999999867685752,
+      "confidence": 0.99,
+      "evidence_ids": [
+        "doc_1",
+        "doc_2"
+      ],
+      "step": 2,
+      "kind": "intermediate_answer"
+    },
+    {
+      "node_id": "memory_mem_5",
+      "content": "Conclusion: The answer to 'Is Pennsylvania State University a located in the U' is Pennsylvania.",
+      "answer_text": "Pennsylvania",
+      "value": 0.9999999938330696,
+      "confidence": 0.95,
+      "evidence_ids": [
+        "doc_4"
+      ],
+      "step": 3,
+      "kind": "intermediate_answer"
+    },
+    {
+      "node_id": "memory_mem_6",
+      "content": "Conclusion: The answer to 'Is Pennsylvania State University located in the United States' is Pennsylvania.",
+      "answer_text": "Pennsylvania",
+      "value": 0.9999999937473252,
+      "confidence": 0.95,
+      "evidence_ids": [
+        "doc_4",
+        "doc_8"
+      ],
+      "step": 4,
+      "kind": "intermediate_answer"
+    },
+    {
+      "node_id": "state_7",
+      "answer_text": "Yes",
+      "previous_answer": "Yes",
+      "confidence": 0.95,
+      "score": 0.8464274297647142,
+      "source": "expansion_candidate",
+      "step": 6,
+      "evidence_ids": [
+        "doc_7",
+        "doc_1",
+        "doc_2",
+        "doc_3"
+      ],
+      "kind": "anytime_answer"
+    },
+    {
+      "node_id": "state_7",
+      "answer_text": "Yes",
+      "source": "answer_judge",
+      "choice": "A",
+      "candidate_source": "expansion_candidate",
+      "base_score": 0.8384153422851832,
+      "judge_confidence": 0.0,
+      "judge_reason": "",
+      "step": 7,
+      "kind": "final_answer_selection"
+    }
+  ],
+  "anytime_answer": "Yes",
+  "anytime_answer_score": 0.8464274297647142,
+  "anytime_answer_source": "expansion_candidate",
+  "anytime_answer_node_id": "state_7",
+  "root_state_synthesis_answer": "",
+  "root_state_synthesis_score": 0.0,
+  "root_state_synthesis_node_id": "",
+  "stats": {
+    "steps": 7,
+    "llm_calls": 12,
+    "generated_tokens": 887,
+    "token_budget_remaining": 313,
+    "total_nodes": 20,
+    "kg_nodes": 8,
+    "memory_nodes": 5,
+    "state_nodes": 7,
+    "deleted_state_nodes": 1,
+    "scheduler_mode": "tdca",
+    "scoring_mode": "hybrid",
+    "stop_reason": "final_synthesis_reserve",
+    "goal_kind": "comparison",
+    "goal_completion": 0.0,
+    "anytime_answer": "Yes",
+    "anytime_answer_score": 0.8464274297647142,
+    "anytime_answer_source": "expansion_candidate"
+  }
+}

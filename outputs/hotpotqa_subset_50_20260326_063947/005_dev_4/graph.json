@@ -1,0 +1,501 @@
+{
+  "nodes": [
+    {
+      "node_id": "state_1",
+      "node_type": "state",
+      "content": "The director of the romantic comedy \"Big Stone Gap\" is based in what New York city?",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.832595287286179,
+      "temperature": 1.245134314784236,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.9609587161179578,
+        "evidence_support": 0.8915519892165495,
+        "memory_usefulness": 0.6940173598631844,
+        "answerability": 0.8257759946082748,
+        "uncertainty": 0.11735168172535208
+      },
+      "metadata": {}
+    },
+    {
+      "node_id": "kg_doc_2",
+      "node_type": "kg",
+      "content": "Christopher Nolan is a film director born in London.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999882155128,
+      "temperature": 0.9999999882155128,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Christopher Nolan Biography",
+        "raw_score": 2.9075682279897754,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_4",
+      "node_type": "kg",
+      "content": "For a composition question, identify the intermediate entity before retrieving its attribute.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999908240712,
+      "temperature": 0.9999999908240712,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Reasoning Pattern",
+        "raw_score": 3.7772988152849662,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_1",
+      "node_type": "kg",
+      "content": "Inception is a 2010 science fiction film directed by Christopher Nolan.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.008274557052203502,
+      "temperature": 0.008274557052203502,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Inception Overview",
+        "raw_score": 0.5108477473095101,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_3",
+      "node_type": "kg",
+      "content": "Leonardo DiCaprio starred in Inception and was born in Los Angeles.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0,
+      "temperature": 0.0,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Leonardo DiCaprio Fact",
+        "raw_score": 1.2033090639646873,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "memory_mem_11",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'What city was the director of Inception born in' is London.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999969419133,
+      "temperature": 0.9718489819718485,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 1.0,
+        "source": "tdca_run",
+        "memory_kind": "derived_fact",
+        "target_question": "What city was the director of Inception born in?",
+        "target_question_norm": "what city was the director of inception born in",
+        "relation_signature": "director",
+        "answer_text": "London",
+        "support_score": 0.6581956575095751,
+        "evidence_ids": [
+          "doc_1",
+          "doc_3"
+        ],
+        "derived_from_state": "state_3",
+        "raw_score": 5.434712919321556
+      }
+    },
+    {
+      "node_id": "memory_mem_12",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'What city was Christopher Nolan born in' is London.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.38803472280097534,
+      "temperature": 0.37578296966203395,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.5553977956102122,
+        "source": "tdca_run",
+        "memory_kind": "derived_fact",
+        "target_question": "What city was Christopher Nolan born in?",
+        "target_question_norm": "what city was christopher nolan born in",
+        "relation_signature": "birth",
+        "answer_text": "London",
+        "support_score": 0.620662193268994,
+        "evidence_ids": [
+          "doc_2"
+        ],
+        "derived_from_state": "state_6",
+        "raw_score": 4.467036044509642
+      }
+    },
+    {
+      "node_id": "memory_mem_6",
+      "node_type": "memory",
+      "content": "Conclusion: The birth city of the director of the movie Inception is London.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.33564850686760567,
+      "temperature": 0.18648215914811542,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.758776433441565,
+        "source": "tdca_run",
+        "memory_kind": "answer_candidate",
+        "target_question": "What is the birth city of the director of the movie Inception?",
+        "target_question_norm": "what is the birth city of the director of the movie inception",
+        "relation_signature": "director",
+        "answer_text": "London",
+        "support_score": 0.758776433441565,
+        "derived_from_state": "state_1",
+        "composed_from": [
+          "memory_mem_4",
+          "memory_mem_5"
+        ],
+        "raw_score": 3.8061035037635076
+      }
+    },
+    {
+      "node_id": "memory_mem_13",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'What is the name of the director of the movie Inception' is Christopher Nolan.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.27282920897255625,
+      "temperature": 0.1510066195559166,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.7248658809196076,
+        "source": "tdca_run",
+        "memory_kind": "derived_fact",
+        "target_question": "What is the name of the director of the movie Inception?",
+        "target_question_norm": "what is the name of the director of the movie inception",
+        "relation_signature": "director",
+        "answer_text": "Christopher Nolan",
+        "support_score": 0.9698038362434835,
+        "evidence_ids": [
+          "doc_1"
+        ],
+        "derived_from_state": "state_7",
+        "raw_score": 3.6221639988815966
+      }
+    },
+    {
+      "node_id": "memory_mem_8",
+      "node_type": "memory",
+      "content": "Conclusion: the director of Inception was born in London.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.09353985511379082,
+      "temperature": 0.05067481523118932,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.6074120836858105,
+        "source": "tdca_run",
+        "memory_kind": "derived_fact",
+        "target_question": "Where was the director of Inception born?",
+        "target_question_norm": "where was the director of inception born",
+        "relation_signature": "director",
+        "answer_text": "London",
+        "support_score": 0.7097352070985521,
+        "evidence_ids": [
+          "doc_1",
+          "doc_3"
+        ],
+        "derived_from_state": "state_3",
+        "raw_score": 2.9408064669201295
+      }
+    },
+    {
+      "node_id": "memory_mem_9",
+      "node_type": "memory",
+      "content": "Conclusion: The director of Inception is Christopher Nolan.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0,
+      "temperature": 0.0,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.6,
+        "source": "tdca_run",
+        "memory_kind": "derived_fact",
+        "target_question": "Who is the director of Inception?",
+        "target_question_norm": "who is the director of inception",
+        "relation_signature": "director",
+        "answer_text": "Christopher Nolan",
+        "support_score": 0.5782755882755066,
+        "evidence_ids": [
+          "doc_1"
+        ],
+        "derived_from_state": "state_4",
+        "raw_score": 2.711636636717538
+      }
+    },
+    {
+      "node_id": "memory_mem_14",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'The director of the romantic comedy \"Big Stone Gap\" is based in what New York city' is Christopher Nolan.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.8325952867710287,
+      "temperature": 1.3158208399863753,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "tdca_run",
+        "memory_kind": "answer_candidate",
+        "target_question": "The director of the romantic comedy \"Big Stone Gap\" is based in what New York city?",
+        "target_question_norm": "the director of the romantic comedy big stone gap is based in what new york city",
+        "relation_signature": "director",
+        "answer_text": "Christopher Nolan",
+        "support_score": 0.8915519892165495,
+        "evidence_ids": [
+          "doc_2"
+        ],
+        "derived_from_state": "state_1",
+        "score": 0.832595287286179,
+        "raw_score": 19.10298697982901
+      }
+    }
+  ],
+  "edges": [
+    {
+      "source": "state_1",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.9999999882155128
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.7831039902175863
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.008274557052203502
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_11",
+      "edge_type": "recalls",
+      "weight": 0.9999999969253933
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_12",
+      "edge_type": "recalls",
+      "weight": 0.38803472280097534
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_6",
+      "edge_type": "recalls",
+      "weight": 0.3253585605862214
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_13",
+      "edge_type": "recalls",
+      "weight": 0.26223672189626873
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_8",
+      "edge_type": "recalls",
+      "weight": 0.09353985511379082
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_9",
+      "edge_type": "recalls",
+      "weight": 0.0
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_14",
+      "edge_type": "derives",
+      "weight": 0.8915519892165495
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.9999999882155128
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "memory_mem_14",
+      "edge_type": "supports",
+      "weight": 0.9999999882155128
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.7831039902175863
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "memory_mem_14",
+      "edge_type": "supports",
+      "weight": 0.7831039902175863
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.008274557052203502
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "memory_mem_14",
+      "edge_type": "supports",
+      "weight": 0.008274557052203502
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "memory_mem_14",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_11",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.9999999969253933
+    },
+    {
+      "source": "memory_mem_11",
+      "target": "memory_mem_14",
+      "edge_type": "recalls",
+      "weight": 0.9999999969253933
+    },
+    {
+      "source": "memory_mem_12",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.38803472280097534
+    },
+    {
+      "source": "memory_mem_12",
+      "target": "memory_mem_14",
+      "edge_type": "recalls",
+      "weight": 0.38803472280097534
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.3253585605862214
+    },
+    {
+      "source": "memory_mem_13",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.26223672189626873
+    },
+    {
+      "source": "memory_mem_8",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.09353985511379082
+    },
+    {
+      "source": "memory_mem_9",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_14",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.8915519892165495
+    },
+    {
+      "source": "memory_mem_14",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.9999999882155128
+    },
+    {
+      "source": "memory_mem_14",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.7831039902175863
+    },
+    {
+      "source": "memory_mem_14",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.008274557052203502
+    },
+    {
+      "source": "memory_mem_14",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_14",
+      "target": "memory_mem_11",
+      "edge_type": "recalls",
+      "weight": 0.9999999969253933
+    },
+    {
+      "source": "memory_mem_14",
+      "target": "memory_mem_12",
+      "edge_type": "recalls",
+      "weight": 0.38803472280097534
+    }
+  ]
+}

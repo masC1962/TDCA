@@ -1,0 +1,1571 @@
+{
+  "nodes": [
+    {
+      "node_id": "state_1",
+      "node_type": "state",
+      "content": "What is the capital of the county that Pine Springs is located in?",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.6723007038282203,
+      "temperature": 1.0870907075725884,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.8558274936714532,
+        "evidence_support": 0.5759632166807445,
+        "memory_usefulness": 0.5139667766205794,
+        "answerability": 0.7879816083403722,
+        "uncertainty": 0.196326620997466
+      },
+      "metadata": {
+        "diffusion_delta": 0.22776887632625498,
+        "diffusion_gain": 0.22776887632625498
+      }
+    },
+    {
+      "node_id": "kg_doc_7",
+      "node_type": "kg",
+      "content": "Pine Springs is an unincorporated community in northern Culberson County, Texas, United States. It is the closest settlement to the headquarters of Guadalupe Mountains National Park, which contains Guadalupe Peak, the highest point in the state of Texas. Pine Springs is located on U.S. Routes 62 and 180. The last population read 51 residents.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999965479743,
+      "temperature": 0.9999999965479743,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Pine Springs, Texas",
+        "raw_score": 9.613412822871679,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_17",
+      "node_type": "kg",
+      "content": "Pine Mountain State Resort Park is a Kentucky state park located in Bell County, Kentucky, United States. The park opened in 1924 as Kentucky's first state park. Each spring, the park hosts the annual Kentucky Mountain Laurel Festival, as it has since 1933. A portion of the park is also a legally dedicated nature preserve by the Office of Kentucky Nature Preserves.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.18591642670613875,
+      "temperature": 0.18591642670613875,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Pine Mountain State Resort Park",
+        "raw_score": 4.645275997648126,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_20",
+      "node_type": "kg",
+      "content": "The Amamoor State Forest and Forest Reserve is a riverine rainforest in the Gympie Region in Queensland, Australia. The forest is composed of subtropical vegetation dominated by stands of \"Melia azedarach\" (white cedar), \"Toona ciliata\" (red cedar), \"Araucaria cunninghamii\" (hoop pine) and \"A. bidwillii\" (Bunya pine). The Amamoor creek within the reserve is noted as a habitat for the platypus and several species of endangered frogs. The park station is located on Amamoor Creek Road about 180 kilometers north of the state capital of Brisbane and 20 kilometres southwest of the town of Gympie.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.015553743835648283,
+      "temperature": 0.015553743835648283,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Amamoor Forest Reserve",
+        "raw_score": 3.313504544812285,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_5",
+      "node_type": "kg",
+      "content": "Culberson County-Allamoore Independent School District is a public school district based in Van Horn, Texas (USA). The district serves all of Culberson County and eastern portions of Hudspeth County. The district was created in 1995 by the consolidation of the Culberson County and Allamore districts.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999973397504,
+      "temperature": 0.9999999973397504,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Culberson County-Allamoore Independent School District",
+        "raw_score": 3.618545056196502,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "memory_mem_1",
+      "node_type": "memory",
+      "content": "Template: for compositional multi-hop questions, first solve the intermediate entity and then ask for the final attribute.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9599999038694302,
+      "temperature": 1.6911512354293345,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.96,
+        "tag": "compositional_template",
+        "memory_kind": "template",
+        "raw_score": 0.08863659555374581,
+        "source": "memory",
+        "diffusion_delta": 0.2149480836109674,
+        "diffusion_gain": 0.2149480836109674
+      }
+    },
+    {
+      "node_id": "memory_mem_3",
+      "node_type": "memory",
+      "content": "Template: when evidence already grounds the answer, switch from branching to short verification and synthesis.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.06793364937172863,
+      "temperature": 0.09857888693465627,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.88,
+        "tag": "verification_then_stop",
+        "memory_kind": "template",
+        "raw_score": 0.06640619538270988,
+        "source": "memory",
+        "diffusion_delta": -0.006290862697414051,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "state_2",
+      "node_type": "state",
+      "content": "What county is Pine Springs located in?",
+      "depth": 1,
+      "parent_id": "state_1",
+      "value": 0.5543038448180077,
+      "temperature": 1.4341109487874222,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.7234239737713811,
+        "evidence_support": 0.5929582116270565,
+        "memory_usefulness": 0.0,
+        "answerability": 0.7237518330862556,
+        "uncertainty": 0.1932675219071298
+      },
+      "metadata": {
+        "kind": "bridge",
+        "evidence_ids": [
+          "doc_7",
+          "doc_17",
+          "doc_5",
+          "doc_20"
+        ],
+        "memory_ids": [],
+        "goal_slot_name": "county",
+        "goal_slot_role": "bridge_entity",
+        "goal_terminal": false,
+        "diffusion_delta": -0.08120847368144135,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "state_3",
+      "node_type": "state",
+      "content": "What is the capital of Culberson County, Texas?",
+      "depth": 2,
+      "parent_id": "state_2",
+      "value": 0.7510054772171347,
+      "temperature": 1.386009471250822,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.7910702808467567,
+        "evidence_support": 0.893522216394204,
+        "memory_usefulness": 0.5139667251540021,
+        "answerability": 0.8558520172880112,
+        "uncertainty": 0.13916600104904325
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_5",
+          "doc_7",
+          "doc_1",
+          "doc_17"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "diffusion_delta": 0.28290376039968645,
+        "diffusion_gain": 0.28290376039968645
+      }
+    },
+    {
+      "node_id": "kg_doc_1",
+      "node_type": "kg",
+      "content": "Kis-Küküllő was an administrative county (comitatus) of the Kingdom of Hungary. Its territory is now in central Romania (central Transylvania). Kis-Küküllő is the Hungarian name for the Târnava Mică River. The capital of the county was \"Dicsőszentmárton\" (now Târnăveni).",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.25,
+      "temperature": 0.25,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Kis-Küküllő County",
+        "raw_score": 5.15755711361978,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "memory_mem_4",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'What county is Pine Springs located in' is Culberson County.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 1.0,
+      "temperature": 0.723383475663967,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "intermediate_answer",
+        "target_question": "What county is Pine Springs located in?",
+        "target_question_norm": "what county is pine springs located in",
+        "relation_signature": "generic",
+        "answer_text": "Culberson County",
+        "support_score": 1.0,
+        "evidence_ids": [
+          "doc_7"
+        ],
+        "slot_name": "county",
+        "slot_role": "bridge_entity",
+        "terminal": false,
+        "derived_from_state": "state_2",
+        "diffusion_delta": 0.019997411101356666,
+        "diffusion_gain": 0.019997411101356666
+      }
+    },
+    {
+      "node_id": "state_4",
+      "node_type": "state",
+      "content": "What is the capital of Culberson County?",
+      "depth": 2,
+      "parent_id": "state_2",
+      "value": 0.6441721299838883,
+      "temperature": 1.355532795921389,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.7602903656233305,
+        "evidence_support": 0.8029930539723624,
+        "memory_usefulness": 0.0033077859658717126,
+        "answerability": 0.8105874360770903,
+        "uncertainty": 0.15546125028497476
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_5",
+          "doc_7",
+          "doc_1",
+          "doc_17"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "diffusion_delta": 0.2146633115323413,
+        "diffusion_gain": 0.2146633115323413
+      }
+    },
+    {
+      "node_id": "state_5",
+      "node_type": "state",
+      "content": "What is the county seat of Culberson County?",
+      "depth": 3,
+      "parent_id": "state_4",
+      "value": 0.6053438319605431,
+      "temperature": 0.7461642042229094,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.7105284211926239,
+        "evidence_support": 0.758238671956915,
+        "memory_usefulness": 0.002560192840953084,
+        "answerability": 0.7700284268875484,
+        "uncertainty": 0.1635170390477553
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_5",
+          "doc_7",
+          "doc_1",
+          "doc_17"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "diffusion_delta": 0.16321633138568858,
+        "diffusion_gain": 0.16321633138568858
+      }
+    },
+    {
+      "node_id": "memory_mem_5",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'What is the capital of Culberson County' is Van Horn.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999958641835,
+      "temperature": 0.8387427725515286,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "intermediate_answer",
+        "target_question": "What is the capital of Culberson County?",
+        "target_question_norm": "what is the capital of culberson county",
+        "relation_signature": "generic",
+        "answer_text": "Van Horn",
+        "support_score": 0.9999999958641835,
+        "evidence_ids": [
+          "doc_5",
+          "doc_7"
+        ],
+        "slot_name": "county_capital",
+        "slot_role": "target_attribute",
+        "terminal": true,
+        "derived_from_state": "state_4",
+        "path_terminal": true,
+        "composition_kind": "path_terminal",
+        "diffusion_delta": 0.1024958744175486,
+        "diffusion_gain": 0.1024958744175486
+      }
+    },
+    {
+      "node_id": "memory_mem_6",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'What is the capital of the county that Pine Springs is located in' is Van Horn.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.96,
+      "temperature": 0.96,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "tdca_run",
+        "memory_kind": "answer_candidate",
+        "target_question": "What is the capital of the county that Pine Springs is located in?",
+        "target_question_norm": "what is the capital of the county that pine springs is located in",
+        "relation_signature": "generic",
+        "answer_text": "Van Horn",
+        "support_score": 0.96,
+        "evidence_ids": [
+          "doc_1",
+          "doc_2",
+          "doc_3",
+          "doc_4",
+          "doc_5",
+          "doc_6",
+          "doc_7",
+          "doc_8",
+          "doc_9",
+          "doc_10",
+          "doc_11",
+          "doc_12"
+        ],
+        "slot_role": "target_attribute",
+        "terminal": true,
+        "path_terminal": true,
+        "coverage_count": 1,
+        "coverage_ratio": 1.0,
+        "composition_kind": "path_terminal",
+        "diffusion_delta": -0.2675219429695499,
+        "diffusion_gain": 0.0,
+        "score": 0.96,
+        "raw_score": 10.214877199608985
+      }
+    },
+    {
+      "node_id": "kg_doc_2",
+      "node_type": "kg",
+      "content": "Sandasar is a village and union council (an administrative subdivision) of Mansehra District in the Khyber Pakhtunkhwa Province of Pakistan. It is located in the south of the district and lies to the west of the district capital Mansehra.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.25,
+      "temperature": 0.25,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Sandasar",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_3",
+      "node_type": "kg",
+      "content": "Nigeria is divided into thirty-six states and one Federal Capital Territory, which are further sub-divided into 774 Local Government Areas (LGAs). The plethora of states, of which there were only three at independence, reflect the country's tumultuous history and the difficulties of managing such a heterogeneous national entity at all levels of government. In some contexts, the states are aggregated into six geopolitical zones: North West, North East, North Central, South East, South South, and South West.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.25,
+      "temperature": 0.25,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Nigeria",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_4",
+      "node_type": "kg",
+      "content": "The Naas River, a perennial stream of the Murrumbidgee catchment within the Murray-Darling basin, is located in the Australian Capital Territory, Australia.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.25,
+      "temperature": 0.25,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Naas River",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_6",
+      "node_type": "kg",
+      "content": "MacDonald Airfield was an airfield built alongside the former northern road, west of Stuart Highway, north of Pine Creek, Northern Territory, Australia during World War II.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.25,
+      "temperature": 0.25,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "MacDonald Airfield",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_8",
+      "node_type": "kg",
+      "content": "Darial is a town in the Islamabad Capital Territory of Pakistan. It is located at 33° 23' 35N 73° 19' 45E with an altitude of 494 metres (1624 feet).",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.25,
+      "temperature": 0.25,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Darial, Pakistan",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_9",
+      "node_type": "kg",
+      "content": "Mian Haji Sahib is a town in the Islamabad Capital Territory of Pakistan. It is located at 33° 22' 50N 73° 20' 40E with an altitude of 479 metres (1574 feet).",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.25,
+      "temperature": 0.25,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Mian Haji Sahib",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_10",
+      "node_type": "kg",
+      "content": "Pesanggrahan is a subdistrict of South Jakarta, one of the administrative city which forms the capital territory of Jakarta, Indonesia. The Pesanggrahan River flows along the eastern edge of Pesanggrahan Subdistrict. To the west of Pesanggrahan Subdistrict is Tangerang Regency, Banten Province.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.25,
+      "temperature": 0.25,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Pesanggrahan, South Jakarta",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_11",
+      "node_type": "kg",
+      "content": "Phulrraa is a village and union council (an administrative subdivision) of Mansehra District in Khyber-Pakhtunkhwa province of Pakistan. It is located in the south of the district and lies to the west of the district capital Mansehra.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.25,
+      "temperature": 0.25,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Phulrraa",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_12",
+      "node_type": "kg",
+      "content": "Bann Na Mohra is a town in the Islamabad Capital Territory of Pakistan. It is located at 33° 27' 50N 73° 22' 10E with an altitude of 562 metres (1847 feet).",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.25,
+      "temperature": 0.25,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Bann Na Mohra",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "state_6",
+      "node_type": "state",
+      "content": "What is the county seat of Culberson County, Texas?",
+      "depth": 3,
+      "parent_id": "state_3",
+      "value": 0.6502445604408706,
+      "temperature": 0.8847680317161958,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.7408635402386056,
+        "evidence_support": 0.8474596103274493,
+        "memory_usefulness": 0.0025997952765744537,
+        "answerability": 0.8146388960728156,
+        "uncertainty": 0.1474572701410591
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_5",
+          "doc_7",
+          "doc_1",
+          "doc_17"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "diffusion_delta": 0.1718615185114173,
+        "diffusion_gain": 0.1718615185114173
+      }
+    },
+    {
+      "node_id": "memory_mem_7",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'What is the capital of Culberson County, Texas' is Van Horn.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999969503074,
+      "temperature": 0.8841702959566665,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "intermediate_answer",
+        "target_question": "What is the capital of Culberson County, Texas?",
+        "target_question_norm": "what is the capital of culberson county texas",
+        "relation_signature": "generic",
+        "answer_text": "Van Horn",
+        "support_score": 0.9999999969503074,
+        "evidence_ids": [
+          "doc_5",
+          "doc_7"
+        ],
+        "slot_name": "path_terminal",
+        "slot_role": "target_attribute",
+        "terminal": true,
+        "derived_from_state": "state_3",
+        "path_terminal": true,
+        "composition_kind": "path_terminal",
+        "diffusion_delta": 0.008192812353984946,
+        "diffusion_gain": 0.008192812353984946
+      }
+    },
+    {
+      "node_id": "state_7",
+      "node_type": "state",
+      "content": "What is the county that Pine Springs is located in?",
+      "depth": 1,
+      "parent_id": "state_1",
+      "value": 0.5855874624998532,
+      "temperature": 0.5968782664515838,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.7916349403007896,
+        "evidence_support": 0.590370145269702,
+        "memory_usefulness": 0.0012464086375229518,
+        "answerability": 0.7588214362712147,
+        "uncertainty": 0.19373337385145362
+      },
+      "metadata": {
+        "kind": "bridge",
+        "evidence_ids": [
+          "doc_7",
+          "doc_17",
+          "doc_5",
+          "doc_20"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "diffusion_delta": -0.13861465099130266,
+        "diffusion_gain": 0.0
+      }
+    }
+  ],
+  "edges": [
+    {
+      "source": "state_1",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.9999999964103062
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_17",
+      "edge_type": "supports",
+      "weight": 0.15192643695118271
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_20",
+      "edge_type": "supports",
+      "weight": 0.015553743835648283
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.004233494734988696
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.06793364937172863
+    },
+    {
+      "source": "state_1",
+      "target": "state_2",
+      "edge_type": "refines",
+      "weight": 1.0
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_6",
+      "edge_type": "derives",
+      "weight": 0.96
+    },
+    {
+      "source": "state_1",
+      "target": "state_7",
+      "edge_type": "refines",
+      "weight": 0.9
+    },
+    {
+      "source": "state_1",
+      "target": "state_6",
+      "edge_type": "refines",
+      "weight": 0.8
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.9999999964103062
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.9999999965479743
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.7870444358381006
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.9999999965479743
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.6059861120805414
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.5164773473645702
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.6059861120805414
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.25
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "state_6",
+      "edge_type": "supports",
+      "weight": 0.6949192233151482
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "memory_mem_7",
+      "edge_type": "supports",
+      "weight": 0.7870444358381006
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "state_7",
+      "edge_type": "supports",
+      "weight": 0.9999999965354927
+    },
+    {
+      "source": "kg_doc_17",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.15192643695118271
+    },
+    {
+      "source": "kg_doc_17",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.18591642670613875
+    },
+    {
+      "source": "kg_doc_17",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_17",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.18591642670613875
+    },
+    {
+      "source": "kg_doc_17",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_17",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_17",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_17",
+      "target": "state_6",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_17",
+      "target": "memory_mem_7",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_17",
+      "target": "state_7",
+      "edge_type": "supports",
+      "weight": 0.18074029400391142
+    },
+    {
+      "source": "kg_doc_20",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.015553743835648283
+    },
+    {
+      "source": "kg_doc_20",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_20",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_20",
+      "target": "state_7",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.033919992179953055
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.9999999969503074
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.033919992179953055
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.9999999958641835
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.9999999965492599
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.9999999958641835
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.55
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "state_6",
+      "edge_type": "supports",
+      "weight": 0.9999999973397504
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "memory_mem_7",
+      "edge_type": "supports",
+      "weight": 0.9999999969503074
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "state_7",
+      "edge_type": "supports",
+      "weight": 0.028232808005721886
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.004233494734988696
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_3",
+      "edge_type": "recalls",
+      "weight": 0.004557292934577703
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_4",
+      "edge_type": "recalls",
+      "weight": 0.0061755355118837865
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_5",
+      "edge_type": "recalls",
+      "weight": 0.004779801949008449
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "memory_mem_5",
+      "edge_type": "recalls",
+      "weight": 0.0061755355118837865
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_6",
+      "edge_type": "recalls",
+      "weight": 0.004855326939730078
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "memory_mem_7",
+      "edge_type": "recalls",
+      "weight": 0.004557292934577703
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_7",
+      "edge_type": "recalls",
+      "weight": 0.0024928172750459036
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.06793364937172863
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_3",
+      "edge_type": "recalls",
+      "weight": 0.0003231317175014054
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_4",
+      "edge_type": "recalls",
+      "weight": 0.0004400364198596386
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_5",
+      "edge_type": "recalls",
+      "weight": 0.00034058373289771814
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "memory_mem_5",
+      "edge_type": "recalls",
+      "weight": 0.0004400364198596386
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_6",
+      "edge_type": "recalls",
+      "weight": 0.0003442636134188298
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "memory_mem_7",
+      "edge_type": "recalls",
+      "weight": 0.0003231317175014054
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_7",
+      "edge_type": "recalls",
+      "weight": 0.0
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.9999999965479743
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_17",
+      "edge_type": "supports",
+      "weight": 0.18591642670613875
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.033919992179953055
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_20",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_2",
+      "target": "state_3",
+      "edge_type": "refines",
+      "weight": 0.9
+    },
+    {
+      "source": "state_2",
+      "target": "memory_mem_4",
+      "edge_type": "derives",
+      "weight": 1.0
+    },
+    {
+      "source": "state_2",
+      "target": "state_4",
+      "edge_type": "refines",
+      "weight": 0.84
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.9999999969503074
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.7870444358381006
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.11069665420978084
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_17",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_3",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.004557292934577703
+    },
+    {
+      "source": "state_3",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.0003231317175014054
+    },
+    {
+      "source": "state_3",
+      "target": "state_6",
+      "edge_type": "refines",
+      "weight": 0.9
+    },
+    {
+      "source": "state_3",
+      "target": "memory_mem_7",
+      "edge_type": "derives",
+      "weight": 0.9999999969503074
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.11069665420978084
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.15159746991515152
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.1631984289023175
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.15159746991515152
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.25
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "state_6",
+      "edge_type": "supports",
+      "weight": 0.1258131690324917
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "memory_mem_7",
+      "edge_type": "supports",
+      "weight": 0.11069665420978084
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "state_2",
+      "edge_type": "recalls",
+      "weight": 1.0
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.9999999965479743
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_17",
+      "edge_type": "supports",
+      "weight": 0.18591642670613875
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.033919992179953055
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_20",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.9999999958641835
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.6059861120805414
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.15159746991515152
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_17",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_4",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.0061755355118837865
+    },
+    {
+      "source": "state_4",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.0004400364198596386
+    },
+    {
+      "source": "state_4",
+      "target": "state_5",
+      "edge_type": "refines",
+      "weight": 0.9
+    },
+    {
+      "source": "state_4",
+      "target": "memory_mem_5",
+      "edge_type": "derives",
+      "weight": 0.9999999958641835
+    },
+    {
+      "source": "state_5",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.9999999965492599
+    },
+    {
+      "source": "state_5",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.5164773473645702
+    },
+    {
+      "source": "state_5",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.1631984289023175
+    },
+    {
+      "source": "state_5",
+      "target": "kg_doc_17",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_5",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.004779801949008449
+    },
+    {
+      "source": "state_5",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.00034058373289771814
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "state_4",
+      "edge_type": "recalls",
+      "weight": 0.9999999958641835
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.9999999958641835
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.6059861120805414
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.15159746991515152
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_17",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.0061755355118837865
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.0004400364198596386
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.96
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.25
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.25
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.25
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.25
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.55
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.25
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.25
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_8",
+      "edge_type": "supports",
+      "weight": 0.25
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.25
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_10",
+      "edge_type": "supports",
+      "weight": 0.25
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_11",
+      "edge_type": "supports",
+      "weight": 0.25
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_12",
+      "edge_type": "supports",
+      "weight": 0.25
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.25
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.25
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.25
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.25
+    },
+    {
+      "source": "kg_doc_8",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.25
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.25
+    },
+    {
+      "source": "kg_doc_10",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.25
+    },
+    {
+      "source": "kg_doc_11",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.25
+    },
+    {
+      "source": "kg_doc_12",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.25
+    },
+    {
+      "source": "state_6",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.9999999973397504
+    },
+    {
+      "source": "state_6",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.6949192233151482
+    },
+    {
+      "source": "state_6",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.1258131690324917
+    },
+    {
+      "source": "state_6",
+      "target": "kg_doc_17",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_6",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.004855326939730078
+    },
+    {
+      "source": "state_6",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.0003442636134188298
+    },
+    {
+      "source": "memory_mem_7",
+      "target": "state_3",
+      "edge_type": "recalls",
+      "weight": 0.9999999969503074
+    },
+    {
+      "source": "memory_mem_7",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.9999999969503074
+    },
+    {
+      "source": "memory_mem_7",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.7870444358381006
+    },
+    {
+      "source": "memory_mem_7",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.11069665420978084
+    },
+    {
+      "source": "memory_mem_7",
+      "target": "kg_doc_17",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_7",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.004557292934577703
+    },
+    {
+      "source": "memory_mem_7",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.0003231317175014054
+    },
+    {
+      "source": "state_7",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.9999999965354927
+    },
+    {
+      "source": "state_7",
+      "target": "kg_doc_17",
+      "edge_type": "supports",
+      "weight": 0.18074029400391142
+    },
+    {
+      "source": "state_7",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.028232808005721886
+    },
+    {
+      "source": "state_7",
+      "target": "kg_doc_20",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_7",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.0024928172750459036
+    },
+    {
+      "source": "state_7",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.0
+    }
+  ]
+}

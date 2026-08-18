@@ -1,0 +1,485 @@
+{
+  "nodes": [
+    {
+      "node_id": "state_1",
+      "node_type": "state",
+      "content": "Who is the father of the father of Anwer Ali?",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.7572010228906473,
+      "temperature": 1.0468187475149566,
+      "expanded": true,
+      "visit_count": 2,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.913192574119039,
+        "evidence_support": 0.744684041526585,
+        "memory_usefulness": 0.5139667766205794,
+        "answerability": 0.8723420207632925,
+        "uncertainty": 0.1659568725252147
+      },
+      "metadata": {
+        "diffusion_delta": 0.18812168404973628,
+        "diffusion_gain": 0.18812168404973628,
+        "goal_retry": 1
+      }
+    },
+    {
+      "node_id": "kg_doc_1",
+      "node_type": "kg",
+      "content": "Prince Anwer Ali was the son of Emperor Muhammad Shah. After Muhammad Shah was attacked & deposed by Ahmad Shah Abdali in 1748 young Prince Anwer Ali then about 17 & half year old escaped to his grand Aunt Princess Jahanarra & hid in a place in Arrah, Bihar which was infested with bears. Later this place was named by him as Bhaluhipur.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999880849797,
+      "temperature": 0.9999999880849797,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Anwer Ali",
+        "raw_score": 5.803475190730191,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_2",
+      "node_type": "kg",
+      "content": "Cages is a 2005 film, directed by American film director Graham Streeter which tells the story of a single mother named Ali Tan (Tan Kheng Hua) who attempts to escape repeated bad relationships which puts her before the man she resents the most—her father, Tan (Mako Iwamatsu). The truth is not always easy to face when her father reveals a dark secret 20 years past; a past that may cost a lifetime of relationship.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.4893681027525117,
+      "temperature": 0.4893681027525117,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Cages",
+        "raw_score": 4.752122725326431,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_17",
+      "node_type": "kg",
+      "content": "The views of Ali Shariati, ideologue of the Iranian Revolution, had resemblance with Mohammad Iqbal, ideological father of the State of Pakistan, but Khomeini's beliefs is perceived to be placed somewhere between beliefs of Sunni Islamic thinkers like Mawdudi and Qutb. He believed that complete imitation of the Prophet Mohammad and his successors such as Ali for restoration of Sharia law was essential to Islam, that many secular, Westernizing Muslims were actually agents of the West serving Western interests, and that the acts such as \"plundering\" of Muslim lands was part of a long-term conspiracy against Islam by the Western governments.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.1316400896046096,
+      "temperature": 0.1316400896046096,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Islamism",
+        "raw_score": 2.9295076349629996,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_18",
+      "node_type": "kg",
+      "content": "Kennedy grew up in Sandycove, Dublin, the middle child of three girls. Her father is John Kennedy who would later feature alongside his daughter as her pianist on \"The Lucy Kennedy Show\".",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0,
+      "temperature": 0.0,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Lucy Kennedy",
+        "raw_score": 3.682352998199923,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "memory_mem_1",
+      "node_type": "memory",
+      "content": "Template: for compositional multi-hop questions, first solve the intermediate entity and then ask for the final attribute.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9599999038694302,
+      "temperature": 0.9960813383218747,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.96,
+        "tag": "compositional_template",
+        "memory_kind": "template",
+        "raw_score": 0.18470114999581103,
+        "source": "memory",
+        "diffusion_delta": -0.04927052487405015,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "memory_mem_3",
+      "node_type": "memory",
+      "content": "Template: when evidence already grounds the answer, switch from branching to short verification and synthesis.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.06793364937172863,
+      "temperature": 0.07120670870204232,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.88,
+        "tag": "verification_then_stop",
+        "memory_kind": "template",
+        "raw_score": 0.13862369149579673,
+        "source": "memory",
+        "diffusion_delta": -0.002825418096297716,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "state_2",
+      "node_type": "state",
+      "content": "Who is the father of Muhammad Shah?",
+      "depth": 1,
+      "parent_id": "state_1",
+      "value": 0.8074411839339546,
+      "temperature": 1.2072874841985544,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.873007358919722,
+        "evidence_support": 0.9458199632092664,
+        "memory_usefulness": 0.5139667251540021,
+        "answerability": 0.9157671244617761,
+        "uncertainty": 0.12975240662233203
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_1",
+          "doc_19",
+          "doc_20",
+          "doc_18"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "diffusion_delta": 0.7211842323114543,
+        "diffusion_gain": 0.7211842323114543
+      }
+    },
+    {
+      "node_id": "kg_doc_19",
+      "node_type": "kg",
+      "content": "Qudsia Begum (died 1765), was a wife of Mughal emperor Muhammad Shah and mother of emperor Ahmad Shah Bahadur. She was an administrator and served as de facto regent of India from 1748 to 1754.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.8916399383335532,
+      "temperature": 0.8916399383335532,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Qudsia Begum",
+        "raw_score": 5.345516426416074,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_20",
+      "node_type": "kg",
+      "content": "Idries Shah was born in Simla, India, to an Afghan-Indian father, Sirdar Ikbal Ali Shah, a writer and diplomat, and a Scottish mother, Saira Elizabeth Luiza Shah. His family on the paternal side were Musavi Sayyids. Their ancestral home was near the Paghman Gardens of Kabul. His paternal grandfather, Sayed Amjad Ali Shah, was the \"nawab\" of Sardhana in the North-Indian state of Uttar Pradesh, a hereditary title the family had gained thanks to the services an earlier ancestor, Jan-Fishan Khan, had rendered to the British.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.04582242023840335,
+      "temperature": 0.04582242023840335,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Idries Shah",
+        "raw_score": 3.604987672225618,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "memory_mem_4",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'Who is the father of Muhammad Shah' is Qudsia Begum.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999880849797,
+      "temperature": 1.2036752877928487,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "intermediate_answer",
+        "target_question": "Who is the father of Muhammad Shah?",
+        "target_question_norm": "who is the father of muhammad shah",
+        "relation_signature": "father",
+        "answer_text": "Qudsia Begum",
+        "support_score": 0.9999999880849797,
+        "evidence_ids": [
+          "doc_19",
+          "doc_1"
+        ],
+        "slot_name": "father_of_father_of_anwer_ali",
+        "slot_type": "",
+        "slot_role": "target_attribute",
+        "terminal": true,
+        "path_terminal": false,
+        "composition_kind": "",
+        "derived_from_state": "state_2",
+        "diffusion_delta": -0.10698440681702404,
+        "diffusion_gain": 0.0
+      }
+    }
+  ],
+  "edges": [
+    {
+      "source": "state_1",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.9999999803006583
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.4893681027525117
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_17",
+      "edge_type": "supports",
+      "weight": 0.1316400896046096
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_18",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.9599999038694302
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.06793364937172863
+    },
+    {
+      "source": "state_1",
+      "target": "state_2",
+      "edge_type": "refines",
+      "weight": 0.94
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.9999999803006583
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.9999999880849797
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.9999999880849797
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.4893681027525117
+    },
+    {
+      "source": "kg_doc_17",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.1316400896046096
+    },
+    {
+      "source": "kg_doc_18",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_18",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_18",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.9599999038694302
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_2",
+      "edge_type": "recalls",
+      "weight": 0.9599998077388796
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "memory_mem_4",
+      "edge_type": "recalls",
+      "weight": 0.9599998077388796
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.06793364937172863
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_2",
+      "edge_type": "recalls",
+      "weight": 0.0679336425691247
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "memory_mem_4",
+      "edge_type": "recalls",
+      "weight": 0.0679336425691247
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.9999999880849797
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_19",
+      "edge_type": "supports",
+      "weight": 0.8916399383335532
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_20",
+      "edge_type": "supports",
+      "weight": 0.04582242023840335
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_18",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_2",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.9599998077388796
+    },
+    {
+      "source": "state_2",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.0679336425691247
+    },
+    {
+      "source": "state_2",
+      "target": "memory_mem_4",
+      "edge_type": "derives",
+      "weight": 0.9999999880849797
+    },
+    {
+      "source": "kg_doc_19",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.8916399383335532
+    },
+    {
+      "source": "kg_doc_19",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.8916399383335532
+    },
+    {
+      "source": "kg_doc_20",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.04582242023840335
+    },
+    {
+      "source": "kg_doc_20",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.04582242023840335
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "state_2",
+      "edge_type": "recalls",
+      "weight": 0.9999999880849797
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_19",
+      "edge_type": "supports",
+      "weight": 0.8916399383335532
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.9999999880849797
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_20",
+      "edge_type": "supports",
+      "weight": 0.04582242023840335
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_18",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.9599998077388796
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.0679336425691247
+    }
+  ]
+}

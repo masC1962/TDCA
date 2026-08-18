@@ -1,0 +1,134 @@
+{
+  "question": "What professional baseball player who played for the Brooklyn Robbins in 1928 and 1929, attended college in Denton, Texas?",
+  "final_answer": "Max West",
+  "best_node": {
+    "node_id": "state_3",
+    "node_type": "state",
+    "content": "Which professional baseball player attended the University of North Texas?",
+    "depth": 2,
+    "parent_id": "state_2",
+    "value": 0.6843452517677857,
+    "temperature": 1.6092069202150747,
+    "expanded": true,
+    "visit_count": 1,
+    "persistent": false,
+    "score_breakdown": {
+      "task_progress": 0.7024792194252063,
+      "evidence_support": 0.8700369198780578,
+      "memory_usefulness": 0.5139667251540021,
+      "answerability": 0.7016851266056956,
+      "uncertainty": 0.1433933544219496
+    },
+    "metadata": {
+      "kind": "retrieval",
+      "evidence_ids": [
+        "doc_7",
+        "doc_1",
+        "doc_5",
+        "doc_8"
+      ],
+      "memory_ids": [
+        "mem_1",
+        "mem_3"
+      ],
+      "diffusion_delta": 0.2613075419479798,
+      "diffusion_gain": 0.2613075419479798
+    }
+  },
+  "final_synthesis_node_ids": [
+    "state_2",
+    "state_3",
+    "memory_mem_5",
+    "state_4",
+    "state_1"
+  ],
+  "answer_history": [
+    {
+      "node_id": "memory_mem_4",
+      "content": "Conclusion: The answer to 'Who played outfield for the Brooklyn Robins in 1928 and 1929' is Walter Maxwell West Sr.",
+      "answer_text": "Walter Maxwell West Sr",
+      "value": 0.9999999918272731,
+      "confidence": 0.8821463788401938,
+      "evidence_ids": [
+        "doc_3",
+        "doc_5"
+      ],
+      "step": 1,
+      "kind": "intermediate_answer"
+    },
+    {
+      "node_id": "memory_mem_5",
+      "content": "Conclusion: The answer to 'Which professional baseball player attended the University of North Texas' is Max West.",
+      "answer_text": "Max West",
+      "value": 0.874,
+      "evidence_ids": [
+        "doc_7",
+        "doc_1",
+        "doc_5"
+      ],
+      "step": 2
+    },
+    {
+      "node_id": "state_3",
+      "answer_text": "Max West",
+      "previous_answer": "",
+      "confidence": 0.95,
+      "score": 0.8322503781403746,
+      "source": "expansion_candidate",
+      "step": 1,
+      "evidence_ids": [
+        "doc_7",
+        "doc_1",
+        "doc_5",
+        "doc_8"
+      ],
+      "kind": "anytime_answer"
+    },
+    {
+      "node_id": "memory_mem_6",
+      "content": "Conclusion: The answer to 'Where did Walter Maxwell West Sr. attend college' is Walter Maxwell West Sr.",
+      "answer_text": "Walter Maxwell West Sr",
+      "value": 0.92,
+      "evidence_ids": [
+        "doc_5"
+      ],
+      "step": 4
+    },
+    {
+      "node_id": "state_3",
+      "answer_text": "Max West",
+      "source": "answer_judge",
+      "choice": "A",
+      "candidate_source": "expansion_candidate",
+      "base_score": 0.8887854364409777,
+      "rerank_score": 0.4151080651233925,
+      "judge_confidence": 0.0,
+      "judge_reason": "",
+      "step": 4,
+      "kind": "final_answer_selection"
+    }
+  ],
+  "anytime_answer": "Max West",
+  "anytime_answer_score": 0.8322503781403746,
+  "anytime_answer_source": "expansion_candidate",
+  "anytime_answer_node_id": "state_3",
+  "stats": {
+    "steps": 4,
+    "llm_calls": 7,
+    "generated_tokens": 563,
+    "token_budget_remaining": 637,
+    "total_nodes": 18,
+    "kg_nodes": 9,
+    "memory_nodes": 5,
+    "state_nodes": 4,
+    "deleted_state_nodes": 0,
+    "scheduler_mode": "tdca",
+    "scoring_mode": "hybrid",
+    "stop_reason": "frontier_empty",
+    "goal_kind": "bridge",
+    "goal_completion": 0.5,
+    "anytime_answer": "Max West",
+    "anytime_answer_score": 0.8322503781403746,
+    "anytime_answer_source": "expansion_candidate"
+  }
+}

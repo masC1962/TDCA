@@ -1,0 +1,2383 @@
+{
+  "nodes": [
+    {
+      "node_id": "state_1",
+      "node_type": "state",
+      "content": "What label was bought by the company which, along with ABC and the network which hosts Westinghouse Playhouse, is the other major broadcaster based in NY?",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.674016446730362,
+      "temperature": 0.681501455467425,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.8299999957253738,
+        "evidence_support": 0.49999998742756974,
+        "memory_usefulness": 0.8468037754734075,
+        "answerability": 0.7499999937137848,
+        "uncertainty": 0.21000000226303744
+      },
+      "metadata": {
+        "diffusion_delta": -0.021110953926218867,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "kg_doc_14",
+      "node_type": "kg",
+      "content": "Westinghouse Playhouse is an American sitcom that aired from January to July 1961 on NBC. Starring Nanette Fabray, the series was also known as The Nanette Fabray Show, Westinghouse Playhouse Starring Nanette Fabray and Wendell Corey, and ran under the title Yes, Yes Nanette in syndication.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999777803394,
+      "temperature": 0.9999999777803394,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Westinghouse Playhouse",
+        "raw_score": 0.26485843726332325,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_3",
+      "node_type": "kg",
+      "content": "PGA Tour on ABC is the \"de facto\" branding used for telecasts of the main professional golf tournaments of the PGA Tour on the American Broadcasting Company (ABC) television network in the United States. ABC broadcast the PGA Tour from 1966 to 2006. From 1962 to 2009, ABC served as the broadcast home of The Open Championship. The British Open on ABC was the longest-running entertainment program in ABC's history and the last-surviving ABC program to debut in the \"circle a\" era. ABC also held the broadcast rights of the US Open from 1966 through 1994. and the PGA Championship from 1965 until 1990.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.25,
+      "temperature": 0.25,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "PGA Tour on ABC",
+        "raw_score": 0.1466050581968978,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_2",
+      "node_type": "kg",
+      "content": "International Playhouse is the name of an American television series that was broadcast on the now-defunct DuMont Television Network during 1951.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.25,
+      "temperature": 0.25,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "International Playhouse",
+        "raw_score": 0.09300394009219033,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_11",
+      "node_type": "kg",
+      "content": "Little Einsteins is an American interactive animated children's television series on Playhouse Disney. The educational preschool series was developed for television by Douglas Wood who created the concept and characters, and a subsequent team headed by Emmy Award-winning director Olexa Hewryk and \"JoJo's Circus\" co-creator Eric Weiner, and produced by Curious Pictures and The Baby Einstein Company. The first episode of the \"Little Einsteins\" TV series premiered on Playhouse Disney in the UK on October 3, 2005, in the United States on October 9 and in Japan on TV Tokyo on February 14, 2006. In Europe, the second season of the show premiered on the Disney Channel around Christmas time, and in Japan, it aired on October 8, 2007, on Playhouse Disney Japan. Reruns were then moved to Playhouse Disney's successor, Disney Junior. The final regular episode was broadcast in December 2009, and a final standalone special was broadcast in mid-2010, marking the end of the series.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0,
+      "temperature": 0.0,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Little Einsteins",
+        "raw_score": 0.07342436950207762,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "memory_mem_1",
+      "node_type": "memory",
+      "content": "Template: for compositional multi-hop questions, first solve the intermediate entity and then ask for the final attribute.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9599999839777177,
+      "temperature": 0.5928602146924216,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.96,
+        "tag": "compositional_template",
+        "memory_kind": "template",
+        "raw_score": 0.10026372703150602,
+        "source": "memory",
+        "diffusion_delta": -0.01877146002223895,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "memory_mem_3",
+      "node_type": "memory",
+      "content": "Template: when evidence already grounds the answer, switch from branching to short verification and synthesis.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.8799999819645339,
+      "temperature": 0.5969394688052021,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.88,
+        "tag": "verification_then_stop",
+        "memory_kind": "template",
+        "raw_score": 0.8186841956531674,
+        "source": "memory",
+        "diffusion_delta": -0.0018227403855952673,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "state_2",
+      "node_type": "state",
+      "content": "Which major broadcasters are based in New York, besides ABC and NBC?",
+      "depth": 1,
+      "parent_id": "state_1",
+      "value": 0.6391763963403945,
+      "temperature": 1.7200388168583118,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.6118257543454487,
+        "evidence_support": 0.6843979987142353,
+        "memory_usefulness": 0.8820682746050714,
+        "answerability": 0.694372912400596,
+        "uncertainty": 0.17680836023143764
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_4",
+          "doc_6",
+          "doc_13",
+          "doc_10"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "goal_slot_name": "major_broadcasters_ny",
+        "goal_slot_role": "target_attribute",
+        "goal_terminal": true,
+        "diffusion_delta": 0.011915891812395163,
+        "diffusion_gain": 0.011915891812395163
+      }
+    },
+    {
+      "node_id": "kg_doc_4",
+      "node_type": "kg",
+      "content": "The television industry developed in New York and is a significant employer in the city's economy. The three major American broadcast networks are all headquartered in New York: ABC, CBS, and NBC. Many cable networks are based in the city as well, including MTV, Fox News, HBO, Showtime, Bravo, Food Network, AMC, and Comedy Central. The City of New York operates a public broadcast service, NYCTV, that has produced several original Emmy Award-winning shows covering music and culture in city neighborhoods and city government.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999409543695,
+      "temperature": 0.9999999409543695,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "New York City",
+        "raw_score": 0.1605126302802496,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_6",
+      "node_type": "kg",
+      "content": "The New York Giants Radio Network is a broadcast radio network based in New York City, the official radio broadcaster of the New York Giants. The network's radio broadcasts are currently flagshipped at WFAN, a station owned by CBS Radio. Overflow radio casts air on WCBS, WFAN's corporate sibling",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999997446758642,
+      "temperature": 0.9999997446758642,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "New York Giants Radio Network",
+        "raw_score": 0.2039086916786239,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_13",
+      "node_type": "kg",
+      "content": "The Best of Broadway is a 60-minute live television anthology series that aired on CBS Television on Wednesdays at 10p.m. Easter Standard Time from September 15, 1954, to May 4, 1955, for a total of nine episodes. Each show was broadcast live in color from New York City, was an adaptation of a famous Broadway play, and included commercials for Westinghouse featuring Betty Furness. Using a \"giant new studio,\" plays were presented in front of a studio audience, which contributed a Broadway-like element.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.893579889179401,
+      "temperature": 0.893579889179401,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "The Best of Broadway",
+        "raw_score": 0.10878238027594547,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_10",
+      "node_type": "kg",
+      "content": "Cannonball Run 2001 is a reality television series broadcast on the USA Network in 2001. It was inspired by the Cannonball Baker Sea-To-Shining-Sea Memorial Trophy Dash, an outlaw road race of the 1970s which was the source for the famous \"Cannonball Run\" movies. The show featured a series of five location-specific challenges along a New York-to-Los Angeles course, as in the original race.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.8113859700288362,
+      "temperature": 0.8113859700288362,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Cannonball Run 2001",
+        "raw_score": 0.0887148925895651,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "state_3",
+      "node_type": "state",
+      "content": "Which network hosts Westinghouse Playhouse?",
+      "depth": 2,
+      "parent_id": "state_2",
+      "value": 0.5506852788819575,
+      "temperature": 1.8556666717822834,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.6237591484807585,
+        "evidence_support": 0.768089567142896,
+        "memory_usefulness": 0.0,
+        "answerability": 0.6275230444410131,
+        "uncertainty": 0.16174387791427872
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_14",
+          "doc_13",
+          "doc_2",
+          "doc_11"
+        ],
+        "memory_ids": [],
+        "diffusion_delta": 0.18993953004301423,
+        "diffusion_gain": 0.18993953004301423
+      }
+    },
+    {
+      "node_id": "state_4",
+      "node_type": "state",
+      "content": "Which company bought the CBS label?",
+      "depth": 2,
+      "parent_id": "state_2",
+      "value": 0.568445149684097,
+      "temperature": 1.08291498690606,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.5940860834697175,
+        "evidence_support": 0.6808158465221869,
+        "memory_usefulness": 0.5139667251540021,
+        "answerability": 0.5838861841306586,
+        "uncertainty": 0.17745314762600636
+      },
+      "metadata": {
+        "kind": "bridge",
+        "evidence_ids": [
+          "doc_18",
+          "doc_13",
+          "doc_3",
+          "doc_17"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "diffusion_delta": -0.004888493626409529,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "kg_doc_18",
+      "node_type": "kg",
+      "content": "In 1964, CBS established its own UK distribution with the acquisition of Oriole Records. EMI continued to distribute Epic and Okeh label material on the Columbia label in the UK until the distribution deal with EMI expired in 1968 when CBS took over distribution.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.99999988561008,
+      "temperature": 0.99999988561008,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Sony Music",
+        "raw_score": 0.18752592634388526,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_17",
+      "node_type": "kg",
+      "content": "The Million Dollar Drop is a game show which airs on Nine Network in Australia and is based on the UK series \"The Million Pound Drop Live\". However, unlike the original UK version, it is not broadcast live, and there are several changes to the format. The show premiered on 21 March 2011 and is hosted by Eddie McGuire.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.21058489631939148,
+      "temperature": 0.21058489631939148,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "The Million Dollar Drop",
+        "raw_score": 0.07446313119339873,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "memory_mem_4",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'Which major broadcasters are based in New York, besides ABC and NBC' is CBS.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999409543695,
+      "temperature": 1.4028586822786906,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "intermediate_answer",
+        "target_question": "Which major broadcasters are based in New York, besides ABC and NBC?",
+        "target_question_norm": "which major broadcasters are based in new york besides abc and nbc",
+        "relation_signature": "generic",
+        "answer_text": "CBS",
+        "support_score": 0.9999999409543695,
+        "evidence_ids": [
+          "doc_4",
+          "doc_6"
+        ],
+        "slot_name": "major_broadcasters_ny",
+        "slot_type": "",
+        "slot_role": "target_attribute",
+        "terminal": true,
+        "path_terminal": false,
+        "composition_kind": "",
+        "derived_from_state": "state_2",
+        "diffusion_delta": -0.009602155817256541,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "state_5",
+      "node_type": "state",
+      "content": "Which label was bought by CBS?",
+      "depth": 2,
+      "parent_id": "state_2",
+      "value": 0.6406072131315785,
+      "temperature": 0.6324627740251981,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.684517212162935,
+        "evidence_support": 0.946789754443415,
+        "memory_usefulness": 0.0,
+        "answerability": 0.7168731380912727,
+        "uncertainty": 0.1295778442001853
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_18",
+          "doc_13",
+          "doc_10",
+          "doc_6"
+        ],
+        "memory_ids": [],
+        "diffusion_delta": 0.06523202959258612,
+        "diffusion_gain": 0.06523202959258612
+      }
+    },
+    {
+      "node_id": "state_6",
+      "node_type": "state",
+      "content": "Which major broadcasters are based in NY besides ABC?",
+      "depth": 3,
+      "parent_id": "state_4",
+      "value": 0.49352225547151557,
+      "temperature": 0.4258498823945453,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.584929843591212,
+        "evidence_support": 0.6052923788488334,
+        "memory_usefulness": 0.0,
+        "answerability": 0.654820102467895,
+        "uncertainty": 0.19104737180721
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_4",
+          "doc_17",
+          "doc_20",
+          "doc_7"
+        ],
+        "memory_ids": [],
+        "diffusion_delta": 0.0024769322713709685,
+        "diffusion_gain": 0.0024769322713709685
+      }
+    },
+    {
+      "node_id": "kg_doc_20",
+      "node_type": "kg",
+      "content": "999 ABC Broken Hill is an ABC Local Radio station based in Broken Hill and broadcasting to the surrounding outback region in New South Wales, including the towns of Menindee, White Cliffs and Silverton.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.025822033642344547,
+      "temperature": 0.025822033642344547,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "999 ABC Broken Hill",
+        "raw_score": 0.11041023166407352,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_7",
+      "node_type": "kg",
+      "content": "ABC Riverina is an ABC Local Radio station based in Wagga Wagga and broadcasting to the Riverina and Murrumbidgee Irrigation Area regions in New South Wales. This includes the towns and cities of Griffith, Goulburn, Leeton and Hay.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.25,
+      "temperature": 0.25,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "ABC Riverina",
+        "raw_score": 0.10493149751655098,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "memory_mem_5",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'Which company bought the CBS label' is Sony.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.99999988561008,
+      "temperature": 0.5854313224344512,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "intermediate_answer",
+        "target_question": "Which company bought the CBS label?",
+        "target_question_norm": "which company bought the cbs label",
+        "relation_signature": "generic",
+        "answer_text": "Sony",
+        "support_score": 0.99999988561008,
+        "evidence_ids": [
+          "doc_18"
+        ],
+        "slot_name": "",
+        "slot_type": "generic",
+        "slot_role": "target_attribute",
+        "terminal": true,
+        "path_terminal": true,
+        "composition_kind": "path_terminal",
+        "derived_from_state": "state_4",
+        "diffusion_delta": -0.006048416799019352,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "state_7",
+      "node_type": "state",
+      "content": "What label was bought by CBS?",
+      "depth": 1,
+      "parent_id": "state_1",
+      "value": 0.5177397708740329,
+      "temperature": 0.9807755291396223,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.6014986700970257,
+        "evidence_support": 0.7026175718966228,
+        "memory_usefulness": 0.0,
+        "answerability": 0.5947870468178766,
+        "uncertainty": 0.1735288370586079
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_18",
+          "doc_6",
+          "doc_13",
+          "doc_9"
+        ],
+        "memory_ids": [],
+        "diffusion_delta": 0.005294133864642392,
+        "diffusion_gain": 0.005294133864642392
+      }
+    },
+    {
+      "node_id": "kg_doc_9",
+      "node_type": "kg",
+      "content": "Barney Miller is an American sitcom set in a New York City Police Department police station on East 6th St in Greenwich Village. The series was broadcast from January 23, 1975, to May 20, 1982, on ABC. It was created by Danny Arnold and Theodore J. Flicker. Noam Pitlik directed the majority of the episodes.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.25,
+      "temperature": 0.25,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Barney Miller",
+        "raw_score": 0.046680756821303966,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "state_8",
+      "node_type": "state",
+      "content": "Which network hosted Westinghouse Playhouse?",
+      "depth": 1,
+      "parent_id": "state_1",
+      "value": 0.5445484398875734,
+      "temperature": 0.25274524810551335,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.6083317895832605,
+        "evidence_support": 0.7713083325338863,
+        "memory_usefulness": 0.0,
+        "answerability": 0.6204367749625954,
+        "uncertainty": 0.16116450014390046
+      },
+      "metadata": {
+        "kind": "bridge",
+        "evidence_ids": [
+          "doc_14",
+          "doc_13",
+          "doc_2",
+          "doc_17"
+        ],
+        "memory_ids": [],
+        "diffusion_delta": 0.0032098097080814625,
+        "diffusion_gain": 0.0032098097080814625
+      }
+    },
+    {
+      "node_id": "state_9",
+      "node_type": "state",
+      "content": "Which major broadcasters, besides ABC, were based in New York?",
+      "depth": 1,
+      "parent_id": "state_1",
+      "value": 0.5470259199737201,
+      "temperature": 0.24213109427538793,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.6212866086778954,
+        "evidence_support": 0.7608173912521221,
+        "memory_usefulness": 0.0,
+        "answerability": 0.6238869564956262,
+        "uncertainty": 0.163052869574618
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_4",
+          "doc_6",
+          "doc_13",
+          "doc_10"
+        ],
+        "memory_ids": [],
+        "diffusion_delta": -0.004149807299276276,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "state_10",
+      "node_type": "state",
+      "content": "Which major broadcasters besides ABC are based in New York?",
+      "depth": 2,
+      "parent_id": "state_7",
+      "value": 0.5711555999657258,
+      "temperature": 0.6850694883257449,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.6261039600238454,
+        "evidence_support": 0.7749860716813864,
+        "memory_usefulness": 0.0,
+        "answerability": 0.7309712967102584,
+        "uncertainty": 0.16050250709735042
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_4",
+          "doc_6",
+          "doc_13",
+          "doc_10"
+        ],
+        "memory_ids": [],
+        "diffusion_delta": 0.08782357525918705,
+        "diffusion_gain": 0.08782357525918705
+      }
+    },
+    {
+      "node_id": "memory_mem_6",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'What label was bought by CBS' is Sony Music.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 1.0,
+      "temperature": 0.5553061725138622,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "intermediate_answer",
+        "target_question": "What label was bought by CBS?",
+        "target_question_norm": "what label was bought by cbs",
+        "relation_signature": "generic",
+        "answer_text": "Sony Music",
+        "support_score": 1.0,
+        "evidence_ids": [
+          "doc_18"
+        ],
+        "slot_name": "company_that_bought_label",
+        "slot_type": "generic",
+        "slot_role": "target_attribute",
+        "terminal": true,
+        "path_terminal": true,
+        "composition_kind": "path_terminal",
+        "derived_from_state": "state_7",
+        "diffusion_delta": -0.025277725274506446,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "state_11",
+      "node_type": "state",
+      "content": "Which major broadcasters are based in New York?",
+      "depth": 3,
+      "parent_id": "state_3",
+      "value": 0.5872807561825444,
+      "temperature": 0.5937484455483706,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.6257184897825652,
+        "evidence_support": 0.8224456860612531,
+        "memory_usefulness": 0.0,
+        "answerability": 0.7460054517262787,
+        "uncertainty": 0.15195977650897444
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_4",
+          "doc_6",
+          "doc_13",
+          "doc_10"
+        ],
+        "memory_ids": [],
+        "diffusion_delta": 0.057415061997453054,
+        "diffusion_gain": 0.057415061997453054
+      }
+    },
+    {
+      "node_id": "state_12",
+      "node_type": "state",
+      "content": "Which company bought the label associated with one of those New York-based broadcasters?",
+      "depth": 3,
+      "parent_id": "state_3",
+      "value": 0.5938758808412073,
+      "temperature": 1.3386668485111617,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.6670938158593134,
+        "evidence_support": 0.7983577704302056,
+        "memory_usefulness": 0.1037216548901236,
+        "answerability": 0.660048450432494,
+        "uncertainty": 0.15629560132256298
+      },
+      "metadata": {
+        "kind": "bridge",
+        "evidence_ids": [
+          "doc_6",
+          "doc_4",
+          "doc_10",
+          "doc_13"
+        ],
+        "memory_ids": [
+          "mem_2",
+          "mem_1"
+        ],
+        "diffusion_delta": 0.36995342519603447,
+        "diffusion_gain": 0.36995342519603447
+      }
+    },
+    {
+      "node_id": "memory_mem_2",
+      "node_type": "memory",
+      "content": "Template: for comparison questions, split the problem into one sub-question per entity before comparing them.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.20378047598544038,
+      "temperature": 0.41548276287077923,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.9,
+        "tag": "comparison_template",
+        "memory_kind": "template",
+        "raw_score": 1.4360021270564605,
+        "source": "memory",
+        "diffusion_delta": -0.24974935106163676,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "memory_mem_7",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'Which network hosts Westinghouse Playhouse' is NBC.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 1.0,
+      "temperature": 0.7975465518863419,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "intermediate_answer",
+        "target_question": "Which network hosts Westinghouse Playhouse?",
+        "target_question_norm": "which network hosts westinghouse playhouse",
+        "relation_signature": "generic",
+        "answer_text": "NBC",
+        "support_score": 1.0,
+        "evidence_ids": [
+          "doc_14",
+          "doc_13"
+        ],
+        "slot_name": "",
+        "slot_type": "generic",
+        "slot_role": "target_attribute",
+        "terminal": true,
+        "path_terminal": true,
+        "composition_kind": "path_terminal",
+        "derived_from_state": "state_3",
+        "diffusion_delta": 0.03603951864094335,
+        "diffusion_gain": 0.03603951864094335
+      }
+    },
+    {
+      "node_id": "memory_mem_8",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'What label was bought by the company which, along with ABC and the network which hosts Westinghouse Playhouse, is the other major broadcaster based in NY' is Sony Music.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 1.0,
+      "temperature": 0.41053765245226076,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "answer_candidate",
+        "target_question": "What label was bought by the company which, along with ABC and the network which hosts Westinghouse Playhouse, is the other major broadcaster based in NY?",
+        "target_question_norm": "what label was bought by the company which along with abc and the network which hosts westinghouse playhouse is the other major broadcaster based in ny",
+        "slot_key": "generic|generic|root_answer|ny|what label was bought by the company which along with abc and the network which hosts westinghouse playhouse is the other major broadcaster based in ny",
+        "slot_type": "generic",
+        "relation_signature": "generic",
+        "answer_text": "Sony Music",
+        "support_score": 0.978,
+        "evidence_ids": [
+          "doc_1",
+          "doc_2",
+          "doc_3",
+          "doc_4",
+          "doc_5",
+          "doc_6",
+          "doc_7",
+          "doc_8",
+          "doc_9",
+          "doc_10",
+          "doc_12",
+          "doc_13"
+        ],
+        "slot_role": "target_attribute",
+        "terminal": true,
+        "path_terminal": true,
+        "coverage_count": 2,
+        "coverage_ratio": 1.0,
+        "composition_kind": "path_terminal",
+        "diffusion_delta": -0.0712574883120155,
+        "diffusion_gain": 0.0,
+        "final_chain_score": 0.978,
+        "final_chain_strict": true,
+        "final_chain_source_node_id": "memory_mem_6",
+        "final_chain_predecessor_ids": [
+          "memory_mem_7",
+          "memory_mem_4",
+          "memory_mem_9"
+        ],
+        "final_chain_path_depth": 4,
+        "final_chain_dependency_backed": false,
+        "final_chain_textual_predecessor": true,
+        "final_chain_source_path_terminal": true
+      }
+    },
+    {
+      "node_id": "kg_doc_1",
+      "node_type": "kg",
+      "content": "Better Living TV Theater was an early American television program originally broadcast on ABC and later on the now defunct DuMont Television Network. The documentary series, featuring moderator Fischer Black, ran from 1953 to 1954. The ABC version was a summer replacement series which aired on Sunday afternoons. The final ABC broadcast occurred on August 16, 1953.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.25,
+      "temperature": 0.25,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Better Living TV Theater",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_5",
+      "node_type": "kg",
+      "content": "Steve Stewart is an American sportscaster, currently serving as a pregame host and play-by-play announcer on the Kansas City Royals Radio Network. The 2011 season was his fourth with the Royals, his 12th in the Major Leagues and his 20th broadcasting baseball.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.25,
+      "temperature": 0.25,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Steve Stewart",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_8",
+      "node_type": "kg",
+      "content": "The sixteenth season of American Idol premiered on March 11, 2018, on the ABC television network. It is the show's first season to air on ABC. Ryan Seacrest continued his role as the show's host, while Katy Perry, Luke Bryan, and Lionel Richie joined as judges.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.25,
+      "temperature": 0.25,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "American Idol (season 16)",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_12",
+      "node_type": "kg",
+      "content": "Fashions on Parade is an American fashion-themed television series that aired on the now-defunct DuMont Television Network Fridays at 8pm EST from November 4, 1948, to April 24, 1949, then broadcast on ABC from April 27 to June 29, 1949. The show was hosted by Adelaide Hawley Cumming beginning on local DuMont stations on February 5, 1948.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.25,
+      "temperature": 0.25,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Fashions on Parade",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "state_13",
+      "node_type": "state",
+      "content": "Which company bought a label associated with one of those New York-based broadcasters?",
+      "depth": 4,
+      "parent_id": "state_12",
+      "value": 0.5976822008168754,
+      "temperature": 0.3187812002013463,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.6550875903547853,
+        "evidence_support": 0.8116386928593426,
+        "memory_usefulness": 0.14438733446059512,
+        "answerability": 0.6579932594731496,
+        "uncertainty": 0.15390503528531832
+      },
+      "metadata": {
+        "kind": "bridge",
+        "evidence_ids": [
+          "doc_6",
+          "doc_4",
+          "doc_13",
+          "doc_10"
+        ],
+        "memory_ids": [
+          "mem_2"
+        ],
+        "diffusion_delta": 0.04836046177109349,
+        "diffusion_gain": 0.04836046177109349
+      }
+    },
+    {
+      "node_id": "memory_mem_9",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'Which company bought the label associated with one of those New York-based broadcasters' is CBS.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999997256348847,
+      "temperature": 0.848649150655591,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "intermediate_answer",
+        "target_question": "Which company bought the label associated with one of those New York-based broadcasters?",
+        "target_question_norm": "which company bought the label associated with one of those new york based broadcasters",
+        "relation_signature": "generic",
+        "answer_text": "CBS",
+        "support_score": 0.9999997256348847,
+        "evidence_ids": [
+          "doc_6",
+          "doc_4"
+        ],
+        "slot_name": "",
+        "slot_type": "generic",
+        "slot_role": "target_attribute",
+        "terminal": true,
+        "path_terminal": true,
+        "composition_kind": "path_terminal",
+        "derived_from_state": "state_12",
+        "diffusion_delta": -0.02113962648979184,
+        "diffusion_gain": 0.0
+      }
+    }
+  ],
+  "edges": [
+    {
+      "source": "state_1",
+      "target": "kg_doc_14",
+      "edge_type": "supports",
+      "weight": 0.9999999748551395
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_11",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.07092789130798068
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.06012826002425427
+    },
+    {
+      "source": "state_1",
+      "target": "state_2",
+      "edge_type": "refines",
+      "weight": 1.0
+    },
+    {
+      "source": "state_1",
+      "target": "state_7",
+      "edge_type": "refines",
+      "weight": 0.94
+    },
+    {
+      "source": "state_1",
+      "target": "state_8",
+      "edge_type": "refines",
+      "weight": 0.9
+    },
+    {
+      "source": "state_1",
+      "target": "state_9",
+      "edge_type": "refines",
+      "weight": 0.8
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_8",
+      "edge_type": "derives",
+      "weight": 0.96
+    },
+    {
+      "source": "kg_doc_14",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.9999999748551395
+    },
+    {
+      "source": "kg_doc_14",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.9999999777803394
+    },
+    {
+      "source": "kg_doc_14",
+      "target": "state_8",
+      "edge_type": "supports",
+      "weight": 0.9999999773028321
+    },
+    {
+      "source": "kg_doc_14",
+      "target": "memory_mem_7",
+      "edge_type": "supports",
+      "weight": 0.9999999777803394
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.03323873777762827
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.03323873777762827
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "memory_mem_8",
+      "edge_type": "supports",
+      "weight": 0.25
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "state_8",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "memory_mem_7",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "memory_mem_8",
+      "edge_type": "supports",
+      "weight": 0.25
+    },
+    {
+      "source": "kg_doc_11",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_11",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_11",
+      "target": "memory_mem_7",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.07092789130798068
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_2",
+      "edge_type": "recalls",
+      "weight": 0.8841365672456091
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_4",
+      "edge_type": "recalls",
+      "weight": 0.016300185052106897
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "memory_mem_4",
+      "edge_type": "recalls",
+      "weight": 0.8841365672456091
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "memory_mem_5",
+      "edge_type": "recalls",
+      "weight": 0.016300185052106897
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_12",
+      "edge_type": "recalls",
+      "weight": 0.00366283379480682
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "memory_mem_9",
+      "edge_type": "recalls",
+      "weight": 0.00366283379480682
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.06012826002425427
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_2",
+      "edge_type": "recalls",
+      "weight": 0.8799999819645339
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_4",
+      "edge_type": "recalls",
+      "weight": 0.0011477672414937589
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "memory_mem_4",
+      "edge_type": "recalls",
+      "weight": 0.8799999819645339
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "memory_mem_5",
+      "edge_type": "recalls",
+      "weight": 0.0011477672414937589
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.9999999409543695
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.36879605647410124
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_13",
+      "edge_type": "supports",
+      "weight": 0.11860779059529047
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_10",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_2",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.8841365672456091
+    },
+    {
+      "source": "state_2",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.8799999819645339
+    },
+    {
+      "source": "state_2",
+      "target": "state_3",
+      "edge_type": "refines",
+      "weight": 0.9
+    },
+    {
+      "source": "state_2",
+      "target": "state_4",
+      "edge_type": "refines",
+      "weight": 0.85
+    },
+    {
+      "source": "state_2",
+      "target": "memory_mem_4",
+      "edge_type": "derives",
+      "weight": 0.9999999409543695
+    },
+    {
+      "source": "state_2",
+      "target": "state_5",
+      "edge_type": "refines",
+      "weight": 0.84
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.9999999409543695
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.9999999409543695
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "state_6",
+      "edge_type": "supports",
+      "weight": 0.9999998613782752
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "state_9",
+      "edge_type": "supports",
+      "weight": 0.9999998977471004
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "state_10",
+      "edge_type": "supports",
+      "weight": 0.9999999275123217
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "state_11",
+      "edge_type": "supports",
+      "weight": 0.999999921271213
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "state_12",
+      "edge_type": "supports",
+      "weight": 0.5967158152255265
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "memory_mem_8",
+      "edge_type": "supports",
+      "weight": 0.25
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "state_13",
+      "edge_type": "supports",
+      "weight": 0.623277641042821
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "memory_mem_9",
+      "edge_type": "supports",
+      "weight": 0.5967158152255265
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.36879605647410124
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.36879605647410124
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "state_7",
+      "edge_type": "supports",
+      "weight": 0.4052353526165844
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "state_9",
+      "edge_type": "supports",
+      "weight": 0.5216348847571437
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "state_10",
+      "edge_type": "supports",
+      "weight": 0.5499722158504512
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.4052353526165844
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "state_11",
+      "edge_type": "supports",
+      "weight": 0.6448914508512933
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "state_12",
+      "edge_type": "supports",
+      "weight": 0.9999997256348847
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "memory_mem_8",
+      "edge_type": "supports",
+      "weight": 0.25
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "state_13",
+      "edge_type": "supports",
+      "weight": 0.9999997446758642
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "memory_mem_9",
+      "edge_type": "supports",
+      "weight": 0.9999997256348847
+    },
+    {
+      "source": "kg_doc_13",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.11860779059529047
+    },
+    {
+      "source": "kg_doc_13",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.5361791565054524
+    },
+    {
+      "source": "kg_doc_13",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.36163180743429363
+    },
+    {
+      "source": "kg_doc_13",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.11860779059529047
+    },
+    {
+      "source": "kg_doc_13",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.893579889179401
+    },
+    {
+      "source": "kg_doc_13",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.36163180743429363
+    },
+    {
+      "source": "kg_doc_13",
+      "target": "state_7",
+      "edge_type": "supports",
+      "weight": 0.00044702741252088633
+    },
+    {
+      "source": "kg_doc_13",
+      "target": "state_8",
+      "edge_type": "supports",
+      "weight": 0.5426166877649405
+    },
+    {
+      "source": "kg_doc_13",
+      "target": "state_9",
+      "edge_type": "supports",
+      "weight": 0.3326940266661119
+    },
+    {
+      "source": "kg_doc_13",
+      "target": "state_10",
+      "edge_type": "supports",
+      "weight": 0.017915632141070073
+    },
+    {
+      "source": "kg_doc_13",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.00044702741252088633
+    },
+    {
+      "source": "kg_doc_13",
+      "target": "state_11",
+      "edge_type": "supports",
+      "weight": 0.019821013053876242
+    },
+    {
+      "source": "kg_doc_13",
+      "target": "state_12",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_13",
+      "target": "memory_mem_7",
+      "edge_type": "supports",
+      "weight": 0.5361791565054524
+    },
+    {
+      "source": "kg_doc_13",
+      "target": "memory_mem_8",
+      "edge_type": "supports",
+      "weight": 0.25
+    },
+    {
+      "source": "kg_doc_13",
+      "target": "state_13",
+      "edge_type": "supports",
+      "weight": 0.1742062743078024
+    },
+    {
+      "source": "kg_doc_13",
+      "target": "memory_mem_9",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_10",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_10",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_10",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.8113859700288362
+    },
+    {
+      "source": "kg_doc_10",
+      "target": "state_9",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_10",
+      "target": "state_10",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_10",
+      "target": "state_11",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_10",
+      "target": "state_12",
+      "edge_type": "supports",
+      "weight": 0.028941748745402257
+    },
+    {
+      "source": "kg_doc_10",
+      "target": "memory_mem_8",
+      "edge_type": "supports",
+      "weight": 0.25
+    },
+    {
+      "source": "kg_doc_10",
+      "target": "state_13",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_10",
+      "target": "memory_mem_9",
+      "edge_type": "supports",
+      "weight": 0.028941748745402257
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_14",
+      "edge_type": "supports",
+      "weight": 0.9999999777803394
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_13",
+      "edge_type": "supports",
+      "weight": 0.5361791565054524
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_11",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_3",
+      "target": "state_11",
+      "edge_type": "refines",
+      "weight": 0.9
+    },
+    {
+      "source": "state_3",
+      "target": "state_12",
+      "edge_type": "refines",
+      "weight": 0.8
+    },
+    {
+      "source": "state_3",
+      "target": "memory_mem_7",
+      "edge_type": "derives",
+      "weight": 1.0
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_18",
+      "edge_type": "supports",
+      "weight": 0.99999988561008
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_13",
+      "edge_type": "supports",
+      "weight": 0.36163180743429363
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.03323873777762827
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_17",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_4",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.016300185052106897
+    },
+    {
+      "source": "state_4",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.0011477672414937589
+    },
+    {
+      "source": "state_4",
+      "target": "state_3",
+      "edge_type": "refines",
+      "weight": 0.9
+    },
+    {
+      "source": "state_4",
+      "target": "state_6",
+      "edge_type": "refines",
+      "weight": 0.85
+    },
+    {
+      "source": "state_4",
+      "target": "memory_mem_5",
+      "edge_type": "derives",
+      "weight": 0.99999988561008
+    },
+    {
+      "source": "kg_doc_18",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.99999988561008
+    },
+    {
+      "source": "kg_doc_18",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.9999996197074289
+    },
+    {
+      "source": "kg_doc_18",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.99999988561008
+    },
+    {
+      "source": "kg_doc_18",
+      "target": "state_7",
+      "edge_type": "supports",
+      "weight": 0.999999791176661
+    },
+    {
+      "source": "kg_doc_18",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.999999791176661
+    },
+    {
+      "source": "kg_doc_17",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_17",
+      "target": "state_6",
+      "edge_type": "supports",
+      "weight": 0.21058489631939148
+    },
+    {
+      "source": "kg_doc_17",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_17",
+      "target": "state_8",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "state_2",
+      "edge_type": "recalls",
+      "weight": 0.9999999409543695
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.9999999409543695
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.36879605647410124
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_13",
+      "edge_type": "supports",
+      "weight": 0.11860779059529047
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_10",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.8841365672456091
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.8799999819645339
+    },
+    {
+      "source": "state_5",
+      "target": "kg_doc_18",
+      "edge_type": "supports",
+      "weight": 0.9999996197074289
+    },
+    {
+      "source": "state_5",
+      "target": "kg_doc_13",
+      "edge_type": "supports",
+      "weight": 0.893579889179401
+    },
+    {
+      "source": "state_5",
+      "target": "kg_doc_10",
+      "edge_type": "supports",
+      "weight": 0.8113859700288362
+    },
+    {
+      "source": "state_5",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_6",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.9999998613782752
+    },
+    {
+      "source": "state_6",
+      "target": "kg_doc_17",
+      "edge_type": "supports",
+      "weight": 0.21058489631939148
+    },
+    {
+      "source": "state_6",
+      "target": "kg_doc_20",
+      "edge_type": "supports",
+      "weight": 0.025822033642344547
+    },
+    {
+      "source": "state_6",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_20",
+      "target": "state_6",
+      "edge_type": "supports",
+      "weight": 0.025822033642344547
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "state_6",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "memory_mem_8",
+      "edge_type": "supports",
+      "weight": 0.25
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "state_4",
+      "edge_type": "recalls",
+      "weight": 0.99999988561008
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_18",
+      "edge_type": "supports",
+      "weight": 0.99999988561008
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_13",
+      "edge_type": "supports",
+      "weight": 0.36163180743429363
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.03323873777762827
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_17",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.016300185052106897
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.0011477672414937589
+    },
+    {
+      "source": "state_7",
+      "target": "kg_doc_18",
+      "edge_type": "supports",
+      "weight": 0.999999791176661
+    },
+    {
+      "source": "state_7",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.4052353526165844
+    },
+    {
+      "source": "state_7",
+      "target": "kg_doc_13",
+      "edge_type": "supports",
+      "weight": 0.00044702741252088633
+    },
+    {
+      "source": "state_7",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_7",
+      "target": "state_10",
+      "edge_type": "refines",
+      "weight": 0.95
+    },
+    {
+      "source": "state_7",
+      "target": "state_3",
+      "edge_type": "refines",
+      "weight": 0.9
+    },
+    {
+      "source": "state_7",
+      "target": "memory_mem_6",
+      "edge_type": "derives",
+      "weight": 1.0
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "state_7",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "memory_mem_8",
+      "edge_type": "supports",
+      "weight": 0.25
+    },
+    {
+      "source": "state_8",
+      "target": "kg_doc_14",
+      "edge_type": "supports",
+      "weight": 0.9999999773028321
+    },
+    {
+      "source": "state_8",
+      "target": "kg_doc_13",
+      "edge_type": "supports",
+      "weight": 0.5426166877649405
+    },
+    {
+      "source": "state_8",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_8",
+      "target": "kg_doc_17",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_9",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.9999998977471004
+    },
+    {
+      "source": "state_9",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.5216348847571437
+    },
+    {
+      "source": "state_9",
+      "target": "kg_doc_13",
+      "edge_type": "supports",
+      "weight": 0.3326940266661119
+    },
+    {
+      "source": "state_9",
+      "target": "kg_doc_10",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_10",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.9999999275123217
+    },
+    {
+      "source": "state_10",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.5499722158504512
+    },
+    {
+      "source": "state_10",
+      "target": "kg_doc_13",
+      "edge_type": "supports",
+      "weight": 0.017915632141070073
+    },
+    {
+      "source": "state_10",
+      "target": "kg_doc_10",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "state_7",
+      "edge_type": "recalls",
+      "weight": 1.0
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_18",
+      "edge_type": "supports",
+      "weight": 0.999999791176661
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.4052353526165844
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_13",
+      "edge_type": "supports",
+      "weight": 0.00044702741252088633
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_11",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.999999921271213
+    },
+    {
+      "source": "state_11",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.6448914508512933
+    },
+    {
+      "source": "state_11",
+      "target": "kg_doc_13",
+      "edge_type": "supports",
+      "weight": 0.019821013053876242
+    },
+    {
+      "source": "state_11",
+      "target": "kg_doc_10",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_12",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.9999997256348847
+    },
+    {
+      "source": "state_12",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.5967158152255265
+    },
+    {
+      "source": "state_12",
+      "target": "kg_doc_10",
+      "edge_type": "supports",
+      "weight": 0.028941748745402257
+    },
+    {
+      "source": "state_12",
+      "target": "kg_doc_13",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_12",
+      "target": "memory_mem_2",
+      "edge_type": "recalls",
+      "weight": 0.14335261199215119
+    },
+    {
+      "source": "state_12",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.00366283379480682
+    },
+    {
+      "source": "state_12",
+      "target": "state_10",
+      "edge_type": "refines",
+      "weight": 0.8
+    },
+    {
+      "source": "state_12",
+      "target": "state_13",
+      "edge_type": "refines",
+      "weight": 0.7
+    },
+    {
+      "source": "state_12",
+      "target": "memory_mem_9",
+      "edge_type": "derives",
+      "weight": 0.9999997256348847
+    },
+    {
+      "source": "state_12",
+      "target": "state_5",
+      "edge_type": "refines",
+      "weight": 0.84
+    },
+    {
+      "source": "memory_mem_2",
+      "target": "state_12",
+      "edge_type": "recalls",
+      "weight": 0.14335261199215119
+    },
+    {
+      "source": "memory_mem_2",
+      "target": "state_13",
+      "edge_type": "recalls",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_2",
+      "target": "memory_mem_9",
+      "edge_type": "recalls",
+      "weight": 0.14335261199215119
+    },
+    {
+      "source": "memory_mem_7",
+      "target": "state_3",
+      "edge_type": "recalls",
+      "weight": 1.0
+    },
+    {
+      "source": "memory_mem_7",
+      "target": "kg_doc_14",
+      "edge_type": "supports",
+      "weight": 0.9999999777803394
+    },
+    {
+      "source": "memory_mem_7",
+      "target": "kg_doc_13",
+      "edge_type": "supports",
+      "weight": 0.5361791565054524
+    },
+    {
+      "source": "memory_mem_7",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_7",
+      "target": "kg_doc_11",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_8",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.96
+    },
+    {
+      "source": "memory_mem_8",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.25
+    },
+    {
+      "source": "memory_mem_8",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.25
+    },
+    {
+      "source": "memory_mem_8",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.25
+    },
+    {
+      "source": "memory_mem_8",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.25
+    },
+    {
+      "source": "memory_mem_8",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.25
+    },
+    {
+      "source": "memory_mem_8",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.25
+    },
+    {
+      "source": "memory_mem_8",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.25
+    },
+    {
+      "source": "memory_mem_8",
+      "target": "kg_doc_8",
+      "edge_type": "supports",
+      "weight": 0.25
+    },
+    {
+      "source": "memory_mem_8",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.25
+    },
+    {
+      "source": "memory_mem_8",
+      "target": "kg_doc_10",
+      "edge_type": "supports",
+      "weight": 0.25
+    },
+    {
+      "source": "memory_mem_8",
+      "target": "kg_doc_12",
+      "edge_type": "supports",
+      "weight": 0.25
+    },
+    {
+      "source": "memory_mem_8",
+      "target": "kg_doc_13",
+      "edge_type": "supports",
+      "weight": 0.25
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "memory_mem_8",
+      "edge_type": "supports",
+      "weight": 0.25
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "memory_mem_8",
+      "edge_type": "supports",
+      "weight": 0.25
+    },
+    {
+      "source": "kg_doc_8",
+      "target": "memory_mem_8",
+      "edge_type": "supports",
+      "weight": 0.25
+    },
+    {
+      "source": "kg_doc_12",
+      "target": "memory_mem_8",
+      "edge_type": "supports",
+      "weight": 0.25
+    },
+    {
+      "source": "state_13",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.9999997446758642
+    },
+    {
+      "source": "state_13",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.623277641042821
+    },
+    {
+      "source": "state_13",
+      "target": "kg_doc_13",
+      "edge_type": "supports",
+      "weight": 0.1742062743078024
+    },
+    {
+      "source": "state_13",
+      "target": "kg_doc_10",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_13",
+      "target": "memory_mem_2",
+      "edge_type": "recalls",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_9",
+      "target": "state_12",
+      "edge_type": "recalls",
+      "weight": 0.9999997256348847
+    },
+    {
+      "source": "memory_mem_9",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.9999997256348847
+    },
+    {
+      "source": "memory_mem_9",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.5967158152255265
+    },
+    {
+      "source": "memory_mem_9",
+      "target": "kg_doc_10",
+      "edge_type": "supports",
+      "weight": 0.028941748745402257
+    },
+    {
+      "source": "memory_mem_9",
+      "target": "kg_doc_13",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_9",
+      "target": "memory_mem_2",
+      "edge_type": "recalls",
+      "weight": 0.14335261199215119
+    },
+    {
+      "source": "memory_mem_9",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.00366283379480682
+    }
+  ]
+}

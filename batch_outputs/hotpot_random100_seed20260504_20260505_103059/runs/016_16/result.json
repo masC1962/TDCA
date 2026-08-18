@@ -1,0 +1,137 @@
+{
+  "question": "Do Singapore Sling and Fish House Punch both contain alcohol?",
+  "final_answer": "Yes",
+  "best_node": {
+    "node_id": "state_1",
+    "node_type": "state",
+    "content": "Do Singapore Sling and Fish House Punch both contain alcohol?",
+    "depth": 0,
+    "parent_id": null,
+    "value": 0.7265234289075609,
+    "temperature": 2.2853440664806937,
+    "expanded": true,
+    "visit_count": 1,
+    "persistent": false,
+    "score_breakdown": {
+      "task_progress": 0.8741048891587515,
+      "evidence_support": 0.6297202622316219,
+      "memory_usefulness": 0.8820682746050714,
+      "answerability": 0.7148601311158109,
+      "uncertainty": 0.18665035279830805
+    },
+    "metadata": {
+      "diffusion_delta": -0.020808447906704775,
+      "diffusion_gain": 0.0
+    }
+  },
+  "final_synthesis_node_ids": [
+    "state_3",
+    "memory_mem_6",
+    "state_6",
+    "state_5",
+    "state_1"
+  ],
+  "answer_history": [
+    {
+      "node_id": "state_1",
+      "answer_text": "Yes",
+      "previous_answer": "",
+      "confidence": 0.7909999960444037,
+      "score": 0.8732974044298524,
+      "source": "direct_rag",
+      "step": 0,
+      "evidence_ids": [
+        "doc_5",
+        "doc_9",
+        "doc_7",
+        "doc_1"
+      ],
+      "kind": "anytime_answer"
+    },
+    {
+      "node_id": "state_1",
+      "answer_text": "Yes",
+      "confidence": 0.7909999960444037,
+      "score": 0.7909999960444037,
+      "source": "direct_rag",
+      "step": 0,
+      "evidence_ids": [
+        "doc_5",
+        "doc_9",
+        "doc_7",
+        "doc_1"
+      ],
+      "kind": "direct_rag_candidate"
+    },
+    {
+      "node_id": "memory_mem_4",
+      "content": "Conclusion: The answer to 'Does Singapore Sling contain alcohol' is No.",
+      "answer_text": "No",
+      "value": 0.5292907512025999,
+      "evidence_ids": [
+        "doc_1"
+      ],
+      "step": 1
+    },
+    {
+      "node_id": "memory_mem_5",
+      "content": "Conclusion: The answer to 'Does Fish House Punch contain alcohol' is No.",
+      "answer_text": "No",
+      "value": 0.9999999959392064,
+      "evidence_ids": [
+        "doc_5"
+      ],
+      "step": 1
+    },
+    {
+      "node_id": "memory_mem_6",
+      "content": "Conclusion: The answer to 'Do Singapore Sling and Fish House Punch both contain alcohol' is No.",
+      "answer_text": "No",
+      "value": 0.9999999959392064,
+      "evidence_ids": [
+        "doc_1",
+        "doc_5"
+      ],
+      "step": 1
+    },
+    {
+      "node_id": "state_1",
+      "answer_text": "Yes",
+      "source": "answer_judge",
+      "choice": "B",
+      "candidate_source": "direct_rag",
+      "base_score": 1.0,
+      "judge_confidence": 0.0,
+      "judge_reason": "Evidence confirms both drinks contain alcohol: Singapore Sling is gin-based (doc_4), Fish House Punch is rum/cognac/brandy-based (doc_1).",
+      "direct_rag_floor_applied": false,
+      "step": 4,
+      "kind": "final_answer_selection"
+    }
+  ],
+  "anytime_answer": "Yes",
+  "anytime_answer_score": 0.8732974044298524,
+  "anytime_answer_source": "direct_rag",
+  "anytime_answer_node_id": "state_1",
+  "direct_rag_answer": "Yes",
+  "direct_rag_score": 0.7909999960444037,
+  "direct_rag_node_id": "state_1",
+  "stats": {
+    "steps": 4,
+    "llm_calls": 8,
+    "generated_tokens": 599,
+    "token_budget_remaining": 601,
+    "total_nodes": 22,
+    "kg_nodes": 10,
+    "memory_nodes": 5,
+    "state_nodes": 7,
+    "deleted_state_nodes": 0,
+    "scheduler_mode": "tdca",
+    "scoring_mode": "hybrid",
+    "stop_reason": "high_confidence_root_memory",
+    "goal_kind": "comparison_both_contain",
+    "goal_completion": 1.0,
+    "anytime_answer": "Yes",
+    "anytime_answer_score": 0.8732974044298524,
+    "anytime_answer_source": "direct_rag"
+  }
+}

@@ -1,0 +1,156 @@
+{
+  "question": "Who wrote lyrics for both \"Little Shop of Horrors\" and the song \"Be Our Guest?\"",
+  "final_answer": "Howard Ashman",
+  "best_node": {
+    "node_id": "state_1",
+    "node_type": "state",
+    "content": "Who wrote lyrics for both \"Little Shop of Horrors\" and the song \"Be Our Guest?\"?",
+    "depth": 0,
+    "parent_id": null,
+    "value": 0.8389153199296339,
+    "temperature": 1.9358069217031408,
+    "expanded": true,
+    "visit_count": 1,
+    "persistent": false,
+    "score_breakdown": {
+      "task_progress": 0.9817247494128472,
+      "evidence_support": 0.9462492629789618,
+      "memory_usefulness": 0.4913557566551675,
+      "answerability": 0.8731246314894809,
+      "uncertainty": 0.12967513266378686
+    },
+    "metadata": {
+      "diffusion_delta": 0.35353895262245105,
+      "diffusion_gain": 0.35353895262245105
+    }
+  },
+  "final_synthesis_node_ids": [
+    "state_4",
+    "state_7",
+    "memory_mem_6",
+    "state_3",
+    "state_1"
+  ],
+  "answer_history": [
+    {
+      "node_id": "",
+      "answer_text": "Howard Ashman",
+      "previous_answer": "",
+      "confidence": 0.28,
+      "score": 0.16880000000000003,
+      "source": "closed_book_initial",
+      "step": 0,
+      "evidence_ids": [],
+      "kind": "anytime_answer"
+    },
+    {
+      "node_id": "memory_mem_4",
+      "content": "Conclusion: The answer to 'Who wrote the lyrics for 'Little Shop of Horrors'' is Frank Oz.",
+      "answer_text": "Frank Oz",
+      "value": 0.518226661300833,
+      "evidence_ids": [
+        "doc_7"
+      ],
+      "step": 1
+    },
+    {
+      "node_id": "memory_mem_5",
+      "content": "Conclusion: The answer to 'Who wrote the lyrics for the song 'Be Our Guest'' is Howard Ashman.",
+      "answer_text": "Howard Ashman",
+      "value": 1.0,
+      "confidence": 1.0,
+      "evidence_ids": [
+        "doc_8"
+      ],
+      "step": 2,
+      "kind": "intermediate_answer"
+    },
+    {
+      "node_id": "memory_mem_6",
+      "content": "Conclusion: The answer to 'Who wrote lyrics for both \"Little Shop of Horrors\" and the song \"Be Our Guest?\"' is Howard Ashman.",
+      "answer_text": "Howard Ashman",
+      "value": 1.0,
+      "evidence_ids": [
+        "doc_7",
+        "doc_8"
+      ],
+      "step": 2
+    },
+    {
+      "node_id": "memory_mem_7",
+      "content": "Conclusion: The answer to 'Who wrote the lyrics for 'Be Our Guest'' is Howard Ashman.",
+      "answer_text": "Howard Ashman",
+      "value": 1.0,
+      "confidence": 1.0,
+      "evidence_ids": [
+        "doc_8"
+      ],
+      "step": 3,
+      "kind": "intermediate_answer"
+    },
+    {
+      "node_id": "memory_mem_6",
+      "answer_text": "Howard Ashman",
+      "previous_answer": "Howard Ashman",
+      "confidence": 1.0,
+      "score": 0.8612593628489768,
+      "source": "final_synthesis",
+      "step": 4,
+      "evidence_ids": [],
+      "kind": "anytime_answer"
+    },
+    {
+      "node_id": "state_1",
+      "answer_text": "Howard Ashman",
+      "confidence": 0.933999997999164,
+      "score": 0.933999997999164,
+      "source": "root_state_synthesis",
+      "step": 4,
+      "evidence_ids": [
+        "doc_8",
+        "doc_7",
+        "doc_1",
+        "doc_2"
+      ],
+      "kind": "root_state_synthesis_candidate"
+    },
+    {
+      "node_id": "state_1",
+      "answer_text": "Howard Ashman",
+      "source": "answer_judge",
+      "choice": "A",
+      "candidate_source": "root_state_synthesis",
+      "base_score": 1.0,
+      "judge_confidence": 0.0,
+      "judge_reason": "Howard Ashman wrote lyrics for both works, per docs 1, 2, and 4.",
+      "step": 4,
+      "kind": "final_answer_selection"
+    }
+  ],
+  "anytime_answer": "Howard Ashman",
+  "anytime_answer_score": 0.8612593628489768,
+  "anytime_answer_source": "final_synthesis",
+  "anytime_answer_node_id": "memory_mem_6",
+  "root_state_synthesis_answer": "Howard Ashman",
+  "root_state_synthesis_score": 0.933999997999164,
+  "root_state_synthesis_node_id": "state_1",
+  "stats": {
+    "steps": 4,
+    "llm_calls": 11,
+    "generated_tokens": 716,
+    "token_budget_remaining": 484,
+    "total_nodes": 20,
+    "kg_nodes": 6,
+    "memory_nodes": 7,
+    "state_nodes": 7,
+    "deleted_state_nodes": 0,
+    "scheduler_mode": "tdca",
+    "scoring_mode": "hybrid",
+    "stop_reason": "high_confidence_root_memory",
+    "goal_kind": "bridge",
+    "goal_completion": 1.0,
+    "anytime_answer": "Howard Ashman",
+    "anytime_answer_score": 0.8612593628489768,
+    "anytime_answer_source": "final_synthesis"
+  }
+}

@@ -1,0 +1,161 @@
+{
+  "question": "According to the 2001 census, what was the population of the city in which Kirton End is located?",
+  "final_answer": "35,124",
+  "best_node": {
+    "node_id": "state_4",
+    "node_type": "state",
+    "content": "What is the population of Boston, Lincolnshire, according to the 2001 census?",
+    "depth": 2,
+    "parent_id": "state_2",
+    "value": 0.7836158746025158,
+    "temperature": 1.4075936251152479,
+    "expanded": true,
+    "visit_count": 1,
+    "persistent": false,
+    "score_breakdown": {
+      "task_progress": 0.8197359151916597,
+      "evidence_support": 0.9587821035048811,
+      "memory_usefulness": 0.48672266765716377,
+      "answerability": 0.8918910517524407,
+      "uncertainty": 0.1274192213691214
+    },
+    "metadata": {
+      "kind": "retrieval",
+      "evidence_ids": [
+        "doc_4",
+        "doc_10",
+        "doc_2",
+        "doc_6"
+      ],
+      "memory_ids": [
+        "mem_3",
+        "mem_1"
+      ],
+      "diffusion_delta": 0.14281715787519111,
+      "diffusion_gain": 0.14281715787519111
+    }
+  },
+  "final_synthesis_node_ids": [
+    "state_4",
+    "state_8",
+    "state_2",
+    "state_12",
+    "state_1"
+  ],
+  "answer_history": [
+    {
+      "node_id": "",
+      "answer_text": "166,896",
+      "previous_answer": "",
+      "confidence": 0.28,
+      "score": 0.16880000000000003,
+      "source": "closed_book_initial",
+      "step": 0,
+      "evidence_ids": [],
+      "kind": "anytime_answer"
+    },
+    {
+      "node_id": "memory_mem_4",
+      "content": "Conclusion: The answer to 'In which city is Kirton End located' is Boston.",
+      "answer_text": "Boston",
+      "value": 0.9999999821136046,
+      "confidence": 0.95,
+      "evidence_ids": [
+        "doc_10"
+      ],
+      "step": 2,
+      "kind": "intermediate_answer"
+    },
+    {
+      "node_id": "memory_mem_5",
+      "content": "Conclusion: The answer to 'What is the population of Boston, Lincolnshire, according to the 2001 census' is 35124.",
+      "answer_text": "35124",
+      "value": 0.874,
+      "evidence_ids": [
+        "doc_4",
+        "doc_10",
+        "doc_2"
+      ],
+      "step": 3
+    },
+    {
+      "node_id": "state_4",
+      "answer_text": "35124",
+      "previous_answer": "166,896",
+      "confidence": 0.95,
+      "score": 0.8697774158403858,
+      "source": "expansion_candidate",
+      "step": 2,
+      "evidence_ids": [
+        "doc_4",
+        "doc_10",
+        "doc_2",
+        "doc_6"
+      ],
+      "kind": "anytime_answer"
+    },
+    {
+      "node_id": "state_4",
+      "answer_text": "35,124",
+      "previous_answer": "35124",
+      "confidence": 0.8918910517524407,
+      "score": 1.0,
+      "source": "final_synthesis",
+      "step": 6,
+      "evidence_ids": [
+        "doc_4",
+        "doc_10",
+        "doc_2",
+        "doc_6"
+      ],
+      "kind": "anytime_answer"
+    },
+    {
+      "node_id": "memory_mem_6",
+      "content": "Conclusion: The answer to 'What is the population of Boston, Lincolnshire, according to the 2001 census' is 35,124.",
+      "answer_text": "35,124",
+      "value": 0.7912,
+      "evidence_ids": [
+        "doc_4",
+        "doc_10",
+        "doc_2"
+      ],
+      "step": 7
+    },
+    {
+      "node_id": "state_4",
+      "answer_text": "35,124",
+      "source": "answer_judge",
+      "choice": "A",
+      "candidate_source": "final_synthesis",
+      "base_score": 0.8254399618312224,
+      "judge_confidence": 0.0,
+      "judge_reason": "",
+      "step": 6,
+      "kind": "final_answer_selection"
+    }
+  ],
+  "anytime_answer": "35,124",
+  "anytime_answer_score": 1.0,
+  "anytime_answer_source": "final_synthesis",
+  "anytime_answer_node_id": "state_4",
+  "stats": {
+    "steps": 6,
+    "llm_calls": 12,
+    "generated_tokens": 942,
+    "token_budget_remaining": 258,
+    "total_nodes": 27,
+    "kg_nodes": 9,
+    "memory_nodes": 5,
+    "state_nodes": 13,
+    "deleted_state_nodes": 0,
+    "scheduler_mode": "tdca",
+    "scoring_mode": "hybrid",
+    "stop_reason": "final_synthesis_reserve",
+    "goal_kind": "bridge",
+    "goal_completion": 0.0,
+    "anytime_answer": "35,124",
+    "anytime_answer_score": 1.0,
+    "anytime_answer_source": "final_synthesis"
+  }
+}

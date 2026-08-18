@@ -1,0 +1,1600 @@
+{
+  "nodes": [
+    {
+      "node_id": "state_1",
+      "node_type": "state",
+      "content": "who played who sang is she really going out with him in the who sang she's out of my life movie?",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.6795940395668013,
+      "temperature": 0.7537980326161704,
+      "expanded": true,
+      "visit_count": 2,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.8607554273975142,
+        "evidence_support": 0.5904571394044534,
+        "memory_usefulness": 0.5139667251540021,
+        "answerability": 0.7952285697022267,
+        "uncertainty": 0.19371771490719836
+      },
+      "metadata": {
+        "diffusion_delta": 0.30452283705666794,
+        "diffusion_gain": 0.30452283705666794,
+        "composition_retry": 2,
+        "goal_retry": 1
+      }
+    },
+    {
+      "node_id": "kg_doc_12",
+      "node_type": "kg",
+      "content": "``Is She Really Going Out with Him? ''is the first single released by British musician Joe Jackson in September 1978. The track, which was to achieve greater commercial success when reissued in 1979, was included on Jackson's debut album, Look Sharp!.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999980537737,
+      "temperature": 0.9999999980537737,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Is She Really Going Out with Him?",
+        "raw_score": 20.79020260474315,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_8",
+      "node_type": "kg",
+      "content": "``She's Out of My Life ''is a song written by American songwriter Tom Bahler and performed by American recording artist Michael Jackson. Although it has been claimed that Bahler wrote the song about Karen Carpenter, Bahler stated,`` The fact is, I had already written that song by the time Karen and I became romantic. That song was written more about Rhonda Rivera... Rhonda and I had been together for two years, and it was after we broke up that I started dating Karen.'' The song has been covered by a variety of artists, including Patti LaBelle, Ginuwine, 98 °, S Club 7, Barbara Mandrell, Daniel Evans, Nina, Willie Nelson, Josh Groban, and Karel Gott.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999968851429,
+      "temperature": 0.9999999968851429,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "She's Out of My Life",
+        "raw_score": 16.743644636733208,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_19",
+      "node_type": "kg",
+      "content": "Park Sang-jin (, born 3 March 1987) is a South Korean football player who plays as a fullback for South Korean club that K-League side Gangwon FC.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.03956207737656217,
+      "temperature": 0.03956207737656217,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Park Sang-jin",
+        "raw_score": 9.580863690154368,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_16",
+      "node_type": "kg",
+      "content": "Park Seung-min (born April 21, 1983) is a South Korean football player who plays for South Korean second division side Busan Transportation Corporation. His father Park Sang-in and his brother Park Hyuk-soon are also footballers.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0,
+      "temperature": 0.0,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Park Seung-min",
+        "raw_score": 9.088584898177379,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "memory_mem_1",
+      "node_type": "memory",
+      "content": "Template: for compositional multi-hop questions, first solve the intermediate entity and then ask for the final attribute.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9599999038694302,
+      "temperature": 3.0751938153333422,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.96,
+        "tag": "compositional_template",
+        "memory_kind": "template",
+        "raw_score": 0.11096380857241772,
+        "source": "memory",
+        "diffusion_delta": 0.6398766565274321,
+        "diffusion_gain": 0.6398766565274321
+      }
+    },
+    {
+      "node_id": "memory_mem_3",
+      "node_type": "memory",
+      "content": "Template: when evidence already grounds the answer, switch from branching to short verification and synthesis.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.06793364937172863,
+      "temperature": 0.2127751892099907,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.88,
+        "tag": "verification_then_stop",
+        "memory_kind": "template",
+        "raw_score": 0.08504193525836931,
+        "source": "memory",
+        "diffusion_delta": 0.0442638854694985,
+        "diffusion_gain": 0.0442638854694985
+      }
+    },
+    {
+      "node_id": "state_2",
+      "node_type": "state",
+      "content": "What is the title of the song 'Is She Really Going Out with Him?'?",
+      "depth": 1,
+      "parent_id": "state_1",
+      "value": 0.5851995787851975,
+      "temperature": 1.157721594905385,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.6748768129985045,
+        "evidence_support": 0.5697068894419681,
+        "memory_usefulness": 0.5139667766205794,
+        "answerability": 0.6907357976621605,
+        "uncertainty": 0.19745275990044575
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_12",
+          "doc_8",
+          "doc_4",
+          "doc_11"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "goal_slot_name": "song_title",
+        "goal_slot_role": "generic",
+        "goal_terminal": false,
+        "diffusion_delta": -0.09684900362622928,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "kg_doc_4",
+      "node_type": "kg",
+      "content": "Francesca Vanini-Boschi (died 1744) was an Italian contralto singer of the 18th century. She is best remembered for her association with the composer George Frideric Handel, for whom she sang both in Italy and in London.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.04524244022636651,
+      "temperature": 0.04524244022636651,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Francesca Vanini-Boschi",
+        "raw_score": 6.186776623031697,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_11",
+      "node_type": "kg",
+      "content": "Ann Hampton Callaway (born May 30, 1958) is a jazz singer, songwriter, and actress. She wrote and sang the theme song for the TV series The Nanny.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.00543656901603123,
+      "temperature": 0.00543656901603123,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Ann Hampton Callaway",
+        "raw_score": 3.769979808409738,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "state_3",
+      "node_type": "state",
+      "content": "Who performed the song 'Is She Really Going Out with Him?'?",
+      "depth": 1,
+      "parent_id": "state_1",
+      "value": 0.5886286019855284,
+      "temperature": 0.4441746925846104,
+      "expanded": true,
+      "visit_count": 2,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.688680211225748,
+        "evidence_support": 0.6103051195220959,
+        "memory_usefulness": 0.5139667251540021,
+        "answerability": 0.6110349127022245,
+        "uncertainty": 0.19014507848602274
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_12",
+          "doc_8",
+          "doc_11",
+          "doc_4"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "goal_slot_name": "performer",
+        "goal_slot_role": "target_attribute",
+        "goal_terminal": true,
+        "diffusion_delta": -0.14170537612426126,
+        "diffusion_gain": 0.0,
+        "goal_retry": 1
+      }
+    },
+    {
+      "node_id": "state_4",
+      "node_type": "state",
+      "content": "Who performed the song 'She's Out of My Life'?",
+      "depth": 2,
+      "parent_id": "state_3",
+      "value": 0.5754268556540459,
+      "temperature": 2.7822869303722846,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.6644977912084506,
+        "evidence_support": 0.6049242994020172,
+        "memory_usefulness": 0.5139667251540021,
+        "answerability": 0.5965797967598322,
+        "uncertainty": 0.19111362610763688
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_8",
+          "doc_3",
+          "doc_12",
+          "doc_11"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "diffusion_delta": 0.39842363017896165,
+        "diffusion_gain": 0.39842363017896165
+      }
+    },
+    {
+      "node_id": "kg_doc_3",
+      "node_type": "kg",
+      "content": "Ofra Haza as Yocheved, the mother of Miriam and Aaron and birth mother of Moses. She also sang her character's number, ``Deliver Us '', in seventeen other languages for the film's dubbing)",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.38724454003116615,
+      "temperature": 0.38724454003116615,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "The Prince of Egypt",
+        "raw_score": 4.683421300928614,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "memory_mem_4",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'What is the title of the movie that contains the phrase 'who sang she's out of my life' in its name' is She's Out of My Life.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999954560875,
+      "temperature": 0.2726743303851204,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "derived_fact",
+        "target_question": "What is the title of the movie that contains the phrase 'who sang she's out of my life' in its name?",
+        "target_question_norm": "what is the title of the movie that contains the phrase who sang she s out of my life in its name",
+        "relation_signature": "generic",
+        "answer_text": "She's Out of My Life",
+        "support_score": 0.9999999954560875,
+        "evidence_ids": [
+          "doc_8"
+        ],
+        "slot_type": "title",
+        "slot_role": "generic",
+        "slot_name": "movie_title",
+        "depends_on": [],
+        "terminal": false,
+        "path_terminal": false,
+        "composition_kind": "",
+        "derived_from_state": "state_1",
+        "diffusion_delta": -0.08647838380697337,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "state_5",
+      "node_type": "state",
+      "content": "Who sang the song 'Is She Really Going Out with Him?'?",
+      "depth": 2,
+      "parent_id": "state_2",
+      "value": 0.5038292841542059,
+      "temperature": 1.3493206738676595,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.6880548131386595,
+        "evidence_support": 0.5427217687469222,
+        "memory_usefulness": 0.0032542804180539075,
+        "answerability": 0.5890079431969906,
+        "uncertainty": 0.20231008162555397
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_12",
+          "doc_8",
+          "doc_11",
+          "doc_4"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "diffusion_delta": 0.05352969482034453,
+        "diffusion_gain": 0.05352969482034453
+      }
+    },
+    {
+      "node_id": "state_6",
+      "node_type": "state",
+      "content": "Who sang the song 'She's Out of My Life'?",
+      "depth": 2,
+      "parent_id": "state_2",
+      "value": 0.5371523886666071,
+      "temperature": 0.7585386488310844,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.695420139351286,
+        "evidence_support": 0.6301284375383844,
+        "memory_usefulness": 0.001872500614687664,
+        "answerability": 0.6209465717103688,
+        "uncertainty": 0.1865768812430908
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_8",
+          "doc_3",
+          "doc_12",
+          "doc_11"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "diffusion_delta": 0.08304917597317873,
+        "diffusion_gain": 0.08304917597317873
+      }
+    },
+    {
+      "node_id": "memory_mem_5",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'What is the title of the song 'Is She Really Going Out with Him?'' is Is She Really Going Out with Him?.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 1.0,
+      "temperature": 0.6666467694337664,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "intermediate_answer",
+        "target_question": "What is the title of the song 'Is She Really Going Out with Him?'?",
+        "target_question_norm": "what is the title of the song is she really going out with him",
+        "relation_signature": "generic",
+        "answer_text": "Is She Really Going Out with Him?",
+        "support_score": 1.0,
+        "evidence_ids": [
+          "doc_12"
+        ],
+        "slot_name": "song_title",
+        "slot_type": "",
+        "slot_role": "generic",
+        "terminal": false,
+        "path_terminal": false,
+        "composition_kind": "",
+        "derived_from_state": "state_2",
+        "diffusion_delta": -0.028620080181387286,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "state_7",
+      "node_type": "state",
+      "content": "Was there a movie titled 'Who Sang She's Out of My Life' that features the song 'Is She Really Going Out with Him?'?",
+      "depth": 3,
+      "parent_id": "state_5",
+      "value": 0.7195819631331167,
+      "temperature": 0.5663895632082852,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.9103252034294349,
+        "evidence_support": 0.8677384875952237,
+        "memory_usefulness": 0.0010349289109814073,
+        "answerability": 0.810339832032906,
+        "uncertainty": 0.14380707223285974
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_12",
+          "doc_8",
+          "doc_14",
+          "doc_4"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "diffusion_delta": 0.0023977360992273322,
+        "diffusion_gain": 0.0023977360992273322
+      }
+    },
+    {
+      "node_id": "kg_doc_14",
+      "node_type": "kg",
+      "content": "Marie Fel was born at Bordeaux. She made her debut at the Paris Opera in 1733 and sang regularly at the Concert Spirituel. In a career that lasted 35 years, she sang in all the operas of Rameau along with Pierre Jélyotte, created roles in those of Mondonville, and participated in revivals of those of Lully and Campra. She retired from the stage in 1758, but continued to perform in concert until 1769. She died in Paris.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.08015078418491992,
+      "temperature": 0.08015078418491992,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Marie Fel",
+        "raw_score": 7.3699471730589465,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "memory_mem_6",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'Who sang the song 'Is She Really Going Out with Him?'' is Joe Jackson.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 1.0,
+      "temperature": 0.6547147511734646,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "intermediate_answer",
+        "target_question": "Who sang the song 'Is She Really Going Out with Him?'?",
+        "target_question_norm": "who sang the song is she really going out with him",
+        "relation_signature": "generic",
+        "answer_text": "Joe Jackson",
+        "support_score": 1.0,
+        "evidence_ids": [
+          "doc_12"
+        ],
+        "slot_name": "",
+        "slot_type": "person",
+        "slot_role": "target_attribute",
+        "terminal": true,
+        "path_terminal": true,
+        "composition_kind": "path_terminal",
+        "derived_from_state": "state_5",
+        "diffusion_delta": -0.02868362675153091,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "state_8",
+      "node_type": "state",
+      "content": "Who sang 'Is She Really Going Out with Him?'?",
+      "depth": 1,
+      "parent_id": "state_1",
+      "value": 0.6456143375884612,
+      "temperature": 0.3491070199682979,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.6553612527367807,
+        "evidence_support": 0.5123081827898391,
+        "memory_usefulness": 0.0,
+        "answerability": 0.5620364443360961,
+        "uncertainty": 0.20778452709782896
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_12",
+          "doc_19",
+          "doc_4",
+          "doc_16"
+        ],
+        "memory_ids": [],
+        "diffusion_delta": -0.17004295314524948,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "state_9",
+      "node_type": "state",
+      "content": "Who sang 'She's Out of My Life'?",
+      "depth": 1,
+      "parent_id": "state_1",
+      "value": 0.6456143375884612,
+      "temperature": 0.40108843926433646,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.6946551003738124,
+        "evidence_support": 0.6936222675354341,
+        "memory_usefulness": 0.0,
+        "answerability": 0.6409287808265406,
+        "uncertainty": 0.17514799184362184
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_8",
+          "doc_3",
+          "doc_12",
+          "doc_14"
+        ],
+        "memory_ids": [],
+        "diffusion_delta": -0.1884895033916537,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "state_11",
+      "node_type": "state",
+      "content": "Was there a movie titled 'Who Sang She's Out of My Life' that featured the song 'Is She Really Going Out with Him?'?",
+      "depth": 1,
+      "parent_id": "state_1",
+      "value": 0.6907866659057716,
+      "temperature": 0.3508297988517249,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.9103252034294349,
+        "evidence_support": 0.8677384875952237,
+        "memory_usefulness": 0.0009305999003868836,
+        "answerability": 0.810339832032906,
+        "uncertainty": 0.14380707223285974
+      },
+      "metadata": {
+        "kind": "verification",
+        "evidence_ids": [
+          "doc_12",
+          "doc_8",
+          "doc_14",
+          "doc_4"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "diffusion_delta": -0.14114163078229575,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "memory_mem_7",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'who played who sang is she really going out with him in the who sang she's out of my life movie' is Joe Jackson.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 1.0,
+      "temperature": 1.28,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "answer_candidate",
+        "target_question": "who played who sang is she really going out with him in the who sang she's out of my life movie?",
+        "target_question_norm": "who played who sang is she really going out with him in the who sang she s out of my life movie",
+        "relation_signature": "generic",
+        "answer_text": "Joe Jackson",
+        "support_score": 1.0,
+        "evidence_ids": [
+          "doc_12"
+        ],
+        "derived_from_state": "state_1",
+        "composed_from": [
+          "memory_mem_6"
+        ],
+        "slot_role": "target_attribute",
+        "terminal": true,
+        "coverage_count": 1,
+        "coverage_ratio": 1.0,
+        "composition_kind": "inferred_final_chain",
+        "final_chain_score": 0.9466666666666667,
+        "final_chain_strict": true,
+        "final_chain_source_node_id": "memory_mem_6",
+        "final_chain_predecessor_ids": [
+          "memory_mem_5"
+        ],
+        "final_chain_path_depth": 1
+      }
+    }
+  ],
+  "edges": [
+    {
+      "source": "state_1",
+      "target": "kg_doc_12",
+      "edge_type": "supports",
+      "weight": 0.9999999974576148
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_8",
+      "edge_type": "supports",
+      "weight": 0.18091428135129214
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_19",
+      "edge_type": "supports",
+      "weight": 0.03956207737656217
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_16",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.0015042895021252314
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.00010064804533800364
+    },
+    {
+      "source": "state_1",
+      "target": "state_2",
+      "edge_type": "refines",
+      "weight": 1.0
+    },
+    {
+      "source": "state_1",
+      "target": "state_3",
+      "edge_type": "refines",
+      "weight": 0.9
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_4",
+      "edge_type": "derives",
+      "weight": 0.9999999954560875
+    },
+    {
+      "source": "state_1",
+      "target": "state_8",
+      "edge_type": "refines",
+      "weight": 0.9
+    },
+    {
+      "source": "state_1",
+      "target": "state_9",
+      "edge_type": "refines",
+      "weight": 0.9
+    },
+    {
+      "source": "state_1",
+      "target": "state_11",
+      "edge_type": "verifies",
+      "weight": 0.7
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_7",
+      "edge_type": "derives",
+      "weight": 1.0
+    },
+    {
+      "source": "kg_doc_12",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.9999999974576148
+    },
+    {
+      "source": "kg_doc_12",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.9999999978217797
+    },
+    {
+      "source": "kg_doc_12",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.9999999978219096
+    },
+    {
+      "source": "kg_doc_12",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.0754863996665401
+    },
+    {
+      "source": "kg_doc_12",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.999999997776749
+    },
+    {
+      "source": "kg_doc_12",
+      "target": "state_6",
+      "edge_type": "supports",
+      "weight": 0.0543871354348094
+    },
+    {
+      "source": "kg_doc_12",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.9999999978217797
+    },
+    {
+      "source": "kg_doc_12",
+      "target": "state_7",
+      "edge_type": "supports",
+      "weight": 0.9999999980516081
+    },
+    {
+      "source": "kg_doc_12",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.999999997776749
+    },
+    {
+      "source": "kg_doc_12",
+      "target": "state_8",
+      "edge_type": "supports",
+      "weight": 0.9999999978292736
+    },
+    {
+      "source": "kg_doc_12",
+      "target": "state_9",
+      "edge_type": "supports",
+      "weight": 0.12497157961520287
+    },
+    {
+      "source": "kg_doc_12",
+      "target": "state_11",
+      "edge_type": "supports",
+      "weight": 0.9999999980516081
+    },
+    {
+      "source": "kg_doc_8",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.18091428135129214
+    },
+    {
+      "source": "kg_doc_8",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.13941378106215643
+    },
+    {
+      "source": "kg_doc_8",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.220610241222282
+    },
+    {
+      "source": "kg_doc_8",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.9999999968851429
+    },
+    {
+      "source": "kg_doc_8",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.0854435397170956
+    },
+    {
+      "source": "kg_doc_8",
+      "target": "state_6",
+      "edge_type": "supports",
+      "weight": 0.9999999961101517
+    },
+    {
+      "source": "kg_doc_8",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.13941378106215643
+    },
+    {
+      "source": "kg_doc_8",
+      "target": "state_7",
+      "edge_type": "supports",
+      "weight": 0.7354769771388392
+    },
+    {
+      "source": "kg_doc_8",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.0854435397170956
+    },
+    {
+      "source": "kg_doc_8",
+      "target": "state_9",
+      "edge_type": "supports",
+      "weight": 0.999999995039702
+    },
+    {
+      "source": "kg_doc_8",
+      "target": "state_11",
+      "edge_type": "supports",
+      "weight": 0.7354769771388392
+    },
+    {
+      "source": "kg_doc_19",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.03956207737656217
+    },
+    {
+      "source": "kg_doc_19",
+      "target": "state_8",
+      "edge_type": "supports",
+      "weight": 0.02461636775040458
+    },
+    {
+      "source": "kg_doc_16",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_16",
+      "target": "state_8",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.0015042895021252314
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_2",
+      "edge_type": "recalls",
+      "weight": 0.008041585480901614
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_3",
+      "edge_type": "recalls",
+      "weight": 0.007182541297578599
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_4",
+      "edge_type": "recalls",
+      "weight": 0.9599998077388796
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_5",
+      "edge_type": "recalls",
+      "weight": 0.0024977166276099836
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_6",
+      "edge_type": "recalls",
+      "weight": 0.0035088156001044954
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "memory_mem_5",
+      "edge_type": "recalls",
+      "weight": 0.008041585480901614
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_7",
+      "edge_type": "recalls",
+      "weight": 0.0019409312305608281
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "memory_mem_6",
+      "edge_type": "recalls",
+      "weight": 0.0024977166276099836
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_11",
+      "edge_type": "recalls",
+      "weight": 0.0017444811644458619
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.00010064804533800364
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_2",
+      "edge_type": "recalls",
+      "weight": 0.0005412957372525865
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_3",
+      "edge_type": "recalls",
+      "weight": 0.0004834716979945667
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_4",
+      "edge_type": "recalls",
+      "weight": 0.0679336425691247
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_5",
+      "edge_type": "recalls",
+      "weight": 0.00016591112864558957
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_6",
+      "edge_type": "recalls",
+      "weight": 0.00023618562927083268
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "memory_mem_5",
+      "edge_type": "recalls",
+      "weight": 0.0005412957372525865
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_7",
+      "edge_type": "recalls",
+      "weight": 0.00012892659140198648
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "memory_mem_6",
+      "edge_type": "recalls",
+      "weight": 0.00016591112864558957
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_11",
+      "edge_type": "recalls",
+      "weight": 0.00011671863632790522
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_12",
+      "edge_type": "supports",
+      "weight": 0.9999999978217797
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_8",
+      "edge_type": "supports",
+      "weight": 0.13941378106215643
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.04524244022636651
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_11",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_2",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.008041585480901614
+    },
+    {
+      "source": "state_2",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.0005412957372525865
+    },
+    {
+      "source": "state_2",
+      "target": "state_5",
+      "edge_type": "refines",
+      "weight": 0.9
+    },
+    {
+      "source": "state_2",
+      "target": "state_6",
+      "edge_type": "refines",
+      "weight": 0.8
+    },
+    {
+      "source": "state_2",
+      "target": "memory_mem_5",
+      "edge_type": "derives",
+      "weight": 1.0
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.04524244022636651
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.04524244022636651
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "state_7",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "state_8",
+      "edge_type": "supports",
+      "weight": 0.020346275244773445
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "state_11",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_11",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_11",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.003704198962639669
+    },
+    {
+      "source": "kg_doc_11",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_11",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.00543656901603123
+    },
+    {
+      "source": "kg_doc_11",
+      "target": "state_6",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_11",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_11",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.00543656901603123
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_12",
+      "edge_type": "supports",
+      "weight": 0.9999999978219096
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_8",
+      "edge_type": "supports",
+      "weight": 0.220610241222282
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_11",
+      "edge_type": "supports",
+      "weight": 0.003704198962639669
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_3",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.007182541297578599
+    },
+    {
+      "source": "state_3",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.0004834716979945667
+    },
+    {
+      "source": "state_3",
+      "target": "state_4",
+      "edge_type": "refines",
+      "weight": 0.9
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_8",
+      "edge_type": "supports",
+      "weight": 0.9999999968851429
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.20984860191889146
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_12",
+      "edge_type": "supports",
+      "weight": 0.0754863996665401
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_11",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_4",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.9599998077388796
+    },
+    {
+      "source": "state_4",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.0679336425691247
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.20984860191889146
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "state_6",
+      "edge_type": "supports",
+      "weight": 0.2602568789666171
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "state_9",
+      "edge_type": "supports",
+      "weight": 0.38724454003116615
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.9999999954560875
+    },
+    {
+      "source": "state_5",
+      "target": "kg_doc_12",
+      "edge_type": "supports",
+      "weight": 0.999999997776749
+    },
+    {
+      "source": "state_5",
+      "target": "kg_doc_8",
+      "edge_type": "supports",
+      "weight": 0.0854435397170956
+    },
+    {
+      "source": "state_5",
+      "target": "kg_doc_11",
+      "edge_type": "supports",
+      "weight": 0.00543656901603123
+    },
+    {
+      "source": "state_5",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_5",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.0024977166276099836
+    },
+    {
+      "source": "state_5",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.00016591112864558957
+    },
+    {
+      "source": "state_5",
+      "target": "state_6",
+      "edge_type": "refines",
+      "weight": 0.9
+    },
+    {
+      "source": "state_5",
+      "target": "state_7",
+      "edge_type": "refines",
+      "weight": 0.8
+    },
+    {
+      "source": "state_5",
+      "target": "memory_mem_6",
+      "edge_type": "derives",
+      "weight": 1.0
+    },
+    {
+      "source": "state_6",
+      "target": "kg_doc_8",
+      "edge_type": "supports",
+      "weight": 0.9999999961101517
+    },
+    {
+      "source": "state_6",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.2602568789666171
+    },
+    {
+      "source": "state_6",
+      "target": "kg_doc_12",
+      "edge_type": "supports",
+      "weight": 0.0543871354348094
+    },
+    {
+      "source": "state_6",
+      "target": "kg_doc_11",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_6",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.0035088156001044954
+    },
+    {
+      "source": "state_6",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.00023618562927083268
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "state_2",
+      "edge_type": "recalls",
+      "weight": 1.0
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_12",
+      "edge_type": "supports",
+      "weight": 0.9999999978217797
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_8",
+      "edge_type": "supports",
+      "weight": 0.13941378106215643
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.04524244022636651
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_11",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.008041585480901614
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.0005412957372525865
+    },
+    {
+      "source": "state_7",
+      "target": "kg_doc_12",
+      "edge_type": "supports",
+      "weight": 0.9999999980516081
+    },
+    {
+      "source": "state_7",
+      "target": "kg_doc_8",
+      "edge_type": "supports",
+      "weight": 0.7354769771388392
+    },
+    {
+      "source": "state_7",
+      "target": "kg_doc_14",
+      "edge_type": "supports",
+      "weight": 0.08015078418491992
+    },
+    {
+      "source": "state_7",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_7",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.0019409312305608281
+    },
+    {
+      "source": "state_7",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.00012892659140198648
+    },
+    {
+      "source": "kg_doc_14",
+      "target": "state_7",
+      "edge_type": "supports",
+      "weight": 0.08015078418491992
+    },
+    {
+      "source": "kg_doc_14",
+      "target": "state_9",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_14",
+      "target": "state_11",
+      "edge_type": "supports",
+      "weight": 0.08015078418491992
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "state_5",
+      "edge_type": "recalls",
+      "weight": 1.0
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_12",
+      "edge_type": "supports",
+      "weight": 0.999999997776749
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_8",
+      "edge_type": "supports",
+      "weight": 0.0854435397170956
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_11",
+      "edge_type": "supports",
+      "weight": 0.00543656901603123
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.0024977166276099836
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.00016591112864558957
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "memory_mem_7",
+      "edge_type": "derives",
+      "weight": 1.0
+    },
+    {
+      "source": "state_8",
+      "target": "kg_doc_12",
+      "edge_type": "supports",
+      "weight": 0.9999999978292736
+    },
+    {
+      "source": "state_8",
+      "target": "kg_doc_19",
+      "edge_type": "supports",
+      "weight": 0.02461636775040458
+    },
+    {
+      "source": "state_8",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.020346275244773445
+    },
+    {
+      "source": "state_8",
+      "target": "kg_doc_16",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_9",
+      "target": "kg_doc_8",
+      "edge_type": "supports",
+      "weight": 0.999999995039702
+    },
+    {
+      "source": "state_9",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.38724454003116615
+    },
+    {
+      "source": "state_9",
+      "target": "kg_doc_12",
+      "edge_type": "supports",
+      "weight": 0.12497157961520287
+    },
+    {
+      "source": "state_9",
+      "target": "kg_doc_14",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_11",
+      "target": "kg_doc_12",
+      "edge_type": "supports",
+      "weight": 0.9999999980516081
+    },
+    {
+      "source": "state_11",
+      "target": "kg_doc_8",
+      "edge_type": "supports",
+      "weight": 0.7354769771388392
+    },
+    {
+      "source": "state_11",
+      "target": "kg_doc_14",
+      "edge_type": "supports",
+      "weight": 0.08015078418491992
+    },
+    {
+      "source": "state_11",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_11",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.0017444811644458619
+    },
+    {
+      "source": "state_11",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.00011671863632790522
+    },
+    {
+      "source": "memory_mem_7",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 1.0
+    }
+  ]
+}

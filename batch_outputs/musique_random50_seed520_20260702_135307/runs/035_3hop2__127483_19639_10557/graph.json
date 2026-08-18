@@ -1,0 +1,2549 @@
+{
+  "nodes": [
+    {
+      "node_id": "state_1",
+      "node_type": "state",
+      "content": "What was the language Auctor comes from during the era of the king who united the tribes in the 9th century later known as?",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.37046057224279555,
+      "temperature": 0.6988778162920719,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.66,
+        "evidence_support": 0.0,
+        "memory_usefulness": 0.5555047686899628,
+        "answerability": 0.4,
+        "uncertainty": 0.3
+      },
+      "metadata": {
+        "diffusion_delta": 0.1312202819337166,
+        "diffusion_gain": 0.1312202819337166
+      }
+    },
+    {
+      "node_id": "memory_mem_3",
+      "node_type": "memory",
+      "content": "Template: when evidence already grounds the answer, switch from branching to short verification and synthesis.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.8799999915181286,
+      "temperature": 2.203206879038139,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.88,
+        "tag": "verification_then_stop",
+        "memory_kind": "template",
+        "raw_score": 0.9903332366235675,
+        "source": "memory",
+        "diffusion_delta": 0.446520162192944,
+        "diffusion_gain": 0.446520162192944
+      }
+    },
+    {
+      "node_id": "memory_mem_1",
+      "node_type": "memory",
+      "content": "Template: for compositional multi-hop questions, first solve the intermediate entity and then ask for the final attribute.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9599999359129513,
+      "temperature": 4.166615553040459,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.96,
+        "tag": "compositional_template",
+        "memory_kind": "template",
+        "raw_score": 0.11950060359090774,
+        "source": "memory",
+        "diffusion_delta": 0.36229230594580253,
+        "diffusion_gain": 0.36229230594580253
+      }
+    },
+    {
+      "node_id": "state_2",
+      "node_type": "state",
+      "content": "Who was the king who united the tribes in the 9th century?",
+      "depth": 1,
+      "parent_id": "state_1",
+      "value": 0.6614029529695176,
+      "temperature": 2.452254890726659,
+      "expanded": true,
+      "visit_count": 2,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.717247930889449,
+        "evidence_support": 0.78308214967485,
+        "memory_usefulness": 0.5139667937761075,
+        "answerability": 0.681541074837425,
+        "uncertainty": 0.15904521305852698
+      },
+      "metadata": {
+        "kind": "bridge",
+        "evidence_ids": [
+          "doc_14",
+          "doc_7",
+          "doc_8",
+          "doc_18"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "goal_slot_name": "unifying_king",
+        "goal_slot_role": "bridge_entity",
+        "goal_terminal": false,
+        "diffusion_delta": 0.3363006508451365,
+        "diffusion_gain": 0.3363006508451365,
+        "goal_retry": 1
+      }
+    },
+    {
+      "node_id": "kg_doc_14",
+      "node_type": "kg",
+      "content": "The migration-period peoples who later coalesced into a \"German\" ethnicity were the Germanic tribes of the Saxons, Franci, Thuringii, Alamanni and Bavarii. These five tribes, sometimes with inclusion of the Frisians, are considered as the major groups to take part in the formation of the Germans. The varieties of the German language are still divided up into these groups. Linguists distinguish low Saxon, Franconian, Bavarian, Thuringian and Alemannic varieties in modern German. By the 9th century, the large tribes which lived on the territory of modern Germany had been united under the rule of the Frankish king Charlemagne, known in German as Karl der Große. Much of what is now Eastern Germany became Slavonic-speaking (Sorbs and Veleti), after these areas were vacated by Germanic tribes (Vandals, Lombards, Burgundians and Suebi amongst others) which had migrated into the former areas of the Roman Empire.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999825958598,
+      "temperature": 0.9999999825958598,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Germans",
+        "raw_score": 0.04884214189552142,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_7",
+      "node_type": "kg",
+      "content": "Prior to the emergence of Kievan Rus' in the 9th century AD, the lands between the Baltic Sea and Black Sea were primarily populated by eastern Slavic tribes. In the northern region around Novgorod were the Ilmen Slavs and neighboring Krivichi, who occupied territories surrounding the headwaters of the West Dvina, Dnieper, and Volga Rivers. To their north, in the Ladoga and Karelia regions, were the Finnic Chud tribe. In the south, in the area around Kiev, were the Poliane, a group of Slavicized tribes with Iranian origins, the Drevliane to the west of the Dnieper, and the Severiane to the east. To their north and east were the Vyatichi, and to their south was forested land settled by Slav farmers, giving way to steppelands populated by nomadic herdsmen.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.6822273406096317,
+      "temperature": 0.6822273406096317,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Kievan Rus'",
+        "raw_score": 0.17368573108874152,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_8",
+      "node_type": "kg",
+      "content": "Erik Refilsson was a semi-legendary king of Sweden of the House of Munsö, who would have lived in the early 9th century. One of the few surviving Scandinavian sources that deal with Swedish kings from this time is \"Hervarar saga\". It says:",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0569173237392964,
+      "temperature": 0.0569173237392964,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Erik Refilsson",
+        "raw_score": 0.1334696740977491,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_18",
+      "node_type": "kg",
+      "content": "Erik Björnsson was one of the sons of Björn Ironside and a semi-legendary king of Sweden of the House of Munsö, who would have lived in the late 9th century. One of the few surviving Scandinavian sources that deal with Swedish kings from this time is \"Hervarar saga\". It says:",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0,
+      "temperature": 0.0,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Erik Björnsson",
+        "raw_score": 0.14143583094226128,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "state_3",
+      "node_type": "state",
+      "content": "What language did Auctor write in or originate from?",
+      "depth": 1,
+      "parent_id": "state_1",
+      "value": 0.5271999929015007,
+      "temperature": 1.5238136463448952,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.5449999959044531,
+        "evidence_support": 0.4999999879542738,
+        "memory_usefulness": 0.8799999913575839,
+        "answerability": 0.4999999939771369,
+        "uncertainty": 0.21000000216823073
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_1",
+          "doc_12",
+          "doc_16",
+          "doc_14"
+        ],
+        "memory_ids": [
+          "mem_3"
+        ],
+        "goal_slot_name": "auctor_language",
+        "goal_slot_role": "target_attribute",
+        "goal_terminal": true,
+        "diffusion_delta": 0.1215743864732568,
+        "diffusion_gain": 0.1215743864732568
+      }
+    },
+    {
+      "node_id": "kg_doc_1",
+      "node_type": "kg",
+      "content": "Auctor is Latin for author or originator. The term is used in Scholasticism for a \"renowned scholar\", and in biological taxonomy for the scientist describing a species or other taxon. The term is widely replaced by author in English-language works.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999759085476,
+      "temperature": 0.9999999759085476,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Auctor",
+        "raw_score": 0.12996188257564614,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_12",
+      "node_type": "kg",
+      "content": "Charlemagne's court in Aachen was the centre of the cultural revival sometimes referred to as the \"Carolingian Renaissance\". Literacy increased, as did development in the arts, architecture and jurisprudence, as well as liturgical and scriptural studies. The English monk Alcuin (d. 804) was invited to Aachen and brought the education available in the monasteries of Northumbria. Charlemagne's chancery—or writing office—made use of a new script today known as Carolingian minuscule,[M] allowing a common writing style that advanced communication across much of Europe. Charlemagne sponsored changes in church liturgy, imposing the Roman form of church service on his domains, as well as the Gregorian chant in liturgical music for the churches. An important activity for scholars during this period was the copying, correcting, and dissemination of basic works on religious and secular topics, with the aim of encouraging learning. New works on religious topics and schoolbooks were also produced. Grammarians of the period modified the Latin language, changing it from the Classical Latin of the Roman Empire into a more flexible form to fit the needs of the church and government. By the reign of Charlemagne, the language had so diverged from the classical that it was later called Medieval Latin.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999774811178,
+      "temperature": 0.9999999774811178,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Middle Ages",
+        "raw_score": 0.08331092370278192,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_16",
+      "node_type": "kg",
+      "content": "Each of these four dialects was associated with an independent kingdom on the island. Of these, Northumbria south of the Tyne, and most of Mercia, were overrun by the Vikings during the 9th century. The portion of Mercia that was successfully defended, and all of Kent, were then integrated into Wessex under Alfred the Great. From that time on, the West Saxon dialect (then in the form now known as Early West Saxon) became standardised as the language of government, and as the basis for the many works of literature and religious materials produced or translated from Latin in that period.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9125828242552602,
+      "temperature": 0.9125828242552602,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Old English",
+        "raw_score": 0.10237211379341875,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "state_4",
+      "node_type": "state",
+      "content": "Which king united the Germanic tribes in the 9th century?",
+      "depth": 2,
+      "parent_id": "state_2",
+      "value": 0.6283328053210416,
+      "temperature": 1.2956330441525132,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.5829999970412962,
+        "evidence_support": 0.4999999912979299,
+        "memory_usefulness": 0.5139667766205794,
+        "answerability": 0.5199999956489649,
+        "uncertainty": 0.2100000015663726
+      },
+      "metadata": {
+        "kind": "bridge",
+        "evidence_ids": [
+          "doc_14",
+          "doc_2",
+          "doc_7",
+          "doc_4"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "diffusion_delta": 0.08196239039213338,
+        "diffusion_gain": 0.08196239039213338
+      }
+    },
+    {
+      "node_id": "kg_doc_2",
+      "node_type": "kg",
+      "content": "According to the Primary Chronicle, the territories of the East Slavs in the 9th century were divided between the Varangians and the Khazars. The Varangians are first mentioned imposing tribute from Slavic and Finnic tribes in 859. In 862, the Finnic and Slavic tribes in the area of Novgorod rebelled against the Varangians, driving them \"back beyond the sea and, refusing them further tribute, set out to govern themselves.\" The tribes had no laws, however, and soon began to make war with one another, prompting them to invite the Varangians back to rule them and bring peace to the region:",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0,
+      "temperature": 0.0,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Kievan Rus'",
+        "raw_score": 0.16130874401229695,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_4",
+      "node_type": "kg",
+      "content": "The Kushan Empire, a collection of Yuezhi tribes, took control of the region in the first century CE and ruled until the 4th century CE during which time Buddhism, Nestorian Christianity, Zoroastrianism, and Manichaeism were all practiced in the region. Later the Hephthalite Empire, a collection of nomadic tribes, moved into the region and Arabs brought Islam in the early eighth century. Central Asia continued in its role as a commercial crossroads, linking China, the steppes to the north, and the Islamic heartland.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0,
+      "temperature": 0.0,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Tajikistan",
+        "raw_score": 0.1292466470087747,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "state_5",
+      "node_type": "state",
+      "content": "What language variety is associated with the Auctor mentioned in the context of those tribes?",
+      "depth": 2,
+      "parent_id": "state_2",
+      "value": 0.5181160067900776,
+      "temperature": 1.518521889063046,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.5829999956727082,
+        "evidence_support": 0.4999999872726712,
+        "memory_usefulness": 0.5139667766205794,
+        "answerability": 0.6199999936363355,
+        "uncertainty": 0.21000000229091917
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_1",
+          "doc_3",
+          "doc_14",
+          "doc_16"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "diffusion_delta": 0.3222933704630493,
+        "diffusion_gain": 0.3222933704630493
+      }
+    },
+    {
+      "node_id": "kg_doc_3",
+      "node_type": "kg",
+      "content": "Norse settlement in the islands probably began in the early 9th century. These settlers are believed to have arrived in very substantial numbers and like those who migrated to Iceland and the Faroe Islands it is probable that most came from the west coast of Norway. Shetland toponymy bears some resemblance to that of northwest Norway, while Norn vocabulary implies links with more southerly Norwegian regions.Orkney and Shetland were pledged to James III in 1468 and 1469 respectively, and it is with these pledges that the replacement of Norn with Scots is most associated. However, the decline of Norse speech in Orkney probably began in 1379 when the earldom passed into the hands of the Sinclairs, and Scots had superseded Norse as the language of prestige on the island by the early 15th century. In Shetland the transition began later, but by the end of the 15th century both island groups were bilingual. Despite this, the process by which Scots overtook Norn as the primary spoken language on the islands was not a swift one, and most natives of Orkney and Shetland likely spoke Norn as a first language until the late 16th and early-to-mid 17th centuries respectively.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999996024427812,
+      "temperature": 0.9999996024427812,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Norn language",
+        "raw_score": 0.1362773249843645,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "state_6",
+      "node_type": "state",
+      "content": "What language did Charlemagne speak?",
+      "depth": 2,
+      "parent_id": "state_2",
+      "value": 0.6349435838503932,
+      "temperature": 0.6716759271440198,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.6502321512502658,
+        "evidence_support": 0.9771533860301931,
+        "memory_usefulness": 0.0,
+        "answerability": 0.7085766930150965,
+        "uncertainty": 0.12411239051456524
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_12",
+          "doc_14",
+          "doc_9",
+          "doc_3"
+        ],
+        "memory_ids": [],
+        "diffusion_delta": 0.07934770021489679,
+        "diffusion_gain": 0.07934770021489679
+      }
+    },
+    {
+      "node_id": "kg_doc_9",
+      "node_type": "kg",
+      "content": "With the unification of the Anglo-Saxon kingdoms (outside the Danelaw) by Alfred the Great in the later 9th century, the language of government and literature became standardised around the West Saxon dialect (Early West Saxon). Alfred advocated education in English alongside Latin, and had many works translated into the English language; some of them, such as Pope Gregory I's treatise Pastoral Care, appear to have been translated by Alfred himself. In Old English, typical of the development of literature, poetry arose before prose, but King Alfred the Great (871 to 901) chiefly inspired the growth of prose.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0,
+      "temperature": 0.0,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Old English",
+        "raw_score": 0.022880960855533868,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "state_7",
+      "node_type": "state",
+      "content": "What language variety is associated with the Auctor group mentioned in the context of Germanic tribes?",
+      "depth": 2,
+      "parent_id": "state_2",
+      "value": 0.7230209949756424,
+      "temperature": 0.5231415036528457,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.7214493120143061,
+        "evidence_support": 0.9072038588656058,
+        "memory_usefulness": 0.5139667766205794,
+        "answerability": 0.8236019294328029,
+        "uncertainty": 0.13670330540419096
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_14",
+          "doc_1",
+          "doc_7",
+          "doc_16"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "diffusion_delta": 0.049469930717165544,
+        "diffusion_gain": 0.049469930717165544
+      }
+    },
+    {
+      "node_id": "state_8",
+      "node_type": "state",
+      "content": "What language was used by scholars and in official contexts during that king's reign?",
+      "depth": 2,
+      "parent_id": "state_3",
+      "value": 0.5839209457607374,
+      "temperature": 0.7784268005854528,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.5961302383838708,
+        "evidence_support": 0.5945007011290318,
+        "memory_usefulness": 0.8820682746050714,
+        "answerability": 0.5572503505645159,
+        "uncertainty": 0.1929898737967743
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_12",
+          "doc_16",
+          "doc_13",
+          "doc_1"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "diffusion_delta": 0.10617542132609081,
+        "diffusion_gain": 0.10617542132609081
+      }
+    },
+    {
+      "node_id": "kg_doc_13",
+      "node_type": "kg",
+      "content": "After the death of David's son, King Solomon, the ten northern tribes of the Kingdom of Israel rejected the Davidic line, refusing to accept Solomon's son, Rehoboam, and instead chose as king Jeroboam and formed the northern Kingdom of Israel. This kingdom was conquered by Assyria in the 8th century BCE which exiled much of the Northern Kingdom population and ended its sovereign status. The bulk population of the Northern Kingdom of Israel was forced to relocate to Mesopotamia and mostly disappeared from history as The Ten Lost Tribes or intermixed with exiled Judean populations two centuries later, while the remaining Israelite peoples in Samaria highlands have become known as Samaritans during the classic era and to modern times.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.22672087920011577,
+      "temperature": 0.22672087920011577,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Davidic line",
+        "raw_score": 0.1204420187908239,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "memory_mem_4",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'What language did Auctor write in or originate from' is Latin.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 1.0,
+      "temperature": 1.158732921520421,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "intermediate_answer",
+        "target_question": "What language did Auctor write in or originate from?",
+        "target_question_norm": "what language did auctor write in or originate from",
+        "relation_signature": "generic",
+        "answer_text": "Latin",
+        "support_score": 1.0,
+        "evidence_ids": [
+          "doc_1"
+        ],
+        "slot_name": "auctor_language",
+        "slot_type": "",
+        "slot_role": "target_attribute",
+        "terminal": true,
+        "path_terminal": false,
+        "composition_kind": "",
+        "derived_from_state": "state_3",
+        "diffusion_delta": 0.09478412136257885,
+        "diffusion_gain": 0.09478412136257885
+      }
+    },
+    {
+      "node_id": "state_9",
+      "node_type": "state",
+      "content": "Who was the king who united the Germanic tribes in the 9th century?",
+      "depth": 3,
+      "parent_id": "state_4",
+      "value": 0.46311432902030625,
+      "temperature": 1.0243073899491677,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.6209999968796849,
+        "evidence_support": 0.4999999908226025,
+        "memory_usefulness": 0.048619446986438226,
+        "answerability": 0.5399999954113013,
+        "uncertainty": 0.21000000165193156
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_14",
+          "doc_7",
+          "doc_2",
+          "doc_10"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "diffusion_delta": 0.1235560109301772,
+        "diffusion_gain": 0.1235560109301772
+      }
+    },
+    {
+      "node_id": "kg_doc_10",
+      "node_type": "kg",
+      "content": "The Comma Johanneum, also called the Johannine Comma or the Heavenly Witnesses, is a comma (a short clause) found in Latin manuscripts of the First Epistle of John at 5: 7 -- 8. The comma first appeared in the Vulgate manuscripts of the 9th century. The first Greek manuscript that contains the comma dates from the 15th century. The comma is absent from the Ethiopic, Aramaic, Syriac, Slavic, Armenian, Georgian, and Arabic translations of the Greek New Testament. The scholarly consensus is that that passage is a Latin corruption that entered the Greek manuscript tradition in some subsequent copies. As the comma does not appear in the manuscript tradition of other languages, the debate is mainly limited to the English - speaking world due to the King James Only movement.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999995605508906,
+      "temperature": 0.9999995605508906,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Johannine Comma",
+        "raw_score": 0.1082228037242237,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "state_10",
+      "node_type": "state",
+      "content": "What language variety is associated with the Auctor group among the Germanic tribes?",
+      "depth": 3,
+      "parent_id": "state_4",
+      "value": 0.6452224281509595,
+      "temperature": 0.4309235859878034,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.6839486914567886,
+        "evidence_support": 0.9086726219317312,
+        "memory_usefulness": 0.00815303995760365,
+        "answerability": 0.8043363109658656,
+        "uncertainty": 0.13643892805228838
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_14",
+          "doc_1",
+          "doc_16",
+          "doc_7"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "diffusion_delta": -0.0029229324260131584,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "memory_mem_5",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'Which king united the Germanic tribes in the 9th century' is Charlemagne.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999825958598,
+      "temperature": 0.5808332880668247,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "intermediate_answer",
+        "target_question": "Which king united the Germanic tribes in the 9th century?",
+        "target_question_norm": "which king united the germanic tribes in the 9th century",
+        "relation_signature": "generic",
+        "answer_text": "Charlemagne",
+        "support_score": 0.9999999825958598,
+        "evidence_ids": [
+          "doc_14"
+        ],
+        "slot_name": "",
+        "slot_type": "",
+        "slot_role": "",
+        "terminal": false,
+        "path_terminal": false,
+        "composition_kind": "",
+        "derived_from_state": "state_4",
+        "diffusion_delta": -0.006596444925299982,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "state_11",
+      "node_type": "state",
+      "content": "Who was the 9th-century king who united the Germanic tribes, particularly the Franks?",
+      "depth": 4,
+      "parent_id": "state_9",
+      "value": 0.44906808994975733,
+      "temperature": 0.4483838931319001,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.6019999967061322,
+        "evidence_support": 0.4999999903121533,
+        "memory_usefulness": 0.005900790205680779,
+        "answerability": 0.5299999951560768,
+        "uncertainty": 0.2100000017438124
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_14",
+          "doc_7",
+          "doc_5",
+          "doc_12"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "diffusion_delta": 0.024595508848303305,
+        "diffusion_gain": 0.024595508848303305
+      }
+    },
+    {
+      "node_id": "kg_doc_5",
+      "node_type": "kg",
+      "content": "By the 9th century, Catalan had evolved from Vulgar Latin on both sides of the eastern end of the Pyrenees, as well as the territories of the Roman province of Hispania Tarraconensis to the south. From the 8th century onwards the Catalan counts extended their territory southwards and westwards at the expense of the Muslims, bringing their language with them. This process was given definitive impetus with the separation of the County of Barcelona from the Carolingian Empire in 988.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0,
+      "temperature": 0.0,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Catalan language",
+        "raw_score": 0.13352476188096513,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "state_12",
+      "node_type": "state",
+      "content": "Which Germanic tribe is associated with the language variety 'Auctor'?",
+      "depth": 4,
+      "parent_id": "state_9",
+      "value": 0.6483169933088023,
+      "temperature": 0.4557028417443253,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.6603941755040483,
+        "evidence_support": 0.9511593397177892,
+        "memory_usefulness": 0.004446779690089481,
+        "answerability": 0.8055796698588946,
+        "uncertainty": 0.12879131885079795
+      },
+      "metadata": {
+        "kind": "bridge",
+        "evidence_ids": [
+          "doc_14",
+          "doc_1",
+          "doc_16",
+          "doc_3"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "diffusion_delta": -0.027415934708652945,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "state_13",
+      "node_type": "state",
+      "content": "What is the later name of the political entity formed under that king in the 9th century?",
+      "depth": 4,
+      "parent_id": "state_9",
+      "value": 0.5739737203188754,
+      "temperature": 0.7073868043366287,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.6642913543917612,
+        "evidence_support": 0.6832098658581212,
+        "memory_usefulness": 0.1368542984922395,
+        "answerability": 0.7216049329290607,
+        "uncertainty": 0.1770222241455382
+      },
+      "metadata": {
+        "kind": "bridge",
+        "evidence_ids": [
+          "doc_14",
+          "doc_10",
+          "doc_3",
+          "doc_18"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_2"
+        ],
+        "diffusion_delta": 0.06840615468327582,
+        "diffusion_gain": 0.06840615468327582
+      }
+    },
+    {
+      "node_id": "memory_mem_2",
+      "node_type": "memory",
+      "content": "Template: for comparison questions, split the problem into one sub-question per entity before comparing them.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.1285526724499486,
+      "temperature": 0.2757773413338584,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.9,
+        "tag": "comparison_template",
+        "memory_kind": "template",
+        "raw_score": 1.1365028683227891,
+        "source": "memory",
+        "diffusion_delta": 0.019908488437458793,
+        "diffusion_gain": 0.019908488437458793
+      }
+    },
+    {
+      "node_id": "state_14",
+      "node_type": "state",
+      "content": "Which Germanic tribe is associated with the Auctor group mentioned in the context of Germanic tribes?",
+      "depth": 3,
+      "parent_id": "state_7",
+      "value": 0.6370778188836478,
+      "temperature": 0.5366062895015589,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.6787412124540531,
+        "evidence_support": 0.8933565072178031,
+        "memory_usefulness": 0.004506870430410532,
+        "answerability": 0.7966782536089015,
+        "uncertainty": 0.13919582870079544
+      },
+      "metadata": {
+        "kind": "bridge",
+        "evidence_ids": [
+          "doc_14",
+          "doc_1",
+          "doc_7",
+          "doc_16"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "diffusion_delta": -0.0991314353451479,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "state_15",
+      "node_type": "state",
+      "content": "What language variety corresponds to that tribe in the 9th century?",
+      "depth": 3,
+      "parent_id": "state_7",
+      "value": 0.609426197328375,
+      "temperature": 0.536895420496081,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.6799785803189102,
+        "evidence_support": 0.8411134715262065,
+        "memory_usefulness": 0.06048248713656511,
+        "answerability": 0.6805567357631033,
+        "uncertainty": 0.14859957512528282
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_3",
+          "doc_7",
+          "doc_14",
+          "doc_10"
+        ],
+        "memory_ids": [
+          "mem_3",
+          "mem_1"
+        ],
+        "diffusion_delta": -0.09510323877814753,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "state_16",
+      "node_type": "state",
+      "content": "Who was the king who united the tribes in the 9th century later known as?",
+      "depth": 3,
+      "parent_id": "state_8",
+      "value": 0.5418363525483579,
+      "temperature": 0.5440031146485932,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.7165425241578102,
+        "evidence_support": 0.6133603651700298,
+        "memory_usefulness": 0.006278473289991016,
+        "answerability": 0.6266801825850149,
+        "uncertainty": 0.18959513426939462
+      },
+      "metadata": {
+        "kind": "bridge",
+        "evidence_ids": [
+          "doc_14",
+          "doc_13",
+          "doc_20",
+          "doc_7"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "diffusion_delta": -0.1717402041547922,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "kg_doc_20",
+      "node_type": "kg",
+      "content": "The Kabul Shahi dynasties ruled the Kabul Valley and Gandhara (modern-day Pakistan and Afghanistan) from the decline of the Kushan Empire in the 3rd century to the early 9th century. The Shahis are generally split up into two eras: the Buddhist Shahis and the Hindu Shahis, with the change-over thought to have occurred sometime around 870. The kingdom was known as the Kabul Shahan or Ratbelshahan from 565-670, when the capitals were located in Kapisa and Kabul, and later Udabhandapura, also known as Hund for its new capital.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.12478259416738564,
+      "temperature": 0.12478259416738564,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "History of India",
+        "raw_score": 0.14932066383998566,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "state_17",
+      "node_type": "state",
+      "content": "What language did that king use in his court and chancery?",
+      "depth": 3,
+      "parent_id": "state_8",
+      "value": 0.4567640250520406,
+      "temperature": 0.6298575612599986,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.543355214117289,
+        "evidence_support": 0.5510447474037912,
+        "memory_usefulness": 0.15331923465377414,
+        "answerability": 0.5155223737018956,
+        "uncertainty": 0.20081194546731757
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_12",
+          "doc_17",
+          "doc_11",
+          "doc_14"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "diffusion_delta": -0.006401190426030268,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "kg_doc_17",
+      "node_type": "kg",
+      "content": "Paul Georg von Möllendorff (17 February 1847 in Zehdenick, Prussia – 20 April 1901 in Ningbo, China) was a German linguist and diplomat. Möllendorff is mostly known for his service as an adviser to the Korean king Gojong in the late nineteenth century and for his contributions to Sinology. Möllendorff is also known for having created a system for romanizing the Manchu language.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.1020895981913527,
+      "temperature": 0.1020895981913527,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Paul Georg von Möllendorff",
+        "raw_score": 0.0778857260929374,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_11",
+      "node_type": "kg",
+      "content": "Around the sixth century AD, a tribe of Slavs arrived in a portion of Central Europe. According to legend they were led by a hero named Čech, from whom the word \"Czech\" derives. The ninth century brought the state of Great Moravia, whose first ruler (Rastislav of Moravia) invited Byzantine ruler Michael III to send missionaries in an attempt to reduce the influence of East Francia on religious and political life in his country. These missionaries, Constantine and Methodius, helped to convert the Czechs from traditional Slavic paganism to Christianity and established a church system. They also brought the Glagolitic alphabet to the West Slavs, whose language was previously unwritten. This language, later known as Proto-Czech, was beginning to separate from its fellow West Slavic hatchlings Proto-Slovak, Proto-Polish and Proto-Sorbian. Among other features, Proto-Czech was marked by its ephemeral use of the voiced velar fricative consonant (/ɣ/) and consistent stress on the first syllable.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.09909753028652604,
+      "temperature": 0.09909753028652604,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Czech language",
+        "raw_score": 0.07703450934159575,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "state_18",
+      "node_type": "state",
+      "content": "What is the Latin word 'Auctor' derived from or associated with in scholarly contexts?",
+      "depth": 3,
+      "parent_id": "state_8",
+      "value": 0.6740991126826433,
+      "temperature": 0.6770048503612391,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.7001390054170457,
+        "evidence_support": 0.9562911924030754,
+        "memory_usefulness": 0.04911153887846544,
+        "answerability": 0.8281455962015377,
+        "uncertainty": 0.12786758536744644
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_10",
+          "doc_16",
+          "doc_1",
+          "doc_12"
+        ],
+        "memory_ids": [
+          "mem_3",
+          "mem_1"
+        ],
+        "diffusion_delta": -0.21636621566147085,
+        "diffusion_gain": 0.0
+      }
+    }
+  ],
+  "edges": [
+    {
+      "source": "state_1",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.8799999915181286
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.23100954586179703
+    },
+    {
+      "source": "state_1",
+      "target": "state_2",
+      "edge_type": "refines",
+      "weight": 1.0
+    },
+    {
+      "source": "state_1",
+      "target": "state_3",
+      "edge_type": "refines",
+      "weight": 0.9
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.8799999915181286
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_2",
+      "edge_type": "recalls",
+      "weight": 0.06793365163926388
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_3",
+      "edge_type": "recalls",
+      "weight": 0.8799999913575839
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_4",
+      "edge_type": "recalls",
+      "weight": 0.004310561498374969
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_5",
+      "edge_type": "recalls",
+      "weight": 0.06793364937172863
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_7",
+      "edge_type": "recalls",
+      "weight": 0.0007281945439059674
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_8",
+      "edge_type": "recalls",
+      "weight": 0.21118430708731015
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "memory_mem_4",
+      "edge_type": "recalls",
+      "weight": 0.8799999913575839
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_9",
+      "edge_type": "recalls",
+      "weight": 0.0007096588484952867
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_10",
+      "edge_type": "recalls",
+      "weight": 0.0010816139864560732
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "memory_mem_5",
+      "edge_type": "recalls",
+      "weight": 0.004310561498374969
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_11",
+      "edge_type": "recalls",
+      "weight": 0.0007828217757788642
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_12",
+      "edge_type": "recalls",
+      "weight": 0.0005899270863997158
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_14",
+      "edge_type": "recalls",
+      "weight": 0.0005978989576925989
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_15",
+      "edge_type": "recalls",
+      "weight": 0.11372963831665332
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_16",
+      "edge_type": "recalls",
+      "weight": 0.0008329266824838583
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_17",
+      "edge_type": "recalls",
+      "weight": 0.1530311179712033
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_18",
+      "edge_type": "recalls",
+      "weight": 0.09451469337062554
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.23100954586179703
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_2",
+      "edge_type": "recalls",
+      "weight": 0.9599999359129513
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_4",
+      "edge_type": "recalls",
+      "weight": 0.060674138359491134
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_5",
+      "edge_type": "recalls",
+      "weight": 0.9599999038694302
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_7",
+      "edge_type": "recalls",
+      "weight": 0.010249842515002633
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_8",
+      "edge_type": "recalls",
+      "weight": 0.2119795142683812
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_9",
+      "edge_type": "recalls",
+      "weight": 0.009988939765242327
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_10",
+      "edge_type": "recalls",
+      "weight": 0.015224465928751228
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "memory_mem_5",
+      "edge_type": "recalls",
+      "weight": 0.060674138359491134
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_11",
+      "edge_type": "recalls",
+      "weight": 0.011018758635582694
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_12",
+      "edge_type": "recalls",
+      "weight": 0.008303632293779246
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_13",
+      "edge_type": "recalls",
+      "weight": 0.14515592453453038
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_14",
+      "edge_type": "recalls",
+      "weight": 0.008415841903128466
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_15",
+      "edge_type": "recalls",
+      "weight": 0.007235335956476897
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_16",
+      "edge_type": "recalls",
+      "weight": 0.011724019897498173
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_17",
+      "edge_type": "recalls",
+      "weight": 0.15360735133634498
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_18",
+      "edge_type": "recalls",
+      "weight": 0.003708384386305338
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_14",
+      "edge_type": "supports",
+      "weight": 0.999999745343456
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.566164554006244
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_8",
+      "edge_type": "supports",
+      "weight": 0.0569173237392964
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_18",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_2",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.9599999359129513
+    },
+    {
+      "source": "state_2",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.06793365163926388
+    },
+    {
+      "source": "state_2",
+      "target": "state_4",
+      "edge_type": "refines",
+      "weight": 0.95
+    },
+    {
+      "source": "state_2",
+      "target": "state_5",
+      "edge_type": "refines",
+      "weight": 0.85
+    },
+    {
+      "source": "state_2",
+      "target": "state_6",
+      "edge_type": "refines",
+      "weight": 0.84
+    },
+    {
+      "source": "state_2",
+      "target": "state_7",
+      "edge_type": "refines",
+      "weight": 0.85
+    },
+    {
+      "source": "kg_doc_14",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.999999745343456
+    },
+    {
+      "source": "kg_doc_14",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_14",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.9999999825958598
+    },
+    {
+      "source": "kg_doc_14",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_14",
+      "target": "state_6",
+      "edge_type": "supports",
+      "weight": 0.9543067945792685
+    },
+    {
+      "source": "kg_doc_14",
+      "target": "state_7",
+      "edge_type": "supports",
+      "weight": 0.999999978777998
+    },
+    {
+      "source": "kg_doc_14",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_14",
+      "target": "state_9",
+      "edge_type": "supports",
+      "weight": 0.999999981645205
+    },
+    {
+      "source": "kg_doc_14",
+      "target": "state_10",
+      "edge_type": "supports",
+      "weight": 0.999999978440167
+    },
+    {
+      "source": "kg_doc_14",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.9999999825958598
+    },
+    {
+      "source": "kg_doc_14",
+      "target": "state_11",
+      "edge_type": "supports",
+      "weight": 0.9999999806243066
+    },
+    {
+      "source": "kg_doc_14",
+      "target": "state_12",
+      "edge_type": "supports",
+      "weight": 0.9999999772617336
+    },
+    {
+      "source": "kg_doc_14",
+      "target": "state_13",
+      "edge_type": "supports",
+      "weight": 0.9999997870229821
+    },
+    {
+      "source": "kg_doc_14",
+      "target": "state_14",
+      "edge_type": "supports",
+      "weight": 0.9999999785634555
+    },
+    {
+      "source": "kg_doc_14",
+      "target": "state_15",
+      "edge_type": "supports",
+      "weight": 0.5971737004254952
+    },
+    {
+      "source": "kg_doc_14",
+      "target": "state_16",
+      "edge_type": "supports",
+      "weight": 0.9999998511399438
+    },
+    {
+      "source": "kg_doc_14",
+      "target": "state_17",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.566164554006244
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "state_7",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "state_9",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "state_10",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "state_11",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "state_14",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "state_15",
+      "edge_type": "supports",
+      "weight": 0.6822273406096317
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "state_16",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_8",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.0569173237392964
+    },
+    {
+      "source": "kg_doc_18",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_18",
+      "target": "state_13",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.9999999759085476
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_12",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_16",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_14",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_3",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.8799999913575839
+    },
+    {
+      "source": "state_3",
+      "target": "state_2",
+      "edge_type": "refines",
+      "weight": 0.95
+    },
+    {
+      "source": "state_3",
+      "target": "state_8",
+      "edge_type": "refines",
+      "weight": 0.9
+    },
+    {
+      "source": "state_3",
+      "target": "memory_mem_4",
+      "edge_type": "derives",
+      "weight": 1.0
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.9999999759085476
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.9999999745453424
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "state_7",
+      "edge_type": "supports",
+      "weight": 0.8144077389532137
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "state_8",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.9999999759085476
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "state_10",
+      "edge_type": "supports",
+      "weight": 0.8173452654232952
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "state_12",
+      "edge_type": "supports",
+      "weight": 0.9023187021738448
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "state_14",
+      "edge_type": "supports",
+      "weight": 0.7867130358721509
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "state_18",
+      "edge_type": "supports",
+      "weight": 0.6970245591473955
+    },
+    {
+      "source": "kg_doc_12",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_12",
+      "target": "state_6",
+      "edge_type": "supports",
+      "weight": 0.9999999774811178
+    },
+    {
+      "source": "kg_doc_12",
+      "target": "state_8",
+      "edge_type": "supports",
+      "weight": 0.99999983254785
+    },
+    {
+      "source": "kg_doc_12",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_12",
+      "target": "state_11",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_12",
+      "target": "state_17",
+      "edge_type": "supports",
+      "weight": 0.9999998966162297
+    },
+    {
+      "source": "kg_doc_12",
+      "target": "state_18",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_16",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_16",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_16",
+      "target": "state_7",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_16",
+      "target": "state_8",
+      "edge_type": "supports",
+      "weight": 0.18900156971021362
+    },
+    {
+      "source": "kg_doc_16",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_16",
+      "target": "state_10",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_16",
+      "target": "state_12",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_16",
+      "target": "state_14",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_16",
+      "target": "state_18",
+      "edge_type": "supports",
+      "weight": 0.9125828242552602
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_14",
+      "edge_type": "supports",
+      "weight": 0.9999999825958598
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_4",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.060674138359491134
+    },
+    {
+      "source": "state_4",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.004310561498374969
+    },
+    {
+      "source": "state_4",
+      "target": "state_9",
+      "edge_type": "refines",
+      "weight": 0.9
+    },
+    {
+      "source": "state_4",
+      "target": "state_10",
+      "edge_type": "refines",
+      "weight": 0.8
+    },
+    {
+      "source": "state_4",
+      "target": "memory_mem_5",
+      "edge_type": "derives",
+      "weight": 0.9999999825958598
+    },
+    {
+      "source": "state_4",
+      "target": "state_6",
+      "edge_type": "refines",
+      "weight": 0.84
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "state_9",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_5",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.9999999745453424
+    },
+    {
+      "source": "state_5",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_5",
+      "target": "kg_doc_14",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_5",
+      "target": "kg_doc_16",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_5",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.9599999038694302
+    },
+    {
+      "source": "state_5",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.06793364937172863
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "state_6",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "state_12",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "state_13",
+      "edge_type": "supports",
+      "weight": 0.05155412303830048
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "state_15",
+      "edge_type": "supports",
+      "weight": 0.9999996024427812
+    },
+    {
+      "source": "state_6",
+      "target": "kg_doc_12",
+      "edge_type": "supports",
+      "weight": 0.9999999774811178
+    },
+    {
+      "source": "state_6",
+      "target": "kg_doc_14",
+      "edge_type": "supports",
+      "weight": 0.9543067945792685
+    },
+    {
+      "source": "state_6",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_6",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "state_6",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_7",
+      "target": "kg_doc_14",
+      "edge_type": "supports",
+      "weight": 0.999999978777998
+    },
+    {
+      "source": "state_7",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.8144077389532137
+    },
+    {
+      "source": "state_7",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_7",
+      "target": "kg_doc_16",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_7",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.010249842515002633
+    },
+    {
+      "source": "state_7",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.0007281945439059674
+    },
+    {
+      "source": "state_7",
+      "target": "state_14",
+      "edge_type": "refines",
+      "weight": 0.9
+    },
+    {
+      "source": "state_7",
+      "target": "state_15",
+      "edge_type": "refines",
+      "weight": 0.85
+    },
+    {
+      "source": "state_8",
+      "target": "kg_doc_12",
+      "edge_type": "supports",
+      "weight": 0.99999983254785
+    },
+    {
+      "source": "state_8",
+      "target": "kg_doc_16",
+      "edge_type": "supports",
+      "weight": 0.18900156971021362
+    },
+    {
+      "source": "state_8",
+      "target": "kg_doc_13",
+      "edge_type": "supports",
+      "weight": 0.05511034250116716
+    },
+    {
+      "source": "state_8",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_8",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.2119795142683812
+    },
+    {
+      "source": "state_8",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.21118430708731015
+    },
+    {
+      "source": "state_8",
+      "target": "state_16",
+      "edge_type": "refines",
+      "weight": 0.9
+    },
+    {
+      "source": "state_8",
+      "target": "state_17",
+      "edge_type": "refines",
+      "weight": 0.85
+    },
+    {
+      "source": "state_8",
+      "target": "state_18",
+      "edge_type": "refines",
+      "weight": 0.7
+    },
+    {
+      "source": "kg_doc_13",
+      "target": "state_8",
+      "edge_type": "supports",
+      "weight": 0.05511034250116716
+    },
+    {
+      "source": "kg_doc_13",
+      "target": "state_16",
+      "edge_type": "supports",
+      "weight": 0.22672087920011577
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "state_3",
+      "edge_type": "recalls",
+      "weight": 1.0
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.9999999759085476
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_12",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_16",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_14",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.8799999913575839
+    },
+    {
+      "source": "state_9",
+      "target": "kg_doc_14",
+      "edge_type": "supports",
+      "weight": 0.999999981645205
+    },
+    {
+      "source": "state_9",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_9",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_9",
+      "target": "kg_doc_10",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_9",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.009988939765242327
+    },
+    {
+      "source": "state_9",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.0007096588484952867
+    },
+    {
+      "source": "state_9",
+      "target": "state_11",
+      "edge_type": "refines",
+      "weight": 1.0
+    },
+    {
+      "source": "state_9",
+      "target": "state_12",
+      "edge_type": "refines",
+      "weight": 0.9
+    },
+    {
+      "source": "state_9",
+      "target": "state_13",
+      "edge_type": "refines",
+      "weight": 0.8
+    },
+    {
+      "source": "kg_doc_10",
+      "target": "state_9",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_10",
+      "target": "state_13",
+      "edge_type": "supports",
+      "weight": 0.3664199446932603
+    },
+    {
+      "source": "kg_doc_10",
+      "target": "state_15",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_10",
+      "target": "state_18",
+      "edge_type": "supports",
+      "weight": 0.9999995605508906
+    },
+    {
+      "source": "state_10",
+      "target": "kg_doc_14",
+      "edge_type": "supports",
+      "weight": 0.999999978440167
+    },
+    {
+      "source": "state_10",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.8173452654232952
+    },
+    {
+      "source": "state_10",
+      "target": "kg_doc_16",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_10",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_10",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.015224465928751228
+    },
+    {
+      "source": "state_10",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.0010816139864560732
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "state_4",
+      "edge_type": "recalls",
+      "weight": 0.9999999825958598
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_14",
+      "edge_type": "supports",
+      "weight": 0.9999999825958598
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.060674138359491134
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.004310561498374969
+    },
+    {
+      "source": "state_11",
+      "target": "kg_doc_14",
+      "edge_type": "supports",
+      "weight": 0.9999999806243066
+    },
+    {
+      "source": "state_11",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_11",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_11",
+      "target": "kg_doc_12",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_11",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.011018758635582694
+    },
+    {
+      "source": "state_11",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.0007828217757788642
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "state_11",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_12",
+      "target": "kg_doc_14",
+      "edge_type": "supports",
+      "weight": 0.9999999772617336
+    },
+    {
+      "source": "state_12",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.9023187021738448
+    },
+    {
+      "source": "state_12",
+      "target": "kg_doc_16",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_12",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_12",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.008303632293779246
+    },
+    {
+      "source": "state_12",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.0005899270863997158
+    },
+    {
+      "source": "state_13",
+      "target": "kg_doc_14",
+      "edge_type": "supports",
+      "weight": 0.9999997870229821
+    },
+    {
+      "source": "state_13",
+      "target": "kg_doc_10",
+      "edge_type": "supports",
+      "weight": 0.3664199446932603
+    },
+    {
+      "source": "state_13",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.05155412303830048
+    },
+    {
+      "source": "state_13",
+      "target": "kg_doc_18",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_13",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.14515592453453038
+    },
+    {
+      "source": "state_13",
+      "target": "memory_mem_2",
+      "edge_type": "recalls",
+      "weight": 0.1285526724499486
+    },
+    {
+      "source": "memory_mem_2",
+      "target": "state_13",
+      "edge_type": "recalls",
+      "weight": 0.1285526724499486
+    },
+    {
+      "source": "state_14",
+      "target": "kg_doc_14",
+      "edge_type": "supports",
+      "weight": 0.9999999785634555
+    },
+    {
+      "source": "state_14",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.7867130358721509
+    },
+    {
+      "source": "state_14",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_14",
+      "target": "kg_doc_16",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_14",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.008415841903128466
+    },
+    {
+      "source": "state_14",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.0005978989576925989
+    },
+    {
+      "source": "state_15",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.9999996024427812
+    },
+    {
+      "source": "state_15",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.6822273406096317
+    },
+    {
+      "source": "state_15",
+      "target": "kg_doc_14",
+      "edge_type": "supports",
+      "weight": 0.5971737004254952
+    },
+    {
+      "source": "state_15",
+      "target": "kg_doc_10",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_15",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.11372963831665332
+    },
+    {
+      "source": "state_15",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.007235335956476897
+    },
+    {
+      "source": "state_16",
+      "target": "kg_doc_14",
+      "edge_type": "supports",
+      "weight": 0.9999998511399438
+    },
+    {
+      "source": "state_16",
+      "target": "kg_doc_13",
+      "edge_type": "supports",
+      "weight": 0.22672087920011577
+    },
+    {
+      "source": "state_16",
+      "target": "kg_doc_20",
+      "edge_type": "supports",
+      "weight": 0.12478259416738564
+    },
+    {
+      "source": "state_16",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_16",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.011724019897498173
+    },
+    {
+      "source": "state_16",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.0008329266824838583
+    },
+    {
+      "source": "kg_doc_20",
+      "target": "state_16",
+      "edge_type": "supports",
+      "weight": 0.12478259416738564
+    },
+    {
+      "source": "state_17",
+      "target": "kg_doc_12",
+      "edge_type": "supports",
+      "weight": 0.9999998966162297
+    },
+    {
+      "source": "state_17",
+      "target": "kg_doc_17",
+      "edge_type": "supports",
+      "weight": 0.1020895981913527
+    },
+    {
+      "source": "state_17",
+      "target": "kg_doc_11",
+      "edge_type": "supports",
+      "weight": 0.09909753028652604
+    },
+    {
+      "source": "state_17",
+      "target": "kg_doc_14",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_17",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.15360735133634498
+    },
+    {
+      "source": "state_17",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.1530311179712033
+    },
+    {
+      "source": "kg_doc_17",
+      "target": "state_17",
+      "edge_type": "supports",
+      "weight": 0.1020895981913527
+    },
+    {
+      "source": "kg_doc_11",
+      "target": "state_17",
+      "edge_type": "supports",
+      "weight": 0.09909753028652604
+    },
+    {
+      "source": "state_18",
+      "target": "kg_doc_10",
+      "edge_type": "supports",
+      "weight": 0.9999995605508906
+    },
+    {
+      "source": "state_18",
+      "target": "kg_doc_16",
+      "edge_type": "supports",
+      "weight": 0.9125828242552602
+    },
+    {
+      "source": "state_18",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.6970245591473955
+    },
+    {
+      "source": "state_18",
+      "target": "kg_doc_12",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_18",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.09451469337062554
+    },
+    {
+      "source": "state_18",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.003708384386305338
+    }
+  ]
+}

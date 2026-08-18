@@ -1,0 +1,187 @@
+{
+  "question": "What is the name for the adventure in \"Tunnels and Trolls\", a game designed by Ken St. Andre?",
+  "final_answer": "Arena of Khazan",
+  "best_node": {
+    "node_id": "state_3",
+    "node_type": "state",
+    "content": "What is the first published adventure module for 'Tunnels and Trolls'?",
+    "depth": 1,
+    "parent_id": "state_1",
+    "value": 0.7706043926598671,
+    "temperature": 1.2974532651949977,
+    "expanded": true,
+    "visit_count": 1,
+    "persistent": false,
+    "score_breakdown": {
+      "task_progress": 0.78725669970647,
+      "evidence_support": 0.9659799126314863,
+      "memory_usefulness": 0.48475299539360556,
+      "answerability": 0.8771076033745666,
+      "uncertainty": 0.12612361572633246
+    },
+    "metadata": {
+      "kind": "retrieval",
+      "evidence_ids": [
+        "doc_6",
+        "doc_9",
+        "doc_2",
+        "doc_10"
+      ],
+      "memory_ids": [
+        "mem_1",
+        "mem_3"
+      ],
+      "diffusion_delta": 0.04166350939995134,
+      "diffusion_gain": 0.04166350939995134
+    }
+  },
+  "final_synthesis_node_ids": [
+    "state_2",
+    "memory_mem_4",
+    "state_3",
+    "state_6",
+    "state_1"
+  ],
+  "answer_history": [
+    {
+      "node_id": "",
+      "answer_text": "Adventure",
+      "previous_answer": "",
+      "confidence": 0.28,
+      "score": 0.16880000000000003,
+      "source": "closed_book_initial",
+      "step": 0,
+      "evidence_ids": [],
+      "kind": "anytime_answer"
+    },
+    {
+      "node_id": "memory_mem_4",
+      "content": "Conclusion: The answer to 'What is the name of a published adventure module for 'Tunnels & Trolls'' is Arena of Khazan.",
+      "answer_text": "Arena of Khazan",
+      "value": 0.92,
+      "evidence_ids": [
+        "doc_9",
+        "doc_6"
+      ],
+      "step": 2
+    },
+    {
+      "node_id": "state_2",
+      "answer_text": "Arena of Khazan",
+      "previous_answer": "Adventure",
+      "confidence": 1.0,
+      "score": 0.904374501145536,
+      "source": "expansion_candidate",
+      "step": 1,
+      "evidence_ids": [
+        "doc_9",
+        "doc_6",
+        "doc_10",
+        "doc_2"
+      ],
+      "kind": "anytime_answer"
+    },
+    {
+      "node_id": "memory_mem_5",
+      "content": "Conclusion: The answer to 'What is the first published adventure module for 'Tunnels and Trolls'' is Arena of Khazan.",
+      "answer_text": "Arena of Khazan",
+      "value": 0.9999999800689027,
+      "confidence": 0.9659799126314863,
+      "evidence_ids": [
+        "doc_6",
+        "doc_9",
+        "doc_2"
+      ],
+      "step": 4,
+      "kind": "intermediate_answer"
+    },
+    {
+      "node_id": "memory_mem_6",
+      "content": "Conclusion: The answer to 'What is the publication year of the first adventure module for 'Tunnels and Trolls'' is 1979.",
+      "answer_text": "1979",
+      "value": 0.9999999789298131,
+      "confidence": 0.95,
+      "evidence_ids": [
+        "doc_6",
+        "doc_9"
+      ],
+      "step": 5,
+      "kind": "intermediate_answer"
+    },
+    {
+      "node_id": "memory_mem_7",
+      "content": "Conclusion: The answer to 'What is the title of the earliest known 'Tunnels and Trolls' adventure module listed in the evidence' is Arena of Khazan.",
+      "answer_text": "Arena of Khazan",
+      "value": 0.9999999734114978,
+      "confidence": 0.9,
+      "evidence_ids": [
+        "doc_5"
+      ],
+      "step": 6,
+      "kind": "intermediate_answer"
+    },
+    {
+      "node_id": "state_3",
+      "answer_text": "Arena of Khazan",
+      "previous_answer": "Arena of Khazan",
+      "confidence": 0.8771076033745666,
+      "score": 0.9877135026131174,
+      "source": "final_synthesis",
+      "step": 7,
+      "evidence_ids": [
+        "doc_6",
+        "doc_9",
+        "doc_2",
+        "doc_10"
+      ],
+      "kind": "anytime_answer"
+    },
+    {
+      "node_id": "memory_mem_5",
+      "content": "Conclusion: The answer to 'What is the first published adventure module for 'Tunnels and Trolls'' is Arena of Khazan.",
+      "answer_text": "Arena of Khazan",
+      "value": 0.9999999800689027,
+      "evidence_ids": [
+        "doc_6",
+        "doc_9",
+        "doc_2"
+      ],
+      "step": 8
+    },
+    {
+      "node_id": "state_3",
+      "answer_text": "Arena of Khazan",
+      "source": "answer_judge",
+      "choice": "A",
+      "candidate_source": "final_synthesis",
+      "base_score": 0.821619548624501,
+      "judge_confidence": 0.0,
+      "judge_reason": "",
+      "step": 7,
+      "kind": "final_answer_selection"
+    }
+  ],
+  "anytime_answer": "Arena of Khazan",
+  "anytime_answer_score": 0.9877135026131174,
+  "anytime_answer_source": "final_synthesis",
+  "anytime_answer_node_id": "state_3",
+  "stats": {
+    "steps": 7,
+    "llm_calls": 13,
+    "generated_tokens": 873,
+    "token_budget_remaining": 327,
+    "total_nodes": 24,
+    "kg_nodes": 8,
+    "memory_nodes": 7,
+    "state_nodes": 9,
+    "deleted_state_nodes": 1,
+    "scheduler_mode": "tdca",
+    "scoring_mode": "hybrid",
+    "stop_reason": "final_synthesis_reserve",
+    "goal_kind": "bridge",
+    "goal_completion": 0.92,
+    "anytime_answer": "Arena of Khazan",
+    "anytime_answer_score": 0.9877135026131174,
+    "anytime_answer_source": "final_synthesis"
+  }
+}

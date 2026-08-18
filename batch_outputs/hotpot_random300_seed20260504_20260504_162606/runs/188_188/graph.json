@@ -1,0 +1,905 @@
+{
+  "nodes": [
+    {
+      "node_id": "state_1",
+      "node_type": "state",
+      "content": "Are both Grapico and Izze artificially flavored soft drinks?",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.8901617686479623,
+      "temperature": 0.9127484111438242,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.9731848484428065,
+        "evidence_support": 0.921131907184725,
+        "memory_usefulness": 0.8820682746050714,
+        "answerability": 0.9605659535923624,
+        "uncertainty": 0.13419625670674948
+      },
+      "metadata": {
+        "diffusion_delta": 0.06693668518029794,
+        "diffusion_gain": 0.06693668518029794
+      }
+    },
+    {
+      "node_id": "kg_doc_5",
+      "node_type": "kg",
+      "content": "Grapico is a caffeine-free, artificially flavored carbonated soft drink with a purple color and a grape taste that is sold in the Southeastern United States. When introduced in 1916, the product quickly became a success, which in part was due to implying that Grapico contained real grape juice even though it did not. In the spring of 1926, J. Grossman's Sons sold the Grapico business to New Orleans business Pan American Manufacturing Co. Pan American continued J. Grossman's Sons' improper practice of implying that Grapico contained real grape juice and lost the right to use the word \"Grapico\" to designate their artificial grape drink in 1929.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999951753535,
+      "temperature": 0.9999999951753535,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Grapico",
+        "raw_score": 2.7877863509953005,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_3",
+      "node_type": "kg",
+      "content": "Izze (pronounced iz-ee) is the brand name of a line of carbonated juice drinks produced by the IZZE Beverage Company in Boulder, Colorado, which is owned by PepsiCo. The drinks consist of 70% fruit juice from concentrate, and 30% seltzer water. Izze is an all-natural, no-preservatives-added fruit soda.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999941070128,
+      "temperature": 0.9999999941070128,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Izze",
+        "raw_score": 4.5059942419883185,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_10",
+      "node_type": "kg",
+      "content": "Mamba Fruit Chews are a brand of fruit chew candies, made in Germany by August Storck KG. They are artificially flavored in strawberry, orange, lemon, and raspberry. They are vegan. Mamba was launched in 1953 in packs of six. They are most often sold in packages of 18 or 24 soft chews and the flavors within each package are selected at random.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.7747773887269134,
+      "temperature": 0.7747773887269134,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Mamba (candy)",
+        "raw_score": 1.3548421777565882,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_1",
+      "node_type": "kg",
+      "content": "Vault was a sweetened carbonated beverage that was released by The Coca-Cola Company in June 2005 and marketed until December 2011. It was touted as an artificially flavored hybrid energy drink. Coca-Cola was marketing Vault as a combination with the slogan \"Drinks like a soda, kicks like an energy drink,\" as well as \"The Taste. The Quench. The Kick.\" \"Get it done, and then some,\" \"Chug & Charge,\" and \"Get to it!\"",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.086230440933528,
+      "temperature": 0.086230440933528,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Vault (drink)",
+        "raw_score": 2.2271812376962257,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "memory_mem_1",
+      "node_type": "memory",
+      "content": "Template: for compositional multi-hop questions, first solve the intermediate entity and then ask for the final attribute.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.8841365672456091,
+      "temperature": 0.10067209974653088,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.96,
+        "tag": "compositional_template",
+        "memory_kind": "template",
+        "raw_score": 0.10356146921516299,
+        "source": "memory",
+        "diffusion_delta": -0.016796190055219845,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "memory_mem_3",
+      "node_type": "memory",
+      "content": "Template: when evidence already grounds the answer, switch from branching to short verification and synthesis.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.8799999819645339,
+      "temperature": 0.524329548305125,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.88,
+        "tag": "verification_then_stop",
+        "memory_kind": "template",
+        "raw_score": 1.6977600658322536,
+        "source": "memory",
+        "diffusion_delta": -0.25354702212585256,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "state_2",
+      "node_type": "state",
+      "content": "Is Grapico an artificially flavored soft drink?",
+      "depth": 1,
+      "parent_id": "state_1",
+      "value": 0.5068275414212269,
+      "temperature": 1.868797754970863,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.641550140599928,
+        "evidence_support": 0.5666507403265857,
+        "memory_usefulness": 0.0,
+        "answerability": 0.6722142590521817,
+        "uncertainty": 0.1980028667412146
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_5",
+          "doc_6",
+          "doc_1",
+          "doc_9"
+        ],
+        "memory_ids": [],
+        "diffusion_delta": 0.09985156393554417,
+        "diffusion_gain": 0.09985156393554417
+      }
+    },
+    {
+      "node_id": "kg_doc_6",
+      "node_type": "kg",
+      "content": "National Beverage Corp. is an American beverage developer, manufacturer, and distributor based in Fort Lauderdale, Florida, focused on flavored soft drinks. National Beverage Corp. is ranked by \"Beverage Digest\" as the fifth-largest soft drink company in the United States.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.16891373004758556,
+      "temperature": 0.16891373004758556,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "National Beverage",
+        "raw_score": 3.2681824716970884,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_9",
+      "node_type": "kg",
+      "content": "Crazy Cow was a breakfast cereal produced by General Mills during the 1970s. The cereal was somewhat of a novelty item in that it had an unusual trait. The round, multi-grain cereal pellets were coated with an excipient of a drink mix. When milk was added, it would dissolve the powdered coating, and the resultant mixture would resemble in sight, smell, and taste, a flavored milk. Crazy Cow came in two flavors, chocolate and strawberry. As the box indicated, these were just flavors; no actual chocolate or strawberries were in the ingredients. The box always contained the disclaimer \"artificially flavored\" or \"chocolate flavored\".",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.00824652742989439,
+      "temperature": 0.00824652742989439,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Crazy Cow",
+        "raw_score": 2.184910755885758,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "state_3",
+      "node_type": "state",
+      "content": "Is Izze an artificially flavored soft drink?",
+      "depth": 1,
+      "parent_id": "state_1",
+      "value": 0.51578758168627,
+      "temperature": 1.2332966277780006,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.6476042218600924,
+        "evidence_support": 0.5844568616800102,
+        "memory_usefulness": 0.0,
+        "answerability": 0.681117319728894,
+        "uncertainty": 0.19479776489759815
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_3",
+          "doc_6",
+          "doc_1",
+          "doc_9"
+        ],
+        "memory_ids": [],
+        "diffusion_delta": -0.0009020330628379813,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "state_4",
+      "node_type": "state",
+      "content": "Is Grapico artificially flavored?",
+      "depth": 1,
+      "parent_id": "state_1",
+      "value": 0.4390208280125597,
+      "temperature": 0.26659156397087674,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.5792657854818128,
+        "evidence_support": 0.5076444671033711,
+        "memory_usefulness": 0.0,
+        "answerability": 0.6204889002183522,
+        "uncertainty": 0.2086239959213932
+      },
+      "metadata": {
+        "kind": "verification",
+        "evidence_ids": [
+          "doc_5",
+          "doc_10",
+          "doc_9",
+          "doc_1"
+        ],
+        "memory_ids": [],
+        "diffusion_delta": 0.00821850392531892,
+        "diffusion_gain": 0.00821850392531892
+      }
+    },
+    {
+      "node_id": "memory_mem_4",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'Is Izze an artificially flavored soft drink' is no-preservatives-added fruit soda.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999933124349,
+      "temperature": 0.737061754061278,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "intermediate_answer",
+        "target_question": "Is Izze an artificially flavored soft drink?",
+        "target_question_norm": "is izze an artificially flavored soft drink",
+        "relation_signature": "generic",
+        "answer_text": "no-preservatives-added fruit soda",
+        "support_score": 0.9999999933124349,
+        "evidence_ids": [
+          "doc_3"
+        ],
+        "slot_name": "izze_artificially_flavored",
+        "slot_role": "final_boolean",
+        "terminal": true,
+        "derived_from_state": "state_3",
+        "diffusion_delta": 0.007627744425586558,
+        "diffusion_gain": 0.007627744425586558
+      }
+    },
+    {
+      "node_id": "kg_doc_8",
+      "node_type": "kg",
+      "content": "This is a list of soft drinks in order of the brand's country of origin. A soft drink is a beverage that typically contains water (often, but not always, carbonated water), usually a sweetener and usually a flavoring agent. The sweetener may be sugar, high-fructose corn syrup, fruit juice, sugar substitutes (in the case of diet drinks) or some combination of these. Soft drinks may also contain caffeine, colorings, preservatives and other ingredients.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.6933453837103694,
+      "temperature": 0.6933453837103694,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "List of soft drinks by country",
+        "raw_score": 4.761156000331044,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_7",
+      "node_type": "kg",
+      "content": "The Cott Corporation is a supplier of private label carbonated soft drinks distributing to the United States, Canada, Mexico, the United Kingdom, and Europe. In addition to producing private-label beverages for retailers, Cott also has portfolio of its own brands, including Cott, RC (excluding the United States, where it is part of Dr Pepper Snapple Group), Ben Shaws, Stars & Stripes, Vintage and Vess soft drinks, ready-to-drink teas, sparkling and flavoured waters, sports and energy drinks, juice drinks and smoothies. Newer Cott brands include Orient Emporium, GL-7, Red Rain Energy and After Shock Energy.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0019442729082461154,
+      "temperature": 0.0019442729082461154,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Cott",
+        "raw_score": 3.0771765113582186,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "memory_mem_5",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'Is Grapico an artificially flavored soft drink' is Grapico is artificially flavored.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.8280000000000001,
+      "temperature": 1.3282288125949817,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "derived_fact",
+        "target_question": "Is Grapico an artificially flavored soft drink?",
+        "target_question_norm": "is grapico an artificially flavored soft drink",
+        "relation_signature": "generic",
+        "answer_text": "Grapico is artificially flavored",
+        "support_score": 0.5666507403265857,
+        "evidence_ids": [
+          "doc_5"
+        ],
+        "derived_from_state": "state_2",
+        "diffusion_delta": 0.5013879573501281,
+        "diffusion_gain": 0.5013879573501281
+      }
+    },
+    {
+      "node_id": "state_6",
+      "node_type": "state",
+      "content": "Is Izze artificially flavored?",
+      "depth": 2,
+      "parent_id": "state_4",
+      "value": 0.47020505933403517,
+      "temperature": 1.053845848472955,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.5879763914419156,
+        "evidence_support": 0.533263896397791,
+        "memory_usefulness": 0.0,
+        "answerability": 0.6332986148655622,
+        "uncertainty": 0.2040124986483976
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_3",
+          "doc_5",
+          "doc_10",
+          "doc_9"
+        ],
+        "memory_ids": [],
+        "diffusion_delta": 0.19923335875696613,
+        "diffusion_gain": 0.19923335875696613
+      }
+    },
+    {
+      "node_id": "memory_mem_6",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'Is Izze artificially flavored' is Izze is an all-natural, no-preservatives-added fruit soda.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999941070128,
+      "temperature": 0.7772230500680165,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "intermediate_answer",
+        "target_question": "Is Izze artificially flavored?",
+        "target_question_norm": "is izze artificially flavored",
+        "relation_signature": "generic",
+        "answer_text": "Izze is an all-natural, no-preservatives-added fruit soda",
+        "support_score": 0.9999999941070128,
+        "evidence_ids": [
+          "doc_3"
+        ],
+        "slot_name": "",
+        "slot_role": "",
+        "terminal": false,
+        "derived_from_state": "state_6",
+        "diffusion_delta": -0.012304091199212719,
+        "diffusion_gain": 0.0
+      }
+    }
+  ],
+  "edges": [
+    {
+      "source": "state_1",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.9999999944156577
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.8422638199537924
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_10",
+      "edge_type": "supports",
+      "weight": 0.7747773887269134
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.8841365672456091
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.8799999819645339
+    },
+    {
+      "source": "state_1",
+      "target": "state_2",
+      "edge_type": "refines",
+      "weight": 1.0
+    },
+    {
+      "source": "state_1",
+      "target": "state_3",
+      "edge_type": "refines",
+      "weight": 1.0
+    },
+    {
+      "source": "state_1",
+      "target": "state_4",
+      "edge_type": "verifies",
+      "weight": 0.95
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.9999999944156577
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.9999999947223807
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.9999999951753535
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.9999999947223807
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "state_6",
+      "edge_type": "supports",
+      "weight": 0.06652779868856934
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.06652779868856934
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.8422638199537924
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.9999999933124349
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.9999999933124349
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "state_6",
+      "edge_type": "supports",
+      "weight": 0.9999999941070128
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.9999999941070128
+    },
+    {
+      "source": "kg_doc_10",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.7747773887269134
+    },
+    {
+      "source": "kg_doc_10",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.01528893903138852
+    },
+    {
+      "source": "kg_doc_10",
+      "target": "state_6",
+      "edge_type": "supports",
+      "weight": 0.008601840865944831
+    },
+    {
+      "source": "kg_doc_10",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.008601840865944831
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.06805039416078458
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.086230440933528
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.086230440933528
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.06805039416078458
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.8841365672456091
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.8799999819645339
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.9999999947223807
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.1333014859307907
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.06805039416078458
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_2",
+      "target": "memory_mem_5",
+      "edge_type": "derives",
+      "weight": 0.9
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.1333014859307907
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.16891373004758556
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.16891373004758556
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.1333014859307907
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.00824652742989439
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "state_6",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.9999999933124349
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.16891373004758556
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.086230440933528
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_3",
+      "target": "state_2",
+      "edge_type": "refines",
+      "weight": 0.9
+    },
+    {
+      "source": "state_3",
+      "target": "memory_mem_4",
+      "edge_type": "derives",
+      "weight": 0.9999999933124349
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.9999999951753535
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_10",
+      "edge_type": "supports",
+      "weight": 0.01528893903138852
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.00824652742989439
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_4",
+      "target": "state_6",
+      "edge_type": "refines",
+      "weight": 0.9
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "state_3",
+      "edge_type": "recalls",
+      "weight": 0.9999999933124349
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.9999999933124349
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.16891373004758556
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.086230440933528
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "state_2",
+      "edge_type": "recalls",
+      "weight": 0.9
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.9999999947223807
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.1333014859307907
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.06805039416078458
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_6",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.9999999941070128
+    },
+    {
+      "source": "state_6",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.06652779868856934
+    },
+    {
+      "source": "state_6",
+      "target": "kg_doc_10",
+      "edge_type": "supports",
+      "weight": 0.008601840865944831
+    },
+    {
+      "source": "state_6",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_6",
+      "target": "memory_mem_6",
+      "edge_type": "derives",
+      "weight": 0.9999999941070128
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "state_6",
+      "edge_type": "recalls",
+      "weight": 0.9999999941070128
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.9999999941070128
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.06652779868856934
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_10",
+      "edge_type": "supports",
+      "weight": 0.008601840865944831
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.0
+    }
+  ]
+}

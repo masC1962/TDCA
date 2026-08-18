@@ -1,0 +1,647 @@
+{
+  "nodes": [
+    {
+      "node_id": "state_1",
+      "node_type": "state",
+      "content": "When was the city George Consider Hale was born in founded?",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.6794235157336377,
+      "temperature": 0.5120709317087073,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.8762226915952038,
+        "evidence_support": 0.63594909292707,
+        "memory_usefulness": 0.4634494347728014,
+        "answerability": 0.717974546463535,
+        "uncertainty": 0.1855291632731274
+      },
+      "metadata": {
+        "diffusion_delta": 0.03101651520871007,
+        "diffusion_gain": 0.03101651520871007
+      }
+    },
+    {
+      "node_id": "kg_doc_5",
+      "node_type": "kg",
+      "content": "George Consider Hale (1850-1923) was fire chief in Kansas City, Missouri from 1882 to 1902. During this time he competed in the international firemen competition in Paris, and another in London in 1893. He was also the holder of more than 60 patents for fire fighting equipment. He is an honoree of Kansas City Fire Brigade's Hall of Fame.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999930971981,
+      "temperature": 0.9999999930971981,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "George C. Hale",
+        "raw_score": 5.26728206303528,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_6",
+      "node_type": "kg",
+      "content": "Robert Hale (born August 22, 1933 in Kerrville, Texas) is an American bass-baritone opera singer. Although born in Texas, Hale spent his childhood in Louisiana. When his family moved to Oklahoma City, he attended high school and college (Southern Nazarene University graduating in 1955 {at age 16?}) there and completed his master's degree at the University of Oklahoma. While still at the University of Oklahoma, he won the National Association of Teachers of Singing \"Singer of the Year\" award and completed further studies at Boston University and the New England Conservatory of Music where he was awarded the Artist Diploma as well as winning the Metropolitan Opera National Council Auditions. He began his career as a recitalist appearing in concert halls across the United States and later made his operatic debut at New York City Opera, as Colline in \"La bohème\" (1967).",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.271898192756942,
+      "temperature": 0.271898192756942,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Robert Hale (bass-baritone)",
+        "raw_score": 2.2850741586898686,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_1",
+      "node_type": "kg",
+      "content": "George Reid (1733–1815) was born in Londonderry, New Hampshire, and was a farmer by trade. He married Mary Woodburn in 1765 who was noted for her skill in running their farm in George's long service during the American Revolutionary War. With news of the Battle of Lexington and Concord, George Reid marched with his militia company to Boston, Massachusetts and commanded a company of the 1st New Hampshire Regiment at the Battle of Bunker Hill. George Reid was with the 1st NH during the Invasion of Canada, the Battle of Trenton and the Battle of Princeton. In the Spring of 1777 George Reid was appointed Lt. Col. of the 2nd New Hampshire Regiment. With the capture of Col. Nathan Hale at the Battle of Hubbardton by the British Army, George Reid took command of the 2nd NH and led them during the rest of the Saratoga Campaign, the Battle of Monmouth and the Sullivan Expedition of 1779. With the consolidation of the three New Hampshire regiments in 1783, Col. Reid was appointed commander of the combined unit until its disbandment on January 1, 1784.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.017629304066121575,
+      "temperature": 0.017629304066121575,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "George Reid (soldier)",
+        "raw_score": 2.8232235852802217,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_9",
+      "node_type": "kg",
+      "content": "Kansas City is the largest city in Missouri, United States, and the sixth largest city in the Midwest. According to the U.S. Census Bureau, the city had an estimated population of 481,420 in 2016, making it the 37th largest city by population in the United States. It is the anchor city of the Kansas City metropolitan area, which straddles the Kansas–Missouri border. Kansas City was founded in the 1830s as a Missouri River port at its confluence with the Kansas River coming in from the west. On June 1, 1850 the town of Kansas was incorporated; shortly after came the establishment of the Kansas Territory. Confusion between the two ensued and the name Kansas City was assigned to distinguish them soon thereafter.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999955984203,
+      "temperature": 0.9999999955984203,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Kansas City, Missouri",
+        "raw_score": 2.758551459226274,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "memory_mem_3",
+      "node_type": "memory",
+      "content": "Template: when evidence already grounds the answer, switch from branching to short verification and synthesis.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.8799999913901771,
+      "temperature": 1.2048451031285992,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.88,
+        "tag": "verification_then_stop",
+        "memory_kind": "template",
+        "raw_score": 1.4907298532777011,
+        "source": "memory",
+        "diffusion_delta": 0.05660915650832221,
+        "diffusion_gain": 0.05660915650832221
+      }
+    },
+    {
+      "node_id": "memory_mem_1",
+      "node_type": "memory",
+      "content": "Template: for compositional multi-hop questions, first solve the intermediate entity and then ask for the final attribute.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.04689887815542571,
+      "temperature": 0.012438668274678027,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.96,
+        "tag": "compositional_template",
+        "memory_kind": "template",
+        "raw_score": 0.11790366965598745,
+        "source": "memory",
+        "diffusion_delta": -0.004136925629269882,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "state_2",
+      "node_type": "state",
+      "content": "In which city was George Consider Hale born?",
+      "depth": 1,
+      "parent_id": "state_1",
+      "value": 0.526543070766017,
+      "temperature": 1.023070279585445,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.7326642370040656,
+        "evidence_support": 0.5490124617766633,
+        "memory_usefulness": 0.0,
+        "answerability": 0.6145062308883317,
+        "uncertainty": 0.20117775688020062
+      },
+      "metadata": {
+        "kind": "bridge",
+        "evidence_ids": [
+          "doc_5",
+          "doc_2",
+          "doc_4",
+          "doc_9"
+        ],
+        "memory_ids": [],
+        "diffusion_delta": 0.18309495424459477,
+        "diffusion_gain": 0.18309495424459477
+      }
+    },
+    {
+      "node_id": "kg_doc_2",
+      "node_type": "kg",
+      "content": "The Tobacco Factory is the last remaining part of the old W. D. & H. O. Wills tobacco factory site on Raleigh Road, Southville, Bristol. It was saved from demolition by the architect and former mayor of the city George Ferguson and through his vision has become a model of urban regeneration. It is now a multi-use building which houses Thali Cafe, animation and performing arts school, loft-style apartments, a café bar, offices and a theatre.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.09968385092209191,
+      "temperature": 0.09968385092209191,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Tobacco Factory",
+        "raw_score": 2.9414020086933266,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_4",
+      "node_type": "kg",
+      "content": "The Hale Avenue Historic District encompasses a significant portion of the central business district of Osceola, Arkansas. It extends for five blocks along Hale Avenue, between Ash and Maple Streets, and includes a few buildings on adjacent streets. The focal point of the district is the Mississippi County Courthouse, and the block of buildings opposite it on Hale Avenue. Although Osceola was founded in 1875, it was relocated beginning in 1900 to be closer to the railroad, with Hale Avenue as the major east-west route. This began a period of growth in the city which continued through much of the 1920s. Most of buildings on these blocks of Hale Avenue result from this time, and a number of those built later were built in an architecturally sympathetic manner.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.00578379204378942,
+      "temperature": 0.00578379204378942,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Hale Avenue Historic District",
+        "raw_score": 2.495093086087369,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "state_3",
+      "node_type": "state",
+      "content": "When was Kansas City, Missouri founded?",
+      "depth": 1,
+      "parent_id": "state_1",
+      "value": 0.725139425022468,
+      "temperature": 1.246893388988342,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.7176617743645661,
+        "evidence_support": 0.8401816893075471,
+        "memory_usefulness": 0.8799999913575839,
+        "answerability": 0.7000908446537737,
+        "uncertainty": 0.14876729592464152
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_9",
+          "doc_5",
+          "doc_10",
+          "doc_6"
+        ],
+        "memory_ids": [
+          "mem_3"
+        ],
+        "diffusion_delta": 0.16747172536358335,
+        "diffusion_gain": 0.16747172536358335
+      }
+    },
+    {
+      "node_id": "kg_doc_10",
+      "node_type": "kg",
+      "content": "Bonnie Hale Leman was the founder of Quilter's Newsletter Magazine, and one of the nation's first female magazine publishers. Born September 28, 1926, in Purdin, Missouri, to Rex and Laura Hale, she left home for college at age 16. She graduated from Park College three years later. She moved to Denver in 1953 and she met her husband, George Leman, while they were both pursuing master's degrees at the University of Denver.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.1480587962041853,
+      "temperature": 0.1480587962041853,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Bonnie Leman",
+        "raw_score": 1.313632478671696,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "memory_mem_4",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'When was Kansas City, Missouri founded' is 1850.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.874,
+      "temperature": 1.3038649930486337,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "derived_fact",
+        "target_question": "When was Kansas City, Missouri founded?",
+        "target_question_norm": "when was kansas city missouri founded",
+        "relation_signature": "generic",
+        "answer_text": "1850",
+        "support_score": 0.8401816893075471,
+        "evidence_ids": [
+          "doc_9",
+          "doc_5"
+        ],
+        "derived_from_state": "state_3",
+        "diffusion_delta": 0.14348433373016012,
+        "diffusion_gain": 0.14348433373016012
+      }
+    },
+    {
+      "node_id": "memory_mem_5",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'In which city was George Consider Hale born' is Kansas City, Missouri.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999928227965,
+      "temperature": 0.7707023500566117,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "intermediate_answer",
+        "target_question": "In which city was George Consider Hale born?",
+        "target_question_norm": "in which city was george consider hale born",
+        "relation_signature": "birth",
+        "answer_text": "Kansas City, Missouri",
+        "support_score": 0.9999999928227965,
+        "evidence_ids": [
+          "doc_5"
+        ],
+        "slot_name": "birth_city",
+        "slot_role": "bridge_entity",
+        "terminal": false,
+        "derived_from_state": "state_2",
+        "diffusion_delta": -0.013523888054837063,
+        "diffusion_gain": 0.0
+      }
+    }
+  ],
+  "edges": [
+    {
+      "source": "state_1",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.9999999930971981
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.271898192756942
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.017629304066121575
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.8799999913901771
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.04689887815542571
+    },
+    {
+      "source": "state_1",
+      "target": "state_2",
+      "edge_type": "refines",
+      "weight": 1.0
+    },
+    {
+      "source": "state_1",
+      "target": "state_3",
+      "edge_type": "refines",
+      "weight": 0.94
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.9999999930971981
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.9999999928227965
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.6803633830166739
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.6803633830166739
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.9999999928227965
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.271898192756942
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.017629304066121575
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.9999999955984203
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.9999999955984203
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.8799999913901771
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_3",
+      "edge_type": "recalls",
+      "weight": 0.8799999913575839
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "memory_mem_4",
+      "edge_type": "recalls",
+      "weight": 0.8799999913575839
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.04689887815542571
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.9999999928227965
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.09802493073053013
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.00578379204378942
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_2",
+      "target": "memory_mem_5",
+      "edge_type": "derives",
+      "weight": 0.9999999928227965
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.09802493073053013
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.09802493073053013
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.00578379204378942
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.00578379204378942
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.9999999955984203
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.6803633830166739
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_10",
+      "edge_type": "supports",
+      "weight": 0.1480587962041853
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_3",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.8799999913575839
+    },
+    {
+      "source": "state_3",
+      "target": "memory_mem_4",
+      "edge_type": "derives",
+      "weight": 0.95
+    },
+    {
+      "source": "kg_doc_10",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.1480587962041853
+    },
+    {
+      "source": "kg_doc_10",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.1480587962041853
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "state_3",
+      "edge_type": "recalls",
+      "weight": 0.95
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.9999999955984203
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.6803633830166739
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_10",
+      "edge_type": "supports",
+      "weight": 0.1480587962041853
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.8799999913575839
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "state_2",
+      "edge_type": "recalls",
+      "weight": 0.9999999928227965
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.9999999928227965
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.09802493073053013
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.00578379204378942
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.0
+    }
+  ]
+}

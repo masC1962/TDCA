@@ -1,0 +1,358 @@
+{
+  "nodes": [
+    {
+      "node_id": "state_1",
+      "node_type": "state",
+      "content": "Which professional sports team does not play their home games at the same location where the Amateur Boxing Golden Gloves event is held?",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.6340760015998956,
+      "temperature": 1.1970069870146118,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.8299999921658285,
+        "evidence_support": 0.499999976958319,
+        "memory_usefulness": 0.5139667766205794,
+        "answerability": 0.7499999884791595,
+        "uncertainty": 0.21000000414750258
+      },
+      "metadata": {
+        "diffusion_delta": 0.3119240928623751,
+        "diffusion_gain": 0.3119240928623751
+      }
+    },
+    {
+      "node_id": "kg_doc_14",
+      "node_type": "kg",
+      "content": "The annual United States Open Tennis Championships is one of the world's four Grand Slam tennis tournaments and is held at the National Tennis Center in Flushing Meadows-Corona Park, Queens. The New York Marathon is one of the world's largest, and the 2004–2006 events hold the top three places in the marathons with the largest number of finishers, including 37,866 finishers in 2006. The Millrose Games is an annual track and field meet whose featured event is the Wanamaker Mile. Boxing is also a prominent part of the city's sporting scene, with events like the Amateur Boxing Golden Gloves being held at Madison Square Garden each year. The city is also considered the host of the Belmont Stakes, the last, longest and oldest of horse racing's Triple Crown races, held just over the city's border at Belmont Park on the first or second Sunday of June. The city also hosted the 1932 U.S. Open golf tournament and the 1930 and 1939 PGA Championships, and has been host city for both events several times, most notably for nearby Winged Foot Golf Club.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.999999953916638,
+      "temperature": 0.999999953916638,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "New York City",
+        "raw_score": 0.21226441576172705,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_6",
+      "node_type": "kg",
+      "content": "Buvik Idrettslag is a multi-sports team from Buvik in Skaun, Norway. In 2012, the club's first football team played in the Second Division, having won their Third Division conference in 2011. The team was, however, relegated after only one season in the Second Division. They play their home games at Buvik Stadion.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0,
+      "temperature": 0.0,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Buvik IL",
+        "raw_score": 0.14597804142389165,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_5",
+      "node_type": "kg",
+      "content": "The Men's 2013 European Amateur Boxing Championships were held in Minsk, Belarus from June 1 to June 8, 2013. It is the 40th edition of this biennial competition organised by the European governing body for amateur boxing, the EUBC.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0,
+      "temperature": 0.0,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "2013 European Amateur Boxing Championships",
+        "raw_score": 0.13856716366384603,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_13",
+      "node_type": "kg",
+      "content": "Vermont Lady Voltage was a professional American women’s soccer team, founded in 2005, which is a member of the United Soccer Leagues W-League. Voltage played in the Northern Division of the Central Conference. They play their home games at the Collins-Perley Sports Complex in the city of St. Albans, Vermont, 27 miles north of the state's largest city, Burlington. The team's colors are black and white, and gold and blue. The team was a sister organization of the men's Vermont Voltage team, which plays in the USL Premier Development League.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0,
+      "temperature": 0.0,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Vermont Lady Voltage",
+        "raw_score": 0.14783350140429072,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "memory_mem_1",
+      "node_type": "memory",
+      "content": "Template: for compositional multi-hop questions, first solve the intermediate entity and then ask for the final attribute.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9599999038694302,
+      "temperature": 0.8074250931459561,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.96,
+        "tag": "compositional_template",
+        "memory_kind": "template",
+        "raw_score": 0.4665410287431425,
+        "source": "memory",
+        "diffusion_delta": -0.05258998357365585,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "memory_mem_3",
+      "node_type": "memory",
+      "content": "Template: when evidence already grounds the answer, switch from branching to short verification and synthesis.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.8799999914546318,
+      "temperature": 0.4980576150392075,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.88,
+        "tag": "verification_then_stop",
+        "memory_kind": "template",
+        "raw_score": 1.7127372972387778,
+        "source": "memory",
+        "diffusion_delta": -0.13929084396872377,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "kg_doc_1",
+      "node_type": "kg",
+      "content": "The club also owned and operated a professional basketball team, by the name of Everton Tigers, who compete in the elite British Basketball League. The team was launched in the summer of 2007 as part of the clubs' Community programme, and play their home games at the Greenbank Sports Academy. The team was an amalgam of the Toxteth Tigers community youth programme which started in 1968. The team quickly became one of the most successful in the league winning the BBL Cup in 2009 and the play-offs in 2010. However Everton withdrew funding before the 2010–11 season and the team was re launched as the Mersey Tigers.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0,
+      "temperature": 0.0,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Everton F.C.",
+        "raw_score": 0.15537062484265565,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "memory_mem_4",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'Which professional sports team does not play their home games at the same location where the Amateur Boxing Golden Gloves event is held' is New York City.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.999999953916638,
+      "temperature": 1.2874458896493584,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "intermediate_answer",
+        "target_question": "Which professional sports team does not play their home games at the same location where the Amateur Boxing Golden Gloves event is held?",
+        "target_question_norm": "which professional sports team does not play their home games at the same location where the amateur boxing golden gloves event is held",
+        "relation_signature": "comparison",
+        "answer_text": "New York City",
+        "support_score": 0.999999953916638,
+        "evidence_ids": [
+          "doc_14"
+        ],
+        "slot_name": "",
+        "slot_type": "",
+        "slot_role": "",
+        "terminal": false,
+        "path_terminal": false,
+        "composition_kind": "",
+        "derived_from_state": "state_1",
+        "diffusion_delta": 0.1107379554724377,
+        "diffusion_gain": 0.1107379554724377
+      }
+    }
+  ],
+  "edges": [
+    {
+      "source": "state_1",
+      "target": "kg_doc_14",
+      "edge_type": "supports",
+      "weight": 0.999999953916638
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_13",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.9599999038694302
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.06793364937172863
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_4",
+      "edge_type": "derives",
+      "weight": 0.999999953916638
+    },
+    {
+      "source": "kg_doc_14",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.999999953916638
+    },
+    {
+      "source": "kg_doc_14",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.999999953916638
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_13",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_13",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.9599999038694302
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "memory_mem_4",
+      "edge_type": "recalls",
+      "weight": 0.9599999038694302
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.06793364937172863
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "memory_mem_4",
+      "edge_type": "recalls",
+      "weight": 0.06793364937172863
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.999999953916638
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_14",
+      "edge_type": "supports",
+      "weight": 0.999999953916638
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_13",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.9599999038694302
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.06793364937172863
+    }
+  ]
+}

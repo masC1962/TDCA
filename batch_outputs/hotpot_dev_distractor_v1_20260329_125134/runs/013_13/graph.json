@@ -1,0 +1,918 @@
+{
+  "nodes": [
+    {
+      "node_id": "state_1",
+      "node_type": "state",
+      "content": "Are Random House Tower and 888 7th Avenue both used for real estate?",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.7611675384513863,
+      "temperature": 0.41050110345101853,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.9072639241022212,
+        "evidence_support": 0.7423997891728368,
+        "memory_usefulness": 0.7324343827589508,
+        "answerability": 0.7511998945864184,
+        "uncertainty": 0.14121603373234612
+      },
+      "metadata": {
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "kg_doc_5",
+      "node_type": "kg",
+      "content": "Title: Random House Tower. The Random House Tower, also known as the Park Imperial Apartments, is a 52-story mixed-use tower in New York City, United States, that is used as the headquarters of book publisher Random House and a luxury apartment complex. The book publisher entrance is on Broadway and goes up to 27 floors, while the apartment complex entrance is on West 56th Street.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.999999996867517,
+      "temperature": 0.999999996867517,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Random House Tower",
+        "raw_score": 12.532698462405111,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_8",
+      "node_type": "kg",
+      "content": "Title: Real estate technology. Real Estate Technology or Property Technology, often referred to as (\"RE Tech\") or (\"Proptech\"), is an economic industry composed of companies which use technology to make real estate transactions more efficient. Real estate technology is a sub-category under financial technology as real estate is an asset class which represents a significant investment. Besides for own stay, there are investors who generate income and capital gains by investing in different categories of Real Estate properties over time - They are broadly residential, commercial and industrial. Historically used as a more tactical investment or for providing portfolio alpha, real estate has been used as part of a long-term core strategy due to increased market efficiency and increasing concerns about the future long-term variability of stock and bond returns. In fact, real estate is known for its ability to serve as a portfolio diversifier and inflation hedge.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.4847995895157056,
+      "temperature": 0.4847995895157056,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Real estate technology",
+        "raw_score": 9.791462882411905,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_4",
+      "node_type": "kg",
+      "content": "Title: 888 7th Avenue. 888 7th Avenue is a 628 ft (191m) tall modern-style office skyscraper in Midtown Manhattan which was completed in 1969 and has 46 floors. Emery Roth & Sons designed the building, which is tied with Central Park Place for the 65th tallest building in New York City. It currently carries the Vornado Realty Trust corporate headquarters. Previously known as the Arlen Building, its namesake being the company responsible for its construction, Arlen Realty & Development Corporation. The Red Eye Grill is located in the building at street level.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999875857667,
+      "temperature": 0.9999999875857667,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "888 7th Avenue",
+        "raw_score": 6.169821185372953,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_3",
+      "node_type": "kg",
+      "content": "Title: Villard (imprint). Villard, also known as Villard Books, is a publishing imprint of Random House, one of the largest publishing companies in the world. It was founded in 1983. Villard began as an independent imprint of Random House and is currently a sub-imprint of Ballantine Books, itself an imprint of Random House. It was named after a Stanford White brownstone mansion on Madison Avenue that was the home of Random House for twenty years.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.49583416590378887,
+      "temperature": 0.49583416590378887,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Villard (imprint)",
+        "raw_score": 8.131899952727643,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "memory_tmpl_1",
+      "node_type": "memory",
+      "content": "Template: for compositional multi-hop questions, first solve the intermediate entity and then ask for the final attribute.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9599999937824346,
+      "temperature": 0.9599999937824346,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.96,
+        "tag": "compositional_template",
+        "memory_kind": "template",
+        "raw_score": 1.1694598985721316,
+        "source": "memory"
+      }
+    },
+    {
+      "node_id": "memory_tmpl_3",
+      "node_type": "memory",
+      "content": "Template: when evidence already grounds the answer, switch from branching to short verification and synthesis.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.87999999613347,
+      "temperature": 0.87999999613347,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.88,
+        "tag": "verification_then_stop",
+        "memory_kind": "template",
+        "raw_score": 2.275942503844848,
+        "source": "memory"
+      }
+    },
+    {
+      "node_id": "memory_tmpl_2",
+      "node_type": "memory",
+      "content": "Template: for comparison questions, split the problem into one sub-question per entity before comparing them.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.5617102682097569,
+      "temperature": 0.5617102682097569,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.9,
+        "tag": "comparison_template",
+        "memory_kind": "template",
+        "raw_score": 0.8481756060799154,
+        "source": "memory"
+      }
+    },
+    {
+      "node_id": "memory_tmpl_4",
+      "node_type": "memory",
+      "content": "Template: for nested relation questions, solve the intermediate relation first, then query the target attribute, then verify the chain.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.758776425066481,
+      "temperature": 0.758776425066481,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.758776433441565,
+        "source": "tdca_run",
+        "kind": "strategy_template",
+        "memory_kind": "template",
+        "raw_score": 1.358988931213934
+      }
+    },
+    {
+      "node_id": "state_2",
+      "node_type": "state",
+      "content": "What is the height of the 888 7th Avenue?",
+      "depth": 1,
+      "parent_id": "state_1",
+      "value": 0.6518857521602677,
+      "temperature": 0.36363294122494144,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.608747281855905,
+        "evidence_support": 0.7678877487450353,
+        "memory_usefulness": 0.7924458410580982,
+        "answerability": 0.6900977205263638,
+        "uncertainty": 0.13713796020079436
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_4",
+          "doc_6",
+          "doc_10",
+          "doc_2"
+        ],
+        "memory_ids": [
+          "tmpl_4",
+          "tmpl_1",
+          "tmpl_3",
+          "tmpl_2"
+        ]
+      }
+    },
+    {
+      "node_id": "kg_doc_6",
+      "node_type": "kg",
+      "content": "Title: Pershing Square Capital Management. Pershing Square Capital Management is an American hedge fund management company founded and run by Bill Ackman, located at 888 7th Avenue in New York.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.535775509904304,
+      "temperature": 0.535775509904304,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Pershing Square Capital Management",
+        "raw_score": 4.816508750752763,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_10",
+      "node_type": "kg",
+      "content": "Title: South Phoenix. South Phoenix is a region of Phoenix, Arizona, with the boundaries of the Gila River Indian Community to the south and west, 48th Street or Interstate-10 (Phoenix/Tempe and Phoenix/Chandler borders) to the east, and the Salt River to the north. This area includes Phoenix's following Urban Villages: South Mountain Village (aka South Mountain District) along with Laveen Village and Ahwatukee Village. The area is sometimes simply referred to as \"the Southside\" by its residents. Major arterial east-west streets include Broadway Road, Southern Avenue, Baseline Road, Dobbins Road, Elliott Road, Warner Road, Chandler Boulevard, and Pecos Road, most of which connect South Phoenix with the suburbs of Tempe and Chandler. Major arterial south-north streets include 24th Street, 16th Street, 7th Street, Central Avenue, 7th Avenue, and 19th Avenue connecting South Mountain Village to Central and North Phoenix; 27th Avenue, 35th Avenue, 43rd Avenue, 51st Avenue, 59th Avenue, 67th Avenue, and 75th Avenue connecting Laveen to west Phoenix; and 32nd Street, 40th Street, and 48th Street connecting South Mountain Village to east Phoenix and Tempe.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.10265552260559789,
+      "temperature": 0.10265552260559789,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "South Phoenix",
+        "raw_score": 4.036574590793544,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_2",
+      "node_type": "kg",
+      "content": "Title: Hounsfield Heights/Briar Hill, Calgary. Hounsfield Heights/Briar Hill is an inner suburban neighbourhood in northwest Calgary, Alberta, Canada. Located north of the Hillhurst and West Hillhurst communities, the boundaries of the district are 16th Avenue N (Trans-Canada Highway)to the north; 14th Street W to the east; Lane north of 7th Avenue N to 19th Street W and 8th Avenue N to the south; and Crowchild Trail, 12th Avenue N, Juniper Road, and 22nd Street W to the west. Lions Park C-Train station is located within the community. The community is built on an escarpment and is popular for its views of downtown to the south and the Rocky Mountains to the west.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0,
+      "temperature": 0.0,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Hounsfield Heights/Briar Hill, Calgary",
+        "raw_score": 3.8124540800338504,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "state_3",
+      "node_type": "state",
+      "content": "What is the primary use of the Random House Tower?",
+      "depth": 1,
+      "parent_id": "state_1",
+      "value": 0.6101698307488332,
+      "temperature": 0.3931706877967197,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.6015578416065274,
+        "evidence_support": 0.7479170813856529,
+        "memory_usefulness": 0.5296552144612535,
+        "answerability": 0.6801123868466726,
+        "uncertainty": 0.14033326697829554
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_5",
+          "doc_3",
+          "doc_7",
+          "doc_9"
+        ],
+        "memory_ids": [
+          "tmpl_5",
+          "tmpl_4",
+          "tmpl_1",
+          "tmpl_3",
+          "tmpl_2"
+        ]
+      }
+    },
+    {
+      "node_id": "kg_doc_7",
+      "node_type": "kg",
+      "content": "Title: Carl B. Stokes United States Courthouse. The Carl B. Stokes Federal Court House Building is a skyscraper located in downtown Cleveland, Ohio. It is also known as the Carl B. Stokes Federal Court House Tower, Federal Court House Tower, and the Stokes Tower. The 23-story building is 430 ft tall and is located at the corner of Huron Road and Superior Avenue. It is currently the fourth tallest United States courthouse in the country.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.3017912048566759,
+      "temperature": 0.3017912048566759,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Carl B. Stokes United States Courthouse",
+        "raw_score": 6.184194863327285,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_9",
+      "node_type": "kg",
+      "content": "Title: Loan modification in the United States. Loan modification is the systematic alteration of mortgage loan agreements that help those having problems making the payments by reducing interest rates, monthly payments or principal balances. Lending institutions could make one or more of these changes to relieve financial pressure on borrowers to prevent the condition of foreclosure. Loan modifications have been practiced in the United States since The 2008 Crash Of The Housing Market from Washington Mutual, Chase Home Finance, Chase, JP Morgan & Chase, other contributors like MER's. Crimes of Mortgage ad Real Estate Staff had long assisted nd finally the squeaky will could not continue as their deviant practices broke the state and crashed. Modification owners either ordered by The United States Department of Housing, The United States IRS or President Obamas letters from Note Holders came to those various departments asking for the Democratic process to help them keep their homes and protection them from explosion. Thus the birth of Modifications. It is yet to date for clarity how theses enforcements came into existence and except b whom, but t is certain that note holders form the Midwest reached out in the Democratic Process for assistance. FBI Mortgage Fraud Department came into existence. Modifications HMAP HARP were also birthed to help note holders get Justice through reduced mortgage by making terms legal. Modification of mortgage terms was introduced by IRS staff addressing the crisis called the HAMP TEAMS that went across the United States desiring the new products to assist homeowners that were victims of predatory lending practices, unethical staff, brokers, attorneys and lenders that contributed to the crash. Modification were a fix to the crash as litigation has ensued as the lenders reorganized and renamed the lending institutions and government agencies are to closely monitor them. Prior to modifications loan holders that experiences crisis would use Loan assumptions and Loan transfers to keep the note in the 1930s. During the Great Depression, loan transfers, loan assumption, and loan bail out programs took place at the state level in an effort to reduce levels of loan foreclosures while the Federal Bureau of Investigation, Federal Trade Commission, Comptroller, the United States Government and State Government responded to lending institution violations of law in these arenas by setting public court records that are legal precedence of such illegal actions. The legal precedents and reporting agencies were created to address the violations of laws to consumers while the Modifications were created to assist the consumers that are victims of predatory lending practices. During the so-called \"Great Recession\" of the early 21st century, loan modification became a matter of national policy, with various actions taken to alter mortgage loan terms to prevent further economic destabilization. Due to absorbent personal profits nothing has been done to educate Homeowners or Creditors that this money from equity, escrow is truly theirs the Loan Note Holder and it is their monetary rights as the real prize and reason for the Housing Crash was the profit n obtaining the mortgage holders Escrow. The Escrow and Equity that is accursed form the Note Holders payments various staff through the United States claimed as recorded and cashed by all staff in real-estate from local residential Tax Assessing Staff, Real Estate Staff, Ordinance Staff, Police Staff, Brokers, attorneys, lending institutional staff but typically Attorneys who are also typically the owners or Rental properties that are trained through Bankruptcies'. that collect the Escrow that is rightfully the Homeowners but because most Homeowners are unaware of what money is due them and how they can loose their escrow. Most Creditors are unaware that as the note holder that the Note Holder are due a annual or semi annual equity check and again bank or other lending and or legal intuitions staff claim this monies instead. This money Note Holders were unaware of is the prize of real estate and the cause of the Real Estate Crash of 2008 where Lending Institutions provided mortgages to people years prior they know they would eventually loose with Loan holders purchasing Balloon Mortgages lending product that is designed to make fast money off the note holder whom is always typically unaware of their escrow, equity and that are further victimized by conferences and books on HOW TO MAKE MONEY IN REAL STATE - when in fact the money is the Note Holder. The key of the crash was not the House, but the loan product used and the interest and money that was accrued form the note holders that staff too immorally. The immoral and illegal actions of predatory lending station and their staff began with the inception of balloon mortgages although illegal activity has always existed in the arena, yet the crash created \"Watch Dog\" like HAMP TEAM, IRS, COMPTROLLER< Federal Trade Commission Consumer Protection Bureau, FBI, CIA, Local Police Department, ICE ( The FBI online Computer crime division receives and investigates computer crimes that record keeping staff from title companies, lending institutional staff, legal staff and others created fraudulent documents to change payments and billing of note holders to obtain the money note holders are typically unaware of) and other watch dog agencies came into existence to examine if houses were purchased through a processed check at Government Debited office as many obtained free homes illegally. Many were incarcerated for such illegal actions. Modifications fixed the Notes to proper lower interest, escrow, tax fees that staff typically raised for no reason. Many people from various arenas involved in reals estate have been incarcerated for these actions as well as other illegal actions like charging for a modification. Additionally Modifications were also made to address the falsifications such as inappropriate mortgage charges, filing of fraudulently deeds, reporting of and at times filing of fraudulent mortgages that were already paid off that were fraudulently continued by lenders staff and attorneys or brokers or anyone in the Real Estate Chain through the issues of real estate terms to continue to violate United States Laws, contract law and legal precedence where collusion was often done again to defraud and steal from the Note Holder was such a common practice that was evidence as to why the Mortgage Crash in 2008 occurred for the purpose of wining the prize of stealing form Homeowners and those that foreclosed was actually often purposefully for these monies note holders were unaware of to be obtained which was why Balloon mortgages and loans were given to the staff in the Real Estate Market with the hoper and the expectation that the loan holders would default as it offered opportunity to commit illegal transactions of obtaining the homeowners funds. While such scams were addressed through modifications in 2008. The Market relied heavily on Consumers ignorance to prosper, ignorance of real estate terms, ignorance on what they were to be charged properly for unethical financial gain and while staff in real estates lending arenas mingled terms to deceive y deliberate confusion consumers out of cash and homes while the USA Government provided Justice through President Obamas Inception and IRS Inception of Modifications which addressed these unethical profits in Reals Estate. It was in 2009 that HARP, HAMP and Modifications were introduced to stop the victimization of Note Holders. Taking on the Banks that ran USA Government was a great and dangerous undertaking that made America Great Again as Justice for Consumers reigned. Legal action taken against institutions that have such business practices can be viewed in State Code of Law and Federal Law on precedent cases that are available to the public. Finally, It had been unlawful to be charged by an attorney to modify as well as fro banking staff to modify terms to increase a mortgage and or change lending product to a balloon in an concerted effort to make homeowner foreclose which is also illegal, computer fraud and not the governments intended purpose or definition of a modification.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.021660228549760515,
+      "temperature": 0.021660228549760515,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Loan modification in the United States",
+        "raw_score": 6.281260013917068,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "memory_tmpl_5",
+      "node_type": "memory",
+      "content": "Template: use KG-grounded decomposition before final answer synthesis.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.8325952794658693,
+      "temperature": 0.8325952794658693,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.8325952867710287,
+        "source": "tdca_run",
+        "kind": "strategy_template",
+        "memory_kind": "template",
+        "raw_score": 1.7051863547321335
+      }
+    },
+    {
+      "node_id": "state_4",
+      "node_type": "state",
+      "content": "Does the evidence support that What is the height of the 888 7th Avenue?",
+      "depth": 2,
+      "parent_id": "state_2",
+      "value": 0.5793355761074154,
+      "temperature": 0.4725077399058194,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.5852307018336096,
+        "evidence_support": 0.7025639153497703,
+        "memory_usefulness": 0.666536645640288,
+        "answerability": 0.6574358038287312,
+        "uncertainty": 0.14758977354403677
+      },
+      "metadata": {
+        "kind": "verification",
+        "evidence_ids": [
+          "doc_4",
+          "doc_6",
+          "doc_10",
+          "doc_2"
+        ],
+        "memory_ids": [
+          "tmpl_3",
+          "tmpl_4",
+          "tmpl_1",
+          "tmpl_2"
+        ]
+      }
+    },
+    {
+      "node_id": "memory_mem_6",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'Are Random House Tower and 888 7th Avenue both used for real estate' is Yes.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.7912,
+      "temperature": 0.9580356612261358,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "answer_candidate",
+        "target_question": "Are Random House Tower and 888 7th Avenue both used for real estate?",
+        "target_question_norm": "are random house tower and 888 7th avenue both used for real estate",
+        "relation_signature": "generic",
+        "answer_text": "Yes",
+        "support_score": 0.7423997891728368,
+        "evidence_ids": [
+          "doc_5"
+        ],
+        "derived_from_state": "state_1",
+        "diffusion_gain": 0.0
+      }
+    }
+  ],
+  "edges": [
+    {
+      "source": "state_1",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.9999999888299679
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_8",
+      "edge_type": "supports",
+      "weight": 0.4847995895157056
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.005008965916654831
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_1",
+      "target": "memory_tmpl_1",
+      "edge_type": "recalls",
+      "weight": 0.9599999937824346
+    },
+    {
+      "source": "state_1",
+      "target": "memory_tmpl_3",
+      "edge_type": "recalls",
+      "weight": 0.5048687717354671
+    },
+    {
+      "source": "state_1",
+      "target": "memory_tmpl_2",
+      "edge_type": "recalls",
+      "weight": 0.30876588174226394
+    },
+    {
+      "source": "state_1",
+      "target": "memory_tmpl_4",
+      "edge_type": "recalls",
+      "weight": 0.239668010293694
+    },
+    {
+      "source": "state_1",
+      "target": "state_2",
+      "edge_type": "refines",
+      "weight": 0.8
+    },
+    {
+      "source": "state_1",
+      "target": "state_3",
+      "edge_type": "refines",
+      "weight": 0.7
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_6",
+      "edge_type": "derives",
+      "weight": 0.86
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.9999999888299679
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.999999996867517
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.9999999888299679
+    },
+    {
+      "source": "kg_doc_8",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.4847995895157056
+    },
+    {
+      "source": "kg_doc_8",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.4847995895157056
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.005008965916654831
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.9999999875857667
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.9999999875234687
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.005008965916654831
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.49583416590378887
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_tmpl_1",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.9599999937824346
+    },
+    {
+      "source": "memory_tmpl_1",
+      "target": "state_2",
+      "edge_type": "recalls",
+      "weight": 0.8261152570497154
+    },
+    {
+      "source": "memory_tmpl_1",
+      "target": "state_3",
+      "edge_type": "recalls",
+      "weight": 0.18041191494260164
+    },
+    {
+      "source": "memory_tmpl_1",
+      "target": "state_4",
+      "edge_type": "recalls",
+      "weight": 0.49328201208942307
+    },
+    {
+      "source": "memory_tmpl_1",
+      "target": "memory_mem_6",
+      "edge_type": "recalls",
+      "weight": 0.9599999937824346
+    },
+    {
+      "source": "memory_tmpl_3",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.5048687717354671
+    },
+    {
+      "source": "memory_tmpl_3",
+      "target": "state_2",
+      "edge_type": "recalls",
+      "weight": 0.5654664852172043
+    },
+    {
+      "source": "memory_tmpl_3",
+      "target": "state_3",
+      "edge_type": "recalls",
+      "weight": 0.0129083520368791
+    },
+    {
+      "source": "memory_tmpl_3",
+      "target": "state_4",
+      "edge_type": "recalls",
+      "weight": 0.87999999613347
+    },
+    {
+      "source": "memory_tmpl_3",
+      "target": "memory_mem_6",
+      "edge_type": "recalls",
+      "weight": 0.5048687717354671
+    },
+    {
+      "source": "memory_tmpl_2",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.30876588174226394
+    },
+    {
+      "source": "memory_tmpl_2",
+      "target": "state_2",
+      "edge_type": "recalls",
+      "weight": 0.5617102682097569
+    },
+    {
+      "source": "memory_tmpl_2",
+      "target": "state_3",
+      "edge_type": "recalls",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_tmpl_2",
+      "target": "state_4",
+      "edge_type": "recalls",
+      "weight": 0.3354030432791336
+    },
+    {
+      "source": "memory_tmpl_4",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.239668010293694
+    },
+    {
+      "source": "memory_tmpl_4",
+      "target": "state_2",
+      "edge_type": "recalls",
+      "weight": 0.758776425066481
+    },
+    {
+      "source": "memory_tmpl_4",
+      "target": "state_3",
+      "edge_type": "recalls",
+      "weight": 0.22671514945663765
+    },
+    {
+      "source": "memory_tmpl_4",
+      "target": "state_4",
+      "edge_type": "recalls",
+      "weight": 0.453073295147106
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.9999999875857667
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.535775509904304
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_10",
+      "edge_type": "supports",
+      "weight": 0.10265552260559789
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_2",
+      "target": "memory_tmpl_4",
+      "edge_type": "recalls",
+      "weight": 0.758776425066481
+    },
+    {
+      "source": "state_2",
+      "target": "memory_tmpl_1",
+      "edge_type": "recalls",
+      "weight": 0.8261152570497154
+    },
+    {
+      "source": "state_2",
+      "target": "memory_tmpl_3",
+      "edge_type": "recalls",
+      "weight": 0.5654664852172043
+    },
+    {
+      "source": "state_2",
+      "target": "memory_tmpl_2",
+      "edge_type": "recalls",
+      "weight": 0.5617102682097569
+    },
+    {
+      "source": "state_2",
+      "target": "state_4",
+      "edge_type": "verifies",
+      "weight": 0.38
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.535775509904304
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.40512784317607187
+    },
+    {
+      "source": "kg_doc_10",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.10265552260559789
+    },
+    {
+      "source": "kg_doc_10",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.0950723828528216
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.999999996867517
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.49583416590378887
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.3017912048566759
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_3",
+      "target": "memory_tmpl_5",
+      "edge_type": "recalls",
+      "weight": 0.8325952794658693
+    },
+    {
+      "source": "state_3",
+      "target": "memory_tmpl_4",
+      "edge_type": "recalls",
+      "weight": 0.22671514945663765
+    },
+    {
+      "source": "state_3",
+      "target": "memory_tmpl_1",
+      "edge_type": "recalls",
+      "weight": 0.18041191494260164
+    },
+    {
+      "source": "state_3",
+      "target": "memory_tmpl_3",
+      "edge_type": "recalls",
+      "weight": 0.0129083520368791
+    },
+    {
+      "source": "state_3",
+      "target": "memory_tmpl_2",
+      "edge_type": "recalls",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.3017912048566759
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_tmpl_5",
+      "target": "state_3",
+      "edge_type": "recalls",
+      "weight": 0.8325952794658693
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.9999999875234687
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.40512784317607187
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_10",
+      "edge_type": "supports",
+      "weight": 0.0950723828528216
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_4",
+      "target": "memory_tmpl_3",
+      "edge_type": "recalls",
+      "weight": 0.87999999613347
+    },
+    {
+      "source": "state_4",
+      "target": "memory_tmpl_4",
+      "edge_type": "recalls",
+      "weight": 0.453073295147106
+    },
+    {
+      "source": "state_4",
+      "target": "memory_tmpl_1",
+      "edge_type": "recalls",
+      "weight": 0.49328201208942307
+    },
+    {
+      "source": "state_4",
+      "target": "memory_tmpl_2",
+      "edge_type": "recalls",
+      "weight": 0.3354030432791336
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.86
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.9999999888299679
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.005008965916654831
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_8",
+      "edge_type": "supports",
+      "weight": 0.4847995895157056
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "memory_tmpl_1",
+      "edge_type": "recalls",
+      "weight": 0.9599999937824346
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "memory_tmpl_3",
+      "edge_type": "recalls",
+      "weight": 0.5048687717354671
+    }
+  ]
+}

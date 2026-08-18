@@ -1,0 +1,596 @@
+{
+  "nodes": [
+    {
+      "node_id": "state_1",
+      "node_type": "state",
+      "content": "Are Giuseppe Verdi and Ambroise Thomas both Opera composers ?",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.8796006622802494,
+      "temperature": 0.49237971167333305,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.9783163072875503,
+        "evidence_support": 0.9397675202431952,
+        "memory_usefulness": 0.8808931705022371,
+        "answerability": 0.8498837601215976,
+        "uncertainty": 0.10963719676108877
+      },
+      "metadata": {
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "kg_doc_6",
+      "node_type": "kg",
+      "content": "Title: Ambroise Thomas. Charles Louis Ambroise Thomas (5 August 1811 – 12 February 1896) was a French composer, best known for his operas \"Mignon\" (1866) and \"Hamlet\" (1868, after Shakespeare) and as Director of the Conservatoire de Paris from 1871 till his death.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999963857991,
+      "temperature": 0.9999999963857991,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Ambroise Thomas",
+        "raw_score": 4.109873089976666,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_7",
+      "node_type": "kg",
+      "content": "Title: Armand Castelmary. Armand Castelmary, real name Comte Armand de Castan, born Toulouse 16 August 1834, died New York City 10 February 1897, was a French operatic bass. He created roles in three major premieres at the Paris Opera – Don Diego in \"L'Africaine\" by Meyerbeer (1865), the Monk in Verdi's \"Don Carlos\" (1867), and Horatio in Ambroise Thomas's \"Hamlet\" (1868). Castelmary also appeared at opera houses in England and the United States, and died onstage at the Metropolitan Opera House, New York, during a performance of \"Martha\" by Friedrich von Flotow.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.8996610127412213,
+      "temperature": 0.8996610127412213,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Armand Castelmary",
+        "raw_score": 3.595288016249076,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_8",
+      "node_type": "kg",
+      "content": "Title: Ferdinando Provesi. Ferdinando Angelo Maria Provesi (1770 – 1833) was a native of Parma, Italy. He was regarded as one of the greatest Italian opera composers of the era . Provesi is best known as being an early tutor of Giuseppe Verdi when he was the \"Maestro di cappella\" (master of music) at the St. Bartolomeo cathedral in Busseto (the town very close to Le Roncole, the village where Verdi was born.) Provesi was also director of the municipal music school and local Philharmonic Society. He began teaching Verdi in 1824 when the future composer was 11 years old.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.2252150097787588,
+      "temperature": 0.2252150097787588,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Ferdinando Provesi",
+        "raw_score": 3.188949634166531,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_1",
+      "node_type": "kg",
+      "content": "Title: Bernhard Bötel. Bernhard Bötel (1883–1953) was a German operatic tenor and actor who had an active career in Germany and Austria during the first half of the 20th century. He made recordings for several record labels during the early years of the recording industry, including His Master's Voice, Odeon Records, Polydor Records, Tri-Ergon, and Vox Records. On the stage he sang a variety of roles in operas and operettas from leading parts to comprimario roles. His stage repertoire included Belmonte in Wolfgang Amadeus Mozart's \"Die Entführung aus dem Serail\", Chapelou in Adolphe Adam's \"Le postillon de Lonjumeau\", Count Almaviva in Gioachino Rossini's \"The Barber of Seville\", Daniel in Franz Lehár's \"The Merry Widow\", the Duke of Mantua in Giuseppe Verdi's \"Rigoletto\", Gabriel von Eisenstein in Johann Strauss II's \"Die Fledermaus\", Indigo in Strauss' \"Indigo und die vierzig Räuber\", Jeník in Bedřich Smetana's \"The Bartered Bride\", Paolino in Domenico Cimarosa's \"Il matrimonio segreto\", Pâris in Jacques Offenbach's \"La belle Hélène\", Pietro in Franz von Suppé's \"Boccaccio\", and Wilhelm Meister in Ambroise Thomas' \"Mignon\".",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999998962357126,
+      "temperature": 0.9999998962357126,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Bernhard Bötel",
+        "raw_score": 1.734555397238271,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "memory_tmpl_3",
+      "node_type": "memory",
+      "content": "Template: when evidence already grounds the answer, switch from branching to short verification and synthesis.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.8799999948045011,
+      "temperature": 0.8799999948045011,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.88,
+        "tag": "verification_then_stop",
+        "memory_kind": "template",
+        "raw_score": 1.693773789553465,
+        "source": "memory"
+      }
+    },
+    {
+      "node_id": "memory_tmpl_1",
+      "node_type": "memory",
+      "content": "Template: for compositional multi-hop questions, first solve the intermediate entity and then ask for the final attribute.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.8817863509387444,
+      "temperature": 0.8817863509387444,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.96,
+        "tag": "compositional_template",
+        "memory_kind": "template",
+        "raw_score": 0.38981996619071047,
+        "source": "memory"
+      }
+    },
+    {
+      "node_id": "kg_doc_2",
+      "node_type": "kg",
+      "content": "Title: Giuseppe Verdi (film). Giuseppe Verdi is a 1938 Italian biographical film directed by Carmine Gallone and starring Fosco Giachetti, Gaby Morlay and Germana Paolieri. The film portrays the life of the composer Giuseppe Verdi (1813-1901). The casting of Giachetti as Verdi was intended to emphasise the composer's patriotism, as he had recently played patriotic roles in films such as \"The White Squadron\". The film was made at the Cinecittà Studios in Rome. The film is also known by the alternative title The Life of Giuseppe Verdi.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0,
+      "temperature": 0.0,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Giuseppe Verdi (film)",
+        "raw_score": 0.8939622044428008,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "state_3",
+      "node_type": "state",
+      "content": "Did Giuseppe Verdi compose operas?",
+      "depth": 1,
+      "parent_id": "state_1",
+      "value": 0.4345499268984118,
+      "temperature": 0.3595354417559327,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.5425181995732836,
+        "evidence_support": 0.5934147519010965,
+        "memory_usefulness": 0.0,
+        "answerability": 0.5211518203949926,
+        "uncertainty": 0.16505363969582457
+      },
+      "metadata": {
+        "kind": "verification",
+        "evidence_ids": [
+          "doc_1",
+          "doc_5",
+          "doc_4",
+          "doc_2"
+        ],
+        "memory_ids": []
+      }
+    },
+    {
+      "node_id": "kg_doc_5",
+      "node_type": "kg",
+      "content": "Title: Teatro Giuseppe Verdi. Teatro Giuseppe Verdi (the Giuseppe Verdi Theatre) is a small opera house located in a wing of the Rocca dei Marchesi Pallavicino on the Piazza Giuseppe Verdi in Busseto, Italy, a town closely associated with the life of the opera composer, Giuseppe Verdi. From the 13th century, the “rocca” or “fortress” was the family’s palace; it is now the city hall after being acquired by the municipality in 1856. The theatre opened on 15 August 1868 and seats 300.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.18682960756648034,
+      "temperature": 0.18682960756648034,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Teatro Giuseppe Verdi",
+        "raw_score": 1.2383021479385619,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_4",
+      "node_type": "kg",
+      "content": "Title: Giuseppe Verdi. Giuseppe Fortunino Francesco Verdi (] ; 9 or 10 October 1813 – 27 January 1901) was an Italian opera composer.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.10739847369975758,
+      "temperature": 0.10739847369975758,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Giuseppe Verdi",
+        "raw_score": 1.2157875634305881,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "state_4",
+      "node_type": "state",
+      "content": "What opera did Ambroise Thomas compose?",
+      "depth": 2,
+      "parent_id": "state_2",
+      "value": 0.6544466162610313,
+      "temperature": 0.4045578054219891,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.7148648787510878,
+        "evidence_support": 0.9486987372715405,
+        "memory_usefulness": 0.0,
+        "answerability": 0.7210160353024369,
+        "uncertainty": 0.10820820203655353
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_6",
+          "doc_7",
+          "doc_1",
+          "doc_9"
+        ],
+        "memory_ids": []
+      }
+    },
+    {
+      "node_id": "kg_doc_9",
+      "node_type": "kg",
+      "content": "Title: List of major opera composers. This list provides a guide to opera composers, as determined by their presence on a majority of compiled lists of significant opera composers. (See the \"Lists Consulted\" section for full details.) The composers run from Jacopo Peri, who wrote the first ever opera in late 16th century Italy, to John Adams, one of the leading figures in the contemporary operatic world. The brief accompanying notes offer an explanation as to why each composer has been considered major. Also included is a section about major women opera composers, compiled from the same lists. For an introduction to operatic history, see opera. The organisation of the list is by birthdate.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0,
+      "temperature": 0.0,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "List of major opera composers",
+        "raw_score": 1.6266591166561915,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "memory_tmpl_4",
+      "node_type": "memory",
+      "content": "Template: for nested relation questions, solve the intermediate relation first, then query the target attribute, then verify the chain.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.20293319265042423,
+      "temperature": 0.20293319265042423,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.758776433441565,
+        "source": "tdca_run",
+        "kind": "strategy_template",
+        "memory_kind": "template",
+        "raw_score": 0.45299631040464466
+      }
+    },
+    {
+      "node_id": "memory_tmpl_2",
+      "node_type": "memory",
+      "content": "Template: for comparison questions, split the problem into one sub-question per entity before comparing them.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.1502282547357013,
+      "temperature": 0.1502282547357013,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.9,
+        "tag": "comparison_template",
+        "memory_kind": "template",
+        "raw_score": 0.2827252020266385,
+        "source": "memory"
+      }
+    },
+    {
+      "node_id": "memory_mem_6",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'Are Giuseppe Verdi and Ambroise Thomas both Opera composers ' is Yes.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.8092326092978295,
+      "temperature": 1.0408318834083814,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "answer_candidate",
+        "target_question": "Are Giuseppe Verdi and Ambroise Thomas both Opera composers ?",
+        "target_question_norm": "are giuseppe verdi and ambroise thomas both opera composers",
+        "relation_signature": "generic",
+        "answer_text": "Yes",
+        "support_score": 0.9397675202431952,
+        "evidence_ids": [
+          "doc_6",
+          "doc_7"
+        ],
+        "derived_from_state": "state_1",
+        "diffusion_gain": 0.0
+      }
+    }
+  ],
+  "edges": [
+    {
+      "source": "state_1",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.9999999851001588
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.8795350553862317
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_8",
+      "edge_type": "supports",
+      "weight": 0.2252150097787588
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_1",
+      "target": "memory_tmpl_3",
+      "edge_type": "recalls",
+      "weight": 0.87999999006573
+    },
+    {
+      "source": "state_1",
+      "target": "memory_tmpl_1",
+      "edge_type": "recalls",
+      "weight": 0.8817863509387444
+    },
+    {
+      "source": "state_1",
+      "target": "state_3",
+      "edge_type": "verifies",
+      "weight": 0.7
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_6",
+      "edge_type": "derives",
+      "weight": 0.9397675202431952
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.9999999851001588
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.9999999938121231
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.9999999851001588
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.8795350553862317
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.8973974807309578
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.8795350553862317
+    },
+    {
+      "source": "kg_doc_8",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.2252150097787588
+    },
+    {
+      "source": "kg_doc_8",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.2252150097787588
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.9999998962357126
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.48219855538270323
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_tmpl_3",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.87999999006573
+    },
+    {
+      "source": "memory_tmpl_3",
+      "target": "memory_mem_6",
+      "edge_type": "recalls",
+      "weight": 0.87999999006573
+    },
+    {
+      "source": "memory_tmpl_1",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.8817863509387444
+    },
+    {
+      "source": "memory_tmpl_1",
+      "target": "memory_mem_6",
+      "edge_type": "recalls",
+      "weight": 0.8817863509387444
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.9999998962357126
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.18682960756648034
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.10739847369975758
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.18682960756648034
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.10739847369975758
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.9999999938121231
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.8973974807309578
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.48219855538270323
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.9397675202431952
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.9999999851001588
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.8795350553862317
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_8",
+      "edge_type": "supports",
+      "weight": 0.2252150097787588
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "memory_tmpl_1",
+      "edge_type": "recalls",
+      "weight": 0.8817863509387444
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "memory_tmpl_3",
+      "edge_type": "recalls",
+      "weight": 0.87999999006573
+    }
+  ]
+}

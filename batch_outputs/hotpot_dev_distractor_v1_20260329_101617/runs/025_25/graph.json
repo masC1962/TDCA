@@ -1,0 +1,1407 @@
+{
+  "nodes": [
+    {
+      "node_id": "state_1",
+      "node_type": "state",
+      "content": "Who was the writer of These Boots Are Made for Walkin' and who died in 2007?",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.8220067025510361,
+      "temperature": 0.8375466928846537,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.9489258086904611,
+        "evidence_support": 0.8581272463623917,
+        "memory_usefulness": 0.747778602962407,
+        "answerability": 0.8090636231811958,
+        "uncertainty": 0.12269964058201734
+      },
+      "metadata": {
+        "diffusion_gain": -0.008386048198477103
+      }
+    },
+    {
+      "node_id": "kg_doc_4",
+      "node_type": "kg",
+      "content": "Title: Jim Shoulders. James A. Shoulders (May 13, 1928 – June 20, 2007) was an American professional rodeo cowboy and rancher. He is commemorated at the ProRodeo Hall of Fame and at the time of his death, was the most successful contestant in the Professional Rodeo Cowboys Association (PRCA). Known as the 'Babe Ruth of rodeo', Shoulders was a spokesperson for a number of commercial products such as Miller Lite, Justin Boots and Wrangler Jeans. He was born in Tulsa, Oklahoma and died in Henryetta, Oklahoma. He was of English descent.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999903708835,
+      "temperature": 0.9999999903708835,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Jim Shoulders",
+        "raw_score": 3.418695524867118,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_7",
+      "node_type": "kg",
+      "content": "Title: Boots (album). Boots is a 1966 debut studio album by Nancy Sinatra. The album was produced by Lee Hazlewood. Billy Strange was the arranger and conductor. The album is titled after the song on the album \"These Boots Are Made for Walkin'\", which became a #1 hit for Sinatra. Most of the other songs on the album are covers of then-recent hits.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999938260572,
+      "temperature": 0.9999999938260572,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Boots (album)",
+        "raw_score": 4.286638797610894,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_5",
+      "node_type": "kg",
+      "content": "Title: The Twenty-fifth Anniversary Anthology. The Twenty-fifth Anniversary Anthology is a compilation album released by The Fixx in 2006 in celebration of their 25th anniversary. It contains singles, album and live tracks from their previous albums, together with a cover version of Nancy Sinatra's \"These Boots Are Made for Walkin'\" that was originally recorded for the multi-artist album \"When Pigs Fly: Songs You Thought You'd Never Hear\". The eight page booklet contains an essay by Josh Norek.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999866917789,
+      "temperature": 0.9999999866917789,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "The Twenty-fifth Anniversary Anthology",
+        "raw_score": 6.295068951810928,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_6",
+      "node_type": "kg",
+      "content": "Title: Boots (EP). Boots is an EP by KMFDM, featuring a cover of the Nancy Sinatra song \"These Boots Are Made for Walkin'\". It was the first release by the band after their three-year hiatus.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.45838106536521833,
+      "temperature": 0.45838106536521833,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Boots (EP)",
+        "raw_score": 4.44297401489135,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "memory_tmpl_1",
+      "node_type": "memory",
+      "content": "Template: for compositional multi-hop questions, first solve the intermediate entity and then ask for the final attribute.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9599999950357649,
+      "temperature": 1.0625002877896468,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.96,
+        "tag": "compositional_template",
+        "memory_kind": "template",
+        "raw_score": 1.899820313115324,
+        "source": "memory",
+        "diffusion_gain": 0.02266756430570549
+      }
+    },
+    {
+      "node_id": "memory_tmpl_3",
+      "node_type": "memory",
+      "content": "Template: when evidence already grounds the answer, switch from branching to short verification and synthesis.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.87999999613347,
+      "temperature": 1.064795102809967,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.88,
+        "tag": "verification_then_stop",
+        "memory_kind": "template",
+        "raw_score": 2.275942503844848,
+        "source": "memory",
+        "diffusion_gain": 0.1262195982529093
+      }
+    },
+    {
+      "node_id": "memory_tmpl_4",
+      "node_type": "memory",
+      "content": "Template: for nested relation questions, solve the intermediate relation first, then query the target attribute, then verify the chain.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.758776425066481,
+      "temperature": 0.7792413835994383,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.758776433441565,
+        "source": "tdca_run",
+        "kind": "strategy_template",
+        "memory_kind": "template",
+        "raw_score": 1.8466825922764123,
+        "diffusion_gain": 0.014780628385722805
+      }
+    },
+    {
+      "node_id": "memory_tmpl_2",
+      "node_type": "memory",
+      "content": "Template: for comparison questions, split the problem into one sub-question per entity before comparing them.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.8999999966970247,
+      "temperature": 1.4226373123813454,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.9,
+        "tag": "comparison_template",
+        "memory_kind": "template",
+        "raw_score": 1.3778849941643685,
+        "source": "memory",
+        "diffusion_gain": 0.16388484535726966
+      }
+    },
+    {
+      "node_id": "state_2",
+      "node_type": "state",
+      "content": "Who wrote the song 'These Boots Are Made for Walkin'?",
+      "depth": 1,
+      "parent_id": "state_1",
+      "value": 0.6451910460630915,
+      "temperature": 1.1232416416625592,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.6943874016850103,
+        "evidence_support": 0.6695946343102138,
+        "memory_usefulness": 0.7985975124312039,
+        "answerability": 0.6214639838217736,
+        "uncertainty": 0.1528648585103658
+      },
+      "metadata": {
+        "kind": "bridge",
+        "evidence_ids": [
+          "doc_8",
+          "doc_9",
+          "doc_6",
+          "doc_7"
+        ],
+        "memory_ids": [
+          "tmpl_1",
+          "tmpl_4",
+          "tmpl_2",
+          "tmpl_3"
+        ],
+        "diffusion_gain": -0.0008813612242881685
+      }
+    },
+    {
+      "node_id": "kg_doc_8",
+      "node_type": "kg",
+      "content": "Title: These Boots Are Made for Walkin'. \"These Boots Are Made for Walkin' is a hit song written by Lee Hazlewood and recorded by Nancy Sinatra. It charted January 22, 1966 and reached No. 1 in the United States \"Billboard\" Hot 100 and in the UK Singles Chart.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999878032605,
+      "temperature": 0.9999999878032605,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "These Boots Are Made for Walkin'",
+        "raw_score": 3.5411058073244552,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_9",
+      "node_type": "kg",
+      "content": "Title: Puss N' Boots/These Boots Are Made for Walkin'. \"Puss N' Boots/These Boots (Are Made for Walkin')\" is a song by Canadian synthpop band Kon Kan, released as the third single from their 1989 album \"Move to Move\". The song peaked at #61 in their native Canada, and at #58 on the U.S. \"Billboard\" Hot 100. In October 1989, the song peaked at #11 in New Zealand.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.33918928081716715,
+      "temperature": 0.33918928081716715,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Puss N' Boots/These Boots Are Made for Walkin'",
+        "raw_score": 4.158553595938198,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "state_3",
+      "node_type": "state",
+      "content": "Who is the artist of the album 'Boots'?",
+      "depth": 1,
+      "parent_id": "state_1",
+      "value": 0.7183821169062659,
+      "temperature": 1.0981345959429514,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.6653483099631474,
+        "evidence_support": 0.8852267869346688,
+        "memory_usefulness": 0.7924458410580982,
+        "answerability": 0.7559467268006677,
+        "uncertainty": 0.11836371409045299
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_7",
+          "doc_5",
+          "doc_9",
+          "doc_6"
+        ],
+        "memory_ids": [
+          "tmpl_4",
+          "tmpl_1",
+          "tmpl_3",
+          "tmpl_2"
+        ],
+        "diffusion_gain": 0.07244172906793667
+      }
+    },
+    {
+      "node_id": "state_4",
+      "node_type": "state",
+      "content": "Who died in 2007?",
+      "depth": 1,
+      "parent_id": "state_1",
+      "value": 0.5876362132626318,
+      "temperature": 0.3334252329930356,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.6670659996864527,
+        "evidence_support": 0.8899981472771836,
+        "memory_usefulness": 0.0,
+        "answerability": 0.6783324069719251,
+        "uncertainty": 0.11760029643565062
+      },
+      "metadata": {
+        "kind": "verification",
+        "evidence_ids": [
+          "doc_4",
+          "doc_3",
+          "doc_10",
+          "doc_9"
+        ],
+        "memory_ids": [],
+        "diffusion_gain": -0.0034001238855366767
+      }
+    },
+    {
+      "node_id": "kg_doc_3",
+      "node_type": "kg",
+      "content": "Title: Death of Abdul Wali. Abdul Wali was an Afghan man who died in US custody on June 21, 2003 at the age of 28. At the time of his death, he had been held for three days at the US base 10 miles south of Asadabad, in Kunar Province, Afghanistan, on suspicion of involvement in a rocket attack on the same base. The cause of his death was at first reported to be a heart attack, but this came into question when three members of the U.S. 82nd Airborne Division came forward to testify that CIA contractor David Passaro assaulted Wali. Passaro, a former U.S. Army Ranger, allegedly beat Wali for two consecutive nights, causing grievous injuries including a fractured pelvis. Prosecutors would charge that Passaro ordered soldiers not to allow Wali to sleep, limited his access to food and water and subjected him to two consecutive nights of interrogation and beatings. Among other injuries, Wali suffered a suspected fractured pelvis that would have made it impossible for him to urinate. Witnesses testified that during one session Passaro, while wearing combat boots, kicked Wali in the groin hard enough to lift him off the ground, threw Wali to the ground, beat Wali on the arms and legs with a heavy Maglite flashlight, and that Passaro also vigorously thrust a flashlight into Wali's abdomen. After the second night of beatings, Wali begged the soldiers to kill him and moaned a phrase that meant, \"I'm dying.\" Wali died on his fourth day in custody. He repeatedly denied any involvement in the rocket attacks.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 1.0,
+      "temperature": 1.0,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Death of Abdul Wali",
+        "raw_score": 0.9710256772300083,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_10",
+      "node_type": "kg",
+      "content": "Title: Lee Hazlewood. Barton Lee Hazlewood (July 9, 1929 – August 4, 2007) was an American country and pop singer, songwriter, and record producer, most widely known for his work with guitarist Duane Eddy during the late 1950s and singer Nancy Sinatra in the 1960s.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.597169554047217,
+      "temperature": 0.597169554047217,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Lee Hazlewood",
+        "raw_score": 2.335324340637568,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "state_5",
+      "node_type": "state",
+      "content": "Who is the artist of the song 'These Boots Are Made for Walkin'?",
+      "depth": 2,
+      "parent_id": "state_3",
+      "value": 0.7053610336244992,
+      "temperature": 0.8114186204730399,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.7425085844194146,
+        "evidence_support": 0.7291905122761518,
+        "memory_usefulness": 0.8301642538843091,
+        "answerability": 0.7445952561380759,
+        "uncertainty": 0.14332951803581573
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_5",
+          "doc_6",
+          "doc_7",
+          "doc_9"
+        ],
+        "memory_ids": [
+          "tmpl_1",
+          "tmpl_4",
+          "tmpl_2",
+          "tmpl_3"
+        ],
+        "diffusion_gain": 0.327536155406387
+      }
+    },
+    {
+      "node_id": "state_6",
+      "node_type": "state",
+      "content": "Who produced the album 'Boots'?",
+      "depth": 2,
+      "parent_id": "state_3",
+      "value": 0.5664208940740266,
+      "temperature": 0.9372221089121537,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.549732957847779,
+        "evidence_support": 0.6381471051327194,
+        "memory_usefulness": 0.7924458323113844,
+        "answerability": 0.5390735525663597,
+        "uncertainty": 0.1578964631787649
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_7",
+          "doc_9",
+          "doc_5",
+          "doc_6"
+        ],
+        "memory_ids": [
+          "tmpl_4",
+          "tmpl_1",
+          "tmpl_3",
+          "tmpl_2"
+        ],
+        "diffusion_gain": 0.1864687435125394
+      }
+    },
+    {
+      "node_id": "state_7",
+      "node_type": "state",
+      "content": "When did Nancy Sinatra die?",
+      "depth": 2,
+      "parent_id": "state_3",
+      "value": 0.5822776463673354,
+      "temperature": 0.7116379150197492,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.5169127455056355,
+        "evidence_support": 0.7692020708489875,
+        "memory_usefulness": 0.8799999937263376,
+        "answerability": 0.5646010354244937,
+        "uncertainty": 0.136927668664162
+      },
+      "metadata": {
+        "kind": "verification",
+        "evidence_ids": [
+          "doc_5",
+          "doc_1",
+          "doc_6",
+          "doc_7"
+        ],
+        "memory_ids": [
+          "tmpl_3"
+        ],
+        "diffusion_gain": 0.04149792117856865
+      }
+    },
+    {
+      "node_id": "kg_doc_1",
+      "node_type": "kg",
+      "content": "Title: Nancy Sinatra. Nancy Sandra Sinatra (born June 8, 1940) is an American singer and actress. She is the elder daughter of Frank Sinatra and Nancy (Barbato) Sinatra, and is widely known for her 1966 signature hit \"These Boots Are Made for Walkin'\".",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.5384041654300575,
+      "temperature": 0.5384041654300575,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Nancy Sinatra",
+        "raw_score": 2.046888045440997,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "state_8",
+      "node_type": "state",
+      "content": "standalone semantic sub-question?",
+      "depth": 3,
+      "parent_id": "state_6",
+      "value": 0.726599999603643,
+      "temperature": 0.8952047751370462,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.6,
+        "evidence_support": 1.0,
+        "memory_usefulness": 0.8999999966970247,
+        "answerability": 0.6799999999999999,
+        "uncertainty": 0.1
+      },
+      "metadata": {
+        "kind": "bridge|retrieval|verification|comparison",
+        "evidence_ids": [
+          "doc_3"
+        ],
+        "memory_ids": [
+          "tmpl_2"
+        ],
+        "diffusion_gain": -0.013263785280501539
+      }
+    },
+    {
+      "node_id": "state_9",
+      "node_type": "state",
+      "content": "Does the evidence support that Who is the artist of the song 'These Boots Are Made for Walkin'?",
+      "depth": 3,
+      "parent_id": "state_5",
+      "value": 0.6017525374136365,
+      "temperature": 0.7350495883583457,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.6861593417714719,
+        "evidence_support": 0.5726648382540885,
+        "memory_usefulness": 0.8406752105328091,
+        "answerability": 0.6663324191270442,
+        "uncertainty": 0.16837362587934585
+      },
+      "metadata": {
+        "kind": "verification",
+        "evidence_ids": [
+          "doc_5",
+          "doc_6",
+          "doc_7",
+          "doc_9"
+        ],
+        "memory_ids": [
+          "tmpl_3",
+          "tmpl_1",
+          "tmpl_4",
+          "tmpl_2"
+        ],
+        "diffusion_gain": 0.29306152193445234
+      }
+    },
+    {
+      "node_id": "memory_mem_6",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'Who was the writer of These Boots Are Made for Walkin' and who died in 2007' is Nancy Sinatra.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.7912,
+      "temperature": 1.0355138140481919,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "answer_candidate",
+        "target_question": "Who was the writer of These Boots Are Made for Walkin' and who died in 2007?",
+        "target_question_norm": "who was the writer of these boots are made for walkin and who died in 2007",
+        "relation_signature": "generic",
+        "answer_text": "Nancy Sinatra",
+        "support_score": 0.8581272463623917,
+        "evidence_ids": [
+          "doc_7"
+        ],
+        "derived_from_state": "state_1",
+        "diffusion_gain": 0.0
+      }
+    }
+  ],
+  "edges": [
+    {
+      "source": "state_1",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.9999999120007722
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.716254580724011
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.05506093775686031
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_1",
+      "target": "memory_tmpl_1",
+      "edge_type": "recalls",
+      "weight": 0.9599999950357649
+    },
+    {
+      "source": "state_1",
+      "target": "memory_tmpl_3",
+      "edge_type": "recalls",
+      "weight": 0.535557210889049
+    },
+    {
+      "source": "state_1",
+      "target": "memory_tmpl_4",
+      "edge_type": "recalls",
+      "weight": 0.36909779537082016
+    },
+    {
+      "source": "state_1",
+      "target": "memory_tmpl_2",
+      "edge_type": "recalls",
+      "weight": 0.3781046498363969
+    },
+    {
+      "source": "state_1",
+      "target": "state_2",
+      "edge_type": "refines",
+      "weight": 0.9
+    },
+    {
+      "source": "state_1",
+      "target": "state_3",
+      "edge_type": "refines",
+      "weight": 0.8
+    },
+    {
+      "source": "state_1",
+      "target": "state_4",
+      "edge_type": "verifies",
+      "weight": 0.7
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_6",
+      "edge_type": "derives",
+      "weight": 0.86
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.9999999120007722
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.9999999903708835
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.9999999120007722
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.716254580724011
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.9999999886429866
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.22966203694778875
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "state_6",
+      "edge_type": "supports",
+      "weight": 0.9999999938260572
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "state_7",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "state_9",
+      "edge_type": "supports",
+      "weight": 0.07459120637516127
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.716254580724011
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.05506093775686031
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.7704535852263511
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.9999999591870854
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "state_6",
+      "edge_type": "supports",
+      "weight": 0.004267058704320071
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "state_7",
+      "edge_type": "supports",
+      "weight": 0.9999999762679176
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "state_9",
+      "edge_type": "supports",
+      "weight": 0.9999999866917789
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.05506093775686031
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.1361030335769448
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.45838106536521833
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "state_6",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "state_7",
+      "edge_type": "supports",
+      "weight": 0.013885706355512605
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "state_9",
+      "edge_type": "supports",
+      "weight": 0.14532968981639816
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_tmpl_1",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.9599999950357649
+    },
+    {
+      "source": "memory_tmpl_1",
+      "target": "state_2",
+      "edge_type": "recalls",
+      "weight": 0.9599999914299517
+    },
+    {
+      "source": "memory_tmpl_1",
+      "target": "state_3",
+      "edge_type": "recalls",
+      "weight": 0.8261152570497154
+    },
+    {
+      "source": "memory_tmpl_1",
+      "target": "state_5",
+      "edge_type": "recalls",
+      "weight": 0.9599999936423855
+    },
+    {
+      "source": "memory_tmpl_1",
+      "target": "state_6",
+      "edge_type": "recalls",
+      "weight": 0.8261152479313716
+    },
+    {
+      "source": "memory_tmpl_1",
+      "target": "state_9",
+      "edge_type": "recalls",
+      "weight": 0.8013504249321483
+    },
+    {
+      "source": "memory_tmpl_1",
+      "target": "memory_mem_6",
+      "edge_type": "recalls",
+      "weight": 0.9599999950357649
+    },
+    {
+      "source": "memory_tmpl_3",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.535557210889049
+    },
+    {
+      "source": "memory_tmpl_3",
+      "target": "state_2",
+      "edge_type": "recalls",
+      "weight": 0.22867230707402866
+    },
+    {
+      "source": "memory_tmpl_3",
+      "target": "state_3",
+      "edge_type": "recalls",
+      "weight": 0.5654664852172043
+    },
+    {
+      "source": "memory_tmpl_3",
+      "target": "state_5",
+      "edge_type": "recalls",
+      "weight": 0.3392770513113157
+    },
+    {
+      "source": "memory_tmpl_3",
+      "target": "state_6",
+      "edge_type": "recalls",
+      "weight": 0.5654664789758016
+    },
+    {
+      "source": "memory_tmpl_3",
+      "target": "state_7",
+      "edge_type": "recalls",
+      "weight": 0.8799999937263376
+    },
+    {
+      "source": "memory_tmpl_3",
+      "target": "state_9",
+      "edge_type": "recalls",
+      "weight": 0.87999999613347
+    },
+    {
+      "source": "memory_tmpl_3",
+      "target": "memory_mem_6",
+      "edge_type": "recalls",
+      "weight": 0.535557210889049
+    },
+    {
+      "source": "memory_tmpl_4",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.36909779537082016
+    },
+    {
+      "source": "memory_tmpl_4",
+      "target": "state_2",
+      "edge_type": "recalls",
+      "weight": 0.6371950334324562
+    },
+    {
+      "source": "memory_tmpl_4",
+      "target": "state_3",
+      "edge_type": "recalls",
+      "weight": 0.758776425066481
+    },
+    {
+      "source": "memory_tmpl_4",
+      "target": "state_5",
+      "edge_type": "recalls",
+      "weight": 0.7003285141262328
+    },
+    {
+      "source": "memory_tmpl_4",
+      "target": "state_6",
+      "edge_type": "recalls",
+      "weight": 0.7587764166913973
+    },
+    {
+      "source": "memory_tmpl_4",
+      "target": "state_9",
+      "edge_type": "recalls",
+      "weight": 0.6156654759697685
+    },
+    {
+      "source": "memory_tmpl_2",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.3781046498363969
+    },
+    {
+      "source": "memory_tmpl_2",
+      "target": "state_2",
+      "edge_type": "recalls",
+      "weight": 0.6527440911735043
+    },
+    {
+      "source": "memory_tmpl_2",
+      "target": "state_3",
+      "edge_type": "recalls",
+      "weight": 0.5617102682097569
+    },
+    {
+      "source": "memory_tmpl_2",
+      "target": "state_5",
+      "edge_type": "recalls",
+      "weight": 0.6527440926778308
+    },
+    {
+      "source": "memory_tmpl_2",
+      "target": "state_6",
+      "edge_type": "recalls",
+      "weight": 0.5617102620098141
+    },
+    {
+      "source": "memory_tmpl_2",
+      "target": "state_8",
+      "edge_type": "recalls",
+      "weight": 0.8999999966970247
+    },
+    {
+      "source": "memory_tmpl_2",
+      "target": "state_9",
+      "edge_type": "recalls",
+      "weight": 0.5448716244827216
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_8",
+      "edge_type": "supports",
+      "weight": 0.9999999878032605
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.33918928081716715
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.1361030335769448
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_2",
+      "target": "memory_tmpl_1",
+      "edge_type": "recalls",
+      "weight": 0.9599999914299517
+    },
+    {
+      "source": "state_2",
+      "target": "memory_tmpl_4",
+      "edge_type": "recalls",
+      "weight": 0.6371950334324562
+    },
+    {
+      "source": "state_2",
+      "target": "memory_tmpl_2",
+      "edge_type": "recalls",
+      "weight": 0.6527440911735043
+    },
+    {
+      "source": "state_2",
+      "target": "memory_tmpl_3",
+      "edge_type": "recalls",
+      "weight": 0.22867230707402866
+    },
+    {
+      "source": "kg_doc_8",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.9999999878032605
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.33918928081716715
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.16508773013631278
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "state_6",
+      "edge_type": "supports",
+      "weight": 0.2762942164393817
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "state_9",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.9999999886429866
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.7704535852263511
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.16508773013631278
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_3",
+      "target": "memory_tmpl_4",
+      "edge_type": "recalls",
+      "weight": 0.758776425066481
+    },
+    {
+      "source": "state_3",
+      "target": "memory_tmpl_1",
+      "edge_type": "recalls",
+      "weight": 0.8261152570497154
+    },
+    {
+      "source": "state_3",
+      "target": "memory_tmpl_3",
+      "edge_type": "recalls",
+      "weight": 0.5654664852172043
+    },
+    {
+      "source": "state_3",
+      "target": "memory_tmpl_2",
+      "edge_type": "recalls",
+      "weight": 0.5617102682097569
+    },
+    {
+      "source": "state_3",
+      "target": "state_5",
+      "edge_type": "refines",
+      "weight": 0.8
+    },
+    {
+      "source": "state_3",
+      "target": "state_6",
+      "edge_type": "refines",
+      "weight": 0.7
+    },
+    {
+      "source": "state_3",
+      "target": "state_7",
+      "edge_type": "verifies",
+      "weight": 0.6
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.9999999903708835
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.7799963041834836
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_10",
+      "edge_type": "supports",
+      "weight": 0.597169554047217
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.7799963041834836
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "state_8",
+      "edge_type": "supports",
+      "weight": 1.0
+    },
+    {
+      "source": "kg_doc_10",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.597169554047217
+    },
+    {
+      "source": "state_5",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.9999999591870854
+    },
+    {
+      "source": "state_5",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.45838106536521833
+    },
+    {
+      "source": "state_5",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.22966203694778875
+    },
+    {
+      "source": "state_5",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_5",
+      "target": "memory_tmpl_1",
+      "edge_type": "recalls",
+      "weight": 0.9599999936423855
+    },
+    {
+      "source": "state_5",
+      "target": "memory_tmpl_4",
+      "edge_type": "recalls",
+      "weight": 0.7003285141262328
+    },
+    {
+      "source": "state_5",
+      "target": "memory_tmpl_2",
+      "edge_type": "recalls",
+      "weight": 0.6527440926778308
+    },
+    {
+      "source": "state_5",
+      "target": "memory_tmpl_3",
+      "edge_type": "recalls",
+      "weight": 0.3392770513113157
+    },
+    {
+      "source": "state_5",
+      "target": "state_9",
+      "edge_type": "verifies",
+      "weight": 0.38
+    },
+    {
+      "source": "state_6",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.9999999938260572
+    },
+    {
+      "source": "state_6",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.2762942164393817
+    },
+    {
+      "source": "state_6",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.004267058704320071
+    },
+    {
+      "source": "state_6",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_6",
+      "target": "memory_tmpl_4",
+      "edge_type": "recalls",
+      "weight": 0.7587764166913973
+    },
+    {
+      "source": "state_6",
+      "target": "memory_tmpl_1",
+      "edge_type": "recalls",
+      "weight": 0.8261152479313716
+    },
+    {
+      "source": "state_6",
+      "target": "memory_tmpl_3",
+      "edge_type": "recalls",
+      "weight": 0.5654664789758016
+    },
+    {
+      "source": "state_6",
+      "target": "memory_tmpl_2",
+      "edge_type": "recalls",
+      "weight": 0.5617102620098141
+    },
+    {
+      "source": "state_6",
+      "target": "state_8",
+      "edge_type": "state_transition",
+      "weight": 0.1
+    },
+    {
+      "source": "state_7",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.9999999762679176
+    },
+    {
+      "source": "state_7",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.5384041654300575
+    },
+    {
+      "source": "state_7",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.013885706355512605
+    },
+    {
+      "source": "state_7",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_7",
+      "target": "memory_tmpl_3",
+      "edge_type": "recalls",
+      "weight": 0.8799999937263376
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "state_7",
+      "edge_type": "supports",
+      "weight": 0.5384041654300575
+    },
+    {
+      "source": "state_8",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 1.0
+    },
+    {
+      "source": "state_8",
+      "target": "memory_tmpl_2",
+      "edge_type": "recalls",
+      "weight": 0.8999999966970247
+    },
+    {
+      "source": "state_9",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.9999999866917789
+    },
+    {
+      "source": "state_9",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.14532968981639816
+    },
+    {
+      "source": "state_9",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.07459120637516127
+    },
+    {
+      "source": "state_9",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_9",
+      "target": "memory_tmpl_3",
+      "edge_type": "recalls",
+      "weight": 0.87999999613347
+    },
+    {
+      "source": "state_9",
+      "target": "memory_tmpl_1",
+      "edge_type": "recalls",
+      "weight": 0.8013504249321483
+    },
+    {
+      "source": "state_9",
+      "target": "memory_tmpl_4",
+      "edge_type": "recalls",
+      "weight": 0.6156654759697685
+    },
+    {
+      "source": "state_9",
+      "target": "memory_tmpl_2",
+      "edge_type": "recalls",
+      "weight": 0.5448716244827216
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.86
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.716254580724011
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.9999999120007722
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.05506093775686031
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "memory_tmpl_1",
+      "edge_type": "recalls",
+      "weight": 0.9599999950357649
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "memory_tmpl_3",
+      "edge_type": "recalls",
+      "weight": 0.535557210889049
+    }
+  ]
+}

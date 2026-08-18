@@ -1,0 +1,1090 @@
+{
+  "nodes": [
+    {
+      "node_id": "state_1",
+      "node_type": "state",
+      "content": "Who is the mother of the screenwriter of WarGames?",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.8822133248199957,
+      "temperature": 1.2522491783705116,
+      "expanded": true,
+      "visit_count": 2,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.9976603456929231,
+        "evidence_support": 0.9931186638027147,
+        "memory_usefulness": 0.5139667766205794,
+        "answerability": 0.9965593319013574,
+        "uncertainty": 0.12123864051551134
+      },
+      "metadata": {
+        "diffusion_delta": -0.03752297673333471,
+        "diffusion_gain": 0.0,
+        "goal_retry": 1,
+        "composition_retry": 1
+      }
+    },
+    {
+      "node_id": "kg_doc_13",
+      "node_type": "kg",
+      "content": "Eva Ionesco (born 18 July 1965) is a French actress, film director and screenwriter. She is the daughter of Romanian-French photographer Irina Ionesco and came to international prominence as a child after being featured in her mother's works.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999997458753784,
+      "temperature": 0.9999997458753784,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Eva Ionesco",
+        "raw_score": 0.07167240263100698,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_4",
+      "node_type": "kg",
+      "content": "Nina Companeez (26 August 1937 – 9 April 2015) was a French screenwriter and film director. Nina Companeez was the younger daughter of Russian Jewish émigré screenwriter Jacques Companéez and younger sister of contralto Irène Companeez. She was the mother of actress Valentine Varela.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.986237581730051,
+      "temperature": 0.986237581730051,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Nina Companeez",
+        "raw_score": 0.1349016857384827,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_9",
+      "node_type": "kg",
+      "content": "Christian Marquand (15 March 1927 – 22 November 2000) was a French director, actor and screenwriter working in French cinema. Born in Marseille, he was born to a Spanish father and an Arab mother, and his sister was film director Nadine Trintignant. He was often cast as a heartthrob in French films of the 1950s.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.03772994714299805,
+      "temperature": 0.03772994714299805,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Christian Marquand",
+        "raw_score": 0.06556524746006234,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_7",
+      "node_type": "kg",
+      "content": "Kyan Khojandi (born 29 August 1982 in Reims, France) is a French comedian, actor and screenwriter born to a French mother and an Iranian father. He is best known for playing the main character in the television series \"Bref\", which was broadcast on Canal+ from 2011 to 2012.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0,
+      "temperature": 0.0,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Kyan Khojandi",
+        "raw_score": 0.06119847527835415,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "memory_mem_1",
+      "node_type": "memory",
+      "content": "Template: for compositional multi-hop questions, first solve the intermediate entity and then ask for the final attribute.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9599999038694302,
+      "temperature": 0.2842615503723928,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.96,
+        "tag": "compositional_template",
+        "memory_kind": "template",
+        "raw_score": 0.2347068199187882,
+        "source": "memory",
+        "diffusion_delta": -0.16728932808912,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "memory_mem_3",
+      "node_type": "memory",
+      "content": "Template: when evidence already grounds the answer, switch from branching to short verification and synthesis.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.26652948136108584,
+      "temperature": 1.074602212228711,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.88,
+        "tag": "verification_then_stop",
+        "memory_kind": "template",
+        "raw_score": 1.569610863633824,
+        "source": "memory",
+        "diffusion_delta": 0.1023033636109234,
+        "diffusion_gain": 0.1023033636109234
+      }
+    },
+    {
+      "node_id": "state_2",
+      "node_type": "state",
+      "content": "Who is the screenwriter of WarGames?",
+      "depth": 1,
+      "parent_id": "state_1",
+      "value": 0.6987416667651292,
+      "temperature": 1.2840227798349533,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.8366273762766931,
+        "evidence_support": 0.6791561487129631,
+        "memory_usefulness": 0.5139667251540021,
+        "answerability": 0.811006645785053,
+        "uncertainty": 0.17775189323166662
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_19",
+          "doc_20",
+          "doc_17",
+          "doc_12"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "diffusion_delta": -0.0036053954487902384,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "kg_doc_19",
+      "node_type": "kg",
+      "content": "WarGames is a 1983 American Cold War science fiction film written by Lawrence Lasker and Walter F. Parkes and directed by John Badham. The film stars Matthew Broderick, Dabney Coleman, John Wood, and Ally Sheedy. The film follows David Lightman (Broderick), a young hacker who unwittingly accesses WOPR (War Operation Plan Response), a United States military supercomputer originally programmed to predict possible outcomes of nuclear war. Lightman gets WOPR to run a nuclear war simulation, believing it to be a computer game. The computer, now tied into the nuclear weapons control system and unable to tell the difference between simulation and reality, attempts to start World War III.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999637715637,
+      "temperature": 0.9999999637715637,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "WarGames",
+        "raw_score": 0.12355724584074511,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_20",
+      "node_type": "kg",
+      "content": "Jacques Audiard (; born 30 April 1952) is a French film director and screenwriter. He is the son of Michel Audiard, also a film director and screenwriter.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999995989464756,
+      "temperature": 0.9999995989464756,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Jacques Audiard",
+        "raw_score": 0.06826551541128259,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_17",
+      "node_type": "kg",
+      "content": "Dungeons & Dragons (abbreviated as D&D or DnD) is a fantasy tabletop role - playing game (RPG) originally designed by Gary Gygax and Dave Arneson. It was first published in 1974 by Tactical Studies Rules, Inc. (TSR). The game has been published by Wizards of the Coast (now a subsidiary of Hasbro) since 1997. It was derived from miniature wargames with a variation of Chainmail serving as the initial rule system. D&D's publication is commonly recognized as the beginning of modern role - playing games and the role - playing game industry.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.5062072881470198,
+      "temperature": 0.5062072881470198,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Dungeons & Dragons",
+        "raw_score": 0.09291004540416456,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_12",
+      "node_type": "kg",
+      "content": "Though some fans of war simulation games appreciate detail, The Campaign for North Africa offered more detail than any board wargame before or since, leading to the ambivalent reaction with which the game is regarded. Even gamers who were initially fascinated with the idea of an extremely detailed war game might have been chagrined when they opened the box to discover 1,800 counters, maps large enough to cover several tables, and a three - volume rulebook of considerable weight and density. The rules cover logistics in extreme detail, far more so than the combat simulation. It is recommended that each side be played by a five - person team, including a Commander - In - Chief and four subordinate commanders, making a total of ten players needed for a game, although it can be played with the usual two. According to SPI, a complete game can run over 1,500 hours. However, the logistics of keeping a ten - person group together for fifteen hundred hours of gaming was a feat beyond even most hardcore wargamers, and completed full games of The Campaign for North Africa are rare.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999998830976622,
+      "temperature": 0.9999998830976622,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "The Campaign for North Africa",
+        "raw_score": 0.09988478516725954,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "memory_mem_4",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'Who is the screenwriter of WarGames' is John Badham.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999996877625388,
+      "temperature": 0.6675951912231135,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "tdca_run",
+        "memory_kind": "derived_fact",
+        "target_question": "Who is the screenwriter of WarGames?",
+        "target_question_norm": "who is the screenwriter of wargames",
+        "relation_signature": "generic",
+        "answer_text": "John Badham",
+        "support_score": 0.9999996877625388,
+        "evidence_ids": [
+          "doc_19"
+        ],
+        "slot_type": "person",
+        "slot_role": "target_attribute",
+        "slot_name": "screenwriter_of_wargames",
+        "depends_on": [],
+        "terminal": true,
+        "path_terminal": false,
+        "composition_kind": "",
+        "derived_from_state": "state_1",
+        "diffusion_delta": -0.007563048550451423,
+        "diffusion_gain": 0.0,
+        "score": 0.9999996877625388,
+        "raw_score": 7.165537132843429
+      }
+    },
+    {
+      "node_id": "state_3",
+      "node_type": "state",
+      "content": "What is the screenwriter of WarGames?",
+      "depth": 1,
+      "parent_id": "state_1",
+      "value": 0.6492104497584135,
+      "temperature": 0.6528714108709399,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.8074837422344657,
+        "evidence_support": 0.7531034435467476,
+        "memory_usefulness": 0.0035018794759879134,
+        "answerability": 0.8194088646305167,
+        "uncertainty": 0.16444138016158544
+      },
+      "metadata": {
+        "kind": "bridge",
+        "evidence_ids": [
+          "doc_20",
+          "doc_17",
+          "doc_13",
+          "doc_19"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "diffusion_delta": -0.02764660979288791,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "state_4",
+      "node_type": "state",
+      "content": "Who is the mother of Lawrence Lasker?",
+      "depth": 2,
+      "parent_id": "state_2",
+      "value": 0.647112431982578,
+      "temperature": 2.2098042238104614,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.8059836137134846,
+        "evidence_support": 0.7486913008379799,
+        "memory_usefulness": 0.004519983102791671,
+        "answerability": 0.8172027932761328,
+        "uncertainty": 0.16523556584916363
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_14",
+          "doc_19",
+          "doc_4",
+          "doc_13"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "diffusion_delta": 0.15397434388768216,
+        "diffusion_gain": 0.15397434388768216
+      }
+    },
+    {
+      "node_id": "kg_doc_14",
+      "node_type": "kg",
+      "content": "Lasker was born in Los Angeles County, California. He is the son of actress Jane Greer and producer Edward Lasker. His paternal grandfather was businessman Albert Lasker and his paternal step-grandmothers were actress Doris Kenyon and Mary Woodard Lasker. He graduated from the Phillips Exeter Academy in 1967 and attended Yale University, as did his father.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999816553868,
+      "temperature": 0.9999999816553868,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Lawrence Lasker",
+        "raw_score": 0.1469642031785277,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "state_5",
+      "node_type": "state",
+      "content": "Who is the mother of Walter F. Parkes?",
+      "depth": 2,
+      "parent_id": "state_2",
+      "value": 0.6811036482934186,
+      "temperature": 1.09493865613802,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.7214285652697373,
+        "evidence_support": 0.4999999818857819,
+        "memory_usefulness": 0.004519983102791671,
+        "answerability": 0.6928571338000338,
+        "uncertainty": 0.21000000326055926
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_19",
+          "doc_4",
+          "doc_13",
+          "doc_20"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "diffusion_delta": 0.11156856444384156,
+        "diffusion_gain": 0.11156856444384156
+      }
+    },
+    {
+      "node_id": "state_6",
+      "node_type": "state",
+      "content": "Who are the screenwriters of WarGames?",
+      "depth": 2,
+      "parent_id": "state_3",
+      "value": 0.7169512087299144,
+      "temperature": 0.5958380789223123,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.8160584757966445,
+        "evidence_support": 0.9379871136876099,
+        "memory_usefulness": 0.005110299828765942,
+        "answerability": 0.8832792711295193,
+        "uncertainty": 0.13116231953623023
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_12",
+          "doc_19",
+          "doc_17",
+          "doc_8"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "diffusion_delta": -0.008124057335641255,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "kg_doc_8",
+      "node_type": "kg",
+      "content": "Panzer General II is a computer wargame by Strategic Simulations, Inc. Released September 30, 1997, \"Panzer General II\" is the sixth SSI game in the \"General\" series and the first in the \"Living Battlefield \" series. It takes place during World War II, covering events from the Spanish Civil War in 1938 to hypothetical battles in 1946. In the April 2000 issue of the magazine PC Gamer, it was voted the 44th best computer game of all time. (The highest rating in the \"General\" series.) The game was re-released in 2010 on GOG.com.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0,
+      "temperature": 0.0,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Panzer General II",
+        "raw_score": 0.09321813745513036,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "memory_mem_5",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'Who is the mother of Lawrence Lasker' is Jane Greer.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.92,
+      "temperature": 1.4829007565072645,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "derived_fact",
+        "target_question": "Who is the mother of Lawrence Lasker?",
+        "target_question_norm": "who is the mother of lawrence lasker",
+        "slot_key": "mother|person|generic|lawrence lasker|who is the mother of lawrence lasker",
+        "slot_type": "",
+        "relation_signature": "mother",
+        "answer_text": "Jane Greer",
+        "support_score": 0.7486913008379799,
+        "evidence_ids": [
+          "doc_14",
+          "doc_19"
+        ],
+        "slot_name": "",
+        "slot_role": "",
+        "terminal": false,
+        "path_terminal": false,
+        "composition_kind": "",
+        "derived_from_state": "state_4",
+        "diffusion_delta": 0.12704491025643483,
+        "diffusion_gain": 0.12704491025643483
+      }
+    }
+  ],
+  "edges": [
+    {
+      "source": "state_1",
+      "target": "kg_doc_13",
+      "edge_type": "supports",
+      "weight": 0.9999997458753784
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.986237581730051
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.03772994714299805
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.008954185372030356
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.0006399123581534244
+    },
+    {
+      "source": "state_1",
+      "target": "state_2",
+      "edge_type": "refines",
+      "weight": 1.0
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_4",
+      "edge_type": "derives",
+      "weight": 0.9999996877625388
+    },
+    {
+      "source": "state_1",
+      "target": "state_3",
+      "edge_type": "refines",
+      "weight": 0.97
+    },
+    {
+      "source": "kg_doc_13",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.9999997458753784
+    },
+    {
+      "source": "kg_doc_13",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.35726976040455094
+    },
+    {
+      "source": "kg_doc_13",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_13",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_13",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.986237581730051
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.03772994714299805
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.008954185372030356
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_2",
+      "edge_type": "recalls",
+      "weight": 0.005334948016416013
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_3",
+      "edge_type": "recalls",
+      "weight": 0.006536618421105796
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_4",
+      "edge_type": "recalls",
+      "weight": 0.008437013613799468
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_5",
+      "edge_type": "recalls",
+      "weight": 0.0067839916899568725
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_6",
+      "edge_type": "recalls",
+      "weight": 0.009132431355817207
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "memory_mem_5",
+      "edge_type": "recalls",
+      "weight": 0.008437013613799468
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.0006399123581534244
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_2",
+      "edge_type": "recalls",
+      "weight": 0.0679336425691247
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_3",
+      "edge_type": "recalls",
+      "weight": 0.00046714053087003077
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_4",
+      "edge_type": "recalls",
+      "weight": 0.0006029525917838749
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_5",
+      "edge_type": "recalls",
+      "weight": 0.00048653201105873566
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_6",
+      "edge_type": "recalls",
+      "weight": 0.0006549566090977698
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "memory_mem_5",
+      "edge_type": "recalls",
+      "weight": 0.0006029525917838749
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_19",
+      "edge_type": "supports",
+      "weight": 0.9999996877625388
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_20",
+      "edge_type": "supports",
+      "weight": 0.3583126096633874
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_17",
+      "edge_type": "supports",
+      "weight": 0.01733955002476248
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_12",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_2",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.005334948016416013
+    },
+    {
+      "source": "state_2",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.0679336425691247
+    },
+    {
+      "source": "state_2",
+      "target": "memory_mem_4",
+      "edge_type": "recalls",
+      "weight": 0.9999996863464464
+    },
+    {
+      "source": "state_2",
+      "target": "state_4",
+      "edge_type": "refines",
+      "weight": 0.9
+    },
+    {
+      "source": "state_2",
+      "target": "state_5",
+      "edge_type": "refines",
+      "weight": 0.9
+    },
+    {
+      "source": "kg_doc_19",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.9999996877625388
+    },
+    {
+      "source": "kg_doc_19",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_19",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.4973826200205729
+    },
+    {
+      "source": "kg_doc_19",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.9999999637715637
+    },
+    {
+      "source": "kg_doc_19",
+      "target": "state_6",
+      "edge_type": "supports",
+      "weight": 0.8759743442775577
+    },
+    {
+      "source": "kg_doc_19",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.4973826200205729
+    },
+    {
+      "source": "kg_doc_20",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.3583126096633874
+    },
+    {
+      "source": "kg_doc_20",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.9999995989464756
+    },
+    {
+      "source": "kg_doc_20",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_17",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.01733955002476248
+    },
+    {
+      "source": "kg_doc_17",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.5062072881470198
+    },
+    {
+      "source": "kg_doc_17",
+      "target": "state_6",
+      "edge_type": "supports",
+      "weight": 0.47931849610401533
+    },
+    {
+      "source": "kg_doc_12",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_12",
+      "target": "state_6",
+      "edge_type": "supports",
+      "weight": 0.9999998830976622
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.9999996877625388
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "state_2",
+      "edge_type": "recalls",
+      "weight": 0.9999996863464464
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_20",
+      "edge_type": "supports",
+      "weight": 0.9999995989464756
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_17",
+      "edge_type": "supports",
+      "weight": 0.5062072881470198
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_13",
+      "edge_type": "supports",
+      "weight": 0.35726976040455094
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_19",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_3",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.006536618421105796
+    },
+    {
+      "source": "state_3",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.00046714053087003077
+    },
+    {
+      "source": "state_3",
+      "target": "state_6",
+      "edge_type": "refines",
+      "weight": 1.0
+    },
+    {
+      "source": "state_3",
+      "target": "state_4",
+      "edge_type": "refines",
+      "weight": 0.84
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_14",
+      "edge_type": "supports",
+      "weight": 0.9999999816553868
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_19",
+      "edge_type": "supports",
+      "weight": 0.4973826200205729
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_13",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_4",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.008437013613799468
+    },
+    {
+      "source": "state_4",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.0006029525917838749
+    },
+    {
+      "source": "state_4",
+      "target": "memory_mem_5",
+      "edge_type": "derives",
+      "weight": 1.0
+    },
+    {
+      "source": "kg_doc_14",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.9999999816553868
+    },
+    {
+      "source": "kg_doc_14",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.9999999816553868
+    },
+    {
+      "source": "state_5",
+      "target": "kg_doc_19",
+      "edge_type": "supports",
+      "weight": 0.9999999637715637
+    },
+    {
+      "source": "state_5",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_5",
+      "target": "kg_doc_13",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_5",
+      "target": "kg_doc_20",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_5",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.0067839916899568725
+    },
+    {
+      "source": "state_5",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.00048653201105873566
+    },
+    {
+      "source": "state_6",
+      "target": "kg_doc_12",
+      "edge_type": "supports",
+      "weight": 0.9999998830976622
+    },
+    {
+      "source": "state_6",
+      "target": "kg_doc_19",
+      "edge_type": "supports",
+      "weight": 0.8759743442775577
+    },
+    {
+      "source": "state_6",
+      "target": "kg_doc_17",
+      "edge_type": "supports",
+      "weight": 0.47931849610401533
+    },
+    {
+      "source": "state_6",
+      "target": "kg_doc_8",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_6",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.009132431355817207
+    },
+    {
+      "source": "state_6",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.0006549566090977698
+    },
+    {
+      "source": "state_6",
+      "target": "state_5",
+      "edge_type": "refines",
+      "weight": 0.9
+    },
+    {
+      "source": "kg_doc_8",
+      "target": "state_6",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "state_4",
+      "edge_type": "recalls",
+      "weight": 1.0
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_14",
+      "edge_type": "supports",
+      "weight": 0.9999999816553868
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_19",
+      "edge_type": "supports",
+      "weight": 0.4973826200205729
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_13",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.008437013613799468
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.0006029525917838749
+    }
+  ]
+}

@@ -1,0 +1,240 @@
+{
+  "nodes": [
+    {
+      "node_id": "state_1",
+      "node_type": "state",
+      "content": "What was the name of the law passed by the actor from Terminator?",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.6165785951073249,
+      "temperature": 0.5657365171000792,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.8299999961807694,
+        "evidence_support": 0.49999998876696855,
+        "memory_usefulness": 0.5098216729982189,
+        "answerability": 0.6499999943834842,
+        "uncertainty": 0.21000000202194563
+      },
+      "metadata": {
+        "diffusion_delta": 0.0720303424918532,
+        "diffusion_gain": 0.0720303424918532
+      }
+    },
+    {
+      "node_id": "kg_doc_12",
+      "node_type": "kg",
+      "content": "Cyberdyne Systems Series T-800 / T-850 Model 101, or \"The Terminator\", is a fictional character from the \"Terminator\" franchise portrayed by both Arnold Schwarzenegger and numerous actor stand-ins digitally overlaid with Schwarzenegger's likeness. The Terminator itself is part of a series of machines created by Skynet for infiltration-based assassination missions, and while an android for its appearance resembling a human, it is described as a cybernetic organism consisting of living tissue over a robotic endoskeleton.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999775339371,
+      "temperature": 0.9999999775339371,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Terminator (character)",
+        "raw_score": 0.15998404092567753,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_19",
+      "node_type": "kg",
+      "content": "The S. 3066 legislation was passed by the United States 93rd Congressional session and enacted into law by the 38th President of the United States Gerald Ford on August 22, 1974.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0,
+      "temperature": 0.0,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Housing and Community Development Act of 1974",
+        "raw_score": 0.17691488186378898,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_9",
+      "node_type": "kg",
+      "content": "Norfolk Island is the only non-mainland Australian territory to have achieved self-governance. The Norfolk Island Act 1979, passed by the Parliament of Australia in 1979, is the Act under which the island was governed until the passing of the Norfolk Island Legislation Amendment Act 2015. The Australian government maintains authority on the island through an Administrator, currently Gary Hardgrave. From 1979 to 2015, a Legislative Assembly was elected by popular vote for terms of not more than three years, although legislation passed by the Australian Parliament could extend its laws to the territory at will, including the power to override any laws made by the assembly.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0,
+      "temperature": 0.0,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Norfolk Island",
+        "raw_score": 0.18457669274532307,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_7",
+      "node_type": "kg",
+      "content": "The original name of the airport was Bengaluru International Airport. In February 2009, the State Government sent a proposal to the Union Government to rename the airport after the founder of Bengaluru, Kempe Gowda I. When no action was taken, the State Government passed a resolution for the name change in December 2011. The Union Government accepted the proposal in 2012 and formally approved it in July 2013. The airport was officially renamed Kempegowda International Airport on 14 December 2013 amid the inauguration of the expanded terminal building.Kingfisher Airlines once operated a hub and was one of the largest airlines at Kempegowda Airport. Following its collapse in October 2012, other airlines stepped in to fill the gap in domestic connectivity by adding more flights. In addition, Air Pegasus and AirAsia India launched hub operations at the airport in 2014.The first phase of expansion was launched in June 2011 and finished in December 2013. The ₹1,500 crore (US$220 million) project doubled the size of the passenger terminal to 150,556 square metres (1,620,570 sq ft), involving the construction of additional facilities for check-in, immigration, security and baggage reclaim. One domestic gate and three international gates were added as well. A large, sweeping roof connects the original building with the expanded areas. The expanded terminal, dubbed \"Terminal 1A\", has raised the annual passenger capacity of the airport to 25 million.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0,
+      "temperature": 0.0,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Kempegowda International Airport",
+        "raw_score": 0.19000840509054828,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "memory_mem_3",
+      "node_type": "memory",
+      "content": "Template: when evidence already grounds the answer, switch from branching to short verification and synthesis.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.8799999957112629,
+      "temperature": 0.6670889722819082,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.88,
+        "tag": "verification_then_stop",
+        "memory_kind": "template",
+        "raw_score": 2.590962282829568,
+        "source": "memory",
+        "diffusion_delta": -0.21291102342935464,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "memory_mem_1",
+      "node_type": "memory",
+      "content": "Template: for compositional multi-hop questions, first solve the intermediate entity and then ask for the final attribute.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.13964335454180607,
+      "temperature": 0.07743044287666868,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.96,
+        "tag": "compositional_template",
+        "memory_kind": "template",
+        "raw_score": 0.7388045999832441,
+        "source": "memory",
+        "diffusion_delta": -0.02176524778300562,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "kg_doc_14",
+      "node_type": "kg",
+      "content": "French Constitutional Law of 1940, are the bills that were voted into law on 10 July 1940 by the National Assembly, which comprised both the Senate and the Chamber of Deputies during the French Third Republic. The law established the regime of Vichy France. It passed with 569 votes to 80, with 20 abstentions. The group of 80 parliamentarians who voted against it are known as the Vichy 80.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0,
+      "temperature": 0.0,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "French Constitutional Law of 1940",
+        "raw_score": 0.18555254075830738,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "source": "state_1",
+      "target": "kg_doc_12",
+      "edge_type": "supports",
+      "weight": 0.9999999775339371
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_19",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.8799999914546318
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.13964335454180607
+    },
+    {
+      "source": "kg_doc_12",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.9999999775339371
+    },
+    {
+      "source": "kg_doc_19",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.8799999914546318
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.13964335454180607
+    }
+  ]
+}

@@ -1,0 +1,985 @@
+{
+  "nodes": [
+    {
+      "node_id": "state_1",
+      "node_type": "state",
+      "content": "What type of writing did both Richard Harding Davis and Harry Stephen Keeler write?",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.8738739721896807,
+      "temperature": 0.9658719663351191,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.9736660670520757,
+        "evidence_support": 0.9225472560355166,
+        "memory_usefulness": 0.8820682746050714,
+        "answerability": 0.8612736280177582,
+        "uncertainty": 0.13394149391360702
+      },
+      "metadata": {
+        "diffusion_delta": 0.21109322876438075,
+        "diffusion_gain": 0.21109322876438075
+      }
+    },
+    {
+      "node_id": "kg_doc_9",
+      "node_type": "kg",
+      "content": "The Mysterious Mr. Wong is a tongue-in-cheek 1934 mystery film starring Bela Lugosi as a powerful Fu Manchu type criminal mastermind of the Chinatown underworld, and Wallace Ford as a wisecracking reporter. The film is based on Harry Stephen Keeler's 1928 short story \"The Strange Adventure of the Twelve Coins of Confucius\" one of three stories in Keeler's book \"Sing Sing Nights\". Despite the name of the title character and being directed by William Nigh, it has no relation to Monogram Pictures later Mr Wong film series. The character of Mr. Wong does not appear in the original story.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.999999994448001,
+      "temperature": 0.999999994448001,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "The Mysterious Mr. Wong",
+        "raw_score": 7.956588694529503,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_2",
+      "node_type": "kg",
+      "content": "Harry Stephen Keeler (November 3, 1890 – January 22, 1967) was a prolific but little-known American author of mysteries and science fiction.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999926317649,
+      "temperature": 0.9999999926317649,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Harry Stephen Keeler",
+        "raw_score": 5.533500353269222,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_8",
+      "node_type": "kg",
+      "content": "Sing Sing Nights is a 1934 American film directed by Lewis D. Collins, based on the 1927 novel by American Author Harry Stephen Keeler (Hutchinson 1927, Dutton 1928, Ward & Lock 1929).",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.7072220289479766,
+      "temperature": 0.7072220289479766,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Sing Sing Nights (film)",
+        "raw_score": 4.251103364868678,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_1",
+      "node_type": "kg",
+      "content": "Richard Harding Davis (April 18, 1864 – April 11, 1916) was an American journalist and writer of fiction and drama, known foremost as the first American war correspondent to cover the Spanish–American War, the Second Boer War, and the First World War. His writing greatly assisted the political career of Theodore Roosevelt and he also played a major role in the evolution of the American magazine. His influence extended to the world of fashion and he is credited with making the clean-shaven look popular among men at the turn of the 20th century.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999832030831,
+      "temperature": 0.9999999832030831,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Richard Harding Davis",
+        "raw_score": 3.8872308705090406,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "memory_mem_1",
+      "node_type": "memory",
+      "content": "Template: for compositional multi-hop questions, first solve the intermediate entity and then ask for the final attribute.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.8841365672456091,
+      "temperature": 0.7331184106928559,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.96,
+        "tag": "compositional_template",
+        "memory_kind": "template",
+        "raw_score": 0.34163481086044883,
+        "source": "memory",
+        "diffusion_delta": -0.019870434254697145,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "memory_mem_3",
+      "node_type": "memory",
+      "content": "Template: when evidence already grounds the answer, switch from branching to short verification and synthesis.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.8799999819645339,
+      "temperature": 1.3297062548957925,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.88,
+        "tag": "verification_then_stop",
+        "memory_kind": "template",
+        "raw_score": 1.975377351806007,
+        "source": "memory",
+        "diffusion_delta": 0.44970627293125864,
+        "diffusion_gain": 0.44970627293125864
+      }
+    },
+    {
+      "node_id": "state_2",
+      "node_type": "state",
+      "content": "What type of writing did Richard Harding Davis write?",
+      "depth": 1,
+      "parent_id": "state_1",
+      "value": 0.6894111584439606,
+      "temperature": 1.0155295738263894,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.7140648996595327,
+        "evidence_support": 0.5581740746288774,
+        "memory_usefulness": 0.0,
+        "answerability": 0.6076584658858672,
+        "uncertainty": 0.19952866656680207
+      },
+      "metadata": {
+        "kind": "comparison",
+        "evidence_ids": [
+          "doc_1",
+          "doc_10",
+          "doc_4",
+          "doc_3"
+        ],
+        "memory_ids": [],
+        "goal_slot_name": "left_category",
+        "goal_slot_role": "left_value",
+        "goal_terminal": true,
+        "diffusion_delta": 0.10885217879750886,
+        "diffusion_gain": 0.10885217879750886
+      }
+    },
+    {
+      "node_id": "kg_doc_10",
+      "node_type": "kg",
+      "content": "Soldiers of Fortune is a lost 1919 American silent drama film directed by Allan Dwan and starring Wallace Beery. The film is based on the 1897 novel of the same name by Richard Harding Davis. The film was producer by the Mayflower Photoplay Company Richard Harding Davis's novel that inspired the film had already been brought to the screen in 1914 by William F. Haddock; Soldiers of Fortune had her starring Dustin Farnum. The subject of both the 1914 and 1919 films are based on the Spanish–American War. The 1919 film was shot in San Diego Fairgrounds at Balboa Park in San Diego, California. Distributed by Realart Pictures, the film was released in American theaters on November 22, 1919.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.1658482023661754,
+      "temperature": 0.1658482023661754,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Soldiers of Fortune (1919 film)",
+        "raw_score": 5.3944518632804686,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_4",
+      "node_type": "kg",
+      "content": "The Scarlet Car is a 1917 American silent drama film directed by Joe De Grasse and featuring Lon Chaney. The film is based upon the novel \"The Scarlet Car\" by Richard Harding Davis, which also was the basis of a 1923 film of the same name. A print of the 1917 film exists and has been released on DVD.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.09616560600369325,
+      "temperature": 0.09616560600369325,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "The Scarlet Car",
+        "raw_score": 1.9017594959028408,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_3",
+      "node_type": "kg",
+      "content": "Stephen Steps Out is a lost 1923 American silent film that is notable as being the first starring role for the still teenaged Douglas Fairbanks, Jr.. Directed by Joseph Henabery, it was based on a short story by Richard Harding Davis, \"The Grand Cross of the Desert.\" This is a lost film.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0,
+      "temperature": 0.0,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Stephen Steps Out",
+        "raw_score": 4.916000985832107,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "state_3",
+      "node_type": "state",
+      "content": "What type of writing did Harry Stephen Keeler write?",
+      "depth": 1,
+      "parent_id": "state_1",
+      "value": 0.7256959562568007,
+      "temperature": 0.9533106341442759,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.8524007426445566,
+        "evidence_support": 0.9650442010554181,
+        "memory_usefulness": 0.0,
+        "answerability": 0.8110935290991377,
+        "uncertainty": 0.12629204381002473
+      },
+      "metadata": {
+        "kind": "comparison",
+        "evidence_ids": [
+          "doc_9",
+          "doc_2",
+          "doc_8",
+          "doc_1"
+        ],
+        "memory_ids": [],
+        "goal_slot_name": "right_category",
+        "goal_slot_role": "right_value",
+        "goal_terminal": true,
+        "diffusion_delta": -0.1056371151532276,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "state_4",
+      "node_type": "state",
+      "content": "Did both Richard Harding Davis and Harry Stephen Keeler write mystery fiction?",
+      "depth": 2,
+      "parent_id": "state_3",
+      "value": 0.7324788737930172,
+      "temperature": 1.447309732654172,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.8039975642744075,
+        "evidence_support": 0.742849978958341,
+        "memory_usefulness": 0.8820682746050714,
+        "answerability": 0.7142821323363134,
+        "uncertainty": 0.1662870037874986
+      },
+      "metadata": {
+        "kind": "comparison",
+        "evidence_ids": [
+          "doc_2",
+          "doc_9",
+          "doc_8",
+          "doc_10"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "diffusion_delta": 0.14422906672319713,
+        "diffusion_gain": 0.14422906672319713
+      }
+    },
+    {
+      "node_id": "memory_mem_4",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'What type of writing did Harry Stephen Keeler write' is mysteries and science fiction.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.999999994448001,
+      "temperature": 0.36771358842725277,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "intermediate_answer",
+        "target_question": "What type of writing did Harry Stephen Keeler write?",
+        "target_question_norm": "what type of writing did harry stephen keeler write",
+        "relation_signature": "generic",
+        "answer_text": "mysteries and science fiction",
+        "support_score": 0.999999994448001,
+        "evidence_ids": [
+          "doc_9",
+          "doc_2",
+          "doc_8"
+        ],
+        "slot_name": "right_category",
+        "slot_role": "right_value",
+        "terminal": true,
+        "derived_from_state": "state_3",
+        "diffusion_delta": 0.08308477396096525,
+        "diffusion_gain": 0.08308477396096525
+      }
+    },
+    {
+      "node_id": "memory_mem_5",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'What type of writing did Richard Harding Davis write' is fiction and drama.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999832030831,
+      "temperature": 0.5690597009495441,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "intermediate_answer",
+        "target_question": "What type of writing did Richard Harding Davis write?",
+        "target_question_norm": "what type of writing did richard harding davis write",
+        "relation_signature": "generic",
+        "answer_text": "fiction and drama",
+        "support_score": 0.9999999832030831,
+        "evidence_ids": [
+          "doc_1"
+        ],
+        "slot_name": "left_category",
+        "slot_role": "left_value",
+        "terminal": true,
+        "derived_from_state": "state_2",
+        "diffusion_delta": 0.25221441179550685,
+        "diffusion_gain": 0.25221441179550685
+      }
+    },
+    {
+      "node_id": "memory_mem_6",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'What type of writing did both Richard Harding Davis and Harry Stephen Keeler write' is fiction.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.999999994448001,
+      "temperature": 1.4053883656281636,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "tdca_run",
+        "memory_kind": "answer_candidate",
+        "target_question": "What type of writing did both Richard Harding Davis and Harry Stephen Keeler write?",
+        "target_question_norm": "what type of writing did both richard harding davis and harry stephen keeler write",
+        "relation_signature": "generic",
+        "answer_text": "fiction",
+        "support_score": 0.999999994448001,
+        "derived_from_state": "state_1",
+        "composed_from": [
+          "memory_mem_5",
+          "memory_mem_4"
+        ],
+        "slot_role": "target_attribute",
+        "terminal": true,
+        "coverage_count": 2,
+        "coverage_ratio": 1.0,
+        "composition_kind": "shared_category",
+        "diffusion_delta": 0.06469977629064227,
+        "diffusion_gain": 0.06469977629064227,
+        "score": 0.999999994448001,
+        "raw_score": 11.333574596743778,
+        "evidence_ids": [
+          "doc_9",
+          "doc_2"
+        ]
+      }
+    },
+    {
+      "node_id": "state_5",
+      "node_type": "state",
+      "content": "Does the evidence support that What type of writing did both Richard Harding Davis and Harry Stephen Keeler write?",
+      "depth": 1,
+      "parent_id": "state_1",
+      "value": 0.5866629329085359,
+      "temperature": 0.3369617572629488,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.8607495072008731,
+        "evidence_support": 0.5904397270613913,
+        "memory_usefulness": 0.08498292602027285,
+        "answerability": 0.6952198635306956,
+        "uncertainty": 0.19372084912894957
+      },
+      "metadata": {
+        "kind": "verification",
+        "evidence_ids": [
+          "doc_9",
+          "doc_2",
+          "doc_10",
+          "doc_3"
+        ],
+        "memory_ids": [
+          "mem_3",
+          "mem_1"
+        ],
+        "diffusion_delta": -0.07266230973872417,
+        "diffusion_gain": 0.0
+      }
+    }
+  ],
+  "edges": [
+    {
+      "source": "state_1",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.999999984506355
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.8450945275646781
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_8",
+      "edge_type": "supports",
+      "weight": 0.016825331846925508
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.0200798736621387
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.8799999819645339
+    },
+    {
+      "source": "state_1",
+      "target": "state_2",
+      "edge_type": "refines",
+      "weight": 0.99
+    },
+    {
+      "source": "state_1",
+      "target": "state_3",
+      "edge_type": "refines",
+      "weight": 0.97
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_6",
+      "edge_type": "derives",
+      "weight": 0.95
+    },
+    {
+      "source": "state_1",
+      "target": "state_5",
+      "edge_type": "verifies",
+      "weight": 0.38
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.999999984506355
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.999999994448001
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.48569996528491727
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.999999994448001
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.9999999904244474
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.999999984506355
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.8450945275646781
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.9300884076628353
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.9999999926317649
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.9300884076628353
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.18087946369833496
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.8450945275646781
+    },
+    {
+      "source": "kg_doc_8",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.016825331846925508
+    },
+    {
+      "source": "kg_doc_8",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.7072220289479766
+    },
+    {
+      "source": "kg_doc_8",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.20442755687742556
+    },
+    {
+      "source": "kg_doc_8",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.7072220289479766
+    },
+    {
+      "source": "kg_doc_8",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.016825331846925508
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.9999999832030831
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.9999999832030831
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.0200798736621387
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_4",
+      "edge_type": "recalls",
+      "weight": 0.8841365672456091
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_5",
+      "edge_type": "recalls",
+      "weight": 0.0224503025013608
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.8799999819645339
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_4",
+      "edge_type": "recalls",
+      "weight": 0.8799999819645339
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_5",
+      "edge_type": "recalls",
+      "weight": 0.14751554953918491
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "memory_mem_6",
+      "edge_type": "recalls",
+      "weight": 0.8799999819645339
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.9999999832030831
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_10",
+      "edge_type": "supports",
+      "weight": 0.11634816605467166
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.09616560600369325
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_2",
+      "target": "memory_mem_5",
+      "edge_type": "derives",
+      "weight": 0.9999999832030831
+    },
+    {
+      "source": "kg_doc_10",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.11634816605467166
+    },
+    {
+      "source": "kg_doc_10",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_10",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.11634816605467166
+    },
+    {
+      "source": "kg_doc_10",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.1658482023661754
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.09616560600369325
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.09616560600369325
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.999999994448001
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.9300884076628353
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_8",
+      "edge_type": "supports",
+      "weight": 0.7072220289479766
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_3",
+      "target": "state_2",
+      "edge_type": "refines",
+      "weight": 0.84
+    },
+    {
+      "source": "state_3",
+      "target": "state_4",
+      "edge_type": "refines",
+      "weight": 0.8
+    },
+    {
+      "source": "state_3",
+      "target": "memory_mem_4",
+      "edge_type": "derives",
+      "weight": 0.999999994448001
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.9999999926317649
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.48569996528491727
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_8",
+      "edge_type": "supports",
+      "weight": 0.20442755687742556
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_10",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_4",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.8841365672456091
+    },
+    {
+      "source": "state_4",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.8799999819645339
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "state_3",
+      "edge_type": "recalls",
+      "weight": 0.999999994448001
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.999999994448001
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.9300884076628353
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_8",
+      "edge_type": "supports",
+      "weight": 0.7072220289479766
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "memory_mem_6",
+      "edge_type": "derives",
+      "weight": 0.999999994448001
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "state_2",
+      "edge_type": "recalls",
+      "weight": 0.9999999832030831
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.9999999832030831
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_10",
+      "edge_type": "supports",
+      "weight": 0.11634816605467166
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.09616560600369325
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "memory_mem_6",
+      "edge_type": "derives",
+      "weight": 0.9999999832030831
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.95
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.999999984506355
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.8450945275646781
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_8",
+      "edge_type": "supports",
+      "weight": 0.016825331846925508
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.8799999819645339
+    },
+    {
+      "source": "state_5",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.9999999904244474
+    },
+    {
+      "source": "state_5",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.18087946369833496
+    },
+    {
+      "source": "state_5",
+      "target": "kg_doc_10",
+      "edge_type": "supports",
+      "weight": 0.1658482023661754
+    },
+    {
+      "source": "state_5",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_5",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.14751554953918491
+    },
+    {
+      "source": "state_5",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.0224503025013608
+    }
+  ]
+}

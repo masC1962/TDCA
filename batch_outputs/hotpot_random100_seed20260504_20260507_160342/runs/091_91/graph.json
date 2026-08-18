@@ -1,0 +1,2230 @@
+{
+  "nodes": [
+    {
+      "node_id": "state_1",
+      "node_type": "state",
+      "content": "What award was an actor born in 1955 that acted in the movie Ransom nominated for?",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.8923726988015844,
+      "temperature": 0.2643753926765071,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.9941066543057262,
+        "evidence_support": 0.9826666303109591,
+        "memory_usefulness": 0.7841237535759132,
+        "answerability": 0.8913333151554796,
+        "uncertainty": 0.12312000654402735
+      },
+      "metadata": {
+        "diffusion_delta": -0.01372388002970304,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "kg_doc_6",
+      "node_type": "kg",
+      "content": "Gary Alan Sinise ( ; born March 17, 1955) is an American actor, director, and musician. Among other awards, he has won an Emmy Award, a Golden Globe Award, a star on Hollywood Walk of Fame and has been nominated for an Academy Award.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999973994028,
+      "temperature": 0.9999999973994028,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Gary Sinise",
+        "raw_score": 3.06425546874224,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_9",
+      "node_type": "kg",
+      "content": "Ransom is a 1996 American crime thriller film directed by Ron Howard and written by Richard Price and Alexander Ignon. The film stars Mel Gibson, Rene Russo, Gary Sinise, Brawley Nolte, Delroy Lindo, Liev Schreiber, Evan Handler, Donnie Wahlberg, and Lili Taylor. Gibson was nominated for a Golden Globe Award for Best Actor.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999948950388,
+      "temperature": 0.9999999948950388,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Ransom (1996 film)",
+        "raw_score": 3.2620346990872755,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_7",
+      "node_type": "kg",
+      "content": "Erik Simon Norrthon (born 4 August 1967) is a Swedish actor born in Fosie, Malmö. He studied at the Swedish National Academy of Mime and Acting from 1989 to 1992. At the 29th Guldbagge Awards, he was nominated for the Best Actor award for his role in \"Speak Up! It's So Dark\".",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.999999988016372,
+      "temperature": 0.999999988016372,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Simon Norrthon",
+        "raw_score": 4.43863537554614,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_4",
+      "node_type": "kg",
+      "content": "Turpu . JayaPrakash Reddy is a Telugu actor born in Sirvel, of Kurnool district in the state of Andhra Pradesh, India. He came into the limelight with the movie \"Samarasimha Reddy\" where he played the role of Veera Raghava Reddy. Fondly called JP, he acted as the villain in blockbuster hit movie \"Jayam Manade Raa and\" \"Chennakeshava Reddy\". Apart from doing villain roles, JP also acted in several comedy movies.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999887757908,
+      "temperature": 0.9999999887757908,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Jaya Prakash Reddy",
+        "raw_score": 5.939076945803384,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "memory_mem_1",
+      "node_type": "memory",
+      "content": "Template: for compositional multi-hop questions, first solve the intermediate entity and then ask for the final attribute.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.959999986210628,
+      "temperature": 3.6459486762243536,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.96,
+        "tag": "compositional_template",
+        "memory_kind": "template",
+        "raw_score": 0.14287825734693727,
+        "source": "memory",
+        "diffusion_delta": -0.13970800432775743,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "memory_mem_2",
+      "node_type": "memory",
+      "content": "Template: for comparison questions, split the problem into one sub-question per entity before comparing them.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.6566941196618674,
+      "temperature": 1.208597859858182,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.9,
+        "tag": "comparison_template",
+        "memory_kind": "template",
+        "raw_score": 0.5058670843904833,
+        "source": "memory",
+        "diffusion_delta": -0.002435689256793827,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "state_2",
+      "node_type": "state",
+      "content": "Who is an actor born in 1955 that acted in the movie Ransom?",
+      "depth": 1,
+      "parent_id": "state_1",
+      "value": 0.5943103566227788,
+      "temperature": 2.085987578812545,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.7166448308137152,
+        "evidence_support": 0.5391514631775938,
+        "memory_usefulness": 0.5139667251540021,
+        "answerability": 0.7029090649221302,
+        "uncertainty": 0.20295273662803312
+      },
+      "metadata": {
+        "kind": "bridge",
+        "evidence_ids": [
+          "doc_4",
+          "doc_6",
+          "doc_10",
+          "doc_9"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "goal_slot_name": "actor_in_ransom_born_1955",
+        "goal_slot_role": "bridge_entity",
+        "goal_terminal": false,
+        "goal_answered_cooling": 1,
+        "diffusion_delta": 0.12350267536200343,
+        "diffusion_gain": 0.12350267536200343
+      }
+    },
+    {
+      "node_id": "kg_doc_10",
+      "node_type": "kg",
+      "content": "Delhi Ganesh is a veteran Tamil actor born in Tirunelveli, who mostly acts in supporting roles and is perhaps best known for his role in Kamal Hassan comedies and films like \"Nayagan\" and \"Michael Madana Kama Rajan\". He has acted in more than 400 films from 1976 to present. He was a member of the 'Delhi' drama troupe called Dakshina Bharata Nataka Sabha (DBNS). Ganesh worked in Indian Airforce from 1964 to 1974 before quitting in favour of films.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999916031121,
+      "temperature": 0.9999999916031121,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Delhi Ganesh",
+        "raw_score": 6.390483135280395,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "memory_mem_3",
+      "node_type": "memory",
+      "content": "Template: when evidence already grounds the answer, switch from branching to short verification and synthesis.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0679336425691247,
+      "temperature": 0.173417290627732,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.88,
+        "tag": "verification_then_stop",
+        "memory_kind": "template",
+        "raw_score": 0.10742051180638844,
+        "source": "memory",
+        "diffusion_delta": -0.01420896816698422,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "state_3",
+      "node_type": "state",
+      "content": "Which actor born in 1955 appeared in the 1996 film Ransom?",
+      "depth": 2,
+      "parent_id": "state_2",
+      "value": 0.5924926229736275,
+      "temperature": 1.2672336498948753,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.6577139296994238,
+        "evidence_support": 0.6638644991159521,
+        "memory_usefulness": 0.5139667251540021,
+        "answerability": 0.6119322495579762,
+        "uncertainty": 0.1805043901591286
+      },
+      "metadata": {
+        "kind": "bridge",
+        "evidence_ids": [
+          "doc_9",
+          "doc_2",
+          "doc_3",
+          "doc_6"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "diffusion_delta": 0.02246801410915933,
+        "diffusion_gain": 0.02246801410915933
+      }
+    },
+    {
+      "node_id": "kg_doc_2",
+      "node_type": "kg",
+      "content": "Ludwig Dessoir, original name Leopold Dessauer (15 December 1810 – 30 December 1874) was a German actor born in Posen, the son of a Jewish tradesman. He made his first appearance on the stage there in 1824 in a small part. After some experience at the theatre in Posen and on tour, he was engaged at Leipzig from 1834 to 1836. Then he was attached to the municipal theatre of Breslau, and in 1837 appeared at Prague, Brno, Vienna and Budapest, where he accepted an engagement which lasted until 1839. He succeeded Karl Devrient at Karlsruhe, and went in 1847 to Berlin, where he acted Othello and Hamlet with great success, he received a permanent engagement at that theatre. From 1849 to 1872, when he retired on a pension, he played 110 parts, frequently on tour, and in 1853 acting in London. He died in 1874 in Berlin.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.327729003560989,
+      "temperature": 0.327729003560989,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Ludwig Dessoir",
+        "raw_score": 2.1523736974525836,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_3",
+      "node_type": "kg",
+      "content": "Derek Royle (7 September 1928 – 23 January 1990) was a British actor born in London, England. His face was probably better known than his name to British viewers, but he acted in films and TV from the mid-1960s until his death. He had a supporting role in the Beatles' film \"Magical Mystery Tour\" in 1967, as well as a minor one with Cilla Black in the film \"Work Is a Four-Letter Word\" a year later. Most of his film appearances were in comedy films such as \"Don't Just Lie There, Say Something! \" (1973), \"Tiffany Jones\" (1973) and \"Confessions of a Sex Maniac\" (1974).",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.11734665641915698,
+      "temperature": 0.11734665641915698,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Derek Royle",
+        "raw_score": 3.8822324628805776,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "state_4",
+      "node_type": "state",
+      "content": "What award nominations did Gary Sinise receive for his acting roles?",
+      "depth": 2,
+      "parent_id": "state_2",
+      "value": 0.7360136252894826,
+      "temperature": 1.6729793906059456,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.6789270128349819,
+        "evidence_support": 0.9497853318675936,
+        "memory_usefulness": 0.8083470524475778,
+        "answerability": 0.7148926659337969,
+        "uncertainty": 0.12903864026383313
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_6",
+          "doc_9",
+          "doc_7",
+          "doc_8"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_2"
+        ],
+        "diffusion_delta": 0.10380903582138101,
+        "diffusion_gain": 0.10380903582138101
+      }
+    },
+    {
+      "node_id": "kg_doc_8",
+      "node_type": "kg",
+      "content": "Noor Mohammed Charlie (1911–1983), popularly known as Charlie was an actor born on 1 July 1911 in Ranavav village, Porbandar, Saurashtra, India. Best known for his comedy roles, he was the first 'star' comedian and has been referred to as India's first comedy king. He acted with several top actresses of those days as a comic hero. Being a great fan of Charlie Chaplin, he took the name \"Charlie\" as his screen name following the release of his popular film \"The Indian Charlie\" (1933). He had a successful career in pre-partition India from 1925–1946. His shift to Pakistan following partition saw his career going down with less than 12 films. He shifted to the US to live with his son and returned later to Pakistan where he died in 1983.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0,
+      "temperature": 0.0,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Noor Mohammed Charlie",
+        "raw_score": 2.6180490764178708,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "memory_mem_4",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'Who is an actor born in 1955 that acted in the movie Ransom' is Sirvel.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999767666139,
+      "temperature": 1.6517593977321126,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "intermediate_answer",
+        "target_question": "Who is an actor born in 1955 that acted in the movie Ransom?",
+        "target_question_norm": "who is an actor born in 1955 that acted in the movie ransom",
+        "relation_signature": "birth",
+        "answer_text": "Ron Howard",
+        "support_score": 0.9999999767666139,
+        "evidence_ids": [
+          "doc_4"
+        ],
+        "slot_name": "actor_in_ransom_born_1955",
+        "slot_role": "bridge_entity",
+        "terminal": false,
+        "derived_from_state": "state_2",
+        "diffusion_delta": 0.1235591125325588,
+        "diffusion_gain": 0.1235591125325588
+      }
+    },
+    {
+      "node_id": "state_5",
+      "node_type": "state",
+      "content": "Who is the actor born in 1955 who appeared in the 1996 film Ransom?",
+      "depth": 3,
+      "parent_id": "state_3",
+      "value": 0.5910904172913372,
+      "temperature": 0.451114637992807,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.6866766418833297,
+        "evidence_support": 0.7490489467156752,
+        "memory_usefulness": 0.003408227533410687,
+        "answerability": 0.7545244733578377,
+        "uncertainty": 0.16517118959117844
+      },
+      "metadata": {
+        "kind": "bridge",
+        "evidence_ids": [
+          "doc_9",
+          "doc_10",
+          "doc_3",
+          "doc_2"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "diffusion_delta": 0.004893984587592326,
+        "diffusion_gain": 0.004893984587592326
+      }
+    },
+    {
+      "node_id": "state_6",
+      "node_type": "state",
+      "content": "What award was that actor nominated for?",
+      "depth": 3,
+      "parent_id": "state_3",
+      "value": 0.7522933068286359,
+      "temperature": 1.288609638820074,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.7967589052782896,
+        "evidence_support": 0.9983105057204595,
+        "memory_usefulness": 0.34408439180639394,
+        "answerability": 0.7924885861935632,
+        "uncertainty": 0.12030410897031728
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_7",
+          "doc_6",
+          "doc_9",
+          "doc_2"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_2"
+        ],
+        "diffusion_delta": 0.23726810953669397,
+        "diffusion_gain": 0.23726810953669397
+      }
+    },
+    {
+      "node_id": "memory_mem_5",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'Which actor born in 1955 appeared in the 1996 film Ransom' is Gary Sinise.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999946709153,
+      "temperature": 0.4919178925854336,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "intermediate_answer",
+        "target_question": "Which actor born in 1955 appeared in the 1996 film Ransom?",
+        "target_question_norm": "which actor born in 1955 appeared in the 1996 film ransom",
+        "relation_signature": "birth",
+        "answer_text": "Gary Sinise",
+        "support_score": 0.9999999946709153,
+        "evidence_ids": [
+          "doc_9"
+        ],
+        "slot_name": "",
+        "slot_role": "",
+        "terminal": false,
+        "derived_from_state": "state_3",
+        "diffusion_delta": -0.001582746977639049,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "state_7",
+      "node_type": "state",
+      "content": "What award was Gary Sinise nominated for?",
+      "depth": 3,
+      "parent_id": "state_3",
+      "value": 0.7318437389484715,
+      "temperature": 1.959866781806711,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.7464433406207409,
+        "evidence_support": 0.9993431586884538,
+        "memory_usefulness": 0.3675632902481237,
+        "answerability": 0.7663382460108936,
+        "uncertainty": 0.1201182314360783
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_6",
+          "doc_9",
+          "doc_7",
+          "doc_10"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_2"
+        ],
+        "diffusion_delta": 0.14326790398896017,
+        "diffusion_gain": 0.14326790398896017
+      }
+    },
+    {
+      "node_id": "state_8",
+      "node_type": "state",
+      "content": "For which role was Gary Sinise nominated for an Academy Award?",
+      "depth": 4,
+      "parent_id": "state_7",
+      "value": 0.6815156604530396,
+      "temperature": 1.9049514420076172,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.7025037391494295,
+        "evidence_support": 0.8701090367140083,
+        "memory_usefulness": 0.4900843875990323,
+        "answerability": 0.7017211850236709,
+        "uncertainty": 0.1433803733914785
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_6",
+          "doc_9",
+          "doc_7",
+          "doc_10"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_2"
+        ],
+        "diffusion_delta": 0.3334816805204335,
+        "diffusion_gain": 0.3334816805204335
+      }
+    },
+    {
+      "node_id": "memory_mem_6",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'What award was Gary Sinise nominated for' is Gary Sinise.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9193957059933775,
+      "temperature": 1.5878689001467556,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "derived_fact",
+        "target_question": "What award was Gary Sinise nominated for?",
+        "target_question_norm": "what award was gary sinise nominated for",
+        "relation_signature": "generic",
+        "answer_text": "Gary Sinise",
+        "support_score": 0.9993431586884538,
+        "evidence_ids": [
+          "doc_9",
+          "doc_6"
+        ],
+        "derived_from_state": "state_7",
+        "diffusion_delta": 0.1147785083401911,
+        "diffusion_gain": 0.1147785083401911
+      }
+    },
+    {
+      "node_id": "state_9",
+      "node_type": "state",
+      "content": "What award nominations did Gary Sinise receive for his role in the movie Ransom?",
+      "depth": 3,
+      "parent_id": "state_4",
+      "value": 0.6335869729599899,
+      "temperature": 1.1018184138528189,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.7354908846512351,
+        "evidence_support": 0.8181104450526522,
+        "memory_usefulness": 0.11050386396801581,
+        "answerability": 0.7023885558596595,
+        "uncertainty": 0.1527401198905226
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_9",
+          "doc_6",
+          "doc_7",
+          "doc_4"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_2"
+        ],
+        "diffusion_delta": 0.09011830100325646,
+        "diffusion_gain": 0.09011830100325646
+      }
+    },
+    {
+      "node_id": "memory_mem_7",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'What award nominations did Gary Sinise receive for his acting roles' is Gary Sinise.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.8738025053181862,
+      "temperature": 1.0364222736445978,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "derived_fact",
+        "target_question": "What award nominations did Gary Sinise receive for his acting roles?",
+        "target_question_norm": "what award nominations did gary sinise receive for his acting roles",
+        "relation_signature": "generic",
+        "answer_text": "Gary Sinise",
+        "support_score": 0.9497853318675936,
+        "evidence_ids": [
+          "doc_9",
+          "doc_6"
+        ],
+        "derived_from_state": "state_4",
+        "diffusion_delta": 0.05594543398117291,
+        "diffusion_gain": 0.05594543398117291
+      }
+    },
+    {
+      "node_id": "state_10",
+      "node_type": "state",
+      "content": "Which actor born in 1955 acted in the movie Ransom?",
+      "depth": 1,
+      "parent_id": "state_1",
+      "value": 0.5948342362075596,
+      "temperature": 0.31285246973710884,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.7354466211764861,
+        "evidence_support": 0.743470454440645,
+        "memory_usefulness": 0.0014436405530016767,
+        "answerability": 0.6784018938869891,
+        "uncertainty": 0.1661753182006839
+      },
+      "metadata": {
+        "kind": "bridge",
+        "evidence_ids": [
+          "doc_4",
+          "doc_9",
+          "doc_2",
+          "doc_6"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "diffusion_delta": -0.051941857558001014,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "memory_mem_8",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'For which role was Gary Sinise nominated for an Academy Award' is Gary Sinise.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.8005003137768877,
+      "temperature": 1.5496388032976436,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "derived_fact",
+        "target_question": "For which role was Gary Sinise nominated for an Academy Award?",
+        "target_question_norm": "for which role was gary sinise nominated for an academy award",
+        "relation_signature": "generic",
+        "answer_text": "Gary Sinise",
+        "support_score": 0.8701090367140083,
+        "evidence_ids": [
+          "doc_6",
+          "doc_9"
+        ],
+        "derived_from_state": "state_8",
+        "diffusion_delta": 0.28081891993773445,
+        "diffusion_gain": 0.28081891993773445
+      }
+    },
+    {
+      "node_id": "state_11",
+      "node_type": "state",
+      "content": "Who is the actor born in 1955 who acted in the movie Ransom?",
+      "depth": 4,
+      "parent_id": "state_6",
+      "value": 0.7084879691147018,
+      "temperature": 1.0733651524936716,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.8007581104665593,
+        "evidence_support": 0.935563069999684,
+        "memory_usefulness": 0.001383046868284726,
+        "answerability": 0.8744482016665086,
+        "uncertainty": 0.1315986474000569
+      },
+      "metadata": {
+        "kind": "bridge",
+        "evidence_ids": [
+          "doc_10",
+          "doc_4",
+          "doc_9",
+          "doc_6"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "diffusion_delta": 0.7374385775293876,
+        "diffusion_gain": 0.7374385775293876
+      }
+    },
+    {
+      "node_id": "memory_mem_9",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'What award was that actor nominated for' is Gary Sinise.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9184456652628228,
+      "temperature": 0.9670473381793036,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "derived_fact",
+        "target_question": "What award was that actor nominated for?",
+        "target_question_norm": "what award was that actor nominated for",
+        "relation_signature": "generic",
+        "answer_text": "Gary Sinise",
+        "support_score": 0.9983105057204595,
+        "evidence_ids": [
+          "doc_7",
+          "doc_6",
+          "doc_9"
+        ],
+        "derived_from_state": "state_6",
+        "diffusion_delta": -0.009366598533778636,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "memory_mem_10",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'Who is the actor born in 1955 who acted in the movie Ransom' is Tirunelveli.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.8607180243997092,
+      "temperature": 0.8676939987675827,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "derived_fact",
+        "target_question": "Who is the actor born in 1955 who acted in the movie Ransom?",
+        "target_question_norm": "who is the actor born in 1955 who acted in the movie ransom",
+        "relation_signature": "birth",
+        "answer_text": "Tirunelveli",
+        "support_score": 0.935563069999684,
+        "evidence_ids": [
+          "doc_10"
+        ],
+        "derived_from_state": "state_11",
+        "diffusion_delta": -0.22882453692939042,
+        "diffusion_gain": 0.0
+      }
+    }
+  ],
+  "edges": [
+    {
+      "source": "state_1",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.9999999912795213
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.9653332693423969
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.2569420089193534
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.05690262353531628
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_2",
+      "edge_type": "recalls",
+      "weight": 0.03787535508732042
+    },
+    {
+      "source": "state_1",
+      "target": "state_2",
+      "edge_type": "refines",
+      "weight": 1.0
+    },
+    {
+      "source": "state_1",
+      "target": "state_10",
+      "edge_type": "refines",
+      "weight": 0.9
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.9999999912795213
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.07830294958857366
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.999999995061687
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.07830294958857366
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "state_6",
+      "edge_type": "supports",
+      "weight": 0.9966210234245471
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "state_7",
+      "edge_type": "supports",
+      "weight": 0.9999999967348454
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "state_8",
+      "edge_type": "supports",
+      "weight": 0.9999999973994028
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.9999999967348454
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "state_9",
+      "edge_type": "supports",
+      "weight": 0.6362208952102657
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "memory_mem_7",
+      "edge_type": "supports",
+      "weight": 0.999999995061687
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "state_10",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "memory_mem_8",
+      "edge_type": "supports",
+      "weight": 0.9999999973994028
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "state_11",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "memory_mem_9",
+      "edge_type": "supports",
+      "weight": 0.9966210234245471
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "memory_mem_10",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.9653332693423969
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.9999999946709153
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.8995706686735002
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.9999999945871667
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "state_6",
+      "edge_type": "supports",
+      "weight": 0.991949942599391
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.9999999946709153
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "state_7",
+      "edge_type": "supports",
+      "weight": 0.9986863206420622
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "state_8",
+      "edge_type": "supports",
+      "weight": 0.7402180760286139
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.9986863206420622
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "state_9",
+      "edge_type": "supports",
+      "weight": 0.9999999948950388
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "memory_mem_7",
+      "edge_type": "supports",
+      "weight": 0.8995706686735002
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "state_10",
+      "edge_type": "supports",
+      "weight": 0.4869409201054991
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "memory_mem_8",
+      "edge_type": "supports",
+      "weight": 0.7402180760286139
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "state_11",
+      "edge_type": "supports",
+      "weight": 0.4427216622731032
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "memory_mem_9",
+      "edge_type": "supports",
+      "weight": 0.991949942599391
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "memory_mem_10",
+      "edge_type": "supports",
+      "weight": 0.4427216622731032
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.2569420089193534
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.3348159082870812
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "state_6",
+      "edge_type": "supports",
+      "weight": 0.999999988016372
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "state_7",
+      "edge_type": "supports",
+      "weight": 0.3699181713828889
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "state_8",
+      "edge_type": "supports",
+      "weight": 0.4815928898279436
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.3699181713828889
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "state_9",
+      "edge_type": "supports",
+      "weight": 0.064262477202487
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "memory_mem_7",
+      "edge_type": "supports",
+      "weight": 0.3348159082870812
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "memory_mem_8",
+      "edge_type": "supports",
+      "weight": 0.4815928898279436
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "memory_mem_9",
+      "edge_type": "supports",
+      "weight": 0.999999988016372
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.9999999767666139
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.9999999767666139
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "state_9",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "state_10",
+      "edge_type": "supports",
+      "weight": 0.9999999887757908
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "state_11",
+      "edge_type": "supports",
+      "weight": 0.8711261483962557
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "memory_mem_10",
+      "edge_type": "supports",
+      "weight": 0.8711261483962557
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.05690262353531628
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_2",
+      "edge_type": "recalls",
+      "weight": 0.9599998077388796
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_3",
+      "edge_type": "recalls",
+      "weight": 0.004784369890713692
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_4",
+      "edge_type": "recalls",
+      "weight": 0.12929072105982595
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "memory_mem_4",
+      "edge_type": "recalls",
+      "weight": 0.9599998077388796
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_5",
+      "edge_type": "recalls",
+      "weight": 0.006369299905786392
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_6",
+      "edge_type": "recalls",
+      "weight": 0.11557843764903891
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "memory_mem_5",
+      "edge_type": "recalls",
+      "weight": 0.004784369890713692
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_7",
+      "edge_type": "recalls",
+      "weight": 0.43559183145218444
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_8",
+      "edge_type": "recalls",
+      "weight": 0.17902184598586696
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "memory_mem_6",
+      "edge_type": "recalls",
+      "weight": 0.43559183145218444
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_9",
+      "edge_type": "recalls",
+      "weight": 0.1326793863029367
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "memory_mem_7",
+      "edge_type": "recalls",
+      "weight": 0.12929072105982595
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_10",
+      "edge_type": "recalls",
+      "weight": 0.0024567500790059894
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "memory_mem_8",
+      "edge_type": "recalls",
+      "weight": 0.17902184598586696
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_11",
+      "edge_type": "recalls",
+      "weight": 0.002241125741859145
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "memory_mem_9",
+      "edge_type": "recalls",
+      "weight": 0.11557843764903891
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "memory_mem_10",
+      "edge_type": "recalls",
+      "weight": 0.002241125741859145
+    },
+    {
+      "source": "memory_mem_2",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.03787535508732042
+    },
+    {
+      "source": "memory_mem_2",
+      "target": "state_4",
+      "edge_type": "recalls",
+      "weight": 0.08862404950447592
+    },
+    {
+      "source": "memory_mem_2",
+      "target": "state_6",
+      "edge_type": "recalls",
+      "weight": 0.07938379285279061
+    },
+    {
+      "source": "memory_mem_2",
+      "target": "state_7",
+      "edge_type": "recalls",
+      "weight": 0.2995347490440629
+    },
+    {
+      "source": "memory_mem_2",
+      "target": "state_8",
+      "edge_type": "recalls",
+      "weight": 0.12285432405578252
+    },
+    {
+      "source": "memory_mem_2",
+      "target": "memory_mem_6",
+      "edge_type": "recalls",
+      "weight": 0.2995347490440629
+    },
+    {
+      "source": "memory_mem_2",
+      "target": "state_9",
+      "edge_type": "recalls",
+      "weight": 0.08832834163309491
+    },
+    {
+      "source": "memory_mem_2",
+      "target": "memory_mem_7",
+      "edge_type": "recalls",
+      "weight": 0.08862404950447592
+    },
+    {
+      "source": "memory_mem_2",
+      "target": "memory_mem_8",
+      "edge_type": "recalls",
+      "weight": 0.12285432405578252
+    },
+    {
+      "source": "memory_mem_2",
+      "target": "memory_mem_9",
+      "edge_type": "recalls",
+      "weight": 0.07938379285279061
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.9999999767666139
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.07830294958857366
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_10",
+      "edge_type": "supports",
+      "weight": 0.004181572984971992
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_2",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.9599998077388796
+    },
+    {
+      "source": "state_2",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.0679336425691247
+    },
+    {
+      "source": "state_2",
+      "target": "state_3",
+      "edge_type": "refines",
+      "weight": 0.95
+    },
+    {
+      "source": "state_2",
+      "target": "state_4",
+      "edge_type": "refines",
+      "weight": 0.85
+    },
+    {
+      "source": "state_2",
+      "target": "memory_mem_4",
+      "edge_type": "derives",
+      "weight": 0.9999999767666139
+    },
+    {
+      "source": "kg_doc_10",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.004181572984971992
+    },
+    {
+      "source": "kg_doc_10",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.004181572984971992
+    },
+    {
+      "source": "kg_doc_10",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.4980978988441837
+    },
+    {
+      "source": "kg_doc_10",
+      "target": "state_7",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_10",
+      "target": "state_8",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_10",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_10",
+      "target": "memory_mem_8",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_10",
+      "target": "state_11",
+      "edge_type": "supports",
+      "weight": 0.9999999916031121
+    },
+    {
+      "source": "kg_doc_10",
+      "target": "memory_mem_10",
+      "edge_type": "supports",
+      "weight": 0.9999999916031121
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_2",
+      "edge_type": "recalls",
+      "weight": 0.0679336425691247
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_3",
+      "edge_type": "recalls",
+      "weight": 0.00033588553225283535
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "memory_mem_4",
+      "edge_type": "recalls",
+      "weight": 0.0679336425691247
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_5",
+      "edge_type": "recalls",
+      "weight": 0.0004471551610349812
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "memory_mem_5",
+      "edge_type": "recalls",
+      "weight": 0.00033588553225283535
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_10",
+      "edge_type": "recalls",
+      "weight": 0.00043053102699736404
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_11",
+      "edge_type": "recalls",
+      "weight": 0.00015796416387318712
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "memory_mem_10",
+      "edge_type": "recalls",
+      "weight": 0.00015796416387318712
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.9999999946709153
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.327729003560989
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.11734665641915698
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_3",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.004784369890713692
+    },
+    {
+      "source": "state_3",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.00033588553225283535
+    },
+    {
+      "source": "state_3",
+      "target": "state_5",
+      "edge_type": "refines",
+      "weight": 0.9
+    },
+    {
+      "source": "state_3",
+      "target": "state_6",
+      "edge_type": "refines",
+      "weight": 0.8
+    },
+    {
+      "source": "state_3",
+      "target": "memory_mem_5",
+      "edge_type": "derives",
+      "weight": 0.9999999946709153
+    },
+    {
+      "source": "state_3",
+      "target": "state_7",
+      "edge_type": "refines",
+      "weight": 0.84
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.327729003560989
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "state_6",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.327729003560989
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "state_10",
+      "edge_type": "supports",
+      "weight": 0.26394534919711937
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "memory_mem_9",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.11734665641915698
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.10591000331607434
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.11734665641915698
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.999999995061687
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.8995706686735002
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.3348159082870812
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_8",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_4",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.12929072105982595
+    },
+    {
+      "source": "state_4",
+      "target": "memory_mem_2",
+      "edge_type": "recalls",
+      "weight": 0.08862404950447592
+    },
+    {
+      "source": "state_4",
+      "target": "state_9",
+      "edge_type": "refines",
+      "weight": 0.95
+    },
+    {
+      "source": "state_4",
+      "target": "memory_mem_7",
+      "edge_type": "derives",
+      "weight": 0.9497853318675936
+    },
+    {
+      "source": "kg_doc_8",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_8",
+      "target": "memory_mem_7",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "state_2",
+      "edge_type": "recalls",
+      "weight": 0.9999999767666139
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.9999999767666139
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.07830294958857366
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_10",
+      "edge_type": "supports",
+      "weight": 0.004181572984971992
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.9599998077388796
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.0679336425691247
+    },
+    {
+      "source": "state_5",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.9999999945871667
+    },
+    {
+      "source": "state_5",
+      "target": "kg_doc_10",
+      "edge_type": "supports",
+      "weight": 0.4980978988441837
+    },
+    {
+      "source": "state_5",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.10591000331607434
+    },
+    {
+      "source": "state_5",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_5",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.006369299905786392
+    },
+    {
+      "source": "state_5",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.0004471551610349812
+    },
+    {
+      "source": "state_6",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.999999988016372
+    },
+    {
+      "source": "state_6",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.9966210234245471
+    },
+    {
+      "source": "state_6",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.991949942599391
+    },
+    {
+      "source": "state_6",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_6",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.11557843764903891
+    },
+    {
+      "source": "state_6",
+      "target": "memory_mem_2",
+      "edge_type": "recalls",
+      "weight": 0.07938379285279061
+    },
+    {
+      "source": "state_6",
+      "target": "state_11",
+      "edge_type": "refines",
+      "weight": 0.9
+    },
+    {
+      "source": "state_6",
+      "target": "memory_mem_9",
+      "edge_type": "derives",
+      "weight": 0.9983105057204595
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "state_3",
+      "edge_type": "recalls",
+      "weight": 0.9999999946709153
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.9999999946709153
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.327729003560989
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.11734665641915698
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.004784369890713692
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.00033588553225283535
+    },
+    {
+      "source": "state_7",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.9999999967348454
+    },
+    {
+      "source": "state_7",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.9986863206420622
+    },
+    {
+      "source": "state_7",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.3699181713828889
+    },
+    {
+      "source": "state_7",
+      "target": "kg_doc_10",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_7",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.43559183145218444
+    },
+    {
+      "source": "state_7",
+      "target": "memory_mem_2",
+      "edge_type": "recalls",
+      "weight": 0.2995347490440629
+    },
+    {
+      "source": "state_7",
+      "target": "state_8",
+      "edge_type": "refines",
+      "weight": 0.9
+    },
+    {
+      "source": "state_7",
+      "target": "memory_mem_6",
+      "edge_type": "derives",
+      "weight": 0.9993431586884538
+    },
+    {
+      "source": "state_8",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.9999999973994028
+    },
+    {
+      "source": "state_8",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.7402180760286139
+    },
+    {
+      "source": "state_8",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.4815928898279436
+    },
+    {
+      "source": "state_8",
+      "target": "kg_doc_10",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_8",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.17902184598586696
+    },
+    {
+      "source": "state_8",
+      "target": "memory_mem_2",
+      "edge_type": "recalls",
+      "weight": 0.12285432405578252
+    },
+    {
+      "source": "state_8",
+      "target": "memory_mem_8",
+      "edge_type": "derives",
+      "weight": 0.8701090367140083
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "state_7",
+      "edge_type": "recalls",
+      "weight": 0.9993431586884538
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.9986863206420622
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.9999999967348454
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.3699181713828889
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_10",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.43559183145218444
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "memory_mem_2",
+      "edge_type": "recalls",
+      "weight": 0.2995347490440629
+    },
+    {
+      "source": "state_9",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.9999999948950388
+    },
+    {
+      "source": "state_9",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.6362208952102657
+    },
+    {
+      "source": "state_9",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.064262477202487
+    },
+    {
+      "source": "state_9",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_9",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.1326793863029367
+    },
+    {
+      "source": "state_9",
+      "target": "memory_mem_2",
+      "edge_type": "recalls",
+      "weight": 0.08832834163309491
+    },
+    {
+      "source": "memory_mem_7",
+      "target": "state_4",
+      "edge_type": "recalls",
+      "weight": 0.9497853318675936
+    },
+    {
+      "source": "memory_mem_7",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.8995706686735002
+    },
+    {
+      "source": "memory_mem_7",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.999999995061687
+    },
+    {
+      "source": "memory_mem_7",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.3348159082870812
+    },
+    {
+      "source": "memory_mem_7",
+      "target": "kg_doc_8",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_7",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.12929072105982595
+    },
+    {
+      "source": "memory_mem_7",
+      "target": "memory_mem_2",
+      "edge_type": "recalls",
+      "weight": 0.08862404950447592
+    },
+    {
+      "source": "state_10",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.9999999887757908
+    },
+    {
+      "source": "state_10",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.4869409201054991
+    },
+    {
+      "source": "state_10",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.26394534919711937
+    },
+    {
+      "source": "state_10",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_10",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.0024567500790059894
+    },
+    {
+      "source": "state_10",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.00043053102699736404
+    },
+    {
+      "source": "memory_mem_8",
+      "target": "state_8",
+      "edge_type": "recalls",
+      "weight": 0.8701090367140083
+    },
+    {
+      "source": "memory_mem_8",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.9999999973994028
+    },
+    {
+      "source": "memory_mem_8",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.7402180760286139
+    },
+    {
+      "source": "memory_mem_8",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.4815928898279436
+    },
+    {
+      "source": "memory_mem_8",
+      "target": "kg_doc_10",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_8",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.17902184598586696
+    },
+    {
+      "source": "memory_mem_8",
+      "target": "memory_mem_2",
+      "edge_type": "recalls",
+      "weight": 0.12285432405578252
+    },
+    {
+      "source": "state_11",
+      "target": "kg_doc_10",
+      "edge_type": "supports",
+      "weight": 0.9999999916031121
+    },
+    {
+      "source": "state_11",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.8711261483962557
+    },
+    {
+      "source": "state_11",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.4427216622731032
+    },
+    {
+      "source": "state_11",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_11",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.002241125741859145
+    },
+    {
+      "source": "state_11",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.00015796416387318712
+    },
+    {
+      "source": "state_11",
+      "target": "memory_mem_10",
+      "edge_type": "derives",
+      "weight": 0.935563069999684
+    },
+    {
+      "source": "memory_mem_9",
+      "target": "state_6",
+      "edge_type": "recalls",
+      "weight": 0.9983105057204595
+    },
+    {
+      "source": "memory_mem_9",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.999999988016372
+    },
+    {
+      "source": "memory_mem_9",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.9966210234245471
+    },
+    {
+      "source": "memory_mem_9",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.991949942599391
+    },
+    {
+      "source": "memory_mem_9",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_9",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.11557843764903891
+    },
+    {
+      "source": "memory_mem_9",
+      "target": "memory_mem_2",
+      "edge_type": "recalls",
+      "weight": 0.07938379285279061
+    },
+    {
+      "source": "memory_mem_10",
+      "target": "state_11",
+      "edge_type": "recalls",
+      "weight": 0.935563069999684
+    },
+    {
+      "source": "memory_mem_10",
+      "target": "kg_doc_10",
+      "edge_type": "supports",
+      "weight": 0.9999999916031121
+    },
+    {
+      "source": "memory_mem_10",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.8711261483962557
+    },
+    {
+      "source": "memory_mem_10",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.4427216622731032
+    },
+    {
+      "source": "memory_mem_10",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_10",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.002241125741859145
+    },
+    {
+      "source": "memory_mem_10",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.00015796416387318712
+    }
+  ]
+}

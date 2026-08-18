@@ -1,0 +1,2109 @@
+{
+  "nodes": [
+    {
+      "node_id": "state_1",
+      "node_type": "state",
+      "content": "What was the name of the law passed by the actor from Terminator?",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.6165785951073249,
+      "temperature": 0.29142800340661557,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.8299999961807694,
+        "evidence_support": 0.49999998876696855,
+        "memory_usefulness": 0.5098216729982189,
+        "answerability": 0.6499999943834842,
+        "uncertainty": 0.21000000202194563
+      },
+      "metadata": {
+        "diffusion_delta": -0.021075836648606017,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "kg_doc_12",
+      "node_type": "kg",
+      "content": "Cyberdyne Systems Series T-800 / T-850 Model 101, or \"The Terminator\", is a fictional character from the \"Terminator\" franchise portrayed by both Arnold Schwarzenegger and numerous actor stand-ins digitally overlaid with Schwarzenegger's likeness. The Terminator itself is part of a series of machines created by Skynet for infiltration-based assassination missions, and while an android for its appearance resembling a human, it is described as a cybernetic organism consisting of living tissue over a robotic endoskeleton.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999807383732,
+      "temperature": 0.9999999807383732,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Terminator (character)",
+        "raw_score": 0.28230676591827114,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_19",
+      "node_type": "kg",
+      "content": "The S. 3066 legislation was passed by the United States 93rd Congressional session and enacted into law by the 38th President of the United States Gerald Ford on August 22, 1974.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999998088758291,
+      "temperature": 0.9999998088758291,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Housing and Community Development Act of 1974",
+        "raw_score": 0.16548380962215958,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_9",
+      "node_type": "kg",
+      "content": "Norfolk Island is the only non-mainland Australian territory to have achieved self-governance. The Norfolk Island Act 1979, passed by the Parliament of Australia in 1979, is the Act under which the island was governed until the passing of the Norfolk Island Legislation Amendment Act 2015. The Australian government maintains authority on the island through an Administrator, currently Gary Hardgrave. From 1979 to 2015, a Legislative Assembly was elected by popular vote for terms of not more than three years, although legislation passed by the Australian Parliament could extend its laws to the territory at will, including the power to override any laws made by the assembly.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0,
+      "temperature": 0.0,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Norfolk Island",
+        "raw_score": 0.0968591404976477,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_7",
+      "node_type": "kg",
+      "content": "The original name of the airport was Bengaluru International Airport. In February 2009, the State Government sent a proposal to the Union Government to rename the airport after the founder of Bengaluru, Kempe Gowda I. When no action was taken, the State Government passed a resolution for the name change in December 2011. The Union Government accepted the proposal in 2012 and formally approved it in July 2013. The airport was officially renamed Kempegowda International Airport on 14 December 2013 amid the inauguration of the expanded terminal building.Kingfisher Airlines once operated a hub and was one of the largest airlines at Kempegowda Airport. Following its collapse in October 2012, other airlines stepped in to fill the gap in domestic connectivity by adding more flights. In addition, Air Pegasus and AirAsia India launched hub operations at the airport in 2014.The first phase of expansion was launched in June 2011 and finished in December 2013. The ₹1,500 crore (US$220 million) project doubled the size of the passenger terminal to 150,556 square metres (1,620,570 sq ft), involving the construction of additional facilities for check-in, immigration, security and baggage reclaim. One domestic gate and three international gates were added as well. A large, sweeping roof connects the original building with the expanded areas. The expanded terminal, dubbed \"Terminal 1A\", has raised the annual passenger capacity of the airport to 25 million.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0,
+      "temperature": 0.0,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Kempegowda International Airport",
+        "raw_score": 0.06997629942300734,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "memory_mem_3",
+      "node_type": "memory",
+      "content": "Template: when evidence already grounds the answer, switch from branching to short verification and synthesis.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.8799999914546318,
+      "temperature": 0.2682711642887179,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.88,
+        "tag": "verification_then_stop",
+        "memory_kind": "template",
+        "raw_score": 0.055312929647659936,
+        "source": "memory",
+        "diffusion_delta": -0.0633887378769985,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "memory_mem_1",
+      "node_type": "memory",
+      "content": "Template: for compositional multi-hop questions, first solve the intermediate entity and then ask for the final attribute.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9599999359129513,
+      "temperature": 1.346159522154322,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.96,
+        "tag": "compositional_template",
+        "memory_kind": "template",
+        "raw_score": 0.07313013412792231,
+        "source": "memory",
+        "diffusion_delta": -0.20117145646138535,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "state_2",
+      "node_type": "state",
+      "content": "Who is the main actor who portrayed the Terminator in the Terminator films?",
+      "depth": 1,
+      "parent_id": "state_1",
+      "value": 0.5043305556546124,
+      "temperature": 2.200224510423213,
+      "expanded": true,
+      "visit_count": 2,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.5536363602221299,
+        "evidence_support": 0.499999989958136,
+        "memory_usefulness": 0.5139667937761075,
+        "answerability": 0.6045454495245225,
+        "uncertainty": 0.21000000180753553
+      },
+      "metadata": {
+        "kind": "bridge",
+        "evidence_ids": [
+          "doc_12",
+          "doc_13",
+          "doc_9",
+          "doc_2"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "goal_slot_name": "actor_from_terminator",
+        "goal_slot_role": "bridge_entity",
+        "goal_terminal": false,
+        "diffusion_delta": 0.07945846725578942,
+        "diffusion_gain": 0.07945846725578942,
+        "goal_retry": 1
+      }
+    },
+    {
+      "node_id": "kg_doc_13",
+      "node_type": "kg",
+      "content": "The road serving the main terminal of McCarran International Airport in Las Vegas is named Wayne Newton Boulevard in his honor.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0,
+      "temperature": 0.0,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Wayne Newton",
+        "raw_score": 0.14307592112227968,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_2",
+      "node_type": "kg",
+      "content": "From the lateral geniculate body, fibers of the optic radiation pass to the visual cortex in the occipital lobe of the brain. In more specific terms, fibers carrying information from the contralateral superior visual field traverse Meyer's loop to terminate in the lingual gyrus below the calcarine fissure in the occipital lobe, and fibers carrying information from the contralateral inferior visual field terminate more superiorly, to the cuneus.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0,
+      "temperature": 0.0,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Optic nerve",
+        "raw_score": 0.06957086925070069,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "state_3",
+      "node_type": "state",
+      "content": "What law was passed by Arnold Schwarzenegger?",
+      "depth": 2,
+      "parent_id": "state_2",
+      "value": 0.6980470194559351,
+      "temperature": 1.8857250559721184,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.7848597797306686,
+        "evidence_support": 0.97686031471587,
+        "memory_usefulness": 0.0,
+        "answerability": 0.7793392482670259,
+        "uncertainty": 0.1241651433511434
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_10",
+          "doc_12",
+          "doc_19",
+          "doc_8"
+        ],
+        "memory_ids": [],
+        "diffusion_delta": 0.15953136372794496,
+        "diffusion_gain": 0.15953136372794496
+      }
+    },
+    {
+      "node_id": "kg_doc_10",
+      "node_type": "kg",
+      "content": "California governor Arnold Schwarzenegger signed the \"Donda West Law\", legislation which makes it mandatory for patients to provide medical clearance for elective cosmetic surgery.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.99999998022059,
+      "temperature": 0.99999998022059,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Kanye West",
+        "raw_score": 0.24665081841425684,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_8",
+      "node_type": "kg",
+      "content": "The Statute of Marlborough (52 Hen 3) was a set of laws passed by King Henry III of England in 1267.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0,
+      "temperature": 0.0,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Statute of Marlborough",
+        "raw_score": 0.09966992390608526,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "memory_mem_4",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'Who is the main actor who portrayed the Terminator in the Terminator films' is Arnold Schwarzenegger.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 1.0,
+      "temperature": 2.0066705011065937,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "intermediate_answer",
+        "target_question": "Who is the main actor who portrayed the Terminator in the Terminator films?",
+        "target_question_norm": "who is the main actor who portrayed the terminator in the terminator films",
+        "relation_signature": "generic",
+        "answer_text": "Arnold Schwarzenegger",
+        "support_score": 1.0,
+        "evidence_ids": [
+          "doc_12"
+        ],
+        "slot_name": "actor_from_terminator",
+        "slot_type": "",
+        "slot_role": "bridge_entity",
+        "terminal": false,
+        "path_terminal": false,
+        "composition_kind": "",
+        "derived_from_state": "state_2",
+        "diffusion_delta": 0.06949126433448183,
+        "diffusion_gain": 0.06949126433448183
+      }
+    },
+    {
+      "node_id": "state_4",
+      "node_type": "state",
+      "content": "What law was passed by Arnold Schwarzenegger during his time as Governor of California?",
+      "depth": 1,
+      "parent_id": "state_1",
+      "value": 0.701325130438054,
+      "temperature": 1.1745359266821773,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.8106619431706753,
+        "evidence_support": 0.9511447526410235,
+        "memory_usefulness": 0.0,
+        "answerability": 0.7846632854114208,
+        "uncertainty": 0.12879394452461576
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_10",
+          "doc_12",
+          "doc_19",
+          "doc_14"
+        ],
+        "memory_ids": [],
+        "diffusion_delta": 0.021206456700082477,
+        "diffusion_gain": 0.021206456700082477
+      }
+    },
+    {
+      "node_id": "kg_doc_14",
+      "node_type": "kg",
+      "content": "French Constitutional Law of 1940, are the bills that were voted into law on 10 July 1940 by the National Assembly, which comprised both the Senate and the Chamber of Deputies during the French Third Republic. The law established the regime of Vichy France. It passed with 569 votes to 80, with 20 abstentions. The group of 80 parliamentarians who voted against it are known as the Vichy 80.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.4614388906579784,
+      "temperature": 0.4614388906579784,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "French Constitutional Law of 1940",
+        "raw_score": 0.092328795582857,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "state_5",
+      "node_type": "state",
+      "content": "Who is the actor from Terminator?",
+      "depth": 1,
+      "parent_id": "state_1",
+      "value": 0.47032751377026366,
+      "temperature": 0.8354283544461699,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.5881818149073417,
+        "evidence_support": 0.4999999903691866,
+        "memory_usefulness": 0.09545659453134715,
+        "answerability": 0.6227272679118661,
+        "uncertainty": 0.21000000173354644
+      },
+      "metadata": {
+        "kind": "bridge",
+        "evidence_ids": [
+          "doc_12",
+          "doc_9",
+          "doc_4",
+          "doc_2"
+        ],
+        "memory_ids": [
+          "mem_3",
+          "mem_1"
+        ],
+        "diffusion_delta": -0.03462145875712752,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "kg_doc_4",
+      "node_type": "kg",
+      "content": "Mawson Peninsula () is a high (), narrow, ice-covered peninsula on the George V Coast, on the west side of the Slava Ice Shelf, Antarctica, terminating in Cape Hudson. It extends for over in a northwesterly direction. The peninsula was photographed from the air by U.S. Navy Operation Highjump, 1946–47, and was sketched and photographed by Phillip Law of the Australian National Antarctic Research Expeditions who flew along it to its northern end in February 1959. It was named by the Antarctic Names Committee of Australia for Sir Douglas Mawson.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0,
+      "temperature": 0.0,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Mawson Peninsula",
+        "raw_score": 0.061728330356764324,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "state_6",
+      "node_type": "state",
+      "content": "What law was passed by that actor?",
+      "depth": 1,
+      "parent_id": "state_1",
+      "value": 0.590407067711797,
+      "temperature": 0.18423813751194304,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.7357173061934746,
+        "evidence_support": 0.7307193497669038,
+        "memory_usefulness": 0.0,
+        "answerability": 0.6744505839743611,
+        "uncertainty": 0.1684705170419573
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_19",
+          "doc_14",
+          "doc_11",
+          "doc_8"
+        ],
+        "memory_ids": [],
+        "diffusion_delta": -0.010264563241437485,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "kg_doc_11",
+      "node_type": "kg",
+      "content": "The preferred name for the holiday gradually changed from ``Decoration Day ''to`` Memorial Day,'' which was first used in 1882. Memorial Day did not become the more common name until after World War II, and was not declared the official name by Federal law until 1967. On June 28, 1968, Congress passed the Uniform Monday Holiday Act, which moved four holidays, including Memorial Day, from their traditional dates to a specified Monday in order to create a convenient three - day weekend. The change moved Memorial Day from its traditional May 30 date to the last Monday in May. The law took effect at the federal level in 1971. After some initial confusion and unwillingness to comply, all 50 states adopted Congress' change of date within a few years.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.13671260950391403,
+      "temperature": 0.13671260950391403,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Memorial Day",
+        "raw_score": 0.11441797257303912,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "state_7",
+      "node_type": "state",
+      "content": "What is the official name of the 'Donda West Law'?",
+      "depth": 2,
+      "parent_id": "state_4",
+      "value": 0.47781395022554585,
+      "temperature": 1.1534687460929254,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.6227272689724427,
+        "evidence_support": 0.49999998895638204,
+        "memory_usefulness": 0.02269205576487763,
+        "answerability": 0.640909085387282,
+        "uncertainty": 0.21000000198785124
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_10",
+          "doc_11",
+          "doc_17",
+          "doc_9"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "diffusion_delta": 0.23663144749791643,
+        "diffusion_gain": 0.23663144749791643
+      }
+    },
+    {
+      "node_id": "kg_doc_17",
+      "node_type": "kg",
+      "content": "The Comenius has been the name of two distinct EuroCity (EC) international express trains, both of them originating, terminating or passing through Prague, the capital of the Czech Republic.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0,
+      "temperature": 0.0,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Comenius (train)",
+        "raw_score": 0.10390215142136822,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "memory_mem_5",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'What law was passed by Arnold Schwarzenegger during his time as Governor of California' is Donda West Law.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999768587107,
+      "temperature": 0.8420195240228499,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "intermediate_answer",
+        "target_question": "What law was passed by Arnold Schwarzenegger during his time as Governor of California?",
+        "target_question_norm": "what law was passed by arnold schwarzenegger during his time as governor of california",
+        "relation_signature": "generic",
+        "answer_text": "Donda West Law",
+        "support_score": 0.9999999768587107,
+        "evidence_ids": [
+          "doc_10",
+          "doc_12"
+        ],
+        "slot_name": "law_passed_by_actor",
+        "slot_type": "generic",
+        "slot_role": "target_attribute",
+        "terminal": true,
+        "path_terminal": true,
+        "composition_kind": "path_terminal",
+        "derived_from_state": "state_4",
+        "diffusion_delta": 0.016902753465865117,
+        "diffusion_gain": 0.016902753465865117
+      }
+    },
+    {
+      "node_id": "state_8",
+      "node_type": "state",
+      "content": "Who played the main human actor in Terminator?",
+      "depth": 2,
+      "parent_id": "state_5",
+      "value": 0.4260842600933584,
+      "temperature": 0.2390938644245149,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.5536363597980063,
+        "evidence_support": 0.49999998871071366,
+        "memory_usefulness": 0.00358100266318238,
+        "answerability": 0.5045454489008114,
+        "uncertainty": 0.21000000203207153
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_12",
+          "doc_13",
+          "doc_7",
+          "doc_4"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "diffusion_delta": 0.08282499147882996,
+        "diffusion_gain": 0.08282499147882996
+      }
+    },
+    {
+      "node_id": "state_9",
+      "node_type": "state",
+      "content": "What law did that actor sponsor or pass while in public office?",
+      "depth": 2,
+      "parent_id": "state_5",
+      "value": 0.5694463311800402,
+      "temperature": 0.31534698973867337,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.6507929756130493,
+        "evidence_support": 0.7857547411078987,
+        "memory_usefulness": 0.0,
+        "answerability": 0.647422825099404,
+        "uncertainty": 0.15856414660057824
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_5",
+          "doc_1",
+          "doc_6",
+          "doc_12"
+        ],
+        "memory_ids": [],
+        "diffusion_delta": -0.013528563507843816,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "kg_doc_5",
+      "node_type": "kg",
+      "content": "In South Africa, pass laws were a form of internal passport system designed to segregate the population, manage urbanisation, and allocate migrant labour. Also known as the natives law, pass laws severely limited the movements of not only black African citizens, but other people's as well by requiring them to carry pass books when outside their homelands or designated areas. Before the 1950s, this legislation largely applied to African men, and attempts to apply it to women in the 1910s and 1950s were met with significant protests. Pass laws would be one of the dominant features of the country's apartheid system, until it was effectively ended in 1986.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999995138097746,
+      "temperature": 0.9999995138097746,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Pass laws",
+        "raw_score": 0.10606803454714481,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_1",
+      "node_type": "kg",
+      "content": "Whistle Pass () is a snow pass at about 1,050 m at the head of Sullivan Glacier in north Alexander Island, Antarctica. The pass trends in a NE-SW direction and provides access to and from the upper part of Hampton Glacier. So named by British Antarctic Survey in 1977, because the pass falls away steeply to the southwest between high cliffs, so that the descent by sledge is fast and exhilarating as suggested by the name.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.5715099684060229,
+      "temperature": 0.5715099684060229,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Whistle Pass",
+        "raw_score": 0.1291664431710551,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_6",
+      "node_type": "kg",
+      "content": "Minotaur Pass () is a pass, or saddle, at about between Apollo Peak and Mount Electra in the Olympus Range, Victoria Land, Antarctica. The pass permits walking access to Wright Valley from McKelvey Valley. It was named by the New Zealand Antarctic Place-Names Committee in 1984 after the Minotaur, in association with other names from Greek mythology in the Olympus Range.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.3120289258205824,
+      "temperature": 0.3120289258205824,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Minotaur Pass",
+        "raw_score": 0.1134693045346103,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "memory_mem_6",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'Who is the actor from Terminator' is Arnold Schwarzenegger.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 1.0,
+      "temperature": 0.5432977685128757,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "intermediate_answer",
+        "target_question": "Who is the actor from Terminator?",
+        "target_question_norm": "who is the actor from terminator",
+        "relation_signature": "generic",
+        "answer_text": "Arnold Schwarzenegger",
+        "support_score": 1.0,
+        "evidence_ids": [
+          "doc_12"
+        ],
+        "slot_name": "",
+        "slot_type": "",
+        "slot_role": "",
+        "terminal": false,
+        "path_terminal": false,
+        "composition_kind": "",
+        "derived_from_state": "state_5",
+        "diffusion_delta": -0.029521588928084097,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "state_10",
+      "node_type": "state",
+      "content": "What is the official name of the law signed by Arnold Schwarzenegger regarding elective cosmetic surgery?",
+      "depth": 3,
+      "parent_id": "state_3",
+      "value": 0.6889196993381832,
+      "temperature": 1.7360062242344654,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.7905031995073856,
+        "evidence_support": 0.8918543301019359,
+        "memory_usefulness": 0.0035792460149838556,
+        "answerability": 0.855018074141877,
+        "uncertainty": 0.13946622058165153
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_10",
+          "doc_12",
+          "doc_11",
+          "doc_3"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "diffusion_delta": 0.3422791249089203,
+        "diffusion_gain": 0.3422791249089203
+      }
+    },
+    {
+      "node_id": "kg_doc_3",
+      "node_type": "kg",
+      "content": "In the Name of the Law () is a 1932 French crime film directed by Maurice Tourneur and starring Marcelle Chantal, Régine Dancourt and Gabriel Gabrio. It was based on a novel by Paul Bringuier. The film was well received by critics. \"Variety\" considered Marcelle Chantal's performance \"her best so far in talkers\".",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0,
+      "temperature": 0.0,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "In the Name of the Law (1932 film)",
+        "raw_score": 0.11309082304941381,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "memory_mem_7",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'What law was passed by Arnold Schwarzenegger' is Donda West Law.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.999999976726769,
+      "temperature": 0.9173285471505636,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "intermediate_answer",
+        "target_question": "What law was passed by Arnold Schwarzenegger?",
+        "target_question_norm": "what law was passed by arnold schwarzenegger",
+        "relation_signature": "generic",
+        "answer_text": "Donda West Law",
+        "support_score": 0.999999976726769,
+        "evidence_ids": [
+          "doc_10",
+          "doc_12"
+        ],
+        "slot_name": "",
+        "slot_type": "generic",
+        "slot_role": "target_attribute",
+        "terminal": true,
+        "path_terminal": true,
+        "composition_kind": "path_terminal",
+        "derived_from_state": "state_3",
+        "diffusion_delta": 0.06735371160458359,
+        "diffusion_gain": 0.06735371160458359
+      }
+    },
+    {
+      "node_id": "memory_mem_8",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'What is the official name of the law signed by Arnold Schwarzenegger regarding elective cosmetic surgery' is Donda West Law.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.874,
+      "temperature": 1.2811439028422105,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "answer_candidate",
+        "target_question": "What is the official name of the law signed by Arnold Schwarzenegger regarding elective cosmetic surgery?",
+        "target_question_norm": "what is the official name of the law signed by arnold schwarzenegger regarding elective cosmetic surgery",
+        "slot_key": "generic|generic|target_attribute|arnold schwarzenegger|what is the official name of the law signed by arnold schwarzenegger regarding elective cosmetic surgery",
+        "slot_type": "generic",
+        "relation_signature": "generic",
+        "answer_text": "Donda West Law",
+        "support_score": 0.8918543301019359,
+        "evidence_ids": [
+          "doc_10",
+          "doc_12"
+        ],
+        "slot_name": "path_terminal",
+        "slot_role": "target_attribute",
+        "terminal": true,
+        "path_terminal": true,
+        "composition_kind": "path_terminal",
+        "derived_from_state": "state_10",
+        "diffusion_delta": 0.2709597795370797,
+        "diffusion_gain": 0.2709597795370797
+      }
+    },
+    {
+      "node_id": "memory_mem_9",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'What is the official name of the 'Donda West Law'' is Donda West Law.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.92,
+      "temperature": 0.92247211127878,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "answer_candidate",
+        "target_question": "What is the official name of the 'Donda West Law'?",
+        "target_question_norm": "what is the official name of the donda west law",
+        "slot_key": "generic|generic|target_attribute|donda west law|what is the official name of the donda west law",
+        "slot_type": "generic",
+        "relation_signature": "generic",
+        "answer_text": "Donda West Law",
+        "support_score": 0.49999998895638204,
+        "evidence_ids": [
+          "doc_10"
+        ],
+        "slot_name": "path_terminal",
+        "slot_role": "target_attribute",
+        "terminal": true,
+        "path_terminal": true,
+        "composition_kind": "path_terminal",
+        "derived_from_state": "state_7",
+        "diffusion_delta": 0.13395289599390992,
+        "diffusion_gain": 0.13395289599390992
+      }
+    },
+    {
+      "node_id": "state_11",
+      "node_type": "state",
+      "content": "Who is the main human actor in the Terminator film series?",
+      "depth": 3,
+      "parent_id": "state_8",
+      "value": 0.4426545403818044,
+      "temperature": 0.4308537569495182,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.5536363602088359,
+        "evidence_support": 0.49999998991903594,
+        "memory_usefulness": 0.0,
+        "answerability": 0.6045454495049725,
+        "uncertainty": 0.2100000018145735
+      },
+      "metadata": {
+        "kind": "bridge",
+        "evidence_ids": [
+          "doc_12",
+          "doc_13",
+          "doc_3",
+          "doc_9"
+        ],
+        "memory_ids": [],
+        "diffusion_delta": -0.1701808741539267,
+        "diffusion_gain": 0.0
+      }
+    }
+  ],
+  "edges": [
+    {
+      "source": "state_1",
+      "target": "kg_doc_12",
+      "edge_type": "supports",
+      "weight": 0.9999999775339371
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_19",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.3791939934314107
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.03808305342938723
+    },
+    {
+      "source": "state_1",
+      "target": "state_2",
+      "edge_type": "refines",
+      "weight": 1.0
+    },
+    {
+      "source": "state_1",
+      "target": "state_4",
+      "edge_type": "refines",
+      "weight": 0.94
+    },
+    {
+      "source": "state_1",
+      "target": "state_5",
+      "edge_type": "refines",
+      "weight": 0.9
+    },
+    {
+      "source": "state_1",
+      "target": "state_6",
+      "edge_type": "refines",
+      "weight": 0.8
+    },
+    {
+      "source": "kg_doc_12",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.9999999775339371
+    },
+    {
+      "source": "kg_doc_12",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.999999979916272
+    },
+    {
+      "source": "kg_doc_12",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.953720652704971
+    },
+    {
+      "source": "kg_doc_12",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.999999979916272
+    },
+    {
+      "source": "kg_doc_12",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.9022895284233364
+    },
+    {
+      "source": "kg_doc_12",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.9999999807383732
+    },
+    {
+      "source": "kg_doc_12",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.9022895284233364
+    },
+    {
+      "source": "kg_doc_12",
+      "target": "state_8",
+      "edge_type": "supports",
+      "weight": 0.9999999774214273
+    },
+    {
+      "source": "kg_doc_12",
+      "target": "state_9",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_12",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.9999999807383732
+    },
+    {
+      "source": "kg_doc_12",
+      "target": "state_10",
+      "edge_type": "supports",
+      "weight": 0.7837086799832818
+    },
+    {
+      "source": "kg_doc_12",
+      "target": "memory_mem_7",
+      "edge_type": "supports",
+      "weight": 0.953720652704971
+    },
+    {
+      "source": "kg_doc_12",
+      "target": "memory_mem_8",
+      "edge_type": "supports",
+      "weight": 0.7837086799832818
+    },
+    {
+      "source": "kg_doc_12",
+      "target": "state_11",
+      "edge_type": "supports",
+      "weight": 0.9999999798380719
+    },
+    {
+      "source": "kg_doc_19",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_19",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_19",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_19",
+      "target": "state_6",
+      "edge_type": "supports",
+      "weight": 0.9999998088758291
+    },
+    {
+      "source": "kg_doc_19",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_19",
+      "target": "memory_mem_7",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "state_7",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "memory_mem_9",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "state_11",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "state_8",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.3791939934314107
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_2",
+      "edge_type": "recalls",
+      "weight": 0.06793365163926388
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "memory_mem_4",
+      "edge_type": "recalls",
+      "weight": 0.06793365163926388
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_5",
+      "edge_type": "recalls",
+      "weight": 0.2060059233181866
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_7",
+      "edge_type": "recalls",
+      "weight": 0.0029688724738464334
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_8",
+      "edge_type": "recalls",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "memory_mem_6",
+      "edge_type": "recalls",
+      "weight": 0.2060059233181866
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_10",
+      "edge_type": "recalls",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "memory_mem_8",
+      "edge_type": "recalls",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "memory_mem_9",
+      "edge_type": "recalls",
+      "weight": 0.0029688724738464334
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.03808305342938723
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_2",
+      "edge_type": "recalls",
+      "weight": 0.9599999359129513
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "memory_mem_4",
+      "edge_type": "recalls",
+      "weight": 0.9599999359129513
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_5",
+      "edge_type": "recalls",
+      "weight": 0.004877473094875459
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_7",
+      "edge_type": "recalls",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_8",
+      "edge_type": "recalls",
+      "weight": 0.0019500929038721315
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "memory_mem_6",
+      "edge_type": "recalls",
+      "weight": 0.004877473094875459
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_10",
+      "edge_type": "recalls",
+      "weight": 0.0065458601532008935
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "memory_mem_8",
+      "edge_type": "recalls",
+      "weight": 0.0065458601532008935
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "memory_mem_9",
+      "edge_type": "recalls",
+      "weight": 0.0
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_12",
+      "edge_type": "supports",
+      "weight": 0.999999979916272
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_13",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_2",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.9599999359129513
+    },
+    {
+      "source": "state_2",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.06793365163926388
+    },
+    {
+      "source": "state_2",
+      "target": "state_3",
+      "edge_type": "refines",
+      "weight": 0.84
+    },
+    {
+      "source": "state_2",
+      "target": "memory_mem_4",
+      "edge_type": "derives",
+      "weight": 1.0
+    },
+    {
+      "source": "kg_doc_13",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_13",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_13",
+      "target": "state_8",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_13",
+      "target": "state_11",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_10",
+      "edge_type": "supports",
+      "weight": 0.999999976726769
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_12",
+      "edge_type": "supports",
+      "weight": 0.953720652704971
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_19",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_8",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_3",
+      "target": "state_10",
+      "edge_type": "refines",
+      "weight": 1.0
+    },
+    {
+      "source": "state_3",
+      "target": "memory_mem_7",
+      "edge_type": "derives",
+      "weight": 0.999999976726769
+    },
+    {
+      "source": "kg_doc_10",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.999999976726769
+    },
+    {
+      "source": "kg_doc_10",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.9999999768587107
+    },
+    {
+      "source": "kg_doc_10",
+      "target": "state_7",
+      "edge_type": "supports",
+      "weight": 0.9999999779127641
+    },
+    {
+      "source": "kg_doc_10",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.9999999768587107
+    },
+    {
+      "source": "kg_doc_10",
+      "target": "state_10",
+      "edge_type": "supports",
+      "weight": 0.99999998022059
+    },
+    {
+      "source": "kg_doc_10",
+      "target": "memory_mem_7",
+      "edge_type": "supports",
+      "weight": 0.999999976726769
+    },
+    {
+      "source": "kg_doc_10",
+      "target": "memory_mem_8",
+      "edge_type": "supports",
+      "weight": 0.99999998022059
+    },
+    {
+      "source": "kg_doc_10",
+      "target": "memory_mem_9",
+      "edge_type": "supports",
+      "weight": 0.9999999779127641
+    },
+    {
+      "source": "kg_doc_8",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_8",
+      "target": "state_6",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_8",
+      "target": "memory_mem_7",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "state_2",
+      "edge_type": "recalls",
+      "weight": 1.0
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_12",
+      "edge_type": "supports",
+      "weight": 0.999999979916272
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_13",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.9599999359129513
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.06793365163926388
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_10",
+      "edge_type": "supports",
+      "weight": 0.9999999768587107
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_12",
+      "edge_type": "supports",
+      "weight": 0.9022895284233364
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_19",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_14",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_4",
+      "target": "state_7",
+      "edge_type": "refines",
+      "weight": 0.9
+    },
+    {
+      "source": "state_4",
+      "target": "memory_mem_5",
+      "edge_type": "derives",
+      "weight": 0.9999999768587107
+    },
+    {
+      "source": "kg_doc_14",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_14",
+      "target": "state_6",
+      "edge_type": "supports",
+      "weight": 0.4614388906579784
+    },
+    {
+      "source": "kg_doc_14",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_5",
+      "target": "kg_doc_12",
+      "edge_type": "supports",
+      "weight": 0.9999999807383732
+    },
+    {
+      "source": "state_5",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_5",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_5",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_5",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.2060059233181866
+    },
+    {
+      "source": "state_5",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.004877473094875459
+    },
+    {
+      "source": "state_5",
+      "target": "state_8",
+      "edge_type": "refines",
+      "weight": 0.9
+    },
+    {
+      "source": "state_5",
+      "target": "state_9",
+      "edge_type": "refines",
+      "weight": 0.8
+    },
+    {
+      "source": "state_5",
+      "target": "memory_mem_6",
+      "edge_type": "derives",
+      "weight": 1.0
+    },
+    {
+      "source": "state_5",
+      "target": "state_3",
+      "edge_type": "refines",
+      "weight": 0.84
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "state_8",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_6",
+      "target": "kg_doc_19",
+      "edge_type": "supports",
+      "weight": 0.9999998088758291
+    },
+    {
+      "source": "state_6",
+      "target": "kg_doc_14",
+      "edge_type": "supports",
+      "weight": 0.4614388906579784
+    },
+    {
+      "source": "state_6",
+      "target": "kg_doc_11",
+      "edge_type": "supports",
+      "weight": 0.13671260950391403
+    },
+    {
+      "source": "state_6",
+      "target": "kg_doc_8",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_11",
+      "target": "state_6",
+      "edge_type": "supports",
+      "weight": 0.13671260950391403
+    },
+    {
+      "source": "kg_doc_11",
+      "target": "state_7",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_11",
+      "target": "state_10",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_11",
+      "target": "memory_mem_8",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_11",
+      "target": "memory_mem_9",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_7",
+      "target": "kg_doc_10",
+      "edge_type": "supports",
+      "weight": 0.9999999779127641
+    },
+    {
+      "source": "state_7",
+      "target": "kg_doc_11",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_7",
+      "target": "kg_doc_17",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_7",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_7",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.0
+    },
+    {
+      "source": "state_7",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.0029688724738464334
+    },
+    {
+      "source": "state_7",
+      "target": "memory_mem_9",
+      "edge_type": "derives",
+      "weight": 1.0
+    },
+    {
+      "source": "kg_doc_17",
+      "target": "state_7",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_17",
+      "target": "memory_mem_9",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "state_4",
+      "edge_type": "recalls",
+      "weight": 0.9999999768587107
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_10",
+      "edge_type": "supports",
+      "weight": 0.9999999768587107
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_12",
+      "edge_type": "supports",
+      "weight": 0.9022895284233364
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_19",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_14",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_8",
+      "target": "kg_doc_12",
+      "edge_type": "supports",
+      "weight": 0.9999999774214273
+    },
+    {
+      "source": "state_8",
+      "target": "kg_doc_13",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_8",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_8",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_8",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.0019500929038721315
+    },
+    {
+      "source": "state_8",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.0
+    },
+    {
+      "source": "state_8",
+      "target": "state_11",
+      "edge_type": "refines",
+      "weight": 0.9
+    },
+    {
+      "source": "state_9",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.9999995138097746
+    },
+    {
+      "source": "state_9",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.5715099684060229
+    },
+    {
+      "source": "state_9",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.3120289258205824
+    },
+    {
+      "source": "state_9",
+      "target": "kg_doc_12",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "state_9",
+      "edge_type": "supports",
+      "weight": 0.9999995138097746
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "state_9",
+      "edge_type": "supports",
+      "weight": 0.5715099684060229
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "state_9",
+      "edge_type": "supports",
+      "weight": 0.3120289258205824
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "state_5",
+      "edge_type": "recalls",
+      "weight": 1.0
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_12",
+      "edge_type": "supports",
+      "weight": 0.9999999807383732
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.2060059233181866
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.004877473094875459
+    },
+    {
+      "source": "state_10",
+      "target": "kg_doc_10",
+      "edge_type": "supports",
+      "weight": 0.99999998022059
+    },
+    {
+      "source": "state_10",
+      "target": "kg_doc_12",
+      "edge_type": "supports",
+      "weight": 0.7837086799832818
+    },
+    {
+      "source": "state_10",
+      "target": "kg_doc_11",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_10",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_10",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.0065458601532008935
+    },
+    {
+      "source": "state_10",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.0
+    },
+    {
+      "source": "state_10",
+      "target": "memory_mem_8",
+      "edge_type": "derives",
+      "weight": 0.95
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "state_10",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "memory_mem_8",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "state_11",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_7",
+      "target": "state_3",
+      "edge_type": "recalls",
+      "weight": 0.999999976726769
+    },
+    {
+      "source": "memory_mem_7",
+      "target": "kg_doc_10",
+      "edge_type": "supports",
+      "weight": 0.999999976726769
+    },
+    {
+      "source": "memory_mem_7",
+      "target": "kg_doc_12",
+      "edge_type": "supports",
+      "weight": 0.953720652704971
+    },
+    {
+      "source": "memory_mem_7",
+      "target": "kg_doc_19",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_7",
+      "target": "kg_doc_8",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_8",
+      "target": "state_10",
+      "edge_type": "recalls",
+      "weight": 0.95
+    },
+    {
+      "source": "memory_mem_8",
+      "target": "kg_doc_10",
+      "edge_type": "supports",
+      "weight": 0.99999998022059
+    },
+    {
+      "source": "memory_mem_8",
+      "target": "kg_doc_12",
+      "edge_type": "supports",
+      "weight": 0.7837086799832818
+    },
+    {
+      "source": "memory_mem_8",
+      "target": "kg_doc_11",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_8",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_8",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.0065458601532008935
+    },
+    {
+      "source": "memory_mem_8",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_9",
+      "target": "state_7",
+      "edge_type": "recalls",
+      "weight": 1.0
+    },
+    {
+      "source": "memory_mem_9",
+      "target": "kg_doc_10",
+      "edge_type": "supports",
+      "weight": 0.9999999779127641
+    },
+    {
+      "source": "memory_mem_9",
+      "target": "kg_doc_11",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_9",
+      "target": "kg_doc_17",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_9",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_9",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.0029688724738464334
+    },
+    {
+      "source": "memory_mem_9",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.0
+    },
+    {
+      "source": "state_11",
+      "target": "kg_doc_12",
+      "edge_type": "supports",
+      "weight": 0.9999999798380719
+    },
+    {
+      "source": "state_11",
+      "target": "kg_doc_13",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_11",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_11",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.0
+    }
+  ]
+}

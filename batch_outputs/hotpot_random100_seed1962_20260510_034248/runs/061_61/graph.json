@@ -1,0 +1,1341 @@
+{
+  "nodes": [
+    {
+      "node_id": "state_1",
+      "node_type": "state",
+      "content": "Are Mike Bryan and Ray Ruffels both tennis players?",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.7576547369796517,
+      "temperature": 1.2668585355296442,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.8836530702885426,
+        "evidence_support": 0.6578031479074782,
+        "memory_usefulness": 0.8820682746050714,
+        "answerability": 0.828901573953739,
+        "uncertainty": 0.18159543337665393
+      },
+      "metadata": {
+        "diffusion_delta": 0.27070720598899345,
+        "diffusion_gain": 0.27070720598899345
+      }
+    },
+    {
+      "node_id": "kg_doc_1",
+      "node_type": "kg",
+      "content": "The 2007 Tennis Channel Open was a tennis event on the 2007 ATP Tour. Lleyton Hewitt, who was the 2006 runner-up, was the singles champion, while Bob and Mike Bryan were the doubles champions. The event was held in Las Vegas, Nevada at the Darling Tennis Center. It was the twentieth Tennis Channel Open, but just the second to be held in Las Vegas. The ITF women's competition was won by Caroline Wozniacki in singles and by Victoria Azarenka and Tatiana Poutchek for doubles.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999943734685,
+      "temperature": 0.9999999943734685,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "2007 Tennis Channel Open and the Mirage Cup",
+        "raw_score": 4.152463459635363,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_6",
+      "node_type": "kg",
+      "content": "Ray Ruffels and Allan Stone were the defending champions.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.31560631757915536,
+      "temperature": 0.31560631757915536,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "1978 Australian Open – Men's Doubles",
+        "raw_score": 3.022445495798523,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_7",
+      "node_type": "kg",
+      "content": "Raymond Owen \"Ray\" Ruffels (born 23 March 1946 in Sydney) is an Australian former professional tennis player and coach.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999945847299,
+      "temperature": 0.9999999945847299,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Ray Ruffels",
+        "raw_score": 5.0047578563688875,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_5",
+      "node_type": "kg",
+      "content": "William Bowrey was the defending champion, but lost in the quarterfinals to Ray Ruffels.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.20240580676674683,
+      "temperature": 0.20240580676674683,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "1969 Australian Open – Men's Singles",
+        "raw_score": 2.9091698671561197,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "memory_mem_1",
+      "node_type": "memory",
+      "content": "Template: for compositional multi-hop questions, first solve the intermediate entity and then ask for the final attribute.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.8841365672456091,
+      "temperature": 0.2996804334093432,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.96,
+        "tag": "compositional_template",
+        "memory_kind": "template",
+        "raw_score": 0.5253544431077298,
+        "source": "memory",
+        "diffusion_delta": -0.19971726269452733,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "memory_mem_3",
+      "node_type": "memory",
+      "content": "Template: when evidence already grounds the answer, switch from branching to short verification and synthesis.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.8799999819645339,
+      "temperature": 0.8002052342248415,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.88,
+        "tag": "verification_then_stop",
+        "memory_kind": "template",
+        "raw_score": 0.6861299425115319,
+        "source": "memory",
+        "diffusion_delta": -0.07979474773969242,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "state_2",
+      "node_type": "state",
+      "content": "Is Mike Bryan a tennis player?",
+      "depth": 1,
+      "parent_id": "state_1",
+      "value": 0.626623068561148,
+      "temperature": 0.9136338467462622,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.6936642355142892,
+        "evidence_support": 0.8441104966106545,
+        "memory_usefulness": 0.0,
+        "answerability": 0.7887219149719938,
+        "uncertainty": 0.14806011061008217
+      },
+      "metadata": {
+        "kind": "comparison",
+        "evidence_ids": [
+          "doc_1",
+          "doc_4",
+          "doc_7",
+          "doc_9"
+        ],
+        "memory_ids": [],
+        "goal_slot_name": "left_value",
+        "goal_slot_role": "left_value",
+        "goal_terminal": true,
+        "diffusion_delta": -0.13271024605412507,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "kg_doc_4",
+      "node_type": "kg",
+      "content": "Michael Carl Bryan (born April 29, 1978) is an American professional tennis player. The right-hander turned professional in 1998. With his twin brother Bob, he has been world No. 1 doubles player for much of the last several years, first achieving top ranking in September 2003, and they became the second men's doubles team to complete the career golden slam by winning the 2012 Summer Olympics. He currently holds the records for the most ATP men's doubles titles (115) and final appearances (171), and is tied for fourth all-time in men's titles in the Open Era, all with his brother with the exception of one with Mahesh Bhupathi and another with Mark Knowles.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.8552808915758476,
+      "temperature": 0.8552808915758476,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Mike Bryan",
+        "raw_score": 3.124189844534727,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_9",
+      "node_type": "kg",
+      "content": "Athletic DNA (ADNA) is an American sports apparel company. Founded in Seattle in 2007, ADNA began by training young tennis athletes, which evolved into sponsoring Select Junior Tennis players, and then expanded to manufacturing clothing for youth and adult tennis players. ADNA has since spread to professional tennis, and currently sponsors players on the ATP Tour & WTA Tour.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.3577101669094184,
+      "temperature": 0.3577101669094184,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Athletic DNA",
+        "raw_score": 3.5707998665559915,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "state_3",
+      "node_type": "state",
+      "content": "Is Ray Ruffels a tennis player?",
+      "depth": 1,
+      "parent_id": "state_1",
+      "value": 0.5952919151330905,
+      "temperature": 1.0840245136715945,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.5899009144734564,
+        "evidence_support": 0.5389242582552639,
+        "memory_usefulness": 0.0,
+        "answerability": 0.6361287957942986,
+        "uncertainty": 0.20299363351405247
+      },
+      "metadata": {
+        "kind": "comparison",
+        "evidence_ids": [
+          "doc_7",
+          "doc_8",
+          "doc_6",
+          "doc_5"
+        ],
+        "memory_ids": [],
+        "goal_slot_name": "right_value",
+        "goal_slot_role": "right_value",
+        "goal_terminal": true,
+        "diffusion_delta": -0.002623368919853375,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "kg_doc_8",
+      "node_type": "kg",
+      "content": "The 1972 New Zealand Open, also known as Benson and Hedges Open for sponsorship reasons, was a combined men's and women's professional tennis tournament held at the Stanley Street Courts in Auckland, New Zealand. It was an independent event, i.e. not part of the 1972 Grand Prix or 1972 World Championship Tennis circuit. The tournament was played on outdoor grass courts and was held from 7 December through 12 December 1971. Ray Ruffels and Kerry Melville won the singles titles.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.20886697872025542,
+      "temperature": 0.20886697872025542,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "1972 New Zealand Open",
+        "raw_score": 2.3045075879691916,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "state_4",
+      "node_type": "state",
+      "content": "Are Mike Bryan and Ray Ruffels both professional tennis players?",
+      "depth": 2,
+      "parent_id": "state_2",
+      "value": 0.918603690406622,
+      "temperature": 1.3477972301642274,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.9924023631446037,
+        "evidence_support": 0.9776540092488343,
+        "memory_usefulness": 0.8820682746050714,
+        "answerability": 0.9888270046244171,
+        "uncertainty": 0.12402227833520983
+      },
+      "metadata": {
+        "kind": "comparison",
+        "evidence_ids": [
+          "doc_7",
+          "doc_1",
+          "doc_8",
+          "doc_6"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "diffusion_delta": 0.20878380801998508,
+        "diffusion_gain": 0.20878380801998508
+      }
+    },
+    {
+      "node_id": "memory_mem_4",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'Is Mike Bryan a tennis player' is Yes.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 1.0,
+      "temperature": 0.34774985281143245,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "intermediate_answer",
+        "target_question": "Is Mike Bryan a tennis player?",
+        "target_question_norm": "is mike bryan a tennis player",
+        "relation_signature": "generic",
+        "answer_text": "Yes",
+        "support_score": 1.0,
+        "evidence_ids": [
+          "doc_1"
+        ],
+        "slot_name": "left_value",
+        "slot_role": "left_value",
+        "terminal": true,
+        "derived_from_state": "state_2",
+        "diffusion_delta": 0.1068604280814911,
+        "diffusion_gain": 0.1068604280814911
+      }
+    },
+    {
+      "node_id": "memory_mem_5",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'Is Ray Ruffels a tennis player' is Yes.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.874,
+      "temperature": 0.6213929564568732,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "derived_fact",
+        "target_question": "Is Ray Ruffels a tennis player?",
+        "target_question_norm": "is ray ruffels a tennis player",
+        "relation_signature": "generic",
+        "answer_text": "Yes",
+        "support_score": 0.5389242582552639,
+        "evidence_ids": [
+          "doc_7"
+        ],
+        "derived_from_state": "state_3",
+        "diffusion_delta": 0.3226297022675292,
+        "diffusion_gain": 0.3226297022675292
+      }
+    },
+    {
+      "node_id": "memory_mem_6",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'Are Mike Bryan and Ray Ruffels both tennis players' is Yes.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 1.0,
+      "temperature": 1.437644270656043,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "tdca_run",
+        "memory_kind": "answer_candidate",
+        "target_question": "Are Mike Bryan and Ray Ruffels both tennis players?",
+        "target_question_norm": "are mike bryan and ray ruffels both tennis players",
+        "relation_signature": "generic",
+        "answer_text": "Yes",
+        "support_score": 1.0,
+        "derived_from_state": "state_1",
+        "composed_from": [
+          "memory_mem_4",
+          "memory_mem_5"
+        ],
+        "slot_role": "final_boolean",
+        "terminal": true,
+        "coverage_count": 2,
+        "coverage_ratio": 1.0,
+        "composition_kind": "compare_yesno",
+        "diffusion_delta": 0.09763290807224045,
+        "diffusion_gain": 0.09763290807224045,
+        "score": 1.0,
+        "raw_score": 7.912657551403083,
+        "evidence_ids": [
+          "doc_1"
+        ]
+      }
+    },
+    {
+      "node_id": "state_5",
+      "node_type": "state",
+      "content": "Is Mike Bryan a professional tennis player?",
+      "depth": 3,
+      "parent_id": "state_4",
+      "value": 0.6686553372529246,
+      "temperature": 0.6857312889300152,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.7220644170627868,
+        "evidence_support": 0.9276404423415299,
+        "memory_usefulness": 0.0,
+        "answerability": 0.8304868878374315,
+        "uncertainty": 0.1330247203785246
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_1",
+          "doc_4",
+          "doc_7",
+          "doc_9"
+        ],
+        "memory_ids": [],
+        "diffusion_delta": -0.027092105028212132,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "state_6",
+      "node_type": "state",
+      "content": "Is Ray Ruffels a professional tennis player?",
+      "depth": 3,
+      "parent_id": "state_4",
+      "value": 0.5060175971502011,
+      "temperature": 0.5666810455322757,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.6121740521285142,
+        "evidence_support": 0.6044334866524926,
+        "memory_usefulness": 0.0,
+        "answerability": 0.668883409992913,
+        "uncertainty": 0.19120197240255132
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_7",
+          "doc_8",
+          "doc_6",
+          "doc_5"
+        ],
+        "memory_ids": [],
+        "diffusion_delta": 0.014717690423341145,
+        "diffusion_gain": 0.014717690423341145
+      }
+    },
+    {
+      "node_id": "memory_mem_7",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'Are Mike Bryan and Ray Ruffels both professional tennis players' is Yes.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999694043191,
+      "temperature": 0.8752649164360367,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "intermediate_answer",
+        "target_question": "Are Mike Bryan and Ray Ruffels both professional tennis players?",
+        "target_question_norm": "are mike bryan and ray ruffels both professional tennis players",
+        "relation_signature": "generic",
+        "answer_text": "Yes",
+        "support_score": 0.9999999694043191,
+        "evidence_ids": [
+          "doc_1",
+          "doc_7"
+        ],
+        "slot_name": "",
+        "slot_role": "",
+        "terminal": false,
+        "derived_from_state": "state_4",
+        "diffusion_delta": -0.04971522009099527,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "state_7",
+      "node_type": "state",
+      "content": "Is Mike Bryan tennis players?",
+      "depth": 1,
+      "parent_id": "state_1",
+      "value": 0.563288765083273,
+      "temperature": 0.5548371725126177,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.6796996160472565,
+        "evidence_support": 0.6788550798775517,
+        "memory_usefulness": 0.0,
+        "answerability": 0.7283164288276647,
+        "uncertainty": 0.1778060856220407
+      },
+      "metadata": {
+        "kind": "comparison",
+        "evidence_ids": [
+          "doc_1",
+          "doc_9",
+          "doc_4",
+          "doc_2"
+        ],
+        "memory_ids": [],
+        "diffusion_delta": -0.2047755924835818,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "kg_doc_2",
+      "node_type": "kg",
+      "content": "The Virginia Slims Circuit was a tennis tour consisting of a group of originally nine female professional players. Formed in 1970, the Virginia Slims Circuit eventually became the basis for the later named WTA Tour. The players, dubbed the \"Original 9\", rebelled against the United States Lawn Tennis Association (USLTA) due to the wide inequality between the amount of prize money paid to male tennis players and to female tennis players.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0,
+      "temperature": 0.0,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Virginia Slims Circuit",
+        "raw_score": 2.217881689612891,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "state_8",
+      "node_type": "state",
+      "content": "Is Ray Ruffels tennis players?",
+      "depth": 1,
+      "parent_id": "state_1",
+      "value": 0.5360589818688486,
+      "temperature": 0.5303239035412145,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.6613011138753482,
+        "evidence_support": 0.6247418381954682,
+        "memory_usefulness": 0.0,
+        "answerability": 0.701259807986623,
+        "uncertainty": 0.1875464691248157
+      },
+      "metadata": {
+        "kind": "comparison",
+        "evidence_ids": [
+          "doc_7",
+          "doc_6",
+          "doc_5",
+          "doc_8"
+        ],
+        "memory_ids": [],
+        "diffusion_delta": -0.19046479854169274,
+        "diffusion_gain": 0.0
+      }
+    }
+  ],
+  "edges": [
+    {
+      "source": "state_1",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.9999999782358011
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.31560631757915536
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.18370363547203758
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.06373841676701986
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.8799999819645339
+    },
+    {
+      "source": "state_1",
+      "target": "state_2",
+      "edge_type": "refines",
+      "weight": 0.99
+    },
+    {
+      "source": "state_1",
+      "target": "state_3",
+      "edge_type": "refines",
+      "weight": 0.97
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_6",
+      "edge_type": "derives",
+      "weight": 0.95
+    },
+    {
+      "source": "state_1",
+      "target": "state_7",
+      "edge_type": "refines",
+      "weight": 0.95
+    },
+    {
+      "source": "state_1",
+      "target": "state_8",
+      "edge_type": "refines",
+      "weight": 0.93
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.9999999782358011
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.9999999943734685
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.9553080490933494
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.9999999943734685
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.999999993107212
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "memory_mem_7",
+      "edge_type": "supports",
+      "weight": 0.9553080490933494
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "state_7",
+      "edge_type": "supports",
+      "weight": 0.9999999928456849
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.9999999782358011
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.31560631757915536
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.026331045707311367
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.026331045707311367
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "state_6",
+      "edge_type": "supports",
+      "weight": 0.02085621636347457
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "memory_mem_7",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "state_8",
+      "edge_type": "supports",
+      "weight": 0.2494836886146036
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.31560631757915536
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.18370363547203758
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.5184475716557245
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.9999999931632026
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.9999999694043191
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.5184475716557245
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.9999999931632026
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.6878561197750431
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "state_6",
+      "edge_type": "supports",
+      "weight": 0.9999999945847299
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "memory_mem_7",
+      "edge_type": "supports",
+      "weight": 0.9999999694043191
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "state_8",
+      "edge_type": "supports",
+      "weight": 0.9999999877763328
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.18370363547203758
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "state_6",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "state_8",
+      "edge_type": "supports",
+      "weight": 0.20240580676674683
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.06373841676701986
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_4",
+      "edge_type": "recalls",
+      "weight": 0.06022602521710532
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "memory_mem_7",
+      "edge_type": "recalls",
+      "weight": 0.06022602521710532
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.8799999819645339
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_4",
+      "edge_type": "recalls",
+      "weight": 0.0602373161854625
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "memory_mem_7",
+      "edge_type": "recalls",
+      "weight": 0.0602373161854625
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "memory_mem_6",
+      "edge_type": "recalls",
+      "weight": 0.8799999819645339
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.9999999943734685
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.6882209988478406
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.5184475716557245
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_2",
+      "target": "state_4",
+      "edge_type": "refines",
+      "weight": 0.85
+    },
+    {
+      "source": "state_2",
+      "target": "memory_mem_4",
+      "edge_type": "derives",
+      "weight": 1.0
+    },
+    {
+      "source": "state_2",
+      "target": "state_3",
+      "edge_type": "refines",
+      "weight": 0.84
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.6882209988478406
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.6882209988478406
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.8552808915758476
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "state_7",
+      "edge_type": "supports",
+      "weight": 0.29915395152230384
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "state_7",
+      "edge_type": "supports",
+      "weight": 0.3577101669094184
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.9999999931632026
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_8",
+      "edge_type": "supports",
+      "weight": 0.07784852334732523
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.026331045707311367
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_3",
+      "target": "memory_mem_5",
+      "edge_type": "derives",
+      "weight": 0.95
+    },
+    {
+      "source": "kg_doc_8",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.07784852334732523
+    },
+    {
+      "source": "kg_doc_8",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.17719837423331433
+    },
+    {
+      "source": "kg_doc_8",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.07784852334732523
+    },
+    {
+      "source": "kg_doc_8",
+      "target": "state_6",
+      "edge_type": "supports",
+      "weight": 0.20886697872025542
+    },
+    {
+      "source": "kg_doc_8",
+      "target": "memory_mem_7",
+      "edge_type": "supports",
+      "weight": 0.17719837423331433
+    },
+    {
+      "source": "kg_doc_8",
+      "target": "state_8",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.9999999694043191
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.9553080490933494
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_8",
+      "edge_type": "supports",
+      "weight": 0.17719837423331433
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_4",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.06022602521710532
+    },
+    {
+      "source": "state_4",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.0602373161854625
+    },
+    {
+      "source": "state_4",
+      "target": "state_5",
+      "edge_type": "refines",
+      "weight": 0.9
+    },
+    {
+      "source": "state_4",
+      "target": "state_6",
+      "edge_type": "refines",
+      "weight": 0.9
+    },
+    {
+      "source": "state_4",
+      "target": "memory_mem_7",
+      "edge_type": "derives",
+      "weight": 0.9999999694043191
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "state_2",
+      "edge_type": "recalls",
+      "weight": 1.0
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.9999999943734685
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.6882209988478406
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.5184475716557245
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "memory_mem_6",
+      "edge_type": "derives",
+      "weight": 1.0
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "state_3",
+      "edge_type": "recalls",
+      "weight": 0.95
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.9999999931632026
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_8",
+      "edge_type": "supports",
+      "weight": 0.07784852334732523
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.026331045707311367
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "memory_mem_6",
+      "edge_type": "derives",
+      "weight": 0.874
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.95
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.9999999782358011
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.31560631757915536
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.18370363547203758
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.8799999819645339
+    },
+    {
+      "source": "state_5",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.999999993107212
+    },
+    {
+      "source": "state_5",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.8552808915758476
+    },
+    {
+      "source": "state_5",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.6878561197750431
+    },
+    {
+      "source": "state_5",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_6",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.9999999945847299
+    },
+    {
+      "source": "state_6",
+      "target": "kg_doc_8",
+      "edge_type": "supports",
+      "weight": 0.20886697872025542
+    },
+    {
+      "source": "state_6",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.02085621636347457
+    },
+    {
+      "source": "state_6",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_7",
+      "target": "state_4",
+      "edge_type": "recalls",
+      "weight": 0.9999999694043191
+    },
+    {
+      "source": "memory_mem_7",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.9553080490933494
+    },
+    {
+      "source": "memory_mem_7",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.9999999694043191
+    },
+    {
+      "source": "memory_mem_7",
+      "target": "kg_doc_8",
+      "edge_type": "supports",
+      "weight": 0.17719837423331433
+    },
+    {
+      "source": "memory_mem_7",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_7",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.0602373161854625
+    },
+    {
+      "source": "memory_mem_7",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.06022602521710532
+    },
+    {
+      "source": "state_7",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.9999999928456849
+    },
+    {
+      "source": "state_7",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.3577101669094184
+    },
+    {
+      "source": "state_7",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.29915395152230384
+    },
+    {
+      "source": "state_7",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "state_7",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_8",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.9999999877763328
+    },
+    {
+      "source": "state_8",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.2494836886146036
+    },
+    {
+      "source": "state_8",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.20240580676674683
+    },
+    {
+      "source": "state_8",
+      "target": "kg_doc_8",
+      "edge_type": "supports",
+      "weight": 0.0
+    }
+  ]
+}

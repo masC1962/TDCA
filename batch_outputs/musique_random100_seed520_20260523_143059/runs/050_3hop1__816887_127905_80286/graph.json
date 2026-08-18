@@ -1,0 +1,911 @@
+{
+  "nodes": [
+    {
+      "node_id": "state_1",
+      "node_type": "state",
+      "content": "Who has the most hits in the league of the team that Dick Aylward plays for?",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.7963708303881758,
+      "temperature": 1.192442895218637,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.9324798547581014,
+        "evidence_support": 0.8014113375238274,
+        "memory_usefulness": 0.7441720445515476,
+        "answerability": 0.8007056687619136,
+        "uncertainty": 0.15574595924571105
+      },
+      "metadata": {
+        "diffusion_delta": 0.32245194900093277,
+        "diffusion_gain": 0.32245194900093277
+      }
+    },
+    {
+      "node_id": "kg_doc_11",
+      "node_type": "kg",
+      "content": "Pete Rose holds the Major League record for most career hits, with 4,256. Rose and Ty Cobb are the only players with 4,000 career hits. George Davis was the first switch hitter to collect 2,000 hits, doing so during the 1902 season. Ichiro Suzuki is the current active leader.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.999999993136888,
+      "temperature": 0.999999993136888,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "List of Major League Baseball career hits leaders",
+        "raw_score": 7.883854226069262,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_12",
+      "node_type": "kg",
+      "content": "Carl Francis Zoll (January 29, 1899 – October 19, 1973) was a professional football player who was an original member of the Green Bay Packers. He played for the Packers beginning in 1919, two years before the team joined the National Football League. His career ended after the 1922 season. He was also the brother of teammate Martin Zoll and future-Packer Dick Zoll.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.6028226819107667,
+      "temperature": 0.6028226819107667,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Carl Zoll",
+        "raw_score": 4.577441039620753,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_8",
+      "node_type": "kg",
+      "content": "Aylward, who batted and threw right-handed, was listed as tall and . After his first pro season in 1943, he joined the United States Army and served in the European Theater of Operations during World War II. He resumed his baseball career in 1946 in the Chicago Cubs' farm system, and was eventually acquired by the Indians' organization in 1951. After hitting a career-high .285 in the Double-A Texas League in 1952, he received his MLB trial with Cleveland the following spring.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999882554006,
+      "temperature": 0.9999999882554006,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Dick Aylward",
+        "raw_score": 4.835103161591608,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_18",
+      "node_type": "kg",
+      "content": "New Haven has a history of professional sports franchises dating back to the 19th century and has been the home to professional baseball, basketball, football, hockey, and soccer teams—including the New York Giants of the National Football League from 1973 to 1974, who played at the Yale Bowl. Throughout the second half of the 20th century, New Haven consistently had minor league hockey and baseball teams, which played at the New Haven Arena (built in 1926, demolished in 1972), New Haven Coliseum (1972–2002), and Yale Field (1928–present).",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.12849105424736038,
+      "temperature": 0.12849105424736038,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "New Haven, Connecticut",
+        "raw_score": 4.390395709407881,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "memory_mem_1",
+      "node_type": "memory",
+      "content": "Template: for compositional multi-hop questions, first solve the intermediate entity and then ask for the final attribute.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9599999878225635,
+      "temperature": 1.8533375718500356,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.96,
+        "tag": "compositional_template",
+        "memory_kind": "template",
+        "raw_score": 0.30103004473664674,
+        "source": "memory",
+        "diffusion_delta": 0.48458239939931014,
+        "diffusion_gain": 0.48458239939931014
+      }
+    },
+    {
+      "node_id": "memory_mem_2",
+      "node_type": "memory",
+      "content": "Template: for comparison questions, split the problem into one sub-question per entity before comparing them.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.6566941196618674,
+      "temperature": 0.6873511084722437,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.9,
+        "tag": "comparison_template",
+        "memory_kind": "template",
+        "raw_score": 0.4863531153647987,
+        "source": "memory",
+        "diffusion_delta": 0.008445658264281342,
+        "diffusion_gain": 0.008445658264281342
+      }
+    },
+    {
+      "node_id": "state_2",
+      "node_type": "state",
+      "content": "Which MLB team did Dick Aylward play for?",
+      "depth": 1,
+      "parent_id": "state_1",
+      "value": 0.6245744019269898,
+      "temperature": 0.4499597643912199,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.6258696225321394,
+        "evidence_support": 0.6979358645903257,
+        "memory_usefulness": 0.8083470524475778,
+        "answerability": 0.60611078943802,
+        "uncertainty": 0.17437154437374136
+      },
+      "metadata": {
+        "kind": "bridge",
+        "evidence_ids": [
+          "doc_8",
+          "doc_12",
+          "doc_2",
+          "doc_4"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_2"
+        ],
+        "diffusion_delta": 0.05060419451867909,
+        "diffusion_gain": 0.05060419451867909
+      }
+    },
+    {
+      "node_id": "kg_doc_2",
+      "node_type": "kg",
+      "content": "Vermont Lady Voltage was a professional American women’s soccer team, founded in 2005, which is a member of the United Soccer Leagues W-League. Voltage played in the Northern Division of the Central Conference. They play their home games at the Collins-Perley Sports Complex in the city of St. Albans, Vermont, 27 miles north of the state's largest city, Burlington. The team's colors are black and white, and gold and blue. The team was a sister organization of the men's Vermont Voltage team, which plays in the USL Premier Development League.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9054656307052003,
+      "temperature": 0.9054656307052003,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Vermont Lady Voltage",
+        "raw_score": 6.228158198895378,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_4",
+      "node_type": "kg",
+      "content": "The 1916 New York Giants hold the record for the longest unbeaten streak in MLB history at 26, with a tie in - between the 14th and 15th win. The record for the longest winning streak by an American League team is held by the 2017 Cleveland Indians at 22. The Chicago Cubs franchise has won 21 games twice, once in 1880 when they were the Chicago White Stockings and once in 1935.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0,
+      "temperature": 0.0,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "List of Major League Baseball longest winning streaks",
+        "raw_score": 3.495312763973816,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "state_3",
+      "node_type": "state",
+      "content": "Who has the most hits in that team's league (AL or NL)?",
+      "depth": 1,
+      "parent_id": "state_1",
+      "value": 0.5636926543016759,
+      "temperature": 0.7608730375584601,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.7012660744191477,
+        "evidence_support": 0.5205304709806862,
+        "memory_usefulness": 0.5139667251540021,
+        "answerability": 0.5888366640617717,
+        "uncertainty": 0.20630451522347648
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_11",
+          "doc_13",
+          "doc_18",
+          "doc_5"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "diffusion_delta": 0.07909575871838281,
+        "diffusion_gain": 0.07909575871838281
+      }
+    },
+    {
+      "node_id": "kg_doc_13",
+      "node_type": "kg",
+      "content": "The Cleveland Indians are an American professional baseball team based in Cleveland, Ohio. The Indians compete in Major League Baseball (MLB) as a member club of the American League (AL) Central division. Since , they have played at Progressive Field. The team's spring training facility is at Goodyear Ballpark in Goodyear, Arizona. Since their establishment as a major league franchise in 1901, the Indians have won two World Series championships: in 1920 and 1948, along with 10 Central Division titles and six American League pennants. The Indians' current World Series championship drought is the longest active drought among all 30 current Major League teams.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.04106095016616854,
+      "temperature": 0.04106095016616854,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Cleveland Indians",
+        "raw_score": 2.0872736026449923,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_5",
+      "node_type": "kg",
+      "content": "Premier League Founded 20 February 1992 Country England (19 teams) Other club (s) from Wales (1 team) Confederation UEFA Number of teams 20 Level on pyramid Relegation to EFL Championship Domestic cup (s) FA Cup FA Community Shield League cup (s) EFL Cup International cup (s) UEFA Champions League UEFA Europa League Current champions Chelsea (5th title) (2016 -- 17) Most championships Manchester United (13 titles) TV partners Sky Sports and BT Sport (live matches) Sky Sports and BBC (highlights) Website premierleague.com 2017 -- 18 Premier League",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0,
+      "temperature": 0.0,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Premier League",
+        "raw_score": 4.14661692035571,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "memory_mem_3",
+      "node_type": "memory",
+      "content": "Template: when evidence already grounds the answer, switch from branching to short verification and synthesis.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0679336425691247,
+      "temperature": 0.07313998992986334,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.88,
+        "tag": "verification_then_stop",
+        "memory_kind": "template",
+        "raw_score": 0.22780652034124618,
+        "source": "memory",
+        "diffusion_delta": 0.013008158890633434,
+        "diffusion_gain": 0.013008158890633434
+      }
+    },
+    {
+      "node_id": "memory_mem_4",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'Who has the most hits in the league of the team that Dick Aylward plays for' is Pete Rose.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.999999993136888,
+      "temperature": 1.237680899119021,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "intermediate_answer",
+        "target_question": "Who has the most hits in the league of the team that Dick Aylward plays for?",
+        "target_question_norm": "who has the most hits in the league of the team that dick aylward plays for",
+        "relation_signature": "generic",
+        "answer_text": "Pete Rose",
+        "support_score": 0.999999993136888,
+        "evidence_ids": [],
+        "slot_name": "",
+        "slot_type": "",
+        "slot_role": "",
+        "terminal": false,
+        "path_terminal": false,
+        "composition_kind": "",
+        "derived_from_state": "state_1",
+        "diffusion_delta": 0.09203898906215335,
+        "diffusion_gain": 0.09203898906215335
+      }
+    },
+    {
+      "node_id": "state_4",
+      "node_type": "state",
+      "content": "Which MLB team did Dick Aylward play for in the major leagues?",
+      "depth": 2,
+      "parent_id": "state_2",
+      "value": 0.6923265644284721,
+      "temperature": 0.7161367115642971,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.7667862970463915,
+        "evidence_support": 0.9527328064389664,
+        "memory_usefulness": 0.09211894476034435,
+        "answerability": 0.7620806889337689,
+        "uncertainty": 0.12850809484098605
+      },
+      "metadata": {
+        "kind": "bridge",
+        "evidence_ids": [
+          "doc_8",
+          "doc_2",
+          "doc_1",
+          "doc_12"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_2"
+        ],
+        "diffusion_delta": -0.19273195885786598,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "kg_doc_1",
+      "node_type": "kg",
+      "content": "Edward Wesley Schulmerich (August 21, 1901 – June 26, 1985) was an American Major League Baseball player from the state of Oregon. A native of the state, he played baseball and football at what is now Oregon State University where he participated in three sports. On the football team, he played three positions and earned the nickname of Ironhorse and all-conference honors. In baseball, he was a right-handed outfielder and after leaving school started his professional career in the minor leagues. Schulmerich then became the first player from the school to make it to the Major Leagues, playing for three teams in the early 1930s. He is a member of the Oregon State University Sports Hall of Fame and the Oregon Sports Hall of Fame.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.02925287366170988,
+      "temperature": 0.02925287366170988,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Wes Schulmerich",
+        "raw_score": 4.782565731903757,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "state_5",
+      "node_type": "state",
+      "content": "Who had the most hits in the American League in 1953?",
+      "depth": 2,
+      "parent_id": "state_2",
+      "value": 0.509271063517581,
+      "temperature": 0.4785694069399651,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.6500668108977109,
+        "evidence_support": 0.6094402001193179,
+        "memory_usefulness": 0.006196766336644629,
+        "answerability": 0.5904343857739447,
+        "uncertainty": 0.19030076397852277
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_11",
+          "doc_15",
+          "doc_18",
+          "doc_13"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "diffusion_delta": -0.19841683087657924,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "kg_doc_15",
+      "node_type": "kg",
+      "content": "Amanda Cinalli (born May 10, 1986, in Cleveland, Ohio) is an American soccer forward who played for Atlanta Beat of Women's Professional Soccer, Chicago Red Stars in Women's Premier Soccer League Elite and was a member of the United States U-23 women's national soccer team. She attended Laurel School in Shaker Heights, Ohio, and Notre Dame University",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.21888040756909624,
+      "temperature": 0.21888040756909624,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Amanda Cinalli",
+        "raw_score": 3.311885451736625,
+        "source": "kg"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "source": "state_1",
+      "target": "kg_doc_11",
+      "edge_type": "supports",
+      "weight": 0.999999993136888
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_12",
+      "edge_type": "supports",
+      "weight": 0.6028226819107667
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_8",
+      "edge_type": "supports",
+      "weight": 0.49357512749203847
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_18",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.9599999878225635
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_2",
+      "edge_type": "recalls",
+      "weight": 0.5283441012805319
+    },
+    {
+      "source": "state_1",
+      "target": "state_2",
+      "edge_type": "refines",
+      "weight": 0.9
+    },
+    {
+      "source": "state_1",
+      "target": "state_3",
+      "edge_type": "refines",
+      "weight": 0.8
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_4",
+      "edge_type": "derives",
+      "weight": 0.999999993136888
+    },
+    {
+      "source": "kg_doc_11",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.999999993136888
+    },
+    {
+      "source": "kg_doc_11",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.9999999917952038
+    },
+    {
+      "source": "kg_doc_11",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.999999993136888
+    },
+    {
+      "source": "kg_doc_11",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.9999999926695394
+    },
+    {
+      "source": "kg_doc_12",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.6028226819107667
+    },
+    {
+      "source": "kg_doc_12",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.3958717409252508
+    },
+    {
+      "source": "kg_doc_12",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.6028226819107667
+    },
+    {
+      "source": "kg_doc_12",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_8",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.49357512749203847
+    },
+    {
+      "source": "kg_doc_8",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.9999999882554006
+    },
+    {
+      "source": "kg_doc_8",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.49357512749203847
+    },
+    {
+      "source": "kg_doc_8",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.9999999821727326
+    },
+    {
+      "source": "kg_doc_18",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_18",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.013211043336278705
+    },
+    {
+      "source": "kg_doc_18",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_18",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.12849105424736038
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.9599999878225635
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_2",
+      "edge_type": "recalls",
+      "weight": 0.13866335849577807
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_3",
+      "edge_type": "recalls",
+      "weight": 0.9599998077388796
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "memory_mem_4",
+      "edge_type": "recalls",
+      "weight": 0.9599999878225635
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_4",
+      "edge_type": "recalls",
+      "weight": 0.11238567307870909
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_5",
+      "edge_type": "recalls",
+      "weight": 0.011589571413101157
+    },
+    {
+      "source": "memory_mem_2",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.5283441012805319
+    },
+    {
+      "source": "memory_mem_2",
+      "target": "state_2",
+      "edge_type": "recalls",
+      "weight": 0.09578718843458353
+    },
+    {
+      "source": "memory_mem_2",
+      "target": "memory_mem_4",
+      "edge_type": "recalls",
+      "weight": 0.5283441012805319
+    },
+    {
+      "source": "memory_mem_2",
+      "target": "state_4",
+      "edge_type": "recalls",
+      "weight": 0.07185221644197963
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_8",
+      "edge_type": "supports",
+      "weight": 0.9999999882554006
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_12",
+      "edge_type": "supports",
+      "weight": 0.3958717409252508
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.2669896994283907
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_2",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.13866335849577807
+    },
+    {
+      "source": "state_2",
+      "target": "memory_mem_2",
+      "edge_type": "recalls",
+      "weight": 0.09578718843458353
+    },
+    {
+      "source": "state_2",
+      "target": "state_4",
+      "edge_type": "refines",
+      "weight": 0.95
+    },
+    {
+      "source": "state_2",
+      "target": "state_5",
+      "edge_type": "refines",
+      "weight": 0.85
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.2669896994283907
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.9054656307052003
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_11",
+      "edge_type": "supports",
+      "weight": 0.9999999917952038
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_13",
+      "edge_type": "supports",
+      "weight": 0.04106095016616854
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_18",
+      "edge_type": "supports",
+      "weight": 0.013211043336278705
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_3",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.9599998077388796
+    },
+    {
+      "source": "state_3",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.0679336425691247
+    },
+    {
+      "source": "kg_doc_13",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.04106095016616854
+    },
+    {
+      "source": "kg_doc_13",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_3",
+      "edge_type": "recalls",
+      "weight": 0.0679336425691247
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_5",
+      "edge_type": "recalls",
+      "weight": 0.0008039612601881002
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.999999993136888
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_8",
+      "edge_type": "supports",
+      "weight": 0.49357512749203847
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_11",
+      "edge_type": "supports",
+      "weight": 0.999999993136888
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_12",
+      "edge_type": "supports",
+      "weight": 0.6028226819107667
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_18",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.9599999878225635
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "memory_mem_2",
+      "edge_type": "recalls",
+      "weight": 0.5283441012805319
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_8",
+      "edge_type": "supports",
+      "weight": 0.9999999821727326
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.9054656307052003
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.02925287366170988
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_12",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_4",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.11238567307870909
+    },
+    {
+      "source": "state_4",
+      "target": "memory_mem_2",
+      "edge_type": "recalls",
+      "weight": 0.07185221644197963
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.02925287366170988
+    },
+    {
+      "source": "state_5",
+      "target": "kg_doc_11",
+      "edge_type": "supports",
+      "weight": 0.9999999926695394
+    },
+    {
+      "source": "state_5",
+      "target": "kg_doc_15",
+      "edge_type": "supports",
+      "weight": 0.21888040756909624
+    },
+    {
+      "source": "state_5",
+      "target": "kg_doc_18",
+      "edge_type": "supports",
+      "weight": 0.12849105424736038
+    },
+    {
+      "source": "state_5",
+      "target": "kg_doc_13",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_5",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.011589571413101157
+    },
+    {
+      "source": "state_5",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.0008039612601881002
+    },
+    {
+      "source": "kg_doc_15",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.21888040756909624
+    }
+  ]
+}

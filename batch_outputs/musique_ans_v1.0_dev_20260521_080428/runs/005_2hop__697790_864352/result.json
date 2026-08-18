@@ -1,0 +1,127 @@
+{
+  "question": "Who is the child of Caroline LeRoy's spouse?",
+  "final_answer": "Fletcher Webster",
+  "best_node": {
+    "node_id": "state_1",
+    "node_type": "state",
+    "content": "Who is the child of Caroline LeRoy's spouse?",
+    "depth": 0,
+    "parent_id": null,
+    "value": 0.8429119977745234,
+    "temperature": 0.3670041669578914,
+    "expanded": true,
+    "visit_count": 1,
+    "persistent": false,
+    "score_breakdown": {
+      "task_progress": 0.9711053991594886,
+      "evidence_support": 0.9150158798808486,
+      "memory_usefulness": 0.5139667251540021,
+      "answerability": 0.9575079399404244,
+      "uncertainty": 0.13529714162144724
+    },
+    "metadata": {
+      "diffusion_delta": -0.0778272585332771,
+      "diffusion_gain": 0.0
+    }
+  },
+  "final_synthesis_node_ids": [
+    "state_2",
+    "state_3",
+    "state_4",
+    "memory_mem_6",
+    "state_1"
+  ],
+  "answer_history": [
+    {
+      "node_id": "memory_mem_4",
+      "content": "Conclusion: The answer to 'Who is Caroline LeRoy's spouse' is Daniel Webster.",
+      "answer_text": "Daniel Webster",
+      "value": 1.0,
+      "confidence": 1.0,
+      "evidence_ids": [
+        "doc_11",
+        "doc_5"
+      ],
+      "step": 1,
+      "kind": "intermediate_answer"
+    },
+    {
+      "node_id": "memory_mem_5",
+      "content": "Conclusion: The answer to 'Who is the child of Daniel Webster' is Daniel Fletcher Webster.",
+      "answer_text": "Daniel Fletcher Webster",
+      "value": 0.9999999949326259,
+      "confidence": 0.9704784917421692,
+      "evidence_ids": [
+        "doc_11",
+        "doc_1"
+      ],
+      "step": 2,
+      "kind": "intermediate_answer"
+    },
+    {
+      "node_id": "memory_mem_6",
+      "content": "Conclusion: The answer to 'Who are the children of Daniel Webster' is Fletcher Webster.",
+      "answer_text": "Fletcher Webster",
+      "value": 0.9999999951783243,
+      "confidence": 0.9719098808881138,
+      "evidence_ids": [
+        "doc_11",
+        "doc_1"
+      ],
+      "step": 4,
+      "kind": "intermediate_answer"
+    },
+    {
+      "node_id": "state_1",
+      "answer_text": "Fletcher Webster",
+      "previous_answer": "",
+      "confidence": 0.9575079399404244,
+      "score": 0.9342610240425132,
+      "source": "final_synthesis",
+      "step": 4,
+      "evidence_ids": [
+        "doc_11",
+        "doc_5",
+        "doc_16",
+        "doc_17"
+      ],
+      "kind": "anytime_answer"
+    },
+    {
+      "node_id": "state_1",
+      "answer_text": "Fletcher Webster",
+      "source": "answer_judge",
+      "choice": "B",
+      "candidate_source": "final_synthesis",
+      "base_score": 0.8418707532541427,
+      "rerank_score": 0.5735857163667399,
+      "judge_confidence": 0.0,
+      "judge_reason": "B directly answers the original question with 'Fletcher Webster', matching evidence and supporting nodes.",
+      "step": 4,
+      "kind": "final_answer_selection"
+    }
+  ],
+  "anytime_answer": "Fletcher Webster",
+  "anytime_answer_score": 0.9342610240425132,
+  "anytime_answer_source": "final_synthesis",
+  "anytime_answer_node_id": "state_1",
+  "stats": {
+    "steps": 4,
+    "llm_calls": 11,
+    "generated_tokens": 783,
+    "token_budget_remaining": 417,
+    "total_nodes": 16,
+    "kg_nodes": 7,
+    "memory_nodes": 5,
+    "state_nodes": 4,
+    "deleted_state_nodes": 0,
+    "scheduler_mode": "tdca",
+    "scoring_mode": "hybrid",
+    "stop_reason": "frontier_empty",
+    "goal_kind": "bridge",
+    "goal_completion": 0.0,
+    "anytime_answer": "Fletcher Webster",
+    "anytime_answer_score": 0.9342610240425132,
+    "anytime_answer_source": "final_synthesis"
+  }
+}

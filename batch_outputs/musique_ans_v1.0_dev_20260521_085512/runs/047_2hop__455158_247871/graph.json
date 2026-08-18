@@ -1,0 +1,913 @@
+{
+  "nodes": [
+    {
+      "node_id": "state_1",
+      "node_type": "state",
+      "content": "What county is the NRHEG High School located in?",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.8710708451355019,
+      "temperature": 1.474008660070565,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.9901316473763659,
+        "evidence_support": 0.9709754334598998,
+        "memory_usefulness": 0.5139667251540021,
+        "answerability": 0.98548771672995,
+        "uncertainty": 0.12522442197721803
+      },
+      "metadata": {
+        "diffusion_delta": 0.3334935482199055,
+        "diffusion_gain": 0.3334935482199055
+      }
+    },
+    {
+      "node_id": "kg_doc_17",
+      "node_type": "kg",
+      "content": "NRHEG High School is located in New Richland, Minnesota. NRHEG stands for New Richland, Hartland, Ellendale, Geneva, which are the towns that the school district covers.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.999999994650984,
+      "temperature": 0.999999994650984,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "NRHEG High School",
+        "raw_score": 10.652160067313224,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_20",
+      "node_type": "kg",
+      "content": "New Richland is a city in Waseca County, Minnesota, United States. The city was founded in 1877. The population was 1,203 at the 2010 census. Located in rural south-central Minnesota, New Richland is a small town with a strong agricultural base. In 2013, the NRHEG High School Women's Basketball team won the State Tournament.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999977182278,
+      "temperature": 0.9999999977182278,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "New Richland, Minnesota",
+        "raw_score": 12.873677323839088,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_3",
+      "node_type": "kg",
+      "content": "Mount View High School is a public high school located in Thorndike, Maine, United States. The school is a part of Maine School Administrative District 3, and serves students from the towns of Brooks, Freedom, Jackson, Knox, Liberty, Monroe, Montville, Thorndike, Troy, Unity and Waldo.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.2822544228829775,
+      "temperature": 0.2822544228829775,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Mount View High School (Maine)",
+        "raw_score": 6.732614436289055,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_15",
+      "node_type": "kg",
+      "content": "Ashland Community High School was located in Ashland, Maine, USA. It was part of Maine School Administrative District 32, or MSAD 32, which serves Ashland, Garfield Plantation, Masardis, Oxbow, Portage Lake and Sheridan, Maine. There was a student population of 200 in school grades 7–12, with eighteen faculty members as well as administrators, a counselor and three support personnel. The school had achieved accredited status with the New England Association of Schools and Colleges.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.25,
+      "temperature": 0.25,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Ashland Community High School",
+        "raw_score": 2.2733463037762034,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "memory_mem_1",
+      "node_type": "memory",
+      "content": "Template: for compositional multi-hop questions, first solve the intermediate entity and then ask for the final attribute.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9599998077388796,
+      "temperature": 0.39603006242461947,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.96,
+        "tag": "compositional_template",
+        "memory_kind": "template",
+        "raw_score": 0.18470114999581103,
+        "source": "memory",
+        "diffusion_delta": -0.2161706182618257,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "memory_mem_3",
+      "node_type": "memory",
+      "content": "Template: when evidence already grounds the answer, switch from branching to short verification and synthesis.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0679336425691247,
+      "temperature": 0.028031637432282812,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.88,
+        "tag": "verification_then_stop",
+        "memory_kind": "template",
+        "raw_score": 0.13862369149579673,
+        "source": "memory",
+        "diffusion_delta": -0.01529575117846952,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "state_2",
+      "node_type": "state",
+      "content": "What city is NRHEG High School located in?",
+      "depth": 1,
+      "parent_id": "state_1",
+      "value": 0.7520874588021462,
+      "temperature": 1.613422403692193,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.8937527874789277,
+        "evidence_support": 0.9358742115393297,
+        "memory_usefulness": 0.0,
+        "answerability": 0.9234926613252203,
+        "uncertainty": 0.13154264192292064
+      },
+      "metadata": {
+        "kind": "bridge",
+        "evidence_ids": [
+          "doc_20",
+          "doc_17",
+          "doc_3",
+          "doc_15"
+        ],
+        "memory_ids": [],
+        "goal_slot_name": "school_location_city",
+        "goal_slot_role": "bridge_entity",
+        "goal_terminal": false,
+        "diffusion_delta": 0.24833273052645022,
+        "diffusion_gain": 0.24833273052645022
+      }
+    },
+    {
+      "node_id": "state_3",
+      "node_type": "state",
+      "content": "What county is New Richland, Minnesota located in?",
+      "depth": 2,
+      "parent_id": "state_2",
+      "value": 0.7144830858620389,
+      "temperature": 1.0649260535897849,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.8008425582612861,
+        "evidence_support": 0.910974844559338,
+        "memory_usefulness": 0.0,
+        "answerability": 0.8665985333907801,
+        "uncertainty": 0.13602452797931916
+      },
+      "metadata": {
+        "kind": "bridge",
+        "evidence_ids": [
+          "doc_20",
+          "doc_17",
+          "doc_15",
+          "doc_13"
+        ],
+        "memory_ids": [],
+        "diffusion_delta": 0.7582271262033908,
+        "diffusion_gain": 0.7582271262033908
+      }
+    },
+    {
+      "node_id": "kg_doc_13",
+      "node_type": "kg",
+      "content": "Pak Tam Chung () is an area in the southern part of the Sai Kung Peninsula in the New Territories of Hong Kong. It is administratively under the Sai Kung District.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.25,
+      "temperature": 0.25,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Pak Tam Chung",
+        "raw_score": 2.062231051596772,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "memory_mem_4",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'What city is NRHEG High School located in' is New Richland.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 1.0,
+      "temperature": 0.9366181028358616,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "intermediate_answer",
+        "target_question": "What city is NRHEG High School located in?",
+        "target_question_norm": "what city is nrheg high school located in",
+        "relation_signature": "generic",
+        "answer_text": "New Richland",
+        "support_score": 1.0,
+        "evidence_ids": [
+          "doc_17",
+          "doc_20"
+        ],
+        "slot_name": "school_location_city",
+        "slot_role": "bridge_entity",
+        "terminal": false,
+        "derived_from_state": "state_2",
+        "diffusion_delta": 0.03885784471394782,
+        "diffusion_gain": 0.03885784471394782
+      }
+    },
+    {
+      "node_id": "memory_mem_5",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'What county is New Richland, Minnesota located in' is Waseca County.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.874,
+      "temperature": 0.823703653732831,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "answer_candidate",
+        "target_question": "What county is New Richland, Minnesota located in?",
+        "target_question_norm": "what county is new richland minnesota located in",
+        "relation_signature": "generic",
+        "answer_text": "Waseca County",
+        "support_score": 0.910974844559338,
+        "evidence_ids": [
+          "doc_20",
+          "doc_17"
+        ],
+        "slot_name": "path_terminal",
+        "slot_role": "target_attribute",
+        "terminal": true,
+        "path_terminal": true,
+        "composition_kind": "path_terminal",
+        "derived_from_state": "state_3",
+        "diffusion_delta": -0.2435672890595646,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "memory_mem_6",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'What county is the NRHEG High School located in' is Waseca County.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.96,
+      "temperature": 0.96,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "answer_candidate",
+        "target_question": "What county is the NRHEG High School located in?",
+        "target_question_norm": "what county is the nrheg high school located in",
+        "relation_signature": "generic",
+        "answer_text": "Waseca County",
+        "support_score": 0.96,
+        "evidence_ids": [
+          "doc_1",
+          "doc_3",
+          "doc_4",
+          "doc_5",
+          "doc_6",
+          "doc_9",
+          "doc_10",
+          "doc_12",
+          "doc_13",
+          "doc_15",
+          "doc_17",
+          "doc_20"
+        ],
+        "slot_role": "target_attribute",
+        "terminal": true,
+        "path_terminal": true,
+        "coverage_count": 1,
+        "coverage_ratio": 1.0,
+        "composition_kind": "path_terminal",
+        "diffusion_delta": -0.16638121936504102,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "kg_doc_1",
+      "node_type": "kg",
+      "content": "Taputapuatea is a commune of French Polynesia, an overseas territory of France in the Pacific Ocean. The commune of Taputapuatea is located on the island of Raiatea, in the administrative subdivision of the Leeward Islands, themselves part of the Society Islands. At the 2017 census it had a population of 4,792. In 2017 Taputapuatea along with Taputapuatea marae were inscribed on the UNESCO World Heritage Sites list.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.25,
+      "temperature": 0.25,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Taputapuatea",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_4",
+      "node_type": "kg",
+      "content": "Saulkrasti Municipality () is a municipality in Vidzeme, Latvia. The municipality was formed in 2009 by reorganization of Saulkrasti town with its countryside territory, with the administrative centre being Saulkrasti. In 2010 Saulkrasti parish was created from the countryside territory of Saulkrasti town.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.25,
+      "temperature": 0.25,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Saulkrasti Municipality",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_5",
+      "node_type": "kg",
+      "content": "Moorea-Maiao is a commune of French Polynesia, an overseas territory of France in the Pacific Ocean. The commune is in the administrative subdivision of the Windward Islands. At the 2017 census it had a population of 17,816.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.25,
+      "temperature": 0.25,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Moorea-Maiao",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_6",
+      "node_type": "kg",
+      "content": "Pettai is a panchayat village and revenue village in Pondicherry Union Territory, India. Administratively, Pettai is under the Thirunallar Taluk (formerly Thirunallar Commune Panchayat) of Karaikal District, Pondicherry Union Territory. Pettai is situated on the banks of the Arasalar River, to the west of Karaikal town and south of Thirunallar.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.25,
+      "temperature": 0.25,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Pettai, Karaikal",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_9",
+      "node_type": "kg",
+      "content": "Tumaraa is a commune of French Polynesia, an overseas territory of France in the Pacific Ocean. The commune of Tumaraa is located on the island of Raiatea, in the administrative subdivision of the Leeward Islands, themselves part of the Society Islands. At the 2017 census it had a population of 3,721, making it the least populous commune on Raiatea.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.25,
+      "temperature": 0.25,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Tumaraa",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_10",
+      "node_type": "kg",
+      "content": "Hörnli mountain is located on the territory of the community of Fischenthal, in the Zürcher Oberland, in the eastern part of canton of Zürich, in Switzerland. It is high.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.25,
+      "temperature": 0.25,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Hörnli",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_12",
+      "node_type": "kg",
+      "content": "Pangi Territory is an administrative area in Maniema Province of the Democratic Republic of the Congo. The headquarters is the town of Pangi.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.25,
+      "temperature": 0.25,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Pangi Territory",
+        "source": "kg"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "source": "state_1",
+      "target": "kg_doc_17",
+      "edge_type": "supports",
+      "weight": 0.999999994650984
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_20",
+      "edge_type": "supports",
+      "weight": 0.9419508722688156
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.2822544228829775
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_15",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.9599998077388796
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.0679336425691247
+    },
+    {
+      "source": "state_1",
+      "target": "state_2",
+      "edge_type": "refines",
+      "weight": 1.0
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_6",
+      "edge_type": "derives",
+      "weight": 0.96
+    },
+    {
+      "source": "kg_doc_17",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.999999994650984
+    },
+    {
+      "source": "kg_doc_17",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.871748427735504
+    },
+    {
+      "source": "kg_doc_17",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.8219496914004482
+    },
+    {
+      "source": "kg_doc_17",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.871748427735504
+    },
+    {
+      "source": "kg_doc_17",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.8219496914004482
+    },
+    {
+      "source": "kg_doc_17",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.25
+    },
+    {
+      "source": "kg_doc_20",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.9419508722688156
+    },
+    {
+      "source": "kg_doc_20",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.9999999953431555
+    },
+    {
+      "source": "kg_doc_20",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.9999999977182278
+    },
+    {
+      "source": "kg_doc_20",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.9999999953431555
+    },
+    {
+      "source": "kg_doc_20",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.9999999977182278
+    },
+    {
+      "source": "kg_doc_20",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.55
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.2822544228829775
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.24622522164730434
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.24622522164730434
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.25
+    },
+    {
+      "source": "kg_doc_15",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_15",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_15",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.01105423998586153
+    },
+    {
+      "source": "kg_doc_15",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_15",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.01105423998586153
+    },
+    {
+      "source": "kg_doc_15",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.25
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.9599998077388796
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.0679336425691247
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_20",
+      "edge_type": "supports",
+      "weight": 0.9999999953431555
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_17",
+      "edge_type": "supports",
+      "weight": 0.871748427735504
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.24622522164730434
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_15",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_2",
+      "target": "state_3",
+      "edge_type": "refines",
+      "weight": 0.84
+    },
+    {
+      "source": "state_2",
+      "target": "memory_mem_4",
+      "edge_type": "derives",
+      "weight": 1.0
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_20",
+      "edge_type": "supports",
+      "weight": 0.9999999977182278
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_17",
+      "edge_type": "supports",
+      "weight": 0.8219496914004482
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_15",
+      "edge_type": "supports",
+      "weight": 0.01105423998586153
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_13",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_3",
+      "target": "memory_mem_5",
+      "edge_type": "derives",
+      "weight": 0.95
+    },
+    {
+      "source": "kg_doc_13",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_13",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_13",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.25
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "state_2",
+      "edge_type": "recalls",
+      "weight": 1.0
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_17",
+      "edge_type": "supports",
+      "weight": 0.871748427735504
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_20",
+      "edge_type": "supports",
+      "weight": 0.9999999953431555
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.24622522164730434
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_15",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "state_3",
+      "edge_type": "recalls",
+      "weight": 0.95
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_20",
+      "edge_type": "supports",
+      "weight": 0.9999999977182278
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_17",
+      "edge_type": "supports",
+      "weight": 0.8219496914004482
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_15",
+      "edge_type": "supports",
+      "weight": 0.01105423998586153
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_13",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.96
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.25
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.25
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.25
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.25
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.25
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.25
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_10",
+      "edge_type": "supports",
+      "weight": 0.25
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_12",
+      "edge_type": "supports",
+      "weight": 0.25
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_13",
+      "edge_type": "supports",
+      "weight": 0.25
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_15",
+      "edge_type": "supports",
+      "weight": 0.25
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_17",
+      "edge_type": "supports",
+      "weight": 0.25
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_20",
+      "edge_type": "supports",
+      "weight": 0.55
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.25
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.25
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.25
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.25
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.25
+    },
+    {
+      "source": "kg_doc_10",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.25
+    },
+    {
+      "source": "kg_doc_12",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.25
+    }
+  ]
+}

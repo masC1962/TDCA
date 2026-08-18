@@ -1,0 +1,592 @@
+{
+  "nodes": [
+    {
+      "node_id": "state_1",
+      "node_type": "state",
+      "content": "What county is the NRHEG High School located in?",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.8710708451355019,
+      "temperature": 0.5284775206450101,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.9901316473763659,
+        "evidence_support": 0.9709754334598998,
+        "memory_usefulness": 0.5139667251540021,
+        "answerability": 0.98548771672995,
+        "uncertainty": 0.12522442197721803
+      },
+      "metadata": {
+        "diffusion_delta": 0.06522884616324609,
+        "diffusion_gain": 0.06522884616324609
+      }
+    },
+    {
+      "node_id": "kg_doc_17",
+      "node_type": "kg",
+      "content": "NRHEG High School is located in New Richland, Minnesota. NRHEG stands for New Richland, Hartland, Ellendale, Geneva, which are the towns that the school district covers.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.999999994650984,
+      "temperature": 0.999999994650984,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "NRHEG High School",
+        "raw_score": 10.241677739868914,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_20",
+      "node_type": "kg",
+      "content": "New Richland is a city in Waseca County, Minnesota, United States. The city was founded in 1877. The population was 1,203 at the 2010 census. Located in rural south-central Minnesota, New Richland is a small town with a strong agricultural base. In 2013, the NRHEG High School Women's Basketball team won the State Tournament.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999977182278,
+      "temperature": 0.9999999977182278,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "New Richland, Minnesota",
+        "raw_score": 10.131642799432939,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_3",
+      "node_type": "kg",
+      "content": "Mount View High School is a public high school located in Thorndike, Maine, United States. The school is a part of Maine School Administrative District 3, and serves students from the towns of Brooks, Freedom, Jackson, Knox, Liberty, Monroe, Montville, Thorndike, Troy, Unity and Waldo.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.2822544228829775,
+      "temperature": 0.2822544228829775,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Mount View High School (Maine)",
+        "raw_score": 6.772251092665013,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_15",
+      "node_type": "kg",
+      "content": "Ashland Community High School was located in Ashland, Maine, USA. It was part of Maine School Administrative District 32, or MSAD 32, which serves Ashland, Garfield Plantation, Masardis, Oxbow, Portage Lake and Sheridan, Maine. There was a student population of 200 in school grades 7–12, with eighteen faculty members as well as administrators, a counselor and three support personnel. The school had achieved accredited status with the New England Association of Schools and Colleges.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.01105423998586153,
+      "temperature": 0.01105423998586153,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Ashland Community High School",
+        "raw_score": 5.285624084918992,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "memory_mem_1",
+      "node_type": "memory",
+      "content": "Template: for compositional multi-hop questions, first solve the intermediate entity and then ask for the final attribute.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9599998077388796,
+      "temperature": 0.2362334011546843,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.96,
+        "tag": "compositional_template",
+        "memory_kind": "template",
+        "raw_score": 0.11897704512645167,
+        "source": "memory",
+        "diffusion_delta": -0.19294717744658943,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "memory_mem_3",
+      "node_type": "memory",
+      "content": "Template: when evidence already grounds the answer, switch from branching to short verification and synthesis.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0679336425691247,
+      "temperature": 0.016721937539685344,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.88,
+        "tag": "verification_then_stop",
+        "memory_kind": "template",
+        "raw_score": 0.0890401396655537,
+        "source": "memory",
+        "diffusion_delta": -0.013657728706881759,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "state_2",
+      "node_type": "state",
+      "content": "What city is NRHEG High School located in?",
+      "depth": 1,
+      "parent_id": "state_1",
+      "value": 0.7520874588021462,
+      "temperature": 1.79033191841159,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.8937527874789277,
+        "evidence_support": 0.9358742115393297,
+        "memory_usefulness": 0.0,
+        "answerability": 0.9234926613252203,
+        "uncertainty": 0.13154264192292064
+      },
+      "metadata": {
+        "kind": "bridge",
+        "evidence_ids": [
+          "doc_20",
+          "doc_17",
+          "doc_3",
+          "doc_15"
+        ],
+        "memory_ids": [],
+        "goal_slot_name": "school_location_city",
+        "goal_slot_role": "bridge_entity",
+        "goal_terminal": false,
+        "diffusion_delta": 0.030530326142838238,
+        "diffusion_gain": 0.030530326142838238
+      }
+    },
+    {
+      "node_id": "state_3",
+      "node_type": "state",
+      "content": "What county is New Richland, Minnesota located in?",
+      "depth": 2,
+      "parent_id": "state_2",
+      "value": 0.7144830858620389,
+      "temperature": 1.4603215311577464,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.8008425582612861,
+        "evidence_support": 0.910974844559338,
+        "memory_usefulness": 0.0,
+        "answerability": 0.8665985333907801,
+        "uncertainty": 0.13602452797931916
+      },
+      "metadata": {
+        "kind": "bridge",
+        "evidence_ids": [
+          "doc_20",
+          "doc_17",
+          "doc_15",
+          "doc_13"
+        ],
+        "memory_ids": [],
+        "diffusion_delta": 0.3905973604973094,
+        "diffusion_gain": 0.3905973604973094
+      }
+    },
+    {
+      "node_id": "kg_doc_13",
+      "node_type": "kg",
+      "content": "Pak Tam Chung () is an area in the southern part of the Sai Kung Peninsula in the New Territories of Hong Kong. It is administratively under the Sai Kung District.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0,
+      "temperature": 0.0,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Pak Tam Chung",
+        "raw_score": 2.062231051596772,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "memory_mem_4",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'What city is NRHEG High School located in' is New Richland.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 1.0,
+      "temperature": 1.0521813101087578,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "intermediate_answer",
+        "target_question": "What city is NRHEG High School located in?",
+        "target_question_norm": "what city is nrheg high school located in",
+        "relation_signature": "generic",
+        "answer_text": "New Richland",
+        "support_score": 1.0,
+        "evidence_ids": [
+          "doc_17",
+          "doc_20"
+        ],
+        "slot_name": "school_location_city",
+        "slot_role": "bridge_entity",
+        "terminal": false,
+        "derived_from_state": "state_2",
+        "diffusion_delta": 0.11743212381262258,
+        "diffusion_gain": 0.11743212381262258
+      }
+    },
+    {
+      "node_id": "memory_mem_5",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'What county is New Richland, Minnesota located in' is Waseca County.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.874,
+      "temperature": 1.0366912128092103,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "derived_fact",
+        "target_question": "What county is New Richland, Minnesota located in?",
+        "target_question_norm": "what county is new richland minnesota located in",
+        "relation_signature": "generic",
+        "answer_text": "Waseca County",
+        "support_score": 0.910974844559338,
+        "evidence_ids": [
+          "doc_20",
+          "doc_17"
+        ],
+        "slot_name": "city_county",
+        "slot_role": "target_attribute",
+        "terminal": true,
+        "derived_from_state": "state_3",
+        "diffusion_delta": 0.20646354346579654,
+        "diffusion_gain": 0.20646354346579654
+      }
+    }
+  ],
+  "edges": [
+    {
+      "source": "state_1",
+      "target": "kg_doc_17",
+      "edge_type": "supports",
+      "weight": 0.999999994650984
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_20",
+      "edge_type": "supports",
+      "weight": 0.9419508722688156
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.2822544228829775
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_15",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.003791982748084206
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.00027003736261991976
+    },
+    {
+      "source": "state_1",
+      "target": "state_2",
+      "edge_type": "refines",
+      "weight": 1.0
+    },
+    {
+      "source": "kg_doc_17",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.999999994650984
+    },
+    {
+      "source": "kg_doc_17",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.871748427735504
+    },
+    {
+      "source": "kg_doc_17",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.8219496914004482
+    },
+    {
+      "source": "kg_doc_17",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.871748427735504
+    },
+    {
+      "source": "kg_doc_17",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.8219496914004482
+    },
+    {
+      "source": "kg_doc_20",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.9419508722688156
+    },
+    {
+      "source": "kg_doc_20",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.9999999953431555
+    },
+    {
+      "source": "kg_doc_20",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.9999999977182278
+    },
+    {
+      "source": "kg_doc_20",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.9999999953431555
+    },
+    {
+      "source": "kg_doc_20",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.9999999977182278
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.2822544228829775
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.24622522164730434
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.24622522164730434
+    },
+    {
+      "source": "kg_doc_15",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_15",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_15",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.01105423998586153
+    },
+    {
+      "source": "kg_doc_15",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_15",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.01105423998586153
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.003791982748084206
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.00027003736261991976
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_20",
+      "edge_type": "supports",
+      "weight": 0.9999999953431555
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_17",
+      "edge_type": "supports",
+      "weight": 0.871748427735504
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.24622522164730434
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_15",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_2",
+      "target": "state_3",
+      "edge_type": "refines",
+      "weight": 0.84
+    },
+    {
+      "source": "state_2",
+      "target": "memory_mem_4",
+      "edge_type": "derives",
+      "weight": 1.0
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_20",
+      "edge_type": "supports",
+      "weight": 0.9999999977182278
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_17",
+      "edge_type": "supports",
+      "weight": 0.8219496914004482
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_15",
+      "edge_type": "supports",
+      "weight": 0.01105423998586153
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_13",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_3",
+      "target": "memory_mem_5",
+      "edge_type": "derives",
+      "weight": 0.95
+    },
+    {
+      "source": "kg_doc_13",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_13",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "state_2",
+      "edge_type": "recalls",
+      "weight": 1.0
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_17",
+      "edge_type": "supports",
+      "weight": 0.871748427735504
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_20",
+      "edge_type": "supports",
+      "weight": 0.9999999953431555
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.24622522164730434
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_15",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "state_3",
+      "edge_type": "recalls",
+      "weight": 0.95
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_20",
+      "edge_type": "supports",
+      "weight": 0.9999999977182278
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_17",
+      "edge_type": "supports",
+      "weight": 0.8219496914004482
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_15",
+      "edge_type": "supports",
+      "weight": 0.01105423998586153
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_13",
+      "edge_type": "supports",
+      "weight": 0.0
+    }
+  ]
+}

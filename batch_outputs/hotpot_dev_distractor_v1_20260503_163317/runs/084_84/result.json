@@ -1,0 +1,179 @@
+{
+  "question": "What was the name of a woman from the book titled \"Their Lives: The Women Targeted by the Clinton Machine \" and was also a former white house intern?",
+  "final_answer": "Their Lives",
+  "best_node": {
+    "node_id": "state_1",
+    "node_type": "state",
+    "content": "What was the name of a woman from the book titled \"Their Lives: The Women Targeted by the Clinton Machine \" and was also a former white house intern?",
+    "depth": 0,
+    "parent_id": null,
+    "value": 0.7046294528895076,
+    "temperature": 0.9976377184839416,
+    "expanded": true,
+    "visit_count": 1,
+    "persistent": false,
+    "score_breakdown": {
+      "task_progress": 0.878552436765679,
+      "evidence_support": 0.6428012846049381,
+      "memory_usefulness": 0.6447653873025236,
+      "answerability": 0.721400642302469,
+      "uncertainty": 0.18429576877111115
+    },
+    "metadata": {
+      "diffusion_delta": 0.04972569366904356,
+      "diffusion_gain": 0.04972569366904356
+    }
+  },
+  "final_synthesis_node_ids": [
+    "state_3",
+    "state_10",
+    "memory_mem_4",
+    "state_5",
+    "state_1"
+  ],
+  "answer_history": [
+    {
+      "node_id": "",
+      "answer_text": "Monica Lewinsky",
+      "previous_answer": "",
+      "confidence": 0.28,
+      "score": 0.16880000000000003,
+      "source": "closed_book_initial",
+      "step": 0,
+      "evidence_ids": [],
+      "kind": "anytime_answer"
+    },
+    {
+      "node_id": "state_1",
+      "answer_text": "Their Lives",
+      "previous_answer": "Monica Lewinsky",
+      "confidence": 0.7046294528895076,
+      "score": 0.8237044012264839,
+      "source": "grounded",
+      "step": 0,
+      "evidence_ids": [
+        "doc_5",
+        "doc_3",
+        "doc_1",
+        "doc_10"
+      ],
+      "kind": "anytime_answer"
+    },
+    {
+      "node_id": "state_1",
+      "answer_text": "Their Lives",
+      "previous_answer": "Their Lives",
+      "confidence": 0.98,
+      "score": 0.9503748528973105,
+      "source": "grounded",
+      "step": 0,
+      "evidence_ids": [
+        "doc_5",
+        "doc_10",
+        "doc_3",
+        "doc_1"
+      ],
+      "kind": "anytime_answer"
+    },
+    {
+      "node_id": "memory_mem_4",
+      "content": "Conclusion: The answer to 'Which of those seven women was a White House intern' is Monica Lewinsky.",
+      "answer_text": "Monica Lewinsky",
+      "value": 0.9999999704644252,
+      "confidence": 0.95,
+      "evidence_ids": [
+        "doc_10"
+      ],
+      "step": 2,
+      "kind": "intermediate_answer"
+    },
+    {
+      "node_id": "memory_mem_5",
+      "content": "Conclusion: The answer to 'Who are the seven women named in 'Their Lives: The Women Targeted by the Clinton Machine'' is Monica Lewinsky.",
+      "answer_text": "Monica Lewinsky",
+      "value": 0.9016000000000001,
+      "evidence_ids": [
+        "doc_5"
+      ],
+      "step": 3
+    },
+    {
+      "node_id": "memory_mem_6",
+      "content": "Conclusion: The answer to 'Which of the seven women listed in 'Their Lives' was a White House intern' is Their Lives.",
+      "answer_text": "Their Lives",
+      "value": 0.874,
+      "evidence_ids": [
+        "doc_5"
+      ],
+      "step": 4
+    },
+    {
+      "node_id": "memory_mem_7",
+      "content": "Conclusion: The answer to 'What other women from the book were former White House interns' is The White House Doctor.",
+      "answer_text": "The White House Doctor",
+      "value": 0.7297379984075718,
+      "evidence_ids": [
+        "doc_3",
+        "doc_4"
+      ],
+      "step": 7
+    },
+    {
+      "node_id": "memory_mem_8",
+      "content": "Conclusion: The answer to 'Which of those women was a former White House intern' is Lewinsky scandal.",
+      "answer_text": "Lewinsky scandal",
+      "value": 0.8890500287758263,
+      "evidence_ids": [
+        "doc_10",
+        "doc_7",
+        "doc_6"
+      ],
+      "step": 8
+    },
+    {
+      "node_id": "memory_mem_9",
+      "content": "Conclusion: The answer to 'What was the name of a woman from the book titled \"Their Lives: The Women Targeted by the Clinton Machine \" and was also a former white house intern' is Their Lives.",
+      "answer_text": "Their Lives",
+      "value": 0.7912,
+      "evidence_ids": [
+        "doc_5"
+      ],
+      "step": 9
+    },
+    {
+      "node_id": "state_1",
+      "answer_text": "Their Lives",
+      "source": "answer_judge",
+      "choice": "A",
+      "candidate_source": "anytime",
+      "base_score": 0.8490633300351541,
+      "judge_confidence": 0.0,
+      "judge_reason": "Original question asks for a woman's name; 'Their Lives' is the book title, not a person — but candidate A is misaligned. Evidence doc_3 confirms Monica Lewinsky is one of the seven women in the book and was a White House intern. None of the candidates list 'Monica Lewinsky'. All given candidates are incorrect. Reject all.",
+      "step": 8,
+      "kind": "final_answer_selection"
+    }
+  ],
+  "anytime_answer": "Their Lives",
+  "anytime_answer_score": 0.9503748528973105,
+  "anytime_answer_source": "grounded",
+  "anytime_answer_node_id": "state_1",
+  "stats": {
+    "steps": 8,
+    "llm_calls": 12,
+    "generated_tokens": 1027,
+    "token_budget_remaining": 173,
+    "total_nodes": 28,
+    "kg_nodes": 10,
+    "memory_nodes": 9,
+    "state_nodes": 9,
+    "deleted_state_nodes": 1,
+    "scheduler_mode": "tdca",
+    "scoring_mode": "hybrid",
+    "stop_reason": "final_synthesis_reserve",
+    "goal_kind": "bridge",
+    "goal_completion": 1.0,
+    "anytime_answer": "Their Lives",
+    "anytime_answer_score": 0.9503748528973105,
+    "anytime_answer_source": "grounded"
+  }
+}

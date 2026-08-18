@@ -1,0 +1,1730 @@
+{
+  "nodes": [
+    {
+      "node_id": "state_1",
+      "node_type": "state",
+      "content": "How long had Pfrang Association's headquarters location been the capitol city of Yaxing Coach's headquarters location?",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.8496511019769194,
+      "temperature": 0.6821704136052853,
+      "expanded": false,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.9871453344313779,
+        "evidence_support": 0.9621921600922878,
+        "memory_usefulness": 0.5139667251540021,
+        "answerability": 0.8810960800461438,
+        "uncertainty": 0.1268054111833882
+      },
+      "metadata": {
+        "diffusion_delta": 0.06566018812219188,
+        "diffusion_gain": 0.06566018812219188,
+        "composition_retry": 3,
+        "goal_retry": 1
+      }
+    },
+    {
+      "node_id": "kg_doc_19",
+      "node_type": "kg",
+      "content": "Yaxing Coach (Yangzhou Yaxing Motor Coach Co., Ltd) is a bus manufacturer based in Yangzhou, Jiangsu, China. It is a subsidiary of Jiangsu Yaxing that was founded in 1998. Buses are produced under the \"Yaxing\", \"Yangtse（Yangzlv）\", and more recently Asiastar brands.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999806195045,
+      "temperature": 0.9999999806195045,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Yaxing Coach",
+        "raw_score": 0.2572194161210143,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_15",
+      "node_type": "kg",
+      "content": "Pfrang Association (also known as Pfrang) is a charitable organization based in Nanjing, China which raises money to assist with the education of children in the poor and rural regions of Jiangsu Province. Its aim is to help overcome social inequality and as a result break the cycle of lack of education, poverty, and crime.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999788967066,
+      "temperature": 0.9999999788967066,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Pfrang Association",
+        "raw_score": 0.13686291072281134,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_1",
+      "node_type": "kg",
+      "content": "The headquarters of the French Communist Party, designed by the Brazilian communist and utilitarian architect Oscar Niemeyer is located here, as is a station of the Paris Métro. Nearby is the former location of the medieval Gibbet of Montfaucon, a multi-tiered gibbet that was for most of its history outside Paris' city walls.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0,
+      "temperature": 0.0,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Place du Colonel Fabien",
+        "raw_score": 0.10430297837321305,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_5",
+      "node_type": "kg",
+      "content": "Buckingham Palace (UK: ) is the London residence and administrative headquarters of the monarch of the United Kingdom. Located in the City of Westminster, the palace is often at the centre of state occasions and royal hospitality. It has been a focal point for the British people at times of national rejoicing and mourning.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0,
+      "temperature": 0.0,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Buckingham Palace",
+        "raw_score": 0.14759035719378652,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "memory_mem_1",
+      "node_type": "memory",
+      "content": "Template: for compositional multi-hop questions, first solve the intermediate entity and then ask for the final attribute.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9599998077388796,
+      "temperature": 3.6411543209469297,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.96,
+        "tag": "compositional_template",
+        "memory_kind": "template",
+        "raw_score": 0.20130095393343936,
+        "source": "memory",
+        "diffusion_delta": 0.26494273868310536,
+        "diffusion_gain": 0.26494273868310536
+      }
+    },
+    {
+      "node_id": "memory_mem_3",
+      "node_type": "memory",
+      "content": "Template: when evidence already grounds the answer, switch from branching to short verification and synthesis.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0679336425691247,
+      "temperature": 0.2590591735239334,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.88,
+        "tag": "verification_then_stop",
+        "memory_kind": "template",
+        "raw_score": 0.1503991578897137,
+        "source": "memory",
+        "diffusion_delta": 0.01903363535067082,
+        "diffusion_gain": 0.01903363535067082
+      }
+    },
+    {
+      "node_id": "state_2",
+      "node_type": "state",
+      "content": "What city is Pfrang Association's headquarters located in?",
+      "depth": 1,
+      "parent_id": "state_1",
+      "value": 0.4534666610299536,
+      "temperature": 1.6449634885067046,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.5766666628580768,
+        "evidence_support": 0.4999999887982648,
+        "memory_usefulness": 0.0,
+        "answerability": 0.616666661065799,
+        "uncertainty": 0.21000000201631233
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_15",
+          "doc_11",
+          "doc_16",
+          "doc_5"
+        ],
+        "memory_ids": [],
+        "goal_slot_name": "pfrang_headquarters",
+        "goal_slot_role": "target_attribute",
+        "goal_terminal": true,
+        "diffusion_delta": 0.05731320956517871,
+        "diffusion_gain": 0.05731320956517871
+      }
+    },
+    {
+      "node_id": "kg_doc_11",
+      "node_type": "kg",
+      "content": "\"Love Around\" was filmed entirely on location in Taiwan. Asia FM 92.7, the radio station depicted in the drama is an actual free to air radio station in Taiwan with its headquarters and broadcasting station in Taoyuan City, Taoyuan County. The building and set used in the drama to depict the radio station is actually an office building located at 257 Xinhu 2nd Rd., Neihu District, Taipei City, which is only a few blocks from Sanlih's broadcasting headquarters in the Neihu District of Taipei. The resort that Zhou Zhen owns is the former \"Leo Ocean Resort\" now called \"EHR Hotels & Resorts Yilan\", located in Yilan County. The homes of both main lead characters are located in the newly developed area of Danshui District New Taipei City.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0,
+      "temperature": 0.0,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Love Around",
+        "raw_score": 0.09867150168156161,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_16",
+      "node_type": "kg",
+      "content": "Kathmandu(/ˌkɑːtmɑːnˈduː/; Nepali pronunciation: [kɑʈʰmɑɳɖu]) is the capital and largest municipality of Nepal. It also hosts the headquarters of the South Asian Association for Regional Cooperation (SAARC). It is the only city of Nepal with the administrative status of Mahanagar (Metropolitan City), as compared to Upa-Mahanagar (Sub-Metropolitan City) or Nagar (City). Kathmandu is the core of Nepal's largest urban agglomeration located in the Kathmandu Valley consisting of Lalitpur, Kirtipur, Madhyapur Thimi, Bhaktapur and a number of smaller communities. Kathmandu is also known informally as \"KTM\" or the \"tri-city\". According to the 2011 census, Kathmandu Metropolitan City has a population of 975,453 and measures 49.45 km2 (19.09 sq mi).",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0,
+      "temperature": 0.0,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Kathmandu",
+        "raw_score": 0.14684739621758322,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "state_3",
+      "node_type": "state",
+      "content": "What city is Yaxing Coach's headquarters located in?",
+      "depth": 1,
+      "parent_id": "state_1",
+      "value": 0.45346666171419087,
+      "temperature": 1.7705491673510547,
+      "expanded": true,
+      "visit_count": 2,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.5766666633203992,
+        "evidence_support": 0.49999999015803687,
+        "memory_usefulness": 0.0,
+        "answerability": 0.6166666617456851,
+        "uncertainty": 0.21000000177155337
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_19",
+          "doc_11",
+          "doc_16",
+          "doc_5"
+        ],
+        "memory_ids": [],
+        "goal_slot_name": "yaxing_headquarters",
+        "goal_slot_role": "target_attribute",
+        "goal_terminal": true,
+        "diffusion_delta": 0.06219405988800997,
+        "diffusion_gain": 0.06219405988800997,
+        "goal_retry": 1
+      }
+    },
+    {
+      "node_id": "state_4",
+      "node_type": "state",
+      "content": "What was the capital city of Yaxing Coach's headquarters location?",
+      "depth": 2,
+      "parent_id": "state_3",
+      "value": 0.5338226683830226,
+      "temperature": 0.5715593632741571,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.6526666630841502,
+        "evidence_support": 0.49999998946318697,
+        "memory_usefulness": 0.5139667251540021,
+        "answerability": 0.5566666613982602,
+        "uncertainty": 0.21000000189662632
+      },
+      "metadata": {
+        "kind": "bridge",
+        "evidence_ids": [
+          "doc_19",
+          "doc_12",
+          "doc_16",
+          "doc_1"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "diffusion_delta": -0.07422452099024779,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "kg_doc_12",
+      "node_type": "kg",
+      "content": "Archaeological discovery shows that \"Nanjing Man\" lived in more than 500 thousand years ago. Zun, a kind of wine vessel, was found to exist in Beiyinyangying culture of Nanjing in about 5000 years ago. In the late period of Shang dynasty, Taibo of Zhou came to Jiangnan and established Wu state, and the first stop is in Nanjing area according to some historians based on discoveries in Taowu and Hushu culture. According to legend,[which?] Fuchai, King of the State of Wu, founded a fort named Yecheng (冶城) in today's Nanjing area in 495 BC. Later in 473 BC, the State of Yue conquered Wu and constructed the fort of Yuecheng (越城) on the outskirts of the present-day Zhonghua Gate. In 333 BC, after eliminating the State of Yue, the State of Chu built Jinling Yi (金陵邑) in the western part of present-day Nanjing. It was renamed Moling (秣陵) during reign of Qin Shi Huang. Since then, the city experienced destruction and renewal many times.[citation needed] The area was successively part of Kuaiji, Zhang and Danyang prefectures in Qin and Han dynasty, and part of Yangzhou region which was established as the nation's 13 supervisory and administrative regions in the 5th year of Yuanfeng in Han dynasty (106 BC). Nanjing was later the capital city of Danyang Prefecture, and had been the capital city of Yangzhou for about 400 years from late Han to early Tang.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999812161472,
+      "temperature": 0.9999999812161472,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Nanjing",
+        "raw_score": 0.18171858822237974,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "state_5",
+      "node_type": "state",
+      "content": "How long had that capital city served as the capital?",
+      "depth": 2,
+      "parent_id": "state_3",
+      "value": 0.24654267368514693,
+      "temperature": 2.3585577398174284,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.4066666666666667,
+        "evidence_support": 0.0,
+        "memory_usefulness": 0.5139667251540021,
+        "answerability": 0.26666666666666666,
+        "uncertainty": 0.3
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "diffusion_delta": 1.1109144998459315,
+        "diffusion_gain": 1.1109144998459315
+      }
+    },
+    {
+      "node_id": "state_6",
+      "node_type": "state",
+      "content": "Is Nanjing the capital city of Jiangsu Province?",
+      "depth": 1,
+      "parent_id": "state_1",
+      "value": 0.7404696169304198,
+      "temperature": 1.0909158574362645,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.6943200066972565,
+        "evidence_support": 0.9950588432272247,
+        "memory_usefulness": 0.5139667251540021,
+        "answerability": 0.8375294216136123,
+        "uncertainty": 0.12088940821909955
+      },
+      "metadata": {
+        "kind": "comparison",
+        "evidence_ids": [
+          "doc_12",
+          "doc_15",
+          "doc_19",
+          "doc_16"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "goal_slot_name": "is_nanjing_capital_of_jiangsu",
+        "goal_slot_role": "final_boolean",
+        "goal_terminal": true,
+        "diffusion_delta": -0.06115145928319721,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "memory_mem_4",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'What city is Pfrang Association's headquarters located in' is Nanjing.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 1.0,
+      "temperature": 0.8636902391622093,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "intermediate_answer",
+        "target_question": "What city is Pfrang Association's headquarters located in?",
+        "target_question_norm": "what city is pfrang association s headquarters located in",
+        "relation_signature": "generic",
+        "answer_text": "Nanjing",
+        "support_score": 1.0,
+        "evidence_ids": [
+          "doc_15"
+        ],
+        "slot_name": "pfrang_headquarters",
+        "slot_type": "",
+        "slot_role": "target_attribute",
+        "terminal": true,
+        "path_terminal": false,
+        "composition_kind": "",
+        "derived_from_state": "state_2",
+        "diffusion_delta": 0.015566676003670898,
+        "diffusion_gain": 0.015566676003670898
+      }
+    },
+    {
+      "node_id": "state_7",
+      "node_type": "state",
+      "content": "What is the headquarters location of Pfrang Association?",
+      "depth": 2,
+      "parent_id": "state_6",
+      "value": 0.8071685468780734,
+      "temperature": 0.46000587642269397,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.6019999964124402,
+        "evidence_support": 0.4999999894483533,
+        "memory_usefulness": 0.0030125833753716635,
+        "answerability": 0.6299999947241767,
+        "uncertainty": 0.2100000018992964
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_15",
+          "doc_1",
+          "doc_16",
+          "doc_8"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "diffusion_delta": 0.00013233236105103519,
+        "diffusion_gain": 0.00013233236105103519
+      }
+    },
+    {
+      "node_id": "kg_doc_8",
+      "node_type": "kg",
+      "content": "Quán Sứ Temple (, is a Buddhist temple located at 73 Quan Su Street, Hanoi, Vietnam. The temple is the headquarters of the Buddhist Sangha of Vietnam.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0,
+      "temperature": 0.0,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Quán Sứ Temple",
+        "raw_score": 0.10403066735133207,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "state_8",
+      "node_type": "state",
+      "content": "What is the headquarters location of Yaxing Coach?",
+      "depth": 2,
+      "parent_id": "state_6",
+      "value": 0.8071685468780734,
+      "temperature": 0.6631514338195393,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.6019999967053158,
+        "evidence_support": 0.49999999030975223,
+        "memory_usefulness": 0.00477467956266413,
+        "answerability": 0.6299999951548761,
+        "uncertainty": 0.21000000174424457
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_19",
+          "doc_1",
+          "doc_8",
+          "doc_16"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "diffusion_delta": 0.11976009678224919,
+        "diffusion_gain": 0.11976009678224919
+      }
+    },
+    {
+      "node_id": "memory_mem_5",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'Is Nanjing the capital city of Jiangsu Province' is Yes.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999800941812,
+      "temperature": 0.5524358665850545,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "intermediate_answer",
+        "target_question": "Is Nanjing the capital city of Jiangsu Province?",
+        "target_question_norm": "is nanjing the capital city of jiangsu province",
+        "relation_signature": "generic",
+        "answer_text": "Yes",
+        "support_score": 0.9999999800941812,
+        "evidence_ids": [
+          "doc_12",
+          "doc_15",
+          "doc_19"
+        ],
+        "slot_name": "is_nanjing_capital_of_jiangsu",
+        "slot_type": "",
+        "slot_role": "final_boolean",
+        "terminal": true,
+        "path_terminal": false,
+        "composition_kind": "",
+        "derived_from_state": "state_6",
+        "diffusion_delta": -0.0476046875495284,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "state_9",
+      "node_type": "state",
+      "content": "What is the capital city of Jiangsu Province?",
+      "depth": 2,
+      "parent_id": "state_6",
+      "value": 0.8071685468780734,
+      "temperature": 0.530007226222336,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.628215362064397,
+        "evidence_support": 0.8006334178364616,
+        "memory_usefulness": 0.0020670826946223037,
+        "answerability": 0.7403167089182309,
+        "uncertainty": 0.1558859847894369
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_15",
+          "doc_19",
+          "doc_12",
+          "doc_16"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "diffusion_delta": -0.009593897446928734,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "state_10",
+      "node_type": "state",
+      "content": "What was the capital city of Yangzhou during which historical period?",
+      "depth": 2,
+      "parent_id": "state_3",
+      "value": 0.5932932483976195,
+      "temperature": 0.42408116731976125,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.647686345653512,
+        "evidence_support": 0.8579010166279764,
+        "memory_usefulness": 0.0043121402535146415,
+        "answerability": 0.6689505083139882,
+        "uncertainty": 0.14557781700696426
+      },
+      "metadata": {
+        "kind": "bridge",
+        "evidence_ids": [
+          "doc_12",
+          "doc_19",
+          "doc_16",
+          "doc_5"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "diffusion_delta": -0.020932938554951153,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "memory_mem_6",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'What city is Yaxing Coach's headquarters located in' is Yangzhou.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 1.0,
+      "temperature": 0.5461208656897499,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "intermediate_answer",
+        "target_question": "What city is Yaxing Coach's headquarters located in?",
+        "target_question_norm": "what city is yaxing coach s headquarters located in",
+        "relation_signature": "generic",
+        "answer_text": "Yangzhou",
+        "support_score": 1.0,
+        "evidence_ids": [
+          "doc_19"
+        ],
+        "slot_name": "yaxing_headquarters",
+        "slot_type": "generic",
+        "slot_role": "target_attribute",
+        "terminal": true,
+        "path_terminal": true,
+        "composition_kind": "path_terminal",
+        "derived_from_state": "state_3",
+        "diffusion_delta": -0.059273783529638635,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "state_12",
+      "node_type": "state",
+      "content": "What was the capital city of the administrative region where Yaxing Coach's headquarters is located?",
+      "depth": 3,
+      "parent_id": "state_4",
+      "value": 0.4776313206116484,
+      "temperature": 0.527901119007691,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.6273333295340653,
+        "evidence_support": 0.49999998882568225,
+        "memory_usefulness": 0.0031499408435980906,
+        "answerability": 0.6433333277461745,
+        "uncertainty": 0.2100000020113772
+      },
+      "metadata": {
+        "kind": "bridge",
+        "evidence_ids": [
+          "doc_19",
+          "doc_12",
+          "doc_5",
+          "doc_16"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "diffusion_delta": -0.10806174106783195,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "memory_mem_7",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'How long had Pfrang Association's headquarters location been the capitol city of Yaxing Coach's headquarters location' is Yangzhou.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 1.0,
+      "temperature": 1.28,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "answer_candidate",
+        "target_question": "How long had Pfrang Association's headquarters location been the capitol city of Yaxing Coach's headquarters location?",
+        "target_question_norm": "how long had pfrang association s headquarters location been the capitol city of yaxing coach s headquarters location",
+        "slot_key": "generic|generic|root_answer|yaxing coach s|how long had pfrang association s headquarters location been the capitol city of yaxing coach s headquarters location",
+        "slot_type": "generic",
+        "relation_signature": "generic",
+        "answer_text": "Yangzhou",
+        "support_score": 1.0,
+        "evidence_ids": [
+          "doc_19"
+        ],
+        "derived_from_state": "state_1",
+        "composed_from": [
+          "memory_mem_6"
+        ],
+        "slot_role": "target_attribute",
+        "terminal": true,
+        "coverage_count": 3,
+        "coverage_ratio": 1.0,
+        "composition_kind": "inferred_final_chain",
+        "final_chain_score": 0.9415789473684211,
+        "final_chain_strict": true,
+        "final_chain_source_node_id": "memory_mem_6",
+        "final_chain_predecessor_ids": [
+          "memory_mem_5"
+        ],
+        "final_chain_path_depth": 3,
+        "final_chain_dependency_backed": false,
+        "final_chain_textual_predecessor": true,
+        "final_chain_source_path_terminal": true
+      }
+    }
+  ],
+  "edges": [
+    {
+      "source": "state_1",
+      "target": "kg_doc_19",
+      "edge_type": "supports",
+      "weight": 0.9999999755330387
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_15",
+      "edge_type": "supports",
+      "weight": 0.924384344651537
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.0033078282512589243
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.00023639450030166724
+    },
+    {
+      "source": "state_1",
+      "target": "state_2",
+      "edge_type": "refines",
+      "weight": 1.0
+    },
+    {
+      "source": "state_1",
+      "target": "state_3",
+      "edge_type": "refines",
+      "weight": 1.0
+    },
+    {
+      "source": "state_1",
+      "target": "state_6",
+      "edge_type": "refines",
+      "weight": 0.9
+    },
+    {
+      "source": "state_1",
+      "target": "state_8",
+      "edge_type": "refines",
+      "weight": 1.0
+    },
+    {
+      "source": "state_1",
+      "target": "state_7",
+      "edge_type": "refines",
+      "weight": 1.0
+    },
+    {
+      "source": "state_1",
+      "target": "state_9",
+      "edge_type": "refines",
+      "weight": 0.84
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_7",
+      "edge_type": "derives",
+      "weight": 1.0
+    },
+    {
+      "source": "kg_doc_19",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.9999999755330387
+    },
+    {
+      "source": "kg_doc_19",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.9999999803160737
+    },
+    {
+      "source": "kg_doc_19",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.9999999789263739
+    },
+    {
+      "source": "kg_doc_19",
+      "target": "state_6",
+      "edge_type": "supports",
+      "weight": 0.5530042420724398
+    },
+    {
+      "source": "kg_doc_19",
+      "target": "state_8",
+      "edge_type": "supports",
+      "weight": 0.9999999806195045
+    },
+    {
+      "source": "kg_doc_19",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.5530042420724398
+    },
+    {
+      "source": "kg_doc_19",
+      "target": "state_9",
+      "edge_type": "supports",
+      "weight": 0.6012668572158401
+    },
+    {
+      "source": "kg_doc_19",
+      "target": "state_10",
+      "edge_type": "supports",
+      "weight": 0.7158020520398055
+    },
+    {
+      "source": "kg_doc_19",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.9999999803160737
+    },
+    {
+      "source": "kg_doc_19",
+      "target": "state_12",
+      "edge_type": "supports",
+      "weight": 0.9999999776513645
+    },
+    {
+      "source": "kg_doc_15",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.924384344651537
+    },
+    {
+      "source": "kg_doc_15",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.9999999775965296
+    },
+    {
+      "source": "kg_doc_15",
+      "target": "state_6",
+      "edge_type": "supports",
+      "weight": 0.9901177063602682
+    },
+    {
+      "source": "kg_doc_15",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.9999999775965296
+    },
+    {
+      "source": "kg_doc_15",
+      "target": "state_7",
+      "edge_type": "supports",
+      "weight": 0.9999999788967066
+    },
+    {
+      "source": "kg_doc_15",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.9901177063602682
+    },
+    {
+      "source": "kg_doc_15",
+      "target": "state_9",
+      "edge_type": "supports",
+      "weight": 0.999999978457083
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "state_7",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "state_8",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "state_10",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "state_12",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.0033078282512589243
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_4",
+      "edge_type": "recalls",
+      "weight": 0.003803938393878189
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_5",
+      "edge_type": "recalls",
+      "weight": 0.9599998077388796
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_6",
+      "edge_type": "recalls",
+      "weight": 0.008915931566690193
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_7",
+      "edge_type": "recalls",
+      "weight": 0.005625505724781084
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_8",
+      "edge_type": "recalls",
+      "weight": 0.008915931566690193
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "memory_mem_5",
+      "edge_type": "recalls",
+      "weight": 0.008915931566690193
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_9",
+      "edge_type": "recalls",
+      "weight": 0.0038587256664384547
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_10",
+      "edge_type": "recalls",
+      "weight": 0.008049685828635756
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_12",
+      "edge_type": "recalls",
+      "weight": 0.0058796887456694065
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.00023639450030166724
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_4",
+      "edge_type": "recalls",
+      "weight": 0.0002718490947820292
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_5",
+      "edge_type": "recalls",
+      "weight": 0.0679336425691247
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_6",
+      "edge_type": "recalls",
+      "weight": 0.000633427558638067
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_7",
+      "edge_type": "recalls",
+      "weight": 0.00039966102596224315
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_8",
+      "edge_type": "recalls",
+      "weight": 0.000633427558638067
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "memory_mem_5",
+      "edge_type": "recalls",
+      "weight": 0.000633427558638067
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_9",
+      "edge_type": "recalls",
+      "weight": 0.00027543972280615314
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_10",
+      "edge_type": "recalls",
+      "weight": 0.000574594678393527
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_12",
+      "edge_type": "recalls",
+      "weight": 0.00042019294152677506
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_15",
+      "edge_type": "supports",
+      "weight": 0.9999999775965296
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_11",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_16",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_2",
+      "target": "state_3",
+      "edge_type": "refines",
+      "weight": 0.84
+    },
+    {
+      "source": "state_2",
+      "target": "memory_mem_4",
+      "edge_type": "derives",
+      "weight": 1.0
+    },
+    {
+      "source": "kg_doc_11",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_11",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_11",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_11",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_16",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_16",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_16",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_16",
+      "target": "state_6",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_16",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_16",
+      "target": "state_7",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_16",
+      "target": "state_8",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_16",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_16",
+      "target": "state_9",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_16",
+      "target": "state_10",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_16",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_16",
+      "target": "state_12",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_19",
+      "edge_type": "supports",
+      "weight": 0.9999999803160737
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_11",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_16",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_3",
+      "target": "state_2",
+      "edge_type": "refines",
+      "weight": 0.9
+    },
+    {
+      "source": "state_3",
+      "target": "state_4",
+      "edge_type": "refines",
+      "weight": 0.8
+    },
+    {
+      "source": "state_3",
+      "target": "state_5",
+      "edge_type": "refines",
+      "weight": 0.7
+    },
+    {
+      "source": "state_3",
+      "target": "state_10",
+      "edge_type": "refines",
+      "weight": 0.7
+    },
+    {
+      "source": "state_3",
+      "target": "memory_mem_6",
+      "edge_type": "derives",
+      "weight": 1.0
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_19",
+      "edge_type": "supports",
+      "weight": 0.9999999789263739
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_12",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_16",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_4",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.003803938393878189
+    },
+    {
+      "source": "state_4",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.0002718490947820292
+    },
+    {
+      "source": "state_4",
+      "target": "state_8",
+      "edge_type": "refines",
+      "weight": 1.0
+    },
+    {
+      "source": "state_4",
+      "target": "state_12",
+      "edge_type": "refines",
+      "weight": 0.9
+    },
+    {
+      "source": "kg_doc_12",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_12",
+      "target": "state_6",
+      "edge_type": "supports",
+      "weight": 0.9999999800941812
+    },
+    {
+      "source": "kg_doc_12",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.9999999800941812
+    },
+    {
+      "source": "kg_doc_12",
+      "target": "state_9",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_12",
+      "target": "state_10",
+      "edge_type": "supports",
+      "weight": 0.9999999812161472
+    },
+    {
+      "source": "kg_doc_12",
+      "target": "state_12",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_5",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.9599998077388796
+    },
+    {
+      "source": "state_5",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.0679336425691247
+    },
+    {
+      "source": "state_6",
+      "target": "kg_doc_12",
+      "edge_type": "supports",
+      "weight": 0.9999999800941812
+    },
+    {
+      "source": "state_6",
+      "target": "kg_doc_15",
+      "edge_type": "supports",
+      "weight": 0.9901177063602682
+    },
+    {
+      "source": "state_6",
+      "target": "kg_doc_19",
+      "edge_type": "supports",
+      "weight": 0.5530042420724398
+    },
+    {
+      "source": "state_6",
+      "target": "kg_doc_16",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_6",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.008915931566690193
+    },
+    {
+      "source": "state_6",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.000633427558638067
+    },
+    {
+      "source": "state_6",
+      "target": "state_7",
+      "edge_type": "refines",
+      "weight": 1.0
+    },
+    {
+      "source": "state_6",
+      "target": "state_8",
+      "edge_type": "refines",
+      "weight": 1.0
+    },
+    {
+      "source": "state_6",
+      "target": "memory_mem_5",
+      "edge_type": "derives",
+      "weight": 0.9999999800941812
+    },
+    {
+      "source": "state_6",
+      "target": "state_9",
+      "edge_type": "refines",
+      "weight": 0.84
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "state_2",
+      "edge_type": "recalls",
+      "weight": 1.0
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_15",
+      "edge_type": "supports",
+      "weight": 0.9999999775965296
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_11",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_16",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_7",
+      "target": "kg_doc_15",
+      "edge_type": "supports",
+      "weight": 0.9999999788967066
+    },
+    {
+      "source": "state_7",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_7",
+      "target": "kg_doc_16",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_7",
+      "target": "kg_doc_8",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_7",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.005625505724781084
+    },
+    {
+      "source": "state_7",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.00039966102596224315
+    },
+    {
+      "source": "kg_doc_8",
+      "target": "state_7",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_8",
+      "target": "state_8",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_8",
+      "target": "kg_doc_19",
+      "edge_type": "supports",
+      "weight": 0.9999999806195045
+    },
+    {
+      "source": "state_8",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_8",
+      "target": "kg_doc_8",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_8",
+      "target": "kg_doc_16",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_8",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.008915931566690193
+    },
+    {
+      "source": "state_8",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.000633427558638067
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "state_6",
+      "edge_type": "recalls",
+      "weight": 0.9999999800941812
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_12",
+      "edge_type": "supports",
+      "weight": 0.9999999800941812
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_15",
+      "edge_type": "supports",
+      "weight": 0.9901177063602682
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_19",
+      "edge_type": "supports",
+      "weight": 0.5530042420724398
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_16",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.008915931566690193
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.000633427558638067
+    },
+    {
+      "source": "state_9",
+      "target": "kg_doc_15",
+      "edge_type": "supports",
+      "weight": 0.999999978457083
+    },
+    {
+      "source": "state_9",
+      "target": "kg_doc_19",
+      "edge_type": "supports",
+      "weight": 0.6012668572158401
+    },
+    {
+      "source": "state_9",
+      "target": "kg_doc_12",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_9",
+      "target": "kg_doc_16",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_9",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.0038587256664384547
+    },
+    {
+      "source": "state_9",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.00027543972280615314
+    },
+    {
+      "source": "state_10",
+      "target": "kg_doc_12",
+      "edge_type": "supports",
+      "weight": 0.9999999812161472
+    },
+    {
+      "source": "state_10",
+      "target": "kg_doc_19",
+      "edge_type": "supports",
+      "weight": 0.7158020520398055
+    },
+    {
+      "source": "state_10",
+      "target": "kg_doc_16",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_10",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_10",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.008049685828635756
+    },
+    {
+      "source": "state_10",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.000574594678393527
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "state_3",
+      "edge_type": "recalls",
+      "weight": 1.0
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_19",
+      "edge_type": "supports",
+      "weight": 0.9999999803160737
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_11",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_16",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "memory_mem_7",
+      "edge_type": "derives",
+      "weight": 1.0
+    },
+    {
+      "source": "state_12",
+      "target": "kg_doc_19",
+      "edge_type": "supports",
+      "weight": 0.9999999776513645
+    },
+    {
+      "source": "state_12",
+      "target": "kg_doc_12",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_12",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_12",
+      "target": "kg_doc_16",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_12",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.0058796887456694065
+    },
+    {
+      "source": "state_12",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.00042019294152677506
+    },
+    {
+      "source": "memory_mem_7",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 1.0
+    }
+  ]
+}

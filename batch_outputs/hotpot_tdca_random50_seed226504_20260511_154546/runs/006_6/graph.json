@@ -1,0 +1,989 @@
+{
+  "nodes": [
+    {
+      "node_id": "state_1",
+      "node_type": "state",
+      "content": "A wide receiver for the Toronto Argonauts played college football for a team that represents the University of Oklahoma, which belongs to what conference?",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.6952708310435071,
+      "temperature": 0.3312652322184048,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.8794847425432653,
+        "evidence_support": 0.6455433604213682,
+        "memory_usefulness": 0.5552784339956205,
+        "answerability": 0.722771680210684,
+        "uncertainty": 0.18380219512415372
+      },
+      "metadata": {
+        "diffusion_delta": 0.005925475359239263,
+        "diffusion_gain": 0.005925475359239263
+      }
+    },
+    {
+      "node_id": "kg_doc_4",
+      "node_type": "kg",
+      "content": "The Oklahoma Sooners football program is a college football team that represents the University of Oklahoma (variously \"Oklahoma\" or \"OU\"). The team is currently a member of the Big 12 Conference, which is in Division I Football Bowl Subdivision (formerly Division I-A) of the National Collegiate Athletic Association (NCAA). The program began in 1895 and is one of the most successful programs since World War II with the most wins (606) and the highest winning percentage (.762) since 1945. The program has 7 national championships, 45 conference championships, 154 All-Americans (76 consensus), and five Heisman Trophy winners. In addition, the school has had 23 members (five coaches and 18 players) inducted into the College Football Hall of Fame and holds the record for the longest winning streak in Division I history with 47 straight victories, a record that stands to this day. Oklahoma is also the only program that has had four coaches with 100+ wins. They became the sixth NCAA FBS team to win 850 games when they defeated the Kansas Jayhawks on November 22, 2014. The Sooners play their home games at Gaylord Family Oklahoma Memorial Stadium in Norman, Oklahoma. Lincoln Riley is currently the team's head coach.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999969120653,
+      "temperature": 0.9999999969120653,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Oklahoma Sooners football",
+        "raw_score": 8.837110976103647,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_10",
+      "node_type": "kg",
+      "content": "The Toronto Argonauts are a professional Canadian football team competing in the East Division of the Canadian Football League (CFL). Based in Toronto, Ontario, the team was founded in 1873, and is the oldest existing professional sports team in North America still using its original name. The team's origins date back to a modified version of rugby football that emerged in North America in the latter half of the nineteenth century. The Argonauts played their home games at Rogers Centre from 1989 until 2016 when the team moved to BMO Field, the fifth stadium site to host the team.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.3065563213427936,
+      "temperature": 0.3065563213427936,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Toronto Argonauts",
+        "raw_score": 5.92169629143967,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_5",
+      "node_type": "kg",
+      "content": "Rashaun Dorrell Woods (born October 17, 1980) is a former American college and professional football player who was a wide receiver in the National Football League (NFL) and Canadian Football League (CFL) for two seasons during the early 2000s. Woods played college football for Oklahoma State University, and received All-American honors. He was selected by the San Francisco 49ers in the first round of the 2004 NFL Draft, and played professionally for the NFL's 49ers and the CFL's Toronto Argonauts.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.1178138853683783,
+      "temperature": 0.1178138853683783,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Rashaun Woods",
+        "raw_score": 4.153842648711366,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_3",
+      "node_type": "kg",
+      "content": "Emanuel Tolbert (born December 2, 1958) is a former American college and professional football player who was a slotback and wide receiver in the Canadian Football League (CFL) for eleven seasons during the 1980s and early 1990s. Tolbert played college football for Southern Methodist University, where he was an All-American. He played professionally for the Saskatchewan Roughriders, Toronto Argonauts, Calgary Stampeders and British Columbia Lions of the CFL, and was a part of the Argonauts' 1983 Grey Cup victory.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0,
+      "temperature": 0.0,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Emanuel Tolbert",
+        "raw_score": 4.222389000839345,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "memory_mem_1",
+      "node_type": "memory",
+      "content": "Template: for compositional multi-hop questions, first solve the intermediate entity and then ask for the final attribute.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9599999787312261,
+      "temperature": 1.055718947484465,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.96,
+        "tag": "compositional_template",
+        "memory_kind": "template",
+        "raw_score": 0.12151214741693925,
+        "source": "memory",
+        "diffusion_delta": -0.03031863855726291,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "memory_mem_3",
+      "node_type": "memory",
+      "content": "Template: when evidence already grounds the answer, switch from branching to short verification and synthesis.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.1505568892600149,
+      "temperature": 0.2678093979064534,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.88,
+        "tag": "verification_then_stop",
+        "memory_kind": "template",
+        "raw_score": 0.6577193461998077,
+        "source": "memory",
+        "diffusion_delta": -0.11847486379219413,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "state_2",
+      "node_type": "state",
+      "content": "Which college football team represents the University of Oklahoma?",
+      "depth": 1,
+      "parent_id": "state_1",
+      "value": 0.5410129099145045,
+      "temperature": 1.7124733501699945,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.6303434672077383,
+        "evidence_support": 0.5514303657370454,
+        "memory_usefulness": 0.5139667251540021,
+        "answerability": 0.5614294685828084,
+        "uncertainty": 0.20074253416733182
+      },
+      "metadata": {
+        "kind": "bridge",
+        "evidence_ids": [
+          "doc_4",
+          "doc_2",
+          "doc_7",
+          "doc_1"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "goal_slot_name": "college_team",
+        "goal_slot_role": "bridge_entity",
+        "goal_terminal": false,
+        "diffusion_delta": 0.17611791453312353,
+        "diffusion_gain": 0.17611791453312353
+      }
+    },
+    {
+      "node_id": "kg_doc_2",
+      "node_type": "kg",
+      "content": "Michael Eben (born January 29, 1946) is a former wide receiver who played ten seasons in the Canadian Football League, mainly for the Toronto Argonauts. Eben also played for the Hamilton Tiger-Cats, Ottawa Rough Riders and Edmonton Eskimos. Eben was initially drafted by the BC Lions in 1968 as the first overall draft pick in the CFL draft. Eben played college football at the University of Toronto and won the Hec Crighton Trophy in 1967 as the most outstanding Canadian university player. While playing professional football he earned his doctorate in German literature from the University of Toronto.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.10286073586439395,
+      "temperature": 0.10286073586439395,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Mike Eben",
+        "raw_score": 1.6968982766902594,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_7",
+      "node_type": "kg",
+      "content": "Justin Brown (born March 10, 1991) is a wide receiver for the Toronto Argonauts of the Canadian Football League (CFL). Before his 2013 draft selection by the Pittsburgh Steelers, he played college football at Oklahoma for his senior season after transferring from Penn State. After being drafted, Brown was on the Steelers practice squad for his rookie season. He played eight games during the 2014 season for a total of 12 passes for 94 yards and one lost fumble. Following the 2014 NFL season, Brown was waived by the Steelers. On February 3, 2015, the Buffalo Bills claimed Brown off waivers. On August 9, 2015, Brown was waived/injured by the Bills. On August 13, 2015, he reached an injury settlement with the Bills and was released.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.06768002650148841,
+      "temperature": 0.06768002650148841,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Justin Brown (wide receiver)",
+        "raw_score": 1.8421028854212673,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_1",
+      "node_type": "kg",
+      "content": "Mike Bradwell (born July 11, 1986) is a former Canadian football wide receiver who played for the Toronto Argonauts of the Canadian Football League. He was drafted in the second round of the 2008 CFL Draft by the Toronto Argonauts. He began playing football in his final year at Leaside High School and played CIS football with McMaster University.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0,
+      "temperature": 0.0,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Mike Bradwell",
+        "raw_score": 1.4540565463663886,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "memory_mem_4",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'Which college football team represents the University of Oklahoma' is Oklahoma Sooners.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 1.0,
+      "temperature": 1.7833720307221466,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "intermediate_answer",
+        "target_question": "Which college football team represents the University of Oklahoma?",
+        "target_question_norm": "which college football team represents the university of oklahoma",
+        "relation_signature": "generic",
+        "answer_text": "Oklahoma Sooners",
+        "support_score": 1.0,
+        "evidence_ids": [
+          "doc_4"
+        ],
+        "slot_name": "college_team",
+        "slot_role": "bridge_entity",
+        "terminal": false,
+        "derived_from_state": "state_2",
+        "diffusion_delta": 0.19646042639653727,
+        "diffusion_gain": 0.19646042639653727
+      }
+    },
+    {
+      "node_id": "memory_mem_2",
+      "node_type": "memory",
+      "content": "Template: for comparison questions, split the problem into one sub-question per entity before comparing them.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.05882539338667081,
+      "temperature": 0.011146363363973276,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.9,
+        "tag": "comparison_template",
+        "memory_kind": "template",
+        "raw_score": 1.6081487297956671,
+        "source": "memory",
+        "diffusion_delta": -0.00776268316701745,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "state_3",
+      "node_type": "state",
+      "content": "What conference is the University of Oklahoma's football team in?",
+      "depth": 1,
+      "parent_id": "state_1",
+      "value": 0.4919139040830396,
+      "temperature": 0.7822034527270662,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.6147902644586962,
+        "evidence_support": 0.5589069402846806,
+        "memory_usefulness": 0.0025835580823623415,
+        "answerability": 0.6556439463328164,
+        "uncertainty": 0.19939675074875748
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_4",
+          "doc_5",
+          "doc_10",
+          "doc_2"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "diffusion_delta": 0.12818257901771168,
+        "diffusion_gain": 0.12818257901771168
+      }
+    },
+    {
+      "node_id": "state_4",
+      "node_type": "state",
+      "content": "What conference does the University of Oklahoma's football team belong to?",
+      "depth": 1,
+      "parent_id": "state_1",
+      "value": 0.5360967533779044,
+      "temperature": 0.6954406254234534,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.6649717168083982,
+        "evidence_support": 0.6532781586801627,
+        "memory_usefulness": 0.04591700894086407,
+        "answerability": 0.6123533650543671,
+        "uncertainty": 0.1824099314375707
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_4",
+          "doc_10",
+          "doc_5",
+          "doc_2"
+        ],
+        "memory_ids": [
+          "mem_3",
+          "mem_1"
+        ],
+        "diffusion_delta": 0.5397481504255826,
+        "diffusion_gain": 0.5397481504255826
+      }
+    },
+    {
+      "node_id": "memory_mem_5",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'What conference is the University of Oklahoma's football team in' is Big 12 Conference.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.874,
+      "temperature": 0.7615595575433046,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "derived_fact",
+        "target_question": "What conference is the University of Oklahoma's football team in?",
+        "target_question_norm": "what conference is the university of oklahoma s football team in",
+        "relation_signature": "generic",
+        "answer_text": "Big 12 Conference",
+        "support_score": 0.5589069402846806,
+        "evidence_ids": [
+          "doc_4"
+        ],
+        "slot_name": "conference",
+        "slot_role": "target_attribute",
+        "terminal": true,
+        "derived_from_state": "state_3",
+        "diffusion_delta": 0.05715792637046113,
+        "diffusion_gain": 0.05715792637046113
+      }
+    },
+    {
+      "node_id": "memory_mem_6",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'What conference does the University of Oklahoma's football team belong to' is Big 12 Conference.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.874,
+      "temperature": 0.776487076606348,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "derived_fact",
+        "target_question": "What conference does the University of Oklahoma's football team belong to?",
+        "target_question_norm": "what conference does the university of oklahoma s football team belong to",
+        "relation_signature": "generic",
+        "answer_text": "Big 12 Conference",
+        "support_score": 0.6532781586801627,
+        "evidence_ids": [
+          "doc_4"
+        ],
+        "slot_name": "",
+        "slot_role": "",
+        "terminal": false,
+        "derived_from_state": "state_4",
+        "diffusion_delta": -0.3045392412804112,
+        "diffusion_gain": 0.0
+      }
+    }
+  ],
+  "edges": [
+    {
+      "source": "state_1",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.9999999969120653
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_10",
+      "edge_type": "supports",
+      "weight": 0.2910867239306711
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.10853919630255318
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.11849913096916712
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.1505568892600149
+    },
+    {
+      "source": "state_1",
+      "target": "state_2",
+      "edge_type": "refines",
+      "weight": 1.0
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_2",
+      "edge_type": "recalls",
+      "weight": 0.05882539338667081
+    },
+    {
+      "source": "state_1",
+      "target": "state_3",
+      "edge_type": "refines",
+      "weight": 0.94
+    },
+    {
+      "source": "state_1",
+      "target": "state_4",
+      "edge_type": "refines",
+      "weight": 1.0
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.9999999969120653
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.9999999956096968
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.9999999956096968
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.9999999952009828
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.9999999960175319
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.9999999952009828
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.9999999960175319
+    },
+    {
+      "source": "kg_doc_10",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.2910867239306711
+    },
+    {
+      "source": "kg_doc_10",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.05421170860447907
+    },
+    {
+      "source": "kg_doc_10",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.3065563213427936
+    },
+    {
+      "source": "kg_doc_10",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.05421170860447907
+    },
+    {
+      "source": "kg_doc_10",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.3065563213427936
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.10853919630255318
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.1178138853683783
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.10435171740533646
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.1178138853683783
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.10435171740533646
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.11849913096916712
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_2",
+      "edge_type": "recalls",
+      "weight": 0.9599998077388796
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "memory_mem_4",
+      "edge_type": "recalls",
+      "weight": 0.9599998077388796
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_3",
+      "edge_type": "recalls",
+      "weight": 0.004825318314899874
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_4",
+      "edge_type": "recalls",
+      "weight": 0.003404280426322341
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "memory_mem_5",
+      "edge_type": "recalls",
+      "weight": 0.004825318314899874
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "memory_mem_6",
+      "edge_type": "recalls",
+      "weight": 0.003404280426322341
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.1505568892600149
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_2",
+      "edge_type": "recalls",
+      "weight": 0.0679336425691247
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "memory_mem_4",
+      "edge_type": "recalls",
+      "weight": 0.0679336425691247
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_3",
+      "edge_type": "recalls",
+      "weight": 0.000341797849824809
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_4",
+      "edge_type": "recalls",
+      "weight": 0.05445551574469976
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "memory_mem_5",
+      "edge_type": "recalls",
+      "weight": 0.000341797849824809
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "memory_mem_6",
+      "edge_type": "recalls",
+      "weight": 0.05445551574469976
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.9999999956096968
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.10286073586439395
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.06768002650148841
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_2",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.9599998077388796
+    },
+    {
+      "source": "state_2",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.0679336425691247
+    },
+    {
+      "source": "state_2",
+      "target": "memory_mem_4",
+      "edge_type": "derives",
+      "weight": 1.0
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.10286073586439395
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.10286073586439395
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.06768002650148841
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.06768002650148841
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "state_2",
+      "edge_type": "recalls",
+      "weight": 1.0
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.9999999956096968
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.10286073586439395
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.06768002650148841
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.9599998077388796
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.0679336425691247
+    },
+    {
+      "source": "memory_mem_2",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.05882539338667081
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.9999999952009828
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.1178138853683783
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_10",
+      "edge_type": "supports",
+      "weight": 0.05421170860447907
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_3",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.004825318314899874
+    },
+    {
+      "source": "state_3",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.000341797849824809
+    },
+    {
+      "source": "state_3",
+      "target": "memory_mem_5",
+      "edge_type": "derives",
+      "weight": 0.95
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.9999999960175319
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_10",
+      "edge_type": "supports",
+      "weight": 0.3065563213427936
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.10435171740533646
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_4",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.05445551574469976
+    },
+    {
+      "source": "state_4",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.003404280426322341
+    },
+    {
+      "source": "state_4",
+      "target": "memory_mem_6",
+      "edge_type": "derives",
+      "weight": 0.95
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "state_3",
+      "edge_type": "recalls",
+      "weight": 0.95
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.9999999952009828
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.1178138853683783
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_10",
+      "edge_type": "supports",
+      "weight": 0.05421170860447907
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.004825318314899874
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.000341797849824809
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "state_4",
+      "edge_type": "recalls",
+      "weight": 0.95
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.9999999960175319
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_10",
+      "edge_type": "supports",
+      "weight": 0.3065563213427936
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.10435171740533646
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.05445551574469976
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.003404280426322341
+    }
+  ]
+}

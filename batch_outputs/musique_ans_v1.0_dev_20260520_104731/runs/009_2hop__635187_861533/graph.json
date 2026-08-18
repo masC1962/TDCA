@@ -1,0 +1,1031 @@
+{
+  "nodes": [
+    {
+      "node_id": "state_1",
+      "node_type": "state",
+      "content": "What province shares a border with the province where Lago District is located?",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.7533812880557593,
+      "temperature": 0.29924556447089623,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.91061167637654,
+        "evidence_support": 0.7370931658133526,
+        "memory_usefulness": 0.5139667251540021,
+        "answerability": 0.8685465829066762,
+        "uncertainty": 0.1673232301535965
+      },
+      "metadata": {
+        "diffusion_delta": -0.058084010533054786,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "kg_doc_17",
+      "node_type": "kg",
+      "content": "Lago District is a district of Niassa Province in north-western Mozambique. The principal town is Metangula. Lago District is bordered to the west by Lake Nyasa, on the south by Lichinga, on the east by Sanga District. Lago shares its northern boundary with Tanzania.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.999999996535162,
+      "temperature": 0.999999996535162,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Lago District",
+        "raw_score": 4.708885067995774,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_4",
+      "node_type": "kg",
+      "content": "Swan Miara is a village and union council (an administrative subdivision) of Mansehra District in Khyber-Pakhtunkhwa province of Pakistan. It is located in the south of the district where it borders Abbottabad District.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.4741863350915431,
+      "temperature": 0.4741863350915431,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Swan Miara",
+        "raw_score": 9.742498836793317,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_11",
+      "node_type": "kg",
+      "content": "Lago Verde (Italian for \"green lake\") is a lake which is located in Italy, close to the French border and the Queyras valley.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.4106200189115306,
+      "temperature": 0.4106200189115306,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Lago Verde (Queyras)",
+        "raw_score": 3.286133417214717,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_1",
+      "node_type": "kg",
+      "content": "Niassa Reserve is a nature reserve in Cabo Delgado Province and Niassa Province, Mozambique. Covering over , it is the largest protected area in the country. The reserve is part of the Trans-Frontier Conservation Area and links to the Tanzanian Lukwika-Lumesule Game Reserve. It will connect to the Lake Niassa Reserve when it is completed.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999964888497,
+      "temperature": 0.9999999964888497,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Niassa Reserve",
+        "raw_score": 9.136994559905974,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "memory_mem_1",
+      "node_type": "memory",
+      "content": "Template: for compositional multi-hop questions, first solve the intermediate entity and then ask for the final attribute.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9599998077388796,
+      "temperature": 0.24846776391067146,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.96,
+        "tag": "compositional_template",
+        "memory_kind": "template",
+        "raw_score": 0.09987153596429008,
+        "source": "memory",
+        "diffusion_delta": -0.19868354705666372,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "memory_mem_3",
+      "node_type": "memory",
+      "content": "Template: when evidence already grounds the answer, switch from branching to short verification and synthesis.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0679336425691247,
+      "temperature": 0.01777304905551994,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.88,
+        "tag": "verification_then_stop",
+        "memory_kind": "template",
+        "raw_score": 0.0744762613582406,
+        "source": "memory",
+        "diffusion_delta": -0.014200442617884255,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "state_2",
+      "node_type": "state",
+      "content": "What province is Lago District located in?",
+      "depth": 1,
+      "parent_id": "state_1",
+      "value": 0.5288072172220202,
+      "temperature": 1.7334222876038803,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.6708156873121758,
+        "evidence_support": 0.5906343744475756,
+        "memory_usefulness": 0.0,
+        "answerability": 0.6953171872237878,
+        "uncertainty": 0.1936858125994364
+      },
+      "metadata": {
+        "kind": "bridge",
+        "evidence_ids": [
+          "doc_17",
+          "doc_11",
+          "doc_4",
+          "doc_1"
+        ],
+        "memory_ids": [],
+        "goal_slot_name": "province_of_lago_district",
+        "goal_slot_role": "bridge_entity",
+        "goal_terminal": false,
+        "diffusion_delta": 0.017985553346079985,
+        "diffusion_gain": 0.017985553346079985
+      }
+    },
+    {
+      "node_id": "state_3",
+      "node_type": "state",
+      "content": "What provinces border Niassa Province?",
+      "depth": 2,
+      "parent_id": "state_2",
+      "value": 0.6026693971834315,
+      "temperature": 1.679117900936951,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.6673441872861023,
+        "evidence_support": 0.8598358449591245,
+        "memory_usefulness": 0.0,
+        "answerability": 0.6799179224795623,
+        "uncertainty": 0.1452295479073576
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_1",
+          "doc_17",
+          "doc_11",
+          "doc_4"
+        ],
+        "memory_ids": [],
+        "diffusion_delta": 0.1328415409708823,
+        "diffusion_gain": 0.1328415409708823
+      }
+    },
+    {
+      "node_id": "memory_mem_4",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'What province is Lago District located in' is Niassa Province.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 1.0,
+      "temperature": 1.0775820248359,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "intermediate_answer",
+        "target_question": "What province is Lago District located in?",
+        "target_question_norm": "what province is lago district located in",
+        "relation_signature": "generic",
+        "answer_text": "Niassa Province",
+        "support_score": 1.0,
+        "evidence_ids": [
+          "doc_17"
+        ],
+        "slot_name": "province_of_lago_district",
+        "slot_role": "bridge_entity",
+        "terminal": false,
+        "derived_from_state": "state_2",
+        "diffusion_delta": 0.056789030755892256,
+        "diffusion_gain": 0.056789030755892256
+      }
+    },
+    {
+      "node_id": "state_4",
+      "node_type": "state",
+      "content": "Which provinces border Niassa Province in Mozambique?",
+      "depth": 3,
+      "parent_id": "state_3",
+      "value": 0.6095607219713438,
+      "temperature": 1.5510782830604333,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.6503788661968539,
+        "evidence_support": 0.9030750966574133,
+        "memory_usefulness": 0.0,
+        "answerability": 0.68487088166204,
+        "uncertainty": 0.13744648260166561
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_1",
+          "doc_17",
+          "doc_11",
+          "doc_16"
+        ],
+        "memory_ids": [],
+        "diffusion_delta": 0.37802986778926995,
+        "diffusion_gain": 0.37802986778926995
+      }
+    },
+    {
+      "node_id": "kg_doc_16",
+      "node_type": "kg",
+      "content": "Gallaratese is a district (\"quartiere\") of Milan, Italy, part of the Zone 8 administrative division of the city. It is located about 7 km north-west of the city centre. It borders on the \"comune\" of Pero to the north and on the districts of Trenno to the west and Lampugnano to the south; to the east, its ideal border is the eponymous street, which in turn is named after Gallarate, the town it leads to.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0,
+      "temperature": 0.0,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Gallaratese",
+        "raw_score": 2.9031767643153725,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "memory_mem_5",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'What provinces border Niassa Province' is Cabo Delgado Province.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999953969113,
+      "temperature": 0.8367085634175188,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "intermediate_answer",
+        "target_question": "What provinces border Niassa Province?",
+        "target_question_norm": "what provinces border niassa province",
+        "relation_signature": "generic",
+        "answer_text": "Cabo Delgado Province",
+        "support_score": 0.9999999953969113,
+        "evidence_ids": [
+          "doc_1",
+          "doc_17"
+        ],
+        "slot_name": "bordering_provinces",
+        "slot_role": "target_attribute",
+        "terminal": true,
+        "derived_from_state": "state_3",
+        "diffusion_delta": 0.058286063250586384,
+        "diffusion_gain": 0.058286063250586384
+      }
+    },
+    {
+      "node_id": "state_5",
+      "node_type": "state",
+      "content": "What is the location of Lago District?",
+      "depth": 4,
+      "parent_id": "state_4",
+      "value": 0.5720392075673076,
+      "temperature": 1.0660451420907608,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.6781387356751724,
+        "evidence_support": 0.7053100068877618,
+        "memory_usefulness": 0.0032823230671047312,
+        "answerability": 0.7359883367772142,
+        "uncertainty": 0.17304419876020288
+      },
+      "metadata": {
+        "kind": "bridge",
+        "evidence_ids": [
+          "doc_17",
+          "doc_11",
+          "doc_5",
+          "doc_2"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "diffusion_delta": 0.800114729715539,
+        "diffusion_gain": 0.800114729715539
+      }
+    },
+    {
+      "node_id": "kg_doc_5",
+      "node_type": "kg",
+      "content": "Nyuksensky District () is an administrative and municipal district (raion), one of the twenty-six in Vologda Oblast, Russia. It is located in the northeast of the oblast and borders with Ustyansky District of Arkhangelsk Oblast in the north, Velikoustyugsky District in the east, Kichmengsko-Gorodetsky District in the southeast, Babushkinsky District in the south, Totemsky District in the southwest, and with Tarnogsky District in the west. The area of the district is . Its administrative center is the rural locality (a \"selo\") of Nyuksenitsa. District's population: 11,714 (2002 Census); The population of Nyuksenitsa accounts for 43.7% of the district's total population.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.23747774924762147,
+      "temperature": 0.23747774924762147,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Nyuksensky District",
+        "raw_score": 0.8380374257652435,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_2",
+      "node_type": "kg",
+      "content": "Michurinsky District () is an administrative and municipal district (raion), one of the twenty-three in Tambov Oblast, Russia. It is located in the northwest of the oblast. The district borders with Pervomaysky District in the north, Nikiforovsky District in the east, Petrovsky District in the south, and with Dobrovsky District of Lipetsk Oblast in the west. The area of the district is . Its administrative center is the town of Michurinsk (which is not administratively a part of the district). Population: 34,245 (2010 Census);",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0,
+      "temperature": 0.0,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Michurinsky District",
+        "raw_score": 0.8506507049097431,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "memory_mem_6",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'Which provinces border Niassa Province in Mozambique' is Cabo Delgado Province.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999964888497,
+      "temperature": 0.8734800557007285,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "intermediate_answer",
+        "target_question": "Which provinces border Niassa Province in Mozambique?",
+        "target_question_norm": "which provinces border niassa province in mozambique",
+        "relation_signature": "generic",
+        "answer_text": "Cabo Delgado Province",
+        "support_score": 0.9999999964888497,
+        "evidence_ids": [
+          "doc_1",
+          "doc_17"
+        ],
+        "slot_name": "",
+        "slot_role": "",
+        "terminal": false,
+        "derived_from_state": "state_4",
+        "diffusion_delta": 0.03550950551393761,
+        "diffusion_gain": 0.03550950551393761
+      }
+    },
+    {
+      "node_id": "memory_mem_7",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'What is the location of Lago District' is Niassa Province.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 1.0,
+      "temperature": 0.960438865743019,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "intermediate_answer",
+        "target_question": "What is the location of Lago District?",
+        "target_question_norm": "what is the location of lago district",
+        "relation_signature": "generic",
+        "answer_text": "Niassa Province",
+        "support_score": 1.0,
+        "evidence_ids": [
+          "doc_17"
+        ],
+        "slot_name": "",
+        "slot_role": "",
+        "terminal": false,
+        "derived_from_state": "state_5",
+        "diffusion_delta": -0.24128555298136312,
+        "diffusion_gain": 0.0
+      }
+    }
+  ],
+  "edges": [
+    {
+      "source": "state_1",
+      "target": "kg_doc_17",
+      "edge_type": "supports",
+      "weight": 0.999999996535162
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.4741863350915431
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_11",
+      "edge_type": "supports",
+      "weight": 0.12018749528685652
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.0034228034357318554
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.0002454754538556866
+    },
+    {
+      "source": "state_1",
+      "target": "state_2",
+      "edge_type": "refines",
+      "weight": 1.0
+    },
+    {
+      "source": "kg_doc_17",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.999999996535162
+    },
+    {
+      "source": "kg_doc_17",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.9999999951207544
+    },
+    {
+      "source": "kg_doc_17",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.7196716945213376
+    },
+    {
+      "source": "kg_doc_17",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.9999999951207544
+    },
+    {
+      "source": "kg_doc_17",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.8061501968259768
+    },
+    {
+      "source": "kg_doc_17",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.7196716945213376
+    },
+    {
+      "source": "kg_doc_17",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.9999999948639929
+    },
+    {
+      "source": "kg_doc_17",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.8061501968259768
+    },
+    {
+      "source": "kg_doc_17",
+      "target": "memory_mem_7",
+      "edge_type": "supports",
+      "weight": 0.9999999948639929
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.4741863350915431
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.14958157259870522
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.14958157259870522
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_11",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.12018749528685652
+    },
+    {
+      "source": "kg_doc_11",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.18126875377439683
+    },
+    {
+      "source": "kg_doc_11",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.03531551940876815
+    },
+    {
+      "source": "kg_doc_11",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.18126875377439683
+    },
+    {
+      "source": "kg_doc_11",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.15775372833345477
+    },
+    {
+      "source": "kg_doc_11",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.03531551940876815
+    },
+    {
+      "source": "kg_doc_11",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.4106200189115306
+    },
+    {
+      "source": "kg_doc_11",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.15775372833345477
+    },
+    {
+      "source": "kg_doc_11",
+      "target": "memory_mem_7",
+      "edge_type": "supports",
+      "weight": 0.4106200189115306
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.9999999953969113
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.9999999964888497
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.9999999953969113
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.9999999964888497
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.0034228034357318554
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_5",
+      "edge_type": "recalls",
+      "weight": 0.0050116216026798305
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "memory_mem_7",
+      "edge_type": "recalls",
+      "weight": 0.0050116216026798305
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.0002454754538556866
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_5",
+      "edge_type": "recalls",
+      "weight": 0.0003595623669345427
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "memory_mem_7",
+      "edge_type": "recalls",
+      "weight": 0.0003595623669345427
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_17",
+      "edge_type": "supports",
+      "weight": 0.9999999951207544
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_11",
+      "edge_type": "supports",
+      "weight": 0.18126875377439683
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.14958157259870522
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_2",
+      "target": "state_3",
+      "edge_type": "refines",
+      "weight": 0.84
+    },
+    {
+      "source": "state_2",
+      "target": "memory_mem_4",
+      "edge_type": "derives",
+      "weight": 1.0
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.9999999953969113
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_17",
+      "edge_type": "supports",
+      "weight": 0.7196716945213376
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_11",
+      "edge_type": "supports",
+      "weight": 0.03531551940876815
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_3",
+      "target": "state_4",
+      "edge_type": "refines",
+      "weight": 0.9
+    },
+    {
+      "source": "state_3",
+      "target": "memory_mem_5",
+      "edge_type": "derives",
+      "weight": 0.9999999953969113
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "state_2",
+      "edge_type": "recalls",
+      "weight": 1.0
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_17",
+      "edge_type": "supports",
+      "weight": 0.9999999951207544
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_11",
+      "edge_type": "supports",
+      "weight": 0.18126875377439683
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.14958157259870522
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.9999999964888497
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_17",
+      "edge_type": "supports",
+      "weight": 0.8061501968259768
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_11",
+      "edge_type": "supports",
+      "weight": 0.15775372833345477
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_16",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_4",
+      "target": "state_5",
+      "edge_type": "refines",
+      "weight": 0.8
+    },
+    {
+      "source": "state_4",
+      "target": "memory_mem_6",
+      "edge_type": "derives",
+      "weight": 0.9999999964888497
+    },
+    {
+      "source": "kg_doc_16",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_16",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "state_3",
+      "edge_type": "recalls",
+      "weight": 0.9999999953969113
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.9999999953969113
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_17",
+      "edge_type": "supports",
+      "weight": 0.7196716945213376
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_11",
+      "edge_type": "supports",
+      "weight": 0.03531551940876815
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_5",
+      "target": "kg_doc_17",
+      "edge_type": "supports",
+      "weight": 0.9999999948639929
+    },
+    {
+      "source": "state_5",
+      "target": "kg_doc_11",
+      "edge_type": "supports",
+      "weight": 0.4106200189115306
+    },
+    {
+      "source": "state_5",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.23747774924762147
+    },
+    {
+      "source": "state_5",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_5",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.0050116216026798305
+    },
+    {
+      "source": "state_5",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.0003595623669345427
+    },
+    {
+      "source": "state_5",
+      "target": "memory_mem_7",
+      "edge_type": "derives",
+      "weight": 1.0
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.23747774924762147
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "memory_mem_7",
+      "edge_type": "supports",
+      "weight": 0.23747774924762147
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "memory_mem_7",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "state_4",
+      "edge_type": "recalls",
+      "weight": 0.9999999964888497
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.9999999964888497
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_17",
+      "edge_type": "supports",
+      "weight": 0.8061501968259768
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_11",
+      "edge_type": "supports",
+      "weight": 0.15775372833345477
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_16",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_7",
+      "target": "state_5",
+      "edge_type": "recalls",
+      "weight": 1.0
+    },
+    {
+      "source": "memory_mem_7",
+      "target": "kg_doc_17",
+      "edge_type": "supports",
+      "weight": 0.9999999948639929
+    },
+    {
+      "source": "memory_mem_7",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.23747774924762147
+    },
+    {
+      "source": "memory_mem_7",
+      "target": "kg_doc_11",
+      "edge_type": "supports",
+      "weight": 0.4106200189115306
+    },
+    {
+      "source": "memory_mem_7",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_7",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.0050116216026798305
+    },
+    {
+      "source": "memory_mem_7",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.0003595623669345427
+    }
+  ]
+}

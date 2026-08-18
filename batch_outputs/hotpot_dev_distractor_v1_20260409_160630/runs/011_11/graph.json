@@ -1,0 +1,449 @@
+{
+  "nodes": [
+    {
+      "node_id": "state_1",
+      "node_type": "state",
+      "content": "What screenwriter with credits for \"Evolution\" co-wrote a film starring Nicolas Cage and Téa Leoni?",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.6456881142837361,
+      "temperature": 0.49197507070299906,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.8604663982512499,
+        "evidence_support": 0.5896070536801467,
+        "memory_usefulness": 0.3766487072657184,
+        "answerability": 0.6948035268400734,
+        "uncertainty": 0.1938707303375736
+      },
+      "metadata": {
+        "diffusion_delta": 0.0328224459445835,
+        "diffusion_gain": 0.0328224459445835
+      }
+    },
+    {
+      "node_id": "kg_doc_4",
+      "node_type": "kg",
+      "content": "For a composition question, identify the intermediate entity before retrieving its attribute.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999916415897,
+      "temperature": 0.9999999916415897,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Reasoning Pattern",
+        "raw_score": 3.4972846054041264,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_2",
+      "node_type": "kg",
+      "content": "Christopher Nolan is a film director born in London.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.1792141204878175,
+      "temperature": 0.1792141204878175,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Christopher Nolan Biography",
+        "raw_score": 1.6786543560954454,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_1",
+      "node_type": "kg",
+      "content": "Inception is a 2010 science fiction film directed by Christopher Nolan.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.1139994966647807,
+      "temperature": 0.1139994966647807,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Inception Overview",
+        "raw_score": 1.5325432419285303,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_3",
+      "node_type": "kg",
+      "content": "Leonardo DiCaprio starred in Inception and was born in Los Angeles.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0,
+      "temperature": 0.0,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Leonardo DiCaprio Fact",
+        "raw_score": 1.3138960095720436,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "memory_mem_20",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'What screenwriter with credits for \"Evolution\" co-wrote a film starring Nicolas Cage and Téa Leoni' is Reasoning Pattern.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.6778393930715363,
+      "temperature": 0.7339507220875958,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.6778393932827099,
+        "source": "tdca_run",
+        "memory_kind": "answer_candidate",
+        "target_question": "What screenwriter with credits for \"Evolution\" co-wrote a film starring Nicolas Cage and Téa Leoni?",
+        "target_question_norm": "what screenwriter with credits for evolution co wrote a film starring nicolas cage and t a leoni",
+        "relation_signature": "author",
+        "answer_text": "Reasoning Pattern",
+        "support_score": 0.5896070536801467,
+        "evidence_ids": [],
+        "derived_from_state": "state_1",
+        "raw_score": 33.549824711589416,
+        "diffusion_delta": -0.0785577647947533,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "memory_mem_18",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'What science fantasy young adult series, told in first person, has a set of companion books narrating the stories of enslaved worlds and alien species' is Leonardo DiCaprio Fact.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.07579452252218917,
+      "temperature": 0.09832313886692778,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.7457344696248972,
+        "source": "tdca_run",
+        "memory_kind": "answer_candidate",
+        "target_question": "What science fantasy young adult series, told in first person, has a set of companion books narrating the stories of enslaved worlds and alien species?",
+        "target_question_norm": "what science fantasy young adult series told in first person has a set of companion books narrating the stories of enslaved worlds and alien species",
+        "relation_signature": "generic",
+        "answer_text": "Leonardo DiCaprio Fact",
+        "support_score": 0.6698787014290118,
+        "evidence_ids": [
+          "doc_3"
+        ],
+        "derived_from_state": "state_1",
+        "raw_score": 4.743638263780844,
+        "diffusion_delta": 0.004956938498178853,
+        "diffusion_gain": 0.004956938498178853
+      }
+    },
+    {
+      "node_id": "memory_mem_1",
+      "node_type": "memory",
+      "content": "Template: for compositional multi-hop questions, first solve the intermediate entity and then ask for the final attribute.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.05946017266297725,
+      "temperature": 0.04556005640562241,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.96,
+        "tag": "compositional_template",
+        "memory_kind": "template",
+        "raw_score": 3.470657908577996,
+        "source": "memory",
+        "diffusion_delta": -0.013900116257354836,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "memory_mem_3",
+      "node_type": "memory",
+      "content": "Template: when evidence already grounds the answer, switch from branching to short verification and synthesis.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.07949811474585552,
+      "temperature": 0.054533444024090945,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.88,
+        "tag": "verification_then_stop",
+        "memory_kind": "template",
+        "raw_score": 4.381344770392765,
+        "source": "memory",
+        "diffusion_delta": -0.02496467072176458,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "memory_mem_17",
+      "node_type": "memory",
+      "content": "Template: for comparison questions, decompose into one attribute query per entity before final comparison.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.001815087160827847,
+      "temperature": 0.0007831011009563661,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.7248658750583714,
+        "source": "tdca_run",
+        "kind": "strategy_template",
+        "memory_kind": "template",
+        "raw_score": 1.3871574463760612,
+        "diffusion_delta": -0.00034039386893931984,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "memory_mem_2",
+      "node_type": "memory",
+      "content": "Template: for comparison questions, split the problem into one sub-question per entity before comparing them.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0,
+      "temperature": 0.0,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.9,
+        "tag": "comparison_template",
+        "memory_kind": "template",
+        "raw_score": 1.4846130963802433,
+        "source": "memory",
+        "diffusion_delta": 0.0,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "memory_mem_7",
+      "node_type": "memory",
+      "content": "Template: for nested relation questions, solve the intermediate relation first, then query the target attribute, then verify the chain.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 8.020630605524046e-05,
+      "temperature": 5.4413729813884614e-05,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.758776433441565,
+        "source": "tdca_run",
+        "kind": "strategy_template",
+        "memory_kind": "template",
+        "raw_score": 1.4880025429470964,
+        "diffusion_delta": -2.5792576241355847e-05,
+        "diffusion_gain": 0.0
+      }
+    }
+  ],
+  "edges": [
+    {
+      "source": "state_1",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.9999999868724758
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.1792141204878175
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.1139994966647807
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_20",
+      "edge_type": "derives",
+      "weight": 0.5896070536801467
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_18",
+      "edge_type": "recalls",
+      "weight": 0.07545802145990058
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.057371144546632134
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.006595002978664527
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_17",
+      "edge_type": "recalls",
+      "weight": 0.001815087160827847
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_2",
+      "edge_type": "recalls",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.9999999868724758
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "memory_mem_20",
+      "edge_type": "supports",
+      "weight": 0.9999999868724758
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.1792141204878175
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "memory_mem_20",
+      "edge_type": "supports",
+      "weight": 0.1792141204878175
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.1139994966647807
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "memory_mem_20",
+      "edge_type": "supports",
+      "weight": 0.1139994966647807
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "memory_mem_20",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_20",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.5896070536801467
+    },
+    {
+      "source": "memory_mem_20",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.9999999868724758
+    },
+    {
+      "source": "memory_mem_20",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.1792141204878175
+    },
+    {
+      "source": "memory_mem_20",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.1139994966647807
+    },
+    {
+      "source": "memory_mem_20",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_20",
+      "target": "memory_mem_18",
+      "edge_type": "recalls",
+      "weight": 0.07545802145990058
+    },
+    {
+      "source": "memory_mem_18",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.07545802145990058
+    },
+    {
+      "source": "memory_mem_18",
+      "target": "memory_mem_20",
+      "edge_type": "recalls",
+      "weight": 0.07545802145990058
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.057371144546632134
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.006595002978664527
+    },
+    {
+      "source": "memory_mem_17",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.001815087160827847
+    },
+    {
+      "source": "memory_mem_2",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.0
+    }
+  ]
+}

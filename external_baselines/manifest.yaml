@@ -1,0 +1,122 @@
+baselines:
+  - name: ircot
+    source_url: https://github.com/StonyBrookNLP/ircot
+    commit: 3c1820f698eea5eeddb4fba3c56b64c961e063e4
+    license: Apache-2.0
+    implementation: native_controlled_adapter_and_official_reproduction_pending
+    installation_status: controlled_adapter_smoke20_tuning50_and_validation200_complete
+    adapter: src/tdca_research/baselines/ircot.py
+    failure_reason: Official paper reproduction requires upstream environment audit.
+    original_config: upstream prompts and retrieval setup
+    normalized_config: configs/structured_tdca_qwen.yaml with method=ircot
+  - name: legacy_tdca
+    source_url: local_legacy_snapshot
+    commit: unversioned_worktree_source_hash_manifest
+    license: project_local
+    implementation: legacy
+    installation_status: mock_smoke_real_qwen_canary_and_tuning50_complete
+    adapter: legacy/tdca_v0/run_batch.py
+    failure_reason: ""
+    original_config: legacy root config.py
+    normalized_config: frozen legacy algorithm with Qwen-plus top_k=10 max_steps=8
+  - name: hipporag2
+    source_url: https://github.com/OSU-NLP-Group/HippoRAG.git
+    commit: c617143f01477243992a63b2e2151cc003dd3b21
+    license: Apache-2.0
+    implementation: official
+    installation_status: official_repository_pinned_verified_controlled_smoke20_tuning50_and_validation200_complete
+    adapter: external_baselines/hipporag2_adapter.yaml
+    failure_reason: Paper-default NV-Embed-v2 reproduction remains pending; completed local numbers use official code with Qwen-plus and the upstream-supported controlled MiniLM backend.
+    original_config: upstream reproduce configuration
+    normalized_config: official code with Qwen-plus, per-question distractor graphs, MiniLM embeddings, top_k=20 retrieval and qa_top_k=5
+  - name: kirag
+    source_url: https://github.com/jyfang6/kirag.git
+    commit: cd17e6d2114b1fda95e68160cbddacdb13f25c16
+    license: no_license_file_verified_at_audit
+    implementation: official
+    installation_status: connectivity_verified_not_installed
+    adapter: external_baselines/kirag_adapter.yaml
+    failure_reason: Training-dependent components conflict with the training-free main method; reproduction track only.
+    original_config: upstream default
+    normalized_config: not_yet_applicable
+  - name: kgeir
+    source_url: https://github.com/TiandaSun/KGEIR.git
+    commit: c0bf0d2110657e5fcb477e00dda409cdc45cca31
+    license: no_license_file_verified_at_audit
+    implementation: official
+    installation_status: connectivity_verified_not_installed
+    adapter: external_baselines/kgeir_adapter.yaml
+    failure_reason: Requires isolated dependency audit in the Linux container.
+    original_config: upstream default
+    normalized_config: controlled Qwen-plus track pending audit
+  - name: hoprag
+    source_url: https://github.com/LIU-Hao-2002/HopRAG.git
+    commit: a6e425b8f8a5d8131dd7805db40185ac76e09903
+    license: no_license_file_verified_at_audit
+    implementation: official
+    installation_status: remote_head_verified_not_installed
+    adapter: ""
+    failure_reason: Requires Neo4j 5.26, dataset-level graph construction and separately configured embedding/query/traversal models; evaluate only on a frozen global-corpus track, not the current per-question distractor table.
+    original_config: official Neo4j graph build and HopGenerator pipeline
+    normalized_config: pending global-corpus resource and license audit
+  - name: youtu_graphrag
+    source_url: https://github.com/TencentCloudADP/youtu-graphrag.git
+    commit: d982b5a8df1a269ee0e57a1d0ebd55feb719832c
+    license: Youtu-GraphRAG academic-only custom license
+    implementation: official
+    installation_status: remote_head_verified_not_installed
+    adapter: ""
+    failure_reason: Requires a dataset-level schema-guided graph construction protocol and global index; not comparable to a per-question distractor graph without a separately frozen global-corpus experiment.
+    original_config: official ICLR-2026 repository
+    normalized_config: pending global-corpus protocol
+  - name: sag
+    source_url: https://github.com/Zleap-AI/SAG-Benchmark.git
+    commit: c00896ea406baa5417988d82a2a9999693a598e6
+    license: MIT
+    implementation: official_benchmark_repository
+    installation_status: remote_head_verified_not_installed
+    adapter: ""
+    failure_reason: Reproduction requires separate LLM, embedding and reranker endpoints plus MySQL/Elasticsearch; only Qwen-plus and local MiniLM are currently authorized, and the repository does not yet run its comparison methods.
+    original_config: qwen3.6-flash, bge-large-en-v1.5, Qwen3-Reranker-8B, mysql_es
+    normalized_config: unavailable under current authorized endpoints
+  - name: cirag
+    source_url: https://arxiv.org/abs/2601.06799
+    commit: ""
+    license: unknown
+    implementation: paper_reported_only
+    installation_status: excluded_from_training_free_controlled_track
+    adapter: ""
+    failure_reason: Core integration policy uses 3,000 teacher trajectories and LoRA trajectory distillation, conflicting with the training-free method constraint.
+    original_config: Qwen-2.5-7B-Instruct student distilled from Qwen-max
+    normalized_config: not_applicable
+  - name: stepchain_graphrag
+    source_url: https://arxiv.org/abs/2510.02827
+    commit: ""
+    license: unknown
+    implementation: paper_reported_only
+    installation_status: no_reliable_official_repository_confirmed
+    adapter: ""
+    failure_reason: Never report a local result as official unless a verified author repository is found.
+    original_config: paper only
+    normalized_config: unavailable
+evaluation_resources:
+  - name: hotpotqa_official_scorer
+    source_url: https://github.com/hotpotqa/hotpot.git
+    commit: 3635853403a8735609ee997664e1528f4480762a
+    license: CC-BY-SA-4.0
+    installation_status: pinned_and_programmatic_answer_metric_parity_verified
+    local_path: external_repos/hotpot
+  - name: 2wikimultihopqa_official_scorer
+    source_url: https://github.com/Alab-NII/2wikimultihop.git
+    commit: 13800e5be57df1b4040b9b1588c6c811779e69e9
+    license: Apache-2.0
+    installation_status: pinned_and_programmatic_answer_metric_parity_verified
+    local_path: external_repos/2wikimultihop
+  - name: 2wikimultihopqa_dev_official_mirror
+    source_url: https://huggingface.co/datasets/xanhho/2WikiMultihopQA
+    commit: 612bc5039a457880d9e7d84c3b0a4cf154b70e4f
+    license: Apache-2.0
+    source_file: dev.parquet
+    source_bytes: 30056098
+    source_sha256: c0d8b60b9026b728fb07ad74c5252a0f188f6942e8ba5c02df4dfa369502ea8d
+    installation_status: downloaded_verified_converted_and_integrity_checked

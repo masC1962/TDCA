@@ -1,0 +1,443 @@
+[compare] started_at=20260507_155822
+[compare] dataset=data/hotpot_dev_distractor_v1.jsonl
+[compare] random_count=100 seeds=20260504 exclude_first=100
+[compare] backend=openai model=qwen-plus token_budget=1200
+[compare] log=tmp/random_compare_logs/random_compare_20260507_155822.log
+[compare] probing API
+base_url=https://dashscope.aliyuncs.com/compatible-mode/v1
+model=qwen-plus
+
+### max_completion_tokens
+{
+  "finish_reason": "stop",
+  "content": "Final Answer: yes",
+  "reasoning": null,
+  "refusal": null,
+  "usage": {
+    "completion_tokens": 4,
+    "prompt_tokens": 18,
+    "total_tokens": 22,
+    "completion_tokens_details": null,
+    "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 0
+    }
+  }
+}
+
+### max_tokens
+{
+  "finish_reason": "stop",
+  "content": "Final Answer: yes",
+  "reasoning": null,
+  "refusal": null,
+  "usage": {
+    "completion_tokens": 4,
+    "prompt_tokens": 18,
+    "total_tokens": 22,
+    "completion_tokens_details": null,
+    "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 0
+    }
+  }
+}
+
+### reasoning_none_exclude_true
+{
+  "finish_reason": "stop",
+  "content": "Final Answer: yes",
+  "reasoning": null,
+  "refusal": null,
+  "usage": {
+    "completion_tokens": 4,
+    "prompt_tokens": 18,
+    "total_tokens": 22,
+    "completion_tokens_details": null,
+    "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 0
+    }
+  }
+}
+
+### reasoning_none_exclude_false
+{
+  "finish_reason": "stop",
+  "content": "Final Answer: yes",
+  "reasoning": null,
+  "refusal": null,
+  "usage": {
+    "completion_tokens": 4,
+    "prompt_tokens": 18,
+    "total_tokens": 22,
+    "completion_tokens_details": null,
+    "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 0
+    }
+  }
+}
+
+### reasoning_minimal_exclude_true
+{
+  "finish_reason": "stop",
+  "content": "Final Answer: yes",
+  "reasoning": null,
+  "refusal": null,
+  "usage": {
+    "completion_tokens": 4,
+    "prompt_tokens": 18,
+    "total_tokens": 22,
+    "completion_tokens_details": null,
+    "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 0
+    }
+  }
+}
+
+### temperature_zero_max_completion
+{
+  "finish_reason": "stop",
+  "content": "Final Answer: yes",
+  "reasoning": null,
+  "refusal": null,
+  "usage": {
+    "completion_tokens": 4,
+    "prompt_tokens": 18,
+    "total_tokens": 22,
+    "completion_tokens_details": null,
+    "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 0
+    }
+  }
+}
+
+### temperature_zero_max_tokens
+{
+  "finish_reason": "stop",
+  "content": "Final Answer: yes",
+  "reasoning": null,
+  "refusal": null,
+  "usage": {
+    "completion_tokens": 4,
+    "prompt_tokens": 18,
+    "total_tokens": 22,
+    "completion_tokens_details": null,
+    "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 0
+    }
+  }
+}
+
+### summary
+saved=outputs/probe_openrouter_chat_20260507_155826.json
+nonempty_variants=max_completion_tokens, max_tokens, reasoning_none_exclude_true, reasoning_none_exclude_false, reasoning_minimal_exclude_true, temperature_zero_max_completion, temperature_zero_max_tokens
+[compare] random_dataset=tmp/random_compare_samples/hotpot_random100_seed20260504.jsonl
+[compare] running sparse_rag seed=20260504
+[TDCA] Using OpenAI-compatible backend @ https://dashscope.aliyuncs.com/compatible-mode/v1
+[TDCA] served_model_name = qwen-plus
+[TDCA] reasoning_effort = none
+[baseline] output_dir = outputs/hotpot_sparse_rag_random_seed20260504_20260507_155828_sparse_rag_qwen-plus_tok1200_n100_random100_seed20260504_tok1200
+[baseline] max_new_tokens_answer = 1200
+[baseline] reasoning_effort = none
+[baseline] loaded_examples = 100
+{
+  "algorithm": "sparse_rag",
+  "baseline": "sparse_rag",
+  "dataset_name": "hotpotqa",
+  "dataset_path": "tmp/random_compare_samples/hotpot_random100_seed20260504.jsonl",
+  "limit": 100,
+  "top_k": 5,
+  "retriever_type": "dense",
+  "encoder_path": "",
+  "index_path": "",
+  "llm_backend": "openai",
+  "model_path": "",
+  "openai_base_url": "https://dashscope.aliyuncs.com/compatible-mode/v1",
+  "served_model_name": "qwen-plus",
+  "reasoning_effort": "none",
+  "num_examples": 100,
+  "max_new_tokens_answer": 1200,
+  "ircot_step_max_new_tokens": 512,
+  "timestamped_output": true,
+  "run_tag": "random100_seed20260504_tok1200",
+  "output_dir": "outputs/hotpot_sparse_rag_random_seed20260504_20260507_155828_sparse_rag_qwen-plus_tok1200_n100_random100_seed20260504_tok1200",
+  "created_at_local": "2026-05-07T15:59:29"
+}
+[compare] sparse_rag output_dir=outputs/hotpot_sparse_rag_random_seed20260504_20260507_155828_sparse_rag_qwen-plus_tok1200_n100_random100_seed20260504_tok1200
+[compare] sparse_rag_seed_20260504: rows=100 nonempty=100 EM=62/100 acc=0.620 soft_em=0.820 f1=0.758 calls=0.00 gen_tokens=0.00
+[compare] running ircot seed=20260504
+[TDCA] Using OpenAI-compatible backend @ https://dashscope.aliyuncs.com/compatible-mode/v1
+[TDCA] served_model_name = qwen-plus
+[TDCA] reasoning_effort = none
+[baseline] output_dir = outputs/hotpot_ircot_sparse_random_seed20260504_20260507_155930_ircot_qwen-plus_tok1200_n100_random100_seed20260504_tok1200
+[baseline] max_new_tokens_answer = 1200
+[baseline] reasoning_effort = none
+[baseline] loaded_examples = 100
+{
+  "algorithm": "ircot",
+  "baseline": "ircot",
+  "dataset_name": "hotpotqa",
+  "dataset_path": "tmp/random_compare_samples/hotpot_random100_seed20260504.jsonl",
+  "limit": 100,
+  "top_k": 5,
+  "retriever_type": "sparse",
+  "encoder_path": "",
+  "index_path": "",
+  "llm_backend": "openai",
+  "model_path": "",
+  "openai_base_url": "https://dashscope.aliyuncs.com/compatible-mode/v1",
+  "served_model_name": "qwen-plus",
+  "reasoning_effort": "none",
+  "num_examples": 100,
+  "max_new_tokens_answer": 1200,
+  "ircot_step_max_new_tokens": 512,
+  "timestamped_output": true,
+  "run_tag": "random100_seed20260504_tok1200",
+  "output_dir": "outputs/hotpot_ircot_sparse_random_seed20260504_20260507_155930_ircot_qwen-plus_tok1200_n100_random100_seed20260504_tok1200",
+  "created_at_local": "2026-05-07T16:03:39"
+}
+[compare] ircot output_dir=outputs/hotpot_ircot_sparse_random_seed20260504_20260507_155930_ircot_qwen-plus_tok1200_n100_random100_seed20260504_tok1200
+[compare] ircot_seed_20260504: rows=100 nonempty=100 EM=64/100 acc=0.640 soft_em=0.790 f1=0.750 calls=0.00 gen_tokens=0.00
+[compare] running tdca seed=20260504
+[TDCA-BATCH] project_root = /workspace/TDCA
+[TDCA-BATCH] dataset      = /workspace/TDCA/tmp/random_compare_samples/hotpot_random100_seed20260504.jsonl
+[TDCA-BATCH] fallback evidence = /workspace/TDCA/data/demo_corpus.jsonl
+[TDCA-BATCH] base memory  = /workspace/TDCA/data/demo_memories.jsonl
+[TDCA-BATCH] outputs      = /workspace/TDCA/batch_outputs/hotpot_random100_seed20260504_20260507_160342
+[TDCA-BATCH] backend      = openai
+[TDCA-BATCH] algorithm    = tdca
+[TDCA-BATCH] start_index  = 0
+[TDCA] Using OpenAI-compatible backend @ https://dashscope.aliyuncs.com/compatible-mode/v1
+[TDCA] served_model_name = qwen-plus
+[TDCA] reasoning_effort = none
+
+[1/100] Which post DC Extended Universe actress will also play a role in what is intended to be the fifth installment of the DC Extended Universe?
+
+[2/100] What was the name of the fanzine that interviewed the Sex Pistols bassist when he was in the band "The Flowers of Romance?"
+
+[3/100] Which case was decided first, Selle v. Gibb or Reynolds v. Sims?
+
+[4/100] Hate Them is the ninth album by a band likened to who?
+
+[5/100] With whom did this American singer, songwriter and record producer, who contributed to the single "Marvin Gaye" with Julie Frost, co-produced and performed the 2015 song for a movie soundtrack?
+
+[6/100] Which North American tribe inhabited the banks of the Winnipesaukee River and were also known as the Pawtucket people?
+
+[7/100] Which part of Scotland is this institute found where Alice König is a lecturer in Latin and Classical Studies?
+
+[8/100] What is Rachelle Amy Beinart's role in the film that follows a group of rebels on a mission?
+
+[9/100] The History of Ranching is a mural that was originally located at an American brewery that in 1999 began trasfering its production to who?
+
+[10/100] Do Bloody Mary and Sidecar share any ingredients in common?
+
+[11/100] Liverpool nurse Mimi Smith was the aunt and guardian of which one of the city's most famous sons?
+
+[12/100] Psychopsis and Aubrieta are both genuses of which type of plants?
+
+[13/100] Which Roman Emperor was grandfather to the children of Mark Antony?
+
+[14/100] Which player Richard Gasquet or Jim Pugh  has won more mixed double Grand Slam titles ?
+
+[15/100] Who was the head of the Imperial Family that was making an broadcast announcement of Japan's surrender in 1945?
+
+[16/100] Which singer is younger, Kenny Greene or Billy Idol?
+
+[17/100] Do Singapore Sling and Fish House Punch both contain alcohol?
+
+[18/100] Which genus has the most number of species, Myrsine or Styrax?
+
+[19/100] The actor who plays the grown version of Emma Swan's son, from "Once Upon a Time", also plays what character in the television show "The Walking Dead"?
+
+[20/100] Which man, Ibn Tufail or Ali Qushji, is best known for the development of astronomical physics independent from natural philosophy?
+
+[21/100] What singer who sang in church during her childhood did Stacy Barthe pen album tracks for?
+
+[22/100] Who was this American Founding Father, a proponent of democracy, republicanism, and individual rights, examined Ice Age fossils of Kentucky's Big Bone Lick?
+
+[23/100] Tui Flower and Julia child were both known for what?
+
+[24/100] This radio programme that originally aired from October 1995 to April 2000 starred a critic working in what field?
+
+[25/100] Who was the son and heir of Henry Beauclerc?
+
+[26/100] Which segment of If These Walls Could Talk did the Goddess of Pop direct?
+
+[27/100] Who is is known domestically for his humorous videos and stage performances and released his sixth studio album in 2012?
+
+[28/100] During the 2004-05 Atlanta Hawks season, the team acquired a former professional basketball player, who is the current head coach of what team?
+
+[29/100] What mine was operated by Royal Oak Mines at at earlier date, Kemess Mine or Colomac Mine?
+
+[30/100] In which football league does the son of Souleyman Sané play?
+
+[31/100] Who is younger Chris Gould or Robbie Gould ?
+
+[32/100] Which player won more Grand Slam titles, Kevin Ullyett or Billie Jean King?
+
+[33/100] Who was involved in observing the natural progression of untreated syphilis in rural African-American men in Alabama?
+
+[34/100] The castle where "Spook Squad" was filmed is in what part of Scotland?
+
+[35/100] Where are Catcha Lake and Hedley Mascot Mine located?
+
+[36/100] Which British racing driver has raced for 7 different teams and won the European Grand Prix in 1999?
+
+[37/100] What is the birth name of the disc jockey that notably used Mark Wirtz's song "A Touch of Velvet, A Sting of Brass" on their Radio Caroline show?
+
+[38/100] High School Confidential, an eight part documentary followed twelve high school teenagers from a high school in Overland Park, Kansas that ranked what in the 2009 Newsweek ranking of the top 1,500 high schools in the United States?
+
+[39/100] The historical Nimavar school in the Nimavar Bazaar, or bazar, is located in which country?
+
+[40/100] What magazine was started in 1925 and features the work of Barry Werth?
+
+[41/100] An American pharmacist was inspired to invent cola due to what recipe from  Angelo Mariani?
+
+[42/100] Which is the Birthplace of Sir Isaac Newton and has a neighboring village called Belvor?
+
+[43/100] Are Wake Forest University and Pennsylvania State University both located in the US?
+
+[44/100] Are the 1908 Ex parte Young and 1948 McCollum v. Board of Education United States Supreme Court cases related to each other in any way?
+
+[45/100] Shadi Attieh is often referred to as the Lebanese version of a footballer who plays for what Major League Soccer team?
+
+[46/100] Was Pennsylvania State University or University of California, San Francisco founded first?
+
+[47/100] What actor born in 1951 starred in Aaj Ka Robin Hood?
+
+[48/100] Are Der Rosenkavalier and I Capuleti e i Montecchi both comic operas?
+
+[49/100] Produce 101, which produced I.O.I, cost the company Mnet how much to produce?
+
+[50/100] The German who is credited with inventing the V-2 rocket and Saturn V was also a supervisor of what NASA program?
+
+[51/100] At what intersection was the former home of the wooden roller coaster now located at Six Flags Great America in Gurnee, Illinois located?
+
+[52/100] Which Comcast-owned film studio produced the movie Radio Patrol?
+
+[53/100] Who wrote lyrics for both "Little Shop of Horrors" and the song "Be Our Guest?"
+
+[54/100] When was the brewery founded which has The Stag Inn Hastings as a tied house ?
+
+[55/100] Who was an actor actor in the film The Ladder of Lies and was born October 23, 1893?
+
+[56/100] What are both Caleb Shomo and Brian Welch?
+
+[57/100] Mesilla Park, New Mexico is located on the south side of the seat of what county?
+
+[58/100] Which agreement resulted from multi-party talks held in St Andrews in Fife, Scotland and was opposed by the Concerned Republicans?
+
+[59/100] Hostel: Part III is the first film in the series to be neither written nor directed by a director born in which year ?
+
+[60/100] What's the name of the differential equation that was developed by the German physicist who was the doctoral advisor to another German Physicist who identified the Stark effect?
+
+[61/100] Meghan Strange is an American actress and voice actress, known for her role as Robin on what American animated television series produced for Disney Channel?
+
+[62/100] James Stuart became a specialist of a rhythmic pattern charecterised by what?
+
+[63/100] When is the birthday of the British-Irish heiress who worked on the Optimist In Black studio album?
+
+[64/100] In what year was the football club for which Reuven Niemeijer plays founded?
+
+[65/100] What are the colors of the tricolour flag that was adopted in 1919?
+
+[66/100] What Electoral Division in Victoria contained a suburb of Melbourne with a population of 25,147 at the 2016 Census?
+
+[67/100] Jamal Igle was known for illustrative work on which DC Comics publication?
+
+[68/100] What country is the member of Gujarat Legislative Assembly and parliament representing?
+
+[69/100] Charles Scribner's Sons publishes the books of what author whose books cover subjects such as the Cold War, mathematics, politics, and economics, and global terrorism?
+
+[70/100] Dangerous is a book by which political commentator?
+
+[71/100] The Nun is based on what film series based on the real life cases of Ed and Lorraine Warren?
+
+[72/100] When was the city George Consider Hale was born in founded?
+
+[73/100] The 1966–67 NHL season ended with a win in the Stanley Cup by the team from which division of the Eastern Conference?
+
+[74/100] What year was the singer of "Orange" born?
+
+[75/100] What conference does Ralphie the Buffalo's football team play in?
+
+[76/100] Have Marc Rosset and Max Mirnyi both been professional tennis players?
+
+[77/100] Which film stars more animals, The Jungle Book or The Lone Ranger?
+
+[78/100] Deckers Creek is a tributary, and its beginning in the west is named after?
+
+[79/100] What rapper on the song "Wij zijn Ajax" plays for the Turkish club Beşiktaş?
+
+[80/100] In what capacity did the author of the book,  An Inconvenient Truth,  serve in the United States government ?
+
+[81/100] What sort of dog did the same man who cared for the living gift that Martin Bormann gave Hitler have?
+
+[82/100] Disturbia is a 2007 movie that stars what American actor who starred in the Disney Channel series Even Stevens?
+
+[83/100] Which building will have more floors, 15 Penn Plaza, or 247 Cherry?
+
+[84/100] Sian Gibson co-wrote which British sitcom, set around a supermarket and car share scheme?
+
+[85/100] Where is the University Joe Odom played football for located?
+
+[86/100] The Woodvale Historic District was built buy a company headquartered where?
+
+[87/100] In which year NGC 166 is located by an american astronomer who also discovered Frank Muller and Ormond Stone
+
+[88/100] Kingdom Hearts 358/2 Days was made by the company based in what part of Tokyo?
+
+[89/100] Are Gael and Fitness published in the same country?
+
+[90/100] Are Dutch Smoushond and Sussex Spaniel's both dog breeds?
+
+[91/100] What nationality was the pirate who along with Robert Culliford stole Jean Fantin's ship ?
+
+[92/100] What award was an actor born in 1955 that acted in the movie Ransom nominated for?
+
+[93/100] This film is an adaption of a Jacques Offenbach's opera that was written by a Hungarian British screenwriter?
+
+[94/100] Among the prominent members of the Walla Walla expeditions was member of tribe whose reservation is how many square miles in total?
+
+[95/100] Claudine's Return starred the actress who played which role on "Married...with Children"?
+
+[96/100] What is the name of the vocalist who collaborated with the rap duo who won the 2002 Grammy Award for Best Rap Performance by a Duo or Group?
+
+[97/100] Phillip Pullman's book set in a parallel universe featuring a character named Lyra Belacqua was put into audio in what year?
+
+[98/100] What film did the sound editor for a 2013 Hong Kong-Chinese martial arts drama film based on the life story of the Wing Chun grandmaster Ip Man win two Academy Awards for?
+
+[99/100] susquehanna university and paul musser are both in what city?
+
+[100/100] Was Lee Grant or Colin Campbell born first?
+
+[TDCA-BATCH] aggregate:
+{
+  "count": 100,
+  "answered_with_gold": 100,
+  "exact_match": 0.5,
+  "soft_em": 0.6,
+  "answer_f1": 0.580681,
+  "rouge1_f": 0.580681,
+  "rouge2_f": 0.347667,
+  "rougeL_f": 0.578681,
+  "bleu1": 0.55683,
+  "bleu2": 0.342511,
+  "bleu3": 0.102165,
+  "bleu4": 0.03,
+  "meteor": 0.582907,
+  "title_hit": 0.0,
+  "avg_steps": 5.8,
+  "avg_llm_calls": 10.21,
+  "avg_generated_tokens": 854.48
+}
+[TDCA-BATCH] summary.csv  = /workspace/TDCA/batch_outputs/hotpot_random100_seed20260504_20260507_160342/summary.csv
+[TDCA-BATCH] summary.jsonl= /workspace/TDCA/batch_outputs/hotpot_random100_seed20260504_20260507_160342/summary.jsonl
+[compare] tdca output_dir=batch_outputs/hotpot_random100_seed20260504_20260507_160342
+[compare] tdca_seed_20260504: rows=100 nonempty=86 EM=50/100 acc=0.500 soft_em=0.600 f1=0.581 calls=10.21 gen_tokens=854.48
+[compare] complete

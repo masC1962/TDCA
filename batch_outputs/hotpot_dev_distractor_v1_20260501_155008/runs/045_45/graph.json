@@ -1,0 +1,942 @@
+{
+  "nodes": [
+    {
+      "node_id": "state_1",
+      "node_type": "state",
+      "content": "A medieval fortress in Dirleton, East Lothian, Scotland borders on the south side of what coastal area?",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.7349265623821472,
+      "temperature": 0.6355289420426368,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.9096287536240992,
+        "evidence_support": 0.7342022165414681,
+        "memory_usefulness": 0.5139667251540021,
+        "answerability": 0.767101108270734,
+        "uncertainty": 0.16784360102253573
+      },
+      "metadata": {
+        "diffusion_delta": -0.03129481689093383,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "kg_doc_7",
+      "node_type": "kg",
+      "content": "Dirleton Castle is a medieval fortress in the village of Dirleton, East Lothian, Scotland. It lies around 2 mi west of North Berwick, and around 19 mi east of Edinburgh. The oldest parts of the castle date to the 13th century, and it was abandoned by the end of the 17th century.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999708028909,
+      "temperature": 0.9999999708028909,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Dirleton Castle",
+        "raw_score": 3.3130029502636402,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_6",
+      "node_type": "kg",
+      "content": "Yellowcraig, less commonly known as Broad Sands Bay, is a coastal area of forest, beach and grassland in East Lothian, south-east Scotland. Yellowcraig is partly within the Firth of Forth Site of Special Scientific Interest (SSSI). It is bordered to the north by the Firth of Forth, to the south by the village of Dirleton and Dirleton Castle, to the east by the North Berwick West Links golf course, and to the west by the Archerfield Estate and Links golf courses.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999970248958,
+      "temperature": 0.9999999970248958,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Yellowcraigs",
+        "raw_score": 6.164637939918974,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_1",
+      "node_type": "kg",
+      "content": "Lothian and Borders is an area in south-east Scotland consisting of the East Lothian, City of Edinburgh, Midlothian, West Lothian areas (collectively known as Lothian) along with the Scottish Borders.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.3042678759673778,
+      "temperature": 0.3042678759673778,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Lothian and Borders",
+        "raw_score": 4.816893122187047,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_2",
+      "node_type": "kg",
+      "content": "The Scottish Borders (Scots: \"The Mairches\" , \"The Marches\") is one of 32 council areas of Scotland. It borders the City of Edinburgh, Dumfries and Galloway, East Lothian, Midlothian, South Lanarkshire, West Lothian and, to the south and east, Northumberland in England. The administrative centre of the area is Newtown St Boswells.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.024932077742496964,
+      "temperature": 0.024932077742496964,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Scottish Borders",
+        "raw_score": 4.859483989898182,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "memory_mem_1",
+      "node_type": "memory",
+      "content": "Template: for compositional multi-hop questions, first solve the intermediate entity and then ask for the final attribute.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9599998077388796,
+      "temperature": 0.9599998077388796,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.96,
+        "tag": "compositional_template",
+        "memory_kind": "template",
+        "raw_score": 0.24860393425608485,
+        "source": "memory",
+        "diffusion_delta": -0.04961768928122334,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "memory_mem_3",
+      "node_type": "memory",
+      "content": "Template: when evidence already grounds the answer, switch from branching to short verification and synthesis.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.8799999975267333,
+      "temperature": 1.3608981020406645,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.88,
+        "tag": "verification_then_stop",
+        "memory_kind": "template",
+        "raw_score": 2.269528233331716,
+        "source": "memory",
+        "diffusion_delta": 0.02072442411813058,
+        "diffusion_gain": 0.02072442411813058
+      }
+    },
+    {
+      "node_id": "state_2",
+      "node_type": "state",
+      "content": "What coastal area is bordered to the north by the Firth of Forth and to the south by Dirleton Castle?",
+      "depth": 1,
+      "parent_id": "state_1",
+      "value": 0.5617926316053043,
+      "temperature": 1.6146050269732262,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.625338682689103,
+        "evidence_support": 0.5554943954523787,
+        "memory_usefulness": 0.5534085690354633,
+        "answerability": 0.66010013890266,
+        "uncertainty": 0.20001100881857184
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_6",
+          "doc_4",
+          "doc_3",
+          "doc_7"
+        ],
+        "memory_ids": [
+          "mem_3",
+          "mem_1"
+        ],
+        "diffusion_delta": 0.1456725269624206,
+        "diffusion_gain": 0.1456725269624206
+      }
+    },
+    {
+      "node_id": "kg_doc_4",
+      "node_type": "kg",
+      "content": "Dirleton (Scottish Gaelic 'Duighreach') is a village and parish in East Lothian, Scotland approximately 20 mi east of Edinburgh on the A198. It contains 7500 acre . Dirleton lies between North Berwick (east), Gullane (west), Fenton Barns (south) and the Yellowcraigs nature reserve, Archerfield Estate and the Firth of Forth (north). Gullane parish was joined to Dirleton parish in 1612 by an Act of Parliament because \"Golyn (as it was anciently spelt) is ane decaying toun, and Dirleton is ane thriven place.\"",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.11098879407747173,
+      "temperature": 0.11098879407747173,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Dirleton",
+        "raw_score": 1.1176640072888562,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_3",
+      "node_type": "kg",
+      "content": "Dirleton Kirk is situated to the north of the village green in Dirleton, in East Lothian, Scotland. Dirleton village lies on the south shore of the Firth of Forth 21 miles east of Edinburgh and two miles west of North Berwick on the A198 road. The church is at grid reference [ NT512842] .",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.05946606433046978,
+      "temperature": 0.05946606433046978,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Dirleton Kirk",
+        "raw_score": 7.23006325048783,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "state_3",
+      "node_type": "state",
+      "content": "Is Yellowcraig the same as Broad Sands Bay?",
+      "depth": 1,
+      "parent_id": "state_1",
+      "value": 0.4543230090240642,
+      "temperature": 0.3076220760598595,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.47713875856466503,
+        "evidence_support": 0.5140759334946895,
+        "memory_usefulness": 0.5139667251540021,
+        "answerability": 0.5688026726296977,
+        "uncertainty": 0.20746633197095588
+      },
+      "metadata": {
+        "kind": "verification",
+        "evidence_ids": [
+          "doc_6",
+          "doc_1",
+          "doc_4",
+          "doc_9"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "diffusion_delta": 0.00704344581811972,
+        "diffusion_gain": 0.00704344581811972
+      }
+    },
+    {
+      "node_id": "kg_doc_9",
+      "node_type": "kg",
+      "content": "St. Mary's Priory, North Berwick, was a monastery of nuns in medieval East Lothian, Scotland. Founded by Donnchad I, Earl of Fife (owner of much of northern East Lothian) around 1150, the priory lasted for more than four centuries, declining and disappearing after the Scottish Reformation. It had been endowed by the Earls of Carrick as well as the Earls of Fife, but over time lost its dependence on these and came to be controlled by the more locally based Home (or Hume) family, who eventually acquired the priory's lands as a free barony.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0,
+      "temperature": 0.0,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "St. Mary's Priory (Lothian)",
+        "raw_score": 1.1313940760003662,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "memory_mem_4",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'What coastal area is bordered to the north by the Firth of Forth and to the south by Dirleton Castle' is Yellowcraig.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.874,
+      "temperature": 1.6169568985954796,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "derived_fact",
+        "target_question": "What coastal area is bordered to the north by the Firth of Forth and to the south by Dirleton Castle?",
+        "target_question_norm": "what coastal area is bordered to the north by the firth of forth and to the south by dirleton castle",
+        "relation_signature": "generic",
+        "answer_text": "Yellowcraig",
+        "support_score": 0.5554943954523787,
+        "evidence_ids": [
+          "doc_6"
+        ],
+        "derived_from_state": "state_2",
+        "diffusion_delta": 0.15785657542894005,
+        "diffusion_gain": 0.15785657542894005
+      }
+    },
+    {
+      "node_id": "state_5",
+      "node_type": "state",
+      "content": "What coastal area borders Dirleton Castle to the south?",
+      "depth": 2,
+      "parent_id": "state_3",
+      "value": 0.4941469790393426,
+      "temperature": 0.966145092921187,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.6320255142947929,
+        "evidence_support": 0.5751615472338197,
+        "memory_usefulness": 0.048890541182272824,
+        "answerability": 0.5699337147933805,
+        "uncertainty": 0.19647092149791245
+      },
+      "metadata": {
+        "kind": "bridge",
+        "evidence_ids": [
+          "doc_6",
+          "doc_7",
+          "doc_2",
+          "doc_1"
+        ],
+        "memory_ids": [
+          "mem_3",
+          "mem_1"
+        ],
+        "diffusion_delta": 0.18063365830674738,
+        "diffusion_gain": 0.18063365830674738
+      }
+    },
+    {
+      "node_id": "memory_mem_5",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'What coastal area borders Dirleton Castle to the south' is Yellowcraig.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.874,
+      "temperature": 0.7553511902178899,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "derived_fact",
+        "target_question": "What coastal area borders Dirleton Castle to the south?",
+        "target_question_norm": "what coastal area borders dirleton castle to the south",
+        "relation_signature": "generic",
+        "answer_text": "Yellowcraig",
+        "support_score": 0.5751615472338197,
+        "evidence_ids": [
+          "doc_6"
+        ],
+        "derived_from_state": "state_5",
+        "diffusion_delta": -0.006275608017096923,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "memory_mem_6",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'A medieval fortress in Dirleton, East Lothian, Scotland borders on the south side of what coastal area' is Yellowcraig.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.7912,
+      "temperature": 1.0512273998339687,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "answer_candidate",
+        "target_question": "A medieval fortress in Dirleton, East Lothian, Scotland borders on the south side of what coastal area?",
+        "target_question_norm": "a medieval fortress in dirleton east lothian scotland borders on the south side of what coastal area",
+        "relation_signature": "generic",
+        "answer_text": "Yellowcraig",
+        "support_score": 0.7342022165414681,
+        "evidence_ids": [
+          "doc_7",
+          "doc_6"
+        ],
+        "derived_from_state": "state_1"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "source": "state_1",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.9999999708028909
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.4684044622800453
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.3042678759673778
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.9599998077388796
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.0679336425691247
+    },
+    {
+      "source": "state_1",
+      "target": "state_2",
+      "edge_type": "refines",
+      "weight": 1.0
+    },
+    {
+      "source": "state_1",
+      "target": "state_3",
+      "edge_type": "verifies",
+      "weight": 0.85
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_6",
+      "edge_type": "derives",
+      "weight": 0.86
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.9999999708028909
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.15032310267030272
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.15032310267030272
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.9999999708028909
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.4684044622800453
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.9999999968272856
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.9999999970248958
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.9999999968272856
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.9999999917973368
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.9999999917973368
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.4684044622800453
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.3042678759673778
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.028151869964483173
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.3042678759673778
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.024932077742496964
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.024932077742496964
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.9599998077388796
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_2",
+      "edge_type": "recalls",
+      "weight": 0.22681714154101432
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_3",
+      "edge_type": "recalls",
+      "weight": 0.014535059902375032
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "memory_mem_4",
+      "edge_type": "recalls",
+      "weight": 0.22681714154101432
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_5",
+      "edge_type": "recalls",
+      "weight": 0.005237420228784014
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "memory_mem_5",
+      "edge_type": "recalls",
+      "weight": 0.005237420228784014
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "memory_mem_6",
+      "edge_type": "recalls",
+      "weight": 0.9599998077388796
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.0679336425691247
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_2",
+      "edge_type": "recalls",
+      "weight": 0.8799999965299122
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_3",
+      "edge_type": "recalls",
+      "weight": 0.0009992401783381047
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "memory_mem_4",
+      "edge_type": "recalls",
+      "weight": 0.8799999965299122
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_5",
+      "edge_type": "recalls",
+      "weight": 0.09254366213576164
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "memory_mem_5",
+      "edge_type": "recalls",
+      "weight": 0.09254366213576164
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "memory_mem_6",
+      "edge_type": "recalls",
+      "weight": 0.0679336425691247
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.9999999968272856
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.11098879407747173
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.05946606433046978
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_2",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.8799999965299122
+    },
+    {
+      "source": "state_2",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.22681714154101432
+    },
+    {
+      "source": "state_2",
+      "target": "memory_mem_4",
+      "edge_type": "derives",
+      "weight": 0.95
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.11098879407747173
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.006048915419234543
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.11098879407747173
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.05946606433046978
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.05946606433046978
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.9999999970248958
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.028151869964483173
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.006048915419234543
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_3",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.014535059902375032
+    },
+    {
+      "source": "state_3",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.0009992401783381047
+    },
+    {
+      "source": "state_3",
+      "target": "state_5",
+      "edge_type": "refines",
+      "weight": 0.9
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "state_2",
+      "edge_type": "recalls",
+      "weight": 0.95
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.9999999968272856
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.11098879407747173
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.05946606433046978
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.8799999965299122
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.22681714154101432
+    },
+    {
+      "source": "state_5",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.9999999917973368
+    },
+    {
+      "source": "state_5",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.15032310267030272
+    },
+    {
+      "source": "state_5",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.024932077742496964
+    },
+    {
+      "source": "state_5",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_5",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.09254366213576164
+    },
+    {
+      "source": "state_5",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.005237420228784014
+    },
+    {
+      "source": "state_5",
+      "target": "memory_mem_5",
+      "edge_type": "derives",
+      "weight": 0.95
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "state_5",
+      "edge_type": "recalls",
+      "weight": 0.95
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.9999999917973368
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.15032310267030272
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.024932077742496964
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.09254366213576164
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.005237420228784014
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.86
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.9999999708028909
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.4684044622800453
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.3042678759673778
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.9599998077388796
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.0679336425691247
+    }
+  ]
+}

@@ -1,0 +1,193 @@
+{
+  "nodes": [
+    {
+      "node_id": "state_1",
+      "node_type": "state",
+      "content": "What is the birth city of the director of the movie Inception?",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.789153670299981,
+      "temperature": 0.4645465491361008,
+      "expanded": true,
+      "visit_count": 1,
+      "score_breakdown": {
+        "task_progress": 0.9245735727209127,
+        "evidence_support": 0.6982942908836506,
+        "memory_usefulness": 0.8111131675303156,
+        "answerability": 0.9340618599860079,
+        "uncertainty": 0.1952558563674524
+      },
+      "metadata": {}
+    },
+    {
+      "node_id": "evidence_doc_4",
+      "node_type": "evidence",
+      "content": "For a composition question, identify the intermediate entity before retrieving its attribute.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.999999996607353,
+      "temperature": 0.999999996607353,
+      "expanded": false,
+      "visit_count": 0,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Reasoning Pattern",
+        "source": "evidence"
+      }
+    },
+    {
+      "node_id": "evidence_doc_2",
+      "node_type": "evidence",
+      "content": "Christopher Nolan is a film director born in London.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.39658858515994827,
+      "temperature": 0.39658858515994827,
+      "expanded": false,
+      "visit_count": 0,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Christopher Nolan Biography",
+        "source": "evidence"
+      }
+    },
+    {
+      "node_id": "evidence_doc_1",
+      "node_type": "evidence",
+      "content": "Inception is a 2010 science fiction film directed by Christopher Nolan.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.17331261306711188,
+      "temperature": 0.17331261306711188,
+      "expanded": false,
+      "visit_count": 0,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Inception Overview",
+        "source": "evidence"
+      }
+    },
+    {
+      "node_id": "evidence_doc_3",
+      "node_type": "evidence",
+      "content": "Leonardo DiCaprio starred in Inception and was born in Los Angeles.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0,
+      "temperature": 0.0,
+      "expanded": false,
+      "visit_count": 0,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Leonardo DiCaprio Fact",
+        "source": "evidence"
+      }
+    },
+    {
+      "node_id": "memory_mem_5",
+      "node_type": "memory",
+      "content": "Q: What is the birth city of the director of the movie Inception?\nHelpful reasoning: Answer that the director's birth city is London if the evidence is consistent.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.840430511382564,
+      "temperature": 0.840430511382564,
+      "expanded": false,
+      "visit_count": 0,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.840430511382564,
+        "source": "memory"
+      }
+    },
+    {
+      "node_id": "memory_mem_4",
+      "node_type": "memory",
+      "content": "Q: What is the birth city of the director of the movie Inception?\nHelpful reasoning: Answer that the director's birth city is London if the evidence is consistent.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.7817958236780673,
+      "temperature": 0.7817958236780673,
+      "expanded": false,
+      "visit_count": 0,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.7817958236780673,
+        "source": "memory"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "source": "state_1",
+      "target": "evidence_doc_4",
+      "edge_type": "supports",
+      "weight": 0.999999996607353
+    },
+    {
+      "source": "state_1",
+      "target": "evidence_doc_2",
+      "edge_type": "supports",
+      "weight": 0.39658858515994827
+    },
+    {
+      "source": "state_1",
+      "target": "evidence_doc_1",
+      "edge_type": "supports",
+      "weight": 0.17331261306711188
+    },
+    {
+      "source": "state_1",
+      "target": "evidence_doc_3",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_5",
+      "edge_type": "recalls",
+      "weight": 0.840430511382564
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_4",
+      "edge_type": "recalls",
+      "weight": 0.7817958236780673
+    },
+    {
+      "source": "evidence_doc_4",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.999999996607353
+    },
+    {
+      "source": "evidence_doc_2",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.39658858515994827
+    },
+    {
+      "source": "evidence_doc_1",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.17331261306711188
+    },
+    {
+      "source": "evidence_doc_3",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.840430511382564
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.7817958236780673
+    }
+  ]
+}

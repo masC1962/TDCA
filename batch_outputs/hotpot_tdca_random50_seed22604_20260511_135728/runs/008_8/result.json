@@ -1,0 +1,172 @@
+{
+  "question": "How many venues was in the complex at which Night of Joy was held?",
+  "final_answer": "9 venues",
+  "best_node": {
+    "node_id": "memory_mem_5",
+    "node_type": "memory",
+    "content": "Conclusion: The answer to 'How many venues are in the ESPN Wide World of Sports Complex' is 9 venues.",
+    "depth": 0,
+    "parent_id": null,
+    "value": 1.0,
+    "temperature": 1.7802019871716495,
+    "expanded": false,
+    "visit_count": 0,
+    "persistent": true,
+    "score_breakdown": {},
+    "metadata": {
+      "source": "tdca_run",
+      "memory_kind": "derived_fact",
+      "target_question": "How many venues are in the ESPN Wide World of Sports Complex?",
+      "target_question_norm": "how many venues are in the espn wide world of sports complex",
+      "relation_signature": "generic",
+      "answer_text": "9 venues",
+      "support_score": 0.8486095828722182,
+      "evidence_ids": [
+        "doc_6",
+        "doc_3"
+      ],
+      "slot_name": "",
+      "slot_role": "",
+      "terminal": false,
+      "derived_from_state": "state_4",
+      "diffusion_delta": 0.14076225032889877,
+      "diffusion_gain": 0.14076225032889877
+    }
+  },
+  "final_synthesis_node_ids": [
+    "state_3",
+    "state_4",
+    "memory_mem_5",
+    "state_12",
+    "state_1"
+  ],
+  "answer_history": [
+    {
+      "node_id": "memory_mem_4",
+      "content": "Conclusion: The answer to 'At which complex was Night of Joy held' is Walt Disney World Resort.",
+      "answer_text": "Walt Disney World Resort",
+      "value": 1.0,
+      "confidence": 1.0,
+      "evidence_ids": [
+        "doc_3"
+      ],
+      "step": 1,
+      "kind": "intermediate_answer"
+    },
+    {
+      "node_id": "memory_mem_5",
+      "content": "Conclusion: The answer to 'How many venues are in the ESPN Wide World of Sports Complex' is 9 venues.",
+      "answer_text": "9 venues",
+      "value": 0.92,
+      "evidence_ids": [
+        "doc_6",
+        "doc_3"
+      ],
+      "step": 2
+    },
+    {
+      "node_id": "state_4",
+      "answer_text": "9",
+      "previous_answer": "",
+      "confidence": 1.0,
+      "score": 0.8784038036895129,
+      "source": "expansion_candidate",
+      "step": 1,
+      "evidence_ids": [
+        "doc_6",
+        "doc_3",
+        "doc_10",
+        "doc_4"
+      ],
+      "kind": "anytime_answer"
+    },
+    {
+      "node_id": "memory_mem_6",
+      "content": "Conclusion: The answer to 'At which complex was Night of Joy held in its final years' is Magic Kingdom.",
+      "answer_text": "Magic Kingdom",
+      "value": 0.9999999973597208,
+      "confidence": 0.95,
+      "evidence_ids": [
+        "doc_3"
+      ],
+      "step": 3,
+      "kind": "intermediate_answer"
+    },
+    {
+      "node_id": "memory_mem_7",
+      "content": "Conclusion: The answer to 'How many venues are in the Walt Disney World Resort complex' is 9 venues.",
+      "answer_text": "9 venues",
+      "value": 1.0,
+      "confidence": 1.0,
+      "evidence_ids": [
+        "doc_6",
+        "doc_3"
+      ],
+      "step": 5,
+      "kind": "intermediate_answer"
+    },
+    {
+      "node_id": "memory_mem_7",
+      "answer_text": "9",
+      "previous_answer": "9",
+      "confidence": 1.0,
+      "score": 0.9145176227137585,
+      "source": "final_synthesis",
+      "step": 8,
+      "evidence_ids": [
+        "doc_6",
+        "doc_3",
+        "doc_10",
+        "doc_2"
+      ],
+      "kind": "anytime_answer"
+    },
+    {
+      "node_id": "memory_mem_5",
+      "content": "Conclusion: The answer to 'How many venues are in the ESPN Wide World of Sports Complex' is 9 venues.",
+      "answer_text": "9 venues",
+      "value": 1.0,
+      "evidence_ids": [
+        "doc_6",
+        "doc_3"
+      ],
+      "step": 9
+    },
+    {
+      "node_id": "memory_mem_5",
+      "answer_text": "9 venues",
+      "source": "answer_judge",
+      "choice": "A",
+      "candidate_source": "memory",
+      "base_score": 0.9513999996198972,
+      "rerank_score": 0.7189879996916209,
+      "judge_confidence": 0.0,
+      "judge_reason": "",
+      "step": 8,
+      "kind": "final_answer_selection"
+    }
+  ],
+  "anytime_answer": "9",
+  "anytime_answer_score": 0.9145176227137585,
+  "anytime_answer_source": "final_synthesis",
+  "anytime_answer_node_id": "memory_mem_7",
+  "stats": {
+    "steps": 8,
+    "llm_calls": 13,
+    "generated_tokens": 1085,
+    "token_budget_remaining": 115,
+    "total_nodes": 29,
+    "kg_nodes": 9,
+    "memory_nodes": 7,
+    "state_nodes": 13,
+    "deleted_state_nodes": 0,
+    "scheduler_mode": "tdca",
+    "scoring_mode": "hybrid",
+    "stop_reason": "final_synthesis_reserve",
+    "goal_kind": "bridge",
+    "goal_completion": 0.0,
+    "anytime_answer": "9",
+    "anytime_answer_score": 0.9145176227137585,
+    "anytime_answer_source": "final_synthesis"
+  }
+}

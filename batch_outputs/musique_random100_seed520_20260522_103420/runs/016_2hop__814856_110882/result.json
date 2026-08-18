@@ -1,0 +1,114 @@
+{
+  "question": "What is the Smile performer's birthday?",
+  "final_answer": "5 September 1946",
+  "best_node": {
+    "node_id": "state_1",
+    "node_type": "state",
+    "content": "What is the Smile performer's birthday?",
+    "depth": 0,
+    "parent_id": null,
+    "value": 0.8291517725531015,
+    "temperature": 0.5577151797948874,
+    "expanded": true,
+    "visit_count": 1,
+    "persistent": false,
+    "score_breakdown": {
+      "task_progress": 0.9618079496855548,
+      "evidence_support": 0.8876704402516317,
+      "memory_usefulness": 0.5139667251540021,
+      "answerability": 0.9438352201258159,
+      "uncertainty": 0.1402193207547063
+    },
+    "metadata": {
+      "diffusion_delta": -0.06640286894165814,
+      "diffusion_gain": 0.0
+    }
+  },
+  "final_synthesis_node_ids": [
+    "state_2",
+    "state_5",
+    "state_3",
+    "state_4",
+    "state_1"
+  ],
+  "answer_history": [
+    {
+      "node_id": "memory_mem_4",
+      "content": "Conclusion: The answer to 'Who was the performer in the band named Smile before Queen' is Mark Nesler.",
+      "answer_text": "Mark Nesler",
+      "value": 0.6455897953126902,
+      "evidence_ids": [
+        "doc_18",
+        "doc_17",
+        "doc_14",
+        "doc_1"
+      ],
+      "step": 1
+    },
+    {
+      "node_id": "memory_mem_5",
+      "content": "Conclusion: The answer to 'Who was the Smile performer that later joined Queen' is Freddie Mercury.",
+      "answer_text": "Freddie Mercury",
+      "value": 1.0,
+      "confidence": 1.0,
+      "evidence_ids": [
+        "doc_18",
+        "doc_14"
+      ],
+      "step": 4,
+      "kind": "intermediate_answer"
+    },
+    {
+      "node_id": "state_1",
+      "answer_text": "5 September 1946",
+      "previous_answer": "",
+      "confidence": 0.9438352201258159,
+      "score": 0.9470145305897716,
+      "source": "final_synthesis",
+      "step": 5,
+      "evidence_ids": [
+        "doc_18",
+        "doc_14",
+        "doc_1",
+        "doc_11"
+      ],
+      "kind": "anytime_answer"
+    },
+    {
+      "node_id": "state_1",
+      "answer_text": "5 September 1946",
+      "source": "answer_judge",
+      "choice": "A",
+      "candidate_source": "final_synthesis",
+      "base_score": 0.8383009684248495,
+      "rerank_score": 0.5720864067384368,
+      "judge_confidence": 0.0,
+      "judge_reason": "A directly answers the birthday question with a date; B names a person, not a birthday.",
+      "step": 5,
+      "kind": "final_answer_selection"
+    }
+  ],
+  "anytime_answer": "5 September 1946",
+  "anytime_answer_score": 0.9470145305897716,
+  "anytime_answer_source": "final_synthesis",
+  "anytime_answer_node_id": "state_1",
+  "stats": {
+    "steps": 5,
+    "llm_calls": 13,
+    "generated_tokens": 898,
+    "token_budget_remaining": 302,
+    "total_nodes": 18,
+    "kg_nodes": 8,
+    "memory_nodes": 5,
+    "state_nodes": 5,
+    "deleted_state_nodes": 0,
+    "scheduler_mode": "tdca",
+    "scoring_mode": "hybrid",
+    "stop_reason": "frontier_empty",
+    "goal_kind": "bridge",
+    "goal_completion": 0.0,
+    "anytime_answer": "5 September 1946",
+    "anytime_answer_score": 0.9470145305897716,
+    "anytime_answer_source": "final_synthesis"
+  }
+}

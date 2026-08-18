@@ -1,0 +1,953 @@
+{
+  "nodes": [
+    {
+      "node_id": "state_1",
+      "node_type": "state",
+      "content": "What city is the actress in Signora Enrica from?",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.6363344413289651,
+      "temperature": 1.1820580396675318,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.8356219656461006,
+        "evidence_support": 0.5165351930767664,
+        "memory_usefulness": 0.4634494347728014,
+        "answerability": 0.7582675965383833,
+        "uncertainty": 0.20702366524618204
+      },
+      "metadata": {
+        "diffusion_delta": 0.4293893036156371,
+        "diffusion_gain": 0.4293893036156371
+      }
+    },
+    {
+      "node_id": "kg_doc_9",
+      "node_type": "kg",
+      "content": "Signora Enrica () is a 2010 Italo-Turkish comedy-drama film, written and directed by Ali İlhan, starring Claudia Cardinale as an elderly Italian woman who takes in a young Turkish exchange student. The film, which is scheduled to go on nationwide general release across Turkey on , was selected for the 47th International Antalya Golden Orange Film Festival.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999984984853,
+      "temperature": 0.9999999984984853,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Signora Enrica",
+        "raw_score": 5.850055112079209,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_3",
+      "node_type": "kg",
+      "content": "Le foto proibite di una signora per bene, also known as Forbidden Photos of a Lady Above Suspicion, is a 1970 giallo film directed by Luciano Ercoli. Written by Ernesto Gastaldi and Mahnahén Velasco, the film stars Pier Paolo Capponi, Simon Andreu and Dagmar Lassander. The film, featuring a score written by Ennio Morricone, has received mixed to positive reviews from critics.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.08238876049111075,
+      "temperature": 0.08238876049111075,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Le foto proibite di una signora per bene",
+        "raw_score": 7.618811374479393,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_7",
+      "node_type": "kg",
+      "content": "Peppino e la vecchia signora (also known as \"Peppino e la nobile dama\") is a 1954 Italian comedy film directed by Emma Gramatica and Piero Ballerini.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.10754681672516972,
+      "temperature": 0.10754681672516972,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Peppino e la vecchia signora",
+        "raw_score": 8.165084901721674,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_19",
+      "node_type": "kg",
+      "content": "The Balloon Farm, an American musical act from New Jersey, took its name from a New York City nightclub. It is best known for its sole hit song, \"A Question of Temperature,\" which made the \"Billboard\" charts in February 1968, peaking in the top 40.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.25,
+      "temperature": 0.25,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "The Balloon Farm",
+        "raw_score": 2.1828025865204745,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "memory_mem_3",
+      "node_type": "memory",
+      "content": "Template: when evidence already grounds the answer, switch from branching to short verification and synthesis.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.8799999913901771,
+      "temperature": 0.7264108086093783,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.88,
+        "tag": "verification_then_stop",
+        "memory_kind": "template",
+        "raw_score": 1.286688493172756,
+        "source": "memory",
+        "diffusion_delta": -0.2729084577070594,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "memory_mem_1",
+      "node_type": "memory",
+      "content": "Template: for compositional multi-hop questions, first solve the intermediate entity and then ask for the final attribute.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9599999038694302,
+      "temperature": 0.7759041408384169,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.96,
+        "tag": "compositional_template",
+        "memory_kind": "template",
+        "raw_score": 0.36940229999162205,
+        "source": "memory",
+        "diffusion_delta": -0.05695462114097061,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "state_2",
+      "node_type": "state",
+      "content": "Who is the actress starring as Signora Enrica in the 2010 film 'Signora Enrica'?",
+      "depth": 1,
+      "parent_id": "state_1",
+      "value": 0.6016681252380744,
+      "temperature": 1.4573653494862704,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.7216162919213547,
+        "evidence_support": 0.5537734076118275,
+        "memory_usefulness": 0.5139667766205794,
+        "answerability": 0.7102200371392471,
+        "uncertainty": 0.20032078662987104
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_9",
+          "doc_7",
+          "doc_3",
+          "doc_4"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "goal_slot_name": "actress_in_signora_enrica",
+        "goal_slot_role": "generic",
+        "goal_terminal": false,
+        "diffusion_delta": 0.27885321413857933,
+        "diffusion_gain": 0.27885321413857933
+      }
+    },
+    {
+      "node_id": "kg_doc_4",
+      "node_type": "kg",
+      "content": "\"Le foto proibite di una signora per bene\" was released in Italy on November 19, 1970. The film has also been released under the title \"Forbidden Photos of a Lady Above Suspicion\". An English-language DVD release under the title \"The Forbidden Photos of a Lady Above Suspicion\" was published by Blue Underground on March 28, 2006.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0,
+      "temperature": 0.0,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Le foto proibite di una signora per bene",
+        "raw_score": 6.058451076227929,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "state_3",
+      "node_type": "state",
+      "content": "What is Claudia Cardinale's birthplace?",
+      "depth": 2,
+      "parent_id": "state_2",
+      "value": 0.6374515051860994,
+      "temperature": 0.5242056371647252,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.6721519179185356,
+        "evidence_support": 0.9050219808061505,
+        "memory_usefulness": 0.0,
+        "answerability": 0.7969554348475196,
+        "uncertainty": 0.1370960434548929
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_5",
+          "doc_9",
+          "doc_17",
+          "doc_15"
+        ],
+        "memory_ids": [],
+        "diffusion_delta": -0.04892687329696033,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "kg_doc_5",
+      "node_type": "kg",
+      "content": "Claudia Cardinale was born Claude Joséphine Rose Cardinale in La Goulette, a neighborhood of Tunis, French protectorate of Tunisia, on 15 April 1938. Her mother, Yolande Greco, was born in Tunisia to Sicilian emigrants from Trapani. Her maternal grandparents had a small shipbuilding firm in Trapani, but later settled in La Goulette, where a large Italian community existed. Her father, Francesco Cardinale, was a railway worker, born in Gela, Sicily. Her native languages were French, Tunisian Arabic, and the Sicilian language of her parents. She did not learn to speak Italian until she had already begun to be cast for Italian films.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999952870617,
+      "temperature": 0.9999999952870617,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Claudia Cardinale",
+        "raw_score": 5.7781635173340975,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_17",
+      "node_type": "kg",
+      "content": "Chris Vitali (born 1974) is an American musician. Known for his flamboyant style of playing the bass guitar, Vitali has played in numerous bands in the New York City rock scene since 1990. Most notably, he was the bassist for New York City's prolific hard rock act Orange 9mm from 1995-1999. His other projects have included Hermaphrochrist, Burn, Head Assembly, and The Fuzz (not to be confused with the 1970s musical act The Fuzz).",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.031966046931550245,
+      "temperature": 0.031966046931550245,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Chris Vitali",
+        "raw_score": 1.7982703068935284,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_15",
+      "node_type": "kg",
+      "content": "Darwin (/ ˈdɑːrwɪn / (listen) DAR - win) is the capital city of the Northern Territory of Australia. Situated on the Timor Sea, Darwin is the largest city in the sparsely populated Northern Territory, with a population of 142,300. It is the smallest and most northerly of the Australian capital cities, and acts as the Top End's regional centre.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.25,
+      "temperature": 0.25,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Darwin, Northern Territory",
+        "raw_score": 2.304663978865464,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "memory_mem_4",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'Who is the actress starring as Signora Enrica in the 2010 film 'Signora Enrica'' is Claudia Cardinale.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999984984853,
+      "temperature": 1.1139112087096386,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "intermediate_answer",
+        "target_question": "Who is the actress starring as Signora Enrica in the 2010 film 'Signora Enrica'?",
+        "target_question_norm": "who is the actress starring as signora enrica in the 2010 film signora enrica",
+        "relation_signature": "generic",
+        "answer_text": "Claudia Cardinale",
+        "support_score": 0.9999999984984853,
+        "evidence_ids": [
+          "doc_9"
+        ],
+        "slot_name": "actress_in_signora_enrica",
+        "slot_role": "generic",
+        "terminal": false,
+        "derived_from_state": "state_2",
+        "diffusion_delta": 0.014905806074588135,
+        "diffusion_gain": 0.014905806074588135
+      }
+    },
+    {
+      "node_id": "state_4",
+      "node_type": "state",
+      "content": "What city is Claudia Cardinale from?",
+      "depth": 2,
+      "parent_id": "state_2",
+      "value": 0.7572633572695746,
+      "temperature": 0.9322749873277181,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.7867629347997478,
+        "evidence_support": 0.9937471938554672,
+        "memory_usefulness": 0.2960073369384547,
+        "answerability": 0.8857624858166224,
+        "uncertainty": 0.1211255051060159
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_9",
+          "doc_5",
+          "doc_19",
+          "doc_20"
+        ],
+        "memory_ids": [
+          "mem_3"
+        ],
+        "diffusion_delta": 0.5986207393919313,
+        "diffusion_gain": 0.5986207393919313
+      }
+    },
+    {
+      "node_id": "kg_doc_20",
+      "node_type": "kg",
+      "content": "The Fred Schwengel Memorial Bridge is a 4-lane steel girder bridge that carries Interstate 80 across the Mississippi River between LeClaire, Iowa and Rapids City, Illinois. The bridge is named for Fred Schwengel, a former U.S. Representative from Davenport, Iowa and one of the driving forces behind the Interstate Highway Act. The bridge opened October 27, 1966 and overlooks the Illinois Welcome center as well as Rapids City, Illinois and LeClaire, Iowa.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0,
+      "temperature": 0.0,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Fred Schwengel Memorial Bridge",
+        "raw_score": 2.160127477688371,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "memory_mem_5",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'What city is Claudia Cardinale from' is La Goulette.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9080400000000001,
+      "temperature": 0.9771135147899812,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "answer_candidate",
+        "target_question": "What city is Claudia Cardinale from?",
+        "target_question_norm": "what city is claudia cardinale from",
+        "relation_signature": "generic",
+        "answer_text": "La Goulette",
+        "support_score": 0.9937471938554672,
+        "evidence_ids": [
+          "doc_9",
+          "doc_5"
+        ],
+        "slot_name": "path_terminal",
+        "slot_role": "target_attribute",
+        "terminal": true,
+        "path_terminal": true,
+        "composition_kind": "path_terminal",
+        "derived_from_state": "state_4",
+        "diffusion_delta": -0.16140251502950553,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "memory_mem_6",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'What city is the actress in Signora Enrica from' is La Goulette.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.96,
+      "temperature": 0.96,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "answer_candidate",
+        "target_question": "What city is the actress in Signora Enrica from?",
+        "target_question_norm": "what city is the actress in signora enrica from",
+        "relation_signature": "generic",
+        "answer_text": "La Goulette",
+        "support_score": 0.96,
+        "evidence_ids": [
+          "doc_2",
+          "doc_5",
+          "doc_9",
+          "doc_15",
+          "doc_19"
+        ],
+        "slot_role": "target_attribute",
+        "terminal": true,
+        "path_terminal": true,
+        "coverage_count": 1,
+        "coverage_ratio": 1.0,
+        "composition_kind": "path_terminal",
+        "diffusion_delta": -0.2191468410135382,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "kg_doc_2",
+      "node_type": "kg",
+      "content": "Born in San Rafael, California into a family that was allegedly descended from one of the earliest Spanish families to settle in California, Marin Sais began her acting career as a teenager after travelling to New York City where she appeared in vaudeville.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.25,
+      "temperature": 0.25,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Marin Sais",
+        "source": "kg"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "source": "state_1",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.9999999946422151
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.033070391511317736
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.01537468753611518
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_19",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.8799999913901771
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.04689887815542571
+    },
+    {
+      "source": "state_1",
+      "target": "state_2",
+      "edge_type": "refines",
+      "weight": 1.0
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_6",
+      "edge_type": "derives",
+      "weight": 0.96
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.9999999946422151
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.9999999984984853
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.8100439663252392
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.9999999984984853
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.9999999948837993
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.9999999948837993
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.25
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.033070391511317736
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.08238876049111075
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.08238876049111075
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.01537468753611518
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.10754681672516972
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.10754681672516972
+    },
+    {
+      "source": "kg_doc_19",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_19",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.003944353837902773
+    },
+    {
+      "source": "kg_doc_19",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.003944353837902773
+    },
+    {
+      "source": "kg_doc_19",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.25
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.8799999913901771
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_2",
+      "edge_type": "recalls",
+      "weight": 0.06793364937172863
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "memory_mem_4",
+      "edge_type": "recalls",
+      "weight": 0.06793364937172863
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_4",
+      "edge_type": "recalls",
+      "weight": 0.2960073369384547
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "memory_mem_5",
+      "edge_type": "recalls",
+      "weight": 0.2960073369384547
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.04689887815542571
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_2",
+      "edge_type": "recalls",
+      "weight": 0.9599999038694302
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "memory_mem_4",
+      "edge_type": "recalls",
+      "weight": 0.9599999038694302
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.9999999984984853
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.10754681672516972
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.08238876049111075
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_2",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.9599999038694302
+    },
+    {
+      "source": "state_2",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.06793364937172863
+    },
+    {
+      "source": "state_2",
+      "target": "state_3",
+      "edge_type": "refines",
+      "weight": 0.95
+    },
+    {
+      "source": "state_2",
+      "target": "memory_mem_4",
+      "edge_type": "derives",
+      "weight": 0.9999999984984853
+    },
+    {
+      "source": "state_2",
+      "target": "state_4",
+      "edge_type": "refines",
+      "weight": 0.84
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.9999999952870617
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.8100439663252392
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_17",
+      "edge_type": "supports",
+      "weight": 0.031966046931550245
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_15",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.9999999952870617
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.9874943928271349
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.9874943928271349
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.55
+    },
+    {
+      "source": "kg_doc_17",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.031966046931550245
+    },
+    {
+      "source": "kg_doc_15",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_15",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.25
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "state_2",
+      "edge_type": "recalls",
+      "weight": 0.9999999984984853
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.9999999984984853
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.10754681672516972
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.08238876049111075
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.9599999038694302
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.06793364937172863
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.9999999948837993
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.9874943928271349
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_19",
+      "edge_type": "supports",
+      "weight": 0.003944353837902773
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_20",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_4",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.2960073369384547
+    },
+    {
+      "source": "state_4",
+      "target": "memory_mem_5",
+      "edge_type": "derives",
+      "weight": 0.9937471938554672
+    },
+    {
+      "source": "kg_doc_20",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_20",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "state_4",
+      "edge_type": "recalls",
+      "weight": 0.9937471938554672
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.9999999948837993
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.9874943928271349
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_19",
+      "edge_type": "supports",
+      "weight": 0.003944353837902773
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_20",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.2960073369384547
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.96
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.25
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.55
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.25
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_15",
+      "edge_type": "supports",
+      "weight": 0.25
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_19",
+      "edge_type": "supports",
+      "weight": 0.25
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.25
+    }
+  ]
+}

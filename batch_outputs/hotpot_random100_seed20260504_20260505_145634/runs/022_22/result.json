@@ -1,0 +1,159 @@
+{
+  "question": "Tui Flower and Julia child were both known for what?",
+  "final_answer": "food writing and cooking",
+  "best_node": {
+    "node_id": "state_1",
+    "node_type": "state",
+    "content": "Tui Flower and Julia child were both known for what?",
+    "depth": 0,
+    "parent_id": null,
+    "value": 0.7925869891616056,
+    "temperature": 1.0284311547426714,
+    "expanded": true,
+    "visit_count": 1,
+    "persistent": false,
+    "score_breakdown": {
+      "task_progress": 0.9505682622359636,
+      "evidence_support": 0.854612535988128,
+      "memory_usefulness": 0.4895496754364972,
+      "answerability": 0.8273062679940639,
+      "uncertainty": 0.14616974352213696
+    },
+    "metadata": {
+      "diffusion_delta": 0.5067703238651811,
+      "diffusion_gain": 0.5067703238651811
+    }
+  },
+  "final_synthesis_node_ids": [
+    "state_4",
+    "state_2",
+    "memory_mem_7",
+    "memory_mem_4",
+    "state_1"
+  ],
+  "answer_history": [
+    {
+      "node_id": "",
+      "answer_text": "Cooking and television cooking shows",
+      "previous_answer": "",
+      "confidence": 0.28,
+      "score": 0.16880000000000003,
+      "source": "closed_book_initial",
+      "step": 0,
+      "evidence_ids": [],
+      "kind": "anytime_answer"
+    },
+    {
+      "node_id": "memory_mem_4",
+      "content": "Conclusion: The answer to 'What was Tui Flower known for' is a pioneering New Zealand food writer.",
+      "answer_text": "a pioneering New Zealand food writer",
+      "value": 1.0,
+      "confidence": 1.0,
+      "evidence_ids": [
+        "doc_5"
+      ],
+      "step": 2,
+      "kind": "intermediate_answer"
+    },
+    {
+      "node_id": "memory_mem_5",
+      "content": "Conclusion: The answer to 'What is the common professional domain linking Tui Flower and Julia Child' is food writing and cooking.",
+      "answer_text": "food writing and cooking",
+      "value": 0.9999999936083436,
+      "confidence": 0.95,
+      "evidence_ids": [
+        "doc_5",
+        "doc_4"
+      ],
+      "step": 3,
+      "kind": "intermediate_answer"
+    },
+    {
+      "node_id": "memory_mem_6",
+      "content": "Conclusion: The answer to 'What was Julia Child known for' is an American chef, author and television personality.",
+      "answer_text": "an American chef, author and television personality",
+      "value": 0.9999999783958627,
+      "confidence": 0.95,
+      "evidence_ids": [
+        "doc_2"
+      ],
+      "step": 4,
+      "kind": "intermediate_answer"
+    },
+    {
+      "node_id": "memory_mem_7",
+      "content": "Conclusion: The answer to 'Tui Flower and Julia child were both known for what' is an American chef, author and television personality.",
+      "answer_text": "an American chef, author and television personality",
+      "value": 1.0,
+      "evidence_ids": [
+        "doc_5",
+        "doc_2"
+      ],
+      "step": 4
+    },
+    {
+      "node_id": "memory_mem_7",
+      "answer_text": "chefs, authors, and television personalities",
+      "previous_answer": "Cooking and television cooking shows",
+      "confidence": 1.0,
+      "score": 0.8734583676396406,
+      "source": "final_synthesis",
+      "step": 4,
+      "evidence_ids": [],
+      "kind": "anytime_answer"
+    },
+    {
+      "node_id": "state_1",
+      "answer_text": "food writing and cooking",
+      "confidence": 0.7139999972811103,
+      "score": 0.7139999972811103,
+      "source": "root_state_synthesis",
+      "step": 4,
+      "evidence_ids": [
+        "doc_5",
+        "doc_2",
+        "doc_9",
+        "doc_1"
+      ],
+      "kind": "root_state_synthesis_candidate"
+    },
+    {
+      "node_id": "state_1",
+      "answer_text": "food writing and cooking",
+      "source": "answer_judge",
+      "choice": "B",
+      "candidate_source": "root_state_synthesis",
+      "base_score": 0.9898773510961639,
+      "judge_confidence": 0.0,
+      "judge_reason": "Directly answers 'known for what' with shared domain: food writing and cooking.",
+      "step": 4,
+      "kind": "final_answer_selection"
+    }
+  ],
+  "anytime_answer": "chefs, authors, and television personalities",
+  "anytime_answer_score": 0.8734583676396406,
+  "anytime_answer_source": "final_synthesis",
+  "anytime_answer_node_id": "memory_mem_7",
+  "root_state_synthesis_answer": "food writing and cooking",
+  "root_state_synthesis_score": 0.7139999972811103,
+  "root_state_synthesis_node_id": "state_1",
+  "stats": {
+    "steps": 4,
+    "llm_calls": 12,
+    "generated_tokens": 702,
+    "token_budget_remaining": 498,
+    "total_nodes": 22,
+    "kg_nodes": 8,
+    "memory_nodes": 7,
+    "state_nodes": 7,
+    "deleted_state_nodes": 0,
+    "scheduler_mode": "tdca",
+    "scoring_mode": "hybrid",
+    "stop_reason": "high_confidence_root_memory",
+    "goal_kind": "bridge",
+    "goal_completion": 1.0,
+    "anytime_answer": "chefs, authors, and television personalities",
+    "anytime_answer_score": 0.8734583676396406,
+    "anytime_answer_source": "final_synthesis"
+  }
+}

@@ -1,0 +1,160 @@
+{
+  "question": "Where are Teide National Park and Garajonay National Park located?",
+  "final_answer": "Teide National Park is in Tenerife, Canary Islands, Spain; Garajonay National Park is on La Gomera, Canary Islands, Spain",
+  "best_node": {
+    "node_id": "state_1",
+    "node_type": "state",
+    "content": "Where are Teide National Park and Garajonay National Park located?",
+    "depth": 0,
+    "parent_id": null,
+    "value": 0.8686578873547566,
+    "temperature": 1.3019444875129935,
+    "expanded": true,
+    "visit_count": 1,
+    "persistent": false,
+    "score_breakdown": {
+      "task_progress": 0.9586551989203702,
+      "evidence_support": 0.8783976438834415,
+      "memory_usefulness": 0.8820682746050714,
+      "answerability": 0.9391988219417208,
+      "uncertainty": 0.14188842410098051
+    },
+    "metadata": {
+      "diffusion_delta": 0.037188519973304635,
+      "diffusion_gain": 0.037188519973304635
+    }
+  },
+  "final_synthesis_node_ids": [
+    "state_3",
+    "state_2",
+    "memory_mem_5",
+    "memory_mem_4",
+    "state_1"
+  ],
+  "answer_history": [
+    {
+      "node_id": "",
+      "answer_text": "Teide National Park is located on Tenerife in the Canary Islands, Spain; Garajonay National Park is located on La Gomera in the Canary Islands, Spain",
+      "previous_answer": "",
+      "confidence": 0.28,
+      "score": 0.16880000000000003,
+      "source": "closed_book_initial",
+      "step": 0,
+      "evidence_ids": [],
+      "kind": "anytime_answer"
+    },
+    {
+      "node_id": "memory_mem_4",
+      "content": "Conclusion: The answer to 'Where is Teide National Park located' is Teide National Park is in Tenerife, Canary Islands, Spain.",
+      "answer_text": "Teide National Park is in Tenerife, Canary Islands, Spain",
+      "value": 0.782,
+      "evidence_ids": [
+        "doc_7",
+        "doc_3"
+      ],
+      "step": 2
+    },
+    {
+      "node_id": "state_2",
+      "answer_text": "Teide National Park is in Tenerife, Canary Islands, Spain",
+      "previous_answer": "Teide National Park is located on Tenerife in the Canary Islands, Spain; Garajonay National Park is located on La Gomera in the Canary Islands, Spain",
+      "confidence": 0.85,
+      "score": 0.7767094083957302,
+      "source": "expansion_candidate",
+      "step": 1,
+      "evidence_ids": [
+        "doc_7",
+        "doc_3",
+        "doc_9",
+        "doc_6"
+      ],
+      "kind": "anytime_answer"
+    },
+    {
+      "node_id": "memory_mem_5",
+      "content": "Conclusion: The answer to 'Where is Garajonay National Park located' is Garajonay National Park is located on La Gomera, Canary Islands, Spain.",
+      "answer_text": "Garajonay National Park is located on La Gomera, Canary Islands, Spain",
+      "value": 0.874,
+      "evidence_ids": [
+        "doc_2",
+        "doc_1"
+      ],
+      "step": 3
+    },
+    {
+      "node_id": "state_3",
+      "answer_text": "Garajonay National Park is located on La Gomera, Canary Islands, Spain",
+      "previous_answer": "Teide National Park is in Tenerife, Canary Islands, Spain",
+      "confidence": 0.95,
+      "score": 0.8201348512466452,
+      "source": "expansion_candidate",
+      "step": 2,
+      "evidence_ids": [
+        "doc_2",
+        "doc_1",
+        "doc_7",
+        "doc_9"
+      ],
+      "kind": "anytime_answer"
+    },
+    {
+      "node_id": "state_1",
+      "answer_text": "Teide National Park is in Tenerife, Canary Islands, Spain; Garajonay National Park is on La Gomera, Canary Islands, Spain",
+      "previous_answer": "Garajonay National Park is located on La Gomera, Canary Islands, Spain",
+      "confidence": 0.9391988219417208,
+      "score": 1.0,
+      "source": "final_synthesis",
+      "step": 5,
+      "evidence_ids": [
+        "doc_7",
+        "doc_2",
+        "doc_1",
+        "doc_3"
+      ],
+      "kind": "anytime_answer"
+    },
+    {
+      "node_id": "memory_mem_6",
+      "content": "Conclusion: The answer to 'Where are Teide National Park and Garajonay National Park located' is Teide National Park is in Tenerife, Canary Islands, Spain; Garajonay National Park is on La Gomera, Canary Islands, Spain.",
+      "answer_text": "Teide National Park is in Tenerife, Canary Islands, Spain; Garajonay National Park is on La Gomera, Canary Islands, Spain",
+      "value": 0.0,
+      "evidence_ids": [],
+      "step": 6
+    },
+    {
+      "node_id": "state_1",
+      "answer_text": "Teide National Park is in Tenerife, Canary Islands, Spain; Garajonay National Park is on La Gomera, Canary Islands, Spain",
+      "source": "answer_judge",
+      "choice": "A",
+      "candidate_source": "final_synthesis",
+      "base_score": 0.9254782987760622,
+      "judge_confidence": 0.0,
+      "judge_reason": "A directly answers the original question by naming both parks' locations concisely and correctly.",
+      "step": 5,
+      "kind": "final_answer_selection"
+    }
+  ],
+  "anytime_answer": "Teide National Park is in Tenerife, Canary Islands, Spain; Garajonay National Park is on La Gomera, Canary Islands, Spain",
+  "anytime_answer_score": 1.0,
+  "anytime_answer_source": "final_synthesis",
+  "anytime_answer_node_id": "state_1",
+  "stats": {
+    "steps": 5,
+    "llm_calls": 10,
+    "generated_tokens": 831,
+    "token_budget_remaining": 369,
+    "total_nodes": 16,
+    "kg_nodes": 8,
+    "memory_nodes": 5,
+    "state_nodes": 3,
+    "deleted_state_nodes": 2,
+    "scheduler_mode": "tdca",
+    "scoring_mode": "hybrid",
+    "stop_reason": "frontier_empty",
+    "goal_kind": "multi_fact",
+    "goal_completion": 0.0,
+    "anytime_answer": "Teide National Park is in Tenerife, Canary Islands, Spain; Garajonay National Park is on La Gomera, Canary Islands, Spain",
+    "anytime_answer_score": 1.0,
+    "anytime_answer_source": "final_synthesis"
+  }
+}

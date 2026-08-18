@@ -1,0 +1,150 @@
+{
+  "question": "susquehanna university and paul musser are both in what city?",
+  "final_answer": "Millheim, Pennsylvania",
+  "best_node": {
+    "node_id": "state_1",
+    "node_type": "state",
+    "content": "susquehanna university and paul musser are both in what city?",
+    "depth": 0,
+    "parent_id": null,
+    "value": 0.7067873123696048,
+    "temperature": 1.3698942112534316,
+    "expanded": true,
+    "visit_count": 1,
+    "persistent": false,
+    "score_breakdown": {
+      "task_progress": 0.8492831887952677,
+      "evidence_support": 0.5567152611625518,
+      "memory_usefulness": 0.8820682746050714,
+      "answerability": 0.7783576305812759,
+      "uncertainty": 0.1997912529907407
+    },
+    "metadata": {
+      "diffusion_delta": 0.3995576959126481,
+      "diffusion_gain": 0.3995576959126481
+    }
+  },
+  "final_synthesis_node_ids": [
+    "memory_mem_6",
+    "state_3",
+    "state_2",
+    "memory_mem_4",
+    "state_1"
+  ],
+  "answer_history": [
+    {
+      "node_id": "",
+      "answer_text": "Selinsgrove",
+      "previous_answer": "",
+      "confidence": 0.28,
+      "score": 0.16880000000000003,
+      "source": "closed_book_initial",
+      "step": 0,
+      "evidence_ids": [],
+      "kind": "anytime_answer"
+    },
+    {
+      "node_id": "memory_mem_4",
+      "content": "Conclusion: The answer to 'What city is Paul Musser from' is Millheim, Pennsylvania.",
+      "answer_text": "Millheim, Pennsylvania",
+      "value": 1.0,
+      "confidence": 1.0,
+      "evidence_ids": [
+        "doc_2"
+      ],
+      "step": 2,
+      "kind": "intermediate_answer"
+    },
+    {
+      "node_id": "memory_mem_5",
+      "content": "Conclusion: The answer to 'What city is Susquehanna University located in' is Selinsgrove.",
+      "answer_text": "Selinsgrove",
+      "value": 1.0,
+      "confidence": 1.0,
+      "evidence_ids": [
+        "doc_5",
+        "doc_4",
+        "doc_7"
+      ],
+      "step": 3,
+      "kind": "intermediate_answer"
+    },
+    {
+      "node_id": "memory_mem_6",
+      "content": "Conclusion: The answer to 'susquehanna university and paul musser are both in what city' is Millheim, Pennsylvania.",
+      "answer_text": "Millheim, Pennsylvania",
+      "value": 1.0,
+      "evidence_ids": [
+        "doc_5",
+        "doc_4",
+        "doc_7",
+        "doc_2"
+      ],
+      "step": 3
+    },
+    {
+      "node_id": "memory_mem_6",
+      "answer_text": "Millheim, Pennsylvania",
+      "previous_answer": "Selinsgrove",
+      "confidence": 1.0,
+      "score": 0.8842943150363555,
+      "source": "final_synthesis",
+      "step": 3,
+      "evidence_ids": [],
+      "kind": "anytime_answer"
+    },
+    {
+      "node_id": "state_1",
+      "answer_text": "Millheim, Pennsylvania",
+      "confidence": 0.9339999954436813,
+      "score": 0.9339999954436813,
+      "source": "root_state_synthesis",
+      "step": 3,
+      "evidence_ids": [
+        "doc_2",
+        "doc_3",
+        "doc_4",
+        "doc_9"
+      ],
+      "kind": "root_state_synthesis_candidate"
+    },
+    {
+      "node_id": "state_1",
+      "answer_text": "Millheim, Pennsylvania",
+      "source": "answer_judge",
+      "choice": "A",
+      "candidate_source": "root_state_synthesis",
+      "base_score": 1.0,
+      "judge_confidence": 0.0,
+      "judge_reason": "Paul Musser is from Millheim; Susquehanna University is in Selinsgrove — they are not in the same city, so the premise is false. But candidate A directly answers the question as posed, grounded in doc_1 stating Musser is 'a native of Millheim, Pennsylvania' and attended Susquehanna University — implying association, not co-location. Candidate B (Selinsgrove) is only where the university is, not where Musser is.",
+      "step": 3,
+      "kind": "final_answer_selection"
+    }
+  ],
+  "anytime_answer": "Millheim, Pennsylvania",
+  "anytime_answer_score": 0.8842943150363555,
+  "anytime_answer_source": "final_synthesis",
+  "anytime_answer_node_id": "memory_mem_6",
+  "root_state_synthesis_answer": "Millheim, Pennsylvania",
+  "root_state_synthesis_score": 0.9339999954436813,
+  "root_state_synthesis_node_id": "state_1",
+  "stats": {
+    "steps": 3,
+    "llm_calls": 10,
+    "generated_tokens": 660,
+    "token_budget_remaining": 540,
+    "total_nodes": 21,
+    "kg_nodes": 9,
+    "memory_nodes": 5,
+    "state_nodes": 7,
+    "deleted_state_nodes": 0,
+    "scheduler_mode": "tdca",
+    "scoring_mode": "hybrid",
+    "stop_reason": "high_confidence_root_memory",
+    "goal_kind": "bridge",
+    "goal_completion": 1.0,
+    "anytime_answer": "Millheim, Pennsylvania",
+    "anytime_answer_score": 0.8842943150363555,
+    "anytime_answer_source": "final_synthesis"
+  }
+}

@@ -1,0 +1,173 @@
+{
+  "question": "Where is the company that distributed XXXTentacion's single \"Revenge\" based?",
+  "final_answer": "San Francisco, CA",
+  "best_node": {
+    "node_id": "memory_mem_6",
+    "node_type": "memory",
+    "content": "Conclusion: The answer to 'Where is the company that distributed XXXTentacion's single \"Revenge\" based' is San Francisco, CA.",
+    "depth": 0,
+    "parent_id": null,
+    "value": 1.0,
+    "temperature": 1.4993138725353985,
+    "expanded": false,
+    "visit_count": 0,
+    "persistent": true,
+    "score_breakdown": {},
+    "metadata": {
+      "source": "tdca_run",
+      "memory_kind": "answer_candidate",
+      "target_question": "Where is the company that distributed XXXTentacion's single \"Revenge\" based?",
+      "target_question_norm": "where is the company that distributed xxxtentacion s single revenge based",
+      "relation_signature": "generic",
+      "answer_text": "San Francisco, CA",
+      "support_score": 1.0,
+      "derived_from_state": "state_1",
+      "composed_from": [
+        "memory_mem_4",
+        "memory_mem_5"
+      ],
+      "slot_role": "target_attribute",
+      "terminal": true,
+      "coverage_count": 1,
+      "coverage_ratio": 1.0,
+      "composition_kind": "attribute_after_bridge",
+      "diffusion_delta": -0.03722330021308151,
+      "diffusion_gain": 0.0,
+      "score": 1.0,
+      "raw_score": 9.999964778478207
+    }
+  },
+  "final_synthesis_node_ids": [
+    "state_2",
+    "memory_mem_6",
+    "state_3",
+    "state_4",
+    "state_1"
+  ],
+  "answer_history": [
+    {
+      "node_id": "memory_mem_4",
+      "content": "Conclusion: The answer to 'Which company distributed XXXTentacion's single \"Revenge\"' is Empire Distribution.",
+      "answer_text": "Empire Distribution",
+      "value": 1.0,
+      "confidence": 1.0,
+      "evidence_ids": [
+        "doc_10",
+        "doc_6",
+        "doc_9"
+      ],
+      "step": 1,
+      "kind": "intermediate_answer"
+    },
+    {
+      "node_id": "state_2",
+      "answer_text": "Empire Distribution",
+      "previous_answer": "",
+      "confidence": 0.95,
+      "score": 0.8238677155172687,
+      "source": "expansion_candidate",
+      "step": 0,
+      "evidence_ids": [
+        "doc_10",
+        "doc_6",
+        "doc_9",
+        "doc_7"
+      ],
+      "kind": "anytime_answer"
+    },
+    {
+      "node_id": "memory_mem_5",
+      "content": "Conclusion: The answer to 'Where is Empire Distribution based' is San Francisco, CA.",
+      "answer_text": "San Francisco, CA",
+      "value": 0.8169764472084285,
+      "evidence_ids": [
+        "doc_9",
+        "doc_10"
+      ],
+      "step": 2
+    },
+    {
+      "node_id": "memory_mem_6",
+      "content": "Conclusion: The answer to 'Where is the company that distributed XXXTentacion's single \"Revenge\" based' is San Francisco, CA.",
+      "answer_text": "San Francisco, CA",
+      "value": 1.0,
+      "score": 1.0,
+      "source": "composed_root_memory",
+      "evidence_ids": [
+        "doc_10",
+        "doc_6",
+        "doc_9"
+      ],
+      "step": 2,
+      "kind": "composed_root_memory"
+    },
+    {
+      "node_id": "state_4",
+      "answer_text": "San Francisco, CA",
+      "previous_answer": "Empire Distribution",
+      "confidence": 0.8880178774004658,
+      "score": 0.904201626845174,
+      "source": "grounded",
+      "step": 1,
+      "evidence_ids": [
+        "doc_9",
+        "doc_10",
+        "doc_7",
+        "doc_2"
+      ],
+      "kind": "anytime_answer"
+    },
+    {
+      "node_id": "state_1",
+      "answer_text": "San Francisco, CA",
+      "previous_answer": "San Francisco, CA",
+      "confidence": 0.95,
+      "score": 0.9484056406040338,
+      "source": "expansion_candidate",
+      "step": 2,
+      "evidence_ids": [
+        "doc_10",
+        "doc_9",
+        "doc_6",
+        "doc_7"
+      ],
+      "kind": "anytime_answer"
+    },
+    {
+      "node_id": "memory_mem_6",
+      "answer_text": "San Francisco, CA",
+      "source": "answer_judge",
+      "choice": "A",
+      "candidate_source": "final_synthesis",
+      "base_score": 1.0,
+      "rerank_score": 0.7917647058823529,
+      "judge_confidence": 0.0,
+      "judge_reason": "",
+      "step": 3,
+      "kind": "final_answer_selection"
+    }
+  ],
+  "anytime_answer": "San Francisco, CA",
+  "anytime_answer_score": 0.9484056406040338,
+  "anytime_answer_source": "expansion_candidate",
+  "anytime_answer_node_id": "state_1",
+  "stats": {
+    "steps": 3,
+    "llm_calls": 5,
+    "generated_tokens": 289,
+    "token_budget_remaining": 911,
+    "total_nodes": 15,
+    "kg_nodes": 5,
+    "memory_nodes": 5,
+    "state_nodes": 5,
+    "deleted_state_nodes": 0,
+    "scheduler_mode": "tdca",
+    "scoring_mode": "hybrid",
+    "stop_reason": "llm_stop_with_root_memory",
+    "goal_kind": "nested_relation",
+    "goal_completion": 1.0,
+    "anytime_answer": "San Francisco, CA",
+    "anytime_answer_score": 0.9484056406040338,
+    "anytime_answer_source": "expansion_candidate"
+  }
+}

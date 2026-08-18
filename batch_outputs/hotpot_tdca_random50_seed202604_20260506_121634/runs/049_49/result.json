@@ -1,0 +1,107 @@
+{
+  "question": "Did both Alan Crosland and Chris Columbus work as stage actor?",
+  "final_answer": "No",
+  "best_node": {
+    "node_id": "state_1",
+    "node_type": "state",
+    "content": "Did both Alan Crosland and Chris Columbus work as stage actor?",
+    "depth": 0,
+    "parent_id": null,
+    "value": 0.8241530883951097,
+    "temperature": 1.1230181361412055,
+    "expanded": true,
+    "visit_count": 1,
+    "persistent": false,
+    "score_breakdown": {
+      "task_progress": 0.9400708752989873,
+      "evidence_support": 0.8237378685264329,
+      "memory_usefulness": 0.8820682746050714,
+      "answerability": 0.8118689342632164,
+      "uncertainty": 0.15172718366524207
+    },
+    "metadata": {
+      "diffusion_delta": -0.1151275197956223,
+      "diffusion_gain": 0.0
+    }
+  },
+  "final_synthesis_node_ids": [
+    "state_2",
+    "state_3",
+    "memory_mem_4",
+    "state_1"
+  ],
+  "answer_history": [
+    {
+      "node_id": "memory_mem_4",
+      "content": "Conclusion: The answer to 'Was Alan Crosland a stage actor' is Yes.",
+      "answer_text": "Yes",
+      "value": 1.0,
+      "confidence": 1.0,
+      "evidence_ids": [
+        "doc_1",
+        "doc_9"
+      ],
+      "step": 3,
+      "kind": "intermediate_answer"
+    },
+    {
+      "node_id": "state_1",
+      "answer_text": "No",
+      "previous_answer": "",
+      "confidence": 0.8241530883951097,
+      "score": 0.9431613628105063,
+      "source": "final_synthesis",
+      "step": 3,
+      "evidence_ids": [
+        "doc_2",
+        "doc_1",
+        "doc_9",
+        "doc_6"
+      ],
+      "kind": "anytime_answer"
+    },
+    {
+      "node_id": "memory_mem_5",
+      "content": "Conclusion: The answer to 'Did both Alan Crosland and Chris Columbus work as stage actor' is No.",
+      "answer_text": "No",
+      "value": 0.0,
+      "evidence_ids": [],
+      "step": 4
+    },
+    {
+      "node_id": "state_1",
+      "answer_text": "No",
+      "source": "answer_judge",
+      "choice": "A",
+      "candidate_source": "final_synthesis",
+      "base_score": 0.9365742284995288,
+      "judge_confidence": 0.0,
+      "judge_reason": "Alan Crosland was a stage actor (doc_1), but Chris Columbus's evidence shows only filmmaking, not stage acting.",
+      "step": 3,
+      "kind": "final_answer_selection"
+    }
+  ],
+  "anytime_answer": "No",
+  "anytime_answer_score": 0.9431613628105063,
+  "anytime_answer_source": "final_synthesis",
+  "anytime_answer_node_id": "state_1",
+  "stats": {
+    "steps": 3,
+    "llm_calls": 9,
+    "generated_tokens": 673,
+    "token_budget_remaining": 527,
+    "total_nodes": 13,
+    "kg_nodes": 6,
+    "memory_nodes": 4,
+    "state_nodes": 3,
+    "deleted_state_nodes": 0,
+    "scheduler_mode": "tdca",
+    "scoring_mode": "hybrid",
+    "stop_reason": "frontier_empty",
+    "goal_kind": "comparison",
+    "goal_completion": 0.5,
+    "anytime_answer": "No",
+    "anytime_answer_score": 0.9431613628105063,
+    "anytime_answer_source": "final_synthesis"
+  }
+}

@@ -1,0 +1,107 @@
+{
+  "question": "Did both Alan Crosland and Chris Columbus work as stage actor?",
+  "final_answer": "No",
+  "best_node": {
+    "node_id": "state_1",
+    "node_type": "state",
+    "content": "Did both Alan Crosland and Chris Columbus work as stage actor?",
+    "depth": 0,
+    "parent_id": null,
+    "value": 0.8241530883951097,
+    "temperature": 0.5675288631618758,
+    "expanded": true,
+    "visit_count": 1,
+    "persistent": false,
+    "score_breakdown": {
+      "task_progress": 0.9400708752989873,
+      "evidence_support": 0.8237378685264329,
+      "memory_usefulness": 0.8820682746050714,
+      "answerability": 0.8118689342632164,
+      "uncertainty": 0.15172718366524207
+    },
+    "metadata": {
+      "diffusion_delta": -0.07276901885333109,
+      "diffusion_gain": 0.0
+    }
+  },
+  "final_synthesis_node_ids": [
+    "state_3",
+    "state_2",
+    "memory_mem_4",
+    "state_1"
+  ],
+  "answer_history": [
+    {
+      "node_id": "memory_mem_4",
+      "content": "Conclusion: The answer to 'Was Alan Crosland a stage actor' is Yes.",
+      "answer_text": "Yes",
+      "value": 1.0,
+      "confidence": 1.0,
+      "evidence_ids": [
+        "doc_1",
+        "doc_9"
+      ],
+      "step": 3,
+      "kind": "intermediate_answer"
+    },
+    {
+      "node_id": "state_1",
+      "answer_text": "No",
+      "previous_answer": "",
+      "confidence": 0.8241530883951097,
+      "score": 0.8765026500529868,
+      "source": "final_synthesis",
+      "step": 5,
+      "evidence_ids": [
+        "doc_2",
+        "doc_1",
+        "doc_9",
+        "doc_6"
+      ],
+      "kind": "anytime_answer"
+    },
+    {
+      "node_id": "memory_mem_5",
+      "content": "Conclusion: The answer to 'Did both Alan Crosland and Chris Columbus work as stage actor' is No.",
+      "answer_text": "No",
+      "value": 0.82,
+      "evidence_ids": [],
+      "step": 6
+    },
+    {
+      "node_id": "state_1",
+      "answer_text": "No",
+      "source": "answer_judge",
+      "choice": "A",
+      "candidate_source": "final_synthesis",
+      "base_score": 0.9365742284995288,
+      "judge_confidence": 0.0,
+      "judge_reason": "",
+      "step": 5,
+      "kind": "final_answer_selection"
+    }
+  ],
+  "anytime_answer": "No",
+  "anytime_answer_score": 0.8765026500529868,
+  "anytime_answer_source": "final_synthesis",
+  "anytime_answer_node_id": "state_1",
+  "stats": {
+    "steps": 5,
+    "llm_calls": 12,
+    "generated_tokens": 892,
+    "token_budget_remaining": 308,
+    "total_nodes": 13,
+    "kg_nodes": 6,
+    "memory_nodes": 4,
+    "state_nodes": 3,
+    "deleted_state_nodes": 1,
+    "scheduler_mode": "tdca",
+    "scoring_mode": "hybrid",
+    "stop_reason": "frontier_empty",
+    "goal_kind": "comparison",
+    "goal_completion": 0.5,
+    "anytime_answer": "No",
+    "anytime_answer_score": 0.8765026500529868,
+    "anytime_answer_source": "final_synthesis"
+  }
+}

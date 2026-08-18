@@ -1,0 +1,394 @@
+{
+  "nodes": [
+    {
+      "node_id": "state_1",
+      "node_type": "state",
+      "content": "What memorial park located at John J. Pershing Drive in North Omaha has, among other amenities, a baseball park?",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.7009637480564749,
+      "temperature": 0.8277011486312222,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.9283538838219425,
+        "evidence_support": 0.7892761288880661,
+        "memory_usefulness": 0.0,
+        "answerability": 0.794638064444033,
+        "uncertainty": 0.15793029680014808
+      },
+      "metadata": {
+        "diffusion_delta": 0.4754531821699328,
+        "diffusion_gain": 0.4754531821699328
+      }
+    },
+    {
+      "node_id": "kg_doc_3",
+      "node_type": "kg",
+      "content": "N.P. Dodge Memorial Park, or simply Dodge Park, is a recreational area located at 11001 John J. Pershing Drive in North Omaha, Nebraska, United States. Located on the Missouri River, the park provides fishing, water skiing, and boating, as well as hiking throughout its riparian forests. Baseball fields, soccer fields, horseshoe pits, and tennis courts are included for sporting events. There is a picnic area, pavilions, historical monuments, and a campground.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999919678041,
+      "temperature": 0.9999999919678041,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Dodge Park",
+        "raw_score": 10.243992221693722,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_10",
+      "node_type": "kg",
+      "content": "Hummel Park is located at 11808 John J. Pershing Drive in North Omaha, Nebraska. Developed on 202 acre of land donated to the City of Omaha in 1930, the park was named after Joseph B. Hummel, a long time superintendent of Omaha's Parks and Recreation Department.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.5785522658083282,
+      "temperature": 0.5785522658083282,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Hummel Park",
+        "raw_score": 8.773684812644413,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_5",
+      "node_type": "kg",
+      "content": "The Florence Water Works is located along John J. Pershing Drive in the Florence neighborhood of Omaha, Nebraska. Home of the Minne Lusa Pumping Station, the Water Works has provided water throughout the city of Omaha since 1880.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.03539604364004276,
+      "temperature": 0.03539604364004276,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Florence Water Works",
+        "raw_score": 6.903852322961769,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_8",
+      "node_type": "kg",
+      "content": "Abbott Drive is a roadway in Omaha, Nebraska, and Carter Lake, Iowa. It is the easternmost link in Omaha's Park and Boulevard System that connects the eastern edge of Creighton University and North Downtown Omaha or NoDo to Carter Lake, Iowa, Eppley Airfield to John J Pershing Drive on the east end of Florence, Nebraska. Considered \"Omaha's gateway\", the drive includes a distinctive \"string of pearls\" lighting feature.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.5986952114456573,
+      "temperature": 0.5986952114456573,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Abbott Drive",
+        "raw_score": 8.928986698313878,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "state_2",
+      "node_type": "state",
+      "content": "Does the evidence support that What memorial park located at John J. Pershing Drive in North Omaha has, among other amenities, a baseball park?",
+      "depth": 1,
+      "parent_id": "state_1",
+      "value": 0.7311798194291323,
+      "temperature": 0.8597588293719245,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.9317781845040158,
+        "evidence_support": 0.7993476014823991,
+        "memory_usefulness": 0.4634494347728014,
+        "answerability": 0.7996738007411996,
+        "uncertainty": 0.15611743173316817
+      },
+      "metadata": {
+        "kind": "verification",
+        "evidence_ids": [
+          "doc_3",
+          "doc_8",
+          "doc_10",
+          "doc_5"
+        ],
+        "memory_ids": [
+          "mem_3",
+          "mem_1"
+        ],
+        "diffusion_delta": 0.33297198807209405,
+        "diffusion_gain": 0.33297198807209405
+      }
+    },
+    {
+      "node_id": "memory_mem_3",
+      "node_type": "memory",
+      "content": "Template: when evidence already grounds the answer, switch from branching to short verification and synthesis.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.8799999913901771,
+      "temperature": 0.7090597013099892,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.88,
+        "tag": "verification_then_stop",
+        "memory_kind": "template",
+        "raw_score": 1.1568574499189872,
+        "source": "memory",
+        "diffusion_delta": -0.17094029008018796,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "memory_mem_1",
+      "node_type": "memory",
+      "content": "Template: for compositional multi-hop questions, first solve the intermediate entity and then ask for the final attribute.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.04689887815542571,
+      "temperature": 0.03778875552501616,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.96,
+        "tag": "compositional_template",
+        "memory_kind": "template",
+        "raw_score": 0.18470114999581103,
+        "source": "memory",
+        "diffusion_delta": -0.00911012263040955,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "memory_mem_4",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'What memorial park located at John J. Pershing Drive in North Omaha has, among other amenities, a baseball park' is Dodge Park.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.92,
+      "temperature": 0.8197738746007941,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "answer_candidate",
+        "target_question": "What memorial park located at John J. Pershing Drive in North Omaha has, among other amenities, a baseball park?",
+        "target_question_norm": "what memorial park located at john j pershing drive in north omaha has among other amenities a baseball park",
+        "relation_signature": "generic",
+        "answer_text": "Dodge Park",
+        "support_score": 0.7892761288880661,
+        "evidence_ids": [
+          "doc_3",
+          "doc_10"
+        ],
+        "derived_from_state": "state_1",
+        "diffusion_delta": -0.3036623876992677,
+        "diffusion_gain": 0.0
+      }
+    }
+  ],
+  "edges": [
+    {
+      "source": "state_1",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.9999999919678041
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_10",
+      "edge_type": "supports",
+      "weight": 0.5785522658083282
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.03539604364004276
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_8",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_1",
+      "target": "state_2",
+      "edge_type": "verifies",
+      "weight": 0.38
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_4",
+      "edge_type": "derives",
+      "weight": 1.0
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.9999999919678041
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.999999991519141
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.9999999919678041
+    },
+    {
+      "source": "kg_doc_10",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.5785522658083282
+    },
+    {
+      "source": "kg_doc_10",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.5612886958807615
+    },
+    {
+      "source": "kg_doc_10",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.5785522658083282
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.03539604364004276
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.03539604364004276
+    },
+    {
+      "source": "kg_doc_8",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_8",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.5986952114456573
+    },
+    {
+      "source": "kg_doc_8",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.999999991519141
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_8",
+      "edge_type": "supports",
+      "weight": 0.5986952114456573
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_10",
+      "edge_type": "supports",
+      "weight": 0.5612886958807615
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_2",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.8799999913901771
+    },
+    {
+      "source": "state_2",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.04689887815542571
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_2",
+      "edge_type": "recalls",
+      "weight": 0.8799999913901771
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_2",
+      "edge_type": "recalls",
+      "weight": 0.04689887815542571
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 1.0
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.9999999919678041
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_10",
+      "edge_type": "supports",
+      "weight": 0.5785522658083282
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.03539604364004276
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_8",
+      "edge_type": "supports",
+      "weight": 0.0
+    }
+  ]
+}

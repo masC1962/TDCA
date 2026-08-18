@@ -1,0 +1,941 @@
+{
+  "nodes": [
+    {
+      "node_id": "state_1",
+      "node_type": "state",
+      "content": "Which novelist wrote under the pen name Walter Ericson: Laura Esquivel or Howard Fast?",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.7296534403268699,
+      "temperature": 0.8114043151223553,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.9060658333164794,
+        "evidence_support": 0.7237230391661158,
+        "memory_usefulness": 0.5139667251540021,
+        "answerability": 0.7618615195830578,
+        "uncertainty": 0.16972985295009915
+      },
+      "metadata": {
+        "diffusion_delta": 0.3764627994887483,
+        "diffusion_gain": 0.3764627994887483,
+        "composition_retry": 1
+      }
+    },
+    {
+      "node_id": "kg_doc_10",
+      "node_type": "kg",
+      "content": "Howard Melvin Fast (November 11, 1914 – March 12, 2003) was an American novelist and television writer. Fast also wrote under the pen names E. V. Cunningham and Walter Ericson.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999977414608,
+      "temperature": 0.9999999977414608,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Howard Fast",
+        "raw_score": 14.459229573255259,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_2",
+      "node_type": "kg",
+      "content": "Mirage is a 1965 thriller directed by Edward Dmytryk from a screenplay by Peter Stone, based on the novel \"Fallen Angel\", written by Howard Fast under the pseudonym Walter Ericson; the novel is not credited by title onscreen. The film stars Gregory Peck, Diane Baker, Walter Matthau, George Kennedy and Kevin McCarthy, and was released by Universal Pictures.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.6452515004237915,
+      "temperature": 0.6452515004237915,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Mirage (1965 film)",
+        "raw_score": 7.467043894149067,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_4",
+      "node_type": "kg",
+      "content": "Lloyd \"Skip\" Shearer (December 20, 1916 – May 27, 2001) was a celebrity gossip columnist. From 1958 to 1991, he wrote \"Walter Scott's Personality Parade\" in \"Parade\" magazine. In this column he used the name Walter Scott, and discussed rumors about celebrities using a question-and-answer style. Shearer also wrote profiles of famous people under his real name.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.4285135092619337,
+      "temperature": 0.4285135092619337,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Lloyd Shearer",
+        "raw_score": 7.730354609889748,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_7",
+      "node_type": "kg",
+      "content": "The Law of Love (Spanish: La ley del amor ) is the second novel, published in 1996 (originally published in Spanish in 1995), by the Mexican novelist Laura Esquivel. \"The Law of Love\" is a multi-genre and multi-media publication which includes elements of history, mythology, magical realism, science fiction, and features graphic novel sections that are intended to be accompanied by music from an included CD.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0,
+      "temperature": 0.0,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "The Law of Love",
+        "raw_score": 5.217331881701581,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "memory_mem_1",
+      "node_type": "memory",
+      "content": "Template: for compositional multi-hop questions, first solve the intermediate entity and then ask for the final attribute.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9599998077388796,
+      "temperature": 1.0040792015947957,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.96,
+        "tag": "compositional_template",
+        "memory_kind": "template",
+        "raw_score": 0.24003138479897848,
+        "source": "memory",
+        "diffusion_delta": -0.08400114749146659,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "memory_mem_3",
+      "node_type": "memory",
+      "content": "Template: when evidence already grounds the answer, switch from branching to short verification and synthesis.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.17433206851968167,
+      "temperature": 0.27073395618292706,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.88,
+        "tag": "verification_then_stop",
+        "memory_kind": "template",
+        "raw_score": 1.614121153550845,
+        "source": "memory",
+        "diffusion_delta": 0.0964018876632454,
+        "diffusion_gain": 0.0964018876632454
+      }
+    },
+    {
+      "node_id": "state_2",
+      "node_type": "state",
+      "content": "Did Laura Esquivel write under the pen name Walter Ericson?",
+      "depth": 1,
+      "parent_id": "state_1",
+      "value": 0.6716681724942147,
+      "temperature": 1.0760938398477453,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.755689687097504,
+        "evidence_support": 0.7604318528077846,
+        "memory_usefulness": 0.5139667251540021,
+        "answerability": 0.6945016406896066,
+        "uncertainty": 0.16312226649459877
+      },
+      "metadata": {
+        "kind": "comparison",
+        "evidence_ids": [
+          "doc_10",
+          "doc_2",
+          "doc_4",
+          "doc_6"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "goal_slot_name": "candidate_a_pen_name",
+        "goal_slot_role": "candidate_a",
+        "goal_terminal": true,
+        "diffusion_delta": 0.1092668028610232,
+        "diffusion_gain": 0.1092668028610232
+      }
+    },
+    {
+      "node_id": "kg_doc_6",
+      "node_type": "kg",
+      "content": "Laura Natalia Esquivel (born May 18, 1994 in Buenos Aires, Argentina), known professionally as Laura Esquivel, is an Argentine actress and singer, who gained international popularity for her debut acting role as Patricia \"Patito\" Castro in the popular Argentine children's telenovela, Patito Feo.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0,
+      "temperature": 0.0,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Laura Natalia Esquivel",
+        "raw_score": 1.315433730267185,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "state_3",
+      "node_type": "state",
+      "content": "Did Howard Fast write under the pen name Walter Ericson?",
+      "depth": 1,
+      "parent_id": "state_1",
+      "value": 0.702964141098315,
+      "temperature": 1.5851821487936915,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.7768356118300042,
+        "evidence_support": 0.8226257490798439,
+        "memory_usefulness": 0.5139667251540021,
+        "answerability": 0.7255985888256362,
+        "uncertainty": 0.1519273651656281
+      },
+      "metadata": {
+        "kind": "comparison",
+        "evidence_ids": [
+          "doc_10",
+          "doc_2",
+          "doc_4",
+          "doc_8"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "goal_slot_name": "candidate_b_pen_name",
+        "goal_slot_role": "candidate_b",
+        "goal_terminal": true,
+        "diffusion_delta": 0.18823624481609835,
+        "diffusion_gain": 0.18823624481609835
+      }
+    },
+    {
+      "node_id": "kg_doc_8",
+      "node_type": "kg",
+      "content": "Like Water for Chocolate (Spanish: \"Como Agua Para Chocolate\") is a 1992 Mexican film in the style of magical realism based on the popular novel, published in 1989 by first-time Mexican novelist Laura Esquivel. It earned ten Ariel Awards including the Best Picture and was nominated for a Golden Globe Award for Best Foreign Language Film. The film became the highest grossing Spanish-language film ever released in the United States at the time. The film was selected as the Mexican entry for the Best Foreign Language Film at the 65th Academy Awards, but was not accepted as a nominee.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0,
+      "temperature": 0.0,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Like Water for Chocolate (film)",
+        "raw_score": 0.29813053393297917,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "memory_mem_4",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'Did Howard Fast write under the pen name Walter Ericson' is Yes.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 1.0,
+      "temperature": 1.6146880958793988,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "intermediate_answer",
+        "target_question": "Did Howard Fast write under the pen name Walter Ericson?",
+        "target_question_norm": "did howard fast write under the pen name walter ericson",
+        "relation_signature": "generic",
+        "answer_text": "Yes",
+        "support_score": 1.0,
+        "evidence_ids": [
+          "doc_10",
+          "doc_2"
+        ],
+        "slot_name": "candidate_b_pen_name",
+        "slot_role": "candidate_b",
+        "terminal": true,
+        "derived_from_state": "state_3",
+        "diffusion_delta": 0.2822901950753858,
+        "diffusion_gain": 0.2822901950753858
+      }
+    },
+    {
+      "node_id": "memory_mem_5",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'Did Laura Esquivel write under the pen name Walter Ericson' is No.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 1.0,
+      "temperature": 1.0033992505694425,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "intermediate_answer",
+        "target_question": "Did Laura Esquivel write under the pen name Walter Ericson?",
+        "target_question_norm": "did laura esquivel write under the pen name walter ericson",
+        "relation_signature": "generic",
+        "answer_text": "No",
+        "support_score": 1.0,
+        "evidence_ids": [
+          "doc_10",
+          "doc_2"
+        ],
+        "slot_name": "candidate_a_pen_name",
+        "slot_role": "candidate_a",
+        "terminal": true,
+        "derived_from_state": "state_2",
+        "diffusion_delta": 0.16861824214498544,
+        "diffusion_gain": 0.16861824214498544
+      }
+    },
+    {
+      "node_id": "state_4",
+      "node_type": "state",
+      "content": "Does the evidence support that Which novelist wrote under the pen name Walter Ericson: Laura Esquivel or Howard Fast?",
+      "depth": 1,
+      "parent_id": "state_1",
+      "value": 0.6310377842715582,
+      "temperature": 0.31305428860996626,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.8914563699381772,
+        "evidence_support": 0.6807540292299329,
+        "memory_usefulness": 0.0914633147864238,
+        "answerability": 0.7403770146149664,
+        "uncertainty": 0.17746427473861207
+      },
+      "metadata": {
+        "kind": "verification",
+        "evidence_ids": [
+          "doc_10",
+          "doc_2",
+          "doc_4",
+          "doc_7"
+        ],
+        "memory_ids": [
+          "mem_3",
+          "mem_1"
+        ],
+        "diffusion_delta": -0.027124287768191924,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "memory_mem_6",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'Which novelist wrote under the pen name Walter Ericson: Laura Esquivel or Howard Fast' is Howard Fast.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.874,
+      "temperature": 0.7544845368802279,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "answer_candidate",
+        "target_question": "Which novelist wrote under the pen name Walter Ericson: Laura Esquivel or Howard Fast?",
+        "target_question_norm": "which novelist wrote under the pen name walter ericson laura esquivel or howard fast",
+        "relation_signature": "author",
+        "answer_text": "Howard Fast",
+        "support_score": 0.7237230391661158,
+        "evidence_ids": [
+          "doc_10",
+          "doc_2"
+        ],
+        "derived_from_state": "state_1",
+        "diffusion_delta": -0.3441528700793205,
+        "diffusion_gain": 0.0
+      }
+    }
+  ],
+  "edges": [
+    {
+      "source": "state_1",
+      "target": "kg_doc_10",
+      "edge_type": "supports",
+      "weight": 0.9999999977414608
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.44744608059077084
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.30517210061810485
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.004319458949083061
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.00030614721932934196
+    },
+    {
+      "source": "state_1",
+      "target": "state_2",
+      "edge_type": "refines",
+      "weight": 0.9
+    },
+    {
+      "source": "state_1",
+      "target": "state_3",
+      "edge_type": "refines",
+      "weight": 0.9
+    },
+    {
+      "source": "state_1",
+      "target": "state_4",
+      "edge_type": "verifies",
+      "weight": 0.38
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_6",
+      "edge_type": "derives",
+      "weight": 0.95
+    },
+    {
+      "source": "kg_doc_10",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.9999999977414608
+    },
+    {
+      "source": "kg_doc_10",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.999999995472349
+    },
+    {
+      "source": "kg_doc_10",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.9999999977358961
+    },
+    {
+      "source": "kg_doc_10",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.9999999977358961
+    },
+    {
+      "source": "kg_doc_10",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.999999995472349
+    },
+    {
+      "source": "kg_doc_10",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.9999999973513993
+    },
+    {
+      "source": "kg_doc_10",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.9999999977414608
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.44744608059077084
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.5208637101432202
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.6452515004237915
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.6452515004237915
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.5208637101432202
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.3615080611084665
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.44744608059077084
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.30517210061810485
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.4285135092619337
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.3713924812436237
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.3713924812436237
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.4285135092619337
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.1845147542341324
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.30517210061810485
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.004319458949083061
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_2",
+      "edge_type": "recalls",
+      "weight": 0.00443155296073545
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_3",
+      "edge_type": "recalls",
+      "weight": 0.9599998077388796
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "memory_mem_4",
+      "edge_type": "recalls",
+      "weight": 0.9599998077388796
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "memory_mem_5",
+      "edge_type": "recalls",
+      "weight": 0.00443155296073545
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_4",
+      "edge_type": "recalls",
+      "weight": 0.008594561053165957
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "memory_mem_6",
+      "edge_type": "recalls",
+      "weight": 0.004319458949083061
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.00030614721932934196
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_2",
+      "edge_type": "recalls",
+      "weight": 0.0003139057725346298
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_3",
+      "edge_type": "recalls",
+      "weight": 0.0679336425691247
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "memory_mem_4",
+      "edge_type": "recalls",
+      "weight": 0.0679336425691247
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "memory_mem_5",
+      "edge_type": "recalls",
+      "weight": 0.0003139057725346298
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_4",
+      "edge_type": "recalls",
+      "weight": 0.17433206851968167
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "memory_mem_6",
+      "edge_type": "recalls",
+      "weight": 0.00030614721932934196
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_10",
+      "edge_type": "supports",
+      "weight": 0.999999995472349
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.5208637101432202
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.4285135092619337
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_2",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.00443155296073545
+    },
+    {
+      "source": "state_2",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.0003139057725346298
+    },
+    {
+      "source": "state_2",
+      "target": "memory_mem_5",
+      "edge_type": "derives",
+      "weight": 1.0
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_10",
+      "edge_type": "supports",
+      "weight": 0.9999999977358961
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.6452515004237915
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.3713924812436237
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_8",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_3",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.9599998077388796
+    },
+    {
+      "source": "state_3",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.0679336425691247
+    },
+    {
+      "source": "state_3",
+      "target": "memory_mem_4",
+      "edge_type": "derives",
+      "weight": 1.0
+    },
+    {
+      "source": "kg_doc_8",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_8",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "state_3",
+      "edge_type": "recalls",
+      "weight": 1.0
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_10",
+      "edge_type": "supports",
+      "weight": 0.9999999977358961
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.6452515004237915
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.3713924812436237
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_8",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.9599998077388796
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.0679336425691247
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "state_2",
+      "edge_type": "recalls",
+      "weight": 1.0
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_10",
+      "edge_type": "supports",
+      "weight": 0.999999995472349
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.5208637101432202
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.4285135092619337
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.00443155296073545
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.0003139057725346298
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_10",
+      "edge_type": "supports",
+      "weight": 0.9999999973513993
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.3615080611084665
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.1845147542341324
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_4",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.17433206851968167
+    },
+    {
+      "source": "state_4",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.008594561053165957
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.95
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_10",
+      "edge_type": "supports",
+      "weight": 0.9999999977414608
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.44744608059077084
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.30517210061810485
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.004319458949083061
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.00030614721932934196
+    }
+  ]
+}

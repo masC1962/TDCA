@@ -1,0 +1,614 @@
+{
+  "nodes": [
+    {
+      "node_id": "state_1",
+      "node_type": "state",
+      "content": "What league does the team that plays in Stadio Ciro Vigorito play for?",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.6901301356666211,
+      "temperature": 0.7267499549170071,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.8574562738091295,
+        "evidence_support": 0.5807537464974394,
+        "memory_usefulness": 0.7841237535759132,
+        "answerability": 0.6903768732487197,
+        "uncertainty": 0.1954643256304609
+      },
+      "metadata": {
+        "diffusion_delta": -0.06968529981440108,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "kg_doc_12",
+      "node_type": "kg",
+      "content": "Stadio Ciro Vigorito (formerly Stadio Santa Colomba) is a multi-use stadium in Benevento, Italy. It is currently used mostly for football matches and is the home stadium of Benevento Calcio. The stadium is able to hold 25,000 people and was opened in 1979.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999939406008,
+      "temperature": 0.9999999939406008,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Stadio Ciro Vigorito",
+        "raw_score": 4.728834920978572,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_4",
+      "node_type": "kg",
+      "content": "The stadium is currently under renovation after Cagliari relocated out of their former home venue, Stadio Sant'Elia, in order to make it comply with Serie A league standards in time for the new season.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.1615074992308812,
+      "temperature": 0.1615074992308812,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Stadio Is Arenas",
+        "raw_score": 3.3836948054811886,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_2",
+      "node_type": "kg",
+      "content": "Piacenza Calcio 1919 and Piacenza Calcio play their home matches at the 21,668 capacity, Stadio Leonardo Garilli, located in the city of Piacenza.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.7895141184507909,
+      "temperature": 0.7895141184507909,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Piacenza Calcio 1919",
+        "raw_score": 5.778974491923794,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_3",
+      "node_type": "kg",
+      "content": "Fuori corso was an Italian sitcom written by Vincenzo Coppola, Ciro Ceruti and Ciro Villano; the latter two of whom starred in the comedy.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.17727638864605627,
+      "temperature": 0.17727638864605627,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Fuori corso",
+        "raw_score": 4.118746449608304,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "memory_mem_1",
+      "node_type": "memory",
+      "content": "Template: for compositional multi-hop questions, first solve the intermediate entity and then ask for the final attribute.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.959999986210628,
+      "temperature": 0.18899211805551622,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.96,
+        "tag": "compositional_template",
+        "memory_kind": "template",
+        "raw_score": 1.0906446582486637,
+        "source": "memory",
+        "diffusion_delta": -0.1430371515815557,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "memory_mem_2",
+      "node_type": "memory",
+      "content": "Template: for comparison questions, split the problem into one sub-question per entity before comparing them.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.6082475209411985,
+      "temperature": 0.11992055166066877,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.9,
+        "tag": "comparison_template",
+        "memory_kind": "template",
+        "raw_score": 0.7928445210672911,
+        "source": "memory",
+        "diffusion_delta": -0.09054120567499137,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "state_2",
+      "node_type": "state",
+      "content": "What team plays at Stadio Ciro Vigorito?",
+      "depth": 1,
+      "parent_id": "state_1",
+      "value": 0.5916990859905634,
+      "temperature": 1.5336269081683769,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.7148174697441436,
+        "evidence_support": 0.7630378069397887,
+        "memory_usefulness": 0.0,
+        "answerability": 0.6738265957775867,
+        "uncertainty": 0.16265319475083803
+      },
+      "metadata": {
+        "kind": "bridge",
+        "evidence_ids": [
+          "doc_12",
+          "doc_17",
+          "doc_3",
+          "doc_2"
+        ],
+        "memory_ids": [],
+        "goal_slot_name": "home_team",
+        "goal_slot_role": "bridge_entity",
+        "goal_terminal": false,
+        "diffusion_delta": 0.157587057043719,
+        "diffusion_gain": 0.157587057043719
+      }
+    },
+    {
+      "node_id": "kg_doc_17",
+      "node_type": "kg",
+      "content": "Football Club Crotone is an Italian football club based in Crotone, Calabria. Founded in 1910, holding home games at Stadio Ezio Scida, which has a 16,547 - seat capacity. The club plays in Serie A after being promoted from Serie B in 2016.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.5260756199389768,
+      "temperature": 0.5260756199389768,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "F.C. Crotone",
+        "raw_score": 5.292233728956796,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "state_3",
+      "node_type": "state",
+      "content": "What league does Benevento Calcio play in?",
+      "depth": 2,
+      "parent_id": "state_2",
+      "value": 0.65562362888329,
+      "temperature": 1.278622126331777,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.7303712448569933,
+        "evidence_support": 0.8947570550092562,
+        "memory_usefulness": 0.0,
+        "answerability": 0.7243016044277051,
+        "uncertainty": 0.13894373009833388
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_12",
+          "doc_2",
+          "doc_14",
+          "doc_4"
+        ],
+        "memory_ids": [],
+        "diffusion_delta": 0.9110676425072682,
+        "diffusion_gain": 0.9110676425072682
+      }
+    },
+    {
+      "node_id": "kg_doc_14",
+      "node_type": "kg",
+      "content": "Carmelo Imbriani (10 February 1976 – 15 February 2013) was an Italian footballer and former coach of Benevento in Lega Pro Prima Divisione.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.3922197260163797,
+      "temperature": 0.3922197260163797,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Carmelo Imbriani",
+        "raw_score": 3.104697322505347,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "memory_mem_4",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'What team plays at Stadio Ciro Vigorito' is Benevento Calcio.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 1.0,
+      "temperature": 0.9341995983440512,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "intermediate_answer",
+        "target_question": "What team plays at Stadio Ciro Vigorito?",
+        "target_question_norm": "what team plays at stadio ciro vigorito",
+        "relation_signature": "generic",
+        "answer_text": "Benevento Calcio",
+        "support_score": 1.0,
+        "evidence_ids": [
+          "doc_12"
+        ],
+        "slot_name": "home_team",
+        "slot_role": "bridge_entity",
+        "terminal": false,
+        "derived_from_state": "state_2",
+        "diffusion_delta": 0.04990775746703857,
+        "diffusion_gain": 0.04990775746703857
+      }
+    },
+    {
+      "node_id": "memory_mem_5",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'What league does Benevento Calcio play in' is Lega Pro Prima Divisione.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999915677215,
+      "temperature": 0.9022972417986954,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "intermediate_answer",
+        "target_question": "What league does Benevento Calcio play in?",
+        "target_question_norm": "what league does benevento calcio play in",
+        "relation_signature": "generic",
+        "answer_text": "Lega Pro Prima Divisione",
+        "support_score": 0.9999999915677215,
+        "evidence_ids": [
+          "doc_12"
+        ],
+        "slot_name": "team_league",
+        "slot_role": "target_attribute",
+        "terminal": true,
+        "derived_from_state": "state_3",
+        "diffusion_delta": -0.22760404805263845,
+        "diffusion_gain": 0.0
+      }
+    }
+  ],
+  "edges": [
+    {
+      "source": "state_1",
+      "target": "kg_doc_12",
+      "edge_type": "supports",
+      "weight": 0.9999999937639975
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.1615074992308812
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.05133461348109433
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.124046739892965
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_2",
+      "edge_type": "recalls",
+      "weight": 0.08106174717513244
+    },
+    {
+      "source": "state_1",
+      "target": "state_2",
+      "edge_type": "refines",
+      "weight": 1.0
+    },
+    {
+      "source": "state_1",
+      "target": "state_3",
+      "edge_type": "refines",
+      "weight": 0.94
+    },
+    {
+      "source": "kg_doc_12",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.9999999937639975
+    },
+    {
+      "source": "kg_doc_12",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.9999999939406008
+    },
+    {
+      "source": "kg_doc_12",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.9999999915677215
+    },
+    {
+      "source": "kg_doc_12",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.9999999939406008
+    },
+    {
+      "source": "kg_doc_12",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.9999999915677215
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.1615074992308812
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.05133461348109433
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.7895141184507909
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.7895141184507909
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.17727638864605627
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.17727638864605627
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.124046739892965
+    },
+    {
+      "source": "memory_mem_2",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.08106174717513244
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_12",
+      "edge_type": "supports",
+      "weight": 0.9999999939406008
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_17",
+      "edge_type": "supports",
+      "weight": 0.5260756199389768
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.17727638864605627
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_2",
+      "target": "state_3",
+      "edge_type": "refines",
+      "weight": 0.84
+    },
+    {
+      "source": "state_2",
+      "target": "memory_mem_4",
+      "edge_type": "derives",
+      "weight": 1.0
+    },
+    {
+      "source": "kg_doc_17",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.5260756199389768
+    },
+    {
+      "source": "kg_doc_17",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.5260756199389768
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_12",
+      "edge_type": "supports",
+      "weight": 0.9999999915677215
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.7895141184507909
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_14",
+      "edge_type": "supports",
+      "weight": 0.3922197260163797
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_3",
+      "target": "memory_mem_5",
+      "edge_type": "derives",
+      "weight": 0.9999999915677215
+    },
+    {
+      "source": "kg_doc_14",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.3922197260163797
+    },
+    {
+      "source": "kg_doc_14",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.3922197260163797
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "state_2",
+      "edge_type": "recalls",
+      "weight": 1.0
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_12",
+      "edge_type": "supports",
+      "weight": 0.9999999939406008
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_17",
+      "edge_type": "supports",
+      "weight": 0.5260756199389768
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.17727638864605627
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "state_3",
+      "edge_type": "recalls",
+      "weight": 0.9999999915677215
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_12",
+      "edge_type": "supports",
+      "weight": 0.9999999915677215
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_14",
+      "edge_type": "supports",
+      "weight": 0.3922197260163797
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.7895141184507909
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    }
+  ]
+}

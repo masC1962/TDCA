@@ -1,0 +1,221 @@
+{
+  "nodes": [
+    {
+      "node_id": "state_1",
+      "node_type": "state",
+      "content": "How were the people that the Ajuran Empire declared independence from by minting coins expelled from David Htan's country?",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.8378682474777515,
+      "temperature": 0.6360073250088142,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.9832799425898345,
+        "evidence_support": 0.9508233605583367,
+        "memory_usefulness": 0.4634494370399705,
+        "answerability": 0.8754116802791683,
+        "uncertainty": 0.1288517950994994
+      },
+      "metadata": {
+        "diffusion_delta": 0.058413246927193074,
+        "diffusion_gain": 0.058413246927193074
+      }
+    },
+    {
+      "node_id": "kg_doc_6",
+      "node_type": "kg",
+      "content": "Somali people in the Horn of Africa are divided among different countries (Somalia, Djibouti, Ethiopia, and northeastern Kenya) that were artificially and some might say arbitrarily partitioned by the former imperial powers. Pan-Somalism is an ideology that advocates the unification of all ethnic Somalis once part of Somali empires such as the Ajuran Empire, the Adal Sultanate, the Gobroon Dynasty and the Dervish State under one flag and one nation. The Siad Barre regime actively promoted Pan-Somalism, which eventually led to the Ogaden War between Somalia on one side, and Ethiopia, Cuba and the Soviet Union on the other.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.999999975305747,
+      "temperature": 0.999999975305747,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Somalis",
+        "raw_score": 0.16652255905249372,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_20",
+      "node_type": "kg",
+      "content": "David Htan (; born 13 May 1990) is a burmese professional footballer who plays as a midfielder for Myanmar national football team and Shan United. David Htan suddenly moved to Shan United F.C. in May 2018.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9016467458109265,
+      "temperature": 0.9016467458109265,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "David Htan",
+        "raw_score": 0.17478212899152745,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_5",
+      "node_type": "kg",
+      "content": "The discovery of new maritime trade routes by Western European states allowed them to avoid the Ottoman trade monopoly. The Portuguese discovery of the Cape of Good Hope in 1488 initiated a series of Ottoman-Portuguese naval wars in the Indian Ocean throughout the 16th century. The Somali Muslim Ajuran Empire, allied with the Ottomans, defied the Portuguese economic monopoly in the Indian Ocean by employing a new coinage which followed the Ottoman pattern, thus proclaiming an attitude of economic independence in regard to the Portuguese.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.5649754879245561,
+      "temperature": 0.5649754879245561,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Ottoman Empire",
+        "raw_score": 0.11325449423254344,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_16",
+      "node_type": "kg",
+      "content": "At about the same time, coins and mints appeared independently in China and spread to Korea and Japan. The manufacture of coins in the Roman Empire, dating from about the 4th century BC, significantly influenced later development of coin minting in Europe.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0,
+      "temperature": 0.0,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Mint (facility)",
+        "raw_score": 0.14535607515154858,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "memory_mem_3",
+      "node_type": "memory",
+      "content": "Template: when evidence already grounds the answer, switch from branching to short verification and synthesis.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.879999997130059,
+      "temperature": 0.7171138885540101,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.88,
+        "tag": "verification_then_stop",
+        "memory_kind": "template",
+        "raw_score": 3.4705723497569614,
+        "source": "memory",
+        "diffusion_delta": -0.1628861085760489,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "memory_mem_1",
+      "node_type": "memory",
+      "content": "Template: for compositional multi-hop questions, first solve the intermediate entity and then ask for the final attribute.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.04689887846132804,
+      "temperature": 0.0378991136476847,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.96,
+        "tag": "compositional_template",
+        "memory_kind": "template",
+        "raw_score": 0.5541034499874331,
+        "source": "memory",
+        "diffusion_delta": -0.00899976481364334,
+        "diffusion_gain": 0.0
+      }
+    }
+  ],
+  "edges": [
+    {
+      "source": "state_1",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.999999975305747
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_20",
+      "edge_type": "supports",
+      "weight": 0.9016467458109265
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.5649754879245561
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_16",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.8799999956950886
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.04689887838485243
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.999999975305747
+    },
+    {
+      "source": "kg_doc_20",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.9016467458109265
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.5649754879245561
+    },
+    {
+      "source": "kg_doc_16",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.8799999956950886
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.04689887838485243
+    }
+  ]
+}

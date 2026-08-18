@@ -1,0 +1,152 @@
+{
+  "question": "What is the total circulation of the magazine that called Ohio State Route 78 one of the most scenic highways nationwide?",
+  "final_answer": "1.23 million",
+  "best_node": {
+    "node_id": "state_3",
+    "node_type": "state",
+    "content": "What is the total circulation of Car and Driver magazine?",
+    "depth": 1,
+    "parent_id": "state_1",
+    "value": 0.6654302374865145,
+    "temperature": 2.011999213532012,
+    "expanded": true,
+    "visit_count": 1,
+    "persistent": false,
+    "score_breakdown": {
+      "task_progress": 0.6602423787474055,
+      "evidence_support": 0.6837194146165522,
+      "memory_usefulness": 0.9133737522807308,
+      "answerability": 0.7196374850860537,
+      "uncertainty": 0.1769305053690206
+    },
+    "metadata": {
+      "kind": "retrieval",
+      "evidence_ids": [
+        "doc_10",
+        "doc_4",
+        "doc_3",
+        "doc_9"
+      ],
+      "memory_ids": [
+        "mem_1",
+        "mem_3"
+      ],
+      "diffusion_delta": 0.23472218693877434,
+      "diffusion_gain": 0.23472218693877434
+    }
+  },
+  "final_synthesis_node_ids": [
+    "state_3",
+    "memory_mem_4",
+    "state_2",
+    "state_4",
+    "state_1"
+  ],
+  "answer_history": [
+    {
+      "node_id": "",
+      "answer_text": "1.2 million",
+      "previous_answer": "",
+      "confidence": 0.28,
+      "score": 0.16880000000000003,
+      "source": "closed_book_initial",
+      "step": 0,
+      "evidence_ids": [],
+      "kind": "anytime_answer"
+    },
+    {
+      "node_id": "memory_mem_4",
+      "content": "Conclusion: The answer to 'What is the total circulation of Car and Driver magazine' is 1.23 million.",
+      "answer_text": "1.23 million",
+      "value": 0.874,
+      "evidence_ids": [
+        "doc_10",
+        "doc_4"
+      ],
+      "step": 2
+    },
+    {
+      "node_id": "state_3",
+      "answer_text": "1.23 million",
+      "previous_answer": "1.2 million",
+      "confidence": 0.95,
+      "score": 0.8996455834061575,
+      "source": "expansion_candidate",
+      "step": 1,
+      "evidence_ids": [
+        "doc_10",
+        "doc_4",
+        "doc_3",
+        "doc_9"
+      ],
+      "kind": "anytime_answer"
+    },
+    {
+      "node_id": "memory_mem_5",
+      "content": "Conclusion: The answer to 'What magazine called Ohio State Route 78 one of the most scenic highways nationwide' is Car and Driver.",
+      "answer_text": "Car and Driver",
+      "value": 1.0,
+      "confidence": 1.0,
+      "evidence_ids": [
+        "doc_4"
+      ],
+      "step": 3,
+      "kind": "intermediate_answer"
+    },
+    {
+      "node_id": "memory_mem_6",
+      "content": "Conclusion: The answer to 'Which magazine called Ohio State Route 78 one of the most scenic highways nationwide' is Car and Driver.",
+      "answer_text": "Car and Driver",
+      "value": 1.0,
+      "confidence": 1.0,
+      "evidence_ids": [
+        "doc_4"
+      ],
+      "step": 4,
+      "kind": "intermediate_answer"
+    },
+    {
+      "node_id": "memory_mem_7",
+      "content": "Conclusion: The answer to 'What is the total circulation of the magazine that called Ohio State Route 78 one of the most scenic highways nationwide' is 1.23 million.",
+      "answer_text": "1.23 million",
+      "value": 0.0,
+      "evidence_ids": [],
+      "step": 8
+    },
+    {
+      "node_id": "state_3",
+      "answer_text": "1.23 million",
+      "source": "answer_judge",
+      "choice": "A",
+      "candidate_source": "anytime",
+      "base_score": 1.0,
+      "judge_confidence": 0.0,
+      "judge_reason": "",
+      "step": 7,
+      "kind": "final_answer_selection"
+    }
+  ],
+  "anytime_answer": "1.23 million",
+  "anytime_answer_score": 0.8996455834061575,
+  "anytime_answer_source": "expansion_candidate",
+  "anytime_answer_node_id": "state_3",
+  "stats": {
+    "steps": 7,
+    "llm_calls": 13,
+    "generated_tokens": 858,
+    "token_budget_remaining": 342,
+    "total_nodes": 18,
+    "kg_nodes": 7,
+    "memory_nodes": 7,
+    "state_nodes": 4,
+    "deleted_state_nodes": 3,
+    "scheduler_mode": "tdca",
+    "scoring_mode": "hybrid",
+    "stop_reason": "frontier_empty",
+    "goal_kind": "bridge",
+    "goal_completion": 0.0,
+    "anytime_answer": "1.23 million",
+    "anytime_answer_score": 0.8996455834061575,
+    "anytime_answer_source": "expansion_candidate"
+  }
+}

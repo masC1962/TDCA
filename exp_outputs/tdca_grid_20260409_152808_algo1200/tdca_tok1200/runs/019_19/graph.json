@@ -1,0 +1,323 @@
+{
+  "nodes": [
+    {
+      "node_id": "state_1",
+      "node_type": "state",
+      "content": "Which writer was from England, Henry Roth or Robert Erskine Childers?",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.8726053440960055,
+      "temperature": 0.8636260787326806,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 1.0,
+        "evidence_support": 1.0,
+        "memory_usefulness": 0.5467112008000461,
+        "answerability": 0.8999999999999999,
+        "uncertainty": 0.12
+      },
+      "metadata": {
+        "diffusion_delta": 0.09915618711499363,
+        "diffusion_gain": 0.09915618711499363
+      }
+    },
+    {
+      "node_id": "kg_doc_3",
+      "node_type": "kg",
+      "content": "Leonardo DiCaprio starred in Inception and was born in Los Angeles.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 1.0,
+      "temperature": 1.0,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Leonardo DiCaprio Fact",
+        "raw_score": 1.3138960095720436,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "memory_mem_3",
+      "node_type": "memory",
+      "content": "Template: when evidence already grounds the answer, switch from branching to short verification and synthesis.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.8799999977306794,
+      "temperature": 0.7297762483327341,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.88,
+        "tag": "verification_then_stop",
+        "memory_kind": "template",
+        "raw_score": 5.484873772436316,
+        "source": "memory",
+        "diffusion_delta": -0.15022374939794525,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "memory_mem_5",
+      "node_type": "memory",
+      "content": "Conclusion: Christopher Nolan was born in London.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.213422408342882,
+      "temperature": 0.13224052654915266,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.6601552270148303,
+        "source": "tdca_run",
+        "memory_kind": "derived_fact",
+        "target_question": "Where was Christopher Nolan born?",
+        "target_question_norm": "where was christopher nolan born",
+        "relation_signature": "birth",
+        "answer_text": "London",
+        "support_score": 0.5705871430760764,
+        "evidence_ids": [
+          "doc_2"
+        ],
+        "derived_from_state": "state_3",
+        "raw_score": 1.767697046296339,
+        "diffusion_delta": -0.02239547194613173,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "memory_mem_8",
+      "node_type": "memory",
+      "content": "Conclusion: the director of Inception was born in London.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.13657360030015372,
+      "temperature": 0.08939682556187695,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.6074120836858105,
+        "source": "tdca_run",
+        "memory_kind": "derived_fact",
+        "target_question": "Where was the director of Inception born?",
+        "target_question_norm": "where was the director of inception born",
+        "relation_signature": "director",
+        "answer_text": "London",
+        "support_score": 0.7097352070985521,
+        "evidence_ids": [
+          "doc_1",
+          "doc_3"
+        ],
+        "derived_from_state": "state_3",
+        "raw_score": 1.862285719323733,
+        "diffusion_delta": -0.013165860009949293,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "memory_mem_12",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'What city was Christopher Nolan born in' is London.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0363430835288329,
+      "temperature": 0.022103862836500857,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.5553977956102122,
+        "source": "tdca_run",
+        "memory_kind": "derived_fact",
+        "target_question": "What city was Christopher Nolan born in?",
+        "target_question_norm": "what city was christopher nolan born in",
+        "relation_signature": "birth",
+        "answer_text": "London",
+        "support_score": 0.620662193268994,
+        "evidence_ids": [
+          "doc_2"
+        ],
+        "derived_from_state": "state_6",
+        "raw_score": 1.6259300489706419,
+        "diffusion_delta": -0.003914988760748372,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "memory_mem_10",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'Who was the director of the movie Inception' is Christopher Nolan.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.006837888954078063,
+      "temperature": 0.004951145267257336,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.6119225613854106,
+        "source": "tdca_run",
+        "memory_kind": "derived_fact",
+        "target_question": "Who was the director of the movie Inception?",
+        "target_question_norm": "who was the director of the movie inception",
+        "relation_signature": "director",
+        "answer_text": "Christopher Nolan",
+        "support_score": 0.7701273184072095,
+        "evidence_ids": [
+          "doc_1"
+        ],
+        "derived_from_state": "state_2",
+        "raw_score": 1.6503936313452559,
+        "diffusion_delta": -0.0018867436868207276,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "memory_mem_11",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'What city was the director of Inception born in' is London.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0,
+      "temperature": 0.0,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 1.0,
+        "source": "tdca_run",
+        "memory_kind": "derived_fact",
+        "target_question": "What city was the director of Inception born in?",
+        "target_question_norm": "what city was the director of inception born in",
+        "relation_signature": "director",
+        "answer_text": "London",
+        "support_score": 0.6581956575095751,
+        "evidence_ids": [
+          "doc_1",
+          "doc_3"
+        ],
+        "derived_from_state": "state_3",
+        "raw_score": 1.6070612670260247,
+        "diffusion_delta": 0.0,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "kg_doc_4",
+      "node_type": "kg",
+      "content": "For a composition question, identify the intermediate entity before retrieving its attribute.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999759828556,
+      "temperature": 0.9999999759828556,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Reasoning Pattern",
+        "raw_score": 1.2590996050949887,
+        "source": "kg"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "source": "state_1",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 1.0
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.8799999932572102
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_5",
+      "edge_type": "recalls",
+      "weight": 0.213422408342882
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_8",
+      "edge_type": "recalls",
+      "weight": 0.13657360030015372
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_12",
+      "edge_type": "recalls",
+      "weight": 0.0363430835288329
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_10",
+      "edge_type": "recalls",
+      "weight": 0.0
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_11",
+      "edge_type": "recalls",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 1.0
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.8799999932572102
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.213422408342882
+    },
+    {
+      "source": "memory_mem_8",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.13657360030015372
+    },
+    {
+      "source": "memory_mem_12",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.0363430835288329
+    },
+    {
+      "source": "memory_mem_10",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_11",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.0
+    }
+  ]
+}

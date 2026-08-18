@@ -1,0 +1,911 @@
+{
+  "nodes": [
+    {
+      "node_id": "state_1",
+      "node_type": "state",
+      "content": "Which airport is used for both public and military, Shenandoah Valley Regional Airport or Louisville International Airport?",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.7673193313834226,
+      "temperature": 0.7030784913145078,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.9220090340074615,
+        "evidence_support": 0.7706148059042983,
+        "memory_usefulness": 0.4895496754364972,
+        "answerability": 0.8853074029521492,
+        "uncertainty": 0.1612893349372263
+      },
+      "metadata": {
+        "diffusion_delta": 0.07458969986070707,
+        "diffusion_gain": 0.07458969986070707
+      }
+    },
+    {
+      "node_id": "kg_doc_3",
+      "node_type": "kg",
+      "content": "Louisville International Airport (IATA: SDF, ICAO: KSDF, FAA LID: SDF) is a public and military use public airport centrally located in the city of Louisville in Jefferson County, Kentucky, United States. The airport is situated on approximately 1500 acre and has three runways. Its IATA airport code, SDF, is based on the airport's former name, Standiford Field. Although it currently does not have regularly-scheduled international passenger flights, it is a port of entry, as it handles numerous international cargo flights.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999954056065,
+      "temperature": 0.9999999954056065,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Louisville International Airport",
+        "raw_score": 7.061057621528833,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_4",
+      "node_type": "kg",
+      "content": "Clarence Valley Regional Airport (IATA: GFN, ICAO: YGFN) is an airport located 7 NM southeast of Grafton, New South Wales, Australia. In addition 36 weekly services to Sydney operated by Regional Express, the airport is used by the Royal Flying Doctor Service and during summer months is often used as a base for aircraft engaged in aerial firefighting by the Rural Fire Service. In 2013, the Clarence Valley Council which operates the airport secured $2.12 million funding through loans and grants to upgrade the facilities at the airport.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.7230453762867195,
+      "temperature": 0.7230453762867195,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Clarence Valley Regional Airport",
+        "raw_score": 3.243781775558615,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_5",
+      "node_type": "kg",
+      "content": "Bowman Field (IATA: LOU, ICAO: KLOU, FAA LID: LOU) is a public airport five miles (8 km) southeast of downtown Louisville, in Jefferson County, Kentucky, United States. The airport covers 426 acres (1.7 km²) and has two runways. The FAA calls it a reliever airport for nearby Louisville International Airport.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.7504109796202305,
+      "temperature": 0.7504109796202305,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Bowman Field (airport)",
+        "raw_score": 5.582181052865659,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_10",
+      "node_type": "kg",
+      "content": "Shenandoah Valley Regional Airport (IATA: SHD, ICAO: KSHD, FAA LID: SHD) is a public airport located 10 nautical miles (12 mi, 19 km) northeast of the central business district of Staunton, a city in Augusta County, Virginia, United States. It is mostly used for general aviation, but is also served by one commercial airline. Service is subsidized by the Essential Air Service program.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999869456088,
+      "temperature": 0.9999999869456088,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Shenandoah Valley Regional Airport",
+        "raw_score": 4.93028015319841,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "memory_mem_1",
+      "node_type": "memory",
+      "content": "Template: for compositional multi-hop questions, first solve the intermediate entity and then ask for the final attribute.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9599999852332882,
+      "temperature": 1.4442284863439483,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.96,
+        "tag": "compositional_template",
+        "memory_kind": "template",
+        "raw_score": 0.4064691888478268,
+        "source": "memory",
+        "diffusion_delta": -0.3727521393949502,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "memory_mem_3",
+      "node_type": "memory",
+      "content": "Template: when evidence already grounds the answer, switch from branching to short verification and synthesis.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.01909936623004068,
+      "temperature": 0.020508046243016366,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.88,
+        "tag": "verification_then_stop",
+        "memory_kind": "template",
+        "raw_score": 0.3766132948421398,
+        "source": "memory",
+        "diffusion_delta": -0.0010589093087839466,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "state_2",
+      "node_type": "state",
+      "content": "Is Louisville International Airport used for both public and military purposes?",
+      "depth": 1,
+      "parent_id": "state_1",
+      "value": 0.7604826957022135,
+      "temperature": 1.3621503371054295,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.8309031990877256,
+        "evidence_support": 0.8752054875129185,
+        "memory_usefulness": 0.4895496754364972,
+        "answerability": 0.8709360770897926,
+        "uncertainty": 0.14246301224767466
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_3",
+          "doc_5",
+          "doc_6",
+          "doc_4"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "diffusion_delta": 0.1585971290700443,
+        "diffusion_gain": 0.1585971290700443
+      }
+    },
+    {
+      "node_id": "kg_doc_6",
+      "node_type": "kg",
+      "content": "Pensacola International Airport (IATA: PNS, ICAO: KPNS, FAA LID: PNS) , formerly Pensacola Gulf Coast Regional Airport and Pensacola Regional Airport (Hagler Field), is a public use airport three nautical miles (6 km) northeast of the central business district of Pensacola, in Escambia County, Florida, United States. It is owned by the City of Pensacola. Despite the name, this airport does not offer direct international flights. This airport is one of the five major airports in North Florida, others being: Northwest Florida Beaches International Airport, Destin-Fort Walton Beach Airport Tallahassee International Airport, and Jacksonville International Airport.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.28464938971370285,
+      "temperature": 0.28464938971370285,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Pensacola International Airport",
+        "raw_score": 3.202660146886712,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "state_3",
+      "node_type": "state",
+      "content": "Is Shenandoah Valley Regional Airport used for both public and military purposes?",
+      "depth": 1,
+      "parent_id": "state_1",
+      "value": 0.7475175207225843,
+      "temperature": 1.517503538792503,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.8394402430204085,
+        "evidence_support": 0.8258046363345349,
+        "memory_usefulness": 0.4895496754364972,
+        "answerability": 0.8595689848339342,
+        "uncertainty": 0.1513551654597837
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_10",
+          "doc_4",
+          "doc_9",
+          "doc_2"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "diffusion_delta": 0.17718054280740292,
+        "diffusion_gain": 0.17718054280740292
+      }
+    },
+    {
+      "node_id": "kg_doc_9",
+      "node_type": "kg",
+      "content": "Yampa Valley Regional Airport (IATA: KHDN, ICAO: HDN) is in Routt County, Colorado, two miles southeast of Hayden and about 25 mi west of Steamboat Springs. Also known as Yampa Valley Regional Airport, it has the only scheduled passenger flights to northwest Colorado. It is also used by larger business jets that cannot use the smaller Steamboat Springs Airport (Bob Adams Field).",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.2743882379147335,
+      "temperature": 0.2743882379147335,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Yampa Valley Airport",
+        "raw_score": 3.8818309637458337,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_2",
+      "node_type": "kg",
+      "content": "On September 23, 1985, Henson Airlines Flight 1517 crashed in Grottoes, Virginia, while on approach to the Shenandoah Valley Regional Airport. The two pilots and twelve passengers were killed.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0,
+      "temperature": 0.0,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Henson Airlines Flight 1517",
+        "raw_score": 3.0473130187415096,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "memory_mem_2",
+      "node_type": "memory",
+      "content": "Template: for comparison questions, split the problem into one sub-question per entity before comparing them.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.6566941196618674,
+      "temperature": 0.3154611922885167,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.9,
+        "tag": "comparison_template",
+        "memory_kind": "template",
+        "raw_score": 0.298489449055515,
+        "source": "memory",
+        "diffusion_delta": -0.2458470997826911,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "memory_mem_4",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'Is Louisville International Airport used for both public and military purposes' is Louisville International Airport.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.874,
+      "temperature": 1.1914755625936133,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "derived_fact",
+        "target_question": "Is Louisville International Airport used for both public and military purposes?",
+        "target_question_norm": "is louisville international airport used for both public and military purposes",
+        "relation_signature": "generic",
+        "answer_text": "Louisville International Airport",
+        "support_score": 0.8752054875129185,
+        "evidence_ids": [
+          "doc_3",
+          "doc_5"
+        ],
+        "derived_from_state": "state_2",
+        "diffusion_delta": 0.10771110241743354,
+        "diffusion_gain": 0.10771110241743354
+      }
+    },
+    {
+      "node_id": "state_5",
+      "node_type": "state",
+      "content": "Is Shenandoah Valley Regional Airport used for military purposes?",
+      "depth": 2,
+      "parent_id": "state_3",
+      "value": 0.710141644686455,
+      "temperature": 1.134765006629642,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.7755843782304593,
+        "evidence_support": 0.8615226810699783,
+        "memory_usefulness": 0.057160817670589184,
+        "answerability": 0.8374280072016559,
+        "uncertainty": 0.1449259174074039
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_10",
+          "doc_4",
+          "doc_9",
+          "doc_2"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_2"
+        ],
+        "diffusion_delta": 0.5528507491239223,
+        "diffusion_gain": 0.5528507491239223
+      }
+    },
+    {
+      "node_id": "memory_mem_5",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'Is Shenandoah Valley Regional Airport used for both public and military purposes' is public airport.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999869456088,
+      "temperature": 0.84680963476917,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "intermediate_answer",
+        "target_question": "Is Shenandoah Valley Regional Airport used for both public and military purposes?",
+        "target_question_norm": "is shenandoah valley regional airport used for both public and military purposes",
+        "relation_signature": "generic",
+        "answer_text": "public airport",
+        "support_score": 0.9999999869456088,
+        "evidence_ids": [
+          "doc_10",
+          "doc_4"
+        ],
+        "slot_name": "shenandoah_use_type",
+        "slot_role": "candidate_a",
+        "terminal": true,
+        "derived_from_state": "state_3",
+        "diffusion_delta": 0.031491336634289935,
+        "diffusion_gain": 0.031491336634289935
+      }
+    },
+    {
+      "node_id": "memory_mem_6",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'Which airport is used for both public and military, Shenandoah Valley Regional Airport or Louisville International Airport' is Louisville International Airport.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999869456088,
+      "temperature": 0.9999999869456088,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "answer_candidate",
+        "target_question": "Which airport is used for both public and military, Shenandoah Valley Regional Airport or Louisville International Airport?",
+        "target_question_norm": "which airport is used for both public and military shenandoah valley regional airport or louisville international airport",
+        "relation_signature": "generic",
+        "answer_text": "Louisville International Airport",
+        "support_score": 0.9999999869456088,
+        "derived_from_state": "state_1",
+        "composed_from": [
+          "memory_mem_5",
+          null
+        ],
+        "slot_role": "target_attribute",
+        "terminal": true
+      }
+    }
+  ],
+  "edges": [
+    {
+      "source": "state_1",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.9999999891533071
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.5412296226552894
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.4238583961897664
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_10",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.9599999846429537
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.01909936623004068
+    },
+    {
+      "source": "state_1",
+      "target": "state_2",
+      "edge_type": "refines",
+      "weight": 1.0
+    },
+    {
+      "source": "state_1",
+      "target": "state_3",
+      "edge_type": "refines",
+      "weight": 0.94
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_6",
+      "edge_type": "derives",
+      "weight": 0.9999999869456088
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.9999999891533071
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.9999999954056065
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.9999999954056065
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.5412296226552894
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.6516092857234611
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.7230453762867195
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.6516092857234611
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.4238583961897664
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.7504109796202305
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.7504109796202305
+    },
+    {
+      "source": "kg_doc_10",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_10",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.9999999869456088
+    },
+    {
+      "source": "kg_doc_10",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.9999999858532372
+    },
+    {
+      "source": "kg_doc_10",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.9999999869456088
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.9599999846429537
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_2",
+      "edge_type": "recalls",
+      "weight": 0.9599999846429537
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_3",
+      "edge_type": "recalls",
+      "weight": 0.049442667706600024
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "memory_mem_4",
+      "edge_type": "recalls",
+      "weight": 0.9599999846429537
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_5",
+      "edge_type": "recalls",
+      "weight": 0.042315486278513975
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "memory_mem_5",
+      "edge_type": "recalls",
+      "weight": 0.049442667706600024
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.01909936623004068
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_2",
+      "edge_type": "recalls",
+      "weight": 0.01909936623004068
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_3",
+      "edge_type": "recalls",
+      "weight": 0.0009645217960460493
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "memory_mem_4",
+      "edge_type": "recalls",
+      "weight": 0.01909936623004068
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "memory_mem_5",
+      "edge_type": "recalls",
+      "weight": 0.0009645217960460493
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.9999999954056065
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.7504109796202305
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.28464938971370285
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_2",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.9599999846429537
+    },
+    {
+      "source": "state_2",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.01909936623004068
+    },
+    {
+      "source": "state_2",
+      "target": "state_3",
+      "edge_type": "refines",
+      "weight": 0.9
+    },
+    {
+      "source": "state_2",
+      "target": "memory_mem_4",
+      "edge_type": "derives",
+      "weight": 0.95
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.28464938971370285
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.28464938971370285
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_10",
+      "edge_type": "supports",
+      "weight": 0.9999999869456088
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.6516092857234611
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.22741638342468382
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_3",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.049442667706600024
+    },
+    {
+      "source": "state_3",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.0009645217960460493
+    },
+    {
+      "source": "state_3",
+      "target": "state_5",
+      "edge_type": "refines",
+      "weight": 0.84
+    },
+    {
+      "source": "state_3",
+      "target": "memory_mem_5",
+      "edge_type": "derives",
+      "weight": 0.9999999869456088
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.22741638342468382
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.2743882379147335
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.22741638342468382
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_2",
+      "target": "state_5",
+      "edge_type": "recalls",
+      "weight": 0.02913211166815181
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "state_2",
+      "edge_type": "recalls",
+      "weight": 0.95
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.9999999954056065
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.7504109796202305
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.28464938971370285
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.9599999846429537
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.01909936623004068
+    },
+    {
+      "source": "state_5",
+      "target": "kg_doc_10",
+      "edge_type": "supports",
+      "weight": 0.9999999858532372
+    },
+    {
+      "source": "state_5",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.7230453762867195
+    },
+    {
+      "source": "state_5",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.2743882379147335
+    },
+    {
+      "source": "state_5",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_5",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.042315486278513975
+    },
+    {
+      "source": "state_5",
+      "target": "memory_mem_2",
+      "edge_type": "recalls",
+      "weight": 0.02913211166815181
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "state_3",
+      "edge_type": "recalls",
+      "weight": 0.9999999869456088
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_10",
+      "edge_type": "supports",
+      "weight": 0.9999999869456088
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.6516092857234611
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.22741638342468382
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.049442667706600024
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.0009645217960460493
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "memory_mem_6",
+      "edge_type": "derives",
+      "weight": 0.9999999869456088
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.9999999869456088
+    }
+  ]
+}

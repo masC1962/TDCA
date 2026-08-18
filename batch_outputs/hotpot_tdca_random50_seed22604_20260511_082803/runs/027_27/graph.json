@@ -1,0 +1,394 @@
+{
+  "nodes": [
+    {
+      "node_id": "state_1",
+      "node_type": "state",
+      "content": "What festival is held every June in Bartlesville, Oklahoma?",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.746771225232993,
+      "temperature": 0.8531585302832806,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.947818395427698,
+        "evidence_support": 0.8465246924344056,
+        "memory_usefulness": 0.0,
+        "answerability": 0.9232623462172028,
+        "uncertainty": 0.147625555361807
+      },
+      "metadata": {
+        "diffusion_delta": 0.47547582129832905,
+        "diffusion_gain": 0.47547582129832905
+      }
+    },
+    {
+      "node_id": "kg_doc_4",
+      "node_type": "kg",
+      "content": "OK Mozart is an annual Classical music festival held each June in Bartlesville, Oklahoma. Considered Oklahoma's Premiere Music Festival, OK MOZART brings the highest quality professional musical and cultural experiences to the state of Oklahoma and the middle United States. The festival is a multi-day, multi-location event with professional orchestra musicians, concert artists and musical performances of artistic excellence for an event with international significance.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999914381268,
+      "temperature": 0.9999999914381268,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "OK Mozart Festival",
+        "raw_score": 4.9564123029460045,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_10",
+      "node_type": "kg",
+      "content": "Bartlesville is a city mostly in Washington County in the U.S. state of Oklahoma. The population was 35,750 at the 2010 census, with a 2015 estimate of 36,595 according to the U.S. Census Bureau. Bartlesville is 47 mi north of Tulsa and 18 mi south of the Kansas border. It is the county seat of Washington County. The Caney River runs through Bartlesville.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.7138163122219247,
+      "temperature": 0.7138163122219247,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Bartlesville, Oklahoma",
+        "raw_score": 4.109793416538704,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_6",
+      "node_type": "kg",
+      "content": "Kastav Film Festival is an international film festival founded in 2009. Since then, the festival is held every June in Kastav, Croatia.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.060199497193155364,
+      "temperature": 0.060199497193155364,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Kastav Film Festival",
+        "raw_score": 1.7759168591217886,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_2",
+      "node_type": "kg",
+      "content": "The Sierra Nevada World Music Festival is an annual music festival held every June on the weekend of (or the weekend following) the summer solstice. It is currently held at the Mendocino County Fairgrounds in Boonville, California.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0,
+      "temperature": 0.0,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Sierra Nevada World Music Festival",
+        "raw_score": 1.5996703085582884,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "state_2",
+      "node_type": "state",
+      "content": "Does the evidence support that What festival is held every June in Bartlesville, Oklahoma?",
+      "depth": 1,
+      "parent_id": "state_1",
+      "value": 0.7753057095844866,
+      "temperature": 0.856217612092925,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.951348771606602,
+        "evidence_support": 0.8569081517841233,
+        "memory_usefulness": 0.4634494347728014,
+        "answerability": 0.9284540758920615,
+        "uncertainty": 0.1457565326788578
+      },
+      "metadata": {
+        "kind": "verification",
+        "evidence_ids": [
+          "doc_4",
+          "doc_10",
+          "doc_6",
+          "doc_2"
+        ],
+        "memory_ids": [
+          "mem_3",
+          "mem_1"
+        ],
+        "diffusion_delta": 0.3220314795328252,
+        "diffusion_gain": 0.3220314795328252
+      }
+    },
+    {
+      "node_id": "memory_mem_3",
+      "node_type": "memory",
+      "content": "Template: when evidence already grounds the answer, switch from branching to short verification and synthesis.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.8799999913901771,
+      "temperature": 0.7124495537039903,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.88,
+        "tag": "verification_then_stop",
+        "memory_kind": "template",
+        "raw_score": 1.1568574499189872,
+        "source": "memory",
+        "diffusion_delta": -0.16755043768618683,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "memory_mem_1",
+      "node_type": "memory",
+      "content": "Template: for compositional multi-hop questions, first solve the intermediate entity and then ask for the final attribute.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.04689887815542571,
+      "temperature": 0.03772858419813618,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.96,
+        "tag": "compositional_template",
+        "memory_kind": "template",
+        "raw_score": 0.18470114999581103,
+        "source": "memory",
+        "diffusion_delta": -0.009170293957289535,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "memory_mem_4",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'What festival is held every June in Bartlesville, Oklahoma' is OK Mozart Festival.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.92,
+      "temperature": 0.8400891007714795,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "answer_candidate",
+        "target_question": "What festival is held every June in Bartlesville, Oklahoma?",
+        "target_question_norm": "what festival is held every june in bartlesville oklahoma",
+        "relation_signature": "generic",
+        "answer_text": "OK Mozart Festival",
+        "support_score": 0.8465246924344056,
+        "evidence_ids": [
+          "doc_4",
+          "doc_10"
+        ],
+        "derived_from_state": "state_1",
+        "diffusion_delta": -0.29954550785007217,
+        "diffusion_gain": 0.0
+      }
+    }
+  ],
+  "edges": [
+    {
+      "source": "state_1",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.9999999914381268
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_10",
+      "edge_type": "supports",
+      "weight": 0.6930493934306845
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.060199497193155364
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_1",
+      "target": "state_2",
+      "edge_type": "verifies",
+      "weight": 0.38
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_4",
+      "edge_type": "derives",
+      "weight": 1.0
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.9999999914381268
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.999999991346322
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.9999999914381268
+    },
+    {
+      "source": "kg_doc_10",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.6930493934306845
+    },
+    {
+      "source": "kg_doc_10",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.7138163122219247
+    },
+    {
+      "source": "kg_doc_10",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.6930493934306845
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.060199497193155364
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.05185615083386849
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.060199497193155364
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.999999991346322
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_10",
+      "edge_type": "supports",
+      "weight": 0.7138163122219247
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.05185615083386849
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_2",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.8799999913901771
+    },
+    {
+      "source": "state_2",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.04689887815542571
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_2",
+      "edge_type": "recalls",
+      "weight": 0.8799999913901771
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_2",
+      "edge_type": "recalls",
+      "weight": 0.04689887815542571
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 1.0
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.9999999914381268
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_10",
+      "edge_type": "supports",
+      "weight": 0.6930493934306845
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.060199497193155364
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    }
+  ]
+}

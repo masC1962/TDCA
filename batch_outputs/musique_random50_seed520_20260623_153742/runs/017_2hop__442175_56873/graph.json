@@ -1,0 +1,221 @@
+{
+  "nodes": [
+    {
+      "node_id": "state_1",
+      "node_type": "state",
+      "content": "When did the team that Jamie Ward is a member of win the FA Cup?",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.807471161244372,
+      "temperature": 0.6413991213297838,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.9493678656253463,
+        "evidence_support": 0.8510819577216064,
+        "memory_usefulness": 0.48672266765716377,
+        "answerability": 0.9255409788608032,
+        "uncertainty": 0.14680524761011082
+      },
+      "metadata": {
+        "diffusion_delta": 0.06271506038140051,
+        "diffusion_gain": 0.06271506038140051
+      }
+    },
+    {
+      "node_id": "kg_doc_11",
+      "node_type": "kg",
+      "content": "Current manager, Roberto Martínez, is the fourteenth permanent holder of the position since it was established in 1939. There have also been four caretaker managers, and before 1939 the team was selected by either the club secretary or by committee. The club's longest-serving manager has been Harry Catterick, who was in charge of the team from 1961–73, taking in 594 first team matches. The Everton manager to win most domestic and international trophies is Howard Kendall, who won two Division One championships, the 1984 FA Cup, the 1984 UEFA Cup Winners' Cup, and three Charity Shields.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999990977568612,
+      "temperature": 0.9999990977568612,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Everton F.C.",
+        "raw_score": 0.1729153345864699,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_2",
+      "node_type": "kg",
+      "content": "The club has been a member of the Premier League for all but three years of the competition's history, spending 85 seasons in the top tier as of May 2016, and has never dropped below English football's second tier since joining the Football League in 1893. They have won four League Championship titles, six FA Cups and a Charity Shield, as well as the 1969 Inter-Cities Fairs Cup and the 2006 UEFA Intertoto Cup. Newcastle United has the ninth highest total of trophies won by an English club. The club's most successful period was between 1904 and 1910, when they won an FA Cup and three of their First Division titles. The club were highly successful in the Premier League in the 1990s and early 2000s without winning any trophies, but have been mostly struggling since the 2006 -- 07 season, and were relegated in 2009 and 2016. They returned to the Premiership for the 2017 -- 18 season after winning the Championship title the preceding year.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999991085527387,
+      "temperature": 0.9999991085527387,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Newcastle United F.C.",
+        "raw_score": 0.17432670443384612,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_1",
+      "node_type": "kg",
+      "content": "The 2005 FA Cup Final was a football match played between Arsenal and Manchester United on 21 May 2005 at the Millennium Stadium, Cardiff. It was the final match of the 2004 -- 05 FA Cup, the 124th season of English football's primary cup competition, the FA Cup. Arsenal became the first team to win the FA Cup via a penalty shoot - out, despite being outplayed throughout the game, after neither side managed to score in the initial 90 minutes or in 30 minutes of extra time. The shoot - out finished 5 -- 4 to Arsenal, with Patrick Vieira scoring the winning penalty after Paul Scholes' shot was saved by Arsenal goalkeeper Jens Lehmann.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.7772029856746416,
+      "temperature": 0.7772029856746416,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "2005 FA Cup Final",
+        "raw_score": 0.16697593066684663,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_5",
+      "node_type": "kg",
+      "content": "After the Singapore Cup and League Cup, the Singapore FA Cup is the next major cup competition in Singapore. For a number of years, the FA Cup was solely restricted to NFL Clubs. In 2006, S.League clubs were once again allowed in the competition, but were only permitted to field their developmental Prime League teams. The team matchups were drawn out of a hat against one another for the initial 2006 and 2007 seasons before being seeded into two groups after 2008.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0,
+      "temperature": 0.0,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Singapore FA Cup",
+        "raw_score": 0.1413334587740264,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "memory_mem_3",
+      "node_type": "memory",
+      "content": "Template: when evidence already grounds the answer, switch from branching to short verification and synthesis.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.8799999957031909,
+      "temperature": 0.7170417047573403,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.88,
+        "tag": "verification_then_stop",
+        "memory_kind": "template",
+        "raw_score": 2.452338591333771,
+        "source": "memory",
+        "diffusion_delta": -0.16295829094585057,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "memory_mem_1",
+      "node_type": "memory",
+      "content": "Template: for compositional multi-hop questions, first solve the intermediate entity and then ask for the final attribute.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.09344534389180187,
+      "temperature": 0.06208303480893503,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.96,
+        "tag": "compositional_template",
+        "memory_kind": "template",
+        "raw_score": 0.5541034499874331,
+        "source": "memory",
+        "diffusion_delta": -0.013645402183849444,
+        "diffusion_gain": 0.0
+      }
+    }
+  ],
+  "edges": [
+    {
+      "source": "state_1",
+      "target": "kg_doc_11",
+      "edge_type": "supports",
+      "weight": 0.9999990977568612
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.7021648176863515
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.5697134144355018
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.8799999914225256
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.09344534389180187
+    },
+    {
+      "source": "kg_doc_11",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.9999990977568612
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.7021648176863515
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.5697134144355018
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.8799999914225256
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.09344534389180187
+    }
+  ]
+}

@@ -1,0 +1,124 @@
+{
+  "question": "In which county is Southern Maryland Electric Cooperative headquartered?",
+  "final_answer": "Charles County",
+  "best_node": {
+    "node_id": "state_1",
+    "node_type": "state",
+    "content": "In which county is Southern Maryland Electric Cooperative headquartered?",
+    "depth": 0,
+    "parent_id": null,
+    "value": 0.5971616628254178,
+    "temperature": 0.09894789705039342,
+    "expanded": true,
+    "visit_count": 1,
+    "persistent": false,
+    "score_breakdown": {
+      "task_progress": 0.8467308532604174,
+      "evidence_support": 0.5492083919424042,
+      "memory_usefulness": 0.0,
+      "answerability": 0.7746041959712021,
+      "uncertainty": 0.20114248945036722
+    },
+    "metadata": {
+      "diffusion_delta": -0.016120939343105684,
+      "diffusion_gain": 0.0
+    }
+  },
+  "final_synthesis_node_ids": [
+    "state_3",
+    "state_2",
+    "memory_mem_5",
+    "memory_mem_4",
+    "state_1"
+  ],
+  "answer_history": [
+    {
+      "node_id": "memory_mem_4",
+      "content": "Conclusion: The answer to 'In which city is Southern Maryland Electric Cooperative headquartered' is Hughesville.",
+      "answer_text": "Hughesville",
+      "value": 1.0,
+      "confidence": 1.0,
+      "evidence_ids": [
+        "doc_4"
+      ],
+      "step": 1,
+      "kind": "intermediate_answer"
+    },
+    {
+      "node_id": "memory_mem_5",
+      "content": "Conclusion: The answer to 'In which county is Hughesville, Maryland located' is Charles County.",
+      "answer_text": "Charles County",
+      "value": 0.874,
+      "evidence_ids": [
+        "doc_4",
+        "doc_8",
+        "doc_15"
+      ],
+      "step": 2
+    },
+    {
+      "node_id": "state_1",
+      "answer_text": "Charles County",
+      "previous_answer": "",
+      "confidence": 0.7746041959712021,
+      "score": 0.7566900471572084,
+      "source": "final_synthesis",
+      "step": 3,
+      "evidence_ids": [
+        "doc_4",
+        "doc_15",
+        "doc_8",
+        "doc_5"
+      ],
+      "kind": "anytime_answer"
+    },
+    {
+      "node_id": "memory_mem_5",
+      "content": "Conclusion: The answer to 'In which county is Hughesville, Maryland located' is Charles County.",
+      "answer_text": "Charles County",
+      "value": 0.9739239847100646,
+      "evidence_ids": [
+        "doc_4",
+        "doc_8",
+        "doc_15"
+      ],
+      "step": 4
+    },
+    {
+      "node_id": "state_1",
+      "answer_text": "Charles County",
+      "source": "answer_judge",
+      "choice": "A",
+      "candidate_source": "final_synthesis",
+      "base_score": 0.8182563801831405,
+      "rerank_score": 0.6675412400082833,
+      "judge_confidence": 0.0,
+      "judge_reason": "",
+      "step": 3,
+      "kind": "final_answer_selection"
+    }
+  ],
+  "anytime_answer": "Charles County",
+  "anytime_answer_score": 0.7566900471572084,
+  "anytime_answer_source": "final_synthesis",
+  "anytime_answer_node_id": "state_1",
+  "stats": {
+    "steps": 3,
+    "llm_calls": 7,
+    "generated_tokens": 510,
+    "token_budget_remaining": 690,
+    "total_nodes": 11,
+    "kg_nodes": 6,
+    "memory_nodes": 2,
+    "state_nodes": 3,
+    "deleted_state_nodes": 0,
+    "scheduler_mode": "tdca",
+    "scoring_mode": "hybrid",
+    "stop_reason": "frontier_empty",
+    "goal_kind": "bridge",
+    "goal_completion": 0.5,
+    "anytime_answer": "Charles County",
+    "anytime_answer_score": 0.7566900471572084,
+    "anytime_answer_source": "final_synthesis"
+  }
+}

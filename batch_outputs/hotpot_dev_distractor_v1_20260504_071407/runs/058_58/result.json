@@ -1,0 +1,146 @@
+{
+  "question": "According to the 2001 census, what was the population of the city in which Kirton End is located?",
+  "final_answer": "35124",
+  "best_node": {
+    "node_id": "state_6",
+    "node_type": "state",
+    "content": "What is the population of Boston, Lincolnshire, according to the 2001 census?",
+    "depth": 2,
+    "parent_id": "state_2",
+    "value": 0.7836158746025158,
+    "temperature": 1.2267410099932323,
+    "expanded": true,
+    "visit_count": 1,
+    "persistent": false,
+    "score_breakdown": {
+      "task_progress": 0.8197359151916597,
+      "evidence_support": 0.9587821035048811,
+      "memory_usefulness": 0.48672266765716377,
+      "answerability": 0.8918910517524407,
+      "uncertainty": 0.1274192213691214
+    },
+    "metadata": {
+      "kind": "retrieval",
+      "evidence_ids": [
+        "doc_4",
+        "doc_10",
+        "doc_2",
+        "doc_6"
+      ],
+      "memory_ids": [
+        "mem_3",
+        "mem_1"
+      ],
+      "diffusion_delta": 0.13182189107381603,
+      "diffusion_gain": 0.13182189107381603
+    }
+  },
+  "final_synthesis_node_ids": [
+    "state_2",
+    "state_6",
+    "state_8",
+    "state_10",
+    "state_1"
+  ],
+  "answer_history": [
+    {
+      "node_id": "",
+      "answer_text": "166,896",
+      "previous_answer": "",
+      "confidence": 0.28,
+      "score": 0.16880000000000003,
+      "source": "closed_book_initial",
+      "step": 0,
+      "evidence_ids": [],
+      "kind": "anytime_answer"
+    },
+    {
+      "node_id": "memory_mem_4",
+      "content": "Conclusion: The answer to 'In which city or larger administrative locality is Kirton End located' is Boston district of Lincolnshire, England.",
+      "answer_text": "Boston district of Lincolnshire, England",
+      "value": 1.0,
+      "confidence": 1.0,
+      "evidence_ids": [
+        "doc_10"
+      ],
+      "step": 3,
+      "kind": "intermediate_answer"
+    },
+    {
+      "node_id": "memory_mem_5",
+      "content": "Conclusion: The answer to 'What is the population of Boston, Lincolnshire, according to the 2001 census' is 35124.",
+      "answer_text": "35124",
+      "value": 0.874,
+      "evidence_ids": [
+        "doc_4",
+        "doc_10",
+        "doc_2"
+      ],
+      "step": 4
+    },
+    {
+      "node_id": "state_6",
+      "answer_text": "35124",
+      "previous_answer": "166,896",
+      "confidence": 0.95,
+      "score": 0.8696407854424703,
+      "source": "expansion_candidate",
+      "step": 3,
+      "evidence_ids": [
+        "doc_4",
+        "doc_10",
+        "doc_2",
+        "doc_6"
+      ],
+      "kind": "anytime_answer"
+    },
+    {
+      "node_id": "memory_mem_6",
+      "content": "Conclusion: The answer to 'What is the population of the Boston district (or borough) according to the 2001 census' is 66,900.",
+      "answer_text": "66,900",
+      "value": 0.9999999948526388,
+      "confidence": 0.95,
+      "evidence_ids": [
+        "doc_4",
+        "doc_10"
+      ],
+      "step": 5,
+      "kind": "intermediate_answer"
+    },
+    {
+      "node_id": "state_6",
+      "answer_text": "35124",
+      "source": "answer_judge",
+      "choice": "A",
+      "candidate_source": "expansion_candidate",
+      "base_score": 0.8232058653650162,
+      "judge_confidence": 0.0,
+      "judge_reason": "Kirton End is in Boston, Lincolnshire; doc_1 states Boston town's 2001 population was 35,124.",
+      "step": 6,
+      "kind": "final_answer_selection"
+    }
+  ],
+  "anytime_answer": "35124",
+  "anytime_answer_score": 0.8696407854424703,
+  "anytime_answer_source": "expansion_candidate",
+  "anytime_answer_node_id": "state_6",
+  "stats": {
+    "steps": 6,
+    "llm_calls": 12,
+    "generated_tokens": 972,
+    "token_budget_remaining": 228,
+    "total_nodes": 26,
+    "kg_nodes": 9,
+    "memory_nodes": 5,
+    "state_nodes": 12,
+    "deleted_state_nodes": 1,
+    "scheduler_mode": "tdca",
+    "scoring_mode": "hybrid",
+    "stop_reason": "final_synthesis_reserve",
+    "goal_kind": "bridge",
+    "goal_completion": 0.0,
+    "anytime_answer": "35124",
+    "anytime_answer_score": 0.8696407854424703,
+    "anytime_answer_source": "expansion_candidate"
+  }
+}

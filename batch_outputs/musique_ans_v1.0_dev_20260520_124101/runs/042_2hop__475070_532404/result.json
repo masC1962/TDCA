@@ -1,0 +1,134 @@
+{
+  "question": "Where was the spouse of Frances Tupper born?",
+  "final_answer": "Easton",
+  "best_node": {
+    "node_id": "state_3",
+    "node_type": "state",
+    "content": "Where was Sir Charles Tupper born?",
+    "depth": 2,
+    "parent_id": "state_2",
+    "value": 0.6712314366785179,
+    "temperature": 1.2852301785607578,
+    "expanded": true,
+    "visit_count": 1,
+    "persistent": false,
+    "score_breakdown": {
+      "task_progress": 0.7670482680260255,
+      "evidence_support": 0.873671376547134,
+      "memory_usefulness": 0.0,
+      "answerability": 0.836835688273567,
+      "uncertainty": 0.14273915222151587
+    },
+    "metadata": {
+      "kind": "retrieval",
+      "evidence_ids": [
+        "doc_5",
+        "doc_14",
+        "doc_11",
+        "doc_7"
+      ],
+      "memory_ids": [],
+      "diffusion_delta": 0.31178637215131455,
+      "diffusion_gain": 0.31178637215131455
+    }
+  },
+  "final_synthesis_node_ids": [
+    "state_2",
+    "state_3",
+    "memory_mem_5",
+    "state_1"
+  ],
+  "answer_history": [
+    {
+      "node_id": "memory_mem_4",
+      "content": "Conclusion: The answer to 'Who was the spouse of Frances Tupper' is Sir Charles Tupper.",
+      "answer_text": "Sir Charles Tupper",
+      "value": 1.0,
+      "confidence": 1.0,
+      "evidence_ids": [
+        "doc_5"
+      ],
+      "step": 1,
+      "kind": "intermediate_answer"
+    },
+    {
+      "node_id": "memory_mem_5",
+      "content": "Conclusion: Sir Charles Tupper was born in Easton.",
+      "answer_text": "Easton",
+      "value": 0.873671376547134,
+      "evidence_ids": [
+        "doc_14",
+        "doc_5"
+      ],
+      "step": 2
+    },
+    {
+      "node_id": "state_3",
+      "answer_text": "Easton",
+      "previous_answer": "",
+      "confidence": 0.873671376547134,
+      "score": 0.787689885170913,
+      "source": "expansion_candidate",
+      "step": 1,
+      "evidence_ids": [
+        "doc_14",
+        "doc_5",
+        "doc_11",
+        "doc_7"
+      ],
+      "kind": "anytime_answer"
+    },
+    {
+      "node_id": "state_3",
+      "answer_text": "Easton",
+      "previous_answer": "Easton",
+      "confidence": 0.873671376547134,
+      "score": 0.887689885170913,
+      "source": "grounded",
+      "step": 1,
+      "evidence_ids": [
+        "doc_14",
+        "doc_5",
+        "doc_11",
+        "doc_7"
+      ],
+      "kind": "anytime_answer"
+    },
+    {
+      "node_id": "state_3",
+      "answer_text": "Easton",
+      "source": "answer_judge",
+      "choice": "A",
+      "candidate_source": "grounded",
+      "base_score": 1.0,
+      "rerank_score": 0.780716775501319,
+      "judge_confidence": 0.0,
+      "judge_reason": "",
+      "step": 3,
+      "kind": "final_answer_selection"
+    }
+  ],
+  "anytime_answer": "Easton",
+  "anytime_answer_score": 0.887689885170913,
+  "anytime_answer_source": "grounded",
+  "anytime_answer_node_id": "state_3",
+  "stats": {
+    "steps": 3,
+    "llm_calls": 7,
+    "generated_tokens": 573,
+    "token_budget_remaining": 627,
+    "total_nodes": 13,
+    "kg_nodes": 6,
+    "memory_nodes": 4,
+    "state_nodes": 3,
+    "deleted_state_nodes": 0,
+    "scheduler_mode": "tdca",
+    "scoring_mode": "hybrid",
+    "stop_reason": "frontier_empty",
+    "goal_kind": "bridge",
+    "goal_completion": 0.0,
+    "anytime_answer": "Easton",
+    "anytime_answer_score": 0.887689885170913,
+    "anytime_answer_source": "grounded"
+  }
+}

@@ -1,0 +1,1553 @@
+{
+  "nodes": [
+    {
+      "node_id": "state_1",
+      "node_type": "state",
+      "content": "Whose navigator father explored the east coast of the region where Ignacio Esparza was later born?",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.6170760085046069,
+      "temperature": 0.497314632825878,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.8299999968311739,
+        "evidence_support": 0.499999990679923,
+        "memory_usefulness": 0.5139667766205794,
+        "answerability": 0.6499999953399616,
+        "uncertainty": 0.21000000167761385
+      },
+      "metadata": {
+        "diffusion_delta": -0.010539641660115284,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "kg_doc_1",
+      "node_type": "kg",
+      "content": "Ignacio Esparza Lozano (born June 4, 1977 in Guadalajara, Jalisco, Mexico) is a Mexican professional boxer in the Cruiserweight division. He's the former Mexican National and WBA Fedebol Cruiserweight Champion.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.999999984029235,
+      "temperature": 0.999999984029235,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Ignacio Esparza",
+        "raw_score": 0.07860686915632527,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_4",
+      "node_type": "kg",
+      "content": "The first known landing in Australia by Europeans was by Dutch navigator Willem Janszoon in 1606. Twenty - nine other Dutch navigators explored the western and southern coasts in the 17th century, and dubbed the continent New Holland. Macassan trepangers visited Australia's northern coasts after 1720, possibly earlier. Other European explorers followed until, in 1770, Lieutenant James Cook charted the east coast of Australia for Great Britain and returned with accounts favouring colonisation at Botany Bay (now in Sydney), New South Wales.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0,
+      "temperature": 0.0,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "History of Australia",
+        "raw_score": 0.16488401174913692,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_3",
+      "node_type": "kg",
+      "content": "His fleet of 13 ships sailed far into the western Atlantic Ocean, perhaps intentionally, where he made landfall on what he initially assumed to be a large island. As the new land was within the Portuguese sphere according to the Treaty of Tordesillas, Cabral claimed it for the Portuguese Crown. He explored the coast, realizing that the large land mass was probably a continent, and dispatched a ship to notify King Manuel I of the new territory. The continent was South America, and the land he had claimed for Portugal later came to be known as Brazil. The fleet reprovisioned and then turned eastward to resume the journey to India.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0,
+      "temperature": 0.0,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Pedro Álvares Cabral",
+        "raw_score": 0.03199142983658368,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_20",
+      "node_type": "kg",
+      "content": "The first country to attempt to circumnavigate Africa was Portugal, which had, since the early 15th century, begun to explore northern Africa under Henry the Navigator. Emboldened by these early successes and eyeing a lucrative monopoly on a possible sea route to the Indies the Portuguese first crossed the Cape of Good Hope in 1488 on an expedition led by Bartolomeu Dias. Just nine years later in 1497 on the orders of Manuel I of Portugal, four vessels under the command of navigator Vasco da Gama rounded the Cape of Good Hope, continuing to the eastern coast of Africa to Malindi to sail across the Indian Ocean to Calicut, on the Malabar Coast. in south India -- the capital of the local Zamorin rulers. The wealth of the Indies was now open for the Europeans to explore; the Portuguese Empire was the earliest European seaborne empire to grow from the spice trade.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0,
+      "temperature": 0.0,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Spice trade",
+        "raw_score": 0.10237241433792758,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "memory_mem_1",
+      "node_type": "memory",
+      "content": "Template: for compositional multi-hop questions, first solve the intermediate entity and then ask for the final attribute.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9599999839777177,
+      "temperature": 3.234554269753582,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.96,
+        "tag": "compositional_template",
+        "memory_kind": "template",
+        "raw_score": 0.18470114999581103,
+        "source": "memory",
+        "diffusion_delta": 0.575763814226788,
+        "diffusion_gain": 0.575763814226788
+      }
+    },
+    {
+      "node_id": "memory_mem_3",
+      "node_type": "memory",
+      "content": "Template: when evidence already grounds the answer, switch from branching to short verification and synthesis.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.7336075669690973,
+      "temperature": 0.6775035846641777,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.88,
+        "tag": "verification_then_stop",
+        "memory_kind": "template",
+        "raw_score": 0.13862369149579673,
+        "source": "memory",
+        "diffusion_delta": 0.07398258454758466,
+        "diffusion_gain": 0.07398258454758466
+      }
+    },
+    {
+      "node_id": "state_2",
+      "node_type": "state",
+      "content": "Where was Ignacio Esparza born?",
+      "depth": 1,
+      "parent_id": "state_1",
+      "value": 0.4534666626484222,
+      "temperature": 1.2673421807558722,
+      "expanded": true,
+      "visit_count": 2,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.5766666639516367,
+        "evidence_support": 0.4999999920146175,
+        "memory_usefulness": 0.0,
+        "answerability": 0.6166666626739754,
+        "uncertainty": 0.21000000143736886
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_1",
+          "doc_19",
+          "doc_3",
+          "doc_11"
+        ],
+        "memory_ids": [],
+        "goal_slot_name": "esparza_birth_location",
+        "goal_slot_role": "target_attribute",
+        "goal_terminal": true,
+        "diffusion_delta": 0.0044889853756522324,
+        "diffusion_gain": 0.0044889853756522324,
+        "goal_retry": 1
+      }
+    },
+    {
+      "node_id": "kg_doc_19",
+      "node_type": "kg",
+      "content": "Sebastian Cabot (Italian and , ; , \"Gaboto\" or \"Cabot\"; 1474 – December 1557) was an Italian explorer, likely born in the Venetian Republic. He was the son of Italian explorer John Cabot (Giovanni Caboto) and his Venetian wife Mattea.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0,
+      "temperature": 0.0,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Sebastian Cabot (explorer)",
+        "raw_score": 0.054111538422072475,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_11",
+      "node_type": "kg",
+      "content": "Paula Santiago (born 1969 in Guadalajara) is a Mexican mixed media artist whose works have been displayed at the Monterrey Museum of Modern Art and several galleries in Europe and North America. Most of her work stands out by being made with her own blood and hair.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.8199641119794059,
+      "temperature": 0.8199641119794059,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Paula Santiago",
+        "raw_score": 0.05580136876604272,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "state_3",
+      "node_type": "state",
+      "content": "Which navigator father explored the east coast of Mexico or Central America?",
+      "depth": 2,
+      "parent_id": "state_2",
+      "value": 0.7600685694975301,
+      "temperature": 0.893232493387686,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.7882382178912499,
+        "evidence_support": 0.9732496604644603,
+        "memory_usefulness": 0.5139667251540021,
+        "answerability": 0.7799581635655636,
+        "uncertainty": 0.12481506111639715
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_2",
+          "doc_9",
+          "doc_5",
+          "doc_1"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "diffusion_delta": 0.010959219730506842,
+        "diffusion_gain": 0.010959219730506842
+      }
+    },
+    {
+      "node_id": "kg_doc_2",
+      "node_type": "kg",
+      "content": "Pedro Álvares Cabral (European Portuguese: (ˈpeðɾu ˈaɫvɐr (ɨ) ʃ kɐˈβɾaɫ) or Brazilian Portuguese: (ˈpedɾu ˈawvaɾis kaˈbɾaw); c. 1467 or 1468 -- c. 1520) was a Portuguese nobleman, military commander, navigator and explorer regarded as the European discoverer of Brazil. In 1500 Cabral conducted the first substantial exploration of the northeast coast of South America and claimed it for Portugal. While details of Cabral's early life remain unclear, it is known that he came from a minor noble family and received a good education. He was appointed to head an expedition to India in 1500, following Vasco da Gama's newly - opened route around Africa. The undertaking had the aim of returning with valuable spices and of establishing trade relations in India -- bypassing the monopoly on the spice trade then in the hands of Arab, Turkish and Italian merchants. Although the previous expedition of Vasco da Gama to India, on its sea route, had recorded signs of land west of the southern Atlantic Ocean (in 1497), Cabral is regarded as the first captain who ever touched four continents, leading the first expedition that united Europe, Africa, America, and Asia.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999645976686,
+      "temperature": 0.9999999645976686,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Pedro Álvares Cabral",
+        "raw_score": 0.1376914385025488,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_9",
+      "node_type": "kg",
+      "content": "Explorers flying the flag of Spain reached the New World beginning in 1492 with the discovery of America by Christopher Columbus. Spanish expeditions colonized and explored vast areas in North and South America following the grants of the Pope (contained in the 1493 papal bull Inter caetera) and rights contained in the 1494 Treaty of Tordesillas and 1529 Treaty of Zaragoza. These formal acts gave Spain the exclusive rights to colonize the entire Western Hemisphere (excluding eastern Brazil), including all of the west coast of North America. The first European expedition to actually reach the west coast was led by the Spaniard Vasco Núñez de Balboa, who reached the Pacific coast of Panama in 1513. In an act of enduring historical importance, Balboa claimed the Pacific Ocean for the Spanish Crown, as well as all adjoining land and islands. This act gave Spain exclusive sovereignty and navigation rights over the entire west coast of North America.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9672763456003316,
+      "temperature": 0.9672763456003316,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "History of the west coast of North America",
+        "raw_score": 0.10083921573365033,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_5",
+      "node_type": "kg",
+      "content": "The foundations of the British Empire were laid when England and Scotland were separate kingdoms. In 1496 King Henry VII of England, following the successes of Spain and Portugal in overseas exploration, commissioned John Cabot to lead a voyage to discover a route to Asia via the North Atlantic. Cabot sailed in 1497, five years after the European discovery of America, and although he successfully made landfall on the coast of Newfoundland (mistakenly believing, like Christopher Columbus, that he had reached Asia), there was no attempt to found a colony. Cabot led another voyage to the Americas the following year but nothing was heard of his ships again.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.7112380778010714,
+      "temperature": 0.7112380778010714,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "British Empire",
+        "raw_score": 0.05596744532305295,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "state_4",
+      "node_type": "state",
+      "content": "Where is Guadalajara, Jalisco located geographically?",
+      "depth": 2,
+      "parent_id": "state_2",
+      "value": 0.6121962982650956,
+      "temperature": 0.2862832068175276,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.614727228557497,
+        "evidence_support": 0.9099820447769519,
+        "memory_usefulness": 0.0,
+        "answerability": 0.7683243557218092,
+        "uncertainty": 0.13620323194014866
+      },
+      "metadata": {
+        "kind": "bridge",
+        "evidence_ids": [
+          "doc_1",
+          "doc_11",
+          "doc_14",
+          "doc_3"
+        ],
+        "memory_ids": [],
+        "diffusion_delta": 0.10597421287483796,
+        "diffusion_gain": 0.10597421287483796
+      }
+    },
+    {
+      "node_id": "kg_doc_14",
+      "node_type": "kg",
+      "content": "Wilkins Runway is a single runway aerodrome operated by Australia, located on upper glacier of the ice sheet Preston Heath, Budd Coast, Wilkes Land, on the continent of Antarctica, but southeast of the actual coast. It is named after Sir Hubert Wilkins, a pioneer of Antarctic aviation and exploration.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0,
+      "temperature": 0.0,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Wilkins Runway",
+        "raw_score": 0.08339000156893966,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "state_5",
+      "node_type": "state",
+      "content": "Who was Ignacio Esparza's navigator father?",
+      "depth": 2,
+      "parent_id": "state_2",
+      "value": 0.43646664657908646,
+      "temperature": 0.4475704780414065,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.5766666530939774,
+        "evidence_support": 0.49999996008032543,
+        "memory_usefulness": 0.0,
+        "answerability": 0.5166666467068294,
+        "uncertainty": 0.2100000071855414
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_1",
+          "doc_7",
+          "doc_6",
+          "doc_20"
+        ],
+        "memory_ids": [],
+        "diffusion_delta": 0.009831844035301907,
+        "diffusion_gain": 0.009831844035301907
+      }
+    },
+    {
+      "node_id": "kg_doc_7",
+      "node_type": "kg",
+      "content": "Giovanni Battista Caviglia (1770 in Genoa – September 7, 1845 in Paris) was an explorer, navigator and Italian Egyptologist. He was one of the pioneers of Egyptian archeology of his time. He was influential in the excavation of the Sphinx of Giza near Cairo.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0,
+      "temperature": 0.0,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Giovanni Battista Caviglia",
+        "raw_score": 0.048768401793974875,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_6",
+      "node_type": "kg",
+      "content": "Vicente Yáñez Pinzón (; Palos de la Frontera, Spain, c. 1462 – after 1514) was a Spanish navigator, explorer, and \"conquistador\", the younger of the Pinzón brothers. Along with his older brother, Martín Alonso Pinzón (\"c.\" 1441 – \"c.\" 1493), who captained the \"Pinta\", he sailed with Christopher Columbus on the first voyage to the New World, in 1492, as captain of the \"Niña\".",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0,
+      "temperature": 0.0,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Vicente Yáñez Pinzón",
+        "raw_score": 0.046245498484883726,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "state_6",
+      "node_type": "state",
+      "content": "Which navigator explored the east coast of Mexico?",
+      "depth": 2,
+      "parent_id": "state_2",
+      "value": 0.5815864833518408,
+      "temperature": 0.6987082980486734,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.6019999951676722,
+        "evidence_support": 0.4999999857872711,
+        "memory_usefulness": 0.5139667251540021,
+        "answerability": 0.5299999928936356,
+        "uncertainty": 0.2100000025582912
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_1",
+          "doc_4",
+          "doc_10",
+          "doc_20"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "diffusion_delta": 0.1107225850455138,
+        "diffusion_gain": 0.1107225850455138
+      }
+    },
+    {
+      "node_id": "kg_doc_10",
+      "node_type": "kg",
+      "content": "Pennell Coast is that portion of the coast of Antarctica between Cape Williams and Cape Adare. To the west of Cape Williams lies Oates Coast, and to the east and south of Cape Adare lies Borchgrevink Coast. Named by New Zealand Antarctic Place-Names Committee (NZ-APC) in 1961 after Lieutenant Harry Pennell, Royal Navy, commander of the Terra Nova, the expedition ship of the British Antarctic Expedition, 1910-13. Pennell engaged in oceanographic work in the Ross Sea during this period. In February 1911 he sailed along this coast in exploration and an endeavor to land the Northern Party led by Lieutenant Victor Campbell.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0,
+      "temperature": 0.0,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Pennell Coast",
+        "raw_score": 0.11375248542636711,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "state_7",
+      "node_type": "state",
+      "content": "Which navigator explored the east coast of Mexico or Central America in the early colonial period?",
+      "depth": 3,
+      "parent_id": "state_3",
+      "value": 0.7177457770693225,
+      "temperature": 0.9375655517279546,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.7423444350505763,
+        "evidence_support": 0.912777750148754,
+        "memory_usefulness": 0.5139667766205794,
+        "answerability": 0.736388875074377,
+        "uncertainty": 0.1357000049732243
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_1",
+          "doc_2",
+          "doc_9",
+          "doc_4"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "diffusion_delta": 0.031985822499819516,
+        "diffusion_gain": 0.031985822499819516
+      }
+    },
+    {
+      "node_id": "state_8",
+      "node_type": "state",
+      "content": "Which navigator father explored the east coast of Mexico?",
+      "depth": 3,
+      "parent_id": "state_3",
+      "value": 0.5219293204218015,
+      "temperature": 0.8590962958960089,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.6273333198671089,
+        "evidence_support": 0.4999999603934577,
+        "memory_usefulness": 0.5139667251540021,
+        "answerability": 0.5433333135300622,
+        "uncertainty": 0.2100000071291776
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_1",
+          "doc_4",
+          "doc_10",
+          "doc_20"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "diffusion_delta": 0.01662593259353118,
+        "diffusion_gain": 0.01662593259353118
+      }
+    },
+    {
+      "node_id": "state_9",
+      "node_type": "state",
+      "content": "Which navigator explored the east coast of the region where Ignacio Esparza was born?",
+      "depth": 4,
+      "parent_id": "state_7",
+      "value": 0.5813960085867187,
+      "temperature": 0.7420304039618175,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.7539999968866549,
+        "evidence_support": 0.49999999084310215,
+        "memory_usefulness": 0.5139667766205794,
+        "answerability": 0.6099999954215511,
+        "uncertainty": 0.21000000164824162
+      },
+      "metadata": {
+        "kind": "bridge",
+        "evidence_ids": [
+          "doc_1",
+          "doc_4",
+          "doc_20",
+          "doc_3"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "diffusion_delta": 0.0735899764684963,
+        "diffusion_gain": 0.0735899764684963
+      }
+    },
+    {
+      "node_id": "state_10",
+      "node_type": "state",
+      "content": "Which navigator explored the east coast of Mexico or Central America in the early colonial period, and was the father of someone associated with Ignacio Esparza?",
+      "depth": 4,
+      "parent_id": "state_7",
+      "value": 0.8409165060359591,
+      "temperature": 1.31455854992686,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.8677703060669935,
+        "evidence_support": 0.9836381550990001,
+        "memory_usefulness": 0.8468037754734075,
+        "answerability": 0.8251524108828334,
+        "uncertainty": 0.12294513208217998
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_2",
+          "doc_9",
+          "doc_1",
+          "doc_20"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "diffusion_delta": 0.07092028304865905,
+        "diffusion_gain": 0.07092028304865905
+      }
+    },
+    {
+      "node_id": "state_11",
+      "node_type": "state",
+      "content": "Which navigator explored the east coast of Mexico in the colonial era?",
+      "depth": 3,
+      "parent_id": "state_6",
+      "value": 0.5100360062630701,
+      "temperature": 0.822251695045172,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.6019999953166221,
+        "evidence_support": 0.49999998622535896,
+        "memory_usefulness": 0.5139667766205794,
+        "answerability": 0.5299999931126795,
+        "uncertainty": 0.21000000247943537
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_1",
+          "doc_4",
+          "doc_9",
+          "doc_10"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "diffusion_delta": 0.09517639560250613,
+        "diffusion_gain": 0.09517639560250613
+      }
+    },
+    {
+      "node_id": "state_12",
+      "node_type": "state",
+      "content": "Who is a navigator whose father explored the east coast of Mexico?",
+      "depth": 3,
+      "parent_id": "state_4",
+      "value": 0.5508226572828353,
+      "temperature": 0.6799659559313516,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.6526666555840237,
+        "evidence_support": 0.49999996740399105,
+        "memory_usefulness": 0.5139667251540021,
+        "answerability": 0.6566666503686622,
+        "uncertainty": 0.21000000586728162
+      },
+      "metadata": {
+        "kind": "bridge",
+        "evidence_ids": [
+          "doc_1",
+          "doc_4",
+          "doc_10",
+          "doc_9"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "diffusion_delta": -0.08026800026826397,
+        "diffusion_gain": 0.0
+      }
+    }
+  ],
+  "edges": [
+    {
+      "source": "state_1",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.999999981359846
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_20",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.9599999038694302
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.06793364937172863
+    },
+    {
+      "source": "state_1",
+      "target": "state_2",
+      "edge_type": "refines",
+      "weight": 1.0
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.999999981359846
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.999999984029235
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.9999999775744979
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.9999999201606509
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "state_6",
+      "edge_type": "supports",
+      "weight": 0.9999999715745422
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "state_7",
+      "edge_type": "supports",
+      "weight": 0.9999999710504135
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "state_8",
+      "edge_type": "supports",
+      "weight": 0.9999999207869154
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "state_9",
+      "edge_type": "supports",
+      "weight": 0.9999999816862043
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "state_10",
+      "edge_type": "supports",
+      "weight": 0.609001614949854
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "state_11",
+      "edge_type": "supports",
+      "weight": 0.9999999724507179
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "state_12",
+      "edge_type": "supports",
+      "weight": 0.9999999348079821
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "state_6",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "state_7",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "state_8",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "state_9",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "state_11",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "state_12",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "state_9",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_20",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_20",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_20",
+      "target": "state_6",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_20",
+      "target": "state_8",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_20",
+      "target": "state_9",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_20",
+      "target": "state_10",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.9599999038694302
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_3",
+      "edge_type": "recalls",
+      "weight": 0.9599998077388796
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_6",
+      "edge_type": "recalls",
+      "weight": 0.9599998077388796
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_7",
+      "edge_type": "recalls",
+      "weight": 0.9599999038694302
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_8",
+      "edge_type": "recalls",
+      "weight": 0.9599998077388796
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_9",
+      "edge_type": "recalls",
+      "weight": 0.9599999038694302
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_10",
+      "edge_type": "recalls",
+      "weight": 0.9599999839777177
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_11",
+      "edge_type": "recalls",
+      "weight": 0.9599999038694302
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_12",
+      "edge_type": "recalls",
+      "weight": 0.9599998077388796
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.06793364937172863
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_3",
+      "edge_type": "recalls",
+      "weight": 0.0679336425691247
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_6",
+      "edge_type": "recalls",
+      "weight": 0.0679336425691247
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_7",
+      "edge_type": "recalls",
+      "weight": 0.06793364937172863
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_8",
+      "edge_type": "recalls",
+      "weight": 0.0679336425691247
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_9",
+      "edge_type": "recalls",
+      "weight": 0.06793364937172863
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_10",
+      "edge_type": "recalls",
+      "weight": 0.7336075669690973
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_11",
+      "edge_type": "recalls",
+      "weight": 0.06793364937172863
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_12",
+      "edge_type": "recalls",
+      "weight": 0.0679336425691247
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.999999984029235
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_19",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_11",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_2",
+      "target": "state_3",
+      "edge_type": "refines",
+      "weight": 1.0
+    },
+    {
+      "source": "state_2",
+      "target": "state_4",
+      "edge_type": "refines",
+      "weight": 0.9
+    },
+    {
+      "source": "state_2",
+      "target": "state_5",
+      "edge_type": "refines",
+      "weight": 0.9
+    },
+    {
+      "source": "state_2",
+      "target": "state_6",
+      "edge_type": "refines",
+      "weight": 0.85
+    },
+    {
+      "source": "kg_doc_19",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_11",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_11",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.8199641119794059
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.9999999364642144
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.9464993844647063
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.7112380778010714
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_3",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.9599998077388796
+    },
+    {
+      "source": "state_3",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.0679336425691247
+    },
+    {
+      "source": "state_3",
+      "target": "state_7",
+      "edge_type": "refines",
+      "weight": 0.9
+    },
+    {
+      "source": "state_3",
+      "target": "state_8",
+      "edge_type": "refines",
+      "weight": 0.84
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.9999999364642144
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "state_7",
+      "edge_type": "supports",
+      "weight": 0.8255555292470943
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "state_10",
+      "edge_type": "supports",
+      "weight": 0.9999999645976686
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.9464993844647063
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "state_7",
+      "edge_type": "supports",
+      "weight": 0.7709113133421599
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "state_10",
+      "edge_type": "supports",
+      "weight": 0.9672763456003316
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "state_11",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "state_12",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.7112380778010714
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.9999999775744979
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_11",
+      "edge_type": "supports",
+      "weight": 0.8199641119794059
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_14",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_4",
+      "target": "state_12",
+      "edge_type": "refines",
+      "weight": 0.9
+    },
+    {
+      "source": "state_4",
+      "target": "state_6",
+      "edge_type": "refines",
+      "weight": 0.8
+    },
+    {
+      "source": "kg_doc_14",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_5",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.9999999201606509
+    },
+    {
+      "source": "state_5",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_5",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_5",
+      "target": "kg_doc_20",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_6",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.9999999715745422
+    },
+    {
+      "source": "state_6",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_6",
+      "target": "kg_doc_10",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_6",
+      "target": "kg_doc_20",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_6",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.9599998077388796
+    },
+    {
+      "source": "state_6",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.0679336425691247
+    },
+    {
+      "source": "state_6",
+      "target": "state_11",
+      "edge_type": "refines",
+      "weight": 0.8
+    },
+    {
+      "source": "kg_doc_10",
+      "target": "state_6",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_10",
+      "target": "state_8",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_10",
+      "target": "state_11",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_10",
+      "target": "state_12",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_7",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.9999999710504135
+    },
+    {
+      "source": "state_7",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.8255555292470943
+    },
+    {
+      "source": "state_7",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.7709113133421599
+    },
+    {
+      "source": "state_7",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_7",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.9599999038694302
+    },
+    {
+      "source": "state_7",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.06793364937172863
+    },
+    {
+      "source": "state_7",
+      "target": "state_9",
+      "edge_type": "refines",
+      "weight": 0.9
+    },
+    {
+      "source": "state_7",
+      "target": "state_10",
+      "edge_type": "refines",
+      "weight": 0.84
+    },
+    {
+      "source": "state_8",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.9999999207869154
+    },
+    {
+      "source": "state_8",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_8",
+      "target": "kg_doc_10",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_8",
+      "target": "kg_doc_20",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_8",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.9599998077388796
+    },
+    {
+      "source": "state_8",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.0679336425691247
+    },
+    {
+      "source": "state_9",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.9999999816862043
+    },
+    {
+      "source": "state_9",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_9",
+      "target": "kg_doc_20",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_9",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_9",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.9599999038694302
+    },
+    {
+      "source": "state_9",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.06793364937172863
+    },
+    {
+      "source": "state_10",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.9999999645976686
+    },
+    {
+      "source": "state_10",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.9672763456003316
+    },
+    {
+      "source": "state_10",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.609001614949854
+    },
+    {
+      "source": "state_10",
+      "target": "kg_doc_20",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_10",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.9599999839777177
+    },
+    {
+      "source": "state_10",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.7336075669690973
+    },
+    {
+      "source": "state_11",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.9999999724507179
+    },
+    {
+      "source": "state_11",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_11",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_11",
+      "target": "kg_doc_10",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_11",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.9599999038694302
+    },
+    {
+      "source": "state_11",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.06793364937172863
+    },
+    {
+      "source": "state_12",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.9999999348079821
+    },
+    {
+      "source": "state_12",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_12",
+      "target": "kg_doc_10",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_12",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_12",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.9599998077388796
+    },
+    {
+      "source": "state_12",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.0679336425691247
+    }
+  ]
+}

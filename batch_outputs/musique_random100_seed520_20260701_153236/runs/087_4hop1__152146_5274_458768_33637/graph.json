@@ -1,0 +1,1204 @@
+{
+  "nodes": [
+    {
+      "node_id": "state_1",
+      "node_type": "state",
+      "content": "How many ethnic minorities were looked at differently in the city where the headquarters of the only group larger than Långa nätter's record label is located?",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.38247601525313296,
+      "temperature": 0.45499564964524586,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.66,
+        "evidence_support": 0.0,
+        "memory_usefulness": 0.5139667937761075,
+        "answerability": 0.5,
+        "uncertainty": 0.3
+      },
+      "metadata": {
+        "diffusion_delta": 0.13485330524331274,
+        "diffusion_gain": 0.13485330524331274
+      }
+    },
+    {
+      "node_id": "memory_mem_1",
+      "node_type": "memory",
+      "content": "Template: for compositional multi-hop questions, first solve the intermediate entity and then ask for the final attribute.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9599999807731368,
+      "temperature": 2.5546702722992802,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.96,
+        "tag": "compositional_template",
+        "memory_kind": "template",
+        "raw_score": 0.15247542063361266,
+        "source": "memory",
+        "diffusion_delta": 0.01764786965498022,
+        "diffusion_gain": 0.01764786965498022
+      }
+    },
+    {
+      "node_id": "memory_mem_3",
+      "node_type": "memory",
+      "content": "Template: when evidence already grounds the answer, switch from branching to short verification and synthesis.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.866747523788325,
+      "temperature": 0.7791255762498277,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.88,
+        "tag": "verification_then_stop",
+        "memory_kind": "template",
+        "raw_score": 0.11578078643717182,
+        "source": "memory",
+        "diffusion_delta": -0.05174243062255024,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "state_2",
+      "node_type": "state",
+      "content": "What is the record label of Långa nätter?",
+      "depth": 1,
+      "parent_id": "state_1",
+      "value": 0.7184396217337297,
+      "temperature": 0.9464151131990728,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.5804663675097922,
+        "evidence_support": 0.5111755907150749,
+        "memory_usefulness": 0.5139667251540021,
+        "answerability": 0.6222544620242041,
+        "uncertainty": 0.20798839367128652
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_20",
+          "doc_2",
+          "doc_12",
+          "doc_6"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "diffusion_delta": 0.19134300639057145,
+        "diffusion_gain": 0.19134300639057145
+      }
+    },
+    {
+      "node_id": "kg_doc_20",
+      "node_type": "kg",
+      "content": "Långa nätter is the debut album by singer-songwriter Melissa Horn, released April 30, 2008, on Sony Music Entertainment. It was produced by Lasse Englund and Jan Radesjö. The album features the singles \"Långa nätter\", \"En famn för mig\" and \"Som jag hade dig förut\", a duet with Lars Winnerbäck.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999253930452,
+      "temperature": 0.9999999253930452,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Långa nätter",
+        "raw_score": 0.22473597729447808,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_2",
+      "node_type": "kg",
+      "content": "Look What I Almost Stepped In... is the eighth studio album by the southern California punk rock band The Vandals, released in 2000 by Nitro Records. It was the band's final album for Nitro, as they moved to their own label Kung Fu Records the following year. Between June and August 2001, the group performed on the Warped Tour. Much of the album is characterized by the pop-punk music and humorous lyrics for which the band is known.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.02235129461033067,
+      "temperature": 0.02235129461033067,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Look What I Almost Stepped In...",
+        "raw_score": 0.09278473138030456,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_12",
+      "node_type": "kg",
+      "content": "EmArcy Records is a jazz record label founded in 1954 by Mercury Records, and today a European jazz label owned by Universal Music Group. The name is a phonetic spelling of \"MRC\", the initials for Mercury Record Company.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0003716166939035448,
+      "temperature": 0.0003716166939035448,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "EmArcy Records",
+        "raw_score": 0.10510623466628247,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_6",
+      "node_type": "kg",
+      "content": "The Right Stuff Records is a reissue record label that was part of EMI, which is now owned by Universal Music Group and is based out of Santa Monica, California.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999997288188722,
+      "temperature": 0.9999997288188722,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "The Right Stuff Records",
+        "raw_score": 0.12603508051781526,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "state_3",
+      "node_type": "state",
+      "content": "Which group is larger than Långa nätter's record label and is the only such group?",
+      "depth": 1,
+      "parent_id": "state_1",
+      "value": 0.756252233403926,
+      "temperature": 1.3768716096556346,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.74563261622914,
+        "evidence_support": 0.8313813331358149,
+        "memory_usefulness": 0.9133737522807308,
+        "answerability": 0.8119869628642037,
+        "uncertainty": 0.15035136003555333
+      },
+      "metadata": {
+        "kind": "comparison",
+        "evidence_ids": [
+          "doc_20",
+          "doc_8",
+          "doc_6",
+          "doc_2"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "diffusion_delta": 0.36878380034451164,
+        "diffusion_gain": 0.36878380034451164
+      }
+    },
+    {
+      "node_id": "kg_doc_8",
+      "node_type": "kg",
+      "content": "MCA Records was an American record label owned by MCA Inc., which later gave way to the larger MCA Music Entertainment Group (now Universal Music Group), which the label was part of until its dissolution in 2003. The label's country division MCA Nashville is a still active imprint of Universal Music Group Nashville.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.8934227776016964,
+      "temperature": 0.8934227776016964,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "MCA Records",
+        "raw_score": 0.138286738290282,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "state_4",
+      "node_type": "state",
+      "content": "Where is the headquarters of that group located?",
+      "depth": 1,
+      "parent_id": "state_1",
+      "value": 0.7503176393482187,
+      "temperature": 0.7701658204921691,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.7163494512738473,
+        "evidence_support": 0.9936203904568492,
+        "memory_usefulness": 0.5139667251540021,
+        "answerability": 0.8486620470802765,
+        "uncertainty": 0.12114832971776714
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_6",
+          "doc_7",
+          "doc_4",
+          "doc_2"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "diffusion_delta": 0.06296030443118372,
+        "diffusion_gain": 0.06296030443118372
+      }
+    },
+    {
+      "node_id": "kg_doc_7",
+      "node_type": "kg",
+      "content": "Demsa is a Local Government Area of Adamawa State, Nigeria with headquarters located in Demsa. Demsa lies on the Benue River. Population is 180,251. It is inhabited by ethnic groups such as the Bachama, Batta, Yandang, Bille, Mbula, Maya, Bare and fulani.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9872410520948263,
+      "temperature": 0.9872410520948263,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Demsa",
+        "raw_score": 0.12541739030398485,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_4",
+      "node_type": "kg",
+      "content": "Rebelle Records AB is a record label founded by Björn Afzelius in 1988. The name is a convergence of his two daughters' names \"Rebecca\" and \"Isabelle\". The company, which holds the rights to all of Afzelius music is now located in Snekkersten, Denmark.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.999999942092346,
+      "temperature": 0.999999942092346,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Rebelle Records",
+        "raw_score": 0.17100964293643747,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "state_5",
+      "node_type": "state",
+      "content": "In which city is the headquarters of that larger record label located?",
+      "depth": 2,
+      "parent_id": "state_3",
+      "value": 0.7465351022834145,
+      "temperature": 0.36141144317623863,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.7426225118156462,
+        "evidence_support": 0.9467110913967809,
+        "memory_usefulness": 0.5139667251540021,
+        "answerability": 0.8474296197724644,
+        "uncertainty": 0.12959200354857944
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_4",
+          "doc_8",
+          "doc_6",
+          "doc_5"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "diffusion_delta": -0.011707668620081546,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "kg_doc_5",
+      "node_type": "kg",
+      "content": "Miami is a major television production center, and the most important city in the U.S. for Spanish language media. Univisión, Telemundo and UniMÁS have their headquarters in Miami, along with their production studios. The Telemundo Television Studios produces much of the original programming for Telemundo, such as their telenovelas and talk shows. In 2011, 85% of Telemundo's original programming was filmed in Miami. Miami is also a major music recording center, with the Sony Music Latin and Universal Music Latin Entertainment headquarters in the city, along with many other smaller record labels. The city also attracts many artists for music video and film shootings.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.5631174560201373,
+      "temperature": 0.5631174560201373,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Miami",
+        "raw_score": 0.04353043753511267,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "memory_mem_4",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'Which group is larger than Långa nätter's record label and is the only such group' is Sony Music Entertainment.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999998066646102,
+      "temperature": 1.3831174155503616,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "intermediate_answer",
+        "target_question": "Which group is larger than Långa nätter's record label and is the only such group?",
+        "target_question_norm": "which group is larger than l nga n tter s record label and is the only such group",
+        "relation_signature": "generic",
+        "answer_text": "Sony Music Entertainment",
+        "support_score": 0.9999998066646102,
+        "evidence_ids": [
+          "doc_20"
+        ],
+        "slot_name": "",
+        "slot_type": "",
+        "slot_role": "",
+        "terminal": false,
+        "path_terminal": false,
+        "composition_kind": "",
+        "derived_from_state": "state_3",
+        "diffusion_delta": 0.12308630078906857,
+        "diffusion_gain": 0.12308630078906857
+      }
+    },
+    {
+      "node_id": "state_6",
+      "node_type": "state",
+      "content": "What is the headquarters city of Sony Music Entertainment?",
+      "depth": 2,
+      "parent_id": "state_3",
+      "value": 0.6304701564280901,
+      "temperature": 0.48234771081104144,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.6574903106795555,
+        "evidence_support": 0.9032939420858387,
+        "memory_usefulness": 0.004130064445491177,
+        "answerability": 0.7886840080799563,
+        "uncertainty": 0.13740709042454902
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_20",
+          "doc_16",
+          "doc_5",
+          "doc_1"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "diffusion_delta": -0.10345889912368167,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "kg_doc_16",
+      "node_type": "kg",
+      "content": "Sony Music Entertainment Inc. (sometimes known as Sony Music or by the initials, SME) is an American music corporation managed and operated by Sony Corporation of America (SCA), a subsidiary of Japanese conglomerate Sony Corporation. In 1929, the enterprise was first founded as American Record Corporation (ARC) and, in 1938, was renamed Columbia Recording Corporation, following ARC's acquisition by CBS. In 1966, the company was reorganized to become CBS Records. In 1987, Sony Corporation of Japan bought the company, and in 1991, renamed it SME. It is the world's second largest recorded music company, after Universal Music Group.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.8065879587786322,
+      "temperature": 0.8065879587786322,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Sony Music",
+        "raw_score": 0.21013204737249172,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_1",
+      "node_type": "kg",
+      "content": "Doug Morris, who was head of Warner Music Group, then Universal Music, became chairman and CEO of the company on July 1, 2011. Sony Music underwent a restructuring after Morris' arrival. He was joined by L.A. Reid, who became the chairman and CEO of Epic Records. Under Reid, multiple artists from the Jive half of the former RCA/Jive Label Group moved to Epic. Peter Edge became the new CEO of the RCA Records unit. The RCA Music Group closed down Arista, J Records and Jive Records in October 2011, with the artists from those labels being moved to RCA Records.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0,
+      "temperature": 0.0,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Sony Music",
+        "raw_score": 0.09150306705980867,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "state_7",
+      "node_type": "state",
+      "content": "Which record label is larger than Långa nätter's record label?",
+      "depth": 3,
+      "parent_id": "state_5",
+      "value": 0.6571579159082755,
+      "temperature": 0.5745293882038665,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.7239054987368228,
+        "evidence_support": 0.8916610529296529,
+        "memory_usefulness": 0.0,
+        "answerability": 0.8199046005389006,
+        "uncertainty": 0.13950101047266247
+      },
+      "metadata": {
+        "kind": "comparison",
+        "evidence_ids": [
+          "doc_20",
+          "doc_8",
+          "doc_13",
+          "doc_6"
+        ],
+        "memory_ids": [],
+        "diffusion_delta": -0.267989966184184,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "kg_doc_13",
+      "node_type": "kg",
+      "content": "Nothing Records was an American record label specializing in industrial rock and electronic music, founded by John Malm Jr. and Trent Reznor in 1992. It is considered an example of a vanity label, where an artist is able to run a label with some degree of independence from within a larger parent company, in this case being Interscope Records.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.004053534774290492,
+      "temperature": 0.004053534774290492,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Nothing Records",
+        "raw_score": 0.12665193471984482,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "state_8",
+      "node_type": "state",
+      "content": "How many ethnic minorities were looked at differently in Snekkersten, Denmark?",
+      "depth": 3,
+      "parent_id": "state_5",
+      "value": 0.4364666520971009,
+      "temperature": 0.38878602553887254,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.5766666568223655,
+        "evidence_support": 0.499999971046173,
+        "memory_usefulness": 0.0,
+        "answerability": 0.5166666521897532,
+        "uncertainty": 0.21000000521168885
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_4",
+          "doc_15",
+          "doc_9",
+          "doc_5"
+        ],
+        "memory_ids": [],
+        "diffusion_delta": -0.18168023351877527,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "kg_doc_15",
+      "node_type": "kg",
+      "content": "Around the start of the 20th century, a growing population of Asian Americans lived in or near Santa Monica and Venice. A Japanese fishing village was located near the Long Wharf while small numbers of Chinese lived or worked in both Santa Monica and Venice. The two ethnic minorities were often viewed differently by White Americans who were often well-disposed towards the Japanese but condescending towards the Chinese. The Japanese village fishermen were an integral economic part of the Santa Monica Bay community.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0,
+      "temperature": 0.0,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Santa Monica, California",
+        "raw_score": 0.14290820502451324,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_9",
+      "node_type": "kg",
+      "content": "Myanmar is divided into seven states (ပြည်နယ်) and seven regions (တိုင်းဒေသကြီး), formerly called divisions. Regions are predominantly Bamar (that is, mainly inhabited by the dominant ethnic group). States, in essence, are regions that are home to particular ethnic minorities. The administrative divisions are further subdivided into districts, which are further subdivided into townships, wards, and villages.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0,
+      "temperature": 0.0,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Myanmar",
+        "raw_score": 0.06864224897241114,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "source": "state_1",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.9599999359129513
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.06793365163926388
+    },
+    {
+      "source": "state_1",
+      "target": "state_2",
+      "edge_type": "refines",
+      "weight": 0.9
+    },
+    {
+      "source": "state_1",
+      "target": "state_3",
+      "edge_type": "refines",
+      "weight": 0.85
+    },
+    {
+      "source": "state_1",
+      "target": "state_4",
+      "edge_type": "refines",
+      "weight": 0.8
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.9599999359129513
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_2",
+      "edge_type": "recalls",
+      "weight": 0.9599998077388796
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_3",
+      "edge_type": "recalls",
+      "weight": 0.9599999807731368
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_4",
+      "edge_type": "recalls",
+      "weight": 0.9599998077388796
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_5",
+      "edge_type": "recalls",
+      "weight": 0.006397334891257933
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "memory_mem_4",
+      "edge_type": "recalls",
+      "weight": 0.9599999807731368
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_6",
+      "edge_type": "recalls",
+      "weight": 0.007728798053851904
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.06793365163926388
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_2",
+      "edge_type": "recalls",
+      "weight": 0.0679336425691247
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_3",
+      "edge_type": "recalls",
+      "weight": 0.866747523788325
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_4",
+      "edge_type": "recalls",
+      "weight": 0.0679336425691247
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_5",
+      "edge_type": "recalls",
+      "weight": 0.0004397968842622124
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "memory_mem_4",
+      "edge_type": "recalls",
+      "weight": 0.866747523788325
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_6",
+      "edge_type": "recalls",
+      "weight": 0.0005313308371304506
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_20",
+      "edge_type": "supports",
+      "weight": 0.9999998868198192
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.02235129461033067
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_12",
+      "edge_type": "supports",
+      "weight": 0.0003716166939035448
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_2",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.9599998077388796
+    },
+    {
+      "source": "state_2",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.0679336425691247
+    },
+    {
+      "source": "kg_doc_20",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.9999998868198192
+    },
+    {
+      "source": "kg_doc_20",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.9999998066646102
+    },
+    {
+      "source": "kg_doc_20",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.9999998066646102
+    },
+    {
+      "source": "kg_doc_20",
+      "target": "state_6",
+      "edge_type": "supports",
+      "weight": 0.9999999253930452
+    },
+    {
+      "source": "kg_doc_20",
+      "target": "state_7",
+      "edge_type": "supports",
+      "weight": 0.9999998067264345
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.02235129461033067
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_12",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.0003716166939035448
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.6485823309484166
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.9999997288188722
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.2410973368685312
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.6485823309484166
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "state_7",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_20",
+      "edge_type": "supports",
+      "weight": 0.9999998066646102
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_8",
+      "edge_type": "supports",
+      "weight": 0.6627628596070196
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.6485823309484166
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_3",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.9599999807731368
+    },
+    {
+      "source": "state_3",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.866747523788325
+    },
+    {
+      "source": "state_3",
+      "target": "state_2",
+      "edge_type": "refines",
+      "weight": 0.9
+    },
+    {
+      "source": "state_3",
+      "target": "state_5",
+      "edge_type": "refines",
+      "weight": 0.8
+    },
+    {
+      "source": "state_3",
+      "target": "memory_mem_4",
+      "edge_type": "derives",
+      "weight": 0.9999998066646102
+    },
+    {
+      "source": "state_3",
+      "target": "state_6",
+      "edge_type": "refines",
+      "weight": 0.84
+    },
+    {
+      "source": "kg_doc_8",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.6627628596070196
+    },
+    {
+      "source": "kg_doc_8",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.8934227776016964
+    },
+    {
+      "source": "kg_doc_8",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.6627628596070196
+    },
+    {
+      "source": "kg_doc_8",
+      "target": "state_7",
+      "edge_type": "supports",
+      "weight": 0.7833222991328714
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.9999997288188722
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.9872410520948263
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.055525507327722566
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_4",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.9599998077388796
+    },
+    {
+      "source": "state_4",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.0679336425691247
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.9872410520948263
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.055525507327722566
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.9999994051918655
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "state_8",
+      "edge_type": "supports",
+      "weight": 0.999999942092346
+    },
+    {
+      "source": "state_5",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.9999994051918655
+    },
+    {
+      "source": "state_5",
+      "target": "kg_doc_8",
+      "edge_type": "supports",
+      "weight": 0.8934227776016964
+    },
+    {
+      "source": "state_5",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.2410973368685312
+    },
+    {
+      "source": "state_5",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_5",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.006397334891257933
+    },
+    {
+      "source": "state_5",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.0004397968842622124
+    },
+    {
+      "source": "state_5",
+      "target": "state_2",
+      "edge_type": "refines",
+      "weight": 0.9
+    },
+    {
+      "source": "state_5",
+      "target": "state_7",
+      "edge_type": "refines",
+      "weight": 0.8
+    },
+    {
+      "source": "state_5",
+      "target": "state_8",
+      "edge_type": "refines",
+      "weight": 0.7
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "state_6",
+      "edge_type": "supports",
+      "weight": 0.5631174560201373
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "state_8",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "state_3",
+      "edge_type": "recalls",
+      "weight": 0.9999998066646102
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_20",
+      "edge_type": "supports",
+      "weight": 0.9999998066646102
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_8",
+      "edge_type": "supports",
+      "weight": 0.6627628596070196
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.6485823309484166
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.9599999807731368
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.866747523788325
+    },
+    {
+      "source": "state_6",
+      "target": "kg_doc_20",
+      "edge_type": "supports",
+      "weight": 0.9999999253930452
+    },
+    {
+      "source": "state_6",
+      "target": "kg_doc_16",
+      "edge_type": "supports",
+      "weight": 0.8065879587786322
+    },
+    {
+      "source": "state_6",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.5631174560201373
+    },
+    {
+      "source": "state_6",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_6",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.007728798053851904
+    },
+    {
+      "source": "state_6",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.0005313308371304506
+    },
+    {
+      "source": "kg_doc_16",
+      "target": "state_6",
+      "edge_type": "supports",
+      "weight": 0.8065879587786322
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "state_6",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_7",
+      "target": "kg_doc_20",
+      "edge_type": "supports",
+      "weight": 0.9999998067264345
+    },
+    {
+      "source": "state_7",
+      "target": "kg_doc_8",
+      "edge_type": "supports",
+      "weight": 0.7833222991328714
+    },
+    {
+      "source": "state_7",
+      "target": "kg_doc_13",
+      "edge_type": "supports",
+      "weight": 0.004053534774290492
+    },
+    {
+      "source": "state_7",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_13",
+      "target": "state_7",
+      "edge_type": "supports",
+      "weight": 0.004053534774290492
+    },
+    {
+      "source": "state_8",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.999999942092346
+    },
+    {
+      "source": "state_8",
+      "target": "kg_doc_15",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_8",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_8",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_15",
+      "target": "state_8",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "state_8",
+      "edge_type": "supports",
+      "weight": 0.0
+    }
+  ]
+}

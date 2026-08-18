@@ -1,0 +1,133 @@
+{
+  "question": "When was the city George Consider Hale was born in founded?",
+  "final_answer": "1850",
+  "best_node": {
+    "node_id": "state_3",
+    "node_type": "state",
+    "content": "When was Kansas City, Missouri founded?",
+    "depth": 1,
+    "parent_id": "state_1",
+    "value": 0.725139425022468,
+    "temperature": 1.246893388988342,
+    "expanded": true,
+    "visit_count": 1,
+    "persistent": false,
+    "score_breakdown": {
+      "task_progress": 0.7176617743645661,
+      "evidence_support": 0.8401816893075471,
+      "memory_usefulness": 0.8799999913575839,
+      "answerability": 0.7000908446537737,
+      "uncertainty": 0.14876729592464152
+    },
+    "metadata": {
+      "kind": "retrieval",
+      "evidence_ids": [
+        "doc_9",
+        "doc_5",
+        "doc_10",
+        "doc_6"
+      ],
+      "memory_ids": [
+        "mem_3"
+      ],
+      "diffusion_delta": 0.16747172536358335,
+      "diffusion_gain": 0.16747172536358335
+    }
+  },
+  "final_synthesis_node_ids": [
+    "state_3",
+    "state_2",
+    "memory_mem_4",
+    "state_1"
+  ],
+  "answer_history": [
+    {
+      "node_id": "",
+      "answer_text": "1792",
+      "previous_answer": "",
+      "confidence": 0.28,
+      "score": 0.16880000000000003,
+      "source": "closed_book_initial",
+      "step": 0,
+      "evidence_ids": [],
+      "kind": "anytime_answer"
+    },
+    {
+      "node_id": "memory_mem_4",
+      "content": "Conclusion: The answer to 'When was Kansas City, Missouri founded' is 1850.",
+      "answer_text": "1850",
+      "value": 0.874,
+      "evidence_ids": [
+        "doc_9",
+        "doc_5"
+      ],
+      "step": 2
+    },
+    {
+      "node_id": "state_3",
+      "answer_text": "1850",
+      "previous_answer": "1792",
+      "confidence": 0.95,
+      "score": 0.8508997233943595,
+      "source": "expansion_candidate",
+      "step": 1,
+      "evidence_ids": [
+        "doc_9",
+        "doc_5",
+        "doc_10",
+        "doc_6"
+      ],
+      "kind": "anytime_answer"
+    },
+    {
+      "node_id": "memory_mem_5",
+      "content": "Conclusion: The answer to 'In which city was George Consider Hale born' is Kansas City, Missouri.",
+      "answer_text": "Kansas City, Missouri",
+      "value": 0.9999999928227965,
+      "confidence": 0.95,
+      "evidence_ids": [
+        "doc_5"
+      ],
+      "step": 3,
+      "kind": "intermediate_answer"
+    },
+    {
+      "node_id": "state_3",
+      "answer_text": "1850",
+      "source": "answer_judge",
+      "choice": "A",
+      "candidate_source": "expansion_candidate",
+      "base_score": 1.0,
+      "judge_confidence": 0.0,
+      "judge_reason": "",
+      "step": 4,
+      "kind": "final_answer_selection"
+    }
+  ],
+  "anytime_answer": "1850",
+  "anytime_answer_score": 0.8508997233943595,
+  "anytime_answer_source": "expansion_candidate",
+  "anytime_answer_node_id": "state_3",
+  "root_state_synthesis_answer": "",
+  "root_state_synthesis_score": 0.0,
+  "root_state_synthesis_node_id": "",
+  "stats": {
+    "steps": 4,
+    "llm_calls": 8,
+    "generated_tokens": 621,
+    "token_budget_remaining": 579,
+    "total_nodes": 14,
+    "kg_nodes": 7,
+    "memory_nodes": 4,
+    "state_nodes": 3,
+    "deleted_state_nodes": 1,
+    "scheduler_mode": "tdca",
+    "scoring_mode": "hybrid",
+    "stop_reason": "frontier_empty",
+    "goal_kind": "bridge",
+    "goal_completion": 0.5,
+    "anytime_answer": "1850",
+    "anytime_answer_score": 0.8508997233943595,
+    "anytime_answer_source": "expansion_candidate"
+  }
+}

@@ -1,0 +1,978 @@
+{
+  "nodes": [
+    {
+      "node_id": "state_1",
+      "node_type": "state",
+      "content": "Are both Dictyosperma, and Huernia described as a genus?",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.6782481893326132,
+      "temperature": 0.8935568653823089,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.8299999975540572,
+        "evidence_support": 0.49999999280605034,
+        "memory_usefulness": 0.8820682746050714,
+        "answerability": 0.7499999964030252,
+        "uncertainty": 0.21000000129491092
+      },
+      "metadata": {
+        "diffusion_delta": 0.039322196714522306,
+        "diffusion_gain": 0.039322196714522306
+      }
+    },
+    {
+      "node_id": "kg_doc_2",
+      "node_type": "kg",
+      "content": "The genus Huernia (family Apocynaceae, subfamily Asclepiadoideae) consists of stem succulents from Eastern and Southern Africa, first described as a genus in 1810. The flowers are five-lobed, usually somewhat more funnel- or bell-shaped than in the closely related genus \"Stapelia\", and often striped vividly in contrasting colours or tones, some glossy, others matt and wrinkled depending on the species concerned. To pollinate, the flowers attract flies by emitting a scent similar to that of carrion. The genus is considered close to the genera \"Stapelia\" and \"Hoodia\". The name is in honour of Justin Heurnius (1587–1652) a Dutch missionary who is reputed to have been the first collector of South African Cape plants. His name was actually mis-spelt by the collector.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999932891356,
+      "temperature": 0.9999999932891356,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Huernia",
+        "raw_score": 3.6943418699774213,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_1",
+      "node_type": "kg",
+      "content": "Dictyosperma is a monotypic genus of flowering plant in the palm family found in the Mascarene Islands in the Indian Ocean (Mauritius, Réunion and Rodrigues). The sole species, Dictyosperma album, is widely cultivated in the tropics but has been farmed to near extinction in its native habitat. It is commonly called princess palm or hurricane palm, the latter owing to its ability to withstand strong winds by easily shedding leaves. It is closely related to, and resembles, palms in the \"Archontophoenix\" genus. The genus is named from two Greek words meaning \"net\" and \"seed\" and the epithet is Latin for \"white\", the common color of the crownshaft at the top of the trunk.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999908154319,
+      "temperature": 0.9999999908154319,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Dictyosperma",
+        "raw_score": 1.6368303155284445,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "memory_mem_1",
+      "node_type": "memory",
+      "content": "Template: for compositional multi-hop questions, first solve the intermediate entity and then ask for the final attribute.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.8841365672456091,
+      "temperature": 0.1541177382360341,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.96,
+        "tag": "compositional_template",
+        "memory_kind": "template",
+        "raw_score": 0.11897704512645167,
+        "source": "memory",
+        "diffusion_delta": -0.023936544388211023,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "memory_mem_3",
+      "node_type": "memory",
+      "content": "Template: when evidence already grounds the answer, switch from branching to short verification and synthesis.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.8799999913901771,
+      "temperature": 1.5215835800160016,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.88,
+        "tag": "verification_then_stop",
+        "memory_kind": "template",
+        "raw_score": 1.5076574263037839,
+        "source": "memory",
+        "diffusion_delta": 0.19780996424616415,
+        "diffusion_gain": 0.19780996424616415
+      }
+    },
+    {
+      "node_id": "state_2",
+      "node_type": "state",
+      "content": "Is Dictyosperma described as a genus?",
+      "depth": 1,
+      "parent_id": "state_1",
+      "value": 0.4931111062864221,
+      "temperature": 1.9236551115562184,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.6611111078511861,
+        "evidence_support": 0.4999999904119851,
+        "memory_usefulness": 0.0,
+        "answerability": 0.6611111063171037,
+        "uncertainty": 0.21000000172584266
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_1",
+          "doc_2"
+        ],
+        "memory_ids": [],
+        "diffusion_delta": 0.16380124595801693,
+        "diffusion_gain": 0.16380124595801693
+      }
+    },
+    {
+      "node_id": "state_3",
+      "node_type": "state",
+      "content": "Is Huernia described as a genus?",
+      "depth": 1,
+      "parent_id": "state_1",
+      "value": 0.4931111094226577,
+      "temperature": 1.2261999342301688,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.6611111099702642,
+        "evidence_support": 0.4999999966445678,
+        "memory_usefulness": 0.0,
+        "answerability": 0.661111109433395,
+        "uncertainty": 0.21000000060397778
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_2",
+          "doc_1"
+        ],
+        "memory_ids": [],
+        "diffusion_delta": 0.03488286255313522,
+        "diffusion_gain": 0.03488286255313522
+      }
+    },
+    {
+      "node_id": "state_4",
+      "node_type": "state",
+      "content": "Is Dictyosperma described as a genus in the evidence?",
+      "depth": 1,
+      "parent_id": "state_1",
+      "value": 0.5267760371673182,
+      "temperature": 0.3955409958141688,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.6611111080246985,
+        "evidence_support": 0.4999999909223156,
+        "memory_usefulness": 0.4634494347728014,
+        "answerability": 0.6611111065722689,
+        "uncertainty": 0.2100000016339832
+      },
+      "metadata": {
+        "kind": "verification",
+        "evidence_ids": [
+          "doc_1",
+          "doc_2"
+        ],
+        "memory_ids": [
+          "mem_3",
+          "mem_1"
+        ],
+        "diffusion_delta": 0.04984179948765921,
+        "diffusion_gain": 0.04984179948765921
+      }
+    },
+    {
+      "node_id": "memory_mem_4",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'Is Huernia described as a genus' is The genus Huernia.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 1.0,
+      "temperature": 0.7458782810621003,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "intermediate_answer",
+        "target_question": "Is Huernia described as a genus?",
+        "target_question_norm": "is huernia described as a genus",
+        "relation_signature": "generic",
+        "answer_text": "The genus Huernia",
+        "support_score": 1.0,
+        "evidence_ids": [
+          "doc_2"
+        ],
+        "slot_name": "is_huernia_genus",
+        "slot_role": "final_boolean",
+        "terminal": true,
+        "derived_from_state": "state_3",
+        "diffusion_delta": 0.025362305421496867,
+        "diffusion_gain": 0.025362305421496867
+      }
+    },
+    {
+      "node_id": "state_5",
+      "node_type": "state",
+      "content": "What is the taxonomic rank of Dictyosperma according to the evidence?",
+      "depth": 2,
+      "parent_id": "state_2",
+      "value": 0.4366089823396273,
+      "temperature": 1.0096650744596922,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.49222222066084564,
+        "evidence_support": 0.49999999540771595,
+        "memory_usefulness": 0.34149002799216865,
+        "answerability": 0.5722222199260802,
+        "uncertainty": 0.21000000082661113
+      },
+      "metadata": {
+        "kind": "verification",
+        "evidence_ids": [
+          "doc_1",
+          "doc_2"
+        ],
+        "memory_ids": [
+          "mem_3",
+          "mem_1"
+        ],
+        "diffusion_delta": 0.23523007591992007,
+        "diffusion_gain": 0.23523007591992007
+      }
+    },
+    {
+      "node_id": "memory_mem_5",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'Is Dictyosperma described as a genus' is Dictyosperma is a monotypic genus.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 1.0,
+      "temperature": 1.0101263823531201,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "intermediate_answer",
+        "target_question": "Is Dictyosperma described as a genus?",
+        "target_question_norm": "is dictyosperma described as a genus",
+        "relation_signature": "generic",
+        "answer_text": "Dictyosperma is a monotypic genus",
+        "support_score": 1.0,
+        "evidence_ids": [
+          "doc_1"
+        ],
+        "slot_name": "is_dictyosperma_genus",
+        "slot_role": "final_boolean",
+        "terminal": true,
+        "derived_from_state": "state_2",
+        "diffusion_delta": 0.09347317554568979,
+        "diffusion_gain": 0.09347317554568979
+      }
+    },
+    {
+      "node_id": "state_6",
+      "node_type": "state",
+      "content": "What is the taxonomic rank of Huernia according to the evidence?",
+      "depth": 3,
+      "parent_id": "state_5",
+      "value": 0.4407825137499837,
+      "temperature": 0.7430671732741279,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.4922222203819864,
+        "evidence_support": 0.4999999945875414,
+        "memory_usefulness": 0.22466911876092133,
+        "answerability": 0.572222219515993,
+        "uncertainty": 0.21000000097424254
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_2",
+          "doc_1"
+        ],
+        "memory_ids": [
+          "mem_3",
+          "mem_1"
+        ],
+        "diffusion_delta": 0.2662048936795747,
+        "diffusion_gain": 0.2662048936795747
+      }
+    },
+    {
+      "node_id": "state_7",
+      "node_type": "state",
+      "content": "Is Huernia explicitly described as a genus in the evidence?",
+      "depth": 4,
+      "parent_id": "state_6",
+      "value": 0.4832794732954132,
+      "temperature": 0.4096225184944734,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.6611111099463718,
+        "evidence_support": 0.49999999657429584,
+        "memory_usefulness": 0.08587507190632117,
+        "answerability": 0.661111109398259,
+        "uncertainty": 0.21000000061662674
+      },
+      "metadata": {
+        "kind": "verification",
+        "evidence_ids": [
+          "doc_2",
+          "doc_1"
+        ],
+        "memory_ids": [
+          "mem_3",
+          "mem_1"
+        ],
+        "diffusion_delta": 0.048090449887752906,
+        "diffusion_gain": 0.048090449887752906
+      }
+    },
+    {
+      "node_id": "state_8",
+      "node_type": "state",
+      "content": "Is Dictyosperma explicitly described as a genus in the evidence?",
+      "depth": 4,
+      "parent_id": "state_6",
+      "value": 0.48302607388655555,
+      "temperature": 0.36687326216166305,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.6611111080371006,
+        "evidence_support": 0.4999999909587926,
+        "memory_usefulness": 0.0836754478076649,
+        "answerability": 0.6611111065905074,
+        "uncertainty": 0.21000000162741733
+      },
+      "metadata": {
+        "kind": "verification",
+        "evidence_ids": [
+          "doc_1",
+          "doc_2"
+        ],
+        "memory_ids": [
+          "mem_3",
+          "mem_1"
+        ],
+        "diffusion_delta": 0.05757725188417151,
+        "diffusion_gain": 0.05757725188417151
+      }
+    },
+    {
+      "node_id": "state_9",
+      "node_type": "state",
+      "content": "Is Huernia described as a genus in the evidence?",
+      "depth": 2,
+      "parent_id": "state_4",
+      "value": 0.5034161180238933,
+      "temperature": 0.7286474497689392,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.6611111099516677,
+        "evidence_support": 0.499999996589872,
+        "memory_usefulness": 0.08587507190632117,
+        "answerability": 0.6611111094060471,
+        "uncertainty": 0.210000000613823
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_2",
+          "doc_1"
+        ],
+        "memory_ids": [
+          "mem_3",
+          "mem_1"
+        ],
+        "diffusion_delta": -0.13381864669133892,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "memory_mem_6",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'Are both Dictyosperma, and Huernia described as a genus' is Yes.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 1.0,
+      "temperature": 1.0,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "answer_candidate",
+        "target_question": "Are both Dictyosperma, and Huernia described as a genus?",
+        "target_question_norm": "are both dictyosperma and huernia described as a genus",
+        "relation_signature": "generic",
+        "answer_text": "Yes",
+        "support_score": 1.0,
+        "derived_from_state": "state_1",
+        "composed_from": [
+          "memory_mem_5",
+          null
+        ],
+        "slot_role": "final_boolean",
+        "terminal": true
+      }
+    }
+  ],
+  "edges": [
+    {
+      "source": "state_1",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.9999999856121007
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.8841365672456091
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.8799999819645339
+    },
+    {
+      "source": "state_1",
+      "target": "state_2",
+      "edge_type": "refines",
+      "weight": 0.94
+    },
+    {
+      "source": "state_1",
+      "target": "state_3",
+      "edge_type": "refines",
+      "weight": 0.94
+    },
+    {
+      "source": "state_1",
+      "target": "state_4",
+      "edge_type": "verifies",
+      "weight": 0.95
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_6",
+      "edge_type": "derives",
+      "weight": 1.0
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.9999999856121007
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.9999999932891356
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.9999999932891356
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "state_6",
+      "edge_type": "supports",
+      "weight": 0.9999999891750828
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "state_7",
+      "edge_type": "supports",
+      "weight": 0.9999999931485917
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "state_8",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "state_9",
+      "edge_type": "supports",
+      "weight": 0.999999993179744
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.9999999808239702
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.9999999818446312
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.9999999908154319
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.9999999808239702
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "state_6",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "state_7",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "state_8",
+      "edge_type": "supports",
+      "weight": 0.9999999819175852
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "state_9",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.8841365672456091
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_4",
+      "edge_type": "recalls",
+      "weight": 0.004068367168906985
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_5",
+      "edge_type": "recalls",
+      "weight": 0.01572613127515755
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_6",
+      "edge_type": "recalls",
+      "weight": 0.015552693300332127
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_7",
+      "edge_type": "recalls",
+      "weight": 0.004175314651129961
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_8",
+      "edge_type": "recalls",
+      "weight": 0.004068367168906985
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_9",
+      "edge_type": "recalls",
+      "weight": 0.004175314651129961
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.8799999819645339
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_4",
+      "edge_type": "recalls",
+      "weight": 0.1632825284464228
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_5",
+      "edge_type": "recalls",
+      "weight": 0.43862296272166945
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_6",
+      "edge_type": "recalls",
+      "weight": 0.43378554422151056
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_7",
+      "edge_type": "recalls",
+      "weight": 0.16757482916151237
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_8",
+      "edge_type": "recalls",
+      "weight": 0.1632825284464228
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_9",
+      "edge_type": "recalls",
+      "weight": 0.16757482916151237
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.9999999808239702
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_2",
+      "target": "state_5",
+      "edge_type": "verifies",
+      "weight": 0.8
+    },
+    {
+      "source": "state_2",
+      "target": "memory_mem_5",
+      "edge_type": "derives",
+      "weight": 1.0
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.9999999932891356
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_3",
+      "target": "state_2",
+      "edge_type": "refines",
+      "weight": 0.9
+    },
+    {
+      "source": "state_3",
+      "target": "memory_mem_4",
+      "edge_type": "derives",
+      "weight": 1.0
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.9999999818446312
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_4",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.1632825284464228
+    },
+    {
+      "source": "state_4",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.004068367168906985
+    },
+    {
+      "source": "state_4",
+      "target": "state_9",
+      "edge_type": "refines",
+      "weight": 0.9
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "state_3",
+      "edge_type": "recalls",
+      "weight": 1.0
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.9999999932891356
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_5",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.9999999908154319
+    },
+    {
+      "source": "state_5",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_5",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.43862296272166945
+    },
+    {
+      "source": "state_5",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.01572613127515755
+    },
+    {
+      "source": "state_5",
+      "target": "state_6",
+      "edge_type": "refines",
+      "weight": 0.9
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "state_2",
+      "edge_type": "recalls",
+      "weight": 1.0
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.9999999808239702
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "memory_mem_6",
+      "edge_type": "derives",
+      "weight": 1.0
+    },
+    {
+      "source": "state_6",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.9999999891750828
+    },
+    {
+      "source": "state_6",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_6",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.43378554422151056
+    },
+    {
+      "source": "state_6",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.015552693300332127
+    },
+    {
+      "source": "state_6",
+      "target": "state_7",
+      "edge_type": "verifies",
+      "weight": 0.8
+    },
+    {
+      "source": "state_6",
+      "target": "state_8",
+      "edge_type": "verifies",
+      "weight": 0.7
+    },
+    {
+      "source": "state_7",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.9999999931485917
+    },
+    {
+      "source": "state_7",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_7",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.16757482916151237
+    },
+    {
+      "source": "state_7",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.004175314651129961
+    },
+    {
+      "source": "state_8",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.9999999819175852
+    },
+    {
+      "source": "state_8",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_8",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.1632825284464228
+    },
+    {
+      "source": "state_8",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.004068367168906985
+    },
+    {
+      "source": "state_9",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.999999993179744
+    },
+    {
+      "source": "state_9",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_9",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.16757482916151237
+    },
+    {
+      "source": "state_9",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.004175314651129961
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 1.0
+    }
+  ]
+}

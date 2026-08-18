@@ -1,0 +1,948 @@
+{
+  "nodes": [
+    {
+      "node_id": "state_1",
+      "node_type": "state",
+      "content": "What album did John Lennon release before the one that contained the song \"How?\"?",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.7335152054303105,
+      "temperature": 1.2536438927896283,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.9120429993950003,
+        "evidence_support": 0.7413029393970595,
+        "memory_usefulness": 0.4724297193809175,
+        "answerability": 0.7706514696985298,
+        "uncertainty": 0.1665654709085293
+      },
+      "metadata": {
+        "diffusion_delta": 0.4140649204265301,
+        "diffusion_gain": 0.4140649204265301
+      }
+    },
+    {
+      "node_id": "kg_doc_1",
+      "node_type": "kg",
+      "content": "Instant Karma: All-Time Greatest Hits, a three-disc compilation album of music recorded by John Lennon, is a budget release targeted for sale at warehouse-type stores such as Sam's Club and Costco. The album was released in 2002 by Timeless/Traditions Alive Music under license from Capitol/EMI Special Projects. Disc one, subtitled \"The Hits\", contained eleven songs that were previously released on singles. Disc two, subtitled \"Sings Classic Rock 'N' Roll\", contained ten cover songs recorded during Lennon's \"Rock 'n' Roll\" sessions as well as \"Blue Suede Shoes\" and \"Dizzy, Miss Lizzy,\" which were recorded live in Toronto in 1969. Disc three, subtitled \"The Classics Live\", contained twelve songs recorded live in New York City either in August 1972 with Elephant's Memory at Madison Square Garden or, in the case of \"Well (Baby Please Don't Go),\" with Frank Zappa and The Mothers of Invention at the Fillmore East in June 1971. All thirty-five songs on the album had been previously released.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.999999990630776,
+      "temperature": 0.999999990630776,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Instant Karma: All-Time Greatest Hits",
+        "raw_score": 2.932308930282671,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_4",
+      "node_type": "kg",
+      "content": "\"How?\" is a song from John Lennon's second solo album \"Imagine\", released in 1971. It is a contemplative song inspired by the Primal Therapy he was undergoing with his wife Yoko Ono, during which he faced many personal questions such as \"How can I go forward when I don't know which way I'm facing?\" This song also shows his thoughts about the world in general (such as \"And the World is so tough; Sometimes I feel I've had enough\").",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999942239491,
+      "temperature": 0.9999999942239491,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "How? (song)",
+        "raw_score": 5.141132083339646,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_5",
+      "node_type": "kg",
+      "content": "\"Isolation\" is a 1970 song appearing on John Lennon's first official solo album release, \"John Lennon/Plastic Ono Band\". It ends side one of the album, and is the fifth track. In the Philippines Apple Records released \"Isolation\" as the b-side to \"Mother\", the single off \"John Lennon/Plastic Ono Band\", in contrast to most countries where the b-side was Yoko Ono's \"Why.\" It was also released on an EP in Mexico along with \"Mother,\" \"Look at Me'\" and \"My Mummy's Dead.\"",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999289489525,
+      "temperature": 0.9999999289489525,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Isolation (John Lennon song)",
+        "raw_score": 3.6228701604582803,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_3",
+      "node_type": "kg",
+      "content": "\"Life Begins at 40\" is a song by John Lennon. It was written in 1980, the year that both Lennon and Ringo Starr turned 40 years of age. Lennon recorded a demo of the song at his home, but it was not recorded at any of the sessions for his comeback album, \"Double Fantasy.\" Instead, he intended to give the song to Starr to record on his own forthcoming album, \"Can't Fight Lightning.\" The song's amiable country feel was well suited to Starr's singing style. After Lennon's murder in December 1980, those plans were shelved. However, Lennon's demo was eventually issued in 1998 on the \"John Lennon Anthology\" box set.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.44176149596663283,
+      "temperature": 0.44176149596663283,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Life Begins at 40 (song)",
+        "raw_score": 1.0697494948625854,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "memory_mem_2",
+      "node_type": "memory",
+      "content": "Template: for comparison questions, split the problem into one sub-question per entity before comparing them.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.8999999954364098,
+      "temperature": 2.08032310268699,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.9,
+        "tag": "comparison_template",
+        "memory_kind": "template",
+        "raw_score": 0.7165116922642131,
+        "source": "memory",
+        "diffusion_delta": 0.48996501591248287,
+        "diffusion_gain": 0.48996501591248287
+      }
+    },
+    {
+      "node_id": "memory_mem_1",
+      "node_type": "memory",
+      "content": "Template: for compositional multi-hop questions, first solve the intermediate entity and then ask for the final attribute.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9599998077388796,
+      "temperature": 0.8793963400400632,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.96,
+        "tag": "compositional_template",
+        "memory_kind": "template",
+        "raw_score": 0.1484405427338442,
+        "source": "memory",
+        "diffusion_delta": 0.01730043114757107,
+        "diffusion_gain": 0.01730043114757107
+      }
+    },
+    {
+      "node_id": "state_2",
+      "node_type": "state",
+      "content": "What album contained the song 'How?'?",
+      "depth": 1,
+      "parent_id": "state_1",
+      "value": 0.6131511537841039,
+      "temperature": 0.41651671850981953,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.6876391324299952,
+        "evidence_support": 0.6831015207217054,
+        "memory_usefulness": 0.5139667251540021,
+        "answerability": 0.633858452668545,
+        "uncertainty": 0.17704172627009301
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_4",
+          "doc_1",
+          "doc_3",
+          "doc_2"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "diffusion_delta": -0.020746339893819687,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "kg_doc_2",
+      "node_type": "kg",
+      "content": "\"I'm Losing You\" is a song written by John Lennon and released on his 1980 album \"Double Fantasy\". It was completed in Bermuda in June 1980, after Lennon failed at an attempted telephone call to Yoko Ono. The song is also available on the 1982 compilation \"The John Lennon Collection\", the 1998 boxset \"John Lennon Anthology\", the one disc compilation \"Wonsaponatime\", the 2005 two disc compilation \"\" and in 2010 for the \"Gimme Some Truth\" album. The song was also featured in the 2005 musical \"Lennon\".",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0,
+      "temperature": 0.0,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "I'm Losing You (John Lennon song)",
+        "raw_score": 1.0675958072511995,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "memory_mem_3",
+      "node_type": "memory",
+      "content": "Template: when evidence already grounds the answer, switch from branching to short verification and synthesis.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0679336425691247,
+      "temperature": 0.06046664400423195,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.88,
+        "tag": "verification_then_stop",
+        "memory_kind": "template",
+        "raw_score": 0.11193033995981554,
+        "source": "memory",
+        "diffusion_delta": 0.00046690178127284376,
+        "diffusion_gain": 0.00046690178127284376
+      }
+    },
+    {
+      "node_id": "state_3",
+      "node_type": "state",
+      "content": "What was John Lennon's solo album released immediately before that album?",
+      "depth": 1,
+      "parent_id": "state_1",
+      "value": 0.8015639018198462,
+      "temperature": 0.9675947207220446,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.7836450487443326,
+        "evidence_support": 0.9654718628226977,
+        "memory_usefulness": 0.8999999909083596,
+        "answerability": 0.7750436237190411,
+        "uncertainty": 0.1262150646919144
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_5",
+          "doc_9",
+          "doc_3",
+          "doc_1"
+        ],
+        "memory_ids": [
+          "mem_2"
+        ],
+        "diffusion_delta": 0.016947789969232963,
+        "diffusion_gain": 0.016947789969232963
+      }
+    },
+    {
+      "node_id": "kg_doc_9",
+      "node_type": "kg",
+      "content": "Lennon Legend: The Very Best of John Lennon is the third official compilation album of John Lennon's solo career, coming after 1975's \"Shaved Fish\" and 1982's \"The John Lennon Collection\". Because neither collection spanned Lennon's releases up to and including 1984's \"Milk and Honey\", \"Lennon Legend: The Very Best of John Lennon\" – considered the definitive Lennon retrospective – was compiled to rectify the situation. It was released in the UK in 1997 through Parlophone and early 1998 in the US by EMI Records.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9309437966964429,
+      "temperature": 0.9309437966964429,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Lennon Legend: The Very Best of John Lennon",
+        "raw_score": 2.7097053623096103,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "memory_mem_4",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'What album did John Lennon release before the one that contained the song \"How?\"' is Imagine.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.999999990630776,
+      "temperature": 1.1963460762428868,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "intermediate_answer",
+        "target_question": "What album did John Lennon release before the one that contained the song \"How?\"?",
+        "target_question_norm": "what album did john lennon release before the one that contained the song how",
+        "relation_signature": "generic",
+        "answer_text": "Imagine",
+        "support_score": 0.999999990630776,
+        "evidence_ids": [
+          "doc_1",
+          "doc_4"
+        ],
+        "slot_name": "",
+        "slot_role": "",
+        "terminal": false,
+        "derived_from_state": "state_1",
+        "diffusion_delta": 0.1420538114674077,
+        "diffusion_gain": 0.1420538114674077
+      }
+    },
+    {
+      "node_id": "state_4",
+      "node_type": "state",
+      "content": "What album did John Lennon release immediately before 'Imagine'?",
+      "depth": 1,
+      "parent_id": "state_1",
+      "value": 0.5711035810017568,
+      "temperature": 0.3977162723487143,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.7147162512413076,
+        "evidence_support": 0.6767672547821262,
+        "memory_usefulness": 0.07577299944877058,
+        "answerability": 0.6460759350833709,
+        "uncertainty": 0.17818189413921728
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_6",
+          "doc_4",
+          "doc_7",
+          "doc_5"
+        ],
+        "memory_ids": [
+          "mem_2"
+        ],
+        "diffusion_delta": -0.0371521199443009,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "kg_doc_6",
+      "node_type": "kg",
+      "content": "Imagine is the second studio album by John Lennon. Recorded and released in 1971, the album is more heavily produced in contrast to the basic, raw arrangements of his previous album, the critically acclaimed \"John Lennon/Plastic Ono Band\".",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999655786249,
+      "temperature": 0.9999999655786249,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Imagine (John Lennon album)",
+        "raw_score": 2.2521877585511034,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_7",
+      "node_type": "kg",
+      "content": "Milk and Honey is an album by John Lennon and Yoko Ono released in 1984. Following the compilation \"The John Lennon Collection\", it is Lennon's eighth and final studio album, and the first posthumous release of new Lennon music, having been recorded in the last months of his life during and following the sessions for their 1980 album \"Double Fantasy\". It was assembled by Yoko Ono in association with the Geffen label.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999811247449,
+      "temperature": 0.9999999811247449,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Milk and Honey (album)",
+        "raw_score": 3.71236664447755,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "state_5",
+      "node_type": "state",
+      "content": "Which solo studio album did John Lennon release immediately before 'Imagine'?",
+      "depth": 2,
+      "parent_id": "state_2",
+      "value": 0.5887571349103803,
+      "temperature": 0.5583328579691669,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.7057515984173571,
+        "evidence_support": 0.7363734795080639,
+        "memory_usefulness": 0.08729615402884122,
+        "answerability": 0.6604944320617242,
+        "uncertainty": 0.1674527736885485
+      },
+      "metadata": {
+        "kind": "bridge",
+        "evidence_ids": [
+          "doc_4",
+          "doc_6",
+          "doc_7",
+          "doc_5"
+        ],
+        "memory_ids": [
+          "mem_2"
+        ],
+        "diffusion_delta": -0.13561197592672602,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "state_6",
+      "node_type": "state",
+      "content": "What is the release order of John Lennon's solo studio albums?",
+      "depth": 2,
+      "parent_id": "state_2",
+      "value": 0.7001938399079537,
+      "temperature": 0.7140764386903333,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.7563898651165617,
+        "evidence_support": 0.9712824087138692,
+        "memory_usefulness": 0.003576226897919,
+        "answerability": 0.8625642812800115,
+        "uncertainty": 0.12516916643150355
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_7",
+          "doc_5",
+          "doc_9",
+          "doc_6"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "diffusion_delta": -0.2177625955175584,
+        "diffusion_gain": 0.0
+      }
+    }
+  ],
+  "edges": [
+    {
+      "source": "state_1",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.999999990630776
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.4826058881633429
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.1469319746726333
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_2",
+      "edge_type": "recalls",
+      "weight": 0.8999999954364098
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.04485944332542508
+    },
+    {
+      "source": "state_1",
+      "target": "state_2",
+      "edge_type": "refines",
+      "weight": 0.9
+    },
+    {
+      "source": "state_1",
+      "target": "state_3",
+      "edge_type": "refines",
+      "weight": 0.8
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_4",
+      "edge_type": "derives",
+      "weight": 0.999999990630776
+    },
+    {
+      "source": "state_1",
+      "target": "state_4",
+      "edge_type": "refines",
+      "weight": 0.84
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.999999990630776
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.36620304721946156
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.999999990630776
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.4826058881633429
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.9999999942239491
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.4826058881633429
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.3535345439856274
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.9999999886278391
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.1469319746726333
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.9999999289489525
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.1469319746726333
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "state_6",
+      "edge_type": "supports",
+      "weight": 0.9425648363029936
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.00042295351295970585
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.44176149596663283
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_2",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.8999999954364098
+    },
+    {
+      "source": "memory_mem_2",
+      "target": "state_3",
+      "edge_type": "recalls",
+      "weight": 0.8999999909083596
+    },
+    {
+      "source": "memory_mem_2",
+      "target": "memory_mem_4",
+      "edge_type": "recalls",
+      "weight": 0.8999999954364098
+    },
+    {
+      "source": "memory_mem_2",
+      "target": "state_4",
+      "edge_type": "recalls",
+      "weight": 0.07577299944877058
+    },
+    {
+      "source": "memory_mem_2",
+      "target": "state_5",
+      "edge_type": "recalls",
+      "weight": 0.08729615402884122
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.04485944332542508
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_2",
+      "edge_type": "recalls",
+      "weight": 0.0066845648699746015
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "memory_mem_4",
+      "edge_type": "recalls",
+      "weight": 0.04485944332542508
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_6",
+      "edge_type": "recalls",
+      "weight": 0.0066845648699746015
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.9999999942239491
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.36620304721946156
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.00042295351295970585
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_2",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.0066845648699746015
+    },
+    {
+      "source": "state_2",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.0004678889258633986
+    },
+    {
+      "source": "state_2",
+      "target": "state_5",
+      "edge_type": "refines",
+      "weight": 1.0
+    },
+    {
+      "source": "state_2",
+      "target": "state_6",
+      "edge_type": "refines",
+      "weight": 0.9
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_2",
+      "edge_type": "recalls",
+      "weight": 0.0004678889258633986
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_6",
+      "edge_type": "recalls",
+      "weight": 0.0004678889258633986
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.9999999289489525
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.9309437966964429
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.44176149596663283
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_3",
+      "target": "memory_mem_2",
+      "edge_type": "recalls",
+      "weight": 0.8999999909083596
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.9309437966964429
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "state_6",
+      "edge_type": "supports",
+      "weight": 0.3250746487390761
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.999999990630776
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.999999990630776
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.4826058881633429
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.1469319746726333
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "memory_mem_2",
+      "edge_type": "recalls",
+      "weight": 0.8999999954364098
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.04485944332542508
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.9999999655786249
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.3535345439856274
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.12202871943869205
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_4",
+      "target": "memory_mem_2",
+      "edge_type": "recalls",
+      "weight": 0.07577299944877058
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.9999999655786249
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.47274697038828867
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "state_6",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.12202871943869205
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.07437879789395728
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "state_6",
+      "edge_type": "supports",
+      "weight": 0.9999999811247449
+    },
+    {
+      "source": "state_5",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.9999999886278391
+    },
+    {
+      "source": "state_5",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.47274697038828867
+    },
+    {
+      "source": "state_5",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.07437879789395728
+    },
+    {
+      "source": "state_5",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_5",
+      "target": "memory_mem_2",
+      "edge_type": "recalls",
+      "weight": 0.08729615402884122
+    },
+    {
+      "source": "state_6",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.9999999811247449
+    },
+    {
+      "source": "state_6",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.9425648363029936
+    },
+    {
+      "source": "state_6",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.3250746487390761
+    },
+    {
+      "source": "state_6",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_6",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.0066845648699746015
+    },
+    {
+      "source": "state_6",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.0004678889258633986
+    }
+  ]
+}

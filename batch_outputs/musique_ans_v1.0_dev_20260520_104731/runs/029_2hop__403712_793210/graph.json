@@ -1,0 +1,939 @@
+{
+  "nodes": [
+    {
+      "node_id": "state_1",
+      "node_type": "state",
+      "content": "Who is the father of Edward Baring, 1st Baron Revelstoke's father?",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.7940602486527498,
+      "temperature": 0.7994571498739133,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.9380974605636957,
+        "evidence_support": 0.8179337075402813,
+        "memory_usefulness": 0.5139667251540021,
+        "answerability": 0.9089668537701406,
+        "uncertainty": 0.15277193264274935
+      },
+      "metadata": {
+        "diffusion_delta": 0.01078954402710608,
+        "diffusion_gain": 0.01078954402710608
+      }
+    },
+    {
+      "node_id": "kg_doc_7",
+      "node_type": "kg",
+      "content": "Thomas Baring, known as \"Tom\", was the tenth child (fifth of second marriage) of Henry Baring of Cromer Hall, and younger full brother of Edward Baring, 1st Baron Revelstoke. Like his brother, Baring was involved in the family banking business, beginning his career in the Liverpool office of Barings Bank. He later moved to New York City to join Kidder Peabody. When, in 1890, Kidder Peabody split its dual Boston-New York firm, Baring became a partner in the separated New York firm. He and another Kidder-Peabody alumnus, George C. Magoun, formed Baring, Magoun. Both houses continued as North American agents for Barings.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999957429107,
+      "temperature": 0.9999999957429107,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Tom Baring",
+        "raw_score": 5.04212849829408,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_11",
+      "node_type": "kg",
+      "content": "Sir William Maule was the eldest son of Sir Peter Maule and Christina de Valognes, Baron and Baroness of Panmure and Benvie. William succeeded as Baron in 1254 on his father's death. He was married to Ethana de Vallibus, daughter of John Vaux, Lord of Dirleton, and left one son, Henry Maule, who succeeded him as Baron.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9782056283734079,
+      "temperature": 0.9782056283734079,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Sir William Maule",
+        "raw_score": 5.31490030639129,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_5",
+      "node_type": "kg",
+      "content": "Martha Creek Provincial Park is a provincial park in British Columbia, Canada, located on the Lake Revelstoke Reservoir north of the city of Revelstoke.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.3815295591564079,
+      "temperature": 0.3815295591564079,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Martha Creek Provincial Park",
+        "raw_score": 5.503906458440991,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_13",
+      "node_type": "kg",
+      "content": "Edward Pellew, 3rd Viscount Exmouth (14 February 1811 – 11 February 1876), was a British peer who inherited the title of Viscount Exmouth from his father and held the title for 42 years. He was the grandson of Edward Pellew, 1st Viscount Exmouth.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0,
+      "temperature": 0.0,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Edward Pellew, 3rd Viscount Exmouth",
+        "raw_score": 4.978432058567099,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "memory_mem_1",
+      "node_type": "memory",
+      "content": "Template: for compositional multi-hop questions, first solve the intermediate entity and then ask for the final attribute.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9599998077388796,
+      "temperature": 1.4565096916823295,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.96,
+        "tag": "compositional_template",
+        "memory_kind": "template",
+        "raw_score": 0.1462417252032921,
+        "source": "memory",
+        "diffusion_delta": 0.08000414882500673,
+        "diffusion_gain": 0.08000414882500673
+      }
+    },
+    {
+      "node_id": "memory_mem_3",
+      "node_type": "memory",
+      "content": "Template: when evidence already grounds the answer, switch from branching to short verification and synthesis.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0679336425691247,
+      "temperature": 0.10461652075501023,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.88,
+        "tag": "verification_then_stop",
+        "memory_kind": "template",
+        "raw_score": 0.10985456608872891,
+        "source": "memory",
+        "diffusion_delta": 0.005880469248998044,
+        "diffusion_gain": 0.005880469248998044
+      }
+    },
+    {
+      "node_id": "state_2",
+      "node_type": "state",
+      "content": "Who is the father of Edward Baring, 1st Baron Revelstoke?",
+      "depth": 1,
+      "parent_id": "state_1",
+      "value": 0.713850659714853,
+      "temperature": 2.000426605112153,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.8603145687751904,
+        "evidence_support": 0.690764774472485,
+        "memory_usefulness": 0.5139667251540021,
+        "answerability": 0.8272005690544243,
+        "uncertainty": 0.1756623405949527
+      },
+      "metadata": {
+        "kind": "bridge",
+        "evidence_ids": [
+          "doc_7",
+          "doc_5",
+          "doc_11",
+          "doc_13"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "diffusion_delta": 0.16892748434662241,
+        "diffusion_gain": 0.16892748434662241
+      }
+    },
+    {
+      "node_id": "state_3",
+      "node_type": "state",
+      "content": "Who is the father of Henry Baring of Cromer Hall?",
+      "depth": 1,
+      "parent_id": "state_1",
+      "value": 0.6529500239847584,
+      "temperature": 0.31090008220802057,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.7248165962302863,
+        "evidence_support": 0.6986584381104675,
+        "memory_usefulness": 0.5139667251540021,
+        "answerability": 0.7584201281461428,
+        "uncertainty": 0.17424148114011584
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_7",
+          "doc_18",
+          "doc_11",
+          "doc_10"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "diffusion_delta": -0.0018433709534911302,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "kg_doc_18",
+      "node_type": "kg",
+      "content": "A member of the influential Baring family, he was the son of Lieutenant-General Charles Baring, son of Henry Bingham Baring, son of Henry Baring, third son of Sir Francis Baring, 1st Baronet. His mother was Helen Graham, daughter of Sir James Graham, 2nd Baronet. He was a lifelong resident of the Isle of Wight. He became involved in politics and public affairs at an early age: he was elected president of the Isle of Wight Liberal Union aged 23, was made a Justice of the Peace a year later and was High Sheriff of Hampshire in 1897 at the age of 26. In 1898 he became chairman of the Isle of Wight County Council, a position he held for the rest of his life.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999710268808,
+      "temperature": 0.9999999710268808,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Godfrey Baring",
+        "raw_score": 5.101730492072175,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_10",
+      "node_type": "kg",
+      "content": "Richard spent his reign focused on protecting his possessions in France and fighting in the Third Crusade; his brother, John, inherited England in 1199 but lost Normandy and most of Aquitaine after several years of war with France. John fought successive, increasingly expensive, campaigns in a bid to regain these possessions. John's efforts to raise revenues, combined with his fractious relationships with many of the English barons, led to confrontation in 1215, an attempt to restore peace through the signing of the Magna Carta, and finally the outbreak of the First Barons' War. John died having fought the rebel barons and their French backers to a stalemate, and royal power was re-established by barons loyal to the young Henry III. England's power structures remained unstable and the outbreak of the Second Barons' War in 1264 resulted in the king's capture by Simon de Montfort. Henry's son, Edward, defeated the rebel factions between 1265 and 1267, restoring his father to power.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0,
+      "temperature": 0.0,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "England in the Middle Ages",
+        "raw_score": 3.0473750955202643,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "state_4",
+      "node_type": "state",
+      "content": "Who is Edward Baring, 1st Baron Revelstoke's father?",
+      "depth": 1,
+      "parent_id": "state_1",
+      "value": 0.6825963187991929,
+      "temperature": 1.1763603461020702,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.8572825249871696,
+        "evidence_support": 0.7834512767002315,
+        "memory_usefulness": 0.0,
+        "answerability": 0.8553620019864794,
+        "uncertainty": 0.1589787701939583
+      },
+      "metadata": {
+        "kind": "bridge",
+        "evidence_ids": [
+          "doc_7",
+          "doc_11",
+          "doc_5",
+          "doc_13"
+        ],
+        "memory_ids": [],
+        "diffusion_delta": 0.05963350310858484,
+        "diffusion_gain": 0.05963350310858484
+      }
+    },
+    {
+      "node_id": "memory_mem_4",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'Who is the father of Edward Baring, 1st Baron Revelstoke' is Henry Baring.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999897885621,
+      "temperature": 1.9907028918655392,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "intermediate_answer",
+        "target_question": "Who is the father of Edward Baring, 1st Baron Revelstoke?",
+        "target_question_norm": "who is the father of edward baring 1st baron revelstoke",
+        "relation_signature": "father",
+        "answer_text": "Henry Baring",
+        "support_score": 0.9999999897885621,
+        "evidence_ids": [
+          "doc_7"
+        ],
+        "slot_name": "edward_baring_father",
+        "slot_role": "bridge_entity",
+        "terminal": false,
+        "derived_from_state": "state_2",
+        "diffusion_delta": 0.18489993629452828,
+        "diffusion_gain": 0.18489993629452828
+      }
+    },
+    {
+      "node_id": "state_5",
+      "node_type": "state",
+      "content": "Who is Henry Baring of Cromer Hall's father?",
+      "depth": 2,
+      "parent_id": "state_4",
+      "value": 0.5442400844488793,
+      "temperature": 0.3744317629745661,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.6930369120969087,
+        "evidence_support": 0.6051887788946508,
+        "memory_usefulness": 0.0,
+        "answerability": 0.7116852985382346,
+        "uncertainty": 0.19106601979896284
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_7",
+          "doc_18",
+          "doc_11",
+          "doc_10"
+        ],
+        "memory_ids": [],
+        "diffusion_delta": 0.07959600642272091,
+        "diffusion_gain": 0.07959600642272091
+      }
+    },
+    {
+      "node_id": "memory_mem_5",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'Who is Edward Baring, 1st Baron Revelstoke's father' is Henry Baring.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 1.0,
+      "temperature": 0.6525935785947479,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "intermediate_answer",
+        "target_question": "Who is Edward Baring, 1st Baron Revelstoke's father?",
+        "target_question_norm": "who is edward baring 1st baron revelstoke s father",
+        "relation_signature": "father",
+        "answer_text": "Henry Baring",
+        "support_score": 1.0,
+        "evidence_ids": [
+          "doc_7",
+          "doc_11"
+        ],
+        "slot_name": "",
+        "slot_role": "",
+        "terminal": false,
+        "derived_from_state": "state_4",
+        "diffusion_delta": -0.035428341761275295,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "state_6",
+      "node_type": "state",
+      "content": "Who is Henry Baring's father?",
+      "depth": 2,
+      "parent_id": "state_4",
+      "value": 0.7212074379000216,
+      "temperature": 0.39683922353275447,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.7890222246253218,
+        "evidence_support": 0.9891027997001443,
+        "memory_usefulness": 0.0,
+        "answerability": 0.885460490759163,
+        "uncertainty": 0.12196149605397404
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_18",
+          "doc_11",
+          "doc_7",
+          "doc_10"
+        ],
+        "memory_ids": [],
+        "diffusion_delta": 0.136210177016854,
+        "diffusion_gain": 0.136210177016854
+      }
+    }
+  ],
+  "edges": [
+    {
+      "source": "state_1",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.999999987426492
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_11",
+      "edge_type": "supports",
+      "weight": 0.6358674276540704
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.24532566506212103
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_13",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.9599998077388796
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.0679336425691247
+    },
+    {
+      "source": "state_1",
+      "target": "state_2",
+      "edge_type": "refines",
+      "weight": 1.0
+    },
+    {
+      "source": "state_1",
+      "target": "state_3",
+      "edge_type": "refines",
+      "weight": 0.94
+    },
+    {
+      "source": "state_1",
+      "target": "state_4",
+      "edge_type": "refines",
+      "weight": 0.95
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.999999987426492
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.9999999897885621
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.9999999957429107
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.9999999898545813
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.9999999897885621
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.9999999945834176
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.9999999898545813
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "state_6",
+      "edge_type": "supports",
+      "weight": 0.941286878190671
+    },
+    {
+      "source": "kg_doc_11",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.6358674276540704
+    },
+    {
+      "source": "kg_doc_11",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.13229160589366612
+    },
+    {
+      "source": "kg_doc_11",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.1771038290145631
+    },
+    {
+      "source": "kg_doc_11",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.5669025635458819
+    },
+    {
+      "source": "kg_doc_11",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.13229160589366612
+    },
+    {
+      "source": "kg_doc_11",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.18442223665325838
+    },
+    {
+      "source": "kg_doc_11",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.5669025635458819
+    },
+    {
+      "source": "kg_doc_11",
+      "target": "state_6",
+      "edge_type": "supports",
+      "weight": 0.9782056283734079
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.24532566506212103
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.3815295591564079
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.3661314369635878
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.3815295591564079
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.3661314369635878
+    },
+    {
+      "source": "kg_doc_13",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_13",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_13",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_13",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_13",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.9599998077388796
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_2",
+      "edge_type": "recalls",
+      "weight": 0.9599998077388796
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_3",
+      "edge_type": "recalls",
+      "weight": 0.004031547933209226
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "memory_mem_4",
+      "edge_type": "recalls",
+      "weight": 0.9599998077388796
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.0679336425691247
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_2",
+      "edge_type": "recalls",
+      "weight": 0.0679336425691247
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_3",
+      "edge_type": "recalls",
+      "weight": 0.0002847249087191757
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "memory_mem_4",
+      "edge_type": "recalls",
+      "weight": 0.0679336425691247
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.9999999897885621
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.3815295591564079
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_11",
+      "edge_type": "supports",
+      "weight": 0.13229160589366612
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_13",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_2",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.9599998077388796
+    },
+    {
+      "source": "state_2",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.0679336425691247
+    },
+    {
+      "source": "state_2",
+      "target": "memory_mem_4",
+      "edge_type": "derives",
+      "weight": 0.9999999897885621
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.9999999957429107
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_18",
+      "edge_type": "supports",
+      "weight": 0.39731688047802427
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_11",
+      "edge_type": "supports",
+      "weight": 0.1771038290145631
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_10",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_3",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.004031547933209226
+    },
+    {
+      "source": "state_3",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.0002847249087191757
+    },
+    {
+      "source": "kg_doc_18",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.39731688047802427
+    },
+    {
+      "source": "kg_doc_18",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.21037756320588408
+    },
+    {
+      "source": "kg_doc_18",
+      "target": "state_6",
+      "edge_type": "supports",
+      "weight": 0.9999999710268808
+    },
+    {
+      "source": "kg_doc_10",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_10",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_10",
+      "target": "state_6",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.9999999898545813
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_11",
+      "edge_type": "supports",
+      "weight": 0.5669025635458819
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.3661314369635878
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_13",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_4",
+      "target": "state_5",
+      "edge_type": "refines",
+      "weight": 0.9
+    },
+    {
+      "source": "state_4",
+      "target": "memory_mem_5",
+      "edge_type": "derives",
+      "weight": 1.0
+    },
+    {
+      "source": "state_4",
+      "target": "state_6",
+      "edge_type": "refines",
+      "weight": 0.84
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "state_2",
+      "edge_type": "recalls",
+      "weight": 0.9999999897885621
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.9999999897885621
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.3815295591564079
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_11",
+      "edge_type": "supports",
+      "weight": 0.13229160589366612
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_13",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.9599998077388796
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.0679336425691247
+    },
+    {
+      "source": "state_5",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.9999999945834176
+    },
+    {
+      "source": "state_5",
+      "target": "kg_doc_18",
+      "edge_type": "supports",
+      "weight": 0.21037756320588408
+    },
+    {
+      "source": "state_5",
+      "target": "kg_doc_11",
+      "edge_type": "supports",
+      "weight": 0.18442223665325838
+    },
+    {
+      "source": "state_5",
+      "target": "kg_doc_10",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "state_4",
+      "edge_type": "recalls",
+      "weight": 1.0
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.9999999898545813
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_11",
+      "edge_type": "supports",
+      "weight": 0.5669025635458819
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.3661314369635878
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_13",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_6",
+      "target": "kg_doc_18",
+      "edge_type": "supports",
+      "weight": 0.9999999710268808
+    },
+    {
+      "source": "state_6",
+      "target": "kg_doc_11",
+      "edge_type": "supports",
+      "weight": 0.9782056283734079
+    },
+    {
+      "source": "state_6",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.941286878190671
+    },
+    {
+      "source": "state_6",
+      "target": "kg_doc_10",
+      "edge_type": "supports",
+      "weight": 0.0
+    }
+  ]
+}

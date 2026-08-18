@@ -1,0 +1,153 @@
+{
+  "question": "susquehanna university and paul musser are both in what city?",
+  "final_answer": "Millheim, Pennsylvania",
+  "best_node": {
+    "node_id": "memory_mem_6",
+    "node_type": "memory",
+    "content": "Conclusion: The answer to 'susquehanna university and paul musser are both in what city' is Millheim, Pennsylvania.",
+    "depth": 0,
+    "parent_id": null,
+    "value": 1.0,
+    "temperature": 1.3691192919696293,
+    "expanded": false,
+    "visit_count": 0,
+    "persistent": true,
+    "score_breakdown": {},
+    "metadata": {
+      "source": "memory",
+      "memory_kind": "answer_candidate",
+      "target_question": "susquehanna university and paul musser are both in what city?",
+      "target_question_norm": "susquehanna university and paul musser are both in what city",
+      "relation_signature": "generic",
+      "answer_text": "Millheim, Pennsylvania",
+      "support_score": 1.0,
+      "derived_from_state": "state_1",
+      "composed_from": [
+        "memory_mem_5",
+        "memory_mem_4"
+      ],
+      "slot_role": "target_attribute",
+      "terminal": true,
+      "diffusion_delta": 0.36911929196962934,
+      "diffusion_gain": 0.36911929196962934
+    }
+  },
+  "final_synthesis_node_ids": [
+    "memory_mem_6",
+    "state_3",
+    "memory_mem_4",
+    "state_6",
+    "state_1"
+  ],
+  "answer_history": [
+    {
+      "node_id": "state_1",
+      "answer_text": "Selinsgrove",
+      "previous_answer": "",
+      "confidence": 0.8289999959177492,
+      "score": 0.8901947105075237,
+      "source": "direct_rag",
+      "step": 0,
+      "evidence_ids": [
+        "doc_2",
+        "doc_3",
+        "doc_4",
+        "doc_9"
+      ],
+      "kind": "anytime_answer"
+    },
+    {
+      "node_id": "state_1",
+      "answer_text": "Selinsgrove",
+      "confidence": 0.8289999959177492,
+      "score": 0.8289999959177492,
+      "source": "direct_rag",
+      "step": 0,
+      "evidence_ids": [
+        "doc_2",
+        "doc_3",
+        "doc_4",
+        "doc_9"
+      ],
+      "kind": "direct_rag_candidate"
+    },
+    {
+      "node_id": "memory_mem_4",
+      "content": "Conclusion: The answer to 'What city is Paul Musser from' is Millheim, Pennsylvania.",
+      "answer_text": "Millheim, Pennsylvania",
+      "value": 1.0,
+      "confidence": 1.0,
+      "evidence_ids": [
+        "doc_2"
+      ],
+      "step": 2,
+      "kind": "intermediate_answer"
+    },
+    {
+      "node_id": "memory_mem_5",
+      "content": "Conclusion: The answer to 'What city is Susquehanna University in' is Selinsgrove.",
+      "answer_text": "Selinsgrove",
+      "value": 1.0,
+      "confidence": 1.0,
+      "evidence_ids": [
+        "doc_5",
+        "doc_4",
+        "doc_7"
+      ],
+      "step": 3,
+      "kind": "intermediate_answer"
+    },
+    {
+      "node_id": "memory_mem_6",
+      "content": "Conclusion: The answer to 'susquehanna university and paul musser are both in what city' is Millheim, Pennsylvania.",
+      "answer_text": "Millheim, Pennsylvania",
+      "value": 1.0,
+      "evidence_ids": [
+        "doc_5",
+        "doc_4",
+        "doc_7",
+        "doc_2"
+      ],
+      "step": 3
+    },
+    {
+      "node_id": "memory_mem_6",
+      "answer_text": "Millheim, Pennsylvania",
+      "source": "answer_judge",
+      "choice": "A",
+      "candidate_source": "composed_root_memory",
+      "base_score": 1.0,
+      "judge_confidence": 0.0,
+      "judge_reason": "Doc_1 states Musser is from Millheim, PA and attended Susquehanna University; university's location (Selinsgrove) is irrelevant to 'both in what city'.",
+      "direct_rag_floor_applied": false,
+      "step": 3,
+      "kind": "final_answer_selection"
+    }
+  ],
+  "anytime_answer": "Selinsgrove",
+  "anytime_answer_score": 0.8901947105075237,
+  "anytime_answer_source": "direct_rag",
+  "anytime_answer_node_id": "state_1",
+  "direct_rag_answer": "Selinsgrove",
+  "direct_rag_score": 0.8289999959177492,
+  "direct_rag_node_id": "state_1",
+  "stats": {
+    "steps": 3,
+    "llm_calls": 10,
+    "generated_tokens": 748,
+    "token_budget_remaining": 452,
+    "total_nodes": 20,
+    "kg_nodes": 8,
+    "memory_nodes": 5,
+    "state_nodes": 7,
+    "deleted_state_nodes": 0,
+    "scheduler_mode": "tdca",
+    "scoring_mode": "hybrid",
+    "stop_reason": "high_confidence_root_memory",
+    "goal_kind": "bridge",
+    "goal_completion": 1.0,
+    "anytime_answer": "Selinsgrove",
+    "anytime_answer_score": 0.8901947105075237,
+    "anytime_answer_source": "direct_rag"
+  }
+}

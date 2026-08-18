@@ -1,0 +1,1996 @@
+{
+  "nodes": [
+    {
+      "node_id": "state_1",
+      "node_type": "state",
+      "content": "Who played who sang is she really going out with him in the who influenced Beyonce movie?",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.3824760070184803,
+      "temperature": 0.9703883955945802,
+      "expanded": true,
+      "visit_count": 2,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.66,
+        "evidence_support": 0.0,
+        "memory_usefulness": 0.5139667251540021,
+        "answerability": 0.5,
+        "uncertainty": 0.3
+      },
+      "metadata": {
+        "diffusion_delta": -0.015673009160139362,
+        "diffusion_gain": 0.0,
+        "composition_retry": 2,
+        "goal_retry": 1
+      }
+    },
+    {
+      "node_id": "memory_mem_1",
+      "node_type": "memory",
+      "content": "Template: for compositional multi-hop questions, first solve the intermediate entity and then ask for the final attribute.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9599998077388796,
+      "temperature": 2.2910580869754287,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.96,
+        "tag": "compositional_template",
+        "memory_kind": "template",
+        "raw_score": 0.21984614231620825,
+        "source": "memory",
+        "diffusion_delta": 0.2950926455699563,
+        "diffusion_gain": 0.2950926455699563
+      }
+    },
+    {
+      "node_id": "memory_mem_3",
+      "node_type": "memory",
+      "content": "Template: when evidence already grounds the answer, switch from branching to short verification and synthesis.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.8799999819645339,
+      "temperature": 0.2957940514807653,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.88,
+        "tag": "verification_then_stop",
+        "memory_kind": "template",
+        "raw_score": 0.1680515353671759,
+        "source": "memory",
+        "diffusion_delta": -0.05044813571125123,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "state_2",
+      "node_type": "state",
+      "content": "Who sang the song 'Is She Really Going Out with Him?'?",
+      "depth": 1,
+      "parent_id": "state_1",
+      "value": 0.5576093356819022,
+      "temperature": 2.2624802399708344,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.7033333301779878,
+        "evidence_support": 0.4999999907195719,
+        "memory_usefulness": 0.5139667251540021,
+        "answerability": 0.5833333286931193,
+        "uncertainty": 0.21000000167047705
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_4",
+          "doc_8",
+          "doc_19",
+          "doc_17"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "goal_slot_name": "song_artist",
+        "goal_slot_role": "target_attribute",
+        "goal_terminal": true,
+        "diffusion_delta": 0.12585875810748126,
+        "diffusion_gain": 0.12585875810748126
+      }
+    },
+    {
+      "node_id": "kg_doc_4",
+      "node_type": "kg",
+      "content": "``Is She Really Going Out with Him? ''is the first single released by British musician Joe Jackson in September 1978. The track, which was to achieve greater commercial success when reissued in 1979, was included on Jackson's debut album, Look Sharp!.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.999999982472341,
+      "temperature": 0.999999982472341,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Is She Really Going Out with Him?",
+        "raw_score": 0.08823705532167245,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_8",
+      "node_type": "kg",
+      "content": "On December 11, 2008, Joel recorded his own rendition of \"Christmas in Fallujah\" during a concert at Acer Arena in Sydney and released it as a live single in Australia only. It is the only official release of Joel performing \"Christmas in Fallujah\", as Cass Dillon sang on the 2007 studio recording and the handful of times the song was played live in 2007. Joel sang the song throughout his December 2008 tour of Australia.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0,
+      "temperature": 0.0,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Billy Joel",
+        "raw_score": 0.08340571023906745,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_19",
+      "node_type": "kg",
+      "content": "``On the Good Ship Lollipop ''was the signature song of child actress Shirley Temple. Temple first sang it in the 1934 movie Bright Eyes. The song was composed by Richard A. Whiting and the lyrics were supplied by Sidney Clare.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0,
+      "temperature": 0.0,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "On the Good Ship Lollipop",
+        "raw_score": 0.09177235296344281,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_17",
+      "node_type": "kg",
+      "content": "Hermine Kittel (December 2, 1879 – April 7, 1948) was an Austrian contralto from Vienna. She studied singing with Amalie Materna in Vienna. She made her operatic debut in 1897 in Ljubljana. Kittle first sang under Gustav Mahler at the Vienna Hofoper (Vienna State Opera) and later premiered in a revision of \"Ariadne auf Naxos\". She sang at the Bayreuth Festival in 1902 and 1908, where she sang Erda in \"Der Ring des Nibelungen\". She also sang at the Salzburg Festival, where she often played Marcellina in \"The Marriage of Figaro\".",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0,
+      "temperature": 0.0,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Hermine Kittel",
+        "raw_score": 0.059580256989515495,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "state_3",
+      "node_type": "state",
+      "content": "What movie titled 'The Who Influenced Beyoncé' exists?",
+      "depth": 1,
+      "parent_id": "state_1",
+      "value": 0.23464934035181362,
+      "temperature": 0.7145510306075944,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.38133333333333336,
+        "evidence_support": 0.0,
+        "memory_usefulness": 0.5139667251540021,
+        "answerability": 0.25333333333333335,
+        "uncertainty": 0.3
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "goal_slot_name": "influencing_movie",
+        "goal_slot_role": "generic",
+        "goal_terminal": false,
+        "diffusion_delta": -0.02411276584812605,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "state_4",
+      "node_type": "state",
+      "content": "Who is the musician who sang 'Is She Really Going Out with Him?'?",
+      "depth": 2,
+      "parent_id": "state_2",
+      "value": 0.5746093359418546,
+      "temperature": 1.935288654292154,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.7033333303536313,
+        "evidence_support": 0.4999999912361705,
+        "memory_usefulness": 0.5139667251540021,
+        "answerability": 0.6833333289514185,
+        "uncertainty": 0.2100000015774893
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_4",
+          "doc_9",
+          "doc_17",
+          "doc_1"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "diffusion_delta": 0.16962981171711933,
+        "diffusion_gain": 0.16962981171711933
+      }
+    },
+    {
+      "node_id": "kg_doc_9",
+      "node_type": "kg",
+      "content": "Isgaard Marke (born 1972 in Husum, Schleswig-Holstein, Germany) is a classically trained singer, who is also involved with the project Classic meets Pop. Her style resembles influences of the Kate Bush school as well as cold wave influences and modern ambient sounds. Her greatest hits were \"Ein schöner Tag\" and \"Dream of You\" with the dance project Schiller, in which she sang single, short lyrical lines.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0,
+      "temperature": 0.0,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Isgaard",
+        "raw_score": 0.09422450718499956,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_1",
+      "node_type": "kg",
+      "content": "Beyoncé names Michael Jackson as her major musical influence. Aged five, Beyoncé attended her first ever concert where Jackson performed and she claims to have realised her purpose. When she presented him with a tribute award at the World Music Awards in 2006, Beyoncé said, \"if it wasn't for Michael Jackson, I would never ever have performed.\" She admires Diana Ross as an \"all-around entertainer\" and Whitney Houston, who she said \"inspired me to get up there and do what she did.\" She credits Mariah Carey's singing and her song \"Vision of Love\" as influencing her to begin practicing vocal runs as a child. Her other musical influences include Aaliyah, Prince, Lauryn Hill, Sade Adu, Donna Summer, Mary J. Blige, Janet Jackson, Anita Baker and Rachelle Ferrell.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999997541562787,
+      "temperature": 0.9999997541562787,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Beyoncé",
+        "raw_score": 0.11954710897351838,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "state_5",
+      "node_type": "state",
+      "content": "What movie titled 'Who Influenced Beyoncé' exists, and does it feature a performance of 'Is She Really Going Out with Him?'?",
+      "depth": 2,
+      "parent_id": "state_2",
+      "value": 0.6017815207409474,
+      "temperature": 1.4882963624416539,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.7033333295867154,
+        "evidence_support": 0.4999999889805353,
+        "memory_usefulness": 0.8820682746050714,
+        "answerability": 0.583333327823601,
+        "uncertainty": 0.21000000198350363
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_4",
+          "doc_1",
+          "doc_17",
+          "doc_10"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "diffusion_delta": 0.1067794591213933,
+        "diffusion_gain": 0.1067794591213933
+      }
+    },
+    {
+      "node_id": "kg_doc_10",
+      "node_type": "kg",
+      "content": "Ghosts of Girlfriends Past was originally set up at Touchstone Pictures with Ben Affleck attached to play the lead character, but he opted out of the movie. It was primarily filmed at Castle Hill in Ipswich, Massachusetts The film was also the first pairing of Michael Douglas and Anne Archer since the 1987 hit thriller Fatal Attraction, although they shared no scenes together. Jennifer Garner and Christa B. Allen again appear together for the first time since 13 Going on 30 in 2004, and they again play the older and younger versions of the same character.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0,
+      "temperature": 0.0,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Ghosts of Girlfriends Past",
+        "raw_score": 0.06202180809297655,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "memory_mem_4",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'What movie titled 'The Who Influenced Beyoncé' exists' is Is She Really Going Out with Him?.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.999999982472341,
+      "temperature": 0.5033670604748477,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "tdca_run",
+        "memory_kind": "derived_fact",
+        "target_question": "What movie titled 'The Who Influenced Beyoncé' exists?",
+        "target_question_norm": "what movie titled the who influenced beyonc exists",
+        "relation_signature": "generic",
+        "answer_text": "Is She Really Going Out with Him?",
+        "support_score": 0.999999982472341,
+        "evidence_ids": [],
+        "slot_type": "title",
+        "slot_role": "generic",
+        "slot_name": "influencing_movie",
+        "depends_on": [],
+        "terminal": false,
+        "path_terminal": false,
+        "composition_kind": "",
+        "derived_from_state": "state_1",
+        "diffusion_delta": -0.06866785163827405,
+        "diffusion_gain": 0.0,
+        "score": 0.999999982472341,
+        "raw_score": 7.02835642213801
+      }
+    },
+    {
+      "node_id": "state_6",
+      "node_type": "state",
+      "content": "Which movie about Beyoncé's influences features this musician?",
+      "depth": 3,
+      "parent_id": "state_4",
+      "value": 0.6081280298247054,
+      "temperature": 0.9964152332585101,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.6234648850166928,
+        "evidence_support": 0.9356810343628219,
+        "memory_usefulness": 0.0,
+        "answerability": 0.6811738505147443,
+        "uncertainty": 0.13157741381469204
+      },
+      "metadata": {
+        "kind": "bridge",
+        "evidence_ids": [
+          "doc_1",
+          "doc_4",
+          "doc_14",
+          "doc_16"
+        ],
+        "memory_ids": [],
+        "diffusion_delta": 0.7415149440634172,
+        "diffusion_gain": 0.7415149440634172
+      }
+    },
+    {
+      "node_id": "kg_doc_14",
+      "node_type": "kg",
+      "content": "Movie Surfers is a Disney Channel mini that appears in commercial form where teenagers go behind the scenes of Walt Disney related films. It was about teenagers communicating with each other via webcams and getting info about upcoming Disney theatrical movies. Now it also appears after a Disney Channel movie or series ends.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.5441395751282968,
+      "temperature": 0.5441395751282968,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Movie Surfers",
+        "raw_score": 0.12383334022979609,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_16",
+      "node_type": "kg",
+      "content": "John Ritter voiced Clifford in all episodes. This was originally done by Brent Titcomb in the 1988 direct - to - video series. Generally speaking, Ritter's schedule dictated the production of Clifford the Big Red Dog. By the time the last of the 68 half - hour cartoons and the subsequent film Clifford's Really Big Movie were completed, Ritter was back on ABC's prime - time schedule, starring in 8 Simple Rules. Ritter's death on September 11, 2003 came less than a week before PBS debuted Clifford's Puppy Days, a show that kept Clifford's legacy going.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0,
+      "temperature": 0.0,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Clifford the Big Red Dog (TV series)",
+        "raw_score": 0.02947131583132901,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "memory_mem_5",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'Who is the musician who sang 'Is She Really Going Out with Him?'' is Joe Jackson.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 1.0,
+      "temperature": 0.8314670461279237,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "intermediate_answer",
+        "target_question": "Who is the musician who sang 'Is She Really Going Out with Him?'?",
+        "target_question_norm": "who is the musician who sang is she really going out with him",
+        "relation_signature": "generic",
+        "answer_text": "Joe Jackson",
+        "support_score": 1.0,
+        "evidence_ids": [
+          "doc_4"
+        ],
+        "slot_name": "",
+        "slot_type": "person",
+        "slot_role": "target_attribute",
+        "terminal": true,
+        "path_terminal": true,
+        "composition_kind": "path_terminal",
+        "derived_from_state": "state_4",
+        "diffusion_delta": 0.051663756302472,
+        "diffusion_gain": 0.051663756302472
+      }
+    },
+    {
+      "node_id": "state_7",
+      "node_type": "state",
+      "content": "Who played Joe Jackson in the Beyoncé-influenced movie?",
+      "depth": 3,
+      "parent_id": "state_4",
+      "value": 0.6189901783844957,
+      "temperature": 0.6209417115887983,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.7170069848700202,
+        "evidence_support": 0.8382558378530005,
+        "memory_usefulness": 0.0034986731405478345,
+        "answerability": 0.6991279189265003,
+        "uncertainty": 0.1491139491864599
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_4",
+          "doc_1",
+          "doc_11",
+          "doc_7"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "diffusion_delta": 0.041013042655594245,
+        "diffusion_gain": 0.041013042655594245
+      }
+    },
+    {
+      "node_id": "kg_doc_11",
+      "node_type": "kg",
+      "content": "Lawrence Hilton - Jacobs - Joseph Jackson Angela Bassett - Katherine Jackson Holly Robinson Peete - Diana Ross Margaret Avery - Martha Scruse Billy Dee Williams - Berry Gordy Vanessa Williams - Suzanne de Passe Wylie Draper - Michael Jackson Abolade David Olatunde - Michael Jackson (baby) Alex Burrall - Michael Jackson (ages 6 -- 8) Jason Weaver - Michael Jackson (ages 9 -- 14) Colin Steele - Jermaine Jackson Jermaine Jackson II - Jermaine Jackson (ages 10 -- 17) Terrence Howard - Jackie Jackson Bumper Robinson - Jackie Jackson (ages 12 -- 16) Monica Calhoun - Rebbie Jackson Ebonie Smith - La Toya Jackson Kelli Martin - La Toya Jackson (ages 8 -- 10) Angel Vargas - Tito Jackson Shakiem Jamar Evans - Tito Jackson (ages 11 -- 15) Maya Nicole Johnson - Janet Jackson Monica Allison - Hazel Gordy Robert Redcross - Randy Jackson Nicolas Phillips - Randy Jackson (age 7 - 9) Marcus Maurice - Marlon Jackson Floyd Myers, Jr. - Marlon Jackson (age 7 - 9) Jacen Wilkerson - Marlon Jackson (ages 10 -- 15)",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0,
+      "temperature": 0.0,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "The Jacksons: An American Dream",
+        "raw_score": 0.13448987525466466,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_7",
+      "node_type": "kg",
+      "content": "In the Name of the People is an American television movie drama. It was released in 2000 by CBS Productions and Jaffe/Braunstein Films. The movie was filmed in Vancouver, British Columbia, Canada. It was based on the play by Tim Boland.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.15580012162340331,
+      "temperature": 0.15580012162340331,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "In the Name of the People (2000 film)",
+        "raw_score": 0.1361974824529395,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "state_11",
+      "node_type": "state",
+      "content": "Which actor played the singer of 'Is She Really Going Out with Him?' in that movie?",
+      "depth": 1,
+      "parent_id": "state_1",
+      "value": 0.5080944848551652,
+      "temperature": 0.21879434310981852,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.7286666634600498,
+        "evidence_support": 0.499999990568774,
+        "memory_usefulness": 0.0022318577857620456,
+        "answerability": 0.5966666619510537,
+        "uncertainty": 0.21000000169762068
+      },
+      "metadata": {
+        "kind": "bridge",
+        "evidence_ids": [
+          "doc_4",
+          "doc_17",
+          "doc_9",
+          "doc_2"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "diffusion_delta": -0.009392539194862187,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "kg_doc_2",
+      "node_type": "kg",
+      "content": "Played by Britney Spears; appears in ``Ten Sessions ''and`` Everything Must Go''. Abby is Stella's receptionist. Very energetic and scatterbrained, she developed an obsessive crush on Ted while he was pursuing Stella. Barney ended up sleeping with her. It was announced Spears would appear on the show in March 2008; most critics complimented her acting in ``Ten Sessions '', with Segel noting that she improvised a few`` really good'' lines. However, her scenes in ``Everything Must Go ''were described as`` rushed and awkward'', and her character as ``silly ''. An article in Bustle ranked her top in a list of guest stars on How I Met Your Mother.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0,
+      "temperature": 0.0,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "List of How I Met Your Mother characters",
+        "raw_score": 0.07622552441206572,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "state_12",
+      "node_type": "state",
+      "content": "Does a movie titled 'Who Influenced Beyoncé' exist?",
+      "depth": 3,
+      "parent_id": "state_5",
+      "value": 0.16108,
+      "temperature": 0.4558892826912876,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.35600000000000004,
+        "evidence_support": 0.0,
+        "memory_usefulness": 0.0,
+        "answerability": 0.24000000000000002,
+        "uncertainty": 0.3
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [],
+        "memory_ids": [],
+        "diffusion_delta": 0.06294357566702558,
+        "diffusion_gain": 0.06294357566702558
+      }
+    },
+    {
+      "node_id": "state_13",
+      "node_type": "state",
+      "content": "Did Joe Jackson perform 'Is She Really Going Out with Him?' in any movie featuring Beyoncé's influences?",
+      "depth": 3,
+      "parent_id": "state_5",
+      "value": 0.48403999536068026,
+      "temperature": 0.4991143948134308,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.6779999968653245,
+        "evidence_support": 0.4999999907803661,
+        "memory_usefulness": 0.0,
+        "answerability": 0.5699999953901831,
+        "uncertainty": 0.21000000165953409
+      },
+      "metadata": {
+        "kind": "bridge",
+        "evidence_ids": [
+          "doc_4",
+          "doc_1",
+          "doc_11",
+          "doc_17"
+        ],
+        "memory_ids": [],
+        "diffusion_delta": 0.03106571320285678,
+        "diffusion_gain": 0.03106571320285678
+      }
+    },
+    {
+      "node_id": "memory_mem_6",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'What movie titled 'Who Influenced Beyoncé' exists, and does it feature a performance of 'Is She Really Going Out with Him?'' is Is She Really Going Out with Him.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.6456389990816715,
+      "temperature": 0.6588545705380744,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "derived_fact",
+        "target_question": "What movie titled 'Who Influenced Beyoncé' exists, and does it feature a performance of 'Is She Really Going Out with Him?'?",
+        "target_question_norm": "what movie titled who influenced beyonc exists and does it feature a performance of is she really going out with him",
+        "slot_key": "generic|generic|generic|him|what movie titled who influenced beyonc exists and does it feature a performance of is she really going out with him",
+        "slot_type": "",
+        "relation_signature": "generic",
+        "answer_text": "Is She Really Going Out with Him",
+        "support_score": 0.4999999889805353,
+        "evidence_ids": [
+          "doc_4"
+        ],
+        "slot_name": "",
+        "slot_role": "",
+        "terminal": false,
+        "path_terminal": false,
+        "composition_kind": "",
+        "derived_from_state": "state_5",
+        "diffusion_delta": 0.003536516950385593,
+        "diffusion_gain": 0.003536516950385593
+      }
+    },
+    {
+      "node_id": "state_14",
+      "node_type": "state",
+      "content": "What is the connection between the song 'Is She Really Going Out with Him?' and Beyoncé?",
+      "depth": 2,
+      "parent_id": "state_3",
+      "value": 0.4987626895844037,
+      "temperature": 0.46806794196738477,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.6526666633675196,
+        "evidence_support": 0.4999999902966262,
+        "memory_usefulness": 0.0801335650039556,
+        "answerability": 0.6566666618149798,
+        "uncertainty": 0.2100000017466073
+      },
+      "metadata": {
+        "kind": "bridge",
+        "evidence_ids": [
+          "doc_4",
+          "doc_1",
+          "doc_8",
+          "doc_19"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "diffusion_delta": 0.06676693553847735,
+        "diffusion_gain": 0.06676693553847735
+      }
+    },
+    {
+      "node_id": "state_15",
+      "node_type": "state",
+      "content": "Who performed the song 'Is She Really Going Out with Him?'?",
+      "depth": 3,
+      "parent_id": "state_14",
+      "value": 0.5777216283334701,
+      "temperature": 0.5013259912453747,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.67799999686154,
+        "evidence_support": 0.4999999907692353,
+        "memory_usefulness": 0.002214798124597076,
+        "answerability": 0.5699999953846177,
+        "uncertainty": 0.21000000166153765
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_4",
+          "doc_1",
+          "doc_19",
+          "doc_8"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "diffusion_delta": -0.05518416747467336,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "kg_doc_3",
+      "node_type": "kg",
+      "content": "``Walkin 'in the Rain with the One I Love ''Single by Love Unlimited from the album Love Unlimited B - side`` I Should Have Known'' Released March 1972 (1972) Genre R&B Length 4: 50 Label Uni Songwriter (s) Barry White Producer (s) Barry White Love Unlimited singles chronology ``Walkin' in the Rain with the One I Love ''(1972)`` Is It Really True Boy - Is It Really Me'' (1972) ``Walkin 'in the Rain with the One I Love ''(1972)`` Is It Really True Boy - Is It Really Me'' (1972)",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0,
+      "temperature": 0.0,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Walkin' in the Rain with the One I Love",
+        "raw_score": 0.04714074000911336,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "state_18",
+      "node_type": "state",
+      "content": "What is the title of the movie about Beyoncé's influences?",
+      "depth": 4,
+      "parent_id": "state_6",
+      "value": 0.5673381225705248,
+      "temperature": 0.5224510825939579,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.6185036859783779,
+        "evidence_support": 0.7720696646422878,
+        "memory_usefulness": 0.006272227687713375,
+        "answerability": 0.726034832321144,
+        "uncertainty": 0.1610274603643882
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_1",
+          "doc_14",
+          "doc_7",
+          "doc_18"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "diffusion_delta": -0.23844064354252226,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "kg_doc_18",
+      "node_type": "kg",
+      "content": "With the commercial success of thrillers such as \"Baazi\", \"Jaal\", \"Aar Paar\" and \"CID\", as well as comedies such as \"Mr. & Mrs. '55\", Guru Dutt and his studio were financially secure and established. From 1957, he could now make movies he really wanted to make, including \"Pyaasa\". In 2002, \"Pyaasa\" was ranked at No. 160 on the \"Sight & Sound\" critics' and directors' poll of all-time greatest films. In 2005, \"Pyaasa\" was rated as one of the 100 best films of all time by \"Time\" magazine, which called it \"the soulfully romantic of the lot.\" \"Indiatimes Movies\" ranks the movie amongst the \"Top 25 Must See Bollywood Films\". On the occasion of Valentine's Day 2011 \"Time\" magazine declared it one of the top 10 romantic movies of all time.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0,
+      "temperature": 0.0,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Pyaasa",
+        "raw_score": 0.1175581757607989,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "memory_mem_7",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'Which movie about Beyoncé's influences features this musician' is Beyoncé.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.8608265516137962,
+      "temperature": 0.7421598207017759,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "derived_fact",
+        "target_question": "Which movie about Beyoncé's influences features this musician?",
+        "target_question_norm": "which movie about beyonc s influences features this musician",
+        "slot_key": "generic|generic|generic|beyonc|which movie about beyonc s influences features this musician",
+        "slot_type": "",
+        "relation_signature": "generic",
+        "answer_text": "Beyoncé",
+        "support_score": 0.9356810343628219,
+        "evidence_ids": [
+          "doc_1",
+          "doc_4"
+        ],
+        "slot_name": "",
+        "slot_role": "",
+        "terminal": false,
+        "path_terminal": false,
+        "composition_kind": "",
+        "derived_from_state": "state_6",
+        "diffusion_delta": -0.3453196019945297,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "memory_mem_8",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'Who played who sang is she really going out with him in the who influenced Beyonce movie' is Joe Jackson.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 1.0,
+      "temperature": 1.28,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "answer_candidate",
+        "target_question": "Who played who sang is she really going out with him in the who influenced Beyonce movie?",
+        "target_question_norm": "who played who sang is she really going out with him in the who influenced beyonce movie",
+        "slot_key": "generic|person|root_answer|beyonce|who played who sang is she really going out with him in the who influenced beyonce movie",
+        "slot_type": "person",
+        "relation_signature": "generic",
+        "answer_text": "Joe Jackson",
+        "support_score": 1.0,
+        "evidence_ids": [
+          "doc_4"
+        ],
+        "derived_from_state": "state_1",
+        "composed_from": [
+          "memory_mem_5"
+        ],
+        "slot_role": "target_attribute",
+        "terminal": true,
+        "coverage_count": 1,
+        "coverage_ratio": 1.0,
+        "composition_kind": "score_based_final_chain",
+        "final_chain_score": 0.8567499999999999,
+        "final_chain_score_parts": {
+          "root_alignment": 0.625,
+          "slot_coverage": 1.0,
+          "evidence_support": 1.0,
+          "dependency_satisfaction": 0.75,
+          "answer_type_match": 1.0,
+          "chain_compactness": 0.88
+        },
+        "final_chain_source_node_id": "memory_mem_5"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "source": "state_1",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.0027674090763696283
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.00019243455386355645
+    },
+    {
+      "source": "state_1",
+      "target": "state_2",
+      "edge_type": "refines",
+      "weight": 0.9
+    },
+    {
+      "source": "state_1",
+      "target": "state_3",
+      "edge_type": "refines",
+      "weight": 0.9
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_4",
+      "edge_type": "derives",
+      "weight": 0.999999982472341
+    },
+    {
+      "source": "state_1",
+      "target": "state_11",
+      "edge_type": "refines",
+      "weight": 0.7
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_8",
+      "edge_type": "derives",
+      "weight": 1.0
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.0027674090763696283
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_2",
+      "edge_type": "recalls",
+      "weight": 0.9599998077388796
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_3",
+      "edge_type": "recalls",
+      "weight": 0.003863299990824296
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_4",
+      "edge_type": "recalls",
+      "weight": 0.0030867686810564375
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_5",
+      "edge_type": "recalls",
+      "weight": 0.05616825645504408
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "memory_mem_5",
+      "edge_type": "recalls",
+      "weight": 0.0030867686810564375
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_7",
+      "edge_type": "recalls",
+      "weight": 0.006542413055543691
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_11",
+      "edge_type": "recalls",
+      "weight": 0.00417350662068422
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "memory_mem_6",
+      "edge_type": "recalls",
+      "weight": 0.05616825645504408
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_14",
+      "edge_type": "recalls",
+      "weight": 0.08345398866426333
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_15",
+      "edge_type": "recalls",
+      "weight": 0.004149708696990356
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_18",
+      "edge_type": "recalls",
+      "weight": 0.011751824013280213
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.00019243455386355645
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_2",
+      "edge_type": "recalls",
+      "weight": 0.0679336425691247
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_3",
+      "edge_type": "recalls",
+      "weight": 0.0679336425691247
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_4",
+      "edge_type": "recalls",
+      "weight": 0.00021605967039912413
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_5",
+      "edge_type": "recalls",
+      "weight": 0.05568999993847303
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "memory_mem_5",
+      "edge_type": "recalls",
+      "weight": 0.00021605967039912413
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_7",
+      "edge_type": "recalls",
+      "weight": 0.0004549332255519787
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_11",
+      "edge_type": "recalls",
+      "weight": 0.0002902089508398712
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "memory_mem_6",
+      "edge_type": "recalls",
+      "weight": 0.05568999993847303
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_14",
+      "edge_type": "recalls",
+      "weight": 0.07681314134364788
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_15",
+      "edge_type": "recalls",
+      "weight": 0.0002798875522037965
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_18",
+      "edge_type": "recalls",
+      "weight": 0.0007926313621465363
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.9999999814391438
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_8",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_19",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_17",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_2",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.9599998077388796
+    },
+    {
+      "source": "state_2",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.0679336425691247
+    },
+    {
+      "source": "state_2",
+      "target": "state_4",
+      "edge_type": "refines",
+      "weight": 1.0
+    },
+    {
+      "source": "state_2",
+      "target": "state_5",
+      "edge_type": "refines",
+      "weight": 0.8
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.9999999814391438
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.999999982472341
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.9999999779610707
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "state_6",
+      "edge_type": "supports",
+      "weight": 0.871362504835343
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.999999982472341
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "state_7",
+      "edge_type": "supports",
+      "weight": 0.9999999775638996
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "state_11",
+      "edge_type": "supports",
+      "weight": 0.999999981137548
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "state_13",
+      "edge_type": "supports",
+      "weight": 0.9999999815607322
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.9999999779610707
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "state_14",
+      "edge_type": "supports",
+      "weight": 0.9999999805932523
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "state_15",
+      "edge_type": "supports",
+      "weight": 0.9999999815384706
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "memory_mem_7",
+      "edge_type": "supports",
+      "weight": 0.871362504835343
+    },
+    {
+      "source": "kg_doc_8",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_8",
+      "target": "state_14",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_8",
+      "target": "state_15",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_19",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_19",
+      "target": "state_14",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_19",
+      "target": "state_15",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_17",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_17",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_17",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_17",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_17",
+      "target": "state_11",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_17",
+      "target": "state_13",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_17",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_3",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.003863299990824296
+    },
+    {
+      "source": "state_3",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.0679336425691247
+    },
+    {
+      "source": "state_3",
+      "target": "memory_mem_4",
+      "edge_type": "recalls",
+      "weight": 0.9999999810327438
+    },
+    {
+      "source": "state_3",
+      "target": "state_2",
+      "edge_type": "refines",
+      "weight": 0.9
+    },
+    {
+      "source": "state_3",
+      "target": "state_14",
+      "edge_type": "refines",
+      "weight": 0.7
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.999999982472341
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_17",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_4",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.0030867686810564375
+    },
+    {
+      "source": "state_4",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.00021605967039912413
+    },
+    {
+      "source": "state_4",
+      "target": "state_6",
+      "edge_type": "refines",
+      "weight": 0.8
+    },
+    {
+      "source": "state_4",
+      "target": "memory_mem_5",
+      "edge_type": "derives",
+      "weight": 1.0
+    },
+    {
+      "source": "state_4",
+      "target": "state_7",
+      "edge_type": "refines",
+      "weight": 0.84
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "state_11",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "state_6",
+      "edge_type": "supports",
+      "weight": 0.9999995638903009
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "state_7",
+      "edge_type": "supports",
+      "weight": 0.6765116981421014
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "state_13",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "state_14",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "state_15",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "state_18",
+      "edge_type": "supports",
+      "weight": 0.9999997541562787
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "memory_mem_7",
+      "edge_type": "supports",
+      "weight": 0.9999995638903009
+    },
+    {
+      "source": "state_5",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.9999999779610707
+    },
+    {
+      "source": "state_5",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_5",
+      "target": "kg_doc_17",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_5",
+      "target": "kg_doc_10",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_5",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.05616825645504408
+    },
+    {
+      "source": "state_5",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.05568999993847303
+    },
+    {
+      "source": "state_5",
+      "target": "state_12",
+      "edge_type": "refines",
+      "weight": 0.9
+    },
+    {
+      "source": "state_5",
+      "target": "state_13",
+      "edge_type": "refines",
+      "weight": 0.8
+    },
+    {
+      "source": "state_5",
+      "target": "memory_mem_6",
+      "edge_type": "derives",
+      "weight": 0.7017815207409474
+    },
+    {
+      "source": "kg_doc_10",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_10",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.999999982472341
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "state_3",
+      "edge_type": "recalls",
+      "weight": 0.9999999810327438
+    },
+    {
+      "source": "state_6",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.9999995638903009
+    },
+    {
+      "source": "state_6",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.871362504835343
+    },
+    {
+      "source": "state_6",
+      "target": "kg_doc_14",
+      "edge_type": "supports",
+      "weight": 0.26692300212074077
+    },
+    {
+      "source": "state_6",
+      "target": "kg_doc_16",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_6",
+      "target": "state_18",
+      "edge_type": "refines",
+      "weight": 0.9
+    },
+    {
+      "source": "state_6",
+      "target": "state_15",
+      "edge_type": "refines",
+      "weight": 0.85
+    },
+    {
+      "source": "state_6",
+      "target": "memory_mem_7",
+      "edge_type": "derives",
+      "weight": 0.9356810343628219
+    },
+    {
+      "source": "kg_doc_14",
+      "target": "state_6",
+      "edge_type": "supports",
+      "weight": 0.26692300212074077
+    },
+    {
+      "source": "kg_doc_14",
+      "target": "state_18",
+      "edge_type": "supports",
+      "weight": 0.5441395751282968
+    },
+    {
+      "source": "kg_doc_14",
+      "target": "memory_mem_7",
+      "edge_type": "supports",
+      "weight": 0.26692300212074077
+    },
+    {
+      "source": "kg_doc_16",
+      "target": "state_6",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_16",
+      "target": "memory_mem_7",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "state_4",
+      "edge_type": "recalls",
+      "weight": 1.0
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.999999982472341
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_17",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.0030867686810564375
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.00021605967039912413
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "memory_mem_8",
+      "edge_type": "derives",
+      "weight": 1.0
+    },
+    {
+      "source": "state_7",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.9999999775638996
+    },
+    {
+      "source": "state_7",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.6765116981421014
+    },
+    {
+      "source": "state_7",
+      "target": "kg_doc_11",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_7",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_7",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.006542413055543691
+    },
+    {
+      "source": "state_7",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.0004549332255519787
+    },
+    {
+      "source": "kg_doc_11",
+      "target": "state_7",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_11",
+      "target": "state_13",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "state_7",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "state_18",
+      "edge_type": "supports",
+      "weight": 0.15580012162340331
+    },
+    {
+      "source": "state_11",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.999999981137548
+    },
+    {
+      "source": "state_11",
+      "target": "kg_doc_17",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_11",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_11",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_11",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.00417350662068422
+    },
+    {
+      "source": "state_11",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.0002902089508398712
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "state_11",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_13",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.9999999815607322
+    },
+    {
+      "source": "state_13",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_13",
+      "target": "kg_doc_11",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_13",
+      "target": "kg_doc_17",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "state_5",
+      "edge_type": "recalls",
+      "weight": 0.7017815207409474
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.9999999779610707
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_17",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_10",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.05616825645504408
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.05568999993847303
+    },
+    {
+      "source": "state_14",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.9999999805932523
+    },
+    {
+      "source": "state_14",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_14",
+      "target": "kg_doc_8",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_14",
+      "target": "kg_doc_19",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_14",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.08345398866426333
+    },
+    {
+      "source": "state_14",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.07681314134364788
+    },
+    {
+      "source": "state_14",
+      "target": "state_15",
+      "edge_type": "refines",
+      "weight": 0.9
+    },
+    {
+      "source": "state_15",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.9999999815384706
+    },
+    {
+      "source": "state_15",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_15",
+      "target": "kg_doc_19",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_15",
+      "target": "kg_doc_8",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_15",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.004149708696990356
+    },
+    {
+      "source": "state_15",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.0002798875522037965
+    },
+    {
+      "source": "state_18",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.9999997541562787
+    },
+    {
+      "source": "state_18",
+      "target": "kg_doc_14",
+      "edge_type": "supports",
+      "weight": 0.5441395751282968
+    },
+    {
+      "source": "state_18",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.15580012162340331
+    },
+    {
+      "source": "state_18",
+      "target": "kg_doc_18",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_18",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.011751824013280213
+    },
+    {
+      "source": "state_18",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.0007926313621465363
+    },
+    {
+      "source": "kg_doc_18",
+      "target": "state_18",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_7",
+      "target": "state_6",
+      "edge_type": "recalls",
+      "weight": 0.9356810343628219
+    },
+    {
+      "source": "memory_mem_7",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.9999995638903009
+    },
+    {
+      "source": "memory_mem_7",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.871362504835343
+    },
+    {
+      "source": "memory_mem_7",
+      "target": "kg_doc_14",
+      "edge_type": "supports",
+      "weight": 0.26692300212074077
+    },
+    {
+      "source": "memory_mem_7",
+      "target": "kg_doc_16",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_8",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 1.0
+    }
+  ]
+}

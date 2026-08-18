@@ -1,0 +1,140 @@
+{
+  "question": "The song Arizona was recorded by Paul Revere and Mark Lindsay but who wrote the song?",
+  "final_answer": "Kenny Young",
+  "best_node": {
+    "node_id": "state_2",
+    "node_type": "state",
+    "content": "Who wrote the song Arizona?",
+    "depth": 1,
+    "parent_id": "state_1",
+    "value": 0.5688041398332339,
+    "temperature": 0.8781989907313748,
+    "expanded": true,
+    "visit_count": 1,
+    "persistent": false,
+    "score_breakdown": {
+      "task_progress": 0.6305885067281154,
+      "evidence_support": 0.6319830029818518,
+      "memory_usefulness": 0.5139667251540021,
+      "answerability": 0.5874200729194974,
+      "uncertainty": 0.18624305946326666
+    },
+    "metadata": {
+      "kind": "retrieval",
+      "evidence_ids": [
+        "doc_5",
+        "doc_9",
+        "doc_3",
+        "doc_2"
+      ],
+      "memory_ids": [
+        "mem_1",
+        "mem_3"
+      ],
+      "goal_slot_name": "song_writer",
+      "goal_slot_role": "target_attribute",
+      "goal_terminal": true,
+      "diffusion_delta": 0.5992528927526652,
+      "diffusion_gain": 0.5992528927526652
+    }
+  },
+  "final_synthesis_node_ids": [
+    "memory_mem_5",
+    "state_2",
+    "memory_mem_4",
+    "state_1"
+  ],
+  "answer_history": [
+    {
+      "node_id": "memory_mem_4",
+      "content": "Conclusion: The answer to 'Who wrote the song Arizona' is Kenny Young.",
+      "answer_text": "Kenny Young",
+      "value": 0.874,
+      "evidence_ids": [
+        "doc_5"
+      ],
+      "step": 1
+    },
+    {
+      "node_id": "memory_mem_5",
+      "content": "Conclusion: The answer to 'The song Arizona was recorded by Paul Revere and Mark Lindsay but who wrote the song' is Kenny Young.",
+      "answer_text": "Kenny Young",
+      "value": 0.874,
+      "score": 0.874,
+      "source": "composed_root_memory",
+      "evidence_ids": [
+        "doc_5"
+      ],
+      "step": 1,
+      "kind": "composed_root_memory"
+    },
+    {
+      "node_id": "state_2",
+      "answer_text": "Kenny Young",
+      "previous_answer": "",
+      "confidence": 0.95,
+      "score": 0.7728846967937565,
+      "source": "expansion_candidate",
+      "step": 0,
+      "evidence_ids": [
+        "doc_5",
+        "doc_9",
+        "doc_3",
+        "doc_2"
+      ],
+      "kind": "anytime_answer"
+    },
+    {
+      "node_id": "memory_mem_5",
+      "answer_text": "Kenny Young",
+      "previous_answer": "Kenny Young",
+      "confidence": 0.95,
+      "score": 0.8153199997885262,
+      "source": "expansion_candidate",
+      "step": 0,
+      "evidence_ids": [
+        "doc_5",
+        "doc_9",
+        "doc_6",
+        "doc_3"
+      ],
+      "kind": "anytime_answer"
+    },
+    {
+      "node_id": "state_2",
+      "answer_text": "Kenny Young",
+      "source": "answer_judge",
+      "choice": "A",
+      "candidate_source": "expansion_candidate",
+      "base_score": 1.0,
+      "rerank_score": 0.821571428324348,
+      "judge_confidence": 0.0,
+      "judge_reason": "",
+      "step": 1,
+      "kind": "final_answer_selection"
+    }
+  ],
+  "anytime_answer": "Kenny Young",
+  "anytime_answer_score": 0.8153199997885262,
+  "anytime_answer_source": "expansion_candidate",
+  "anytime_answer_node_id": "memory_mem_5",
+  "stats": {
+    "steps": 1,
+    "llm_calls": 478,
+    "generated_tokens": 27647,
+    "token_budget_remaining": 0,
+    "total_nodes": 11,
+    "kg_nodes": 5,
+    "memory_nodes": 4,
+    "state_nodes": 2,
+    "deleted_state_nodes": 0,
+    "scheduler_mode": "tdca",
+    "scoring_mode": "hybrid",
+    "stop_reason": "anytime_token_guard",
+    "goal_kind": "bridge",
+    "goal_completion": 1.0,
+    "anytime_answer": "Kenny Young",
+    "anytime_answer_score": 0.8153199997885262,
+    "anytime_answer_source": "expansion_candidate"
+  }
+}

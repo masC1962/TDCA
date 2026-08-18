@@ -1,0 +1,968 @@
+{
+  "nodes": [
+    {
+      "node_id": "state_1",
+      "node_type": "state",
+      "content": "Do Singapore Sling and Fish House Punch both contain alcohol?",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.7265234289075609,
+      "temperature": 1.1221700871933946,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.8741048891587515,
+        "evidence_support": 0.6297202622316219,
+        "memory_usefulness": 0.8820682746050714,
+        "answerability": 0.7148601311158109,
+        "uncertainty": 0.18665035279830805
+      },
+      "metadata": {
+        "diffusion_delta": 0.07504195030596938,
+        "diffusion_gain": 0.07504195030596938
+      }
+    },
+    {
+      "node_id": "kg_doc_5",
+      "node_type": "kg",
+      "content": "Fish House Punch is a strong, rum-based punch containing rum, cognac, and peach brandy. The drink is typically served over an ice block in a punch bowl and garnished with lemon slices.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.999999996396189,
+      "temperature": 0.999999996396189,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Fish House Punch",
+        "raw_score": 7.043647871132991,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_9",
+      "node_type": "kg",
+      "content": "The Hamilton Fish House, also known as the Stuyvesant Fish House and Nicholas and Elizabeth Stuyvesant Fish House, is where Hamilton Fish (1808-93), future Governor and Senator of New York, was born and resided from 1808 to 1838. It is located at 21 Stuyvesant Street, a diagonal street within the Manhattan street grid, between East 9th Street and East 10th Street in the East Village neighborhood of New York City. It is owned by Cooper Union and used as a residence for the college's president.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.6475058160412691,
+      "temperature": 0.6475058160412691,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Hamilton Fish House",
+        "raw_score": 4.578603599678081,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_7",
+      "node_type": "kg",
+      "content": "Swampscott Fish House is a historic fishing supply storage house off Humphrey Street on Fisherman's Beach in Swampscott, Massachusetts. It is the oldest active fish house in the country.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.628435726030783,
+      "temperature": 0.628435726030783,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Swampscott Fish House",
+        "raw_score": 4.496496381965508,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_1",
+      "node_type": "kg",
+      "content": "A Hurricane glass is a form of drinking glass which typically will contain 20 fluid ounces (600 ml). It is used to serve mixed drinks, particularly the Hurricane from which it is named originating at Pat O'Brien's Bar in New Orleans. Other drinks served in this glass include the Singapore Sling, June bug, Piña colada and Blue Hawaii. It is shaped similarly to a vase or a hurricane lamp and is typically taller and wider than a highball glass.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999795420227,
+      "temperature": 0.9999999795420227,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Hurricane glass",
+        "raw_score": 3.4227632666258376,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "memory_mem_1",
+      "node_type": "memory",
+      "content": "Template: for compositional multi-hop questions, first solve the intermediate entity and then ask for the final attribute.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.8841365672456091,
+      "temperature": 0.5651201904253514,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.96,
+        "tag": "compositional_template",
+        "memory_kind": "template",
+        "raw_score": 0.09824599736950552,
+        "source": "memory",
+        "diffusion_delta": -0.20187221883763184,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "memory_mem_3",
+      "node_type": "memory",
+      "content": "Template: when evidence already grounds the answer, switch from branching to short verification and synthesis.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.8799999819645339,
+      "temperature": 0.08926465378158507,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.88,
+        "tag": "verification_then_stop",
+        "memory_kind": "template",
+        "raw_score": 0.07297559227361403,
+        "source": "memory",
+        "diffusion_delta": -0.04012458326825591,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "state_2",
+      "node_type": "state",
+      "content": "Does Singapore Sling contain alcohol?",
+      "depth": 1,
+      "parent_id": "state_1",
+      "value": 0.5789143072393197,
+      "temperature": 3.0346190838954463,
+      "expanded": true,
+      "visit_count": 2,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.6119588554088841,
+        "evidence_support": 0.5292907512025999,
+        "memory_usefulness": 0.0,
+        "answerability": 0.5446453756013,
+        "uncertainty": 0.204727664783532
+      },
+      "metadata": {
+        "kind": "comparison",
+        "evidence_ids": [
+          "doc_1",
+          "doc_3",
+          "doc_6",
+          "doc_8"
+        ],
+        "memory_ids": [],
+        "goal_slot_name": "left_contains",
+        "goal_slot_role": "left_value",
+        "goal_terminal": true,
+        "diffusion_delta": 0.2667425090767419,
+        "diffusion_gain": 0.2667425090767419,
+        "goal_retry": 1
+      }
+    },
+    {
+      "node_id": "kg_doc_3",
+      "node_type": "kg",
+      "content": "The Singapore Sling is a gin-based cocktail from Singapore. This long drink was developed sometime before 1915 by Ngiam Tong Boon, a Hainanese bartender working at the Long Bar in Raffles Hotel, Singapore. It was initially called the gin sling – a \"sling\" was originally an North American drink composed of spirit and water, sweetened and flavored.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.6865218745108577,
+      "temperature": 0.6865218745108577,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Singapore Sling",
+        "raw_score": 2.020130753195336,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_6",
+      "node_type": "kg",
+      "content": "The Curse of Singapore Sling (also known simply as The Curse Of) is the first studio album by the Icelandic neo-psychedelia band Singapore Sling. It was released in August 2002 by record label Hitt.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999613028279,
+      "temperature": 0.9999999613028279,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "The Curse of Singapore Sling",
+        "raw_score": 0.9510602803774358,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_8",
+      "node_type": "kg",
+      "content": "Singapore Sling is a 1993 Australian television movie about a private eye in Singapore. It led to a series of TV movies.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.30492399166261147,
+      "temperature": 0.30492399166261147,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Singapore Sling (1993 film)",
+        "raw_score": 1.8141311028198124,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "state_3",
+      "node_type": "state",
+      "content": "Does Fish House Punch contain alcohol?",
+      "depth": 1,
+      "parent_id": "state_1",
+      "value": 0.6093834813045471,
+      "temperature": 2.4403677019511054,
+      "expanded": true,
+      "visit_count": 2,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.7367455954760453,
+        "evidence_support": 0.7845458690471921,
+        "memory_usefulness": 0.0,
+        "answerability": 0.6922729345235961,
+        "uncertainty": 0.1587817435715054
+      },
+      "metadata": {
+        "kind": "comparison",
+        "evidence_ids": [
+          "doc_5",
+          "doc_7",
+          "doc_9",
+          "doc_1"
+        ],
+        "memory_ids": [],
+        "goal_slot_name": "right_contains",
+        "goal_slot_role": "right_value",
+        "goal_terminal": true,
+        "diffusion_delta": 0.0570323224505076,
+        "diffusion_gain": 0.0570323224505076,
+        "goal_retry": 1
+      }
+    },
+    {
+      "node_id": "memory_mem_4",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'Does Fish House Punch contain alcohol' is Yes.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 1.0,
+      "temperature": 1.0,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "tdca_run",
+        "memory_kind": "intermediate_answer",
+        "target_question": "Does Fish House Punch contain alcohol?",
+        "target_question_norm": "does fish house punch contain alcohol",
+        "relation_signature": "generic",
+        "answer_text": "No",
+        "support_score": 1.0,
+        "evidence_ids": [
+          "doc_5",
+          "doc_7",
+          "doc_9"
+        ],
+        "slot_name": "right_contains",
+        "slot_role": "right_value",
+        "terminal": true,
+        "derived_from_state": "state_3",
+        "diffusion_delta": -0.01366789098235588,
+        "diffusion_gain": 0.0,
+        "score": 1.0,
+        "raw_score": 7.335447886942024
+      }
+    },
+    {
+      "node_id": "memory_mem_5",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'Does Singapore Sling contain alcohol' is No.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.5292907512025999,
+      "temperature": 0.7128703183647991,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "tdca_run",
+        "memory_kind": "derived_fact",
+        "target_question": "Does Singapore Sling contain alcohol?",
+        "target_question_norm": "does singapore sling contain alcohol",
+        "relation_signature": "generic",
+        "answer_text": "No",
+        "support_score": 0.5292907512025999,
+        "evidence_ids": [
+          "doc_1"
+        ],
+        "slot_type": "boolean",
+        "slot_role": "left_value",
+        "slot_name": "left_contains",
+        "depends_on": [],
+        "terminal": true,
+        "derived_from_state": "state_1",
+        "diffusion_delta": 0.08891025302651645,
+        "diffusion_gain": 0.08891025302651645,
+        "score": 0.5292907512025999,
+        "raw_score": 6.040833492924734
+      }
+    },
+    {
+      "node_id": "state_4",
+      "node_type": "state",
+      "content": "What are the ingredients of Singapore Sling?",
+      "depth": 2,
+      "parent_id": "state_2",
+      "value": 0.6030468367824395,
+      "temperature": 2.4742592637847762,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.6427087120883266,
+        "evidence_support": 0.8432609179068428,
+        "memory_usefulness": 0.005316190764301888,
+        "answerability": 0.7616304589534214,
+        "uncertainty": 0.14821303477676828
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_6",
+          "doc_3",
+          "doc_8",
+          "doc_4"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "diffusion_delta": 0.6931998534800126,
+        "diffusion_gain": 0.6931998534800126
+      }
+    },
+    {
+      "node_id": "kg_doc_4",
+      "node_type": "kg",
+      "content": "Singapore Sling: The Man Who Loved a Corpse (Greek: \"Singapore Sling: Ο Άνθρωπος που Αγάπησε ένα Πτώμα\" , tr. \"Singapore Sling: O Anthropos pou Agapise ena Ptoma\") is a 1990 Greek black and white dramatic experimental independent underground art film directed by Nikos Nikolaidis and regarded as his magnum opus. Considered a difficult film to label while still managing to develop something of a cult following throughout the years nonetheless, it was shot in a bizarre manner somewhat resembling film noir or neo-noir and black comedy as well as the exploitation, thriller, and crime genres mixed with some elements of eroticism and horror with sex being used as a power game and received a theatrical release in Greece on 6 December 1990. Despite Nikolaidis' career as a film director in his home country which stretches to the early 1960s he was almost entirely unknown outside Greece before the early 1990s and is still less known outside it and it was only with this film, which has immediately achieved cult status, that international fame came to him and it probably still remans the film for which he is best known today, as exemplified by the fact that it was released on DVD by Synapse Films, the only one of Nikolaidis' films to so far receive a home video release in North America. The film was officially selected for screening at the Rimini Film Festival.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0,
+      "temperature": 0.0,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Singapore Sling (1990 film)",
+        "raw_score": 1.498340174949358,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "state_5",
+      "node_type": "state",
+      "content": "What are the ingredients of Fish House Punch?",
+      "depth": 3,
+      "parent_id": "state_4",
+      "value": 0.6108735850288263,
+      "temperature": 0.6756998442587137,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.6740759881143679,
+        "evidence_support": 0.823752906218729,
+        "memory_usefulness": 0.003676021829681489,
+        "answerability": 0.7718764531093646,
+        "uncertainty": 0.1517244768806288
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_5",
+          "doc_9",
+          "doc_7",
+          "doc_6"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "diffusion_delta": 0.3700316176652899,
+        "diffusion_gain": 0.3700316176652899
+      }
+    },
+    {
+      "node_id": "memory_mem_6",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'What are the ingredients of Singapore Sling' is gin-based cocktail.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999613028279,
+      "temperature": 1.0078764038274994,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "intermediate_answer",
+        "target_question": "What are the ingredients of Singapore Sling?",
+        "target_question_norm": "what are the ingredients of singapore sling",
+        "relation_signature": "generic",
+        "answer_text": "gin-based cocktail",
+        "support_score": 0.9999999613028279,
+        "evidence_ids": [
+          "doc_6",
+          "doc_3",
+          "doc_8"
+        ],
+        "slot_name": "",
+        "slot_role": "",
+        "terminal": false,
+        "derived_from_state": "state_4",
+        "diffusion_delta": 0.09455384766417252,
+        "diffusion_gain": 0.09455384766417252
+      }
+    }
+  ],
+  "edges": [
+    {
+      "source": "state_1",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.9999999936200059
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.25944053084323787
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.1218360092926906
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.11824404912830594
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.11836495306401998
+    },
+    {
+      "source": "state_1",
+      "target": "state_2",
+      "edge_type": "refines",
+      "weight": 0.99
+    },
+    {
+      "source": "state_1",
+      "target": "state_3",
+      "edge_type": "refines",
+      "weight": 0.97
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_5",
+      "edge_type": "derives",
+      "weight": 0.5292907512025999
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.9999999936200059
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.9999999959392064
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.9999999959392064
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.999999996396189
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.25944053084323787
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.5080317371674127
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.5080317371674127
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.6475058160412691
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.1218360092926906
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.5690917421551779
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.5690917421551779
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.628435726030783
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.9999999795420227
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.11824404912830594
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_4",
+      "edge_type": "recalls",
+      "weight": 0.009914655062915013
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_5",
+      "edge_type": "recalls",
+      "weight": 0.004316470776636675
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "memory_mem_6",
+      "edge_type": "recalls",
+      "weight": 0.009914655062915013
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.11836495306401998
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_4",
+      "edge_type": "recalls",
+      "weight": 0.0007177264656887645
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_5",
+      "edge_type": "recalls",
+      "weight": 0.0003121086529225168
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "memory_mem_6",
+      "edge_type": "recalls",
+      "weight": 0.0007177264656887645
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.9999999795420227
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.05858152286317714
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.03388338140520592
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_8",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_2",
+      "target": "memory_mem_5",
+      "edge_type": "recalls",
+      "weight": 0.5292907503264117
+    },
+    {
+      "source": "state_2",
+      "target": "state_4",
+      "edge_type": "refines",
+      "weight": 0.7
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.05858152286317714
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.6865218745108577
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.6865218745108577
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.03388338140520592
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.9999999613028279
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.9999999613028279
+    },
+    {
+      "source": "kg_doc_8",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_8",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.30492399166261147
+    },
+    {
+      "source": "kg_doc_8",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.30492399166261147
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.9999999959392064
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.5690917421551779
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.5080317371674127
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_3",
+      "target": "state_2",
+      "edge_type": "refines",
+      "weight": 0.84
+    },
+    {
+      "source": "state_3",
+      "target": "memory_mem_4",
+      "edge_type": "recalls",
+      "weight": 0.9999999986367567
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "state_3",
+      "edge_type": "recalls",
+      "weight": 0.9999999986367567
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.9999999959392064
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.5690917421551779
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.5080317371674127
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.5292907512025999
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "state_2",
+      "edge_type": "recalls",
+      "weight": 0.5292907503264117
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.9999999613028279
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.6865218745108577
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_8",
+      "edge_type": "supports",
+      "weight": 0.30492399166261147
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_4",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.009914655062915013
+    },
+    {
+      "source": "state_4",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.0007177264656887645
+    },
+    {
+      "source": "state_4",
+      "target": "state_5",
+      "edge_type": "refines",
+      "weight": 0.84
+    },
+    {
+      "source": "state_4",
+      "target": "memory_mem_6",
+      "edge_type": "derives",
+      "weight": 0.9999999613028279
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_5",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.999999996396189
+    },
+    {
+      "source": "state_5",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.6475058160412691
+    },
+    {
+      "source": "state_5",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.628435726030783
+    },
+    {
+      "source": "state_5",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_5",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.004316470776636675
+    },
+    {
+      "source": "state_5",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.0003121086529225168
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "state_4",
+      "edge_type": "recalls",
+      "weight": 0.9999999613028279
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.9999999613028279
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.6865218745108577
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_8",
+      "edge_type": "supports",
+      "weight": 0.30492399166261147
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.009914655062915013
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.0007177264656887645
+    }
+  ]
+}

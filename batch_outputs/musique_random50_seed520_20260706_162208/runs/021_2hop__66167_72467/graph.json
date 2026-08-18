@@ -1,0 +1,2159 @@
+{
+  "nodes": [
+    {
+      "node_id": "state_1",
+      "node_type": "state",
+      "content": "Where did the player who scored the most points in a NBA season go in the NBA Draft?",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.8488834355026463,
+      "temperature": 0.6259316626873002,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.9866266353037254,
+        "evidence_support": 0.9606665744227216,
+        "memory_usefulness": 0.5139667937761075,
+        "answerability": 0.8803332872113607,
+        "uncertainty": 0.1270800166039101
+      },
+      "metadata": {
+        "diffusion_delta": 0.4322376834628058,
+        "diffusion_gain": 0.4322376834628058
+      }
+    },
+    {
+      "node_id": "kg_doc_20",
+      "node_type": "kg",
+      "content": "A 6'8\" forward, Henderson played at the University of Georgia during the 1980s and was selected by the Atlanta Hawks in the second round of the 1986 NBA Draft. He split the 1986-87 NBA season with the Hawks and Milwaukee Bucks, averaging 1.4 points and 1.0 rebounds in 8 games.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999770904376,
+      "temperature": 0.9999999770904376,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Cedric Henderson (basketball, born 1965)",
+        "raw_score": 0.10778790493632562,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_15",
+      "node_type": "kg",
+      "content": "Born in Dallas, Texas, Sasser graduated from Justin F. Kimball High School and played college basketball at Southern Methodist University. He was selected by the Orlando Magic as the 22nd pick in the 2001 NBA Draft. In two seasons for the Magic (his only in the NBA) he averaged 2.5 points per game.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.999999978555287,
+      "temperature": 0.999999978555287,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Jeryl Sasser",
+        "raw_score": 0.1279559082541376,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_9",
+      "node_type": "kg",
+      "content": "At 21 years and 197 days, Durant is the youngest scoring leader in NBA history, averaging 30.1 points in the 2009 -- 10 season. Russell Westbrook led the league with an average of 31.6 points in the 2016 -- 17 season, when he also became the second NBA player to average a triple - double in a season. The most recent champion is James Harden.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999998514379487,
+      "temperature": 0.9999998514379487,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "List of National Basketball Association annual scoring leaders",
+        "raw_score": 0.2732615439393746,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_13",
+      "node_type": "kg",
+      "content": "James Young (born August 16, 1995) is an American professional basketball player who last played for the Wisconsin Herd of the NBA G League. He played one season of college basketball for the Kentucky Wildcats before being selected with the 17th overall pick in the 2014 NBA draft by the Boston Celtics. He spent the majority of his rookie NBA season playing in the NBA Development League for the Celtics' affiliate team, the Maine Red Claws.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.25,
+      "temperature": 0.25,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "James Young (basketball)",
+        "raw_score": 0.21731907001505443,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "memory_mem_1",
+      "node_type": "memory",
+      "content": "Template: for compositional multi-hop questions, first solve the intermediate entity and then ask for the final attribute.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9599999359129513,
+      "temperature": 2.2935510443120073,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.96,
+        "tag": "compositional_template",
+        "memory_kind": "template",
+        "raw_score": 0.1025064399585708,
+        "source": "memory",
+        "diffusion_delta": -0.0022063221925510135,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "memory_mem_3",
+      "node_type": "memory",
+      "content": "Template: when evidence already grounds the answer, switch from branching to short verification and synthesis.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.06793365163926388,
+      "temperature": 0.16386011047595525,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.88,
+        "tag": "verification_then_stop",
+        "memory_kind": "template",
+        "raw_score": 0.07693412363416038,
+        "source": "memory",
+        "diffusion_delta": -7.837905689561664e-06,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "state_2",
+      "node_type": "state",
+      "content": "Who scored the most points in an NBA season?",
+      "depth": 1,
+      "parent_id": "state_1",
+      "value": 0.5632153988483987,
+      "temperature": 1.9170691075213693,
+      "expanded": true,
+      "visit_count": 2,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.6824107859854661,
+        "evidence_support": 0.544905673066497,
+        "memory_usefulness": 0.5139667251540021,
+        "answerability": 0.5867385508189628,
+        "uncertainty": 0.20191697884803056
+      },
+      "metadata": {
+        "kind": "bridge",
+        "evidence_ids": [
+          "doc_9",
+          "doc_19",
+          "doc_7",
+          "doc_4"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "goal_slot_name": "scoring_leader",
+        "goal_slot_role": "bridge_entity",
+        "goal_terminal": false,
+        "diffusion_delta": 0.03915390541982955,
+        "diffusion_gain": 0.03915390541982955,
+        "goal_retry": 1
+      }
+    },
+    {
+      "node_id": "kg_doc_19",
+      "node_type": "kg",
+      "content": "Albert Burditt (born May 15, 1972) is an American basketball player who played for four years at the University of Texas at Austin, before being drafted by the Houston Rockets in the 1994 NBA draft. However, he did not play in the NBA. Burditt played for the Oklahoma City Cavalry of the Continental Basketball Association in the 1994–1995 season, averaging 8.4 points and 8.1 rebounds per game. Burditt played professionally in the CBA and nine other countries.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.25,
+      "temperature": 0.25,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Albert Burditt",
+        "raw_score": 0.09643387813301603,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_7",
+      "node_type": "kg",
+      "content": "Matt Kelly Barnes (born March 9, 1980) is an American retired professional basketball player who played 14 seasons in the National Basketball Association (NBA). Barnes was drafted in the second round of the 2002 NBA draft by the Memphis Grizzlies. He won an NBA championship with the Golden State Warriors in his last season with the league in 2017.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.25,
+      "temperature": 0.25,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Matt Barnes",
+        "raw_score": 0.15475502871867008,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_4",
+      "node_type": "kg",
+      "content": "Dwyane Tyrone Wade Jr. (/ dweɪn / dwayn; born January 17, 1982) is an American professional basketball player who last played for the Miami Heat of the National Basketball Association (NBA). After a successful college basketball career with the Marquette Golden Eagles, Wade was drafted fifth overall in the 2003 NBA draft by Miami. In his third season, Wade led the Heat to their first NBA Championship in franchise history and was named the 2006 NBA Finals MVP. At the 2008 Summer Olympics, Wade led the United States men's basketball team, commonly known as the ``Redeem Team '', in scoring, and helped them capture the gold medal. In the 2008 -- 09 season, Wade led the league in scoring and earned his first NBA scoring title. With LeBron James and Chris Bosh, Wade helped guide Miami to four consecutive NBA Finals from 2011 to 2014, winning back - to - back championships in 2012 and 2013. After 11⁄2 seasons away from the Heat with the Chicago Bulls and Cleveland Cavaliers, Wade was traded back to Miami in February 2018. A 12 - time NBA All - Star, Wade is Miami's all - time leader in points, games, assists and steals, shots made and shots taken.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.14382989827488843,
+      "temperature": 0.14382989827488843,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Dwyane Wade",
+        "raw_score": 0.0843184126100413,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "state_3",
+      "node_type": "state",
+      "content": "Who scored the most points in a single NBA season?",
+      "depth": 2,
+      "parent_id": "state_2",
+      "value": 0.6313079647999269,
+      "temperature": 1.8924326168151882,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.746952095026074,
+        "evidence_support": 0.6549011198245872,
+        "memory_usefulness": 0.5139667251540021,
+        "answerability": 0.6560219884837222,
+        "uncertainty": 0.1821177984315743
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_9",
+          "doc_16",
+          "doc_4",
+          "doc_20"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "diffusion_delta": 0.13408957718280679,
+        "diffusion_gain": 0.13408957718280679
+      }
+    },
+    {
+      "node_id": "kg_doc_16",
+      "node_type": "kg",
+      "content": "Wilt Chamberlain holds the all - time records for total points scored (4,029) and points per game (50.4) in a season; both records were achieved in the 1961 -- 62 season. He also holds the rookie records for points per game when he averaged 37.6 points in the 1959 -- 60 season. Among active players, Kevin Durant has the highest point total (2,593) and the highest scoring average (32.0) in a season; both were achieved in the 2013 -- 14 season.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.999999587077959,
+      "temperature": 0.999999587077959,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "List of National Basketball Association annual scoring leaders",
+        "raw_score": 0.15594107479955968,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "state_4",
+      "node_type": "state",
+      "content": "What was the draft position of that player?",
+      "depth": 2,
+      "parent_id": "state_2",
+      "value": 0.6216664283602903,
+      "temperature": 1.250293632702052,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.6292406321807595,
+        "evidence_support": 0.7876825316240827,
+        "memory_usefulness": 0.5139667251540021,
+        "answerability": 0.6366984086691841,
+        "uncertainty": 0.1582171443076651
+      },
+      "metadata": {
+        "kind": "bridge",
+        "evidence_ids": [
+          "doc_17",
+          "doc_6",
+          "doc_5",
+          "doc_8"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "diffusion_delta": 0.05810934639723908,
+        "diffusion_gain": 0.05810934639723908
+      }
+    },
+    {
+      "node_id": "kg_doc_17",
+      "node_type": "kg",
+      "content": "Freshman Greg Oden from Ohio State University was drafted first overall by the Portland Trail Blazers, who won the draft lottery. However, he missed the 2007 -- 08 season due to microfracture surgery on his right knee during the pre-season. Another freshman, Kevin Durant, was drafted second overall from the University of Texas by the Seattle SuperSonics, and went on to win the Rookie of the Year Award for the 2007 -- 08 season. Oden and Durant became the first freshmen to be selected with the top two picks in the draft. Al Horford, the son of former NBA player Tito Horford, was drafted third by the Atlanta Hawks. Of the three top picks, Durant and Horford were able to enjoy solid All - Star careers, while Oden was beset by numerous microfracture surgeries on both knees that limited him to only 82 games from 2008 to 2010.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999998187193812,
+      "temperature": 0.9999998187193812,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "2007 NBA draft",
+        "raw_score": 0.14724075037911855,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_6",
+      "node_type": "kg",
+      "content": "The 1950 NBA draft was the fourth annual draft of the National Basketball Association (NBA). This is the first draft after the Basketball Association of America (BAA) was renamed the NBA. The draft was held on April 25, 1950, before the 1950–51 season. In this draft, 12 remaining NBA teams took turns selecting amateur U.S. college basketball players. In each round, the teams select in reverse order of their win–loss record in the previous season. The Chicago Stags participated in the draft but folded prior to the start of the season. The draft consisted of 12 rounds comprising 121 players selected.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.5753652445287845,
+      "temperature": 0.5753652445287845,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "1950 NBA draft",
+        "raw_score": 0.19293202502574872,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_5",
+      "node_type": "kg",
+      "content": "The 1955 NBA draft was the ninth annual draft of the National Basketball Association (NBA). The draft was held on April 13, 1955, before the 1955–56 season. In this draft, eight remaining NBA teams took turns selecting amateur U.S. college basketball players. In each round, the teams select in reverse order of their win–loss record in the previous season. The Milwaukee Hawks participated in the draft, but relocated to St. Louis, Missouri, and became the St. Louis Hawks prior to the start of the season. The draft consisted of 15 rounds comprising 96 players selected.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.44008128914223343,
+      "temperature": 0.44008128914223343,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "1955 NBA draft",
+        "raw_score": 0.08962288883466456,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_8",
+      "node_type": "kg",
+      "content": "James Hubert Farmer (born September 23, 1964) is a retired American professional basketball player who was drafted by the Dallas Mavericks in the first round (20th pick overall) of the 1987 NBA draft. Farmer, a 6'4\" 190 lb small forward, played for the Mavericks, Utah Jazz, Seattle SuperSonics, Philadelphia 76ers, and Denver Nuggets in 5 NBA seasons. His best stint as an NBA player was during the 1990-91 season when he appeared in 25 games for the Nuggets and averaged 10.0 ppg. He played collegiately at the University of Alabama.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.25,
+      "temperature": 0.25,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Jim Farmer",
+        "raw_score": 0.12090512653456213,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "state_5",
+      "node_type": "state",
+      "content": "What was the NBA draft position of that player?",
+      "depth": 2,
+      "parent_id": "state_2",
+      "value": 0.5926281879231726,
+      "temperature": 0.5032048297874626,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.628153017985796,
+        "evidence_support": 0.7046517335716689,
+        "memory_usefulness": 0.5139667251540021,
+        "answerability": 0.6094687239286916,
+        "uncertainty": 0.1731626879570996
+      },
+      "metadata": {
+        "kind": "bridge",
+        "evidence_ids": [
+          "doc_17",
+          "doc_6",
+          "doc_8",
+          "doc_7"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "diffusion_delta": 0.024408768422715277,
+        "diffusion_gain": 0.024408768422715277
+      }
+    },
+    {
+      "node_id": "memory_mem_4",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'Who scored the most points in an NBA season' is Wilt Chamberlain.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999998169835052,
+      "temperature": 1.476866908212764,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "intermediate_answer",
+        "target_question": "Who scored the most points in an NBA season?",
+        "target_question_norm": "who scored the most points in an nba season",
+        "relation_signature": "generic",
+        "answer_text": "Wilt Chamberlain",
+        "support_score": 0.9999998169835052,
+        "evidence_ids": [
+          "doc_9"
+        ],
+        "slot_name": "scoring_leader",
+        "slot_type": "",
+        "slot_role": "bridge_entity",
+        "terminal": false,
+        "path_terminal": false,
+        "composition_kind": "",
+        "derived_from_state": "state_2",
+        "diffusion_delta": 0.05249484978071495,
+        "diffusion_gain": 0.05249484978071495
+      }
+    },
+    {
+      "node_id": "state_6",
+      "node_type": "state",
+      "content": "What was that player's NBA draft position?",
+      "depth": 3,
+      "parent_id": "state_4",
+      "value": 0.806439263727514,
+      "temperature": 0.8506708081958468,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.5736519764178377,
+        "evidence_support": 0.6241864852625478,
+        "memory_usefulness": 0.0,
+        "answerability": 0.5549503854884167,
+        "uncertainty": 0.1876464326527414
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_17",
+          "doc_6",
+          "doc_8",
+          "doc_5"
+        ],
+        "memory_ids": [],
+        "diffusion_delta": 0.07235861697770352,
+        "diffusion_gain": 0.07235861697770352
+      }
+    },
+    {
+      "node_id": "state_7",
+      "node_type": "state",
+      "content": "Where was Wilt Chamberlain drafted in the NBA Draft?",
+      "depth": 3,
+      "parent_id": "state_3",
+      "value": 0.7060053375932438,
+      "temperature": 1.126569512862034,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.7531431703942595,
+        "evidence_support": 0.9924378961175699,
+        "memory_usefulness": 0.004135854604973913,
+        "answerability": 0.8676475194873564,
+        "uncertainty": 0.1213611786988374
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_15",
+          "doc_20",
+          "doc_16",
+          "doc_7"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "diffusion_delta": 0.7937069027627517,
+        "diffusion_gain": 0.7937069027627517
+      }
+    },
+    {
+      "node_id": "memory_mem_5",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'Who scored the most points in a single NBA season' is Wilt Chamberlain.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999998514379487,
+      "temperature": 0.7539109349510043,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "intermediate_answer",
+        "target_question": "Who scored the most points in a single NBA season?",
+        "target_question_norm": "who scored the most points in a single nba season",
+        "relation_signature": "generic",
+        "answer_text": "Wilt Chamberlain",
+        "support_score": 0.9999998514379487,
+        "evidence_ids": [
+          "doc_9"
+        ],
+        "slot_name": "",
+        "slot_type": "",
+        "slot_role": "",
+        "terminal": false,
+        "path_terminal": false,
+        "composition_kind": "",
+        "derived_from_state": "state_3",
+        "diffusion_delta": 0.02113067420079129,
+        "diffusion_gain": 0.02113067420079129
+      }
+    },
+    {
+      "node_id": "state_8",
+      "node_type": "state",
+      "content": "Where did Wilt Chamberlain go in the NBA Draft?",
+      "depth": 3,
+      "parent_id": "state_3",
+      "value": 0.5373947526481113,
+      "temperature": 0.5827013940374206,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.687725529021123,
+        "evidence_support": 0.6403692030033029,
+        "memory_usefulness": 0.004674747473743474,
+        "answerability": 0.6201846015016514,
+        "uncertainty": 0.18473354345940546
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_16",
+          "doc_15",
+          "doc_3",
+          "doc_20"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "diffusion_delta": 0.04557979490288089,
+        "diffusion_gain": 0.04557979490288089
+      }
+    },
+    {
+      "node_id": "kg_doc_3",
+      "node_type": "kg",
+      "content": "There have been 44 high school draftees in the NBA Draft. Three draftees were selected first overall; Kwame Brown in 2001 NBA draft, LeBron James in 2003 and Dwight Howard in 2004 NBA draft. Two draftees went on to win the Rookie of the Year Award in their first season; LeBron James and 2002 draftee Amar'e Stoudemire. Three draftees went on to win the Most Valuable Player Award; Kevin Garnett in 2004, Kobe Bryant in 2008 and LeBron James in 2009, 2010, 2012, and 2013. Ten draftees have been selected to the All - Star Game while seven draftees have been selected to the All - NBA Team.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.986139719350965,
+      "temperature": 0.986139719350965,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "NBA high school draftees",
+        "raw_score": 0.10724362412797281,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "state_9",
+      "node_type": "state",
+      "content": "Where was that player selected in the NBA Draft?",
+      "depth": 1,
+      "parent_id": "state_1",
+      "value": 0.7196802528321978,
+      "temperature": 1.0858240761342568,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.7805008915012057,
+        "evidence_support": 0.993069848953126,
+        "memory_usefulness": 0.009253016515349946,
+        "answerability": 0.8822492101908488,
+        "uncertainty": 0.12124742718843731
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_15",
+          "doc_3",
+          "doc_20",
+          "doc_6"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "diffusion_delta": 0.18090114819487668,
+        "diffusion_gain": 0.18090114819487668
+      }
+    },
+    {
+      "node_id": "memory_mem_6",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'Where was that player selected in the NBA Draft' is Justin F.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.999999978555287,
+      "temperature": 1.0955478481088123,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "intermediate_answer",
+        "target_question": "Where was that player selected in the NBA Draft?",
+        "target_question_norm": "where was that player selected in the nba draft",
+        "relation_signature": "generic",
+        "answer_text": "Justin F",
+        "support_score": 0.999999978555287,
+        "evidence_ids": [
+          "doc_15",
+          "doc_3",
+          "doc_20"
+        ],
+        "slot_name": "draft_position",
+        "slot_type": "",
+        "slot_role": "generic",
+        "terminal": false,
+        "path_terminal": false,
+        "composition_kind": "",
+        "derived_from_state": "state_9",
+        "diffusion_delta": 0.10566664916226998,
+        "diffusion_gain": 0.10566664916226998
+      }
+    },
+    {
+      "node_id": "state_10",
+      "node_type": "state",
+      "content": "Where was Wilt Chamberlain selected in the NBA Draft?",
+      "depth": 4,
+      "parent_id": "state_7",
+      "value": 0.6601451656879311,
+      "temperature": 0.622945193671815,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.7223409461429562,
+        "evidence_support": 0.9018431189078542,
+        "memory_usefulness": 0.0018618544934430256,
+        "answerability": 0.8223501308824984,
+        "uncertainty": 0.13766823859658625
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_15",
+          "doc_20",
+          "doc_3",
+          "doc_16"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "diffusion_delta": -0.2443709288100182,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "memory_mem_7",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'Where was Wilt Chamberlain drafted in the NBA Draft' is Justin F.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9130428644281644,
+      "temperature": 0.8569860450980463,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "answer_candidate",
+        "target_question": "Where was Wilt Chamberlain drafted in the NBA Draft?",
+        "target_question_norm": "where was wilt chamberlain drafted in the nba draft",
+        "slot_key": "generic|generic|target_attribute|nba draft|where was wilt chamberlain drafted in the nba draft",
+        "slot_type": "generic",
+        "relation_signature": "generic",
+        "answer_text": "Justin F",
+        "support_score": 0.9924378961175699,
+        "evidence_ids": [
+          "doc_15",
+          "doc_20",
+          "doc_16"
+        ],
+        "slot_name": "path_terminal",
+        "slot_role": "target_attribute",
+        "terminal": true,
+        "path_terminal": true,
+        "composition_kind": "path_terminal",
+        "derived_from_state": "state_7",
+        "diffusion_delta": -0.33632426397022097,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "memory_mem_8",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'Where did the player who scored the most points in a NBA season go in the NBA Draft' is Justin F.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9685214322140822,
+      "temperature": 0.96,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "answer_candidate",
+        "target_question": "Where did the player who scored the most points in a NBA season go in the NBA Draft?",
+        "target_question_norm": "where did the player who scored the most points in a nba season go in the nba draft",
+        "slot_key": "generic|generic|root_answer|nba draft|where did the player who scored the most points in a nba season go in the nba draft",
+        "slot_type": "generic",
+        "relation_signature": "generic",
+        "answer_text": "Justin F",
+        "support_score": 0.9685214322140822,
+        "evidence_ids": [
+          "doc_2",
+          "doc_3",
+          "doc_7",
+          "doc_8",
+          "doc_9",
+          "doc_10",
+          "doc_11",
+          "doc_12",
+          "doc_13",
+          "doc_15",
+          "doc_16",
+          "doc_19"
+        ],
+        "slot_role": "target_attribute",
+        "terminal": true,
+        "path_terminal": true,
+        "coverage_count": 2,
+        "coverage_ratio": 1.0,
+        "composition_kind": "path_terminal",
+        "diffusion_delta": -0.32985982729975283,
+        "diffusion_gain": 0.0,
+        "final_chain_score": 0.9685214322140822,
+        "final_chain_strict": true,
+        "final_chain_source_node_id": "memory_mem_7",
+        "final_chain_predecessor_ids": [
+          "memory_mem_5",
+          "memory_mem_4"
+        ],
+        "final_chain_path_depth": 1,
+        "final_chain_dependency_backed": false,
+        "final_chain_textual_predecessor": true,
+        "final_chain_source_path_terminal": true
+      }
+    },
+    {
+      "node_id": "kg_doc_2",
+      "node_type": "kg",
+      "content": "Donatas Motiejūnas (; born September 20, 1990) is a Lithuanian professional basketball player for the Shanghai Sharks of the Chinese Basketball Association (NBA). He was drafted 20th overall in the 2011 NBA draft by the Minnesota Timberwolves before going on to win the 2012 Polish Basketball League championship with Asseco Prokom Gdynia. After spending four seasons with the Houston Rockets from 2012 to 2016, Motiejūnas joined the New Orleans Pelicans in January 2017.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.25,
+      "temperature": 0.25,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Donatas Motiejūnas",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_10",
+      "node_type": "kg",
+      "content": "Wardell Jackson (born July 18, 1951 in Yazoo City, Mississippi) is a retired professional basketball small forward who played one season in the National Basketball Association (NBA) as a member of the Seattle SuperSonics during the 1974–75 season. He attended Ohio State University where he was drafted by the Sonics during the sixth round of the 1974 NBA draft.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.25,
+      "temperature": 0.25,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Wardell Jackson",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_11",
+      "node_type": "kg",
+      "content": "Kenneth Alexander Satterfield (born April 10, 1981) is an American professional basketball player, formerly in the NBA. He played for the Cincinnati Bearcats beginning in 1999. In 2001, after a successful sophomore season, he bolted for the NBA, being drafted 53rd overall (2nd round) by the Dallas Mavericks of the 2001 NBA draft. He played for the Denver Nuggets (2001–2002) and the Philadelphia 76ers (December 2002 – 2003).",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.25,
+      "temperature": 0.25,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Kenny Satterfield",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_12",
+      "node_type": "kg",
+      "content": "James L. Bailey (born May 21, 1957) is a retired American professional basketball player. A 6'9\" (2.06 m) forward/center from Rutgers University, he was selected with the 6th pick of the 1979 NBA Draft by the Seattle SuperSonics. Nicknamed \"Jammin' James,\" he spent 9 seasons (1979–1988) in the National Basketball Association (NBA), playing for the Sonics as well as the New Jersey Nets, Houston Rockets, New York Knicks, and Phoenix Suns. He ended his NBA career with 5,246 total points.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.25,
+      "temperature": 0.25,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "James Bailey (basketball)",
+        "source": "kg"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "source": "state_1",
+      "target": "kg_doc_20",
+      "edge_type": "supports",
+      "weight": 0.9999999770904376
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_15",
+      "edge_type": "supports",
+      "weight": 0.9213331717550056
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_13",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.01016597721220483
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.000718818065403766
+    },
+    {
+      "source": "state_1",
+      "target": "state_2",
+      "edge_type": "refines",
+      "weight": 1.0
+    },
+    {
+      "source": "state_1",
+      "target": "state_9",
+      "edge_type": "refines",
+      "weight": 0.94
+    },
+    {
+      "source": "state_1",
+      "target": "state_6",
+      "edge_type": "refines",
+      "weight": 0.8
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_8",
+      "edge_type": "derives",
+      "weight": 0.96
+    },
+    {
+      "source": "kg_doc_20",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.9999999770904376
+    },
+    {
+      "source": "kg_doc_20",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_20",
+      "target": "state_7",
+      "edge_type": "supports",
+      "weight": 0.9848758156934038
+    },
+    {
+      "source": "kg_doc_20",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_20",
+      "target": "state_8",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_20",
+      "target": "state_9",
+      "edge_type": "supports",
+      "weight": 0.9820917908038727
+    },
+    {
+      "source": "kg_doc_20",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.9820917908038727
+    },
+    {
+      "source": "kg_doc_20",
+      "target": "state_10",
+      "edge_type": "supports",
+      "weight": 0.8036865241066837
+    },
+    {
+      "source": "kg_doc_20",
+      "target": "memory_mem_7",
+      "edge_type": "supports",
+      "weight": 0.9848758156934038
+    },
+    {
+      "source": "kg_doc_15",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.9213331717550056
+    },
+    {
+      "source": "kg_doc_15",
+      "target": "state_7",
+      "edge_type": "supports",
+      "weight": 0.9999999765417361
+    },
+    {
+      "source": "kg_doc_15",
+      "target": "state_8",
+      "edge_type": "supports",
+      "weight": 0.28073881892864677
+    },
+    {
+      "source": "kg_doc_15",
+      "target": "state_9",
+      "edge_type": "supports",
+      "weight": 0.999999978555287
+    },
+    {
+      "source": "kg_doc_15",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.999999978555287
+    },
+    {
+      "source": "kg_doc_15",
+      "target": "state_10",
+      "edge_type": "supports",
+      "weight": 0.9999997137090246
+    },
+    {
+      "source": "kg_doc_15",
+      "target": "memory_mem_7",
+      "edge_type": "supports",
+      "weight": 0.9999999765417361
+    },
+    {
+      "source": "kg_doc_15",
+      "target": "memory_mem_8",
+      "edge_type": "supports",
+      "weight": 0.55
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.9999998169835052
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.9999998514379487
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.9999998169835052
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.9999998514379487
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "memory_mem_8",
+      "edge_type": "supports",
+      "weight": 0.25
+    },
+    {
+      "source": "kg_doc_13",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_13",
+      "target": "memory_mem_8",
+      "edge_type": "supports",
+      "weight": 0.25
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.01016597721220483
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_2",
+      "edge_type": "recalls",
+      "weight": 0.9599998077388796
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_3",
+      "edge_type": "recalls",
+      "weight": 0.0044315529607354505
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_4",
+      "edge_type": "recalls",
+      "weight": 0.8370705540998196
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_5",
+      "edge_type": "recalls",
+      "weight": 0.030065837597049557
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "memory_mem_4",
+      "edge_type": "recalls",
+      "weight": 0.9599998077388796
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_7",
+      "edge_type": "recalls",
+      "weight": 0.004364682373710157
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "memory_mem_5",
+      "edge_type": "recalls",
+      "weight": 0.0044315529607354505
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_8",
+      "edge_type": "recalls",
+      "weight": 0.008732066167316874
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_9",
+      "edge_type": "recalls",
+      "weight": 0.017283918096780024
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "memory_mem_6",
+      "edge_type": "recalls",
+      "weight": 0.017283918096780024
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_10",
+      "edge_type": "recalls",
+      "weight": 0.0034776180407545105
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "memory_mem_7",
+      "edge_type": "recalls",
+      "weight": 0.004364682373710157
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.000718818065403766
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_2",
+      "edge_type": "recalls",
+      "weight": 0.0679336425691247
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_3",
+      "edge_type": "recalls",
+      "weight": 0.00031390577253462987
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_4",
+      "edge_type": "recalls",
+      "weight": 0.059293272872696826
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_5",
+      "edge_type": "recalls",
+      "weight": 0.0021296913432884436
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "memory_mem_4",
+      "edge_type": "recalls",
+      "weight": 0.0679336425691247
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_7",
+      "edge_type": "recalls",
+      "weight": 0.00030886336633937836
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "memory_mem_5",
+      "edge_type": "recalls",
+      "weight": 0.00031390577253462987
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_8",
+      "edge_type": "recalls",
+      "weight": 0.0006174287801700749
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_9",
+      "edge_type": "recalls",
+      "weight": 0.0012221149339198675
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "memory_mem_6",
+      "edge_type": "recalls",
+      "weight": 0.0012221149339198675
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_10",
+      "edge_type": "recalls",
+      "weight": 0.00024609094613154065
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "memory_mem_7",
+      "edge_type": "recalls",
+      "weight": 0.00030886336633937836
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.9999998169835052
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_19",
+      "edge_type": "supports",
+      "weight": 0.08981152914948867
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.049915181172041245
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_2",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.9599998077388796
+    },
+    {
+      "source": "state_2",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.0679336425691247
+    },
+    {
+      "source": "state_2",
+      "target": "state_3",
+      "edge_type": "refines",
+      "weight": 0.84
+    },
+    {
+      "source": "state_2",
+      "target": "state_4",
+      "edge_type": "refines",
+      "weight": 0.9
+    },
+    {
+      "source": "state_2",
+      "target": "state_5",
+      "edge_type": "refines",
+      "weight": 0.9
+    },
+    {
+      "source": "state_2",
+      "target": "memory_mem_4",
+      "edge_type": "derives",
+      "weight": 0.9999998169835052
+    },
+    {
+      "source": "kg_doc_19",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.08981152914948867
+    },
+    {
+      "source": "kg_doc_19",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.08981152914948867
+    },
+    {
+      "source": "kg_doc_19",
+      "target": "memory_mem_8",
+      "edge_type": "supports",
+      "weight": 0.25
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.049915181172041245
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.049915181172041245
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "state_7",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "memory_mem_7",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "memory_mem_8",
+      "edge_type": "supports",
+      "weight": 0.25
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.14382989827488843
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.14382989827488843
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.9999998514379487
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_16",
+      "edge_type": "supports",
+      "weight": 0.3098023882112258
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.14382989827488843
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_20",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_3",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.0044315529607354505
+    },
+    {
+      "source": "state_3",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.00031390577253462987
+    },
+    {
+      "source": "state_3",
+      "target": "state_7",
+      "edge_type": "refines",
+      "weight": 1.0
+    },
+    {
+      "source": "state_3",
+      "target": "memory_mem_5",
+      "edge_type": "derives",
+      "weight": 0.9999998514379487
+    },
+    {
+      "source": "state_3",
+      "target": "state_8",
+      "edge_type": "refines",
+      "weight": 0.84
+    },
+    {
+      "source": "kg_doc_16",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.3098023882112258
+    },
+    {
+      "source": "kg_doc_16",
+      "target": "state_7",
+      "edge_type": "supports",
+      "weight": 0.979823947819818
+    },
+    {
+      "source": "kg_doc_16",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.3098023882112258
+    },
+    {
+      "source": "kg_doc_16",
+      "target": "state_8",
+      "edge_type": "supports",
+      "weight": 0.999999587077959
+    },
+    {
+      "source": "kg_doc_16",
+      "target": "state_10",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_16",
+      "target": "memory_mem_7",
+      "edge_type": "supports",
+      "weight": 0.979823947819818
+    },
+    {
+      "source": "kg_doc_16",
+      "target": "memory_mem_8",
+      "edge_type": "supports",
+      "weight": 0.25
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_17",
+      "edge_type": "supports",
+      "weight": 0.9999998187193812
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.5753652445287845
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.44008128914223343
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_8",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_4",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.8370705540998196
+    },
+    {
+      "source": "state_4",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.059293272872696826
+    },
+    {
+      "source": "state_4",
+      "target": "state_3",
+      "edge_type": "refines",
+      "weight": 0.84
+    },
+    {
+      "source": "state_4",
+      "target": "state_6",
+      "edge_type": "refines",
+      "weight": 0.8
+    },
+    {
+      "source": "kg_doc_17",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.9999998187193812
+    },
+    {
+      "source": "kg_doc_17",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.9999996908259889
+    },
+    {
+      "source": "kg_doc_17",
+      "target": "state_6",
+      "edge_type": "supports",
+      "weight": 0.999999653460332
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.5753652445287845
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.4093037763173489
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "state_6",
+      "edge_type": "supports",
+      "weight": 0.24837331706476357
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "state_9",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.44008128914223343
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "state_6",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_8",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_8",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.03610845737696909
+    },
+    {
+      "source": "kg_doc_8",
+      "target": "state_6",
+      "edge_type": "supports",
+      "weight": 0.016756393958083756
+    },
+    {
+      "source": "kg_doc_8",
+      "target": "memory_mem_8",
+      "edge_type": "supports",
+      "weight": 0.25
+    },
+    {
+      "source": "state_5",
+      "target": "kg_doc_17",
+      "edge_type": "supports",
+      "weight": 0.9999996908259889
+    },
+    {
+      "source": "state_5",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.4093037763173489
+    },
+    {
+      "source": "state_5",
+      "target": "kg_doc_8",
+      "edge_type": "supports",
+      "weight": 0.03610845737696909
+    },
+    {
+      "source": "state_5",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_5",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.030065837597049557
+    },
+    {
+      "source": "state_5",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.0021296913432884436
+    },
+    {
+      "source": "state_5",
+      "target": "state_3",
+      "edge_type": "refines",
+      "weight": 0.84
+    },
+    {
+      "source": "state_5",
+      "target": "state_6",
+      "edge_type": "refines",
+      "weight": 0.8
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "state_2",
+      "edge_type": "recalls",
+      "weight": 0.9999998169835052
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.9999998169835052
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_19",
+      "edge_type": "supports",
+      "weight": 0.08981152914948867
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.049915181172041245
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.9599998077388796
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.0679336425691247
+    },
+    {
+      "source": "state_6",
+      "target": "kg_doc_17",
+      "edge_type": "supports",
+      "weight": 0.999999653460332
+    },
+    {
+      "source": "state_6",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.24837331706476357
+    },
+    {
+      "source": "state_6",
+      "target": "kg_doc_8",
+      "edge_type": "supports",
+      "weight": 0.016756393958083756
+    },
+    {
+      "source": "state_6",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_7",
+      "target": "kg_doc_15",
+      "edge_type": "supports",
+      "weight": 0.9999999765417361
+    },
+    {
+      "source": "state_7",
+      "target": "kg_doc_20",
+      "edge_type": "supports",
+      "weight": 0.9848758156934038
+    },
+    {
+      "source": "state_7",
+      "target": "kg_doc_16",
+      "edge_type": "supports",
+      "weight": 0.979823947819818
+    },
+    {
+      "source": "state_7",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_7",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.004364682373710157
+    },
+    {
+      "source": "state_7",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.00030886336633937836
+    },
+    {
+      "source": "state_7",
+      "target": "state_10",
+      "edge_type": "refines",
+      "weight": 0.9
+    },
+    {
+      "source": "state_7",
+      "target": "memory_mem_7",
+      "edge_type": "derives",
+      "weight": 0.9924378961175699
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "state_3",
+      "edge_type": "recalls",
+      "weight": 0.9999998514379487
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.9999998514379487
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_16",
+      "edge_type": "supports",
+      "weight": 0.3098023882112258
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.14382989827488843
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_20",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.0044315529607354505
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.00031390577253462987
+    },
+    {
+      "source": "state_8",
+      "target": "kg_doc_16",
+      "edge_type": "supports",
+      "weight": 0.999999587077959
+    },
+    {
+      "source": "state_8",
+      "target": "kg_doc_15",
+      "edge_type": "supports",
+      "weight": 0.28073881892864677
+    },
+    {
+      "source": "state_8",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.024448286125624122
+    },
+    {
+      "source": "state_8",
+      "target": "kg_doc_20",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_8",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.008732066167316874
+    },
+    {
+      "source": "state_8",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.0006174287801700749
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "state_8",
+      "edge_type": "supports",
+      "weight": 0.024448286125624122
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "state_9",
+      "edge_type": "supports",
+      "weight": 0.986139719350965
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.986139719350965
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "state_10",
+      "edge_type": "supports",
+      "weight": 0.16218638536512214
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "memory_mem_8",
+      "edge_type": "supports",
+      "weight": 0.25
+    },
+    {
+      "source": "state_9",
+      "target": "kg_doc_15",
+      "edge_type": "supports",
+      "weight": 0.999999978555287
+    },
+    {
+      "source": "state_9",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.986139719350965
+    },
+    {
+      "source": "state_9",
+      "target": "kg_doc_20",
+      "edge_type": "supports",
+      "weight": 0.9820917908038727
+    },
+    {
+      "source": "state_9",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_9",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.017283918096780024
+    },
+    {
+      "source": "state_9",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.0012221149339198675
+    },
+    {
+      "source": "state_9",
+      "target": "memory_mem_6",
+      "edge_type": "derives",
+      "weight": 0.999999978555287
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "state_9",
+      "edge_type": "recalls",
+      "weight": 0.999999978555287
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_15",
+      "edge_type": "supports",
+      "weight": 0.999999978555287
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.986139719350965
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_20",
+      "edge_type": "supports",
+      "weight": 0.9820917908038727
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.017283918096780024
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.0012221149339198675
+    },
+    {
+      "source": "state_10",
+      "target": "kg_doc_15",
+      "edge_type": "supports",
+      "weight": 0.9999997137090246
+    },
+    {
+      "source": "state_10",
+      "target": "kg_doc_20",
+      "edge_type": "supports",
+      "weight": 0.8036865241066837
+    },
+    {
+      "source": "state_10",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.16218638536512214
+    },
+    {
+      "source": "state_10",
+      "target": "kg_doc_16",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_10",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.0034776180407545105
+    },
+    {
+      "source": "state_10",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.00024609094613154065
+    },
+    {
+      "source": "memory_mem_7",
+      "target": "state_7",
+      "edge_type": "recalls",
+      "weight": 0.9924378961175699
+    },
+    {
+      "source": "memory_mem_7",
+      "target": "kg_doc_15",
+      "edge_type": "supports",
+      "weight": 0.9999999765417361
+    },
+    {
+      "source": "memory_mem_7",
+      "target": "kg_doc_20",
+      "edge_type": "supports",
+      "weight": 0.9848758156934038
+    },
+    {
+      "source": "memory_mem_7",
+      "target": "kg_doc_16",
+      "edge_type": "supports",
+      "weight": 0.979823947819818
+    },
+    {
+      "source": "memory_mem_7",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_7",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.004364682373710157
+    },
+    {
+      "source": "memory_mem_7",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.00030886336633937836
+    },
+    {
+      "source": "memory_mem_8",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.96
+    },
+    {
+      "source": "memory_mem_8",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.25
+    },
+    {
+      "source": "memory_mem_8",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.25
+    },
+    {
+      "source": "memory_mem_8",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.25
+    },
+    {
+      "source": "memory_mem_8",
+      "target": "kg_doc_8",
+      "edge_type": "supports",
+      "weight": 0.25
+    },
+    {
+      "source": "memory_mem_8",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.25
+    },
+    {
+      "source": "memory_mem_8",
+      "target": "kg_doc_10",
+      "edge_type": "supports",
+      "weight": 0.25
+    },
+    {
+      "source": "memory_mem_8",
+      "target": "kg_doc_11",
+      "edge_type": "supports",
+      "weight": 0.25
+    },
+    {
+      "source": "memory_mem_8",
+      "target": "kg_doc_12",
+      "edge_type": "supports",
+      "weight": 0.25
+    },
+    {
+      "source": "memory_mem_8",
+      "target": "kg_doc_13",
+      "edge_type": "supports",
+      "weight": 0.25
+    },
+    {
+      "source": "memory_mem_8",
+      "target": "kg_doc_15",
+      "edge_type": "supports",
+      "weight": 0.55
+    },
+    {
+      "source": "memory_mem_8",
+      "target": "kg_doc_16",
+      "edge_type": "supports",
+      "weight": 0.25
+    },
+    {
+      "source": "memory_mem_8",
+      "target": "kg_doc_19",
+      "edge_type": "supports",
+      "weight": 0.25
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "memory_mem_8",
+      "edge_type": "supports",
+      "weight": 0.25
+    },
+    {
+      "source": "kg_doc_10",
+      "target": "memory_mem_8",
+      "edge_type": "supports",
+      "weight": 0.25
+    },
+    {
+      "source": "kg_doc_11",
+      "target": "memory_mem_8",
+      "edge_type": "supports",
+      "weight": 0.25
+    },
+    {
+      "source": "kg_doc_12",
+      "target": "memory_mem_8",
+      "edge_type": "supports",
+      "weight": 0.25
+    }
+  ]
+}

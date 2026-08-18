@@ -1,0 +1,1042 @@
+{
+  "nodes": [
+    {
+      "node_id": "state_1",
+      "node_type": "state",
+      "content": "What is the seat of the county sharing a border with the county where Tenement was founded?",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.38247601525313296,
+      "temperature": 0.3686126727068766,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.66,
+        "evidence_support": 0.0,
+        "memory_usefulness": 0.5139667937761075,
+        "answerability": 0.5,
+        "uncertainty": 0.3
+      },
+      "metadata": {
+        "diffusion_delta": 0.0033935158866867376,
+        "diffusion_gain": 0.0033935158866867376
+      }
+    },
+    {
+      "node_id": "memory_mem_1",
+      "node_type": "memory",
+      "content": "Template: for compositional multi-hop questions, first solve the intermediate entity and then ask for the final attribute.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9599999359129513,
+      "temperature": 1.74197638191381,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.96,
+        "tag": "compositional_template",
+        "memory_kind": "template",
+        "raw_score": 0.14698916291669684,
+        "source": "memory",
+        "diffusion_delta": 0.6856250533336488,
+        "diffusion_gain": 0.6856250533336488
+      }
+    },
+    {
+      "node_id": "memory_mem_3",
+      "node_type": "memory",
+      "content": "Template: when evidence already grounds the answer, switch from branching to short verification and synthesis.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.06793365163926388,
+      "temperature": 0.12398036123382221,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.88,
+        "tag": "verification_then_stop",
+        "memory_kind": "template",
+        "raw_score": 0.11055841110531504,
+        "source": "memory",
+        "diffusion_delta": 0.04856389213902665,
+        "diffusion_gain": 0.04856389213902665
+      }
+    },
+    {
+      "node_id": "state_2",
+      "node_type": "state",
+      "content": "In which county was Tenement founded?",
+      "depth": 1,
+      "parent_id": "state_1",
+      "value": 0.6450655742874515,
+      "temperature": 0.2946640060027052,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.5585714239201215,
+        "evidence_support": 0.4999999863196851,
+        "memory_usefulness": 0.0,
+        "answerability": 0.5071428503026997,
+        "uncertainty": 0.21000000246245668
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_18",
+          "doc_2",
+          "doc_8",
+          "doc_14"
+        ],
+        "memory_ids": [],
+        "diffusion_delta": 0.11599291752439189,
+        "diffusion_gain": 0.11599291752439189
+      }
+    },
+    {
+      "node_id": "kg_doc_18",
+      "node_type": "kg",
+      "content": "Tenement is a three piece rock band from Appleton, Wisconsin formed in 2006. They are often associated with the American hardcore punk scene. Their recorded output has been described as everything from \"noise pop\" to \"fuzz punk\", while in a live setting they are often known for experimentation, improvisation, and high-energy performance. The visual art of singer/guitarist Amos Pitsch is associated with most of their records, as well as several records by other notable punk and hardcore bands. In 2016, they were included in \"Rolling Stone's\" \"10 Great Modern Punk Bands\".",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999726393702,
+      "temperature": 0.9999999726393702,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Tenement (band)",
+        "raw_score": 0.08462460349908824,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_2",
+      "node_type": "kg",
+      "content": "John C. Petersen (November 2, 1842 – July 10, 1887) was an American butcher and farmer from Appleton, Wisconsin who served as a member of the Wisconsin State Assembly from Outagamie County. He was elected in 1878 as a Greenbacker, and was re-elected the next year as a \"Greenback Democrat\" (even though he was opposed by a Democrat).",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999727539639,
+      "temperature": 0.9999999727539639,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "John C. Petersen",
+        "raw_score": 0.15762125862412835,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_8",
+      "node_type": "kg",
+      "content": "Born in Green Bay, Wisconsin, Quinn was a realtor and served on the Green Bay Common Council, the Brown County, Wisconsin Board of Supervisors, the local Board of Education, and the Wisconsin State Assembly from 1955 until 1973. He was a Republican.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.8971450782601507,
+      "temperature": 0.8971450782601507,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Jerome Quinn",
+        "raw_score": 0.1712147130927767,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_14",
+      "node_type": "kg",
+      "content": "The county lies in southern Hungary, on the border with Croatia. The River Drava forms part of its southern border, and the River Danube its eastern border. It shares borders with the Hungarian counties Somogy, Tolna, and Bács-Kiskun. The capital of Baranya county is Pécs.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999998724771757,
+      "temperature": 0.9999998724771757,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Baranya County",
+        "raw_score": 0.1315819230508929,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "state_3",
+      "node_type": "state",
+      "content": "Which counties share a border with that county?",
+      "depth": 1,
+      "parent_id": "state_1",
+      "value": 0.4849299093649253,
+      "temperature": 0.2599672831230173,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.5970568885670344,
+        "evidence_support": 0.6131925293988407,
+        "memory_usefulness": 0.0,
+        "answerability": 0.5637391218422776,
+        "uncertainty": 0.18962534470820866
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_14",
+          "doc_15",
+          "doc_19",
+          "doc_17"
+        ],
+        "memory_ids": [],
+        "diffusion_delta": -0.05831893477938316,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "kg_doc_15",
+      "node_type": "kg",
+      "content": "Pulaski High School is a public high school in Pulaski, Wisconsin, in Brown County, Wisconsin (school district also serves parts of Shawano, Outagamie and Oconto counties), that serves students in grades 9 through 12. Its mascot is the Red Raider.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999785481304,
+      "temperature": 0.9999999785481304,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Pulaski High School",
+        "raw_score": 0.19458772320677103,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_19",
+      "node_type": "kg",
+      "content": "The Western Region is located in south Ghana, spreads from the Ivory Coast border in the west to the Central region in the east, includes the capital and large twin city of Sekondi - Takoradi on the coast, coastal Axim, and a hilly inland area including Elubo. It includes Ghana's southernmost location, Cape Three Points, where crude oil was discovered in commercial quantities in June 2007. The Western Region enjoys a long coastline that stretches from South Ghana's border with Ivory Coast to the Western region's boundary with the Central Region on the east.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.1308156736428722,
+      "temperature": 0.1308156736428722,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Western Region (Ghana)",
+        "raw_score": 0.09167755230566732,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_17",
+      "node_type": "kg",
+      "content": "Namibia (i/nəˈmɪbiə/, /næˈ-/), officially the Republic of Namibia (German: Republik Namibia (help·info); Afrikaans: Republiek van Namibië) is a country in southern Africa whose western border is the Atlantic Ocean. It shares land borders with Zambia and Angola to the north, Botswana to the east and South Africa to the south and east. Although it does not border Zimbabwe, a part of less than 200 metres of the Zambezi River (essentially a small bulge in Botswana to achieve a Botswana/Zambia micro-border) separates it from that country. Namibia gained independence from South Africa on 21 March 1990, following the Namibian War of Independence. Its capital and largest city is Windhoek, and it is a member state of the United Nations (UN), the Southern African Development Community (SADC), the African Union (AU), and the Commonwealth of Nations.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0,
+      "temperature": 0.0,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Namibia",
+        "raw_score": 0.058787111417113895,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "state_4",
+      "node_type": "state",
+      "content": "What is the county seat of each of those bordering counties?",
+      "depth": 1,
+      "parent_id": "state_1",
+      "value": 0.679016393986791,
+      "temperature": 0.9694923784252967,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.7121025780673914,
+        "evidence_support": 0.7918983388536722,
+        "memory_usefulness": 0.5139667251540021,
+        "answerability": 0.7816634551411219,
+        "uncertainty": 0.157458299006339
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_14",
+          "doc_15",
+          "doc_3",
+          "doc_1"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "diffusion_delta": 0.1730632307858493,
+        "diffusion_gain": 0.1730632307858493
+      }
+    },
+    {
+      "node_id": "kg_doc_3",
+      "node_type": "kg",
+      "content": "Washington, D.C. is the current federal capital city of the United States, as it has been since 1800. Each U.S. state has its own capital city, as do many of its Insular areas. Historically, most states have not changed their capital city since becoming a state, but the capital cities of their respective preceding colonies, territories, kingdoms, and republics typically changed multiple times. There have also been other governments within the current borders of the United States with their own capitals, such as the Republic of Texas, Native American nations, and other unrecognized governments.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.25044586887697096,
+      "temperature": 0.25044586887697096,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "List of capitals in the United States",
+        "raw_score": 0.10394114016220088,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_1",
+      "node_type": "kg",
+      "content": "The capital, Brazzaville, is located on the Congo River, in the south of the country, immediately across from Kinshasa, the capital of the Democratic Republic of the Congo.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0,
+      "temperature": 0.0,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Republic of the Congo",
+        "raw_score": 0.09759076101444092,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "state_5",
+      "node_type": "state",
+      "content": "Which counties border the county where Tenement was founded?",
+      "depth": 2,
+      "parent_id": "state_4",
+      "value": 0.27627600701848026,
+      "temperature": 0.5205594275435486,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.47000000000000003,
+        "evidence_support": 0.0,
+        "memory_usefulness": 0.5139667251540021,
+        "answerability": 0.30000000000000004,
+        "uncertainty": 0.3
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "diffusion_delta": 0.0731209578369631,
+        "diffusion_gain": 0.0731209578369631
+      }
+    },
+    {
+      "node_id": "memory_mem_4",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'What is the county seat of each of those bordering counties' is Pécs.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 1.0,
+      "temperature": 0.9321466037007684,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "intermediate_answer",
+        "target_question": "What is the county seat of each of those bordering counties?",
+        "target_question_norm": "what is the county seat of each of those bordering counties",
+        "relation_signature": "generic",
+        "answer_text": "Pécs",
+        "support_score": 1.0,
+        "evidence_ids": [
+          "doc_14"
+        ],
+        "slot_name": "",
+        "slot_type": "",
+        "slot_role": "",
+        "terminal": false,
+        "path_terminal": false,
+        "composition_kind": "",
+        "derived_from_state": "state_4",
+        "diffusion_delta": -0.07477059040921397,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "state_6",
+      "node_type": "state",
+      "content": "In which county is Appleton, Wisconsin located?",
+      "depth": 2,
+      "parent_id": "state_2",
+      "value": 0.5942218466847381,
+      "temperature": 0.5504713846198103,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.6223506686093792,
+        "evidence_support": 0.8472498656578376,
+        "memory_usefulness": 0.0,
+        "answerability": 0.7521963614003473,
+        "uncertainty": 0.14749502418158925
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_2",
+          "doc_15",
+          "doc_18",
+          "doc_8"
+        ],
+        "memory_ids": [],
+        "diffusion_delta": -0.2734976189984266,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "state_7",
+      "node_type": "state",
+      "content": "Which counties border the county where Appleton is located?",
+      "depth": 2,
+      "parent_id": "state_2",
+      "value": 0.45831520808513565,
+      "temperature": 0.3973243402824512,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.5857142810824596,
+        "evidence_support": 0.49999998637698195,
+        "memory_usefulness": 0.005007743549604957,
+        "answerability": 0.6214285646170624,
+        "uncertainty": 0.21000000245214323
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_2",
+          "doc_14",
+          "doc_1",
+          "doc_19"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "diffusion_delta": -0.2194834812932266,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "state_8",
+      "node_type": "state",
+      "content": "What is the seat of each county bordering Outagamie County, Wisconsin?",
+      "depth": 2,
+      "parent_id": "state_2",
+      "value": 0.7047131346032078,
+      "temperature": 0.6262250131945614,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.7709799611984045,
+        "evidence_support": 0.9650671127684167,
+        "memory_usefulness": 0.0019518383416470312,
+        "answerability": 0.868247842098494,
+        "uncertainty": 0.126287919701685
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_15",
+          "doc_2",
+          "doc_8",
+          "doc_14"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "diffusion_delta": -0.31604683693924884,
+        "diffusion_gain": 0.0
+      }
+    }
+  ],
+  "edges": [
+    {
+      "source": "state_1",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.9599999359129513
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.06793365163926388
+    },
+    {
+      "source": "state_1",
+      "target": "state_2",
+      "edge_type": "refines",
+      "weight": 0.9
+    },
+    {
+      "source": "state_1",
+      "target": "state_3",
+      "edge_type": "refines",
+      "weight": 0.8
+    },
+    {
+      "source": "state_1",
+      "target": "state_4",
+      "edge_type": "refines",
+      "weight": 0.7
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.9599999359129513
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_4",
+      "edge_type": "recalls",
+      "weight": 0.9599998077388796
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_5",
+      "edge_type": "recalls",
+      "weight": 0.9599998077388796
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "memory_mem_4",
+      "edge_type": "recalls",
+      "weight": 0.9599998077388796
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_7",
+      "edge_type": "recalls",
+      "weight": 0.009356644857631076
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_8",
+      "edge_type": "recalls",
+      "weight": 0.0036468836715369615
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.06793365163926388
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_4",
+      "edge_type": "recalls",
+      "weight": 0.0679336425691247
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_5",
+      "edge_type": "recalls",
+      "weight": 0.0679336425691247
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "memory_mem_4",
+      "edge_type": "recalls",
+      "weight": 0.0679336425691247
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_7",
+      "edge_type": "recalls",
+      "weight": 0.0006588422415788384
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_8",
+      "edge_type": "recalls",
+      "weight": 0.000256793011757101
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_18",
+      "edge_type": "supports",
+      "weight": 0.9999999726393702
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_8",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_14",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_2",
+      "target": "state_6",
+      "edge_type": "refines",
+      "weight": 1.0
+    },
+    {
+      "source": "state_2",
+      "target": "state_7",
+      "edge_type": "refines",
+      "weight": 0.9
+    },
+    {
+      "source": "state_2",
+      "target": "state_8",
+      "edge_type": "refines",
+      "weight": 0.8
+    },
+    {
+      "source": "kg_doc_18",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.9999999726393702
+    },
+    {
+      "source": "kg_doc_18",
+      "target": "state_6",
+      "edge_type": "supports",
+      "weight": 0.5003774381227386
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "state_6",
+      "edge_type": "supports",
+      "weight": 0.9999997447711146
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "state_7",
+      "edge_type": "supports",
+      "weight": 0.9999999727539639
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "state_8",
+      "edge_type": "supports",
+      "weight": 0.9301342469887032
+    },
+    {
+      "source": "kg_doc_8",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_8",
+      "target": "state_6",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_8",
+      "target": "state_8",
+      "edge_type": "supports",
+      "weight": 0.8971450782601507
+    },
+    {
+      "source": "kg_doc_14",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_14",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.999999839573533
+    },
+    {
+      "source": "kg_doc_14",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.9999998724771757
+    },
+    {
+      "source": "kg_doc_14",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.9999998724771757
+    },
+    {
+      "source": "kg_doc_14",
+      "target": "state_7",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_14",
+      "target": "state_8",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_14",
+      "edge_type": "supports",
+      "weight": 0.999999839573533
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_15",
+      "edge_type": "supports",
+      "weight": 0.22638521922414856
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_19",
+      "edge_type": "supports",
+      "weight": 0.1308156736428722
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_17",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_15",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.22638521922414856
+    },
+    {
+      "source": "kg_doc_15",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.5837968052301687
+    },
+    {
+      "source": "kg_doc_15",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.5837968052301687
+    },
+    {
+      "source": "kg_doc_15",
+      "target": "state_6",
+      "edge_type": "supports",
+      "weight": 0.6944999865445605
+    },
+    {
+      "source": "kg_doc_15",
+      "target": "state_8",
+      "edge_type": "supports",
+      "weight": 0.9999999785481304
+    },
+    {
+      "source": "kg_doc_19",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.1308156736428722
+    },
+    {
+      "source": "kg_doc_19",
+      "target": "state_7",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_17",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_14",
+      "edge_type": "supports",
+      "weight": 0.9999998724771757
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_15",
+      "edge_type": "supports",
+      "weight": 0.5837968052301687
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.25044586887697096
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_4",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.9599998077388796
+    },
+    {
+      "source": "state_4",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.0679336425691247
+    },
+    {
+      "source": "state_4",
+      "target": "state_2",
+      "edge_type": "refines",
+      "weight": 0.95
+    },
+    {
+      "source": "state_4",
+      "target": "state_5",
+      "edge_type": "refines",
+      "weight": 0.9
+    },
+    {
+      "source": "state_4",
+      "target": "memory_mem_4",
+      "edge_type": "derives",
+      "weight": 1.0
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.25044586887697096
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.25044586887697096
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "state_7",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_5",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.9599998077388796
+    },
+    {
+      "source": "state_5",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.0679336425691247
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "state_4",
+      "edge_type": "recalls",
+      "weight": 1.0
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_14",
+      "edge_type": "supports",
+      "weight": 0.9999998724771757
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_15",
+      "edge_type": "supports",
+      "weight": 0.5837968052301687
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.25044586887697096
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.9599998077388796
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.0679336425691247
+    },
+    {
+      "source": "state_6",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.9999997447711146
+    },
+    {
+      "source": "state_6",
+      "target": "kg_doc_15",
+      "edge_type": "supports",
+      "weight": 0.6944999865445605
+    },
+    {
+      "source": "state_6",
+      "target": "kg_doc_18",
+      "edge_type": "supports",
+      "weight": 0.5003774381227386
+    },
+    {
+      "source": "state_6",
+      "target": "kg_doc_8",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_7",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.9999999727539639
+    },
+    {
+      "source": "state_7",
+      "target": "kg_doc_14",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_7",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_7",
+      "target": "kg_doc_19",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_7",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.009356644857631076
+    },
+    {
+      "source": "state_7",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.0006588422415788384
+    },
+    {
+      "source": "state_8",
+      "target": "kg_doc_15",
+      "edge_type": "supports",
+      "weight": 0.9999999785481304
+    },
+    {
+      "source": "state_8",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.9301342469887032
+    },
+    {
+      "source": "state_8",
+      "target": "kg_doc_8",
+      "edge_type": "supports",
+      "weight": 0.8971450782601507
+    },
+    {
+      "source": "state_8",
+      "target": "kg_doc_14",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_8",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.0036468836715369615
+    },
+    {
+      "source": "state_8",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.000256793011757101
+    }
+  ]
+}

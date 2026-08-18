@@ -1,0 +1,147 @@
+{
+  "question": "Who was the husband of the prominent Walton family member who died after John died in 2005?",
+  "final_answer": "Sam Walton",
+  "best_node": {
+    "node_id": "state_7",
+    "node_type": "state",
+    "content": "Who was the husband of Helen Walton?",
+    "depth": 1,
+    "parent_id": "state_1",
+    "value": 0.6118751221899041,
+    "temperature": 1.5220376218609966,
+    "expanded": true,
+    "visit_count": 1,
+    "persistent": false,
+    "score_breakdown": {
+      "task_progress": 0.7186100451227151,
+      "evidence_support": 0.8110379478399183,
+      "memory_usefulness": 0.0158640331642847,
+      "answerability": 0.6912332596342449,
+      "uncertainty": 0.1540131693888147
+    },
+    "metadata": {
+      "kind": "retrieval",
+      "evidence_ids": [
+        "doc_1",
+        "doc_2",
+        "doc_9",
+        "doc_3"
+      ],
+      "memory_ids": [
+        "mem_1",
+        "mem_3"
+      ],
+      "diffusion_delta": 0.06214897966117072,
+      "diffusion_gain": 0.06214897966117072
+    }
+  },
+  "final_synthesis_node_ids": [
+    "state_2",
+    "state_3",
+    "state_7",
+    "state_9",
+    "state_1"
+  ],
+  "answer_history": [
+    {
+      "node_id": "memory_mem_4",
+      "content": "Conclusion: The answer to 'Which prominent Walton family member died in 2005' is John.",
+      "answer_text": "John",
+      "value": 1.0,
+      "confidence": 1.0,
+      "evidence_ids": [
+        "doc_1",
+        "doc_9"
+      ],
+      "step": 1,
+      "kind": "intermediate_answer"
+    },
+    {
+      "node_id": "memory_mem_5",
+      "content": "Conclusion: The answer to 'Who was the husband of the prominent Walton family member who died in 2005' is John Walton.",
+      "answer_text": "John Walton",
+      "value": 0.9999999970298092,
+      "confidence": 0.95,
+      "evidence_ids": [
+        "doc_1"
+      ],
+      "step": 4,
+      "kind": "intermediate_answer"
+    },
+    {
+      "node_id": "memory_mem_6",
+      "content": "Conclusion: The answer to 'Who was the husband of that person' is John Walton.",
+      "answer_text": "John Walton",
+      "value": 0.9999999906745178,
+      "confidence": 0.95,
+      "evidence_ids": [
+        "doc_1"
+      ],
+      "step": 5,
+      "kind": "intermediate_answer"
+    },
+    {
+      "node_id": "memory_mem_7",
+      "content": "Conclusion: The answer to 'Who was the husband of Helen Walton' is Sam Walton.",
+      "answer_text": "Sam Walton",
+      "value": 0.874,
+      "evidence_ids": [
+        "doc_1",
+        "doc_2"
+      ],
+      "step": 6
+    },
+    {
+      "node_id": "state_7",
+      "answer_text": "Sam Walton",
+      "previous_answer": "",
+      "confidence": 0.95,
+      "score": 0.8117334038911486,
+      "source": "expansion_candidate",
+      "step": 5,
+      "evidence_ids": [
+        "doc_1",
+        "doc_2",
+        "doc_9",
+        "doc_3"
+      ],
+      "kind": "anytime_answer"
+    },
+    {
+      "node_id": "state_7",
+      "answer_text": "Sam Walton",
+      "source": "answer_judge",
+      "choice": "A",
+      "candidate_source": "expansion_candidate",
+      "base_score": 0.8920111124149342,
+      "rerank_score": 0.5796446669871265,
+      "judge_confidence": 0.0,
+      "judge_reason": "Helen Walton died in 2007 after John's 2005 death; her husband was Sam Walton.",
+      "step": 9,
+      "kind": "final_answer_selection"
+    }
+  ],
+  "anytime_answer": "Sam Walton",
+  "anytime_answer_score": 0.8117334038911486,
+  "anytime_answer_source": "expansion_candidate",
+  "anytime_answer_node_id": "state_7",
+  "stats": {
+    "steps": 9,
+    "llm_calls": 14,
+    "generated_tokens": 1160,
+    "token_budget_remaining": 40,
+    "total_nodes": 23,
+    "kg_nodes": 7,
+    "memory_nodes": 6,
+    "state_nodes": 10,
+    "deleted_state_nodes": 0,
+    "scheduler_mode": "tdca",
+    "scoring_mode": "hybrid",
+    "stop_reason": "final_synthesis_reserve",
+    "goal_kind": "bridge",
+    "goal_completion": 0.0,
+    "anytime_answer": "Sam Walton",
+    "anytime_answer_score": 0.8117334038911486,
+    "anytime_answer_source": "expansion_candidate"
+  }
+}

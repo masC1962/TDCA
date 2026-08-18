@@ -1,0 +1,826 @@
+{
+  "nodes": [
+    {
+      "node_id": "state_1",
+      "node_type": "state",
+      "content": "What city shares a border with the city where a person worked during the gold rush in the state that has the most house of representatives seat?",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.8064550397074547,
+      "temperature": 1.0636349445775903,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.9579587996114798,
+        "evidence_support": 0.8763494106219991,
+        "memory_usefulness": 0.5139668023538719,
+        "answerability": 0.8381747053109996,
+        "uncertainty": 0.14225710608804015
+      },
+      "metadata": {
+        "diffusion_delta": 0.25931223059952035,
+        "diffusion_gain": 0.25931223059952035
+      }
+    },
+    {
+      "node_id": "kg_doc_16",
+      "node_type": "kg",
+      "content": "The discovery of gold in Victoria in mid 1851 led to the Victorian gold rush, and Melbourne, which served as the major port and provided most services for the region, experienced rapid growth. Within months, the city's population had increased by nearly three-quarters, from 25,000 to 40,000 inhabitants. Thereafter, growth was exponential and by 1865, Melbourne had overtaken Sydney as Australia's most populous city. Additionally, Melbourne along with the Victorian regional cities of Ballarat and Geelong became the wealthiest cities in the world during the Gold Rush era.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999955655604,
+      "temperature": 0.9999999955655604,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Melbourne",
+        "raw_score": 9.578023881461547,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_18",
+      "node_type": "kg",
+      "content": "From its admittance as a state in 1890 to 1913 Idaho was represented in the United States House of Representatives by one at-large representative. After the 1910 census Idaho was awarded a second seat starting with the 63rd Congress in 1913. However both seats continued to be elected at-large on a general ticket until the election of 1918. Since that year the state has allocated two districts for its representatives.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999925878016,
+      "temperature": 0.9999999925878016,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Idaho's at-large congressional district",
+        "raw_score": 9.207864752733158,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_17",
+      "node_type": "kg",
+      "content": "Oak Lawn is a suburb of Chicago, located southwest of the city. It shares borders with the city in two areas, but is surrounded mostly by other suburbs.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.7117340236608353,
+      "temperature": 0.7117340236608353,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Oak Lawn, Illinois",
+        "raw_score": 8.84055612706647,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_3",
+      "node_type": "kg",
+      "content": "Atlantic City is a census-designated place (CDP) in Fremont County, Wyoming, United States. The population was 37 at the 2010 census. The community is a small mining settlement in a gulch near South Pass in southwestern Wyoming. It was founded as a mining camp following the 1867 gold rush in the region. The town declined following the end of the placer gold rush in the early 1870s, but continued to exist as advances in mining technology allowed further extraction of gold. From the 1960s until 1983, it was the location of US Steel iron ore mine. The town is accessible by gravel roads from nearby Wyoming Highway 28.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.011787319787015709,
+      "temperature": 0.011787319787015709,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Atlantic City, Wyoming",
+        "raw_score": 5.248554677647169,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "memory_mem_1",
+      "node_type": "memory",
+      "content": "Template: for compositional multi-hop questions, first solve the intermediate entity and then ask for the final attribute.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9599999519347127,
+      "temperature": 1.6875612020598767,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.96,
+        "tag": "compositional_template",
+        "memory_kind": "template",
+        "raw_score": 0.3133114155554583,
+        "source": "memory",
+        "diffusion_delta": 0.194361956308176,
+        "diffusion_gain": 0.194361956308176
+      }
+    },
+    {
+      "node_id": "memory_mem_3",
+      "node_type": "memory",
+      "content": "Template: when evidence already grounds the answer, switch from branching to short verification and synthesis.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.06793365277303111,
+      "temperature": 0.119065581570422,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.88,
+        "tag": "verification_then_stop",
+        "memory_kind": "template",
+        "raw_score": 0.2396549870718935,
+        "source": "memory",
+        "diffusion_delta": 0.012928954225272404,
+        "diffusion_gain": 0.012928954225272404
+      }
+    },
+    {
+      "node_id": "state_2",
+      "node_type": "state",
+      "content": "Which U.S. state has the most House of Representatives seats?",
+      "depth": 1,
+      "parent_id": "state_1",
+      "value": 0.5715874603977231,
+      "temperature": 0.7960890773185633,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.6223603186223385,
+        "evidence_support": 0.6513271403330811,
+        "memory_usefulness": 0.5139667251540021,
+        "answerability": 0.5892999338029042,
+        "uncertainty": 0.1827611147400454
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_18",
+          "doc_2",
+          "doc_6",
+          "doc_15"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "diffusion_delta": 0.10156477637885908,
+        "diffusion_gain": 0.10156477637885908
+      }
+    },
+    {
+      "node_id": "kg_doc_2",
+      "node_type": "kg",
+      "content": "Alabama is currently divided into 7 congressional districts, each represented by a member of the United States House of Representatives. After the 2010 Census, the number of Alabama's seats remained unchanged.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.3026542881015957,
+      "temperature": 0.3026542881015957,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Alabama's congressional districts",
+        "raw_score": 6.301795616180371,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_6",
+      "node_type": "kg",
+      "content": "The composition of the House is established by Article One of the United States Constitution. The House is composed of Representatives who sit in congressional districts that are allocated to each of the 50 states on a basis of population as measured by the U.S. Census, with each district entitled to one representative. Since its inception in 1789, all Representatives have been directly elected. The total number of voting representatives is fixed by law at 435. As of the 2010 Census, the largest delegation is that of California, with fifty - three representatives. Seven states have the smallest delegation possible, a single representative: Alaska, Delaware, Montana, North Dakota, South Dakota, Vermont, and Wyoming.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.15601433872155915,
+      "temperature": 0.15601433872155915,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "United States House of Representatives",
+        "raw_score": 5.82208348281635,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_15",
+      "node_type": "kg",
+      "content": "Results of the 1979 general election in Japan for the House of Representatives. A total of 511 seats were contested:",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0,
+      "temperature": 0.0,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "1979 Japanese general election",
+        "raw_score": 5.337882256515277,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "state_3",
+      "node_type": "state",
+      "content": "In which city in that state did people work during the gold rush?",
+      "depth": 1,
+      "parent_id": "state_1",
+      "value": 0.5192646854924963,
+      "temperature": 0.2727029057156616,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.598800704128635,
+        "evidence_support": 0.5312320174906375,
+        "memory_usefulness": 0.5139667251540021,
+        "answerability": 0.5383432814725915,
+        "uncertainty": 0.20437823685168524
+      },
+      "metadata": {
+        "kind": "bridge",
+        "evidence_ids": [
+          "doc_16",
+          "doc_4",
+          "doc_18",
+          "doc_3"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "diffusion_delta": -0.012603980503135548,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "kg_doc_4",
+      "node_type": "kg",
+      "content": "Coldspring House is an unincorporated locality and former roadhouse on the Cariboo Wagon Road in the Cariboo Country of the Central Interior of British Columbia, Canada. Located just east of the confluence of Lightning Creek and the Swift River between Quesnel and Barkerville along that route. Only 8 km east along that road from Cottonwood House, another roadhouse still operating as a store and campground today, as well as a provincial heritage property with a small museum. Just farther along the route, which is today's BC Highway 26, is Beaver Pass House. All date from the era of the Cariboo Gold Rush and were busy stopping places for travellers going to and from the goldfields.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.062464041624235626,
+      "temperature": 0.062464041624235626,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Coldspring House",
+        "raw_score": 5.4760951418485515,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "state_4",
+      "node_type": "state",
+      "content": "Which city shares a border with that gold rush city?",
+      "depth": 1,
+      "parent_id": "state_1",
+      "value": 0.6209450056908348,
+      "temperature": 0.4165584670352277,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.7091766008967557,
+        "evidence_support": 0.8558670079851102,
+        "memory_usefulness": 0.0,
+        "answerability": 0.7006607767198278,
+        "uncertainty": 0.14594393856268018
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_16",
+          "doc_17",
+          "doc_3",
+          "doc_4"
+        ],
+        "memory_ids": [],
+        "diffusion_delta": -0.11340922171777734,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "memory_mem_4",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'What city shares a border with the city where a person worked during the gold rush in the state that has the most house of representatives seat' is Melbourne.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 1.0,
+      "temperature": 1.0400909379621674,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "intermediate_answer",
+        "target_question": "What city shares a border with the city where a person worked during the gold rush in the state that has the most house of representatives seat?",
+        "target_question_norm": "what city shares a border with the city where a person worked during the gold rush in the state that has the most house of representatives seat",
+        "relation_signature": "generic",
+        "answer_text": "Melbourne",
+        "support_score": 1.0,
+        "evidence_ids": [
+          "doc_16",
+          "doc_18"
+        ],
+        "slot_name": "",
+        "slot_role": "",
+        "terminal": false,
+        "derived_from_state": "state_1",
+        "diffusion_delta": 0.020384192055175943,
+        "diffusion_gain": 0.020384192055175943
+      }
+    },
+    {
+      "node_id": "state_5",
+      "node_type": "state",
+      "content": "Which U.S. state has the most seats in the House of Representatives?",
+      "depth": 2,
+      "parent_id": "state_3",
+      "value": 0.5037159370116358,
+      "temperature": 0.5477343646040878,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.6294782819680079,
+        "evidence_support": 0.6214601876064403,
+        "memory_usefulness": 0.006037027794564622,
+        "answerability": 0.583457366530493,
+        "uncertainty": 0.18813716623084076
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_18",
+          "doc_2",
+          "doc_6",
+          "doc_15"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "diffusion_delta": -0.13342839936427975,
+        "diffusion_gain": 0.0
+      }
+    }
+  ],
+  "edges": [
+    {
+      "source": "state_1",
+      "target": "kg_doc_16",
+      "edge_type": "supports",
+      "weight": 0.9999999955655604
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_18",
+      "edge_type": "supports",
+      "weight": 0.7526988256784378
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_17",
+      "edge_type": "supports",
+      "weight": 0.3892624042965143
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.9599999519347127
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.06793365277303111
+    },
+    {
+      "source": "state_1",
+      "target": "state_2",
+      "edge_type": "refines",
+      "weight": 0.95
+    },
+    {
+      "source": "state_1",
+      "target": "state_3",
+      "edge_type": "refines",
+      "weight": 0.85
+    },
+    {
+      "source": "state_1",
+      "target": "state_4",
+      "edge_type": "refines",
+      "weight": 0.75
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_4",
+      "edge_type": "derives",
+      "weight": 1.0
+    },
+    {
+      "source": "kg_doc_16",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.9999999955655604
+    },
+    {
+      "source": "kg_doc_16",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.9999999933570394
+    },
+    {
+      "source": "kg_doc_16",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.9999999923093851
+    },
+    {
+      "source": "kg_doc_16",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.9999999955655604
+    },
+    {
+      "source": "kg_doc_18",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.7526988256784378
+    },
+    {
+      "source": "kg_doc_18",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.9999999925645666
+    },
+    {
+      "source": "kg_doc_18",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.028496384427927783
+    },
+    {
+      "source": "kg_doc_18",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.7526988256784378
+    },
+    {
+      "source": "kg_doc_18",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.9999999925878016
+    },
+    {
+      "source": "kg_doc_17",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.3892624042965143
+    },
+    {
+      "source": "kg_doc_17",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.7117340236608353
+    },
+    {
+      "source": "kg_doc_17",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.3892624042965143
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.011787319787015709
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.9599999519347127
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_2",
+      "edge_type": "recalls",
+      "weight": 0.9599998077388796
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_3",
+      "edge_type": "recalls",
+      "weight": 0.004700482707391992
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "memory_mem_4",
+      "edge_type": "recalls",
+      "weight": 0.9599999519347127
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_5",
+      "edge_type": "recalls",
+      "weight": 0.01131258229646355
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.06793365277303111
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_2",
+      "edge_type": "recalls",
+      "weight": 0.0679336425691247
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_3",
+      "edge_type": "recalls",
+      "weight": 0.00031639920493085547
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "memory_mem_4",
+      "edge_type": "recalls",
+      "weight": 0.06793365277303111
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_5",
+      "edge_type": "recalls",
+      "weight": 0.0007614732926656947
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_18",
+      "edge_type": "supports",
+      "weight": 0.9999999925645666
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.3026542881015957
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.15601433872155915
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_15",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_2",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.9599998077388796
+    },
+    {
+      "source": "state_2",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.0679336425691247
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.3026542881015957
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.24292038262507892
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.15601433872155915
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.1454978119680287
+    },
+    {
+      "source": "kg_doc_15",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_15",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_16",
+      "edge_type": "supports",
+      "weight": 0.9999999933570394
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.062464041624235626
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_18",
+      "edge_type": "supports",
+      "weight": 0.028496384427927783
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_3",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.004700482707391992
+    },
+    {
+      "source": "state_3",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.00031639920493085547
+    },
+    {
+      "source": "state_3",
+      "target": "state_5",
+      "edge_type": "refines",
+      "weight": 0.9
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.062464041624235626
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_16",
+      "edge_type": "supports",
+      "weight": 0.9999999923093851
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_17",
+      "edge_type": "supports",
+      "weight": 0.7117340236608353
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.011787319787015709
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 1.0
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_16",
+      "edge_type": "supports",
+      "weight": 0.9999999955655604
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_18",
+      "edge_type": "supports",
+      "weight": 0.7526988256784378
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_17",
+      "edge_type": "supports",
+      "weight": 0.3892624042965143
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.9599999519347127
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.06793365277303111
+    },
+    {
+      "source": "state_5",
+      "target": "kg_doc_18",
+      "edge_type": "supports",
+      "weight": 0.9999999925878016
+    },
+    {
+      "source": "state_5",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.24292038262507892
+    },
+    {
+      "source": "state_5",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.1454978119680287
+    },
+    {
+      "source": "state_5",
+      "target": "kg_doc_15",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_5",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.01131258229646355
+    },
+    {
+      "source": "state_5",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.0007614732926656947
+    }
+  ]
+}

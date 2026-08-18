@@ -1,0 +1,443 @@
+[compare] started_at=20260510_033721
+[compare] dataset=data/hotpot_dev_distractor_v1.jsonl
+[compare] random_count=100 seeds=1962 exclude_first=100
+[compare] backend=openai model=qwen-plus token_budget=1200
+[compare] log=tmp/random_compare_logs/random_compare_20260510_033721.log
+[compare] probing API
+base_url=https://dashscope.aliyuncs.com/compatible-mode/v1
+model=qwen-plus
+
+### max_completion_tokens
+{
+  "finish_reason": "stop",
+  "content": "Final Answer: yes",
+  "reasoning": null,
+  "refusal": null,
+  "usage": {
+    "completion_tokens": 4,
+    "prompt_tokens": 18,
+    "total_tokens": 22,
+    "completion_tokens_details": null,
+    "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 0
+    }
+  }
+}
+
+### max_tokens
+{
+  "finish_reason": "stop",
+  "content": "Final Answer: yes",
+  "reasoning": null,
+  "refusal": null,
+  "usage": {
+    "completion_tokens": 4,
+    "prompt_tokens": 18,
+    "total_tokens": 22,
+    "completion_tokens_details": null,
+    "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 0
+    }
+  }
+}
+
+### reasoning_none_exclude_true
+{
+  "finish_reason": "stop",
+  "content": "Final Answer: yes",
+  "reasoning": null,
+  "refusal": null,
+  "usage": {
+    "completion_tokens": 4,
+    "prompt_tokens": 18,
+    "total_tokens": 22,
+    "completion_tokens_details": null,
+    "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 0
+    }
+  }
+}
+
+### reasoning_none_exclude_false
+{
+  "finish_reason": "stop",
+  "content": "Final Answer: yes",
+  "reasoning": null,
+  "refusal": null,
+  "usage": {
+    "completion_tokens": 4,
+    "prompt_tokens": 18,
+    "total_tokens": 22,
+    "completion_tokens_details": null,
+    "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 0
+    }
+  }
+}
+
+### reasoning_minimal_exclude_true
+{
+  "finish_reason": "stop",
+  "content": "Final Answer: yes",
+  "reasoning": null,
+  "refusal": null,
+  "usage": {
+    "completion_tokens": 4,
+    "prompt_tokens": 18,
+    "total_tokens": 22,
+    "completion_tokens_details": null,
+    "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 0
+    }
+  }
+}
+
+### temperature_zero_max_completion
+{
+  "finish_reason": "stop",
+  "content": "Final Answer: yes",
+  "reasoning": null,
+  "refusal": null,
+  "usage": {
+    "completion_tokens": 4,
+    "prompt_tokens": 18,
+    "total_tokens": 22,
+    "completion_tokens_details": null,
+    "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 0
+    }
+  }
+}
+
+### temperature_zero_max_tokens
+{
+  "finish_reason": "stop",
+  "content": "Final Answer: yes",
+  "reasoning": null,
+  "refusal": null,
+  "usage": {
+    "completion_tokens": 4,
+    "prompt_tokens": 18,
+    "total_tokens": 22,
+    "completion_tokens_details": null,
+    "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 0
+    }
+  }
+}
+
+### summary
+saved=outputs/probe_openrouter_chat_20260510_033726.json
+nonempty_variants=max_completion_tokens, max_tokens, reasoning_none_exclude_true, reasoning_none_exclude_false, reasoning_minimal_exclude_true, temperature_zero_max_completion, temperature_zero_max_tokens
+[compare] random_dataset=tmp/random_compare_samples/hotpot_random100_seed1962.jsonl
+[compare] running sparse_rag seed=1962
+[TDCA] Using OpenAI-compatible backend @ https://dashscope.aliyuncs.com/compatible-mode/v1
+[TDCA] served_model_name = qwen-plus
+[TDCA] reasoning_effort = none
+[baseline] output_dir = outputs/hotpot_sparse_rag_random_seed1962_20260510_033728_sparse_rag_qwen-plus_tok1200_n100_random100_seed1962_tok1200
+[baseline] max_new_tokens_answer = 1200
+[baseline] reasoning_effort = none
+[baseline] loaded_examples = 100
+{
+  "algorithm": "sparse_rag",
+  "baseline": "sparse_rag",
+  "dataset_name": "hotpotqa",
+  "dataset_path": "tmp/random_compare_samples/hotpot_random100_seed1962.jsonl",
+  "limit": 100,
+  "top_k": 5,
+  "retriever_type": "dense",
+  "encoder_path": "",
+  "index_path": "",
+  "llm_backend": "openai",
+  "model_path": "",
+  "openai_base_url": "https://dashscope.aliyuncs.com/compatible-mode/v1",
+  "served_model_name": "qwen-plus",
+  "reasoning_effort": "none",
+  "num_examples": 100,
+  "max_new_tokens_answer": 1200,
+  "ircot_step_max_new_tokens": 512,
+  "timestamped_output": true,
+  "run_tag": "random100_seed1962_tok1200",
+  "output_dir": "outputs/hotpot_sparse_rag_random_seed1962_20260510_033728_sparse_rag_qwen-plus_tok1200_n100_random100_seed1962_tok1200",
+  "created_at_local": "2026-05-10T03:38:28"
+}
+[compare] sparse_rag output_dir=outputs/hotpot_sparse_rag_random_seed1962_20260510_033728_sparse_rag_qwen-plus_tok1200_n100_random100_seed1962_tok1200
+[compare] sparse_rag_seed_1962: rows=100 nonempty=100 EM=58/100 acc=0.580 soft_em=0.800 f1=0.731 calls=0.00 gen_tokens=0.00
+[compare] running ircot seed=1962
+[TDCA] Using OpenAI-compatible backend @ https://dashscope.aliyuncs.com/compatible-mode/v1
+[TDCA] served_model_name = qwen-plus
+[TDCA] reasoning_effort = none
+[baseline] output_dir = outputs/hotpot_ircot_sparse_random_seed1962_20260510_033829_ircot_qwen-plus_tok1200_n100_random100_seed1962_tok1200
+[baseline] max_new_tokens_answer = 1200
+[baseline] reasoning_effort = none
+[baseline] loaded_examples = 100
+{
+  "algorithm": "ircot",
+  "baseline": "ircot",
+  "dataset_name": "hotpotqa",
+  "dataset_path": "tmp/random_compare_samples/hotpot_random100_seed1962.jsonl",
+  "limit": 100,
+  "top_k": 5,
+  "retriever_type": "sparse",
+  "encoder_path": "",
+  "index_path": "",
+  "llm_backend": "openai",
+  "model_path": "",
+  "openai_base_url": "https://dashscope.aliyuncs.com/compatible-mode/v1",
+  "served_model_name": "qwen-plus",
+  "reasoning_effort": "none",
+  "num_examples": 100,
+  "max_new_tokens_answer": 1200,
+  "ircot_step_max_new_tokens": 512,
+  "timestamped_output": true,
+  "run_tag": "random100_seed1962_tok1200",
+  "output_dir": "outputs/hotpot_ircot_sparse_random_seed1962_20260510_033829_ircot_qwen-plus_tok1200_n100_random100_seed1962_tok1200",
+  "created_at_local": "2026-05-10T03:42:46"
+}
+[compare] ircot output_dir=outputs/hotpot_ircot_sparse_random_seed1962_20260510_033829_ircot_qwen-plus_tok1200_n100_random100_seed1962_tok1200
+[compare] ircot_seed_1962: rows=100 nonempty=100 EM=54/100 acc=0.540 soft_em=0.800 f1=0.709 calls=0.00 gen_tokens=0.00
+[compare] running tdca seed=1962
+[TDCA-BATCH] project_root = /workspace/TDCA
+[TDCA-BATCH] dataset      = /workspace/TDCA/tmp/random_compare_samples/hotpot_random100_seed1962.jsonl
+[TDCA-BATCH] fallback evidence = /workspace/TDCA/data/demo_corpus.jsonl
+[TDCA-BATCH] base memory  = /workspace/TDCA/data/demo_memories.jsonl
+[TDCA-BATCH] outputs      = /workspace/TDCA/batch_outputs/hotpot_random100_seed1962_20260510_034248
+[TDCA-BATCH] backend      = openai
+[TDCA-BATCH] algorithm    = tdca
+[TDCA-BATCH] start_index  = 0
+[TDCA] Using OpenAI-compatible backend @ https://dashscope.aliyuncs.com/compatible-mode/v1
+[TDCA] served_model_name = qwen-plus
+[TDCA] reasoning_effort = none
+
+[1/100] Which television series featured an actor who also performed in "The Young Ones"?
+
+[2/100] The Dogwoman telemovies were created by an actress born in what year?
+
+[3/100] Which English actor, comedian and singer is featured in Chalk and Cheese?
+
+[4/100] What type of publication does St. Anthony Messenger and Revolver have in common?
+
+[5/100] Michael Pollock was was a senior officer in the United Kingdom's naval warfare force, also known as the what?
+
+[6/100] M.F.A. starred the actress known for starring in what E! reality series?
+
+[7/100] who were James Hill and John Vereker, 6th Viscount Gort officers for?
+
+[8/100] Which band was formed first, Lit or Adorable?
+
+[9/100] Immanuel Lutheran School is affiliated with the denomination that has how many members?
+
+[10/100] Peter Marc Jacobson is best known as the co-creator of the popular sitcom "The Nanny", which he created and wrote with his then wife an actress born in which year ?
+
+[11/100] Selena Quintanilla-Pérez's assistant and head of her fan club will be eligible for parole on what date?
+
+[12/100] what did the second largest city by population in vietnam also serve as in the first indochina war?
+
+[13/100] Which three-time Olivier Award winning English actress starred in the 1981 BBC television serial, Sons and Lovers?
+
+[14/100] What forim is Nicholas Dante most famous for writing in, musical, such as "A Chorus Line", or epic verse like "Inferno"?
+
+[15/100] A former Australian rules football player who played with the Port Adelaide in the South Australian National Football League is the vice president of a video game company based where?
+
+[16/100] The Meadowbrook State Parkway connects to the Southern State Parkway in a community with what population as of the 2010 census?
+
+[17/100] Do the bands named Phoenix and Shearwater specialize in the exact same genre?
+
+[18/100] What is the name of the so-called reform opera for Vienna that came before the one first performed in Vienna in the presence of Empress Maria Theresa?
+
+[19/100] Kevin Watson currently manages which Southern League football team?
+
+[20/100] How many Sliver Slugger awards does the player who uses The Boss during his at-bat and also plays for the Yankees?
+
+[21/100] How are Ceephax Acid Crew  and Squarepusher's music similar?
+
+[22/100] "Lesbian Request Denied" is the third episode of the first season of a series created by who?
+
+[23/100] Besides the song "OK Computer" what did the same band record in 1995?
+
+[24/100] Charles Barton "Chuck" Kendall, Jr. was reportedly interested in purchasing the Los Angeles Clippers from which Jewish-American businessman?
+
+[25/100] Which of the bands, Hot Snakes or UB40, has more band members?
+
+[26/100] Which opera has more acts, Louise or Le roi malgré lui?
+
+[27/100] What song from the fourth studio album made by The Who reached No.4 on the UK charts and No. 19 o nthe U.S. "Billboard" Hot 100?
+
+[28/100] Which director lived longer, Lowell Sherman or Jonathan Kaplan?
+
+[29/100] Elizabeth Wordsworth's father was bishop in what church?
+
+[30/100] San Francisco National Cemetery is located at a park that is part of what National Recreation Area?
+
+[31/100] A 1946 musical comedy starred a British actor who lived in what country throughout his adult life?
+
+[32/100] What song was number 4 on the charts when a song from FutureSex/LoveSounds was number 1?
+
+[33/100] Li Yitong played Huang Rong is a tv series directed by who?
+
+[34/100] What song included on the 59th edition of Now That's What I Call Music was written and recorded by an Australian recording artist?
+
+[35/100] Ai-Ling Lee is a Singaporean sound editor who worked on a  biographical survival drama film directed by who?
+
+[36/100] Ekaterina Alexeyevna Davydova skated with which 2006 Olympic champion, two-time World champion, three-time Grand Prix Final champion, and three-time European champion?
+
+[37/100] What type of television show did Dylan Everett star in, in 2015?
+
+[38/100] Camp Courtney was named after the Major killed in action at the battle codenamed what?
+
+[39/100] What Irish county are the band that had a concert tour called the In Blue Tour?
+
+[40/100] How many records did Shane Lynch sell as a member of Boyzone?
+
+[41/100] The actress and singer Heather Morris is best known for her role in which series, becoming a regular character in the second season?
+
+[42/100] What production company is owned by the director of "She Hate Me"?
+
+[43/100] Which light rail system would one use to visit the museum that explores the impact of modern conflicts on people and society?
+
+[44/100] What corporation does the company that publishes the monthly magazine that focuses almost exclusively on the Western United States and featured photograph by Julius Shulman of a home designed by Rodney Walker belong to?
+
+[45/100] Who was born first, Grigory Margulis or Leonid Levin?
+
+[46/100] Aside from the all-NBA third team member in 1995 who was also a three-time NBA All-Star and the NBA Sixth Man of the Year twice, which other two players were selected for the 1997 NBA All-Star Game from the Seattle SuperSonics?
+
+[47/100] Henry W. Bloch School of Management is named after the founder of an American tax preparation company that is based where?
+
+[48/100] Hairy Jeremy was a television show created in a style that, when it uses plasticine, is called what?
+
+[49/100] What 1997 song was on the Garth Brooks album that debuted at #1 on the "Billboard" 200?
+
+[50/100] Summer Holiday starred what actor who won  a BAFTA in 1954>
+
+[51/100] What nationality was the inventor of the Alexander Technique for retraining the mind and body to avoid muscular tension?
+
+[52/100] Who was a supporting cast member of King Rat and was knighted in February 2001?
+
+[53/100] In which country did Ahmed Khader Al-Muwallad win a gold medal?
+
+[54/100] Are The Datsuns and The Black Crowes both rock bands?
+
+[55/100] Which professional baseball player was born in 1984 and played as a rookie for the Los Angeles Dogers in 2007?
+
+[56/100] "When a Woman Loves" is the first single by singer R. Kelly from his eleventh studio album named what?
+
+[57/100] The Kilby International Awards were named after the inventor who discovered what electronics phenomenon?
+
+[58/100] What type of profession do Dave Pirner and Les McKeown both have?
+
+[59/100] Are John le Carré and Tim Winton both novelists?
+
+[60/100] Which band was formed first, Wire or Young the Giant?
+
+[61/100] "Coming Over" is the second Japanese single album by a boy group that debuted in what year?
+
+[62/100] Are Mike Bryan and Ray Ruffels both tennis players?
+
+[63/100] SkyJump Las Vegas is located at a hotel on what street?
+
+[64/100] In what european city is a location of the college from which the woman known as Comic Book Girl 19 received her degree?
+
+[65/100] Who has worked for more film companies, Kelly Reichardt or Jacques Tourneur?
+
+[66/100] Who was the director behind the Cirque du Soleil show in Las Vegas that was first performed on December 25, 1993?
+
+[67/100] The father of Manning Marius Kimmel retired from the Navy in what year?
+
+[68/100] Sony/Philips Digital Interface Format can transmit over what Toshiba optical fiber connector system?
+
+[69/100] Which Austrian and later American chess master who was also a highly influential writer and chess theoretician competed for the first contest  that was defined "in advance" as being for the world championship?
+
+[70/100] What company produced both The Little Mermaid and The Strongest Man in the World?
+
+[71/100] Among Kele Okereke and Jon Hume who made the New Zealand band Evermore?
+
+[72/100] Did Zaza Pachulia win an NBA Championship with the Atlanta Hawks?
+
+[73/100] Bill Bryson grew up in a city that is the seat of which county ?
+
+[74/100] Why is Bangor Daily News talkin about Sawin Millett?
+
+[75/100] What age did a wrestler began his training at who began his friendship with Trevor Mann in Brookport, Illinois CPW?
+
+[76/100] What was the slogan  that came about from the idea of Lebensraum which had its most extreme form supported by the Nazi Party until the end of World War II?
+
+[77/100] Where did the host of the 2014 edition of the MTV Africa Music Awards begin their career?
+
+[78/100] Robin R. Bottin is known for his collaboration with an American director and producer who won an Academy Award, Golden Globe and BAFTA award for what movie?
+
+[79/100] Candace Flynn was voiced by the actress who achieved mainstream success on what show?
+
+[80/100] Which single was recorded in 1989 at the first Tubronegro rehearsal by the Norwegian punk rock band, initially active from 1989 to 1998, whose style is "deathpunk"?
+
+[81/100] Who died first, Andrei Platonov or John Masefield?
+
+[82/100] What is the female star of Klepto best known for performing in?
+
+[83/100] WrestleMania XXX took place at the home venue of which National Football League team?
+
+[84/100] This Experts Network sports analysts was inducted into the Pro Football Hall of Fame in 2000 and played in the NFL for how many seasons?
+
+[85/100] What was the other name for the war between the Cherokee people and white settlers in 1793?
+
+[86/100] Humanzee is a hypothetical hybrid of humans with what great ape?
+
+[87/100] What team was formed in 1996 that starred players like Robert Parish?
+
+[88/100] This sister company  of Líneas Aéreas Privadas Argentinas is most commonly known by its shortened name Austral?
+
+[89/100] Barbara Streisand's 34th album Partners features a duet with which of her children?
+
+[90/100] In what city did the 1959 William & Mary Indians football team lose against the #13 Naval Academy?
+
+[91/100] what season of shark tank did Roominate get invsetments
+
+[92/100] The Battle of Uddevalla occurred during what 1675-1679 wars?
+
+[93/100] The 1919 Mississippi gubernatorial election Incumbent Democrat was a master of what?
+
+[94/100] Erving Goffman was cited as higher than a literary critic on which guide?
+
+[95/100] Which mountain is taller, Gasherbrum II or Langtang Ri?
+
+[96/100] Who has won the most Olympic medals for figure skating, Debi Thomas or Katarina Witt?
+
+[97/100] Whose real-life story was the inspiration of the film which included the song "We All Die Young"?
+
+[98/100] 50th Military Airlift Squadron was stationed at this base named in honor of who
+
+[99/100] Lee Sung-jae stars in the film Barking Dogs Never Bite which is what film genre?
+
+[100/100] Blackfin is a family of processors developed by the company that is headquartered in what city?
+
+[TDCA-BATCH] aggregate:
+{
+  "count": 100,
+  "answered_with_gold": 100,
+  "exact_match": 0.45,
+  "soft_em": 0.61,
+  "answer_f1": 0.580874,
+  "rouge1_f": 0.580874,
+  "rouge2_f": 0.343407,
+  "rougeL_f": 0.576429,
+  "bleu1": 0.539889,
+  "bleu2": 0.333396,
+  "bleu3": 0.120848,
+  "bleu4": 0.065,
+  "meteor": 0.583114,
+  "title_hit": 0.0,
+  "avg_steps": 5.35,
+  "avg_llm_calls": 9.81,
+  "avg_generated_tokens": 788.45
+}
+[TDCA-BATCH] summary.csv  = /workspace/TDCA/batch_outputs/hotpot_random100_seed1962_20260510_034248/summary.csv
+[TDCA-BATCH] summary.jsonl= /workspace/TDCA/batch_outputs/hotpot_random100_seed1962_20260510_034248/summary.jsonl
+[compare] tdca output_dir=batch_outputs/hotpot_random100_seed1962_20260510_034248
+[compare] tdca_seed_1962: rows=100 nonempty=89 EM=45/100 acc=0.450 soft_em=0.610 f1=0.581 calls=9.81 gen_tokens=788.45
+[compare] complete

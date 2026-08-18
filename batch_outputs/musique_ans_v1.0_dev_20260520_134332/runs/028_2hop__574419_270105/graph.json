@@ -1,0 +1,906 @@
+{
+  "nodes": [
+    {
+      "node_id": "state_1",
+      "node_type": "state",
+      "content": "What is the seat of the county where Van Hook Township is located?",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.7403248664463878,
+      "temperature": 0.3534930036157171,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.9017897657107556,
+        "evidence_support": 0.7111463697375163,
+        "memory_usefulness": 0.5139667766205794,
+        "answerability": 0.8555731848687581,
+        "uncertainty": 0.17199365344724704
+      },
+      "metadata": {
+        "diffusion_delta": -0.043279505646651895,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "kg_doc_9",
+      "node_type": "kg",
+      "content": "Van Hook Township is a township in Mountrail County in the U.S. state of North Dakota. At the time of the 2000 Census, its population was 42, and estimated to be 41 as of 2009.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999950302075,
+      "temperature": 0.9999999950302075,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Van Hook Township, Mountrail County, North Dakota",
+        "raw_score": 5.037279391225379,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_7",
+      "node_type": "kg",
+      "content": "Van Buren Township is one of four townships in Brown County, Indiana. As of the 2010 census, its population was 2,008 and it contained 941 housing units. The township includes the southern portion of Brown County State Park.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.4222927444448252,
+      "temperature": 0.4222927444448252,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Van Buren Township, Brown County, Indiana",
+        "raw_score": 3.102389478207074,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_14",
+      "node_type": "kg",
+      "content": "Liberty Township is one of the twelve townships of Van Wert County, Ohio, United States. The 2000 census found 1,696 people in the township, 912 of whom lived in the unincorporated portions of the township.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.18810586414411942,
+      "temperature": 0.18810586414411942,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Liberty Township, Van Wert County, Ohio",
+        "raw_score": 5.870804299034327,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_10",
+      "node_type": "kg",
+      "content": "Rochester Community Schools District serves Rochester, the majority of both Oakland Township, and Rochester Hills, as well as parts of Orion Township and Auburn Hills in northeast Oakland County and parts of Shelby Township and Washington Township in northwest Macomb County, in the U.S. state of Michigan. It currently has upwards of 14,500 students in 21 buildings, all located in Rochester Hills and Oakland Township, Michigan. The Administration Center is located in the city of Rochester.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0,
+      "temperature": 0.0,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Rochester Community Schools (Michigan)",
+        "raw_score": 4.757573634770943,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "memory_mem_1",
+      "node_type": "memory",
+      "content": "Template: for compositional multi-hop questions, first solve the intermediate entity and then ask for the final attribute.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9599999038694302,
+      "temperature": 0.390038212027909,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.96,
+        "tag": "compositional_template",
+        "memory_kind": "template",
+        "raw_score": 0.11950060359090774,
+        "source": "memory",
+        "diffusion_delta": -0.3105849425762114,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "memory_mem_3",
+      "node_type": "memory",
+      "content": "Template: when evidence already grounds the answer, switch from branching to short verification and synthesis.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.06793364937172863,
+      "temperature": 0.02769043409623473,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.88,
+        "tag": "verification_then_stop",
+        "memory_kind": "template",
+        "raw_score": 0.08952939111473152,
+        "source": "memory",
+        "diffusion_delta": -0.022032208324615103,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "state_2",
+      "node_type": "state",
+      "content": "What county is Van Hook Township located in?",
+      "depth": 1,
+      "parent_id": "state_1",
+      "value": 0.6091293258030573,
+      "temperature": 1.5206514907929733,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.7604682176801985,
+        "evidence_support": 0.7019118701824016,
+        "memory_usefulness": 0.0,
+        "answerability": 0.7782286623639281,
+        "uncertainty": 0.1736558633671677
+      },
+      "metadata": {
+        "kind": "bridge",
+        "evidence_ids": [
+          "doc_9",
+          "doc_7",
+          "doc_14",
+          "doc_10"
+        ],
+        "memory_ids": [],
+        "goal_slot_name": "county_of_van_hook_township",
+        "goal_slot_role": "bridge_entity",
+        "goal_terminal": false,
+        "diffusion_delta": 0.007071604194494707,
+        "diffusion_gain": 0.007071604194494707
+      }
+    },
+    {
+      "node_id": "state_3",
+      "node_type": "state",
+      "content": "What is the county seat of Mountrail County, North Dakota?",
+      "depth": 2,
+      "parent_id": "state_2",
+      "value": 0.7631626037487441,
+      "temperature": 1.8132495237755901,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.7992845555302766,
+        "evidence_support": 0.9176818478163213,
+        "memory_usefulness": 0.5139667251540021,
+        "answerability": 0.8679318329990698,
+        "uncertainty": 0.13481726739306216
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_2",
+          "doc_9",
+          "doc_19",
+          "doc_7"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "diffusion_delta": 0.3323346181402089,
+        "diffusion_gain": 0.3323346181402089
+      }
+    },
+    {
+      "node_id": "kg_doc_2",
+      "node_type": "kg",
+      "content": "The Mountrail County Courthouse in Stanley, North Dakota was built in 1914 and served Mountrail County as its courthouse continuously since then. It was designed by architects Buechner & Orth in what can be termed Academic Revival architecture and/or Late 19th and 20th Century Revivals architecture. It was listed on the National Register of Historic Places in 1978; a area was included in the listing.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999971436171,
+      "temperature": 0.9999999971436171,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Mountrail County Courthouse",
+        "raw_score": 7.745840930810825,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_19",
+      "node_type": "kg",
+      "content": "Nigeria is divided into thirty-six states and one Federal Capital Territory, which are further sub-divided into 774 Local Government Areas (LGAs). The plethora of states, of which there were only three at independence, reflect the country's tumultuous history and the difficulties of managing such a heterogeneous national entity at all levels of government. In some contexts, the states are aggregated into six geopolitical zones: North West, North East, North Central, South East, South South, and South West.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.01000154059474799,
+      "temperature": 0.01000154059474799,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Nigeria",
+        "raw_score": 3.205373905205761,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "memory_mem_4",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'What county is Van Hook Township located in' is Mountrail County.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999949679137,
+      "temperature": 0.9458640262929722,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "intermediate_answer",
+        "target_question": "What county is Van Hook Township located in?",
+        "target_question_norm": "what county is van hook township located in",
+        "relation_signature": "generic",
+        "answer_text": "Mountrail County",
+        "support_score": 0.9999999949679137,
+        "evidence_ids": [
+          "doc_9"
+        ],
+        "slot_name": "county_of_van_hook_township",
+        "slot_role": "bridge_entity",
+        "terminal": false,
+        "derived_from_state": "state_2",
+        "diffusion_delta": 0.033988325715993306,
+        "diffusion_gain": 0.033988325715993306
+      }
+    },
+    {
+      "node_id": "memory_mem_5",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'What is the county seat of Mountrail County, North Dakota' is Stanley.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.95,
+      "temperature": 1.4646836476468201,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "tdca_run",
+        "memory_kind": "derived_fact",
+        "target_question": "What is the county seat of Mountrail County, North Dakota?",
+        "target_question_norm": "what is the county seat of mountrail county north dakota",
+        "relation_signature": "generic",
+        "answer_text": "Stanley",
+        "support_score": 0.9176818478163213,
+        "evidence_ids": [
+          "doc_2",
+          "doc_9"
+        ],
+        "slot_name": "",
+        "slot_role": "",
+        "terminal": false,
+        "derived_from_state": "state_3",
+        "diffusion_delta": 0.32044017072583,
+        "diffusion_gain": 0.32044017072583
+      }
+    },
+    {
+      "node_id": "state_4",
+      "node_type": "state",
+      "content": "What is the county seat of Mountrail County?",
+      "depth": 1,
+      "parent_id": "state_1",
+      "value": 0.6444421128632453,
+      "temperature": 0.8536262938861418,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.7605780711393806,
+        "evidence_support": 0.8038392466666271,
+        "memory_usefulness": 0.0020092752625624362,
+        "answerability": 0.8110105324242226,
+        "uncertainty": 0.1553089356000071
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_2",
+          "doc_9",
+          "doc_7",
+          "doc_13"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "diffusion_delta": 0.5597289930367898,
+        "diffusion_gain": 0.5597289930367898
+      }
+    },
+    {
+      "node_id": "kg_doc_13",
+      "node_type": "kg",
+      "content": "Kis-Küküllő was an administrative county (comitatus) of the Kingdom of Hungary. Its territory is now in central Romania (central Transylvania). Kis-Küküllő is the Hungarian name for the Târnava Mică River. The capital of the county was \"Dicsőszentmárton\" (now Târnăveni).",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0,
+      "temperature": 0.0,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Kis-Küküllő County",
+        "raw_score": 2.9847645883929084,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "memory_mem_6",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'What is the county seat of Mountrail County' is Stanley.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.874,
+      "temperature": 0.8739663679034577,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "derived_fact",
+        "target_question": "What is the county seat of Mountrail County?",
+        "target_question_norm": "what is the county seat of mountrail county",
+        "relation_signature": "generic",
+        "answer_text": "Stanley",
+        "support_score": 0.8038392466666271,
+        "evidence_ids": [
+          "doc_2",
+          "doc_9"
+        ],
+        "slot_name": "seat_of_county",
+        "slot_role": "target_attribute",
+        "terminal": true,
+        "derived_from_state": "state_4",
+        "diffusion_delta": -0.2051103956926008,
+        "diffusion_gain": 0.0
+      }
+    }
+  ],
+  "edges": [
+    {
+      "source": "state_1",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.9999999950302075
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.4222927444448252
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_14",
+      "edge_type": "supports",
+      "weight": 0.18810586414411942
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_10",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.005974790941311904
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.000424475806147643
+    },
+    {
+      "source": "state_1",
+      "target": "state_2",
+      "edge_type": "refines",
+      "weight": 1.0
+    },
+    {
+      "source": "state_1",
+      "target": "state_4",
+      "edge_type": "refines",
+      "weight": 0.94
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.9999999950302075
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.9999999949679137
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.8353636984890256
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.9999999949679137
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.8353636984890256
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.6076784975934003
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.6076784975934003
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.4222927444448252
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.4038237453968895
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.4038237453968895
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.056798735518171016
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.056798735518171016
+    },
+    {
+      "source": "kg_doc_14",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.18810586414411942
+    },
+    {
+      "source": "kg_doc_14",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.16860752268049076
+    },
+    {
+      "source": "kg_doc_14",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.16860752268049076
+    },
+    {
+      "source": "kg_doc_10",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_10",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_10",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.005974790941311904
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_3",
+      "edge_type": "recalls",
+      "weight": 0.0048754602872214566
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "memory_mem_5",
+      "edge_type": "recalls",
+      "weight": 0.0048754602872214566
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_4",
+      "edge_type": "recalls",
+      "weight": 0.003751992255089545
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "memory_mem_6",
+      "edge_type": "recalls",
+      "weight": 0.003751992255089545
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.000424475806147643
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_3",
+      "edge_type": "recalls",
+      "weight": 0.00034637445160629125
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "memory_mem_5",
+      "edge_type": "recalls",
+      "weight": 0.00034637445160629125
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_4",
+      "edge_type": "recalls",
+      "weight": 0.00026655827003532756
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "memory_mem_6",
+      "edge_type": "recalls",
+      "weight": 0.00026655827003532756
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.9999999949679137
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.4038237453968895
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_14",
+      "edge_type": "supports",
+      "weight": 0.16860752268049076
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_10",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_2",
+      "target": "state_3",
+      "edge_type": "refines",
+      "weight": 1.0
+    },
+    {
+      "source": "state_2",
+      "target": "memory_mem_4",
+      "edge_type": "derives",
+      "weight": 0.9999999949679137
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.9999999971436171
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.8353636984890256
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_19",
+      "edge_type": "supports",
+      "weight": 0.01000154059474799
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_3",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.0048754602872214566
+    },
+    {
+      "source": "state_3",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.00034637445160629125
+    },
+    {
+      "source": "state_3",
+      "target": "memory_mem_5",
+      "edge_type": "derives",
+      "weight": 0.9176818478163213
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.9999999971436171
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.9999999971436171
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.999999995739854
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.999999995739854
+    },
+    {
+      "source": "kg_doc_19",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.01000154059474799
+    },
+    {
+      "source": "kg_doc_19",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.01000154059474799
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "state_2",
+      "edge_type": "recalls",
+      "weight": 0.9999999949679137
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.9999999949679137
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.4038237453968895
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_14",
+      "edge_type": "supports",
+      "weight": 0.16860752268049076
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_10",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "state_3",
+      "edge_type": "recalls",
+      "weight": 0.9176818478163213
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.9999999971436171
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.8353636984890256
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_19",
+      "edge_type": "supports",
+      "weight": 0.01000154059474799
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.0048754602872214566
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.00034637445160629125
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.999999995739854
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.6076784975934003
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.056798735518171016
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_13",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_4",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.003751992255089545
+    },
+    {
+      "source": "state_4",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.00026655827003532756
+    },
+    {
+      "source": "state_4",
+      "target": "memory_mem_6",
+      "edge_type": "derives",
+      "weight": 0.95
+    },
+    {
+      "source": "kg_doc_13",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_13",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "state_4",
+      "edge_type": "recalls",
+      "weight": 0.95
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.999999995739854
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.6076784975934003
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.056798735518171016
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_13",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.003751992255089545
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.00026655827003532756
+    }
+  ]
+}

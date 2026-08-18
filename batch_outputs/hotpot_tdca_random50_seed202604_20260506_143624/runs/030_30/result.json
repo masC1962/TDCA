@@ -1,0 +1,126 @@
+{
+  "question": "Spill.com gave their final review for a movie directed by who?",
+  "final_answer": "John Lee Hancock",
+  "best_node": {
+    "node_id": "state_4",
+    "node_type": "state",
+    "content": "Who is the director of that movie?",
+    "depth": 2,
+    "parent_id": "state_2",
+    "value": 0.5705744660882072,
+    "temperature": 1.5893965649442916,
+    "expanded": true,
+    "visit_count": 1,
+    "persistent": false,
+    "score_breakdown": {
+      "task_progress": 0.5708773372092749,
+      "evidence_support": 0.6692470702233575,
+      "memory_usefulness": 0.5139667251540021,
+      "answerability": 0.6679568684450121,
+      "uncertainty": 0.17953552735979564
+    },
+    "metadata": {
+      "kind": "bridge",
+      "evidence_ids": [
+        "doc_4",
+        "doc_6",
+        "doc_1",
+        "doc_8"
+      ],
+      "memory_ids": [
+        "mem_1",
+        "mem_3"
+      ],
+      "diffusion_delta": 0.15386095216993856,
+      "diffusion_gain": 0.15386095216993856
+    }
+  },
+  "final_synthesis_node_ids": [
+    "state_4",
+    "state_2",
+    "state_7",
+    "state_5",
+    "state_1"
+  ],
+  "answer_history": [
+    {
+      "node_id": "memory_mem_4",
+      "content": "Conclusion: The director of that movie is John Lee Hancock.",
+      "answer_text": "John Lee Hancock",
+      "value": 0.6705744660882071,
+      "evidence_ids": [],
+      "step": 3
+    },
+    {
+      "node_id": "state_4",
+      "answer_text": "John Lee Hancock",
+      "previous_answer": "",
+      "confidence": 0.6705744660882071,
+      "score": 0.6747881326070522,
+      "source": "expansion_candidate",
+      "step": 2,
+      "evidence_ids": [
+        "doc_6",
+        "doc_4",
+        "doc_1",
+        "doc_8"
+      ],
+      "kind": "anytime_answer"
+    },
+    {
+      "node_id": "memory_mem_5",
+      "content": "Conclusion: The director of the final movie reviewed by Spill.com before shutdown is John Lee Hancock.",
+      "answer_text": "John Lee Hancock",
+      "value": 0.6706531759068678,
+      "evidence_ids": [
+        "doc_4"
+      ],
+      "step": 6
+    },
+    {
+      "node_id": "memory_mem_6",
+      "content": "Conclusion: The director of the last movie reviewed by Spill.com before shutdown is John Lee Hancock.",
+      "answer_text": "John Lee Hancock",
+      "value": 0.6556728029911065,
+      "evidence_ids": [
+        "doc_4"
+      ],
+      "step": 7
+    },
+    {
+      "node_id": "state_4",
+      "answer_text": "John Lee Hancock",
+      "source": "answer_judge",
+      "choice": "A",
+      "candidate_source": "expansion_candidate",
+      "base_score": 0.9908600580198992,
+      "judge_confidence": 0.0,
+      "judge_reason": "",
+      "step": 7,
+      "kind": "final_answer_selection"
+    }
+  ],
+  "anytime_answer": "John Lee Hancock",
+  "anytime_answer_score": 0.6747881326070522,
+  "anytime_answer_source": "expansion_candidate",
+  "anytime_answer_node_id": "state_4",
+  "stats": {
+    "steps": 7,
+    "llm_calls": 11,
+    "generated_tokens": 965,
+    "token_budget_remaining": 235,
+    "total_nodes": 25,
+    "kg_nodes": 10,
+    "memory_nodes": 6,
+    "state_nodes": 9,
+    "deleted_state_nodes": 0,
+    "scheduler_mode": "tdca",
+    "scoring_mode": "hybrid",
+    "stop_reason": "final_synthesis_reserve",
+    "goal_kind": "bridge",
+    "goal_completion": 0.0,
+    "anytime_answer": "John Lee Hancock",
+    "anytime_answer_score": 0.6747881326070522,
+    "anytime_answer_source": "expansion_candidate"
+  }
+}

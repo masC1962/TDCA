@@ -1,0 +1,168 @@
+{
+  "question": "In which city is the ambassador of the Rabat-Salé-Kénitra administrative region to China based?",
+  "final_answer": "Beijing",
+  "best_node": {
+    "node_id": "state_1",
+    "node_type": "state",
+    "content": "In which city is the ambassador of the Rabat-Salé-Kénitra administrative region to China based?",
+    "depth": 0,
+    "parent_id": null,
+    "value": 0.7418825833661989,
+    "temperature": 0.8751705417618381,
+    "expanded": true,
+    "visit_count": 1,
+    "persistent": false,
+    "score_breakdown": {
+      "task_progress": 0.905051258950905,
+      "evidence_support": 0.7207389969144262,
+      "memory_usefulness": 0.48672266765716377,
+      "answerability": 0.8603694984572131,
+      "uncertainty": 0.17026698055540326
+    },
+    "metadata": {
+      "diffusion_delta": 0.0984542331254934,
+      "diffusion_gain": 0.0984542331254934
+    }
+  },
+  "final_synthesis_node_ids": [
+    "state_2",
+    "state_4",
+    "state_3",
+    "state_6",
+    "state_1"
+  ],
+  "answer_history": [
+    {
+      "node_id": "",
+      "answer_text": "Rabat",
+      "previous_answer": "",
+      "confidence": 0.28,
+      "score": 0.16880000000000003,
+      "source": "closed_book_initial",
+      "step": 0,
+      "evidence_ids": [],
+      "kind": "anytime_answer"
+    },
+    {
+      "node_id": "memory_mem_4",
+      "content": "Conclusion: The answer to 'What is the capital city of the Rabat-Salé-Kénitra administrative region' is Rabat.",
+      "answer_text": "Rabat",
+      "value": 1.0,
+      "confidence": 1.0,
+      "evidence_ids": [
+        "doc_2"
+      ],
+      "step": 2,
+      "kind": "intermediate_answer"
+    },
+    {
+      "node_id": "memory_mem_5",
+      "content": "Conclusion: The answer to 'In which city is the Moroccan ambassador to China based' is Beijing.",
+      "answer_text": "Beijing",
+      "value": 0.92,
+      "evidence_ids": [
+        "doc_8"
+      ],
+      "step": 3
+    },
+    {
+      "node_id": "state_3",
+      "answer_text": "Beijing",
+      "previous_answer": "Rabat",
+      "confidence": 1.0,
+      "score": 0.8598758021505922,
+      "source": "expansion_candidate",
+      "step": 2,
+      "evidence_ids": [
+        "doc_8",
+        "doc_2",
+        "doc_5",
+        "doc_3"
+      ],
+      "kind": "anytime_answer"
+    },
+    {
+      "node_id": "memory_mem_6",
+      "content": "Conclusion: The answer to 'Where is the Moroccan ambassador to China based' is Beijing.",
+      "answer_text": "Beijing",
+      "value": 1.0,
+      "confidence": 1.0,
+      "evidence_ids": [
+        "doc_8"
+      ],
+      "step": 4,
+      "kind": "intermediate_answer"
+    },
+    {
+      "node_id": "memory_mem_7",
+      "content": "Conclusion: The answer to 'Where is Morocco's ambassador to China based' is Beijing.",
+      "answer_text": "Beijing",
+      "value": 1.0,
+      "confidence": 1.0,
+      "evidence_ids": [
+        "doc_8"
+      ],
+      "step": 7,
+      "kind": "intermediate_answer"
+    },
+    {
+      "node_id": "state_1",
+      "answer_text": "Beijing",
+      "previous_answer": "Beijing",
+      "confidence": 0.8603694984572131,
+      "score": 0.9227359871984432,
+      "source": "final_synthesis",
+      "step": 7,
+      "evidence_ids": [
+        "doc_2",
+        "doc_8",
+        "doc_5",
+        "doc_3"
+      ],
+      "kind": "anytime_answer"
+    },
+    {
+      "node_id": "memory_mem_8",
+      "content": "Conclusion: The answer to 'In which city is the ambassador of the Rabat-Salé-Kénitra administrative region to China based' is Beijing.",
+      "answer_text": "Beijing",
+      "value": 0.0,
+      "evidence_ids": [],
+      "step": 8
+    },
+    {
+      "node_id": "state_1",
+      "answer_text": "Beijing",
+      "source": "answer_judge",
+      "choice": "A",
+      "candidate_source": "anytime",
+      "base_score": 1.0,
+      "judge_confidence": 0.0,
+      "judge_reason": "",
+      "step": 7,
+      "kind": "final_answer_selection"
+    }
+  ],
+  "anytime_answer": "Beijing",
+  "anytime_answer_score": 0.9227359871984432,
+  "anytime_answer_source": "final_synthesis",
+  "anytime_answer_node_id": "state_1",
+  "stats": {
+    "steps": 7,
+    "llm_calls": 13,
+    "generated_tokens": 888,
+    "token_budget_remaining": 312,
+    "total_nodes": 24,
+    "kg_nodes": 8,
+    "memory_nodes": 7,
+    "state_nodes": 9,
+    "deleted_state_nodes": 1,
+    "scheduler_mode": "tdca",
+    "scoring_mode": "hybrid",
+    "stop_reason": "final_synthesis_reserve",
+    "goal_kind": "bridge",
+    "goal_completion": 0.5,
+    "anytime_answer": "Beijing",
+    "anytime_answer_score": 0.9227359871984432,
+    "anytime_answer_source": "final_synthesis"
+  }
+}

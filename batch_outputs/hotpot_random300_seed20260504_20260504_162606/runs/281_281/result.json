@@ -1,0 +1,157 @@
+{
+  "question": "Dunstan is an electoral district that includes which suburb of Adelaide in the City of Norwood Payneham St Peters?",
+  "final_answer": "Payneham South, Marryatville, Hackney, Joslin",
+  "best_node": {
+    "node_id": "memory_mem_6",
+    "node_type": "memory",
+    "content": "Conclusion: The answer to 'Dunstan is an electoral district that includes which suburb of Adelaide in the City of Norwood Payneham St Peters' is Payneham South, Marryatville, Hackney, Joslin.",
+    "depth": 0,
+    "parent_id": null,
+    "value": 1.0,
+    "temperature": 1.2441592448824406,
+    "expanded": false,
+    "visit_count": 0,
+    "persistent": true,
+    "score_breakdown": {},
+    "metadata": {
+      "source": "memory",
+      "memory_kind": "answer_candidate",
+      "target_question": "Dunstan is an electoral district that includes which suburb of Adelaide in the City of Norwood Payneham St Peters?",
+      "target_question_norm": "dunstan is an electoral district that includes which suburb of adelaide in the city of norwood payneham st peters",
+      "relation_signature": "generic",
+      "answer_text": "Payneham South, Marryatville, Hackney, Joslin",
+      "support_score": 1.0,
+      "derived_from_state": "state_1",
+      "composed_from": [
+        "memory_mem_5",
+        "memory_mem_4"
+      ],
+      "slot_role": "target_attribute",
+      "terminal": true,
+      "diffusion_delta": 0.24415924488244056,
+      "diffusion_gain": 0.24415924488244056
+    }
+  },
+  "final_synthesis_node_ids": [
+    "state_5",
+    "state_6",
+    "memory_mem_6",
+    "state_3",
+    "state_1"
+  ],
+  "answer_history": [
+    {
+      "node_id": "",
+      "answer_text": "Stepney",
+      "previous_answer": "",
+      "confidence": 0.28,
+      "score": 0.16880000000000003,
+      "source": "closed_book_initial",
+      "step": 0,
+      "evidence_ids": [],
+      "kind": "anytime_answer"
+    },
+    {
+      "node_id": "memory_mem_4",
+      "content": "Conclusion: The answer to 'Which suburbs are located in the City of Norwood Payneham St Peters' is Payneham South, Marryatville, Hackney, Joslin.",
+      "answer_text": "Payneham South, Marryatville, Hackney, Joslin",
+      "value": 1.0,
+      "confidence": 1.0,
+      "evidence_ids": [
+        "doc_5",
+        "doc_1"
+      ],
+      "step": 2,
+      "kind": "intermediate_answer"
+    },
+    {
+      "node_id": "memory_mem_5",
+      "content": "Conclusion: The answer to 'Which suburbs are included in the electoral district of Dunstan' is Payneham South.",
+      "answer_text": "Payneham South",
+      "value": 0.874,
+      "evidence_ids": [
+        "doc_9"
+      ],
+      "step": 3
+    },
+    {
+      "node_id": "memory_mem_6",
+      "content": "Conclusion: The answer to 'Dunstan is an electoral district that includes which suburb of Adelaide in the City of Norwood Payneham St Peters' is Payneham South, Marryatville, Hackney, Joslin.",
+      "answer_text": "Payneham South, Marryatville, Hackney, Joslin",
+      "value": 1.0,
+      "evidence_ids": [
+        "doc_9",
+        "doc_5",
+        "doc_1"
+      ],
+      "step": 3
+    },
+    {
+      "node_id": "state_2",
+      "answer_text": "Payneham South",
+      "previous_answer": "Stepney",
+      "confidence": 0.95,
+      "score": 0.7948182075455601,
+      "source": "expansion_candidate",
+      "step": 2,
+      "evidence_ids": [
+        "doc_9",
+        "doc_1",
+        "doc_5",
+        "doc_6"
+      ],
+      "kind": "anytime_answer"
+    },
+    {
+      "node_id": "memory_mem_6",
+      "answer_text": "Payneham South",
+      "previous_answer": "Payneham South",
+      "confidence": 1.0,
+      "score": 0.8399999995042913,
+      "source": "expansion_candidate",
+      "step": 2,
+      "evidence_ids": [
+        "doc_9",
+        "doc_1",
+        "doc_7",
+        "doc_8"
+      ],
+      "kind": "anytime_answer"
+    },
+    {
+      "node_id": "memory_mem_6",
+      "answer_text": "Payneham South, Marryatville, Hackney, Joslin",
+      "source": "answer_judge",
+      "choice": "A",
+      "candidate_source": "composed_root_memory",
+      "base_score": 1.0,
+      "judge_confidence": 0.0,
+      "judge_reason": "All four suburbs are in both Dunstan and the City of Norwood Payneham St Peters per evidence.",
+      "step": 3,
+      "kind": "final_answer_selection"
+    }
+  ],
+  "anytime_answer": "Payneham South",
+  "anytime_answer_score": 0.8399999995042913,
+  "anytime_answer_source": "expansion_candidate",
+  "anytime_answer_node_id": "memory_mem_6",
+  "stats": {
+    "steps": 3,
+    "llm_calls": 8,
+    "generated_tokens": 626,
+    "token_budget_remaining": 574,
+    "total_nodes": 20,
+    "kg_nodes": 8,
+    "memory_nodes": 5,
+    "state_nodes": 7,
+    "deleted_state_nodes": 0,
+    "scheduler_mode": "tdca",
+    "scoring_mode": "hybrid",
+    "stop_reason": "llm_stop_with_root_memory",
+    "goal_kind": "bridge",
+    "goal_completion": 1.0,
+    "anytime_answer": "Payneham South",
+    "anytime_answer_score": 0.8399999995042913,
+    "anytime_answer_source": "expansion_candidate"
+  }
+}

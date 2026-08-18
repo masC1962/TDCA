@@ -1,0 +1,1540 @@
+{
+  "nodes": [
+    {
+      "node_id": "state_1",
+      "node_type": "state",
+      "content": "What is the birth city of the director of the movie Inception?",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.8162351528947343,
+      "temperature": 0.5240421239699464,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.9426581690393658,
+        "evidence_support": 0.8407171362204607,
+        "memory_usefulness": 0.6603129737461955,
+        "answerability": 0.8803585681102303,
+        "uncertainty": 0.12548525820472628
+      },
+      "metadata": {}
+    },
+    {
+      "node_id": "kg_doc_4",
+      "node_type": "kg",
+      "content": "For a composition question, identify the intermediate entity before retrieving its attribute.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999897130539,
+      "temperature": 0.9999999897130539,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Reasoning Pattern",
+        "raw_score": 2.5181992101899775,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_1",
+      "node_type": "kg",
+      "content": "Inception is a 2010 science fiction film directed by Christopher Nolan.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999867856503,
+      "temperature": 0.9999999867856503,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Inception Overview",
+        "raw_score": 1.3405956801981194,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_3",
+      "node_type": "kg",
+      "content": "Leonardo DiCaprio starred in Inception and was born in Los Angeles.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.07346967564030198,
+      "temperature": 0.07346967564030198,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Leonardo DiCaprio Fact",
+        "raw_score": 0.8297479328886093,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_2",
+      "node_type": "kg",
+      "content": "Christopher Nolan is a film director born in London.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999914801219,
+      "temperature": 0.9999999914801219,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Christopher Nolan Biography",
+        "raw_score": 1.9987129709910234,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "memory_mem_6",
+      "node_type": "memory",
+      "content": "Conclusion: The birth city of the director of the movie Inception is London.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.8185188167643883,
+      "temperature": 1.9260336353798058,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.8185188167643883,
+        "source": "tdca_run",
+        "memory_kind": "answer_candidate",
+        "target_question": "What is the birth city of the director of the movie Inception?",
+        "target_question_norm": "what is the birth city of the director of the movie inception",
+        "answer_text": "London",
+        "support_score": 0.8185188167643883,
+        "derived_from_state": "state_1",
+        "composed_from": [
+          "memory_mem_4",
+          "memory_mem_5"
+        ],
+        "raw_score": 5.815955521159081
+      }
+    },
+    {
+      "node_id": "memory_mem_4",
+      "node_type": "memory",
+      "content": "Conclusion: The director of the movie Inception is Christopher Nolan.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.7555025247568465,
+      "temperature": 1.6860385333911496,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.7253569059809548,
+        "source": "tdca_run",
+        "memory_kind": "derived_fact",
+        "target_question": "Who is the director of the movie Inception?",
+        "target_question_norm": "who is the director of the movie inception",
+        "answer_text": "Christopher Nolan",
+        "support_score": 0.8185188167643883,
+        "derived_from_state": "state_2",
+        "raw_score": 5.974963130548812
+      }
+    },
+    {
+      "node_id": "memory_mem_7",
+      "node_type": "memory",
+      "content": "Template: for nested relation questions, solve the intermediate relation first, then query the target attribute, then verify the chain.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.1663425648525911,
+      "temperature": 0.06843685689550676,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.8185188167643883,
+        "source": "tdca_run",
+        "kind": "strategy_template",
+        "memory_kind": "template",
+        "raw_score": 0.49854840691346414
+      }
+    },
+    {
+      "node_id": "memory_mem_1",
+      "node_type": "memory",
+      "content": "Template: for compositional multi-hop questions, first solve the intermediate entity and then ask for the final attribute.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.02119603950062725,
+      "temperature": 0.01460897117271166,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.96,
+        "tag": "compositional_template",
+        "memory_kind": "template",
+        "raw_score": 0.42655446233464045,
+        "source": "memory"
+      }
+    },
+    {
+      "node_id": "memory_mem_3",
+      "node_type": "memory",
+      "content": "Template: when evidence already grounds the answer, switch from branching to short verification and synthesis.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.13052887046662429,
+      "temperature": 0.030416534971109493,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.88,
+        "tag": "verification_then_stop",
+        "memory_kind": "template",
+        "raw_score": 2.476982038785426,
+        "source": "memory"
+      }
+    },
+    {
+      "node_id": "memory_mem_2",
+      "node_type": "memory",
+      "content": "Template: for comparison questions, split the problem into one sub-question per entity before comparing them.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0,
+      "temperature": 0.0,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.9,
+        "tag": "comparison_template",
+        "memory_kind": "template",
+        "raw_score": 0.3901947794490502,
+        "source": "memory"
+      }
+    },
+    {
+      "node_id": "state_2",
+      "node_type": "state",
+      "content": "Who is the director of the movie Inception?",
+      "depth": 1,
+      "parent_id": "state_1",
+      "value": 0.7555025247568465,
+      "temperature": 0.6729894504491319,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.8013334407018464,
+        "evidence_support": 0.8185188167643883,
+        "memory_usefulness": 0.7651802664196777,
+        "answerability": 0.8025927417155274,
+        "uncertainty": 0.1290369893176979
+      },
+      "metadata": {
+        "kind": "bridge",
+        "evidence_ids": [
+          "doc_1",
+          "doc_4",
+          "doc_3",
+          "doc_2"
+        ],
+        "memory_ids": [
+          "mem_4",
+          "mem_6",
+          "mem_7",
+          "mem_1",
+          "mem_3",
+          "mem_2"
+        ]
+      }
+    },
+    {
+      "node_id": "state_3",
+      "node_type": "state",
+      "content": "Where was Christopher Nolan born?",
+      "depth": 1,
+      "parent_id": "state_1",
+      "value": 0.5550184406123876,
+      "temperature": 0.6804443435276013,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.5050955877491832,
+        "evidence_support": 0.7363766326366198,
+        "memory_usefulness": 0.4767802774519899,
+        "answerability": 0.6281883163183098,
+        "uncertainty": 0.14217973877814083
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_2",
+          "doc_5",
+          "doc_1",
+          "doc_3"
+        ],
+        "memory_ids": [
+          "mem_5",
+          "mem_4"
+        ]
+      }
+    },
+    {
+      "node_id": "kg_doc_5",
+      "node_type": "kg",
+      "content": "Interstellar is another Christopher Nolan film.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.7668384294069529,
+      "temperature": 0.7668384294069529,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Distractor Film",
+        "raw_score": 1.9587759111917187,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "memory_mem_5",
+      "node_type": "memory",
+      "content": "Conclusion: Christopher Nolan was born in London.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.6890890597407366,
+      "temperature": 0.6808834689328371,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.689089060681907,
+        "source": "tdca_run",
+        "memory_kind": "derived_fact",
+        "target_question": "Where was Christopher Nolan born?",
+        "target_question_norm": "where was christopher nolan born",
+        "answer_text": "London",
+        "support_score": 0.7363766326366198,
+        "derived_from_state": "state_3",
+        "raw_score": 2.311947702229748
+      }
+    },
+    {
+      "node_id": "state_4",
+      "node_type": "state",
+      "content": "Does the evidence support that Christopher Nolan is the director of the movie Inception?",
+      "depth": 1,
+      "parent_id": "state_1",
+      "value": 0.7563352116303087,
+      "temperature": 0.7350606912811619,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.8114096001815165,
+        "evidence_support": 0.8465081486523608,
+        "memory_usefulness": 0.6532113120611271,
+        "answerability": 0.8165874076595137,
+        "uncertainty": 0.12455869621562228
+      },
+      "metadata": {
+        "kind": "verification",
+        "evidence_ids": [
+          "doc_2",
+          "doc_1",
+          "doc_4",
+          "doc_5"
+        ],
+        "memory_ids": [
+          "mem_4",
+          "mem_6",
+          "mem_5",
+          "mem_3",
+          "mem_7",
+          "mem_1"
+        ]
+      }
+    },
+    {
+      "node_id": "state_5",
+      "node_type": "state",
+      "content": "What is the birth city of Christopher Nolan?",
+      "depth": 2,
+      "parent_id": "state_4",
+      "value": 0.7823945074826553,
+      "temperature": 1.8697082489140107,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.8246975814610353,
+        "evidence_support": 0.8834192077621354,
+        "memory_usefulness": 0.7135616280459891,
+        "answerability": 0.8350429372144009,
+        "uncertainty": 0.11865292675805833
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_2",
+          "doc_5",
+          "doc_1",
+          "doc_4"
+        ],
+        "memory_ids": [
+          "mem_6",
+          "mem_4",
+          "mem_5",
+          "mem_7",
+          "mem_1",
+          "mem_3"
+        ]
+      }
+    },
+    {
+      "node_id": "state_6",
+      "node_type": "state",
+      "content": "What is the director of the movie Inception?",
+      "depth": 3,
+      "parent_id": "state_5",
+      "value": 0.7740814484882752,
+      "temperature": 1.482925700558793,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.844303606102184,
+        "evidence_support": 0.814423597197425,
+        "memory_usefulness": 0.7651802664196777,
+        "answerability": 0.8227673541542679,
+        "uncertainty": 0.129692224448412
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_1",
+          "doc_4",
+          "doc_2",
+          "doc_3"
+        ],
+        "memory_ids": [
+          "mem_4",
+          "mem_6",
+          "mem_7",
+          "mem_1",
+          "mem_3",
+          "mem_2"
+        ]
+      }
+    },
+    {
+      "node_id": "memory_mem_8",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'What is the birth city of Christopher Nolan' is London.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.7823945074826553,
+      "temperature": 1.2909052438932507,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "tdca_run",
+        "memory_kind": "derived_fact",
+        "target_question": "What is the birth city of Christopher Nolan?",
+        "target_question_norm": "what is the birth city of christopher nolan",
+        "answer_text": "London",
+        "support_score": 0.8834192077621354,
+        "derived_from_state": "state_5",
+        "score": 0.7823945074826553,
+        "raw_score": 2.4104848147303457
+      }
+    },
+    {
+      "node_id": "memory_mem_9",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'What is the director of the movie Inception' is Christopher Nolan.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.7740814484882752,
+      "temperature": 1.1508290571312276,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "tdca_run",
+        "memory_kind": "derived_fact",
+        "target_question": "What is the director of the movie Inception?",
+        "target_question_norm": "what is the director of the movie inception",
+        "answer_text": "Christopher Nolan",
+        "support_score": 0.814423597197425,
+        "derived_from_state": "state_6",
+        "score": 0.7740814484882752,
+        "raw_score": 5.490565537239343
+      }
+    }
+  ],
+  "edges": [
+    {
+      "source": "state_1",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.9999999865529325
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.6814342858879889
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.07346967564030198
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_6",
+      "edge_type": "derives",
+      "weight": 0.8185188167643883
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_4",
+      "edge_type": "recalls",
+      "weight": 0.5021071314022678
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_7",
+      "edge_type": "recalls",
+      "weight": 0.024799916843247626
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.01816818535368824
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.0013213021602379524
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_2",
+      "edge_type": "recalls",
+      "weight": 0.0
+    },
+    {
+      "source": "state_1",
+      "target": "state_2",
+      "edge_type": "refines",
+      "weight": 0.97
+    },
+    {
+      "source": "state_1",
+      "target": "state_3",
+      "edge_type": "refines",
+      "weight": 0.88
+    },
+    {
+      "source": "state_1",
+      "target": "state_4",
+      "edge_type": "verifies",
+      "weight": 0.7
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.9999999865529325
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.6370376467431264
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.48325747300026284
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "state_6",
+      "edge_type": "supports",
+      "weight": 0.6288472079073885
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "memory_mem_8",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "memory_mem_9",
+      "edge_type": "supports",
+      "weight": 0.6288472079073885
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.6370376467431264
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.6814342858879889
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.9999999867856503
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.375914595569841
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.6930163074626848
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.530148325657983
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.375914595569841
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "state_6",
+      "edge_type": "supports",
+      "weight": 0.9999999864874615
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "memory_mem_8",
+      "edge_type": "supports",
+      "weight": 0.530148325657983
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "memory_mem_9",
+      "edge_type": "supports",
+      "weight": 0.9999999864874615
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.9999999867856503
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.07346967564030198
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.02206756626983496
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "state_6",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "memory_mem_9",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.02206756626983496
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.9999999914801219
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.9999999898420368
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.999999986117318
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.9999999914801219
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "state_6",
+      "edge_type": "supports",
+      "weight": 0.315247930278521
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "memory_mem_8",
+      "edge_type": "supports",
+      "weight": 0.999999986117318
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "memory_mem_9",
+      "edge_type": "supports",
+      "weight": 0.315247930278521
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.8185188167643883
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "state_2",
+      "edge_type": "recalls",
+      "weight": 0.7950615092681973
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "state_4",
+      "edge_type": "recalls",
+      "weight": 0.5810657189041762
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "state_5",
+      "edge_type": "recalls",
+      "weight": 0.8185188155076023
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "state_6",
+      "edge_type": "recalls",
+      "weight": 0.7938332126281143
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "memory_mem_8",
+      "edge_type": "recalls",
+      "weight": 0.8185188155076023
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "memory_mem_9",
+      "edge_type": "recalls",
+      "weight": 0.7938332126281143
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "memory_mem_4",
+      "edge_type": "recalls",
+      "weight": 0.7950615092681973
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.5021071314022678
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "state_2",
+      "edge_type": "recalls",
+      "weight": 0.8185188167643883
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "state_3",
+      "edge_type": "recalls",
+      "weight": 0.26447149516324325
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "state_4",
+      "edge_type": "recalls",
+      "weight": 0.725356905218078
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "state_5",
+      "edge_type": "recalls",
+      "weight": 0.6086044405843758
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "memory_mem_5",
+      "edge_type": "recalls",
+      "weight": 0.26447149516324325
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "state_6",
+      "edge_type": "recalls",
+      "weight": 0.7253569049138922
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "memory_mem_8",
+      "edge_type": "recalls",
+      "weight": 0.6086044405843758
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "memory_mem_9",
+      "edge_type": "recalls",
+      "weight": 0.7253569049138922
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.9999999867856503
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.6370376467431264
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.02206756626983496
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "memory_mem_6",
+      "edge_type": "derives",
+      "weight": 0.7555025247568465
+    },
+    {
+      "source": "memory_mem_7",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.024799916843247626
+    },
+    {
+      "source": "memory_mem_7",
+      "target": "state_2",
+      "edge_type": "recalls",
+      "weight": 0.01062077466684134
+    },
+    {
+      "source": "memory_mem_7",
+      "target": "state_4",
+      "edge_type": "recalls",
+      "weight": 0.011885488838006854
+    },
+    {
+      "source": "memory_mem_7",
+      "target": "state_5",
+      "edge_type": "recalls",
+      "weight": 0.014644885453914574
+    },
+    {
+      "source": "memory_mem_7",
+      "target": "state_6",
+      "edge_type": "recalls",
+      "weight": 0.024640516748346886
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.01816818535368824
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_2",
+      "edge_type": "recalls",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_4",
+      "edge_type": "recalls",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_5",
+      "edge_type": "recalls",
+      "weight": 0.01039252933205201
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_6",
+      "edge_type": "recalls",
+      "weight": 0.017485783270204037
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.0013213021602379524
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_2",
+      "edge_type": "recalls",
+      "weight": 0.0015415063329361244
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_4",
+      "edge_type": "recalls",
+      "weight": 0.13052887046662429
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_5",
+      "edge_type": "recalls",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_6",
+      "edge_type": "recalls",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_2",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_2",
+      "target": "state_2",
+      "edge_type": "recalls",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_2",
+      "target": "state_6",
+      "edge_type": "recalls",
+      "weight": 0.0
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.9999999867856503
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.6370376467431264
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.02206756626983496
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_2",
+      "target": "memory_mem_4",
+      "edge_type": "derives",
+      "weight": 0.8185188167643883
+    },
+    {
+      "source": "state_2",
+      "target": "memory_mem_6",
+      "edge_type": "recalls",
+      "weight": 0.7950615092681973
+    },
+    {
+      "source": "state_2",
+      "target": "memory_mem_7",
+      "edge_type": "recalls",
+      "weight": 0.01062077466684134
+    },
+    {
+      "source": "state_2",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.0
+    },
+    {
+      "source": "state_2",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.0015415063329361244
+    },
+    {
+      "source": "state_2",
+      "target": "memory_mem_2",
+      "edge_type": "recalls",
+      "weight": 0.0
+    },
+    {
+      "source": "state_2",
+      "target": "memory_mem_9",
+      "edge_type": "recalls",
+      "weight": 0.7065011348955985
+    },
+    {
+      "source": "state_2",
+      "target": "memory_mem_8",
+      "edge_type": "recalls",
+      "weight": 0.27975881031210015
+    },
+    {
+      "source": "state_2",
+      "target": "state_5",
+      "edge_type": "refines",
+      "weight": 0.8
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.9999999914801219
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.4727532737931177
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.375914595569841
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_3",
+      "target": "memory_mem_5",
+      "edge_type": "derives",
+      "weight": 0.7363766326366198
+    },
+    {
+      "source": "state_3",
+      "target": "memory_mem_4",
+      "edge_type": "recalls",
+      "weight": 0.26447149516324325
+    },
+    {
+      "source": "state_3",
+      "target": "state_5",
+      "edge_type": "verifies",
+      "weight": 1.0
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.4727532737931177
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.7668384294069529
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.4727532737931177
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "memory_mem_8",
+      "edge_type": "supports",
+      "weight": 0.7668384294069529
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "state_3",
+      "edge_type": "recalls",
+      "weight": 0.7363766326366198
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "state_4",
+      "edge_type": "recalls",
+      "weight": 0.15847344715874429
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "state_5",
+      "edge_type": "recalls",
+      "weight": 0.2963088235214553
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.9999999914801219
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.4727532737931177
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.375914595569841
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "memory_mem_4",
+      "edge_type": "recalls",
+      "weight": 0.26447149516324325
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "memory_mem_6",
+      "edge_type": "derives",
+      "weight": 0.6890890597407366
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.9999999898420368
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.6930163074626848
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.48325747300026284
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_4",
+      "target": "memory_mem_4",
+      "edge_type": "recalls",
+      "weight": 0.725356905218078
+    },
+    {
+      "source": "state_4",
+      "target": "memory_mem_6",
+      "edge_type": "recalls",
+      "weight": 0.5810657189041762
+    },
+    {
+      "source": "state_4",
+      "target": "memory_mem_5",
+      "edge_type": "recalls",
+      "weight": 0.15847344715874429
+    },
+    {
+      "source": "state_4",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.13052887046662429
+    },
+    {
+      "source": "state_4",
+      "target": "memory_mem_7",
+      "edge_type": "recalls",
+      "weight": 0.011885488838006854
+    },
+    {
+      "source": "state_4",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.0
+    },
+    {
+      "source": "state_4",
+      "target": "state_5",
+      "edge_type": "refines",
+      "weight": 0.8
+    },
+    {
+      "source": "state_5",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.999999986117318
+    },
+    {
+      "source": "state_5",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.7668384294069529
+    },
+    {
+      "source": "state_5",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.530148325657983
+    },
+    {
+      "source": "state_5",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_5",
+      "target": "memory_mem_6",
+      "edge_type": "recalls",
+      "weight": 0.8185188155076023
+    },
+    {
+      "source": "state_5",
+      "target": "memory_mem_4",
+      "edge_type": "recalls",
+      "weight": 0.6086044405843758
+    },
+    {
+      "source": "state_5",
+      "target": "memory_mem_5",
+      "edge_type": "recalls",
+      "weight": 0.2963088235214553
+    },
+    {
+      "source": "state_5",
+      "target": "memory_mem_7",
+      "edge_type": "recalls",
+      "weight": 0.014644885453914574
+    },
+    {
+      "source": "state_5",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.01039252933205201
+    },
+    {
+      "source": "state_5",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.0
+    },
+    {
+      "source": "state_5",
+      "target": "state_6",
+      "edge_type": "refines",
+      "weight": 0.9
+    },
+    {
+      "source": "state_5",
+      "target": "memory_mem_8",
+      "edge_type": "derives",
+      "weight": 0.8834192077621354
+    },
+    {
+      "source": "state_6",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.9999999864874615
+    },
+    {
+      "source": "state_6",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.6288472079073885
+    },
+    {
+      "source": "state_6",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.315247930278521
+    },
+    {
+      "source": "state_6",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_6",
+      "target": "memory_mem_4",
+      "edge_type": "recalls",
+      "weight": 0.7253569049138922
+    },
+    {
+      "source": "state_6",
+      "target": "memory_mem_6",
+      "edge_type": "recalls",
+      "weight": 0.7938332126281143
+    },
+    {
+      "source": "state_6",
+      "target": "memory_mem_7",
+      "edge_type": "recalls",
+      "weight": 0.024640516748346886
+    },
+    {
+      "source": "state_6",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.017485783270204037
+    },
+    {
+      "source": "state_6",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.0
+    },
+    {
+      "source": "state_6",
+      "target": "memory_mem_2",
+      "edge_type": "recalls",
+      "weight": 0.0
+    },
+    {
+      "source": "state_6",
+      "target": "memory_mem_8",
+      "edge_type": "recalls",
+      "weight": 0.4895170675482604
+    },
+    {
+      "source": "state_6",
+      "target": "memory_mem_9",
+      "edge_type": "derives",
+      "weight": 0.814423597197425
+    },
+    {
+      "source": "memory_mem_8",
+      "target": "state_5",
+      "edge_type": "recalls",
+      "weight": 0.8834192077621354
+    },
+    {
+      "source": "memory_mem_8",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.999999986117318
+    },
+    {
+      "source": "memory_mem_8",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.7668384294069529
+    },
+    {
+      "source": "memory_mem_8",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.530148325657983
+    },
+    {
+      "source": "memory_mem_8",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_8",
+      "target": "memory_mem_6",
+      "edge_type": "recalls",
+      "weight": 0.8185188155076023
+    },
+    {
+      "source": "memory_mem_8",
+      "target": "memory_mem_4",
+      "edge_type": "recalls",
+      "weight": 0.6086044405843758
+    },
+    {
+      "source": "memory_mem_8",
+      "target": "state_6",
+      "edge_type": "recalls",
+      "weight": 0.4895170675482604
+    },
+    {
+      "source": "memory_mem_8",
+      "target": "state_2",
+      "edge_type": "recalls",
+      "weight": 0.27975881031210015
+    },
+    {
+      "source": "memory_mem_9",
+      "target": "state_6",
+      "edge_type": "recalls",
+      "weight": 0.814423597197425
+    },
+    {
+      "source": "memory_mem_9",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.9999999864874615
+    },
+    {
+      "source": "memory_mem_9",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.6288472079073885
+    },
+    {
+      "source": "memory_mem_9",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.315247930278521
+    },
+    {
+      "source": "memory_mem_9",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_9",
+      "target": "memory_mem_6",
+      "edge_type": "recalls",
+      "weight": 0.7938332126281143
+    },
+    {
+      "source": "memory_mem_9",
+      "target": "memory_mem_4",
+      "edge_type": "recalls",
+      "weight": 0.7253569049138922
+    },
+    {
+      "source": "memory_mem_9",
+      "target": "state_2",
+      "edge_type": "recalls",
+      "weight": 0.7065011348955985
+    }
+  ]
+}

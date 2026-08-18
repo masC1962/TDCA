@@ -1,0 +1,1096 @@
+{
+  "nodes": [
+    {
+      "node_id": "state_1",
+      "node_type": "state",
+      "content": "Which Comcast-owned film studio produced the movie Radio Patrol?",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.7779365714315503,
+      "temperature": 0.6705460461974792,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.9386895705493716,
+        "evidence_support": 0.8196752074981517,
+        "memory_usefulness": 0.5139667251540021,
+        "answerability": 0.8098376037490758,
+        "uncertainty": 0.1524584626503327
+      },
+      "metadata": {
+        "diffusion_delta": 0.03366895769326128,
+        "diffusion_gain": 0.03366895769326128
+      }
+    },
+    {
+      "node_id": "kg_doc_10",
+      "node_type": "kg",
+      "content": "Radio Patrol is a 1937 Universal movie serial based on the comic strip \"Radio Patrol\".",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999948615561,
+      "temperature": 0.9999999948615561,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Radio Patrol (serial)",
+        "raw_score": 6.268803833539182,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_2",
+      "node_type": "kg",
+      "content": "Universal Pictures (also referred to as Universal Studios or simply Universal) is an American film studio owned by Comcast through the Universal Filmed Entertainment Group division of its wholly owned subsidiary NBCUniversal. The company was founded in 1912 by Carl Laemmle, Mark Dintenfass, Charles O. Baumann, Adam Kessel, Pat Powers, William Swanson, David Horsley, Robert H. Cochrane, and Jules Brulatour, and is the oldest surviving film studio in the United States, the world's fourth oldest after Gaumont, Pathé and Nordisk Film, and the oldest in terms of the overall film market . Its studios are located in Universal City, California, and its corporate offices are located in New York City.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.999999995153623,
+      "temperature": 0.999999995153623,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Universal Pictures",
+        "raw_score": 4.025562218183584,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_1",
+      "node_type": "kg",
+      "content": "Radio Patrol is a 1932 American pre-Code crime film directed by Edward L. Cahn and written by Tom Reed and Richard Schayer. The film stars Robert Armstrong, Russell Hopton, Lila Lee, June Clyde, Sidney Toler and Andy Devine. It was released on June 2, 1932, by Universal Pictures.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.5620328571021421,
+      "temperature": 0.5620328571021421,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Radio Patrol (film)",
+        "raw_score": 3.0291645619508243,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_4",
+      "node_type": "kg",
+      "content": "Modern Theaters Ltd was an Indian film studio in Salem, Tamil Nadu started by T. R. Sundaram in 1935. The studio produced over more than 150 films until 1982 in Tamil, Telugu, Kannada, Malayalam, Hindi, Sinhalese and even English of which Tamil were the majority.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.3606771299419001,
+      "temperature": 0.3606771299419001,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Modern Theatres",
+        "raw_score": 3.4377300411290554,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "memory_mem_1",
+      "node_type": "memory",
+      "content": "Template: for compositional multi-hop questions, first solve the intermediate entity and then ask for the final attribute.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9599998077388796,
+      "temperature": 1.0206196617906413,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.96,
+        "tag": "compositional_template",
+        "memory_kind": "template",
+        "raw_score": 0.10103189822262294,
+        "source": "memory",
+        "diffusion_delta": -0.12563748566664645,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "memory_mem_3",
+      "node_type": "memory",
+      "content": "Template: when evidence already grounds the answer, switch from branching to short verification and synthesis.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.8799999913901771,
+      "temperature": 0.20325790683003603,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.88,
+        "tag": "verification_then_stop",
+        "memory_kind": "template",
+        "raw_score": 0.07555476553633246,
+        "source": "memory",
+        "diffusion_delta": -0.05713526658830159,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "state_2",
+      "node_type": "state",
+      "content": "Which studio produced the movie Radio Patrol?",
+      "depth": 1,
+      "parent_id": "state_1",
+      "value": 0.6518635134467727,
+      "temperature": 2.0301779049487996,
+      "expanded": true,
+      "visit_count": 2,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.7756672340731706,
+        "evidence_support": 0.6754918649210899,
+        "memory_usefulness": 0.5139667251540021,
+        "answerability": 0.6777459324605449,
+        "uncertainty": 0.1784114643142038
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_10",
+          "doc_1",
+          "doc_4",
+          "doc_6"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "goal_slot_name": "film_production_company",
+        "goal_slot_role": "target_attribute",
+        "goal_terminal": true,
+        "diffusion_delta": 0.11779935115815099,
+        "diffusion_gain": 0.11779935115815099,
+        "goal_retry": 1
+      }
+    },
+    {
+      "node_id": "kg_doc_6",
+      "node_type": "kg",
+      "content": "\"We Ended Right\" is the debut single by American singer-songwriter Debby Ryan, featuring rapper Chad Hively and Chase Ryan. It premiered on July 1, 2011 and was released as a digital download on July 3, 2011 as the first single of Debby Ryan's career on her own independent label, the Ryan River Studio and not being included on any album. Later the song was included on the soundtrack of the movie Radio Rebel. \"We Ended Right\" was written and produced by Debby Ryan, Chad Hively, Chase Ryan and Mark Grilliot.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0,
+      "temperature": 0.0,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "We Ended Right",
+        "raw_score": 2.2452179074765732,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "state_3",
+      "node_type": "state",
+      "content": "Which film studio owned by Comcast is mentioned in the evidence?",
+      "depth": 1,
+      "parent_id": "state_1",
+      "value": 0.6474002968467698,
+      "temperature": 1.133946724085826,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.739315111266239,
+        "evidence_support": 0.6803385625477616,
+        "memory_usefulness": 0.4634494347728014,
+        "answerability": 0.7601692812738807,
+        "uncertainty": 0.1775390587414029
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_2",
+          "doc_4",
+          "doc_3",
+          "doc_5"
+        ],
+        "memory_ids": [
+          "mem_3",
+          "mem_1"
+        ],
+        "goal_slot_name": "comcast_owned_studio",
+        "goal_slot_role": "target_attribute",
+        "goal_terminal": true,
+        "goal_answered_cooling": 1,
+        "diffusion_delta": 0.05569162446700204,
+        "diffusion_gain": 0.05569162446700204
+      }
+    },
+    {
+      "node_id": "kg_doc_3",
+      "node_type": "kg",
+      "content": "Gorky Film Studio (Russian: Киностудия имени Горького ) is a film studio in Moscow, Russian Federation. By the end of the Soviet Union, Gorky Film Studio had produced more than 1,000 films. Many film classics were filmed at the Gorky Film Studio throughout its history and some of these were granted international awards at various film festivals.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.036762269934928954,
+      "temperature": 0.036762269934928954,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Gorky Film Studio",
+        "raw_score": 2.1525985812087765,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_5",
+      "node_type": "kg",
+      "content": "Tajikfilm (Tajik: Тоҷикфилм , Russian: Таджикфильм ) is a Tajik (former Soviet) film studio. Tajikfilm was founded in 1930 as a newsreel studio, the studio released its first feature film in 1932; its first talky in 1935. In 1941 Tajikfilm merged with Soyuzdetfilm, only to reemerge in 1943. The studio produced films in both Russian and Tajik.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0,
+      "temperature": 0.0,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Tajikfilm",
+        "raw_score": 1.9829711072109406,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "state_4",
+      "node_type": "state",
+      "content": "Which company owns Universal Pictures?",
+      "depth": 2,
+      "parent_id": "state_2",
+      "value": 0.6192703377744341,
+      "temperature": 1.4769774560231137,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.5835455842999453,
+        "evidence_support": 0.7810164244116036,
+        "memory_usefulness": 0.0,
+        "answerability": 0.6105082122058019,
+        "uncertainty": 0.15941704360591136
+      },
+      "metadata": {
+        "kind": "bridge",
+        "evidence_ids": [
+          "doc_2",
+          "doc_1",
+          "doc_10",
+          "doc_9"
+        ],
+        "memory_ids": [],
+        "diffusion_delta": 0.3491675289697187,
+        "diffusion_gain": 0.3491675289697187
+      }
+    },
+    {
+      "node_id": "kg_doc_9",
+      "node_type": "kg",
+      "content": "The Green Hornet Strikes Again! (1941) is a Universal movie serial based on The Green Hornet radio series by George W. Trendle and Fran Striker. It is a sequel to the 1940 serial \"The Green Hornet\". This was Universal's 117th serial (the 49th with sound) of the 137 the studio produced. The plot involves racketeering and is unusual for a film serial in having mostly stand alone episodes instead of a continuous story (although this was also the case for the original \"Green Hornet\" serial).",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0,
+      "temperature": 0.0,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "The Green Hornet Strikes Again!",
+        "raw_score": 2.5530261121685456,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "memory_mem_4",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'Which studio produced the movie Radio Patrol' is Radio Patrol (serial).",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.7518635125939966,
+      "temperature": 1.971519378176545,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "tdca_run",
+        "memory_kind": "derived_fact",
+        "target_question": "Which studio produced the movie Radio Patrol?",
+        "target_question_norm": "which studio produced the movie radio patrol",
+        "relation_signature": "generic",
+        "answer_text": "Radio Patrol (serial)",
+        "support_score": 0.6754918649210899,
+        "evidence_ids": [
+          "doc_10"
+        ],
+        "derived_from_state": "state_2",
+        "diffusion_delta": 0.2896198782904611,
+        "diffusion_gain": 0.2896198782904611,
+        "score": 0.7518635134467727,
+        "slot_name": "film_production_company",
+        "slot_role": "target_attribute",
+        "terminal": true,
+        "raw_score": 8.904635586862241
+      }
+    },
+    {
+      "node_id": "memory_mem_5",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'Which film studio owned by Comcast is mentioned in the evidence' is Universal Pictures.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.999999995153623,
+      "temperature": 1.1849671890571924,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "tdca_run",
+        "memory_kind": "derived_fact",
+        "target_question": "Which film studio owned by Comcast is mentioned in the evidence?",
+        "target_question_norm": "which film studio owned by comcast is mentioned in the evidence",
+        "relation_signature": "generic",
+        "answer_text": "Universal Pictures",
+        "support_score": 0.999999995153623,
+        "evidence_ids": [
+          "doc_2"
+        ],
+        "slot_type": "organization",
+        "slot_role": "target_attribute",
+        "slot_name": "comcast_owned_studio",
+        "depends_on": [],
+        "terminal": true,
+        "derived_from_state": "state_1",
+        "diffusion_delta": 0.07671474689911828,
+        "diffusion_gain": 0.07671474689911828,
+        "score": 0.999999995153623,
+        "raw_score": 11.817068470209254
+      }
+    },
+    {
+      "node_id": "state_5",
+      "node_type": "state",
+      "content": "Which film studio produced the movie Radio Patrol?",
+      "depth": 3,
+      "parent_id": "state_4",
+      "value": 0.6267076559307493,
+      "temperature": 1.3665279006226407,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.826135134401736,
+        "evidence_support": 0.7121621600051058,
+        "memory_usefulness": 0.0018971418015003086,
+        "answerability": 0.7160810800025529,
+        "uncertainty": 0.17181081119908095
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_10",
+          "doc_1",
+          "doc_4",
+          "doc_9"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "diffusion_delta": 0.8772037602133789,
+        "diffusion_gain": 0.8772037602133789
+      }
+    },
+    {
+      "node_id": "memory_mem_6",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'Which company owns Universal Pictures' is Universal Pictures.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.7185351104586754,
+      "temperature": 0.6746559997263103,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "derived_fact",
+        "target_question": "Which company owns Universal Pictures?",
+        "target_question_norm": "which company owns universal pictures",
+        "relation_signature": "generic",
+        "answer_text": "Universal Pictures",
+        "support_score": 0.7810164244116036,
+        "evidence_ids": [
+          "doc_2",
+          "doc_1"
+        ],
+        "derived_from_state": "state_4",
+        "diffusion_delta": 0.015344521900838792,
+        "diffusion_gain": 0.015344521900838792
+      }
+    },
+    {
+      "node_id": "memory_mem_7",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'Which film studio produced the movie Radio Patrol' is Radio Patrol (serial).",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.6685710434562894,
+      "temperature": 0.7789633692487454,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "derived_fact",
+        "target_question": "Which film studio produced the movie Radio Patrol?",
+        "target_question_norm": "which film studio produced the movie radio patrol",
+        "relation_signature": "generic",
+        "answer_text": "Radio Patrol (serial)",
+        "support_score": 0.7121621600051058,
+        "evidence_ids": [
+          "doc_10",
+          "doc_1"
+        ],
+        "derived_from_state": "state_5",
+        "diffusion_delta": -0.08816672316238905,
+        "diffusion_gain": 0.0
+      }
+    }
+  ],
+  "edges": [
+    {
+      "source": "state_1",
+      "target": "kg_doc_10",
+      "edge_type": "supports",
+      "weight": 0.9999999939119613
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.6393504210843423
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.329416311883557
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.003543713929475131
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.0002505696735254862
+    },
+    {
+      "source": "state_1",
+      "target": "state_2",
+      "edge_type": "refines",
+      "weight": 1.0
+    },
+    {
+      "source": "state_1",
+      "target": "state_3",
+      "edge_type": "refines",
+      "weight": 0.9
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_5",
+      "edge_type": "derives",
+      "weight": 0.999999995153623
+    },
+    {
+      "source": "kg_doc_10",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.9999999939119613
+    },
+    {
+      "source": "kg_doc_10",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.9999999948615561
+    },
+    {
+      "source": "kg_doc_10",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.06439168503538438
+    },
+    {
+      "source": "kg_doc_10",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.9999999948615561
+    },
+    {
+      "source": "kg_doc_10",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.9999999947736041
+    },
+    {
+      "source": "kg_doc_10",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.06439168503538438
+    },
+    {
+      "source": "kg_doc_10",
+      "target": "memory_mem_7",
+      "edge_type": "supports",
+      "weight": 0.9999999947736041
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.6393504210843423
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.999999995153623
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.999999991721065
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.999999991721065
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.329416311883557
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.35098373498062374
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.5620328571021421
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.35098373498062374
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.42432432523660735
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.5620328571021421
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "memory_mem_7",
+      "edge_type": "supports",
+      "weight": 0.42432432523660735
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.09497800174057967
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.3606771299419001
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.09497800174057967
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.14414365123716164
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "memory_mem_7",
+      "edge_type": "supports",
+      "weight": 0.14414365123716164
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.003543713929475131
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_2",
+      "edge_type": "recalls",
+      "weight": 0.003543713929475131
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_3",
+      "edge_type": "recalls",
+      "weight": 0.04689887815542571
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "memory_mem_4",
+      "edge_type": "recalls",
+      "weight": 0.9599998077388796
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_5",
+      "edge_type": "recalls",
+      "weight": 0.0028233541860801683
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "memory_mem_7",
+      "edge_type": "recalls",
+      "weight": 0.0028233541860801683
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.0002505696735254862
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_2",
+      "edge_type": "recalls",
+      "weight": 0.0679336425691247
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_3",
+      "edge_type": "recalls",
+      "weight": 0.06849627638338472
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "memory_mem_4",
+      "edge_type": "recalls",
+      "weight": 0.0679336425691247
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_5",
+      "edge_type": "recalls",
+      "weight": 0.00020137546384767718
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "memory_mem_7",
+      "edge_type": "recalls",
+      "weight": 0.00020137546384767718
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_10",
+      "edge_type": "supports",
+      "weight": 0.9999999948615561
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.35098373498062374
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.09497800174057967
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_2",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.003543713929475131
+    },
+    {
+      "source": "state_2",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.0679336425691247
+    },
+    {
+      "source": "state_2",
+      "target": "state_4",
+      "edge_type": "refines",
+      "weight": 0.9
+    },
+    {
+      "source": "state_2",
+      "target": "memory_mem_4",
+      "edge_type": "derives",
+      "weight": 0.7518635134467727
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.999999995153623
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.3606771299419001
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.036762269934928954
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_3",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.06849627638338472
+    },
+    {
+      "source": "state_3",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.04689887815542571
+    },
+    {
+      "source": "state_3",
+      "target": "memory_mem_5",
+      "edge_type": "recalls",
+      "weight": 0.999999994301042
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.036762269934928954
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.999999991721065
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.5620328571021421
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_10",
+      "edge_type": "supports",
+      "weight": 0.06439168503538438
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_4",
+      "target": "state_5",
+      "edge_type": "refines",
+      "weight": 1.0
+    },
+    {
+      "source": "state_4",
+      "target": "memory_mem_6",
+      "edge_type": "derives",
+      "weight": 0.7810164244116036
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "memory_mem_7",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "state_2",
+      "edge_type": "recalls",
+      "weight": 0.7518635134467727
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_10",
+      "edge_type": "supports",
+      "weight": 0.9999999948615561
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.35098373498062374
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.09497800174057967
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.9599998077388796
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.0679336425691247
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.999999995153623
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "state_3",
+      "edge_type": "recalls",
+      "weight": 0.999999994301042
+    },
+    {
+      "source": "state_5",
+      "target": "kg_doc_10",
+      "edge_type": "supports",
+      "weight": 0.9999999947736041
+    },
+    {
+      "source": "state_5",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.42432432523660735
+    },
+    {
+      "source": "state_5",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.14414365123716164
+    },
+    {
+      "source": "state_5",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_5",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.0028233541860801683
+    },
+    {
+      "source": "state_5",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.00020137546384767718
+    },
+    {
+      "source": "state_5",
+      "target": "memory_mem_7",
+      "edge_type": "derives",
+      "weight": 0.7267076559307493
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "state_4",
+      "edge_type": "recalls",
+      "weight": 0.7810164244116036
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.999999991721065
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.5620328571021421
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_10",
+      "edge_type": "supports",
+      "weight": 0.06439168503538438
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_7",
+      "target": "state_5",
+      "edge_type": "recalls",
+      "weight": 0.7267076559307493
+    },
+    {
+      "source": "memory_mem_7",
+      "target": "kg_doc_10",
+      "edge_type": "supports",
+      "weight": 0.9999999947736041
+    },
+    {
+      "source": "memory_mem_7",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.42432432523660735
+    },
+    {
+      "source": "memory_mem_7",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.14414365123716164
+    },
+    {
+      "source": "memory_mem_7",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_7",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.0028233541860801683
+    },
+    {
+      "source": "memory_mem_7",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.00020137546384767718
+    }
+  ]
+}

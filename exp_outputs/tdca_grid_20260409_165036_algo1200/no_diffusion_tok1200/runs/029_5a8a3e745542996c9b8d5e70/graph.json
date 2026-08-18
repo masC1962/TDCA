@@ -1,0 +1,583 @@
+{
+  "nodes": [
+    {
+      "node_id": "state_1",
+      "node_type": "state",
+      "content": "What is the name for the adventure in \"Tunnels and Trolls\", a game designed by Ken St. Andre?",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.7341079570192381,
+      "temperature": 0.39984418123069326,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.875271982520536,
+        "evidence_support": 0.633152889766282,
+        "memory_usefulness": 0.7892118574070415,
+        "answerability": 0.8165764448831411,
+        "uncertainty": 0.18603247984206922
+      },
+      "metadata": {}
+    },
+    {
+      "node_id": "kg_doc_2",
+      "node_type": "kg",
+      "content": "Title: Tunnels &amp; Trolls. Tunnels & Trolls (abbreviated \"T&T\") is a fantasy role-playing game designed by Ken St. Andre and first published in 1975 by Flying Buffalo. The second modern role-playing game published, it was written by Ken St. Andre to be a more accessible alternative to \"Dungeons & Dragons\" and is suitable for solitaire, group, and play-by-mail gameplay.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999933241692,
+      "temperature": 0.9999999933241692,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Tunnels &amp; Trolls",
+        "raw_score": 9.572234965805446,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_6",
+      "node_type": "kg",
+      "content": "Title: Mercenaries, Spies and Private Eyes. Mercenaries, Spies and Private Eyes (\"MSPE\") is a tabletop role-playing game designed and written by Michael A. Stackpole and first published in April 1983 by Blade, a division of Flying Buffalo, Inc. A second edition was later published by Sleuth Publications, but Flying Buffalo continues to distribute the game. \"MSPE\"'s mechanics are based on those of \"Tunnels and Trolls\", with the addition of a skill system for characters. A few adventure modules were also released for \"MSPE\". The ruleset of 1987 video game \"Wasteland\", on which Michael A. Stackpole worked, is based on \"MSPE\"; as the upcoming 2013 sequel \"Wasteland 2\" will use similar mechanics, so it too can be seen as based on MSPE.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.2663057862083948,
+      "temperature": 0.2663057862083948,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Mercenaries, Spies and Private Eyes",
+        "raw_score": 9.517586502676448,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_5",
+      "node_type": "kg",
+      "content": "Title: Ken St. Andre. Kenneth Eugene St. Andre (born on April 28, 1947 in Ogden, Utah) is an American fantasy author and game designer, best known for his work with \"Tunnels & Trolls\" and \"Wasteland\". He has been an active member of \"The Science Fiction and Fantasy Writers of America\" since 1989.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.05492300603809376,
+      "temperature": 0.05492300603809376,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Ken St. Andre",
+        "raw_score": 7.026751120784909,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_9",
+      "node_type": "kg",
+      "content": "Title: Arena of Khazan. Arena of Khazan is a 1979 role-playing game adventure for \"Tunnels & Trolls\" published by Flying Buffalo.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999948971862,
+      "temperature": 0.9999999948971862,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Arena of Khazan",
+        "raw_score": 15.266863347162406,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "memory_tmpl_1",
+      "node_type": "memory",
+      "content": "Template: for compositional multi-hop questions, first solve the intermediate entity and then ask for the final attribute.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9599999964913333,
+      "temperature": 0.9599999964913333,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.96,
+        "tag": "compositional_template",
+        "memory_kind": "template",
+        "raw_score": 1.7863064253562047,
+        "source": "memory"
+      }
+    },
+    {
+      "node_id": "memory_tmpl_3",
+      "node_type": "memory",
+      "content": "Template: when evidence already grounds the answer, switch from branching to short verification and synthesis.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.6184237183227497,
+      "temperature": 0.6184237183227497,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.88,
+        "tag": "verification_then_stop",
+        "memory_kind": "template",
+        "raw_score": 0.8880569951936513,
+        "source": "memory"
+      }
+    },
+    {
+      "node_id": "memory_tmpl_4",
+      "node_type": "memory",
+      "content": "Template: for nested relation questions, solve the intermediate relation first, then query the target attribute, then verify the chain.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.756929636126894,
+      "temperature": 0.756929636126894,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.758776433441565,
+        "source": "tdca_run",
+        "kind": "strategy_template",
+        "memory_kind": "template",
+        "raw_score": 1.7819587173952867
+      }
+    },
+    {
+      "node_id": "memory_tmpl_2",
+      "node_type": "memory",
+      "content": "Template: for comparison questions, split the problem into one sub-question per entity before comparing them.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.6517158140459711,
+      "temperature": 0.6517158140459711,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.9,
+        "tag": "comparison_template",
+        "memory_kind": "template",
+        "raw_score": 1.2935157251708063,
+        "source": "memory"
+      }
+    },
+    {
+      "node_id": "memory_tmpl_6",
+      "node_type": "memory",
+      "content": "Template: for comparison questions, decompose into one attribute query per entity before final comparison.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.1857202350191865,
+      "temperature": 0.1857202350191865,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.7248658750583714,
+        "source": "tdca_run",
+        "kind": "strategy_template",
+        "memory_kind": "template",
+        "raw_score": 0.4576753609264948
+      }
+    },
+    {
+      "node_id": "state_2",
+      "node_type": "state",
+      "content": "What is the name of the 1979 role-playing game adventure published by Flying Buffalo for 'Tunnels & Trolls'?",
+      "depth": 1,
+      "parent_id": "state_1",
+      "value": 0.5827873213085644,
+      "temperature": 0.3933762711367547,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.6769842577426377,
+        "evidence_support": 0.5101613116997995,
+        "memory_usefulness": 0.8584648153763381,
+        "answerability": 0.6727277146734292,
+        "uncertainty": 0.20817096389403608
+      },
+      "metadata": {
+        "kind": "verification",
+        "evidence_ids": [
+          "doc_9",
+          "doc_10",
+          "doc_6",
+          "doc_2"
+        ],
+        "memory_ids": [
+          "tmpl_1",
+          "tmpl_4",
+          "tmpl_2",
+          "tmpl_3",
+          "tmpl_6"
+        ]
+      }
+    },
+    {
+      "node_id": "kg_doc_10",
+      "node_type": "kg",
+      "content": "Title: Tunnels &amp; Trolls: Crusaders of Khazan. Crusaders of Khazan is a computer adaptation of the tabletop role-playing game \"Tunnels and Trolls\", developed and published by New World Computing in 1990 for the PC, FM Towns, PC-88 and PC-98. The game is available from Flying Buffalo and in Fiery Dragon's \"Tunnels and Trolls 30th Anniversary Edition\".",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.02032262850241283,
+      "temperature": 0.02032262850241283,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Tunnels &amp; Trolls: Crusaders of Khazan",
+        "raw_score": 9.6547691176092,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "memory_mem_7",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'What is the name for the adventure in \"Tunnels and Trolls\", a game designed by Ken St. Andre' is Arena of Khazan.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.92,
+      "temperature": 1.273609410341588,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "answer_candidate",
+        "target_question": "What is the name for the adventure in \"Tunnels and Trolls\", a game designed by Ken St. Andre?",
+        "target_question_norm": "what is the name for the adventure in tunnels and trolls a game designed by ken st andre",
+        "relation_signature": "generic",
+        "answer_text": "Arena of Khazan",
+        "support_score": 0.633152889766282,
+        "evidence_ids": [
+          "doc_2"
+        ],
+        "derived_from_state": "state_1"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "source": "state_1",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.9999999933241692
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.2663057862083948
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.05492300603809376
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_1",
+      "target": "memory_tmpl_1",
+      "edge_type": "recalls",
+      "weight": 0.9599999964913333
+    },
+    {
+      "source": "state_1",
+      "target": "memory_tmpl_3",
+      "edge_type": "recalls",
+      "weight": 0.6184237183227497
+    },
+    {
+      "source": "state_1",
+      "target": "memory_tmpl_4",
+      "edge_type": "recalls",
+      "weight": 0.49417679824576105
+    },
+    {
+      "source": "state_1",
+      "target": "memory_tmpl_2",
+      "edge_type": "recalls",
+      "weight": 0.42548582983131616
+    },
+    {
+      "source": "state_1",
+      "target": "memory_tmpl_6",
+      "edge_type": "recalls",
+      "weight": 0.121251205833148
+    },
+    {
+      "source": "state_1",
+      "target": "state_2",
+      "edge_type": "verifies",
+      "weight": 1.0
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_7",
+      "edge_type": "derives",
+      "weight": 1.0
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.9999999933241692
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "memory_mem_7",
+      "edge_type": "supports",
+      "weight": 0.9999999933241692
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.2663057862083948
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.0025253490556836574
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "memory_mem_7",
+      "edge_type": "supports",
+      "weight": 0.2663057862083948
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.05492300603809376
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "memory_mem_7",
+      "edge_type": "supports",
+      "weight": 0.05492300603809376
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.9999999948971862
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "memory_mem_7",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_tmpl_1",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.9599999964913333
+    },
+    {
+      "source": "memory_tmpl_1",
+      "target": "state_2",
+      "edge_type": "recalls",
+      "weight": 0.9599999946257821
+    },
+    {
+      "source": "memory_tmpl_1",
+      "target": "memory_mem_7",
+      "edge_type": "recalls",
+      "weight": 0.9599999964913333
+    },
+    {
+      "source": "memory_tmpl_3",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.6184237183227497
+    },
+    {
+      "source": "memory_tmpl_3",
+      "target": "state_2",
+      "edge_type": "recalls",
+      "weight": 0.4374894140794927
+    },
+    {
+      "source": "memory_tmpl_3",
+      "target": "memory_mem_7",
+      "edge_type": "recalls",
+      "weight": 0.6184237183227497
+    },
+    {
+      "source": "memory_tmpl_4",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.49417679824576105
+    },
+    {
+      "source": "memory_tmpl_4",
+      "target": "state_2",
+      "edge_type": "recalls",
+      "weight": 0.756929636126894
+    },
+    {
+      "source": "memory_tmpl_2",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.42548582983131616
+    },
+    {
+      "source": "memory_tmpl_2",
+      "target": "state_2",
+      "edge_type": "recalls",
+      "weight": 0.6517158140459711
+    },
+    {
+      "source": "memory_tmpl_6",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.121251205833148
+    },
+    {
+      "source": "memory_tmpl_6",
+      "target": "state_2",
+      "edge_type": "recalls",
+      "weight": 0.1857202350191865
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.9999999948971862
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_10",
+      "edge_type": "supports",
+      "weight": 0.02032262850241283
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.0025253490556836574
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_2",
+      "target": "memory_tmpl_1",
+      "edge_type": "recalls",
+      "weight": 0.9599999946257821
+    },
+    {
+      "source": "state_2",
+      "target": "memory_tmpl_4",
+      "edge_type": "recalls",
+      "weight": 0.756929636126894
+    },
+    {
+      "source": "state_2",
+      "target": "memory_tmpl_2",
+      "edge_type": "recalls",
+      "weight": 0.6517158140459711
+    },
+    {
+      "source": "state_2",
+      "target": "memory_tmpl_3",
+      "edge_type": "recalls",
+      "weight": 0.4374894140794927
+    },
+    {
+      "source": "state_2",
+      "target": "memory_tmpl_6",
+      "edge_type": "recalls",
+      "weight": 0.1857202350191865
+    },
+    {
+      "source": "kg_doc_10",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.02032262850241283
+    },
+    {
+      "source": "memory_mem_7",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 1.0
+    },
+    {
+      "source": "memory_mem_7",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.9999999933241692
+    },
+    {
+      "source": "memory_mem_7",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.2663057862083948
+    },
+    {
+      "source": "memory_mem_7",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.05492300603809376
+    },
+    {
+      "source": "memory_mem_7",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_7",
+      "target": "memory_tmpl_1",
+      "edge_type": "recalls",
+      "weight": 0.9599999964913333
+    },
+    {
+      "source": "memory_mem_7",
+      "target": "memory_tmpl_3",
+      "edge_type": "recalls",
+      "weight": 0.6184237183227497
+    }
+  ]
+}

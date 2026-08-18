@@ -1,0 +1,160 @@
+{
+  "question": "Which building will have more floors, 15 Penn Plaza, or 247 Cherry?",
+  "final_answer": "247 Cherry",
+  "best_node": {
+    "node_id": "state_1",
+    "node_type": "state",
+    "content": "Which building will have more floors, 15 Penn Plaza, or 247 Cherry?",
+    "depth": 0,
+    "parent_id": null,
+    "value": 0.8050219682500243,
+    "temperature": 0.1463707411110617,
+    "expanded": true,
+    "visit_count": 1,
+    "persistent": false,
+    "score_breakdown": {
+      "task_progress": 0.9986634920608273,
+      "evidence_support": 0.9960690942965506,
+      "memory_usefulness": 0.0,
+      "answerability": 0.8980345471482754,
+      "uncertainty": 0.12070756302662089
+    },
+    "metadata": {
+      "diffusion_delta": -0.006120457032553317,
+      "diffusion_gain": 0.0
+    }
+  },
+  "final_synthesis_node_ids": [
+    "state_2",
+    "state_4",
+    "state_3",
+    "memory_mem_5",
+    "state_1"
+  ],
+  "answer_history": [
+    {
+      "node_id": "",
+      "answer_text": "15 Penn Plaza",
+      "previous_answer": "",
+      "confidence": 0.28,
+      "score": 0.16880000000000003,
+      "source": "closed_book_initial",
+      "step": 0,
+      "evidence_ids": [],
+      "kind": "anytime_answer"
+    },
+    {
+      "node_id": "memory_mem_4",
+      "content": "Conclusion: The answer to 'How many floors does 247 Cherry have' is seventy seven story.",
+      "answer_text": "seventy seven story",
+      "value": 1.0,
+      "confidence": 1.0,
+      "evidence_ids": [
+        "doc_7"
+      ],
+      "step": 2,
+      "kind": "intermediate_answer"
+    },
+    {
+      "node_id": "memory_mem_5",
+      "content": "Conclusion: The answer to 'How many floors does 15 Penn Plaza have' is 15.",
+      "answer_text": "15",
+      "value": 0.8280000000000001,
+      "evidence_ids": [
+        "doc_5"
+      ],
+      "step": 3
+    },
+    {
+      "node_id": "state_2",
+      "answer_text": "15",
+      "previous_answer": "15 Penn Plaza",
+      "confidence": 0.9,
+      "score": 0.7272805321592156,
+      "source": "expansion_candidate",
+      "step": 2,
+      "evidence_ids": [
+        "doc_5",
+        "doc_8",
+        "doc_3",
+        "doc_6"
+      ],
+      "kind": "anytime_answer"
+    },
+    {
+      "node_id": "memory_mem_6",
+      "content": "Conclusion: The answer to 'Which building has more floors: 247 Cherry or 15 Penn Plaza' is 247 Cherry has 77 floors; 15 Penn Plaza has 68 floors.",
+      "answer_text": "247 Cherry has 77 floors; 15 Penn Plaza has 68 floors",
+      "value": 1.0,
+      "confidence": 1.0,
+      "evidence_ids": [
+        "doc_5",
+        "doc_7"
+      ],
+      "step": 4,
+      "kind": "intermediate_answer"
+    },
+    {
+      "node_id": "state_1",
+      "answer_text": "247 Cherry",
+      "previous_answer": "15",
+      "confidence": 0.8980345471482754,
+      "score": 0.8672280403782681,
+      "source": "final_synthesis",
+      "step": 6,
+      "evidence_ids": [
+        "doc_7",
+        "doc_5",
+        "doc_3",
+        "doc_10"
+      ],
+      "kind": "anytime_answer"
+    },
+    {
+      "node_id": "memory_mem_7",
+      "content": "Conclusion: The answer to 'Which building will have more floors, 15 Penn Plaza, or 247 Cherry' is 247 Cherry.",
+      "answer_text": "247 Cherry",
+      "value": 0.7912,
+      "evidence_ids": [
+        "doc_7",
+        "doc_5"
+      ],
+      "step": 7
+    },
+    {
+      "node_id": "state_1",
+      "answer_text": "247 Cherry",
+      "source": "answer_judge",
+      "choice": "A",
+      "candidate_source": "anytime",
+      "base_score": 1.0,
+      "judge_confidence": 0.0,
+      "judge_reason": "A directly names the building with more floors, matching the original comparison question.",
+      "step": 6,
+      "kind": "final_answer_selection"
+    }
+  ],
+  "anytime_answer": "247 Cherry",
+  "anytime_answer_score": 0.8672280403782681,
+  "anytime_answer_source": "final_synthesis",
+  "anytime_answer_node_id": "state_1",
+  "stats": {
+    "steps": 6,
+    "llm_calls": 13,
+    "generated_tokens": 1098,
+    "token_budget_remaining": 102,
+    "total_nodes": 16,
+    "kg_nodes": 6,
+    "memory_nodes": 6,
+    "state_nodes": 4,
+    "deleted_state_nodes": 2,
+    "scheduler_mode": "tdca",
+    "scoring_mode": "hybrid",
+    "stop_reason": "frontier_empty",
+    "goal_kind": "comparison",
+    "goal_completion": 1.0,
+    "anytime_answer": "247 Cherry",
+    "anytime_answer_score": 0.8672280403782681,
+    "anytime_answer_source": "final_synthesis"
+  }
+}

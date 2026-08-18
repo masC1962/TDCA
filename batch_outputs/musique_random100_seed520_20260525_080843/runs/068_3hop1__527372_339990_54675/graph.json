@@ -1,0 +1,758 @@
+{
+  "nodes": [
+    {
+      "node_id": "state_1",
+      "node_type": "state",
+      "content": "What mountains can you see from Portland, in the state with the county that contains Fester Hollow?",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.696942061187139,
+      "temperature": 1.1270409838720585,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.8861725277488374,
+        "evidence_support": 0.6652133169083452,
+        "memory_usefulness": 0.48672266765716377,
+        "answerability": 0.7326066584541726,
+        "uncertainty": 0.18026160295649785
+      },
+      "metadata": {
+        "diffusion_delta": 0.3442909032660205,
+        "diffusion_gain": 0.3442909032660205
+      }
+    },
+    {
+      "node_id": "kg_doc_13",
+      "node_type": "kg",
+      "content": "Fester Hollow is a tributary of West Branch Briar Creek in Columbia County, Pennsylvania, in the United States. It is long.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999974536282,
+      "temperature": 0.9999999974536282,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Fester Hollow",
+        "raw_score": 11.185026775854302,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_11",
+      "node_type": "kg",
+      "content": "Though much of downtown Portland is relatively flat, the foothills of the Tualatin Mountains, more commonly referred to locally as the ``West Hills '', pierce through the northwest and southwest reaches of the city. Council Crest Park, commonly thought of as the highest point within city limits, is in the West Hills and rises to an elevation of 1,073 feet (327 m) The city's actual high point is a little - known and infrequently accessed point (1,180 feet) near Forest Park. The highest point east of the river is Mt. Tabor, an extinct volcanic cinder cone, which rises to 636 feet (194 m). Nearby Powell Butte and Rocky Butte rise to 614 feet (187 m) and 612 feet (187 m), respectively. To the west of the Tualatin Mountains lies the Oregon Coast Range, and to the east lies the actively volcanic Cascade Range. On clear days, Mt. Hood and Mt. St. Helens dominate the horizon, while Mt. Adams and Mt. Rainier can also be seen in the distance.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999957399043,
+      "temperature": 0.9999999957399043,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Portland, Oregon",
+        "raw_score": 4.944686596372665,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_17",
+      "node_type": "kg",
+      "content": "Usually, a federation is formed at two levels: the central government and the regions (states, provinces, territories), and little to nothing is said about second or third level administrative political entities. Brazil is an exception, because the 1988 Constitution included the municipalities as autonomous political entities making the federation tripartite, encompassing the Union, the States, and the municipalities. Each state is divided into municipalities (municípios) with their own legislative council (câmara de vereadores) and a mayor (prefeito), which are partly autonomous from both Federal and State Government. Each municipality has a \"little constitution\", called \"organic law\" (lei orgânica). Mexico is an intermediate case, in that municipalities are granted full-autonomy by the federal constitution and their existence as autonomous entities (municipio libre, \"free municipality\") is established by the federal government and cannot be revoked by the states' constitutions. Moreover, the federal constitution determines which powers and competencies belong exclusively to the municipalities and not to the constituent states. However, municipalities do not have an elected legislative assembly.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.017145783664004106,
+      "temperature": 0.017145783664004106,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Federalism",
+        "raw_score": 1.9286846318928517,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_19",
+      "node_type": "kg",
+      "content": "The Socialist Party of Oregon in Columbia County, Oregon began around the First Red Scare. The first year (1914) it went mainstream, the Socialist party had 27 more registered members than the Prohibition Party, who were some members of the Suffrage movement. The Socialist party was similar to the Progressive Party in the county, as it tried from the outskirts of government to make change. While Socialism failed its first year, it still received attention from the press who was aware of the October Revolution (1918) in Russia (Now the Soviet Union) by a similarly named government led by Vladimir Lenin.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.8710666331109825,
+      "temperature": 0.8710666331109825,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Socialist Party of Oregon (Columbia County, Oregon)",
+        "raw_score": 2.8577112655491717,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "memory_mem_3",
+      "node_type": "memory",
+      "content": "Template: when evidence already grounds the answer, switch from branching to short verification and synthesis.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.8799999914225256,
+      "temperature": 1.3983394610603974,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.88,
+        "tag": "verification_then_stop",
+        "memory_kind": "template",
+        "raw_score": 0.749348303308049,
+        "source": "memory",
+        "diffusion_delta": -0.2056132215963098,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "memory_mem_1",
+      "node_type": "memory",
+      "content": "Template: for compositional multi-hop questions, first solve the intermediate entity and then ask for the final attribute.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.09344534389180187,
+      "temperature": 0.06988812169019096,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.96,
+        "tag": "compositional_template",
+        "memory_kind": "template",
+        "raw_score": 0.36940229999162205,
+        "source": "memory",
+        "diffusion_delta": -0.00997552547715276,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "state_2",
+      "node_type": "state",
+      "content": "Which state contains Columbia County, Pennsylvania?",
+      "depth": 1,
+      "parent_id": "state_1",
+      "value": 0.49744311271694547,
+      "temperature": 0.3707921661153119,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.5800291302141524,
+        "evidence_support": 0.6728797947475068,
+        "memory_usefulness": 0.0,
+        "answerability": 0.5739398973737534,
+        "uncertainty": 0.17888163694544876
+      },
+      "metadata": {
+        "kind": "bridge",
+        "evidence_ids": [
+          "doc_13",
+          "doc_19",
+          "doc_10",
+          "doc_17"
+        ],
+        "memory_ids": [],
+        "diffusion_delta": -0.08747821402377887,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "kg_doc_10",
+      "node_type": "kg",
+      "content": "A Nigerian State is a federated political entity, which shares sovereignty with the Federal Government of Nigeria, There are 36 States in Nigeria, which are bound together by a federal agreement. There is also a territory called the Federal Capital Territory (FCT), which is not a state, but a territory, under the direct control of the Federal Government. The States are further divided into a total of 774 Local Government Areas. Under the Nigerian Constitution, states have the power to ratify constitutional amendments.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.19647901639529936,
+      "temperature": 0.19647901639529936,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "States of Nigeria",
+        "raw_score": 2.9973836740126805,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "state_3",
+      "node_type": "state",
+      "content": "What mountains are visible from Portland, Oregon?",
+      "depth": 1,
+      "parent_id": "state_1",
+      "value": 0.7633603622536509,
+      "temperature": 0.43096708277174867,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.6930813265477977,
+        "evidence_support": 0.9355333133758759,
+        "memory_usefulness": 0.8799999913575839,
+        "answerability": 0.8177666566879379,
+        "uncertainty": 0.13160400359234234
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_11",
+          "doc_19",
+          "doc_10",
+          "doc_17"
+        ],
+        "memory_ids": [
+          "mem_3"
+        ],
+        "diffusion_delta": 0.03872178755316186,
+        "diffusion_gain": 0.03872178755316186
+      }
+    },
+    {
+      "node_id": "memory_mem_4",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'What mountains can you see from Portland, in the state with the county that contains Fester Hollow' is Pennsylvania.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 1.0,
+      "temperature": 1.0996221961958708,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "intermediate_answer",
+        "target_question": "What mountains can you see from Portland, in the state with the county that contains Fester Hollow?",
+        "target_question_norm": "what mountains can you see from portland in the state with the county that contains fester hollow",
+        "relation_signature": "generic",
+        "answer_text": "Pennsylvania",
+        "support_score": 1.0,
+        "evidence_ids": [
+          "doc_13",
+          "doc_11"
+        ],
+        "slot_name": "",
+        "slot_type": "",
+        "slot_role": "",
+        "terminal": false,
+        "path_terminal": false,
+        "composition_kind": "",
+        "derived_from_state": "state_1",
+        "diffusion_delta": 0.09953220932800955,
+        "diffusion_gain": 0.09953220932800955
+      }
+    },
+    {
+      "node_id": "state_4",
+      "node_type": "state",
+      "content": "What mountains can you see from Portland, Oregon?",
+      "depth": 1,
+      "parent_id": "state_1",
+      "value": 0.6276611851559254,
+      "temperature": 0.48287535888387734,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.7252815396166072,
+        "evidence_support": 0.8206809988723742,
+        "memory_usefulness": 0.09370422102788896,
+        "answerability": 0.6978404994361872,
+        "uncertainty": 0.15227742020297264
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_11",
+          "doc_19",
+          "doc_6",
+          "doc_1"
+        ],
+        "memory_ids": [
+          "mem_3"
+        ],
+        "diffusion_delta": -0.07704298894084649,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "kg_doc_6",
+      "node_type": "kg",
+      "content": "Cormoret is a municipality in the Jura bernois administrative district in the canton of Bern in Switzerland. It is located in the French-speaking part of the canton in the Jura mountains.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0,
+      "temperature": 0.0,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Cormoret",
+        "raw_score": 2.1367770273685496,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_1",
+      "node_type": "kg",
+      "content": "Belprahon is a municipality in the Jura bernois administrative district in the canton of Bern in Switzerland. It is located in the French-speaking part of the canton in the Jura mountains.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0,
+      "temperature": 0.0,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Belprahon",
+        "raw_score": 2.1367770273685496,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "state_5",
+      "node_type": "state",
+      "content": "Which county contains Fester Hollow?",
+      "depth": 2,
+      "parent_id": "state_3",
+      "value": 0.44487913137464097,
+      "temperature": 0.5355461725316909,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.5607291428207033,
+        "evidence_support": 0.5462621847667745,
+        "memory_usefulness": 0.0,
+        "answerability": 0.5231310923833873,
+        "uncertainty": 0.20167280674198057
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_13",
+          "doc_10",
+          "doc_19",
+          "doc_17"
+        ],
+        "memory_ids": [],
+        "diffusion_delta": -0.07463854944179282,
+        "diffusion_gain": 0.0
+      }
+    }
+  ],
+  "edges": [
+    {
+      "source": "state_1",
+      "target": "kg_doc_13",
+      "edge_type": "supports",
+      "weight": 0.9999999966715579
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_11",
+      "edge_type": "supports",
+      "weight": 0.33042663714513243
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_17",
+      "edge_type": "supports",
+      "weight": 0.017145783664004106
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_19",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.8799999914225256
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.09344534389180187
+    },
+    {
+      "source": "state_1",
+      "target": "state_2",
+      "edge_type": "refines",
+      "weight": 0.95
+    },
+    {
+      "source": "state_1",
+      "target": "state_3",
+      "edge_type": "refines",
+      "weight": 0.9
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_4",
+      "edge_type": "derives",
+      "weight": 1.0
+    },
+    {
+      "source": "state_1",
+      "target": "state_4",
+      "edge_type": "refines",
+      "weight": 0.84
+    },
+    {
+      "source": "kg_doc_13",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.9999999966715579
+    },
+    {
+      "source": "kg_doc_13",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.9999999966244101
+    },
+    {
+      "source": "kg_doc_13",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.9999999966715579
+    },
+    {
+      "source": "kg_doc_13",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.9999999974536282
+    },
+    {
+      "source": "kg_doc_11",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.33042663714513243
+    },
+    {
+      "source": "kg_doc_11",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.9999999936407691
+    },
+    {
+      "source": "kg_doc_11",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.33042663714513243
+    },
+    {
+      "source": "kg_doc_11",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.9999999957399043
+    },
+    {
+      "source": "kg_doc_17",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.017145783664004106
+    },
+    {
+      "source": "kg_doc_17",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_17",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_17",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.017145783664004106
+    },
+    {
+      "source": "kg_doc_17",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_19",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_19",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.34575959287060354
+    },
+    {
+      "source": "kg_doc_19",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.8710666331109825
+    },
+    {
+      "source": "kg_doc_19",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_19",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.6413620020048443
+    },
+    {
+      "source": "kg_doc_19",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.08043200427509646
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.8799999914225256
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_3",
+      "edge_type": "recalls",
+      "weight": 0.17232137402271788
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "memory_mem_4",
+      "edge_type": "recalls",
+      "weight": 0.8799999914225256
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_4",
+      "edge_type": "recalls",
+      "weight": 0.09370422102788896
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.09344534389180187
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "memory_mem_4",
+      "edge_type": "recalls",
+      "weight": 0.09344534389180187
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_13",
+      "edge_type": "supports",
+      "weight": 0.9999999966244101
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_19",
+      "edge_type": "supports",
+      "weight": 0.34575959287060354
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_10",
+      "edge_type": "supports",
+      "weight": 0.19647901639529936
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_17",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_10",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.19647901639529936
+    },
+    {
+      "source": "kg_doc_10",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.00658155532602236
+    },
+    {
+      "source": "kg_doc_10",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.09252437207992079
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_11",
+      "edge_type": "supports",
+      "weight": 0.9999999936407691
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_19",
+      "edge_type": "supports",
+      "weight": 0.8710666331109825
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_10",
+      "edge_type": "supports",
+      "weight": 0.00658155532602236
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_17",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_3",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.17232137402271788
+    },
+    {
+      "source": "state_3",
+      "target": "state_5",
+      "edge_type": "refines",
+      "weight": 0.9
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 1.0
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_13",
+      "edge_type": "supports",
+      "weight": 0.9999999966715579
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_11",
+      "edge_type": "supports",
+      "weight": 0.33042663714513243
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_17",
+      "edge_type": "supports",
+      "weight": 0.017145783664004106
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_19",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.8799999914225256
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.09344534389180187
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_11",
+      "edge_type": "supports",
+      "weight": 0.9999999957399043
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_19",
+      "edge_type": "supports",
+      "weight": 0.6413620020048443
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_4",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.09370422102788896
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_5",
+      "target": "kg_doc_13",
+      "edge_type": "supports",
+      "weight": 0.9999999974536282
+    },
+    {
+      "source": "state_5",
+      "target": "kg_doc_10",
+      "edge_type": "supports",
+      "weight": 0.09252437207992079
+    },
+    {
+      "source": "state_5",
+      "target": "kg_doc_19",
+      "edge_type": "supports",
+      "weight": 0.08043200427509646
+    },
+    {
+      "source": "state_5",
+      "target": "kg_doc_17",
+      "edge_type": "supports",
+      "weight": 0.0
+    }
+  ]
+}

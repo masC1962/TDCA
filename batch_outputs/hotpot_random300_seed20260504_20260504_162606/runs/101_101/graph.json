@@ -1,0 +1,1287 @@
+{
+  "nodes": [
+    {
+      "node_id": "state_1",
+      "node_type": "state",
+      "content": "Who passed away first Max Ophüls and Shirley Clarke ?",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.7197410432331868,
+      "temperature": 0.7215255486781962,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.8895733621219728,
+        "evidence_support": 0.6752157709469788,
+        "memory_usefulness": 0.6347705607722245,
+        "answerability": 0.7376078854734893,
+        "uncertainty": 0.1784611612295438
+      },
+      "metadata": {
+        "diffusion_delta": -0.05284560129936522,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "kg_doc_4",
+      "node_type": "kg",
+      "content": "Shirley Clarke (October 2, 1919 – September 23, 1997) was an American experimental and independent filmmaker. She was also a director and editor to many famous works.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999955461307,
+      "temperature": 0.9999999955461307,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Shirley Clarke",
+        "raw_score": 5.612046817796129,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_1",
+      "node_type": "kg",
+      "content": "In natural language processing, open information extraction (OIE) is the task of generating a structured, machine-readable representation of the information in text, usually in the form of triples or n-ary propositions. A proposition can be understood as truth-bearer, a textual expression of a potential fact (e.g., \"Dante wrote the Divine Comedy\"), represented in an amenable structure for computers [e.g., (\"Dante\", \"wrote\", \"Divine Comedy\")]. An OIE extraction normally consists of a relation and a set of arguments. For instance, (\"Dante\", \"passed away in\" \"Ravenna\") is a proposition formed by the relation \"passed away in\" and the arguments \"Dante\" and \"Ravenna\". The first argument is usually referred as the subject while the second is considered to be the object.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.3504315498166405,
+      "temperature": 0.3504315498166405,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Open information extraction",
+        "raw_score": 1.607797468319482,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_9",
+      "node_type": "kg",
+      "content": "Maximillian Oppenheimer (6 May 1902 – 26 March 1957), known as Max Ophüls (] ), was a German-born film director who worked in Germany (1931–1933), France (1933–1940 and 1950–1957), and the United States (1947–1950). He made nearly 30 films, the latter ones being especially notable: \"La Ronde\" (1950), \"Le Plaisir\" (1952), \"The Earrings of Madame de...\" (1953) and \"Lola Montès\" (1955).",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.30302885236333266,
+      "temperature": 0.30302885236333266,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Max Ophüls",
+        "raw_score": 3.6452075626111418,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_3",
+      "node_type": "kg",
+      "content": "Alain Jessua (born 16 January 1932) is a French film director and screenwriter. He directed ten films between 1956 and 1997. He worked as assistant director for Jacques Becker on the set of \"Casque d'or\", with Max Ophüls for \"Madame de...\" and \"Lola Montès\" and with Marcel Carné on \"Wasteland\". \" Léon la lune\" his first short film won the influential Prix Jean Vigo in 1957. He directed first feature film in 1963 \"La vie à l'envers\" that won Best First Film at Venice Film Festival, in 1964.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.09547972152284318,
+      "temperature": 0.09547972152284318,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Alain Jessua",
+        "raw_score": 3.0954945702045604,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "memory_mem_1",
+      "node_type": "memory",
+      "content": "Template: for compositional multi-hop questions, first solve the intermediate entity and then ask for the final attribute.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9599999930792744,
+      "temperature": 0.9415000646313978,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.96,
+        "tag": "compositional_template",
+        "memory_kind": "template",
+        "raw_score": 0.12918719727717945,
+        "source": "memory",
+        "diffusion_delta": 0.2649911510200944,
+        "diffusion_gain": 0.2649911510200944
+      }
+    },
+    {
+      "node_id": "memory_mem_3",
+      "node_type": "memory",
+      "content": "Template: when evidence already grounds the answer, switch from branching to short verification and synthesis.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.8799999941722468,
+      "temperature": 1.3541598408879667,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.88,
+        "tag": "verification_then_stop",
+        "memory_kind": "template",
+        "raw_score": 0.09877752312679164,
+        "source": "memory",
+        "diffusion_delta": 0.04527912479927143,
+        "diffusion_gain": 0.04527912479927143
+      }
+    },
+    {
+      "node_id": "state_2",
+      "node_type": "state",
+      "content": "When did Max Ophüls die?",
+      "depth": 1,
+      "parent_id": "state_1",
+      "value": 0.5615800135241245,
+      "temperature": 1.2166740106678269,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.5812027125413611,
+        "evidence_support": 0.5505962133569444,
+        "memory_usefulness": 0.8799999913575839,
+        "answerability": 0.5352981066784722,
+        "uncertainty": 0.20089268159575
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_7",
+          "doc_10",
+          "doc_2",
+          "doc_5"
+        ],
+        "memory_ids": [
+          "mem_3"
+        ],
+        "diffusion_delta": 0.13970376166046305,
+        "diffusion_gain": 0.13970376166046305
+      }
+    },
+    {
+      "node_id": "kg_doc_7",
+      "node_type": "kg",
+      "content": "French writer Jacques Natanson (15 May 1901 – 19 May 1975) first became involved in the movies in 1929 when one of his plays was adapted for the screen. He enjoyed a fruitful collaboration with Max Ophüls, on such films as \"La Ronde\" (1951, earning an Academy Award nomination), \"Le Plaisir\" (1952) and \"Lola Montès\" (1955).",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.999999986141187,
+      "temperature": 0.999999986141187,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Jacques Natanson",
+        "raw_score": 1.6279854615273326,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_10",
+      "node_type": "kg",
+      "content": "La signora di tutti or Everybody's Woman (1934) is an Italian drama film directed by Max Ophüls, and starring Isa Miranda. It is the only film Max Ophüls made in Italy. The film was a success and Isa Miranda became a star.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999748337224,
+      "temperature": 0.9999999748337224,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Everybody's Woman",
+        "raw_score": 4.642054239566934,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_2",
+      "node_type": "kg",
+      "content": "The Merry Heirs (German: Lachende Erben) is a 1933 German comedy film directed by Max Ophüls and starring Heinz Rühmann, Max Adalbert, Lien Deyers and Friedrich Ettel. The premiere was on 6 March 1933.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.029405894230914484,
+      "temperature": 0.029405894230914484,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "The Merry Heirs",
+        "raw_score": 1.1084112924741278,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_5",
+      "node_type": "kg",
+      "content": "The Earrings of Madame de… (French: Madame de… ] ) is a 1953 drama film directed by Max Ophüls, adapted from Louise Leveque de Vilmorin's period novel by Ophüls, Marcel Archard and Annette Wadement. The film is considered a masterpiece of the 1950s French cinema. Andrew Sarris called it \"the most perfect film ever made\". Ophüls said the story's construction attracted him, stating \"there is always the same axis around which the action continually turns like a carousel. A tiny, scarcely visible axis: a pair of earrings.\"",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999819460567,
+      "temperature": 0.9999999819460567,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "The Earrings of Madame de…",
+        "raw_score": 2.8417449407441118,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "state_3",
+      "node_type": "state",
+      "content": "When did Shirley Clarke die?",
+      "depth": 1,
+      "parent_id": "state_1",
+      "value": 0.5335010128479182,
+      "temperature": 1.9617180523848736,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.5259999991034432,
+        "evidence_support": 0.4999999973630681,
+        "memory_usefulness": 0.8799999913575839,
+        "answerability": 0.4899999986815341,
+        "uncertainty": 0.21000000047464773
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_4",
+          "doc_7"
+        ],
+        "memory_ids": [
+          "mem_3"
+        ],
+        "diffusion_delta": 0.26973335823895006,
+        "diffusion_gain": 0.26973335823895006
+      }
+    },
+    {
+      "node_id": "state_4",
+      "node_type": "state",
+      "content": "Compare the death dates of Max Ophüls and Shirley Clarke to determine who died first.?",
+      "depth": 2,
+      "parent_id": "state_3",
+      "value": 0.654145257948062,
+      "temperature": 1.2033099018061342,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.772113382375234,
+        "evidence_support": 0.5532746540448056,
+        "memory_usefulness": 0.8968121002726315,
+        "answerability": 0.6366373270224028,
+        "uncertainty": 0.200410562271935
+      },
+      "metadata": {
+        "kind": "comparison",
+        "evidence_ids": [
+          "doc_4",
+          "doc_5",
+          "doc_9",
+          "doc_8"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "diffusion_delta": 0.26066417451874646,
+        "diffusion_gain": 0.26066417451874646
+      }
+    },
+    {
+      "node_id": "kg_doc_8",
+      "node_type": "kg",
+      "content": "Sarajevo (French:De Mayerling à Sarajevo) is a 1940 French historical film directed by Max Ophüls and starring Edwige Feuillère, John Lodge and Aimé Clariond. Beginning in the aftermath of the Mayerling Incident the film portrays the love affair and marriage between Archduke Franz Ferdinand of Austria and Sophie, Duchess of Hohenberg, leading up to their eventual assassination in 1914 in events that triggered the First World War. The film was not a commercial or critical success. Following the German occupation of France the film was banned, and Ophüls fled into exile for the second time.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0,
+      "temperature": 0.0,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Sarajevo (1940 French film)",
+        "raw_score": 1.2861696336692412,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "memory_mem_4",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'When did Shirley Clarke die' is September 23, 1997.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 1.0,
+      "temperature": 1.1160405244927811,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "intermediate_answer",
+        "target_question": "When did Shirley Clarke die?",
+        "target_question_norm": "when did shirley clarke die",
+        "relation_signature": "generic",
+        "answer_text": "September 23, 1997",
+        "support_score": 1.0,
+        "evidence_ids": [
+          "doc_4"
+        ],
+        "slot_name": "shirley_clarke_death_date",
+        "slot_role": "generic",
+        "terminal": false,
+        "derived_from_state": "state_3",
+        "diffusion_delta": 0.04492107763496489,
+        "diffusion_gain": 0.04492107763496489
+      }
+    },
+    {
+      "node_id": "state_5",
+      "node_type": "state",
+      "content": "What is Max Ophüls's death date?",
+      "depth": 3,
+      "parent_id": "state_4",
+      "value": 0.6663993764122383,
+      "temperature": 0.5951848463769603,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.7118914705488097,
+        "evidence_support": 0.9349749133788519,
+        "memory_usefulness": 0.0,
+        "answerability": 0.827487456689426,
+        "uncertainty": 0.13170451559180665
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_10",
+          "doc_5",
+          "doc_3",
+          "doc_7"
+        ],
+        "memory_ids": [],
+        "diffusion_delta": -0.13231465356796135,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "state_6",
+      "node_type": "state",
+      "content": "What is Shirley Clarke's death date?",
+      "depth": 3,
+      "parent_id": "state_4",
+      "value": 0.6382041153192863,
+      "temperature": 0.4426137792058316,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.5377887221646283,
+        "evidence_support": 0.5346727122489066,
+        "memory_usefulness": 0.0,
+        "answerability": 0.6073363561244532,
+        "uncertainty": 0.2037589117951968
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_4",
+          "doc_5",
+          "doc_10",
+          "doc_3"
+        ],
+        "memory_ids": [],
+        "diffusion_delta": -0.04900584851221007,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "state_7",
+      "node_type": "state",
+      "content": "Which death date is earlier: Max Ophüls's or Shirley Clarke's?",
+      "depth": 3,
+      "parent_id": "state_4",
+      "value": 0.6717938055992488,
+      "temperature": 0.953579197028862,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.7674282470265195,
+        "evidence_support": 0.8747889618427043,
+        "memory_usefulness": 0.0,
+        "answerability": 0.837394480921352,
+        "uncertainty": 0.14253798686831323
+      },
+      "metadata": {
+        "kind": "comparison",
+        "evidence_ids": [
+          "doc_4",
+          "doc_5",
+          "doc_10",
+          "doc_3"
+        ],
+        "memory_ids": [],
+        "diffusion_delta": 0.6812865639360095,
+        "diffusion_gain": 0.6812865639360095
+      }
+    },
+    {
+      "node_id": "memory_mem_5",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'Compare the death dates of Max Ophüls and Shirley Clarke to determine who died first.' is Max Ophüls (6 May 1902 – 26 March 1957) died before Shirley Clarke (October 2, 1919 – September 23, 1997).",
+      "depth": 0,
+      "parent_id": null,
+      "value": 1.0,
+      "temperature": 0.8841827984610349,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "intermediate_answer",
+        "target_question": "Compare the death dates of Max Ophüls and Shirley Clarke to determine who died first.?",
+        "target_question_norm": "compare the death dates of max oph ls and shirley clarke to determine who died first",
+        "relation_signature": "comparison",
+        "answer_text": "Max Ophüls (6 May 1902 – 26 March 1957) died before Shirley Clarke (October 2, 1919 – September 23, 1997)",
+        "support_score": 1.0,
+        "evidence_ids": [
+          "doc_4"
+        ],
+        "slot_name": "",
+        "slot_role": "",
+        "terminal": false,
+        "derived_from_state": "state_4",
+        "diffusion_delta": -0.0988627590869513,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "state_8",
+      "node_type": "state",
+      "content": "Which of the two death dates is earlier?",
+      "depth": 4,
+      "parent_id": "state_7",
+      "value": 0.5987106075407796,
+      "temperature": 0.5297007873512678,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.587929881793628,
+        "evidence_support": 0.905676122922435,
+        "memory_usefulness": 0.00478652071841877,
+        "answerability": 0.7528380614612175,
+        "uncertainty": 0.13697829787396168
+      },
+      "metadata": {
+        "kind": "comparison",
+        "evidence_ids": [
+          "doc_5",
+          "doc_6",
+          "doc_1",
+          "doc_8"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "diffusion_delta": -0.2659237201085426,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "kg_doc_6",
+      "node_type": "kg",
+      "content": "The Exile (1947) is a adventure romantic film directed by Max Ophüls, and produced, written by, and starring Douglas Fairbanks, Jr.. Rita Corday (billed as \"Paule Croset\") played the romantic interest. According to Robert Osborne, the primary host of Turner Classic Movies, María Montez had a stipulation in her contract that she had to have top billing in any film in which she appeared, so her name comes first in the opening credits, despite her secondary role. The movie is based on the novel \"His Majesty, the King: A Romantic Love Chase of the Seventeenth Century\" by Cosmo Hamilton.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.8113522638988133,
+      "temperature": 0.8113522638988133,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "The Exile (1947 film)",
+        "raw_score": 2.5344180475265676,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "memory_mem_6",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'Which death date is earlier: Max Ophüls's or Shirley Clarke's' is October 2, 1919 – September 23, 1997.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 1.0,
+      "temperature": 0.8322003872460906,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "intermediate_answer",
+        "target_question": "Which death date is earlier: Max Ophüls's or Shirley Clarke's?",
+        "target_question_norm": "which death date is earlier max oph ls s or shirley clarke s",
+        "relation_signature": "generic",
+        "answer_text": "October 2, 1919 – September 23, 1997",
+        "support_score": 1.0,
+        "evidence_ids": [
+          "doc_4",
+          "doc_5",
+          "doc_10"
+        ],
+        "slot_name": "",
+        "slot_role": "",
+        "terminal": false,
+        "derived_from_state": "state_7",
+        "diffusion_delta": -0.4086065140319106,
+        "diffusion_gain": 0.0
+      }
+    }
+  ],
+  "edges": [
+    {
+      "source": "state_1",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.9999999920773173
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.3504315498166405
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.30302885236333266
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.9599999930792744
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.3095411284651746
+    },
+    {
+      "source": "state_1",
+      "target": "state_2",
+      "edge_type": "refines",
+      "weight": 1.0
+    },
+    {
+      "source": "state_1",
+      "target": "state_3",
+      "edge_type": "refines",
+      "weight": 1.0
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.9999999920773173
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.9999999947261362
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.9999999916097803
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.9999999947261362
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "state_6",
+      "edge_type": "supports",
+      "weight": 0.9999999955461307
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "state_7",
+      "edge_type": "supports",
+      "weight": 0.9999999873251039
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.9999999916097803
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.9999999873251039
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.3504315498166405
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "state_8",
+      "edge_type": "supports",
+      "weight": 0.19742612314860142
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.30302885236333266
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.08738305928255795
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.08738305928255795
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.09547972152284318
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "state_6",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "state_7",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.9599999930792744
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_4",
+      "edge_type": "recalls",
+      "weight": 0.5175627363027118
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "memory_mem_5",
+      "edge_type": "recalls",
+      "weight": 0.5175627363027118
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_8",
+      "edge_type": "recalls",
+      "weight": 0.008968616714445312
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.3095411284651746
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_2",
+      "edge_type": "recalls",
+      "weight": 0.8799999913575839
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_3",
+      "edge_type": "recalls",
+      "weight": 0.8799999913575839
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_4",
+      "edge_type": "recalls",
+      "weight": 0.3699377305740212
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "memory_mem_4",
+      "edge_type": "recalls",
+      "weight": 0.8799999913575839
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "memory_mem_5",
+      "edge_type": "recalls",
+      "weight": 0.3699377305740212
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_8",
+      "edge_type": "recalls",
+      "weight": 0.000604424722392226
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.999999986141187
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_10",
+      "edge_type": "supports",
+      "weight": 0.10119244057270191
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.029405894230914484
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_2",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.8799999913575839
+    },
+    {
+      "source": "state_2",
+      "target": "state_3",
+      "edge_type": "refines",
+      "weight": 0.9
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.999999986141187
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_10",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.10119244057270191
+    },
+    {
+      "source": "kg_doc_10",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.9999999748337224
+    },
+    {
+      "source": "kg_doc_10",
+      "target": "state_6",
+      "edge_type": "supports",
+      "weight": 0.05984072566531228
+    },
+    {
+      "source": "kg_doc_10",
+      "target": "state_7",
+      "edge_type": "supports",
+      "weight": 0.666484421823753
+    },
+    {
+      "source": "kg_doc_10",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.666484421823753
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.029405894230914484
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.10654931647983094
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.8699498519239814
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "state_6",
+      "edge_type": "supports",
+      "weight": 0.06934542895168247
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "state_7",
+      "edge_type": "supports",
+      "weight": 0.7495779363603048
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.10654931647983094
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "state_8",
+      "edge_type": "supports",
+      "weight": 0.9999999819460567
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.7495779363603048
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.9999999947261362
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_3",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.8799999913575839
+    },
+    {
+      "source": "state_3",
+      "target": "state_2",
+      "edge_type": "refines",
+      "weight": 0.84
+    },
+    {
+      "source": "state_3",
+      "target": "state_4",
+      "edge_type": "refines",
+      "weight": 0.8
+    },
+    {
+      "source": "state_3",
+      "target": "memory_mem_4",
+      "edge_type": "derives",
+      "weight": 1.0
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.9999999916097803
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.10654931647983094
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.08738305928255795
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_8",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_4",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.5175627363027118
+    },
+    {
+      "source": "state_4",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.3699377305740212
+    },
+    {
+      "source": "state_4",
+      "target": "state_5",
+      "edge_type": "refines",
+      "weight": 0.9
+    },
+    {
+      "source": "state_4",
+      "target": "state_6",
+      "edge_type": "refines",
+      "weight": 0.9
+    },
+    {
+      "source": "state_4",
+      "target": "state_7",
+      "edge_type": "refines",
+      "weight": 0.8
+    },
+    {
+      "source": "state_4",
+      "target": "memory_mem_5",
+      "edge_type": "derives",
+      "weight": 1.0
+    },
+    {
+      "source": "kg_doc_8",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_8",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_8",
+      "target": "state_8",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "state_3",
+      "edge_type": "recalls",
+      "weight": 1.0
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.9999999947261362
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.8799999913575839
+    },
+    {
+      "source": "state_5",
+      "target": "kg_doc_10",
+      "edge_type": "supports",
+      "weight": 0.9999999748337224
+    },
+    {
+      "source": "state_5",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.8699498519239814
+    },
+    {
+      "source": "state_5",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.09547972152284318
+    },
+    {
+      "source": "state_5",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_6",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.9999999955461307
+    },
+    {
+      "source": "state_6",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.06934542895168247
+    },
+    {
+      "source": "state_6",
+      "target": "kg_doc_10",
+      "edge_type": "supports",
+      "weight": 0.05984072566531228
+    },
+    {
+      "source": "state_6",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_7",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.9999999873251039
+    },
+    {
+      "source": "state_7",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.7495779363603048
+    },
+    {
+      "source": "state_7",
+      "target": "kg_doc_10",
+      "edge_type": "supports",
+      "weight": 0.666484421823753
+    },
+    {
+      "source": "state_7",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_7",
+      "target": "state_5",
+      "edge_type": "refines",
+      "weight": 0.84
+    },
+    {
+      "source": "state_7",
+      "target": "state_6",
+      "edge_type": "refines",
+      "weight": 0.9
+    },
+    {
+      "source": "state_7",
+      "target": "state_8",
+      "edge_type": "refines",
+      "weight": 0.8
+    },
+    {
+      "source": "state_7",
+      "target": "memory_mem_6",
+      "edge_type": "derives",
+      "weight": 1.0
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "state_4",
+      "edge_type": "recalls",
+      "weight": 1.0
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.9999999916097803
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.10654931647983094
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.08738305928255795
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_8",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.5175627363027118
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.3699377305740212
+    },
+    {
+      "source": "state_8",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.9999999819460567
+    },
+    {
+      "source": "state_8",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.8113522638988133
+    },
+    {
+      "source": "state_8",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.19742612314860142
+    },
+    {
+      "source": "state_8",
+      "target": "kg_doc_8",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_8",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.008968616714445312
+    },
+    {
+      "source": "state_8",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.000604424722392226
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "state_8",
+      "edge_type": "supports",
+      "weight": 0.8113522638988133
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "state_7",
+      "edge_type": "recalls",
+      "weight": 1.0
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.9999999873251039
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.7495779363603048
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_10",
+      "edge_type": "supports",
+      "weight": 0.666484421823753
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.0
+    }
+  ]
+}

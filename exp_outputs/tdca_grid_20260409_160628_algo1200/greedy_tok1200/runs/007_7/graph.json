@@ -1,0 +1,309 @@
+{
+  "nodes": [
+    {
+      "node_id": "state_1",
+      "node_type": "state",
+      "content": "The arena where the Lewiston Maineiacs played their home games can seat how many people?",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.8903769312061387,
+      "temperature": 0.526976597929257,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 1.0,
+        "evidence_support": 1.0,
+        "memory_usefulness": 0.694807760051155,
+        "answerability": 0.8999999999999999,
+        "uncertainty": 0.12
+      },
+      "metadata": {}
+    },
+    {
+      "node_id": "kg_doc_4",
+      "node_type": "kg",
+      "content": "For a composition question, identify the intermediate entity before retrieving its attribute.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 1.0,
+      "temperature": 1.0,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Reasoning Pattern",
+        "raw_score": 3.7772988152849662,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "memory_mem_13",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'What is the name of the director of the movie Inception' is Christopher Nolan.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.7248657730668061,
+      "temperature": 0.7248657730668061,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.7248658809196076,
+        "source": "tdca_run",
+        "memory_kind": "derived_fact",
+        "target_question": "What is the name of the director of the movie Inception?",
+        "target_question_norm": "what is the name of the director of the movie inception",
+        "relation_signature": "director",
+        "answer_text": "Christopher Nolan",
+        "support_score": 0.9698038362434835,
+        "evidence_ids": [
+          "doc_1"
+        ],
+        "derived_from_state": "state_7",
+        "raw_score": 0.9576326190000995
+      }
+    },
+    {
+      "node_id": "memory_mem_6",
+      "node_type": "memory",
+      "content": "Conclusion: The birth city of the director of the movie Inception is London.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.6647497470355038,
+      "temperature": 0.6647497470355038,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.758776433441565,
+        "source": "tdca_run",
+        "memory_kind": "answer_candidate",
+        "target_question": "What is the birth city of the director of the movie Inception?",
+        "target_question_norm": "what is the birth city of the director of the movie inception",
+        "relation_signature": "director",
+        "answer_text": "London",
+        "support_score": 0.758776433441565,
+        "derived_from_state": "state_1",
+        "composed_from": [
+          "memory_mem_4",
+          "memory_mem_5"
+        ],
+        "raw_score": 0.9451399779053592
+      }
+    },
+    {
+      "node_id": "memory_mem_10",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'Who was the director of the movie Inception' is Christopher Nolan.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.34628833038413387,
+      "temperature": 0.34628833038413387,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.6119225613854106,
+        "source": "tdca_run",
+        "memory_kind": "derived_fact",
+        "target_question": "Who was the director of the movie Inception?",
+        "target_question_norm": "who was the director of the movie inception",
+        "relation_signature": "director",
+        "answer_text": "Christopher Nolan",
+        "support_score": 0.7701273184072095,
+        "evidence_ids": [
+          "doc_1"
+        ],
+        "derived_from_state": "state_2",
+        "raw_score": 0.9138698380242883
+      }
+    },
+    {
+      "node_id": "memory_mem_4",
+      "node_type": "memory",
+      "content": "Conclusion: The director of the movie Inception is Christopher Nolan.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.14067513968534698,
+      "temperature": 0.14067513968534698,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.6949002389629794,
+        "source": "tdca_run",
+        "memory_kind": "derived_fact",
+        "target_question": "Who is the director of the movie Inception?",
+        "target_question_norm": "who is the director of the movie inception",
+        "relation_signature": "director",
+        "answer_text": "Christopher Nolan",
+        "support_score": 0.758776433441565,
+        "evidence_ids": [
+          "doc_1"
+        ],
+        "derived_from_state": "state_2",
+        "raw_score": 0.8772279747291505
+      }
+    },
+    {
+      "node_id": "memory_mem_7",
+      "node_type": "memory",
+      "content": "Template: for nested relation questions, solve the intermediate relation first, then query the target attribute, then verify the chain.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.002501512814414551,
+      "temperature": 0.002501512814414551,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.758776433441565,
+        "source": "tdca_run",
+        "kind": "strategy_template",
+        "memory_kind": "template",
+        "raw_score": 0.857151772049158
+      }
+    },
+    {
+      "node_id": "memory_mem_16",
+      "node_type": "memory",
+      "content": "Conclusion: The birth city of the director of Inception is London.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0,
+      "temperature": 0.0,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.531866601053193,
+        "source": "tdca_run",
+        "memory_kind": "derived_fact",
+        "target_question": "What is the birth city of the director of Inception?",
+        "target_question_norm": "what is the birth city of the director of inception",
+        "relation_signature": "director",
+        "answer_text": "London",
+        "support_score": 0.6602880655328272,
+        "evidence_ids": [
+          "doc_1"
+        ],
+        "derived_from_state": "state_4",
+        "raw_score": 0.5712129425727619
+      }
+    },
+    {
+      "node_id": "memory_mem_3",
+      "node_type": "memory",
+      "content": "Template: when evidence already grounds the answer, switch from branching to short verification and synthesis.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.8799999962443381,
+      "temperature": 0.8799999962443381,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.88,
+        "tag": "verification_then_stop",
+        "memory_kind": "template",
+        "raw_score": 3.2002806762775666,
+        "source": "memory"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "source": "state_1",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 1.0
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_13",
+      "edge_type": "recalls",
+      "weight": 0.7248657730668061
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_6",
+      "edge_type": "recalls",
+      "weight": 0.6647497470355038
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_10",
+      "edge_type": "recalls",
+      "weight": 0.34628833038413387
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_4",
+      "edge_type": "recalls",
+      "weight": 0.14067513968534698
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_7",
+      "edge_type": "recalls",
+      "weight": 0.002501512814414551
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_16",
+      "edge_type": "recalls",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 1.0
+    },
+    {
+      "source": "memory_mem_13",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.7248657730668061
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.6647497470355038
+    },
+    {
+      "source": "memory_mem_10",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.34628833038413387
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.14067513968534698
+    },
+    {
+      "source": "memory_mem_7",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.002501512814414551
+    },
+    {
+      "source": "memory_mem_16",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.0
+    }
+  ]
+}

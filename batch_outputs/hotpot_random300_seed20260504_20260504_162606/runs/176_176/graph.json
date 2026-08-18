@@ -1,0 +1,2102 @@
+{
+  "nodes": [
+    {
+      "node_id": "state_1",
+      "node_type": "state",
+      "content": "What kind of beverage does Planter's Punch and Black Velvet have in common?",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.7049525645553142,
+      "temperature": 1.6160879862206188,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.859529980812639,
+        "evidence_support": 0.5868528847430556,
+        "memory_usefulness": 0.8820682746050714,
+        "answerability": 0.6934264423715278,
+        "uncertainty": 0.19436648074624996
+      },
+      "metadata": {
+        "diffusion_delta": 0.3956680152742309,
+        "diffusion_gain": 0.3956680152742309
+      }
+    },
+    {
+      "node_id": "kg_doc_2",
+      "node_type": "kg",
+      "content": "Planter's Punch is an IBA Official Cocktail made of dark rum, several juices, grenadine syrup, sugar syrup, and Angostura bitters.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999968715253,
+      "temperature": 0.9999999968715253,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Planter's Punch",
+        "raw_score": 8.249194558686773,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_9",
+      "node_type": "kg",
+      "content": "Black Velvet is a quarterly independent rock magazine based in the UK. The zine originated in 1994 and is published/edited by Shari Black Velvet. The zine includes in-depth interviews, CD, concert and zine reviews and more. Sugarcult's Marko 72 also wrote a regular column for a while although now a different musician writes a column each issue.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.999999952669173,
+      "temperature": 0.999999952669173,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Black Velvet (magazine)",
+        "raw_score": 2.7988546455671366,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_1",
+      "node_type": "kg",
+      "content": "Black Velvet Flag was a New York City-based comedy music trio, known for their humorous, lounge-styled covers of songs by Southern California punk rock bands, and for performing while wearing tuxedos. They became known in 1994, after performing on the New York music scene, which suddenly propelled them to fame in just six months. Their only full-length album, \"Come Recline\", was released in 1995 on Go-Kart Records. In 2003, an interactive documentary of the band, entitled \"The Rise and Fall of Black Velvet Flag\", was released; it was directed by Sheldon Schiffer.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.05615261243085039,
+      "temperature": 0.05615261243085039,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Black Velvet Flag",
+        "raw_score": 1.830549990892687,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_8",
+      "node_type": "kg",
+      "content": "Bigger and Blackerer: a 2010 album and DVD that stars American stand-up comedian David Cross. The album's title plays on Chris Rock's comedy album, \"Bigger & Blacker\", and the cover plays off of the popular art form of painting on black velvet, such as Velvet Elvis (and is reminiscent of the Ray Charles album \"Ray Charles Greatest Hits\"). Cross taped and recorded the album during two shows at the Wilbur Theatre in Boston.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.10291118310019216,
+      "temperature": 0.10291118310019216,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Bigger and Blackerer",
+        "raw_score": 3.1619132029562707,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "memory_mem_1",
+      "node_type": "memory",
+      "content": "Template: for compositional multi-hop questions, first solve the intermediate entity and then ask for the final attribute.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9599998077388796,
+      "temperature": 3.1123302114783566,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.96,
+        "tag": "compositional_template",
+        "memory_kind": "template",
+        "raw_score": 0.4436643942737473,
+        "source": "memory",
+        "diffusion_delta": 0.2882302791648472,
+        "diffusion_gain": 0.2882302791648472
+      }
+    },
+    {
+      "node_id": "memory_mem_3",
+      "node_type": "memory",
+      "content": "Template: when evidence already grounds the answer, switch from branching to short verification and synthesis.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.8799999819645339,
+      "temperature": 1.1929549699587119,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.88,
+        "tag": "verification_then_stop",
+        "memory_kind": "template",
+        "raw_score": 0.9588804379973176,
+        "source": "memory",
+        "diffusion_delta": 0.2661272128295802,
+        "diffusion_gain": 0.2661272128295802
+      }
+    },
+    {
+      "node_id": "state_2",
+      "node_type": "state",
+      "content": "Is Planter's Punch a beverage?",
+      "depth": 1,
+      "parent_id": "state_1",
+      "value": 0.4509128871189761,
+      "temperature": 0.37796866395823575,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.5625859275900418,
+        "evidence_support": 0.5118073500547446,
+        "memory_usefulness": 0.0,
+        "answerability": 0.6130465321702294,
+        "uncertainty": 0.20787467699014595
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_2",
+          "doc_9",
+          "doc_3",
+          "doc_8"
+        ],
+        "memory_ids": [],
+        "diffusion_delta": 0.017165859192420196,
+        "diffusion_gain": 0.017165859192420196
+      }
+    },
+    {
+      "node_id": "kg_doc_3",
+      "node_type": "kg",
+      "content": "A velvet painting is a type of painting distinguished by the use of velvet (usually black velvet) as the support, in place of canvas, paper, or similar materials. The velvet provides an especially dark background against which colors stand out brightly.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.8228869251472914,
+      "temperature": 0.8228869251472914,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Velvet painting",
+        "raw_score": 2.3688092594413086,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "state_3",
+      "node_type": "state",
+      "content": "Is Black Velvet (as referenced in cocktail context) a beverage?",
+      "depth": 1,
+      "parent_id": "state_1",
+      "value": 0.5091890911806047,
+      "temperature": 1.111395636583308,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.6019617411451963,
+        "evidence_support": 0.6276185663934343,
+        "memory_usefulness": 0.0,
+        "answerability": 0.6709521403395743,
+        "uncertainty": 0.18702865804918184
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_7",
+          "doc_9",
+          "doc_3",
+          "doc_4"
+        ],
+        "memory_ids": [],
+        "diffusion_delta": 0.003411624242665834,
+        "diffusion_gain": 0.003411624242665834
+      }
+    },
+    {
+      "node_id": "kg_doc_7",
+      "node_type": "kg",
+      "content": "The Black Velvet is a beer cocktail made from stout (often Guinness) and white, sparkling wine, traditionally Champagne.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999974332754,
+      "temperature": 0.9999999974332754,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Black Velvet (beer cocktail)",
+        "raw_score": 1.7027962939078019,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_4",
+      "node_type": "kg",
+      "content": "Black roses are symbols featured in fiction with many different meanings and titles such as black velvet rose, black magic, barkarole, black beauty, Tuscany superb, black jade, and baccara. The roses commonly called black roses are technically a very dark shade of red, purple or maroon. The color of a rose may be deepened by placing a dark rose in a vase of water mixed with black ink. Other black roses may be blackened by other methods such as burning.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999884655286,
+      "temperature": 0.9999999884655286,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Black rose (symbolism)",
+        "raw_score": 3.452658667200196,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "state_4",
+      "node_type": "state",
+      "content": "What type of beverage is Planter's Punch?",
+      "depth": 1,
+      "parent_id": "state_1",
+      "value": 0.5561637911293917,
+      "temperature": 0.41246028116574807,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.6707670403383921,
+        "evidence_support": 0.6703232278860269,
+        "memory_usefulness": 0.0,
+        "answerability": 0.7208758996572993,
+        "uncertainty": 0.17934181898051516
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_2",
+          "doc_3",
+          "doc_8",
+          "doc_9"
+        ],
+        "memory_ids": [],
+        "diffusion_delta": 0.013476967617722546,
+        "diffusion_gain": 0.013476967617722546
+      }
+    },
+    {
+      "node_id": "state_5",
+      "node_type": "state",
+      "content": "What are the beverage components of Black Velvet (cocktail)?",
+      "depth": 2,
+      "parent_id": "state_3",
+      "value": 0.725789404480589,
+      "temperature": 1.1332013532365057,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.7251731450033553,
+        "evidence_support": 0.9101731155560868,
+        "memory_usefulness": 0.5139667251540021,
+        "answerability": 0.8265151292066147,
+        "uncertainty": 0.13616883919990436
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_4",
+          "doc_7",
+          "doc_1",
+          "doc_3"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "diffusion_delta": 0.15812270375201365,
+        "diffusion_gain": 0.15812270375201365
+      }
+    },
+    {
+      "node_id": "state_6",
+      "node_type": "state",
+      "content": "What is the primary beverage component of Planter's Punch?",
+      "depth": 2,
+      "parent_id": "state_3",
+      "value": 0.5578628771181835,
+      "temperature": 0.9785677244637707,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.6302420936967107,
+        "evidence_support": 0.5511322083516701,
+        "memory_usefulness": 0.5139667251540021,
+        "answerability": 0.6612803898901207,
+        "uncertainty": 0.20079620249669938
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_2",
+          "doc_8",
+          "doc_3",
+          "doc_9"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "diffusion_delta": 0.5187797318370327,
+        "diffusion_gain": 0.5187797318370327
+      }
+    },
+    {
+      "node_id": "state_7",
+      "node_type": "state",
+      "content": "Do Planter's Punch and Black Velvet share a common alcoholic base (e.g., rum, stout, champagne)?",
+      "depth": 2,
+      "parent_id": "state_3",
+      "value": 0.7366446328964121,
+      "temperature": 1.2594530138364504,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.7512138107728402,
+        "evidence_support": 0.8270994434495299,
+        "memory_usefulness": 0.8820682746050714,
+        "answerability": 0.7135497217247649,
+        "uncertainty": 0.15112210017908462
+      },
+      "metadata": {
+        "kind": "comparison",
+        "evidence_ids": [
+          "doc_2",
+          "doc_7",
+          "doc_9",
+          "doc_8"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "diffusion_delta": 0.13260748554365787,
+        "diffusion_gain": 0.13260748554365787
+      }
+    },
+    {
+      "node_id": "memory_mem_4",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'Is Black Velvet (as referenced in cocktail context) a beverage' is a beer cocktail.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 1.0,
+      "temperature": 0.4810683403590017,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "intermediate_answer",
+        "target_question": "Is Black Velvet (as referenced in cocktail context) a beverage?",
+        "target_question_norm": "is black velvet as referenced in cocktail context a beverage",
+        "relation_signature": "generic",
+        "answer_text": "a beer cocktail",
+        "support_score": 1.0,
+        "evidence_ids": [
+          "doc_7"
+        ],
+        "slot_name": "black_velvet_beverage",
+        "slot_role": "final_boolean",
+        "terminal": true,
+        "derived_from_state": "state_3",
+        "diffusion_delta": -0.03862083445294373,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "state_8",
+      "node_type": "state",
+      "content": "What is the alcoholic base of Planter's Punch?",
+      "depth": 3,
+      "parent_id": "state_7",
+      "value": 0.48506011363300283,
+      "temperature": 0.40870631102800936,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.6032091862193305,
+        "evidence_support": 0.5514555897207197,
+        "memory_usefulness": 0.012111459760424437,
+        "answerability": 0.6471563662889313,
+        "uncertainty": 0.20073799385027044
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_2",
+          "doc_8",
+          "doc_3",
+          "doc_9"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "diffusion_delta": 0.003632488757074226,
+        "diffusion_gain": 0.003632488757074226
+      }
+    },
+    {
+      "node_id": "state_9",
+      "node_type": "state",
+      "content": "What is the alcoholic base of Black Velvet?",
+      "depth": 3,
+      "parent_id": "state_7",
+      "value": 0.6866227019860959,
+      "temperature": 0.5287287326491287,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.7214387139379272,
+        "evidence_support": 0.9790214275485256,
+        "memory_usefulness": 0.005064092268742557,
+        "answerability": 0.84665357091712,
+        "uncertainty": 0.12377614304126539
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_9",
+          "doc_7",
+          "doc_3",
+          "doc_1"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "diffusion_delta": -0.02668791694370931,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "state_10",
+      "node_type": "state",
+      "content": "Do Planter's Punch and Black Velvet share any alcoholic ingredient?",
+      "depth": 3,
+      "parent_id": "state_7",
+      "value": 0.5393324541434493,
+      "temperature": 0.8075120897590989,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.6485397990968291,
+        "evidence_support": 0.6049489889402536,
+        "memory_usefulness": 0.2755415004297561,
+        "answerability": 0.5881887801844126,
+        "uncertainty": 0.19110918199075433
+      },
+      "metadata": {
+        "kind": "comparison",
+        "evidence_ids": [
+          "doc_2",
+          "doc_9",
+          "doc_7",
+          "doc_8"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "diffusion_delta": 0.13830048809981854,
+        "diffusion_gain": 0.13830048809981854
+      }
+    },
+    {
+      "node_id": "memory_mem_5",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'Do Planter's Punch and Black Velvet share a common alcoholic base (e.g., rum, stout, champagne)' is No.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999968715253,
+      "temperature": 0.8184852577070472,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "intermediate_answer",
+        "target_question": "Do Planter's Punch and Black Velvet share a common alcoholic base (e.g., rum, stout, champagne)?",
+        "target_question_norm": "do planter s punch and black velvet share a common alcoholic base e g rum stout champagne",
+        "relation_signature": "generic",
+        "answer_text": "No",
+        "support_score": 0.9999999968715253,
+        "evidence_ids": [
+          "doc_2",
+          "doc_7"
+        ],
+        "slot_name": "",
+        "slot_role": "",
+        "terminal": false,
+        "derived_from_state": "state_7",
+        "diffusion_delta": 0.016362040957480728,
+        "diffusion_gain": 0.016362040957480728
+      }
+    },
+    {
+      "node_id": "state_11",
+      "node_type": "state",
+      "content": "What are the beverage components of Planter's Punch?",
+      "depth": 3,
+      "parent_id": "state_5",
+      "value": 0.6894999342565595,
+      "temperature": 0.4751188134637084,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.6351351337835567,
+        "evidence_support": 0.5655235027247464,
+        "memory_usefulness": 0.00455948934267529,
+        "answerability": 0.6684760370766589,
+        "uncertainty": 0.19820576950954566
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_2",
+          "doc_4",
+          "doc_8",
+          "doc_3"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "diffusion_delta": -0.030706875286604596,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "state_12",
+      "node_type": "state",
+      "content": "What beverage type is shared between stout and white sparkling wine?",
+      "depth": 3,
+      "parent_id": "state_5",
+      "value": 0.4960625079060252,
+      "temperature": 0.7211978219200419,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.5587211912979277,
+        "evidence_support": 0.5802724113804597,
+        "memory_usefulness": 0.19534049225671962,
+        "answerability": 0.6329933485473727,
+        "uncertainty": 0.19555096595151725
+      },
+      "metadata": {
+        "kind": "comparison",
+        "evidence_ids": [
+          "doc_7",
+          "doc_10",
+          "doc_3",
+          "doc_9"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "diffusion_delta": 0.11605033452322533,
+        "diffusion_gain": 0.11605033452322533
+      }
+    },
+    {
+      "node_id": "kg_doc_10",
+      "node_type": "kg",
+      "content": "Black Velvet Travel Limited, trading as Velvet, was an English bus company based in Eastleigh, that operated between November 2007 and January 2015.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.16054482532764408,
+      "temperature": 0.16054482532764408,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Velvet (bus company)",
+        "raw_score": 3.1696727970051057,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "memory_mem_6",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'What are the beverage components of Black Velvet (cocktail)' is stout and white, sparkling wine.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999884655286,
+      "temperature": 0.7022367885793496,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "intermediate_answer",
+        "target_question": "What are the beverage components of Black Velvet (cocktail)?",
+        "target_question_norm": "what are the beverage components of black velvet cocktail",
+        "relation_signature": "generic",
+        "answer_text": "stout and white, sparkling wine",
+        "support_score": 0.9999999884655286,
+        "evidence_ids": [
+          "doc_7",
+          "doc_4"
+        ],
+        "slot_name": "",
+        "slot_role": "",
+        "terminal": false,
+        "derived_from_state": "state_5",
+        "diffusion_delta": -0.12783353895339056,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "state_13",
+      "node_type": "state",
+      "content": "What is the primary beverage component of Black Velvet?",
+      "depth": 3,
+      "parent_id": "state_6",
+      "value": 0.699039686664639,
+      "temperature": 0.7204748344212376,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.7485815710807845,
+        "evidence_support": 0.9790214275485256,
+        "memory_usefulness": 0.002348488399459043,
+        "answerability": 0.8609392852028342,
+        "uncertainty": 0.12377614304126539
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_9",
+          "doc_7",
+          "doc_3",
+          "doc_1"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "diffusion_delta": -0.30438881718475386,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "state_14",
+      "node_type": "state",
+      "content": "What alcoholic base is common to both Planter's Punch and Black Velvet?",
+      "depth": 3,
+      "parent_id": "state_6",
+      "value": 0.5510257597228129,
+      "temperature": 0.5617282207507466,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.6996387989680628,
+        "evidence_support": 0.5955762994858989,
+        "memory_usefulness": 0.05824090565542821,
+        "answerability": 0.7120738640286637,
+        "uncertainty": 0.1927962660925382
+      },
+      "metadata": {
+        "kind": "comparison",
+        "evidence_ids": [
+          "doc_2",
+          "doc_9",
+          "doc_7",
+          "doc_1"
+        ],
+        "memory_ids": [
+          "mem_3",
+          "mem_1"
+        ],
+        "diffusion_delta": -0.16376821275270736,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "memory_mem_7",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'What is the primary beverage component of Planter's Punch' is dark rum.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 1.0,
+      "temperature": 0.8003099270054441,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "intermediate_answer",
+        "target_question": "What is the primary beverage component of Planter's Punch?",
+        "target_question_norm": "what is the primary beverage component of planter s punch",
+        "relation_signature": "generic",
+        "answer_text": "dark rum",
+        "support_score": 1.0,
+        "evidence_ids": [
+          "doc_2"
+        ],
+        "slot_name": "",
+        "slot_role": "",
+        "terminal": false,
+        "derived_from_state": "state_6",
+        "diffusion_delta": -0.37986321346817786,
+        "diffusion_gain": 0.0
+      }
+    }
+  ],
+  "edges": [
+    {
+      "source": "state_1",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.9999999954626663
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.1737057740234449
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.00500184810263747
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_8",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.8841365672456091
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.8799999819645339
+    },
+    {
+      "source": "state_1",
+      "target": "state_2",
+      "edge_type": "refines",
+      "weight": 0.94
+    },
+    {
+      "source": "state_1",
+      "target": "state_3",
+      "edge_type": "refines",
+      "weight": 0.94
+    },
+    {
+      "source": "state_1",
+      "target": "state_4",
+      "edge_type": "refines",
+      "weight": 0.95
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.9999999954626663
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.9999999962286004
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.9999999966359489
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "state_6",
+      "edge_type": "supports",
+      "weight": 0.999999996335288
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "state_7",
+      "edge_type": "supports",
+      "weight": 0.9999999968715253
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "state_8",
+      "edge_type": "supports",
+      "weight": 0.9999999963412473
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "state_10",
+      "edge_type": "supports",
+      "weight": 0.9999999957340368
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.9999999968715253
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "state_11",
+      "edge_type": "supports",
+      "weight": 0.9999999958792225
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "state_14",
+      "edge_type": "supports",
+      "weight": 0.9999999956352027
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "memory_mem_7",
+      "edge_type": "supports",
+      "weight": 0.999999996335288
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.1737057740234449
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.023614703880889012
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.2552371482973232
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "state_6",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "state_7",
+      "edge_type": "supports",
+      "weight": 0.182434549437343
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.2552371482973232
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "state_8",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "state_9",
+      "edge_type": "supports",
+      "weight": 0.999999952669173
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "state_10",
+      "edge_type": "supports",
+      "weight": 0.2098979821464704
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.182434549437343
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "state_12",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "state_13",
+      "edge_type": "supports",
+      "weight": 0.999999952669173
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "state_14",
+      "edge_type": "supports",
+      "weight": 0.19115260333659492
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "memory_mem_7",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.00500184810263747
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.05615261243085039
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "state_9",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.05615261243085039
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "state_13",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "state_14",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_8",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_8",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_8",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.08369599483663127
+    },
+    {
+      "source": "kg_doc_8",
+      "target": "state_6",
+      "edge_type": "supports",
+      "weight": 0.10226442036805217
+    },
+    {
+      "source": "kg_doc_8",
+      "target": "state_7",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_8",
+      "target": "state_8",
+      "edge_type": "supports",
+      "weight": 0.10291118310019216
+    },
+    {
+      "source": "kg_doc_8",
+      "target": "state_10",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_8",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_8",
+      "target": "state_11",
+      "edge_type": "supports",
+      "weight": 0.028902299685398827
+    },
+    {
+      "source": "kg_doc_8",
+      "target": "memory_mem_7",
+      "edge_type": "supports",
+      "weight": 0.10226442036805217
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.8841365672456091
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_5",
+      "edge_type": "recalls",
+      "weight": 0.006141630161472111
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_6",
+      "edge_type": "recalls",
+      "weight": 0.005651728736459543
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_7",
+      "edge_type": "recalls",
+      "weight": 0.16057374482344783
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_8",
+      "edge_type": "recalls",
+      "weight": 0.022629479038462467
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_9",
+      "edge_type": "recalls",
+      "weight": 0.009461928793984909
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_10",
+      "edge_type": "recalls",
+      "weight": 0.2763439872106798
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "memory_mem_5",
+      "edge_type": "recalls",
+      "weight": 0.16057374482344783
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_11",
+      "edge_type": "recalls",
+      "weight": 0.008527435838870383
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_12",
+      "edge_type": "recalls",
+      "weight": 0.19622438588684052
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "memory_mem_6",
+      "edge_type": "recalls",
+      "weight": 0.006141630161472111
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_13",
+      "edge_type": "recalls",
+      "weight": 0.004392856260442749
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_14",
+      "edge_type": "recalls",
+      "weight": 0.03907254079702415
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "memory_mem_7",
+      "edge_type": "recalls",
+      "weight": 0.005651728736459543
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.8799999819645339
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_5",
+      "edge_type": "recalls",
+      "weight": 0.00042604101120121795
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_6",
+      "edge_type": "recalls",
+      "weight": 0.0003912731682405142
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_7",
+      "edge_type": "recalls",
+      "weight": 0.15964115129112683
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_8",
+      "edge_type": "recalls",
+      "weight": 0.001593440482386406
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_9",
+      "edge_type": "recalls",
+      "weight": 0.000666255743500206
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_10",
+      "edge_type": "recalls",
+      "weight": 0.27473901364883235
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "memory_mem_5",
+      "edge_type": "recalls",
+      "weight": 0.15964115129112683
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_11",
+      "edge_type": "recalls",
+      "weight": 0.0005915428464801969
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_12",
+      "edge_type": "recalls",
+      "weight": 0.19445659862659875
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "memory_mem_6",
+      "edge_type": "recalls",
+      "weight": 0.00042604101120121795
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_13",
+      "edge_type": "recalls",
+      "weight": 0.000304120538475337
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_14",
+      "edge_type": "recalls",
+      "weight": 0.07740927051383226
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "memory_mem_7",
+      "edge_type": "recalls",
+      "weight": 0.0003912731682405142
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.9999999962286004
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.023614703880889012
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.003716218693185108
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_8",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.003716218693185108
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.0593331124672082
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.34064645913610514
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "state_6",
+      "edge_type": "supports",
+      "weight": 0.09515539784905343
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.0593331124672082
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "state_8",
+      "edge_type": "supports",
+      "weight": 0.09500066448286151
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "state_9",
+      "edge_type": "supports",
+      "weight": 0.8228869251472914
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "state_11",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "state_12",
+      "edge_type": "supports",
+      "weight": 0.1266597923603926
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "state_13",
+      "edge_type": "supports",
+      "weight": 0.8097394731903003
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "memory_mem_7",
+      "edge_type": "supports",
+      "weight": 0.09515539784905343
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.9999999844895453
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.2552371482973232
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.0593331124672082
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_3",
+      "target": "state_5",
+      "edge_type": "refines",
+      "weight": 0.95
+    },
+    {
+      "source": "state_3",
+      "target": "state_6",
+      "edge_type": "refines",
+      "weight": 0.9
+    },
+    {
+      "source": "state_3",
+      "target": "state_7",
+      "edge_type": "refines",
+      "weight": 0.85
+    },
+    {
+      "source": "state_3",
+      "target": "memory_mem_4",
+      "edge_type": "derives",
+      "weight": 1.0
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.9999999844895453
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.8203462426466449
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "state_7",
+      "edge_type": "supports",
+      "weight": 0.6541988900275345
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.9999999844895453
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "state_9",
+      "edge_type": "supports",
+      "weight": 0.9580429024278782
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "state_10",
+      "edge_type": "supports",
+      "weight": 0.038896191624767505
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.6541988900275345
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "state_12",
+      "edge_type": "supports",
+      "weight": 0.9999999974332754
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.8203462426466449
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "state_13",
+      "edge_type": "supports",
+      "weight": 0.9580429024278782
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "state_14",
+      "edge_type": "supports",
+      "weight": 0.021779062644129533
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.9999999884655286
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "state_11",
+      "edge_type": "supports",
+      "weight": 0.1310470095702702
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.9999999884655286
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.9999999966359489
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.34064645913610514
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_8",
+      "edge_type": "supports",
+      "weight": 0.08369599483663127
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_5",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.9999999884655286
+    },
+    {
+      "source": "state_5",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.8203462426466449
+    },
+    {
+      "source": "state_5",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.05615261243085039
+    },
+    {
+      "source": "state_5",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_5",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.006141630161472111
+    },
+    {
+      "source": "state_5",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.00042604101120121795
+    },
+    {
+      "source": "state_5",
+      "target": "state_11",
+      "edge_type": "refines",
+      "weight": 0.84
+    },
+    {
+      "source": "state_5",
+      "target": "state_12",
+      "edge_type": "refines",
+      "weight": 0.8
+    },
+    {
+      "source": "state_5",
+      "target": "memory_mem_6",
+      "edge_type": "derives",
+      "weight": 0.9999999884655286
+    },
+    {
+      "source": "state_6",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.999999996335288
+    },
+    {
+      "source": "state_6",
+      "target": "kg_doc_8",
+      "edge_type": "supports",
+      "weight": 0.10226442036805217
+    },
+    {
+      "source": "state_6",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.09515539784905343
+    },
+    {
+      "source": "state_6",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_6",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.005651728736459543
+    },
+    {
+      "source": "state_6",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.0003912731682405142
+    },
+    {
+      "source": "state_6",
+      "target": "state_13",
+      "edge_type": "refines",
+      "weight": 0.84
+    },
+    {
+      "source": "state_6",
+      "target": "state_14",
+      "edge_type": "refines",
+      "weight": 0.9
+    },
+    {
+      "source": "state_6",
+      "target": "memory_mem_7",
+      "edge_type": "derives",
+      "weight": 1.0
+    },
+    {
+      "source": "state_7",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.9999999968715253
+    },
+    {
+      "source": "state_7",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.6541988900275345
+    },
+    {
+      "source": "state_7",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.182434549437343
+    },
+    {
+      "source": "state_7",
+      "target": "kg_doc_8",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_7",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.16057374482344783
+    },
+    {
+      "source": "state_7",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.15964115129112683
+    },
+    {
+      "source": "state_7",
+      "target": "state_8",
+      "edge_type": "refines",
+      "weight": 0.9
+    },
+    {
+      "source": "state_7",
+      "target": "state_9",
+      "edge_type": "refines",
+      "weight": 0.9
+    },
+    {
+      "source": "state_7",
+      "target": "state_10",
+      "edge_type": "refines",
+      "weight": 0.8
+    },
+    {
+      "source": "state_7",
+      "target": "memory_mem_5",
+      "edge_type": "derives",
+      "weight": 0.9999999968715253
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "state_3",
+      "edge_type": "recalls",
+      "weight": 1.0
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.9999999844895453
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.2552371482973232
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.0593331124672082
+    },
+    {
+      "source": "state_8",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.9999999963412473
+    },
+    {
+      "source": "state_8",
+      "target": "kg_doc_8",
+      "edge_type": "supports",
+      "weight": 0.10291118310019216
+    },
+    {
+      "source": "state_8",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.09500066448286151
+    },
+    {
+      "source": "state_8",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_8",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.022629479038462467
+    },
+    {
+      "source": "state_8",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.001593440482386406
+    },
+    {
+      "source": "state_9",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.999999952669173
+    },
+    {
+      "source": "state_9",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.9580429024278782
+    },
+    {
+      "source": "state_9",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.8228869251472914
+    },
+    {
+      "source": "state_9",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_9",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.009461928793984909
+    },
+    {
+      "source": "state_9",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.000666255743500206
+    },
+    {
+      "source": "state_10",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.9999999957340368
+    },
+    {
+      "source": "state_10",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.2098979821464704
+    },
+    {
+      "source": "state_10",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.038896191624767505
+    },
+    {
+      "source": "state_10",
+      "target": "kg_doc_8",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_10",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.2763439872106798
+    },
+    {
+      "source": "state_10",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.27473901364883235
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "state_7",
+      "edge_type": "recalls",
+      "weight": 0.9999999968715253
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.9999999968715253
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.6541988900275345
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.182434549437343
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_8",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.16057374482344783
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.15964115129112683
+    },
+    {
+      "source": "state_11",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.9999999958792225
+    },
+    {
+      "source": "state_11",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.1310470095702702
+    },
+    {
+      "source": "state_11",
+      "target": "kg_doc_8",
+      "edge_type": "supports",
+      "weight": 0.028902299685398827
+    },
+    {
+      "source": "state_11",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_11",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.008527435838870383
+    },
+    {
+      "source": "state_11",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.0005915428464801969
+    },
+    {
+      "source": "state_12",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.9999999974332754
+    },
+    {
+      "source": "state_12",
+      "target": "kg_doc_10",
+      "edge_type": "supports",
+      "weight": 0.16054482532764408
+    },
+    {
+      "source": "state_12",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.1266597923603926
+    },
+    {
+      "source": "state_12",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_12",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.19622438588684052
+    },
+    {
+      "source": "state_12",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.19445659862659875
+    },
+    {
+      "source": "kg_doc_10",
+      "target": "state_12",
+      "edge_type": "supports",
+      "weight": 0.16054482532764408
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "state_5",
+      "edge_type": "recalls",
+      "weight": 0.9999999884655286
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.8203462426466449
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.9999999884655286
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.05615261243085039
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.006141630161472111
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.00042604101120121795
+    },
+    {
+      "source": "state_13",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.999999952669173
+    },
+    {
+      "source": "state_13",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.9580429024278782
+    },
+    {
+      "source": "state_13",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.8097394731903003
+    },
+    {
+      "source": "state_13",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_13",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.004392856260442749
+    },
+    {
+      "source": "state_13",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.000304120538475337
+    },
+    {
+      "source": "state_14",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.9999999956352027
+    },
+    {
+      "source": "state_14",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.19115260333659492
+    },
+    {
+      "source": "state_14",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.021779062644129533
+    },
+    {
+      "source": "state_14",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_14",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.07740927051383226
+    },
+    {
+      "source": "state_14",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.03907254079702415
+    },
+    {
+      "source": "memory_mem_7",
+      "target": "state_6",
+      "edge_type": "recalls",
+      "weight": 1.0
+    },
+    {
+      "source": "memory_mem_7",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.999999996335288
+    },
+    {
+      "source": "memory_mem_7",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.09515539784905343
+    },
+    {
+      "source": "memory_mem_7",
+      "target": "kg_doc_8",
+      "edge_type": "supports",
+      "weight": 0.10226442036805217
+    },
+    {
+      "source": "memory_mem_7",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_7",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.005651728736459543
+    },
+    {
+      "source": "memory_mem_7",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.0003912731682405142
+    }
+  ]
+}

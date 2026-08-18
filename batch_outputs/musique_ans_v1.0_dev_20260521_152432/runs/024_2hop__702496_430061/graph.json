@@ -1,0 +1,613 @@
+{
+  "nodes": [
+    {
+      "node_id": "state_1",
+      "node_type": "state",
+      "content": "What county was Tim Dubois born in?",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.6918226533814786,
+      "temperature": 0.8188196326659343,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.9221774685009991,
+        "evidence_support": 0.7711102014735265,
+        "memory_usefulness": 0.0,
+        "answerability": 0.7855551007367632,
+        "uncertainty": 0.16120016373476523
+      },
+      "metadata": {
+        "diffusion_delta": 0.3412936913059718,
+        "diffusion_gain": 0.3412936913059718
+      }
+    },
+    {
+      "node_id": "kg_doc_7",
+      "node_type": "kg",
+      "content": "Tim DuBois (born May 4, 1948 in Southwest City, Missouri) is a Nashville, Tennessee-based music executive. He attended Oklahoma State University and received a B.A. and M.A. in Accounting and in 2016 he was awarded an honorary PHD in Accounting. He then entered into the music business and has taken part in multiple aspects of the industry including songwriting, record labels, management, and production. DuBois has been recognized for numerous honors and awards for his contributions to the music industry.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999964298558,
+      "temperature": 0.9999999964298558,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Tim DuBois",
+        "raw_score": 7.089908286094191,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_19",
+      "node_type": "kg",
+      "content": "``When I Call Your Name ''is a song co-written and recorded by American country music artist Vince Gill. It was released in May 1990 as the third single and title track from the album When I Call Your Name. The song reached number 2 on the Billboard Hot Country Singles & Tracks chart. It was written by Gill and Tim DuBois. Patty Loveless performed backing vocals on the song. Session veteran Barry Beckett played piano on the track. The Common Linnets performed a cover of the song to celebrate 50 years of the CMA Awards.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.5422204101407287,
+      "temperature": 0.5422204101407287,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "When I Call Your Name (Vince Gill song)",
+        "raw_score": 4.504652902167454,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_2",
+      "node_type": "kg",
+      "content": "Allison DuBois (born January 24, 1972) is an American author and purported medium. DuBois has used her psychic abilities to assist U.S. law enforcement officials in solving crimes, forming the basis of the TV series Medium.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.037125094318109945,
+      "temperature": 0.037125094318109945,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Allison DuBois",
+        "raw_score": 4.641221817874737,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_18",
+      "node_type": "kg",
+      "content": "Southwest City is a city in McDonald County, Missouri, United States. The population was 937 at the 2010 census, at which time it was a town. It is part of the Fayetteville–Springdale–Rogers, AR-MO Metropolitan Statistical Area and is located in the southwestern corner of the state of Missouri.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999979392665,
+      "temperature": 0.9999999979392665,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Southwest City, Missouri",
+        "raw_score": 12.944742767469139,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "state_2",
+      "node_type": "state",
+      "content": "What city was Tim DuBois born in?",
+      "depth": 1,
+      "parent_id": "state_1",
+      "value": 0.5857977229019088,
+      "temperature": 1.3633487037401373,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.813473364895112,
+        "evidence_support": 0.6110561152377247,
+        "memory_usefulness": 0.0,
+        "answerability": 0.6769566290474338,
+        "uncertainty": 0.19000989925720954
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_7",
+          "doc_19",
+          "doc_18",
+          "doc_2"
+        ],
+        "memory_ids": [],
+        "goal_slot_name": "birth_location",
+        "goal_slot_role": "target_attribute",
+        "goal_terminal": true,
+        "diffusion_delta": 0.11150221977031949,
+        "diffusion_gain": 0.11150221977031949
+      }
+    },
+    {
+      "node_id": "state_3",
+      "node_type": "state",
+      "content": "What county is Southwest City, Missouri in?",
+      "depth": 2,
+      "parent_id": "state_2",
+      "value": 0.6173647651345161,
+      "temperature": 1.0110575572206464,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.712119049801314,
+        "evidence_support": 0.7919467851299151,
+        "memory_usefulness": 0.0,
+        "answerability": 0.7816876782792432,
+        "uncertainty": 0.15744957867661527
+      },
+      "metadata": {
+        "kind": "bridge",
+        "evidence_ids": [
+          "doc_18",
+          "doc_7",
+          "doc_20",
+          "doc_9"
+        ],
+        "memory_ids": [],
+        "diffusion_delta": 0.7334503334731115,
+        "diffusion_gain": 0.7334503334731115
+      }
+    },
+    {
+      "node_id": "kg_doc_20",
+      "node_type": "kg",
+      "content": "Sant Martí d'Empúries is an entity of the town of L'Escala. It is located next to the ruins of Empúries or Empòrion. Ancient Greeks established the settlement in the 6th century BC. It was the county seat until 1079 Empúries moved to Castelló d'Empúries place less exposed to attack.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.14189446660308833,
+      "temperature": 0.14189446660308833,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Sant Martí d'Empúries",
+        "raw_score": 3.0083783469421905,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_9",
+      "node_type": "kg",
+      "content": "lex soli: By birth in the UK or a qualified British Overseas Territory to a parent who is a British citizen at the time of the birth, or to a parent who is settled in the UK or that Overseas Territory lex sanguinis: By birth abroad, which constitutes ``by descent ''if one of the parents is a British citizen otherwise than by descent (for example by birth, adoption, registration or naturalisation in the UK). British citizenship by descent is only transferable to one generation down from the parent who is a British citizen otherwise than by descent, if the child is born abroad. By naturalisation By registration By adoption",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0,
+      "temperature": 0.0,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "British nationality law",
+        "raw_score": 0.5556305961118411,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "memory_mem_4",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'What city was Tim DuBois born in' is Southwest City.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 1.0,
+      "temperature": 0.8637460967601872,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "intermediate_answer",
+        "target_question": "What city was Tim DuBois born in?",
+        "target_question_norm": "what city was tim dubois born in",
+        "relation_signature": "birth",
+        "answer_text": "Southwest City",
+        "support_score": 1.0,
+        "evidence_ids": [
+          "doc_7"
+        ],
+        "slot_name": "birth_location",
+        "slot_role": "target_attribute",
+        "terminal": true,
+        "derived_from_state": "state_2",
+        "diffusion_delta": 0.021236156622435054,
+        "diffusion_gain": 0.021236156622435054
+      }
+    },
+    {
+      "node_id": "memory_mem_5",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'What county is Southwest City, Missouri in' is McDonald County.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.92,
+      "temperature": 0.8023876792749136,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "answer_candidate",
+        "target_question": "What county is Southwest City, Missouri in?",
+        "target_question_norm": "what county is southwest city missouri in",
+        "relation_signature": "generic",
+        "answer_text": "McDonald County",
+        "support_score": 0.7919467851299151,
+        "evidence_ids": [
+          "doc_18",
+          "doc_7"
+        ],
+        "slot_name": "path_terminal",
+        "slot_role": "target_attribute",
+        "terminal": true,
+        "path_terminal": true,
+        "composition_kind": "path_terminal",
+        "derived_from_state": "state_3",
+        "diffusion_delta": -0.25159557069351424,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "memory_mem_6",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'What county was Tim Dubois born in' is McDonald County.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.96,
+      "temperature": 0.96,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "answer_candidate",
+        "target_question": "What county was Tim Dubois born in?",
+        "target_question_norm": "what county was tim dubois born in",
+        "relation_signature": "birth",
+        "answer_text": "McDonald County",
+        "support_score": 0.96,
+        "evidence_ids": [
+          "doc_7",
+          "doc_18"
+        ],
+        "slot_role": "target_attribute",
+        "terminal": true,
+        "path_terminal": true,
+        "coverage_count": 2,
+        "coverage_ratio": 1.0,
+        "composition_kind": "path_terminal",
+        "diffusion_delta": -0.24747479841693842,
+        "diffusion_gain": 0.0
+      }
+    }
+  ],
+  "edges": [
+    {
+      "source": "state_1",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.9999999928063242
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_19",
+      "edge_type": "supports",
+      "weight": 0.5422204101407287
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.037125094318109945
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_18",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_1",
+      "target": "state_2",
+      "edge_type": "refines",
+      "weight": 1.0
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_6",
+      "edge_type": "derives",
+      "weight": 0.96
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.9999999928063242
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.9999999964298558
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.5838935723205638
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.9999999964298558
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.5838935723205638
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.25
+    },
+    {
+      "source": "kg_doc_19",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.5422204101407287
+    },
+    {
+      "source": "kg_doc_19",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.2221122340455937
+    },
+    {
+      "source": "kg_doc_19",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.2221122340455937
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.037125094318109945
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_18",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_18",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.08929418505213134
+    },
+    {
+      "source": "kg_doc_18",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.9999999979392665
+    },
+    {
+      "source": "kg_doc_18",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.08929418505213134
+    },
+    {
+      "source": "kg_doc_18",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.9999999979392665
+    },
+    {
+      "source": "kg_doc_18",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.55
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.9999999964298558
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_19",
+      "edge_type": "supports",
+      "weight": 0.2221122340455937
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_18",
+      "edge_type": "supports",
+      "weight": 0.08929418505213134
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_2",
+      "target": "state_3",
+      "edge_type": "refines",
+      "weight": 0.84
+    },
+    {
+      "source": "state_2",
+      "target": "memory_mem_4",
+      "edge_type": "derives",
+      "weight": 1.0
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_18",
+      "edge_type": "supports",
+      "weight": 0.9999999979392665
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.5838935723205638
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_20",
+      "edge_type": "supports",
+      "weight": 0.14189446660308833
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_3",
+      "target": "memory_mem_5",
+      "edge_type": "derives",
+      "weight": 1.0
+    },
+    {
+      "source": "kg_doc_20",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.14189446660308833
+    },
+    {
+      "source": "kg_doc_20",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.14189446660308833
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "state_2",
+      "edge_type": "recalls",
+      "weight": 1.0
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.9999999964298558
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_19",
+      "edge_type": "supports",
+      "weight": 0.2221122340455937
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_18",
+      "edge_type": "supports",
+      "weight": 0.08929418505213134
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "state_3",
+      "edge_type": "recalls",
+      "weight": 1.0
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_18",
+      "edge_type": "supports",
+      "weight": 0.9999999979392665
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.5838935723205638
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_20",
+      "edge_type": "supports",
+      "weight": 0.14189446660308833
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.96
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.25
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_18",
+      "edge_type": "supports",
+      "weight": 0.55
+    }
+  ]
+}

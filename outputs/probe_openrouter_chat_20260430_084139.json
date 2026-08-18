@@ -1,0 +1,133 @@
+{
+  "created_at_local": "2026-04-30T08:41:00",
+  "base_url": "https://yh.m7ai.com/v1",
+  "model": "gpt-5.4",
+  "variants": [
+    {
+      "name": "max_completion_tokens",
+      "request_kwargs": {
+        "max_completion_tokens": 64
+      },
+      "response": {
+        "finish_reason": "stop",
+        "content": null,
+        "reasoning": null,
+        "refusal": null,
+        "usage": {
+          "completion_tokens": 8,
+          "prompt_tokens": 4391,
+          "total_tokens": 4399,
+          "completion_tokens_details": null,
+          "prompt_tokens_details": null
+        }
+      }
+    },
+    {
+      "name": "max_tokens",
+      "request_kwargs": {
+        "max_tokens": 64
+      },
+      "response": {
+        "finish_reason": "stop",
+        "content": null,
+        "reasoning": null,
+        "refusal": null,
+        "usage": {
+          "completion_tokens": 8,
+          "prompt_tokens": 4391,
+          "total_tokens": 4399,
+          "completion_tokens_details": null,
+          "prompt_tokens_details": null
+        }
+      }
+    },
+    {
+      "name": "reasoning_none_exclude_true",
+      "request_kwargs": {
+        "max_completion_tokens": 64,
+        "extra_body": {
+          "reasoning": {
+            "effort": "none",
+            "exclude": true
+          }
+        }
+      },
+      "response": {
+        "error_type": "BadRequestError",
+        "error": "Error code: 400 - {'error': {'message': \"Unknown parameter: '***.exclude'.\", 'type': 'invalid_request_error', 'param': 'reasoning.exclude', 'code': 'unknown_parameter'}}"
+      }
+    },
+    {
+      "name": "reasoning_none_exclude_false",
+      "request_kwargs": {
+        "max_completion_tokens": 64,
+        "extra_body": {
+          "reasoning": {
+            "effort": "none",
+            "exclude": false
+          }
+        }
+      },
+      "response": {
+        "error_type": "BadRequestError",
+        "error": "Error code: 400 - {'error': {'message': \"Unknown parameter: '***.exclude'.\", 'type': 'invalid_request_error', 'param': 'reasoning.exclude', 'code': 'unknown_parameter'}}"
+      }
+    },
+    {
+      "name": "reasoning_minimal_exclude_true",
+      "request_kwargs": {
+        "max_completion_tokens": 64,
+        "extra_body": {
+          "reasoning": {
+            "effort": "minimal",
+            "exclude": true
+          }
+        }
+      },
+      "response": {
+        "error_type": "BadRequestError",
+        "error": "Error code: 400 - {'error': {'message': \"Unknown parameter: '***.exclude'.\", 'type': 'invalid_request_error', 'param': 'reasoning.exclude', 'code': 'unknown_parameter'}}"
+      }
+    },
+    {
+      "name": "temperature_zero_max_completion",
+      "request_kwargs": {
+        "max_completion_tokens": 64,
+        "temperature": 0
+      },
+      "response": {
+        "finish_reason": "stop",
+        "content": null,
+        "reasoning": null,
+        "refusal": null,
+        "usage": {
+          "completion_tokens": 8,
+          "prompt_tokens": 4391,
+          "total_tokens": 4399,
+          "completion_tokens_details": null,
+          "prompt_tokens_details": null
+        }
+      }
+    },
+    {
+      "name": "temperature_zero_max_tokens",
+      "request_kwargs": {
+        "max_tokens": 64,
+        "temperature": 0
+      },
+      "response": {
+        "finish_reason": "stop",
+        "content": null,
+        "reasoning": null,
+        "refusal": null,
+        "usage": {
+          "completion_tokens": 8,
+          "prompt_tokens": 4391,
+          "total_tokens": 4399,
+          "completion_tokens_details": null,
+          "prompt_tokens_details": null
+        }
+      }
+    }
+  ]
+}

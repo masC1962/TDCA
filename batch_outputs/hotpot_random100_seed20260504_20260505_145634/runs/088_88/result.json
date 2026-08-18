@@ -1,0 +1,173 @@
+{
+  "question": "Are Gael and Fitness published in the same country?",
+  "final_answer": "No",
+  "best_node": {
+    "node_id": "state_1",
+    "node_type": "state",
+    "content": "Are Gael and Fitness published in the same country?",
+    "depth": 0,
+    "parent_id": null,
+    "value": 0.8095801443779499,
+    "temperature": 1.3856273870461047,
+    "expanded": true,
+    "visit_count": 1,
+    "persistent": false,
+    "score_breakdown": {
+      "task_progress": 0.9161995230434204,
+      "evidence_support": 0.7535280089512364,
+      "memory_usefulness": 0.9133737522807308,
+      "answerability": 0.8767640044756181,
+      "uncertainty": 0.16436495838877746
+    },
+    "metadata": {
+      "diffusion_delta": 0.37290895087933396,
+      "diffusion_gain": 0.37290895087933396
+    }
+  },
+  "final_synthesis_node_ids": [
+    "state_6",
+    "state_5",
+    "state_2",
+    "memory_mem_8",
+    "state_1"
+  ],
+  "answer_history": [
+    {
+      "node_id": "",
+      "answer_text": "No",
+      "previous_answer": "",
+      "confidence": 0.28,
+      "score": 0.16880000000000003,
+      "source": "closed_book_initial",
+      "step": 0,
+      "evidence_ids": [],
+      "kind": "anytime_answer"
+    },
+    {
+      "node_id": "memory_mem_4",
+      "content": "Conclusion: The answer to 'In which country is Fitness Gurls magazine published' is United States.",
+      "answer_text": "United States",
+      "value": 0.9999999945405168,
+      "confidence": 0.95,
+      "evidence_ids": [
+        "doc_7"
+      ],
+      "step": 2,
+      "kind": "intermediate_answer"
+    },
+    {
+      "node_id": "memory_mem_5",
+      "content": "Conclusion: The answer to 'In which country is Fitness magazine published' is United States.",
+      "answer_text": "United States",
+      "value": 0.9999999847397968,
+      "confidence": 0.8709113307665846,
+      "evidence_ids": [
+        "doc_7",
+        "doc_3",
+        "doc_8"
+      ],
+      "step": 3,
+      "kind": "intermediate_answer"
+    },
+    {
+      "node_id": "memory_mem_6",
+      "content": "Conclusion: The answer to 'Are the publication countries of Gael and Fitness magazines the same' is No.",
+      "answer_text": "No",
+      "value": 0.9999999833518345,
+      "confidence": 0.95,
+      "evidence_ids": [
+        "doc_9",
+        "doc_7"
+      ],
+      "step": 4,
+      "kind": "intermediate_answer"
+    },
+    {
+      "node_id": "memory_mem_7",
+      "content": "Conclusion: The answer to 'In which country is Gael magazine published' is Belgium.",
+      "answer_text": "Belgium",
+      "value": 1.0,
+      "confidence": 1.0,
+      "evidence_ids": [
+        "doc_9"
+      ],
+      "step": 5,
+      "kind": "intermediate_answer"
+    },
+    {
+      "node_id": "memory_mem_8",
+      "content": "Conclusion: The answer to 'Are Gael and Fitness published in the same country' is No.",
+      "answer_text": "No",
+      "value": 1.0,
+      "evidence_ids": [
+        "doc_9",
+        "doc_7"
+      ],
+      "step": 5
+    },
+    {
+      "node_id": "memory_mem_8",
+      "answer_text": "No",
+      "previous_answer": "No",
+      "confidence": 1.0,
+      "score": 0.8747481014648082,
+      "source": "final_synthesis",
+      "step": 5,
+      "evidence_ids": [],
+      "kind": "anytime_answer"
+    },
+    {
+      "node_id": "state_1",
+      "answer_text": "No",
+      "confidence": 0.8019999930655759,
+      "score": 0.8019999930655759,
+      "source": "root_state_synthesis",
+      "step": 5,
+      "evidence_ids": [
+        "doc_9",
+        "doc_7",
+        "doc_1",
+        "doc_6"
+      ],
+      "kind": "root_state_synthesis_candidate"
+    },
+    {
+      "node_id": "state_1",
+      "answer_text": "No",
+      "source": "answer_judge",
+      "choice": "A",
+      "candidate_source": "root_state_synthesis",
+      "base_score": 1.0,
+      "judge_confidence": 0.0,
+      "judge_reason": "",
+      "step": 5,
+      "kind": "final_answer_selection"
+    }
+  ],
+  "anytime_answer": "No",
+  "anytime_answer_score": 0.8747481014648082,
+  "anytime_answer_source": "final_synthesis",
+  "anytime_answer_node_id": "memory_mem_8",
+  "root_state_synthesis_answer": "No",
+  "root_state_synthesis_score": 0.8019999930655759,
+  "root_state_synthesis_node_id": "state_1",
+  "stats": {
+    "steps": 5,
+    "llm_calls": 13,
+    "generated_tokens": 843,
+    "token_budget_remaining": 357,
+    "total_nodes": 23,
+    "kg_nodes": 8,
+    "memory_nodes": 7,
+    "state_nodes": 8,
+    "deleted_state_nodes": 0,
+    "scheduler_mode": "tdca",
+    "scoring_mode": "hybrid",
+    "stop_reason": "high_confidence_root_memory",
+    "goal_kind": "comparison",
+    "goal_completion": 1.0,
+    "anytime_answer": "No",
+    "anytime_answer_score": 0.8747481014648082,
+    "anytime_answer_source": "final_synthesis"
+  }
+}

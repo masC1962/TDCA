@@ -1,0 +1,221 @@
+{
+  "nodes": [
+    {
+      "node_id": "state_1",
+      "node_type": "state",
+      "content": "When did the Governorship end of the city where the author of Paenitentiam Agere died?",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.6165785903015684,
+      "temperature": 0.5651589996984825,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.8299999929336365,
+        "evidence_support": 0.49999997921657774,
+        "memory_usefulness": 0.5098216729982189,
+        "answerability": 0.6499999896082889,
+        "uncertainty": 0.21000000374101602
+      },
+      "metadata": {
+        "diffusion_delta": 0.07252642554618471,
+        "diffusion_gain": 0.07252642554618471
+      }
+    },
+    {
+      "node_id": "kg_doc_8",
+      "node_type": "kg",
+      "content": "Paenitentiam agere (\"Penance for sins\") was the seventh encyclical made by Pope John XXIII, and was issued on 1 July 1962. It calls on Christians to practice penance and considers the upcoming Second Vatican Council.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999584331555,
+      "temperature": 0.9999999584331555,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Paenitentiam agere",
+        "raw_score": 0.13761423185862295,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_10",
+      "node_type": "kg",
+      "content": "Jean-Michel Iribarren (born 13 February 1958) is a French author. He is the author of \"L'insecte\", a monologue in which the AIDS virus speaks and the author denounces the silence that surrounded the death of homosexuals at the beginning of epidemic.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0,
+      "temperature": 0.0,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Jean-Michel Iribarren",
+        "raw_score": 0.21551984591473305,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_6",
+      "node_type": "kg",
+      "content": "The Census of Quirinius was a census of Judea taken by Publius Sulpicius Quirinius, Roman governor of Syria, upon the imposition of direct Roman rule in 6 CE. The Gospel of Luke uses it as the narrative means to establish the birth of Jesus (), but places it within the reign of Herod the Great, who died 9 years earlier. No satisfactory explanation of the contradiction seems possible, and most scholars think that the author of the gospel made an error.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0,
+      "temperature": 0.0,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Census of Quirinius",
+        "raw_score": 0.19309298335374353,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_3",
+      "node_type": "kg",
+      "content": "The Song offers no clue to its author or to the date, place, or circumstances of its composition. The superscription states that it is ``Solomon's '', but even if this is meant to identify the author, it can not be read as strictly as a similar modern statement. The most reliable evidence for its date is its language: Aramaic gradually replaced Hebrew after the end of the Babylonian exile in the late 6th century BCE, and the evidence of vocabulary, morphology, idiom and syntax clearly points to a late date, centuries after King Solomon to whom it is traditionally attributed. It has parallels with Mesopotamian and Egyptian love poetry from the first half of the 1st millennium, and with the pastoral idylls of Theocritus, a Greek poet who wrote in the first half of the 3rd century; as a result of these conflicting signs, speculation ranges from the 10th to the 2nd centuries BCE, with the language supporting a date around the 3rd century.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0,
+      "temperature": 0.0,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Song of Songs",
+        "raw_score": 0.21189349198123736,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "memory_mem_3",
+      "node_type": "memory",
+      "content": "Template: when evidence already grounds the answer, switch from branching to short verification and synthesis.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.8799999957112629,
+      "temperature": 0.66466227709241,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.88,
+        "tag": "verification_then_stop",
+        "memory_kind": "template",
+        "raw_score": 2.590962282829568,
+        "source": "memory",
+        "diffusion_delta": -0.21533771861885287,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "memory_mem_1",
+      "node_type": "memory",
+      "content": "Template: for compositional multi-hop questions, first solve the intermediate entity and then ask for the final attribute.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.13964335454180607,
+      "temperature": 0.07698618916352888,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.96,
+        "tag": "compositional_template",
+        "memory_kind": "template",
+        "raw_score": 0.7388045999832441,
+        "source": "memory",
+        "diffusion_delta": -0.02215838059607049,
+        "diffusion_gain": 0.0
+      }
+    }
+  ],
+  "edges": [
+    {
+      "source": "state_1",
+      "target": "kg_doc_8",
+      "edge_type": "supports",
+      "weight": 0.9999999584331555
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_10",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.8799999914546318
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.13964335454180607
+    },
+    {
+      "source": "kg_doc_8",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.9999999584331555
+    },
+    {
+      "source": "kg_doc_10",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.8799999914546318
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.13964335454180607
+    }
+  ]
+}

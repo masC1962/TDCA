@@ -1,0 +1,2065 @@
+{
+  "nodes": [
+    {
+      "node_id": "state_1",
+      "node_type": "state",
+      "content": "In the King's Speech, who played the person who was the King of England in 1950?",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.6900455362689307,
+      "temperature": 0.9518815658116444,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.8793037304160797,
+        "evidence_support": 0.645010971811999,
+        "memory_usefulness": 0.5139667937761075,
+        "answerability": 0.7225054859059994,
+        "uncertainty": 0.18389802507384018
+      },
+      "metadata": {
+        "diffusion_delta": 0.1297257062982996,
+        "diffusion_gain": 0.1297257062982996
+      }
+    },
+    {
+      "node_id": "kg_doc_2",
+      "node_type": "kg",
+      "content": "The King's Speech is a 2010 British historical drama film directed by Tom Hooper and written by David Seidler. Colin Firth plays the future King George VI who, to cope with a stammer, sees Lionel Logue, an Australian speech and language therapist played by Geoffrey Rush. The men become friends as they work together, and after his brother abdicates the throne, the new king relies on Logue to help him make his first wartime radio broadcast on Britain's declaration of war on Germany in 1939.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999947346223,
+      "temperature": 0.9999999947346223,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "The King's Speech",
+        "raw_score": 9.147852768618616,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_7",
+      "node_type": "kg",
+      "content": "During public discussion of the King's potential response to the outcome of the 1950 general election, which returned a very slim Labour Party majority in the House of Commons, the Lascelles Principles were formally stated in a letter by Sir Alan Lascelles, Private Secretary to King George VI, under the pseudonym \"Senex\" to the Editor of \"The Times\", published on 2 May 1950:",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999780001786,
+      "temperature": 0.9999999780001786,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Lascelles Principles",
+        "raw_score": 6.4183195488283395,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_10",
+      "node_type": "kg",
+      "content": "Dwight King (born July 5, 1989) is a Canadian professional ice hockey left winger who is currently playing for the Graz 99ers of the Austrian Hockey League (EBEL). He previously played in the National Hockey League (NHL) with the Los Angeles Kings and the Montreal Canadiens. He was a member of the Kings' Stanley Cup championship teams in 2012 and in 2014.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.25,
+      "temperature": 0.25,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Dwight King",
+        "raw_score": 4.453819655721559,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_17",
+      "node_type": "kg",
+      "content": "Richard of Shrewsbury, Duke of York KG (born 17 August 1473), was the sixth child and second son of King Edward IV of England and Elizabeth Woodville, born in Shrewsbury. Richard and his older brother, who briefly reigned as King Edward V of England, mysteriously disappeared shortly after Richard III became king in 1483.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.5538069607919145,
+      "temperature": 0.5538069607919145,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Richard of Shrewsbury, Duke of York",
+        "raw_score": 5.77477766084249,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "memory_mem_1",
+      "node_type": "memory",
+      "content": "Template: for compositional multi-hop questions, first solve the intermediate entity and then ask for the final attribute.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9599999359129513,
+      "temperature": 1.4496973112749874,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.96,
+        "tag": "compositional_template",
+        "memory_kind": "template",
+        "raw_score": 0.08165487691421232,
+        "source": "memory",
+        "diffusion_delta": -0.2414470902971646,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "memory_mem_3",
+      "node_type": "memory",
+      "content": "Template: when evidence already grounds the answer, switch from branching to short verification and synthesis.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.06793365163926388,
+      "temperature": 0.10478153325721386,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.88,
+        "tag": "verification_then_stop",
+        "memory_kind": "template",
+        "raw_score": 0.07857046970492382,
+        "source": "memory",
+        "diffusion_delta": -0.016737730532123976,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "state_2",
+      "node_type": "state",
+      "content": "Who was the King of England in 1950?",
+      "depth": 1,
+      "parent_id": "state_1",
+      "value": 0.6969471661519043,
+      "temperature": 2.510320586676619,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.7974805129279892,
+        "evidence_support": 0.7769034693960466,
+        "memory_usefulness": 0.5139667251540021,
+        "answerability": 0.7217850680313567,
+        "uncertainty": 0.16015737550871162
+      },
+      "metadata": {
+        "kind": "bridge",
+        "evidence_ids": [
+          "doc_7",
+          "doc_17",
+          "doc_16",
+          "doc_18"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "goal_slot_name": "king_in_1950",
+        "goal_slot_role": "bridge_entity",
+        "goal_terminal": false,
+        "diffusion_delta": 0.12603353524312944,
+        "diffusion_gain": 0.12603353524312944
+      }
+    },
+    {
+      "node_id": "kg_doc_16",
+      "node_type": "kg",
+      "content": "This list of kings and queens of the Kingdom of England begins with Alfred the Great, King of Wessex, one of the petty kingdoms to rule a portion of modern England. Alfred styled himself King of the Anglo - Saxons and while he was not the first king to lay claim to rule all of the English, his rule represents the first unbroken line of Kings to rule the whole of England, the House of Wessex. The last monarch of a distinct kingdom of England was Queen Anne, who became Queen of Great Britain when England merged with Scotland to form a union in 1707. For monarchs after Queen Anne, see List of British monarchs.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.26612692427964074,
+      "temperature": 0.26612692427964074,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "List of English monarchs",
+        "raw_score": 3.4504489686853086,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_18",
+      "node_type": "kg",
+      "content": "Gunhilde (or Gunnhild) (died 13 November 1002) is said to have been the sister of Sweyn Forkbeard, King of Denmark, and the daughter of Harald Bluetooth. She was married to Pallig, a Dane who served the King of England, Æthelred the Unready, as ealdorman of Devonshire.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0,
+      "temperature": 0.0,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Gunhilde",
+        "raw_score": 3.1681908343085103,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "state_3",
+      "node_type": "state",
+      "content": "Who portrayed that king in the film 'The King's Speech'?",
+      "depth": 2,
+      "parent_id": "state_2",
+      "value": 0.6199327904120946,
+      "temperature": 1.8904253869076904,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.702200525147044,
+        "evidence_support": 0.6829427210207175,
+        "memory_usefulness": 0.5139667766205794,
+        "answerability": 0.6414713605103587,
+        "uncertainty": 0.17707031021627084
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_2",
+          "doc_1",
+          "doc_13",
+          "doc_19"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "diffusion_delta": 0.15536904209984193,
+        "diffusion_gain": 0.15536904209984193
+      }
+    },
+    {
+      "node_id": "kg_doc_1",
+      "node_type": "kg",
+      "content": "One of the oldest depictions of civil disobedience is in Sophocles' play Antigone, in which Antigone, one of the daughters of former King of Thebes, Oedipus, defies Creon, the current King of Thebes, who is trying to stop her from giving her brother Polynices a proper burial. She gives a stirring speech in which she tells him that she must obey her conscience rather than human law. She is not at all afraid of the death he threatens her with (and eventually carries out), but she is afraid of how her conscience will smite her if she does not do this.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.3658854492440985,
+      "temperature": 0.3658854492440985,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Civil disobedience",
+        "raw_score": 4.8405352896191465,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_13",
+      "node_type": "kg",
+      "content": "He was the second son of the 4th king Gaeru and younger brother of the 5th king Chogo. Upon the death of the 6th king Gusu, Gusu's eldest son Saban became king, but proved to be too young to rule. Goi dethroned Saban and became king. The \"Samguk Sagi\" records that \"\"King Chogo's younger brother, who had the same mother, became king.\"\".",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.2943173510669632,
+      "temperature": 0.2943173510669632,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Goi of Baekje",
+        "raw_score": 5.025414246661664,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_19",
+      "node_type": "kg",
+      "content": "The SCLC announced the campaign on December 4, 1967. King delivered a speech which identified ``a kind of social insanity which could lead to national ruin. ''In January 1968, the SCLC created and distributed an`` Economic Fact Sheet'' with statistics explaining why the campaign was necessary. King avoided providing specific details about the campaign and attempted to redirect media attention to the values at stake. The Poor People's Campaign held firm to the movement's commitment to non-violence. ``We are custodians of the philosophy of non-violence, ''said King at a press conference.`` And it has worked''. King originally wanted the Poor People's Campaign to start in Quitman County, Mississippi because of the intense and visible economic disparity there.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0315426740436357,
+      "temperature": 0.0315426740436357,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Poor People's Campaign",
+        "raw_score": 3.2615110576854534,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "memory_mem_4",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'Who was the King of England in 1950' is King George VI.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999780001786,
+      "temperature": 2.1231548276619567,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "intermediate_answer",
+        "target_question": "Who was the King of England in 1950?",
+        "target_question_norm": "who was the king of england in 1950",
+        "relation_signature": "generic",
+        "answer_text": "King George VI",
+        "support_score": 0.9999999780001786,
+        "evidence_ids": [
+          "doc_7",
+          "doc_17"
+        ],
+        "slot_name": "king_in_1950",
+        "slot_type": "",
+        "slot_role": "bridge_entity",
+        "terminal": false,
+        "path_terminal": false,
+        "composition_kind": "",
+        "derived_from_state": "state_2",
+        "diffusion_delta": 0.05260232760974892,
+        "diffusion_gain": 0.05260232760974892
+      }
+    },
+    {
+      "node_id": "state_4",
+      "node_type": "state",
+      "content": "Who portrayed King George VI in 'The King's Speech'?",
+      "depth": 3,
+      "parent_id": "state_3",
+      "value": 0.5668937521656502,
+      "temperature": 1.7475909878909717,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.7078397873363448,
+        "evidence_support": 0.6995287862833668,
+        "memory_usefulness": 0.0024238908988327363,
+        "answerability": 0.6497643931416833,
+        "uncertainty": 0.17408481846899398
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_2",
+          "doc_7",
+          "doc_8",
+          "doc_19"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "diffusion_delta": 0.19736043539185055,
+        "diffusion_gain": 0.19736043539185055
+      }
+    },
+    {
+      "node_id": "kg_doc_8",
+      "node_type": "kg",
+      "content": "George VI (Albert Frederick Arthur George; 14 December 1895 -- 6 February 1952) was King of the United Kingdom and the Dominions of the British Commonwealth from 11 December 1936 until his death. He was the last Emperor of India and the first Head of the Commonwealth.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.32564766427446845,
+      "temperature": 0.32564766427446845,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "George VI",
+        "raw_score": 4.875799589630572,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "memory_mem_5",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'Who portrayed that king in the film 'The King's Speech'' is Colin Firth.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 1.0,
+      "temperature": 0.8874492044294945,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "intermediate_answer",
+        "target_question": "Who portrayed that king in the film 'The King's Speech'?",
+        "target_question_norm": "who portrayed that king in the film the king s speech",
+        "relation_signature": "generic",
+        "answer_text": "Colin Firth",
+        "support_score": 1.0,
+        "evidence_ids": [
+          "doc_2",
+          "doc_1"
+        ],
+        "slot_name": "",
+        "slot_type": "",
+        "slot_role": "",
+        "terminal": false,
+        "path_terminal": false,
+        "composition_kind": "",
+        "derived_from_state": "state_3",
+        "diffusion_delta": 0.05795378734059642,
+        "diffusion_gain": 0.05795378734059642
+      }
+    },
+    {
+      "node_id": "state_5",
+      "node_type": "state",
+      "content": "Who played the King of England in the film The King's Speech?",
+      "depth": 1,
+      "parent_id": "state_1",
+      "value": 0.5516613819669977,
+      "temperature": 0.9028086948193278,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.762117934414525,
+        "evidence_support": 0.5797586306309558,
+        "memory_usefulness": 0.006056991945839469,
+        "answerability": 0.6398793153154779,
+        "uncertainty": 0.19564344648642795
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_2",
+          "doc_20",
+          "doc_19",
+          "doc_10"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "diffusion_delta": 0.04439741968182742,
+        "diffusion_gain": 0.04439741968182742
+      }
+    },
+    {
+      "node_id": "kg_doc_20",
+      "node_type": "kg",
+      "content": "Except for ``Dueling Guitars '', all of August's guitar pieces were played by American guitarist - composer Kaki King. King's hands are used in close - ups for August Rush.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.15951726652728918,
+      "temperature": 0.15951726652728918,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "August Rush",
+        "raw_score": 4.86139258525268,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "state_6",
+      "node_type": "state",
+      "content": "Who played the King of England in 1950 in the film The King's Speech?",
+      "depth": 1,
+      "parent_id": "state_1",
+      "value": 0.6398270210795972,
+      "temperature": 0.7719151808876283,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.8433753007512346,
+        "evidence_support": 0.7256136296604939,
+        "memory_usefulness": 0.005263133064750152,
+        "answerability": 0.7294734814969137,
+        "uncertainty": 0.16938954666111108
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_2",
+          "doc_7",
+          "doc_20",
+          "doc_10"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "diffusion_delta": 0.6528739676573241,
+        "diffusion_gain": 0.6528739676573241
+      }
+    },
+    {
+      "node_id": "state_7",
+      "node_type": "state",
+      "content": "Who played King George VI in The King's Speech?",
+      "depth": 2,
+      "parent_id": "state_5",
+      "value": 0.5385490645573676,
+      "temperature": 1.7941027396668094,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.701018647220048,
+        "evidence_support": 0.5863293545687687,
+        "memory_usefulness": 0.0023354967711851906,
+        "answerability": 0.609831343951051,
+        "uncertainty": 0.19446071617762162
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_2",
+          "doc_7",
+          "doc_8",
+          "doc_20"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "diffusion_delta": 0.5130309802064956,
+        "diffusion_gain": 0.5130309802064956
+      }
+    },
+    {
+      "node_id": "memory_mem_6",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'Who played the King of England in the film The King's Speech' is Colin Firth.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 1.0,
+      "temperature": 0.5778269832174538,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "intermediate_answer",
+        "target_question": "Who played the King of England in the film The King's Speech?",
+        "target_question_norm": "who played the king of england in the film the king s speech",
+        "relation_signature": "generic",
+        "answer_text": "Colin Firth",
+        "support_score": 1.0,
+        "evidence_ids": [
+          "doc_2"
+        ],
+        "slot_name": "actor_portraying_king",
+        "slot_type": "",
+        "slot_role": "target_attribute",
+        "terminal": true,
+        "path_terminal": false,
+        "composition_kind": "",
+        "derived_from_state": "state_5",
+        "diffusion_delta": -0.01018611410372805,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "memory_mem_7",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'Who portrayed King George VI in 'The King's Speech'' is Colin Firth.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 1.0,
+      "temperature": 0.828942979219867,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "intermediate_answer",
+        "target_question": "Who portrayed King George VI in 'The King's Speech'?",
+        "target_question_norm": "who portrayed king george vi in the king s speech",
+        "relation_signature": "generic",
+        "answer_text": "Colin Firth",
+        "support_score": 1.0,
+        "evidence_ids": [
+          "doc_2",
+          "doc_7",
+          "doc_8"
+        ],
+        "slot_name": "",
+        "slot_type": "generic",
+        "slot_role": "target_attribute",
+        "terminal": true,
+        "path_terminal": true,
+        "composition_kind": "path_terminal",
+        "derived_from_state": "state_4",
+        "diffusion_delta": 0.0236123156487269,
+        "diffusion_gain": 0.0236123156487269
+      }
+    },
+    {
+      "node_id": "memory_mem_8",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'In the King's Speech, who played the person who was the King of England in 1950' is Colin Firth.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 1.0,
+      "temperature": 0.96,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "answer_candidate",
+        "target_question": "In the King's Speech, who played the person who was the King of England in 1950?",
+        "target_question_norm": "in the king s speech who played the person who was the king of england in 1950",
+        "relation_signature": "generic",
+        "answer_text": "Colin Firth",
+        "support_score": 1.0,
+        "evidence_ids": [
+          "doc_1",
+          "doc_2",
+          "doc_3",
+          "doc_4",
+          "doc_5",
+          "doc_6",
+          "doc_7",
+          "doc_8",
+          "doc_9",
+          "doc_10",
+          "doc_11",
+          "doc_12"
+        ],
+        "slot_role": "target_attribute",
+        "terminal": true,
+        "path_terminal": true,
+        "coverage_count": 1,
+        "coverage_ratio": 1.0,
+        "composition_kind": "path_terminal",
+        "diffusion_delta": -0.27666960653333084,
+        "diffusion_gain": 0.0,
+        "final_chain_score": 1.0,
+        "final_chain_strict": true,
+        "final_chain_source_node_id": "memory_mem_9",
+        "final_chain_predecessor_ids": [
+          "memory_mem_4"
+        ],
+        "final_chain_path_depth": 1,
+        "final_chain_dependency_backed": false,
+        "final_chain_textual_predecessor": true,
+        "final_chain_source_path_terminal": true
+      }
+    },
+    {
+      "node_id": "kg_doc_3",
+      "node_type": "kg",
+      "content": "In May 1601, King James VI of Scotland attended the General Assembly of the Church of Scotland at St Columba's Church in Burntisland, Fife, at which proposals were put forward for a new translation of the Bible into English. Two years later, he ascended to the throne of England as King James I of England.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.25,
+      "temperature": 0.25,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "King James Version",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_4",
+      "node_type": "kg",
+      "content": "Raymond Márquez (born 1930), a.k.a. \"Spanish Raymond\" was the \"king\" of the illegal numbers racket in Harlem from the 1950s until his retirement in 2001.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.25,
+      "temperature": 0.25,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Raymond Márquez",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_5",
+      "node_type": "kg",
+      "content": "The Sacramento Kings are an American professional basketball team based in Sacramento, California. The Kings compete in the National Basketball Association (NBA) as a member of the Western Conference's Pacific Division. The Kings are the only team in the major professional North American sports leagues located in Sacramento. The team plays its home games at the Golden 1 Center.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.25,
+      "temperature": 0.25,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Sacramento Kings",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_6",
+      "node_type": "kg",
+      "content": "Taylor King (born May 30, 1988) is an American retired professional basketball player. King played for the Villanova University Wildcats, where he played the forward position. King attended Mater Dei High School of Santa Ana, where he enjoyed a successful high school basketball career, posting the third highest career point total in California high school history.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.25,
+      "temperature": 0.25,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Taylor King",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_9",
+      "node_type": "kg",
+      "content": "Oriel College is a constituent college of the University of Oxford in Oxford, England. Located in Oriel Square, the college has the distinction of being the oldest royal foundation in Oxford (a title formerly claimed by University College, whose claim of being founded by King Alfred is no longer promoted). In recognition of this royal connection, the college has also been known as King's College and King's Hall. The reigning monarch of the United Kingdom (since 1952, Elizabeth II) is the official Visitor of the College.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.25,
+      "temperature": 0.25,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Oriel College, Oxford",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_11",
+      "node_type": "kg",
+      "content": "Æthelflæd, known as Æthelflæd of Damerham to distinguish her from other women of the same name, was the second wife of King Edmund I of England.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.25,
+      "temperature": 0.25,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Æthelflæd of Damerham",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_12",
+      "node_type": "kg",
+      "content": "Edward II is a Renaissance or Early Modern period play written by Christopher Marlowe. It is one of the earliest English history plays. The full title of the first publication is The Troublesome Reign and Lamentable Death of Edward the Second, King of England, with the Tragical Fall of Proud Mortimer.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.25,
+      "temperature": 0.25,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Edward II (play)",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "memory_mem_9",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'Who played King George VI in The King's Speech' is Colin Firth.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.92,
+      "temperature": 1.134953475265533,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "answer_candidate",
+        "target_question": "Who played King George VI in The King's Speech?",
+        "target_question_norm": "who played king george vi in the king s speech",
+        "relation_signature": "generic",
+        "answer_text": "Colin Firth",
+        "support_score": 0.5863293545687687,
+        "evidence_ids": [
+          "doc_2"
+        ],
+        "slot_name": "path_terminal",
+        "slot_role": "target_attribute",
+        "terminal": true,
+        "path_terminal": true,
+        "composition_kind": "path_terminal",
+        "derived_from_state": "state_7",
+        "diffusion_delta": 0.2729796475414954,
+        "diffusion_gain": 0.2729796475414954
+      }
+    },
+    {
+      "node_id": "memory_mem_10",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'Who played the King of England in 1950 in the film The King's Speech' is Colin Firth.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 1.0,
+      "temperature": 0.8196835101261511,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "intermediate_answer",
+        "target_question": "Who played the King of England in 1950 in the film The King's Speech?",
+        "target_question_norm": "who played the king of england in 1950 in the film the king s speech",
+        "relation_signature": "generic",
+        "answer_text": "Colin Firth",
+        "support_score": 1.0,
+        "evidence_ids": [
+          "doc_2",
+          "doc_7"
+        ],
+        "slot_name": "",
+        "slot_type": "",
+        "slot_role": "",
+        "terminal": false,
+        "path_terminal": false,
+        "composition_kind": "",
+        "derived_from_state": "state_6",
+        "diffusion_delta": -0.387693897938877,
+        "diffusion_gain": 0.0
+      }
+    }
+  ],
+  "edges": [
+    {
+      "source": "state_1",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.999999985652249
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.2900219579717489
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_10",
+      "edge_type": "supports",
+      "weight": 0.0002891348121830626
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_17",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.007923193395214464
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.0005589040483289402
+    },
+    {
+      "source": "state_1",
+      "target": "state_2",
+      "edge_type": "refines",
+      "weight": 1.0
+    },
+    {
+      "source": "state_1",
+      "target": "state_5",
+      "edge_type": "refines",
+      "weight": 0.94
+    },
+    {
+      "source": "state_1",
+      "target": "state_6",
+      "edge_type": "refines",
+      "weight": 0.8
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_8",
+      "edge_type": "derives",
+      "weight": 0.96
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.999999985652249
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.9999999927973364
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.9999999938164551
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.9999999927973364
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.9999999947346223
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "state_6",
+      "edge_type": "supports",
+      "weight": 0.9999999944150201
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "state_7",
+      "edge_type": "supports",
+      "weight": 0.999999994256979
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.9999999947346223
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "memory_mem_7",
+      "edge_type": "supports",
+      "weight": 0.9999999938164551
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "memory_mem_8",
+      "edge_type": "supports",
+      "weight": 0.55
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "memory_mem_9",
+      "edge_type": "supports",
+      "weight": 0.999999994256979
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "memory_mem_10",
+      "edge_type": "supports",
+      "weight": 0.9999999944150201
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.2900219579717489
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.9999999780001786
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.9999999780001786
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.3990575787502786
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "state_6",
+      "edge_type": "supports",
+      "weight": 0.4512272649059677
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "state_7",
+      "edge_type": "supports",
+      "weight": 0.17265871488055823
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "memory_mem_7",
+      "edge_type": "supports",
+      "weight": 0.3990575787502786
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "memory_mem_8",
+      "edge_type": "supports",
+      "weight": 0.25
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "memory_mem_9",
+      "edge_type": "supports",
+      "weight": 0.17265871488055823
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "memory_mem_10",
+      "edge_type": "supports",
+      "weight": 0.4512272649059677
+    },
+    {
+      "source": "kg_doc_10",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.0002891348121830626
+    },
+    {
+      "source": "kg_doc_10",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_10",
+      "target": "state_6",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_10",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_10",
+      "target": "memory_mem_8",
+      "edge_type": "supports",
+      "weight": 0.25
+    },
+    {
+      "source": "kg_doc_10",
+      "target": "memory_mem_10",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_17",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_17",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.5538069607919145
+    },
+    {
+      "source": "kg_doc_17",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.5538069607919145
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.007923193395214464
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_2",
+      "edge_type": "recalls",
+      "weight": 0.9599998077388796
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_3",
+      "edge_type": "recalls",
+      "weight": 0.012661846732648025
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "memory_mem_4",
+      "edge_type": "recalls",
+      "weight": 0.9599998077388796
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_4",
+      "edge_type": "recalls",
+      "weight": 0.0038813672322513555
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "memory_mem_5",
+      "edge_type": "recalls",
+      "weight": 0.012661846732648025
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_5",
+      "edge_type": "recalls",
+      "weight": 0.011315766860630244
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_6",
+      "edge_type": "recalls",
+      "weight": 0.009832667312377093
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_7",
+      "edge_type": "recalls",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "memory_mem_6",
+      "edge_type": "recalls",
+      "weight": 0.011315766860630244
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "memory_mem_7",
+      "edge_type": "recalls",
+      "weight": 0.0038813672322513555
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "memory_mem_9",
+      "edge_type": "recalls",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "memory_mem_10",
+      "edge_type": "recalls",
+      "weight": 0.009832667312377093
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.0005589040483289402
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_2",
+      "edge_type": "recalls",
+      "weight": 0.0679336425691247
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_3",
+      "edge_type": "recalls",
+      "weight": 0.000896892537569344
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "memory_mem_4",
+      "edge_type": "recalls",
+      "weight": 0.0679336425691247
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_4",
+      "edge_type": "recalls",
+      "weight": 0.0002719486437900733
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "memory_mem_5",
+      "edge_type": "recalls",
+      "weight": 0.000896892537569344
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_5",
+      "edge_type": "recalls",
+      "weight": 0.0007982170310486933
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_6",
+      "edge_type": "recalls",
+      "weight": 0.0006935988171232118
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_7",
+      "edge_type": "recalls",
+      "weight": 0.0003077820336214545
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "memory_mem_6",
+      "edge_type": "recalls",
+      "weight": 0.0007982170310486933
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "memory_mem_7",
+      "edge_type": "recalls",
+      "weight": 0.0002719486437900733
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "memory_mem_9",
+      "edge_type": "recalls",
+      "weight": 0.0003077820336214545
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "memory_mem_10",
+      "edge_type": "recalls",
+      "weight": 0.0006935988171232118
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.9999999780001786
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_17",
+      "edge_type": "supports",
+      "weight": 0.5538069607919145
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_16",
+      "edge_type": "supports",
+      "weight": 0.26612692427964074
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_18",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_2",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.9599998077388796
+    },
+    {
+      "source": "state_2",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.0679336425691247
+    },
+    {
+      "source": "state_2",
+      "target": "state_3",
+      "edge_type": "refines",
+      "weight": 0.9
+    },
+    {
+      "source": "state_2",
+      "target": "memory_mem_4",
+      "edge_type": "derives",
+      "weight": 0.9999999780001786
+    },
+    {
+      "source": "kg_doc_16",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.26612692427964074
+    },
+    {
+      "source": "kg_doc_16",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.26612692427964074
+    },
+    {
+      "source": "kg_doc_18",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_18",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.9999999927973364
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.3658854492440985
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_13",
+      "edge_type": "supports",
+      "weight": 0.2943173510669632
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_19",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_3",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.012661846732648025
+    },
+    {
+      "source": "state_3",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.000896892537569344
+    },
+    {
+      "source": "state_3",
+      "target": "state_4",
+      "edge_type": "refines",
+      "weight": 1.0
+    },
+    {
+      "source": "state_3",
+      "target": "memory_mem_5",
+      "edge_type": "derives",
+      "weight": 1.0
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.3658854492440985
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.3658854492440985
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "memory_mem_8",
+      "edge_type": "supports",
+      "weight": 0.25
+    },
+    {
+      "source": "kg_doc_13",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.2943173510669632
+    },
+    {
+      "source": "kg_doc_13",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.2943173510669632
+    },
+    {
+      "source": "kg_doc_19",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_19",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_19",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_19",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.0315426740436357
+    },
+    {
+      "source": "kg_doc_19",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.0315426740436357
+    },
+    {
+      "source": "kg_doc_19",
+      "target": "memory_mem_7",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "state_2",
+      "edge_type": "recalls",
+      "weight": 0.9999999780001786
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.9999999780001786
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_17",
+      "edge_type": "supports",
+      "weight": 0.5538069607919145
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_16",
+      "edge_type": "supports",
+      "weight": 0.26612692427964074
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_18",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.9599998077388796
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.0679336425691247
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.9999999938164551
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.3990575787502786
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_8",
+      "edge_type": "supports",
+      "weight": 0.32564766427446845
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_19",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_4",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.0038813672322513555
+    },
+    {
+      "source": "state_4",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.0002719486437900733
+    },
+    {
+      "source": "state_4",
+      "target": "state_7",
+      "edge_type": "refines",
+      "weight": 1.0
+    },
+    {
+      "source": "state_4",
+      "target": "memory_mem_7",
+      "edge_type": "derives",
+      "weight": 1.0
+    },
+    {
+      "source": "kg_doc_8",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.32564766427446845
+    },
+    {
+      "source": "kg_doc_8",
+      "target": "state_7",
+      "edge_type": "supports",
+      "weight": 0.10447862016490272
+    },
+    {
+      "source": "kg_doc_8",
+      "target": "memory_mem_7",
+      "edge_type": "supports",
+      "weight": 0.32564766427446845
+    },
+    {
+      "source": "kg_doc_8",
+      "target": "memory_mem_8",
+      "edge_type": "supports",
+      "weight": 0.25
+    },
+    {
+      "source": "kg_doc_8",
+      "target": "memory_mem_9",
+      "edge_type": "supports",
+      "weight": 0.10447862016490272
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "state_3",
+      "edge_type": "recalls",
+      "weight": 1.0
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.9999999927973364
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.3658854492440985
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_13",
+      "edge_type": "supports",
+      "weight": 0.2943173510669632
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_19",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.012661846732648025
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.000896892537569344
+    },
+    {
+      "source": "state_5",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.9999999947346223
+    },
+    {
+      "source": "state_5",
+      "target": "kg_doc_20",
+      "edge_type": "supports",
+      "weight": 0.15951726652728918
+    },
+    {
+      "source": "state_5",
+      "target": "kg_doc_19",
+      "edge_type": "supports",
+      "weight": 0.0315426740436357
+    },
+    {
+      "source": "state_5",
+      "target": "kg_doc_10",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_5",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.011315766860630244
+    },
+    {
+      "source": "state_5",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.0007982170310486933
+    },
+    {
+      "source": "state_5",
+      "target": "state_7",
+      "edge_type": "refines",
+      "weight": 1.0
+    },
+    {
+      "source": "state_5",
+      "target": "memory_mem_6",
+      "edge_type": "derives",
+      "weight": 1.0
+    },
+    {
+      "source": "kg_doc_20",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.15951726652728918
+    },
+    {
+      "source": "kg_doc_20",
+      "target": "state_6",
+      "edge_type": "supports",
+      "weight": 0.1454289560795556
+    },
+    {
+      "source": "kg_doc_20",
+      "target": "state_7",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_20",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.15951726652728918
+    },
+    {
+      "source": "kg_doc_20",
+      "target": "memory_mem_9",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_20",
+      "target": "memory_mem_10",
+      "edge_type": "supports",
+      "weight": 0.1454289560795556
+    },
+    {
+      "source": "state_6",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.9999999944150201
+    },
+    {
+      "source": "state_6",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.4512272649059677
+    },
+    {
+      "source": "state_6",
+      "target": "kg_doc_20",
+      "edge_type": "supports",
+      "weight": 0.1454289560795556
+    },
+    {
+      "source": "state_6",
+      "target": "kg_doc_10",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_6",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.009832667312377093
+    },
+    {
+      "source": "state_6",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.0006935988171232118
+    },
+    {
+      "source": "state_6",
+      "target": "memory_mem_10",
+      "edge_type": "derives",
+      "weight": 1.0
+    },
+    {
+      "source": "state_7",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.999999994256979
+    },
+    {
+      "source": "state_7",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.17265871488055823
+    },
+    {
+      "source": "state_7",
+      "target": "kg_doc_8",
+      "edge_type": "supports",
+      "weight": 0.10447862016490272
+    },
+    {
+      "source": "state_7",
+      "target": "kg_doc_20",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_7",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.0
+    },
+    {
+      "source": "state_7",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.0003077820336214545
+    },
+    {
+      "source": "state_7",
+      "target": "memory_mem_9",
+      "edge_type": "derives",
+      "weight": 1.0
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "state_5",
+      "edge_type": "recalls",
+      "weight": 1.0
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.9999999947346223
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_20",
+      "edge_type": "supports",
+      "weight": 0.15951726652728918
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_19",
+      "edge_type": "supports",
+      "weight": 0.0315426740436357
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_10",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.011315766860630244
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.0007982170310486933
+    },
+    {
+      "source": "memory_mem_7",
+      "target": "state_4",
+      "edge_type": "recalls",
+      "weight": 1.0
+    },
+    {
+      "source": "memory_mem_7",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.9999999938164551
+    },
+    {
+      "source": "memory_mem_7",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.3990575787502786
+    },
+    {
+      "source": "memory_mem_7",
+      "target": "kg_doc_8",
+      "edge_type": "supports",
+      "weight": 0.32564766427446845
+    },
+    {
+      "source": "memory_mem_7",
+      "target": "kg_doc_19",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_7",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.0038813672322513555
+    },
+    {
+      "source": "memory_mem_7",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.0002719486437900733
+    },
+    {
+      "source": "memory_mem_8",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.96
+    },
+    {
+      "source": "memory_mem_8",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.25
+    },
+    {
+      "source": "memory_mem_8",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.55
+    },
+    {
+      "source": "memory_mem_8",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.25
+    },
+    {
+      "source": "memory_mem_8",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.25
+    },
+    {
+      "source": "memory_mem_8",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.25
+    },
+    {
+      "source": "memory_mem_8",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.25
+    },
+    {
+      "source": "memory_mem_8",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.25
+    },
+    {
+      "source": "memory_mem_8",
+      "target": "kg_doc_8",
+      "edge_type": "supports",
+      "weight": 0.25
+    },
+    {
+      "source": "memory_mem_8",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.25
+    },
+    {
+      "source": "memory_mem_8",
+      "target": "kg_doc_10",
+      "edge_type": "supports",
+      "weight": 0.25
+    },
+    {
+      "source": "memory_mem_8",
+      "target": "kg_doc_11",
+      "edge_type": "supports",
+      "weight": 0.25
+    },
+    {
+      "source": "memory_mem_8",
+      "target": "kg_doc_12",
+      "edge_type": "supports",
+      "weight": 0.25
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "memory_mem_8",
+      "edge_type": "supports",
+      "weight": 0.25
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "memory_mem_8",
+      "edge_type": "supports",
+      "weight": 0.25
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "memory_mem_8",
+      "edge_type": "supports",
+      "weight": 0.25
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "memory_mem_8",
+      "edge_type": "supports",
+      "weight": 0.25
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "memory_mem_8",
+      "edge_type": "supports",
+      "weight": 0.25
+    },
+    {
+      "source": "kg_doc_11",
+      "target": "memory_mem_8",
+      "edge_type": "supports",
+      "weight": 0.25
+    },
+    {
+      "source": "kg_doc_12",
+      "target": "memory_mem_8",
+      "edge_type": "supports",
+      "weight": 0.25
+    },
+    {
+      "source": "memory_mem_9",
+      "target": "state_7",
+      "edge_type": "recalls",
+      "weight": 1.0
+    },
+    {
+      "source": "memory_mem_9",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.999999994256979
+    },
+    {
+      "source": "memory_mem_9",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.17265871488055823
+    },
+    {
+      "source": "memory_mem_9",
+      "target": "kg_doc_8",
+      "edge_type": "supports",
+      "weight": 0.10447862016490272
+    },
+    {
+      "source": "memory_mem_9",
+      "target": "kg_doc_20",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_9",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.0003077820336214545
+    },
+    {
+      "source": "memory_mem_9",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_10",
+      "target": "state_6",
+      "edge_type": "recalls",
+      "weight": 1.0
+    },
+    {
+      "source": "memory_mem_10",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.9999999944150201
+    },
+    {
+      "source": "memory_mem_10",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.4512272649059677
+    },
+    {
+      "source": "memory_mem_10",
+      "target": "kg_doc_20",
+      "edge_type": "supports",
+      "weight": 0.1454289560795556
+    },
+    {
+      "source": "memory_mem_10",
+      "target": "kg_doc_10",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_10",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.009832667312377093
+    },
+    {
+      "source": "memory_mem_10",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.0006935988171232118
+    }
+  ]
+}

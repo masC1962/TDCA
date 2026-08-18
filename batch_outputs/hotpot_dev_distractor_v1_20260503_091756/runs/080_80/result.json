@@ -1,0 +1,144 @@
+{
+  "question": "What is the county seat of the county where East Lempster, New Hampshire is located?",
+  "final_answer": "Newport",
+  "best_node": {
+    "node_id": "state_1",
+    "node_type": "state",
+    "content": "What is the county seat of the county where East Lempster, New Hampshire is located?",
+    "depth": 0,
+    "parent_id": null,
+    "value": 0.8615014677755478,
+    "temperature": 0.9212560636514386,
+    "expanded": true,
+    "visit_count": 1,
+    "persistent": false,
+    "score_breakdown": {
+      "task_progress": 0.9836658476899177,
+      "evidence_support": 0.9519583755585814,
+      "memory_usefulness": 0.5139667766205794,
+      "answerability": 0.9759791877792906,
+      "uncertainty": 0.12864749239945533
+    },
+    "metadata": {
+      "diffusion_delta": -0.055236274462582946,
+      "diffusion_gain": 0.0
+    }
+  },
+  "final_synthesis_node_ids": [
+    "state_2",
+    "state_3",
+    "memory_mem_5",
+    "state_1"
+  ],
+  "answer_history": [
+    {
+      "node_id": "",
+      "answer_text": "Newport",
+      "previous_answer": "",
+      "confidence": 0.28,
+      "score": 0.16880000000000003,
+      "source": "closed_book_initial",
+      "step": 0,
+      "evidence_ids": [],
+      "kind": "anytime_answer"
+    },
+    {
+      "node_id": "state_1",
+      "answer_text": "Newport",
+      "previous_answer": "Newport",
+      "confidence": 0.9759791877792906,
+      "score": 0.9251676944725753,
+      "source": "expansion_candidate",
+      "step": 0,
+      "evidence_ids": [
+        "doc_8",
+        "doc_10",
+        "doc_3",
+        "doc_2"
+      ],
+      "kind": "anytime_answer"
+    },
+    {
+      "node_id": "memory_mem_4",
+      "content": "Conclusion: The answer to 'What county is East Lempster, New Hampshire located in' is Sullivan County.",
+      "answer_text": "Sullivan County",
+      "value": 1.0,
+      "confidence": 1.0,
+      "evidence_ids": [
+        "doc_8",
+        "doc_10"
+      ],
+      "step": 2,
+      "kind": "intermediate_answer"
+    },
+    {
+      "node_id": "memory_mem_5",
+      "content": "Conclusion: The answer to 'What is the county seat of Sullivan County, New Hampshire' is Newport.",
+      "answer_text": "Newport",
+      "value": 0.92,
+      "evidence_ids": [
+        "doc_3"
+      ],
+      "step": 3
+    },
+    {
+      "node_id": "state_1",
+      "answer_text": "Newport",
+      "previous_answer": "Newport",
+      "confidence": 0.9759791877792906,
+      "score": 1.0,
+      "source": "final_synthesis",
+      "step": 5,
+      "evidence_ids": [
+        "doc_8",
+        "doc_10",
+        "doc_3",
+        "doc_2"
+      ],
+      "kind": "anytime_answer"
+    },
+    {
+      "node_id": "memory_mem_6",
+      "content": "Conclusion: The answer to 'What is the county seat of the county where East Lempster, New Hampshire is located' is Newport.",
+      "answer_text": "Newport",
+      "value": 0.0,
+      "evidence_ids": [],
+      "step": 6
+    },
+    {
+      "node_id": "state_1",
+      "answer_text": "Newport",
+      "source": "answer_judge",
+      "choice": "A",
+      "candidate_source": "final_synthesis",
+      "base_score": 0.9278681812304118,
+      "judge_confidence": 0.0,
+      "judge_reason": "",
+      "step": 5,
+      "kind": "final_answer_selection"
+    }
+  ],
+  "anytime_answer": "Newport",
+  "anytime_answer_score": 1.0,
+  "anytime_answer_source": "final_synthesis",
+  "anytime_answer_node_id": "state_1",
+  "stats": {
+    "steps": 5,
+    "llm_calls": 10,
+    "generated_tokens": 551,
+    "token_budget_remaining": 649,
+    "total_nodes": 13,
+    "kg_nodes": 5,
+    "memory_nodes": 5,
+    "state_nodes": 3,
+    "deleted_state_nodes": 2,
+    "scheduler_mode": "tdca",
+    "scoring_mode": "hybrid",
+    "stop_reason": "frontier_empty",
+    "goal_kind": "bridge",
+    "goal_completion": 0.0,
+    "anytime_answer": "Newport",
+    "anytime_answer_score": 1.0,
+    "anytime_answer_source": "final_synthesis"
+  }
+}

@@ -1,0 +1,150 @@
+{
+  "question": "Do Singapore Sling and Fish House Punch both contain alcohol?",
+  "final_answer": "No",
+  "best_node": {
+    "node_id": "memory_mem_6",
+    "node_type": "memory",
+    "content": "Conclusion: The answer to 'Do Singapore Sling and Fish House Punch both contain alcohol' is No.",
+    "depth": 0,
+    "parent_id": null,
+    "value": 0.9999999959392064,
+    "temperature": 1.220080912319384,
+    "expanded": false,
+    "visit_count": 0,
+    "persistent": true,
+    "score_breakdown": {},
+    "metadata": {
+      "source": "memory",
+      "memory_kind": "answer_candidate",
+      "target_question": "Do Singapore Sling and Fish House Punch both contain alcohol?",
+      "target_question_norm": "do singapore sling and fish house punch both contain alcohol",
+      "relation_signature": "generic",
+      "answer_text": "No",
+      "support_score": 0.9999999959392064,
+      "derived_from_state": "state_1",
+      "composed_from": [
+        "memory_mem_4",
+        "memory_mem_5"
+      ],
+      "slot_role": "final_boolean",
+      "terminal": true,
+      "diffusion_delta": 0.02599401752237518,
+      "diffusion_gain": 0.02599401752237518
+    }
+  },
+  "final_synthesis_node_ids": [
+    "state_3",
+    "memory_mem_6",
+    "state_6",
+    "state_5",
+    "state_1"
+  ],
+  "answer_history": [
+    {
+      "node_id": "",
+      "answer_text": "Yes",
+      "previous_answer": "",
+      "confidence": 0.28,
+      "score": 0.16880000000000003,
+      "source": "closed_book_initial",
+      "step": 0,
+      "evidence_ids": [],
+      "kind": "anytime_answer"
+    },
+    {
+      "node_id": "memory_mem_4",
+      "content": "Conclusion: The answer to 'Does Singapore Sling contain alcohol' is No.",
+      "answer_text": "No",
+      "value": 0.5292907512025999,
+      "evidence_ids": [
+        "doc_1"
+      ],
+      "step": 1
+    },
+    {
+      "node_id": "memory_mem_5",
+      "content": "Conclusion: The answer to 'Does Fish House Punch contain alcohol' is No.",
+      "answer_text": "No",
+      "value": 0.9999999959392064,
+      "evidence_ids": [
+        "doc_5"
+      ],
+      "step": 1
+    },
+    {
+      "node_id": "memory_mem_6",
+      "content": "Conclusion: The answer to 'Do Singapore Sling and Fish House Punch both contain alcohol' is No.",
+      "answer_text": "No",
+      "value": 0.9999999959392064,
+      "evidence_ids": [
+        "doc_1",
+        "doc_5"
+      ],
+      "step": 1
+    },
+    {
+      "node_id": "memory_mem_6",
+      "answer_text": "Yes",
+      "previous_answer": "Yes",
+      "confidence": 0.9999999959392064,
+      "score": 0.8664097069606341,
+      "source": "final_synthesis",
+      "step": 4,
+      "evidence_ids": [],
+      "kind": "anytime_answer"
+    },
+    {
+      "node_id": "state_1",
+      "answer_text": "Yes",
+      "confidence": 0.7139999964272034,
+      "score": 0.7139999964272034,
+      "source": "root_state_synthesis",
+      "step": 4,
+      "evidence_ids": [
+        "doc_5",
+        "doc_9",
+        "doc_7",
+        "doc_1"
+      ],
+      "kind": "root_state_synthesis_candidate"
+    },
+    {
+      "node_id": "memory_mem_6",
+      "answer_text": "No",
+      "source": "answer_judge",
+      "choice": "A",
+      "candidate_source": "composed_root_memory",
+      "base_score": 1.0,
+      "judge_confidence": 0.0,
+      "judge_reason": "Evidence confirms both drinks contain alcohol; 'No' is incorrect.",
+      "step": 4,
+      "kind": "final_answer_selection"
+    }
+  ],
+  "anytime_answer": "Yes",
+  "anytime_answer_score": 0.8664097069606341,
+  "anytime_answer_source": "final_synthesis",
+  "anytime_answer_node_id": "memory_mem_6",
+  "root_state_synthesis_answer": "Yes",
+  "root_state_synthesis_score": 0.7139999964272034,
+  "root_state_synthesis_node_id": "state_1",
+  "stats": {
+    "steps": 4,
+    "llm_calls": 9,
+    "generated_tokens": 580,
+    "token_budget_remaining": 620,
+    "total_nodes": 22,
+    "kg_nodes": 10,
+    "memory_nodes": 5,
+    "state_nodes": 7,
+    "deleted_state_nodes": 0,
+    "scheduler_mode": "tdca",
+    "scoring_mode": "hybrid",
+    "stop_reason": "high_confidence_root_memory",
+    "goal_kind": "comparison_both_contain",
+    "goal_completion": 1.0,
+    "anytime_answer": "Yes",
+    "anytime_answer_score": 0.8664097069606341,
+    "anytime_answer_source": "final_synthesis"
+  }
+}

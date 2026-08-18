@@ -1,0 +1,1445 @@
+{
+  "nodes": [
+    {
+      "node_id": "state_1",
+      "node_type": "state",
+      "content": "Which genus has the most number of species, Myrsine or Styrax?",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.7581942602507782,
+      "temperature": 1.5093259769901632,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.925350171102904,
+        "evidence_support": 0.7804416797144234,
+        "memory_usefulness": 0.5139667251540021,
+        "answerability": 0.7902208398572117,
+        "uncertainty": 0.1595204976514038
+      },
+      "metadata": {
+        "diffusion_delta": 0.04366850861976612,
+        "diffusion_gain": 0.04366850861976612
+      }
+    },
+    {
+      "node_id": "kg_doc_5",
+      "node_type": "kg",
+      "content": "Rapanea is a genus of plant in family Primulaceae. It has often been placed in synonymy with \"Myrsine\", and many species have been moved to \"Myrsine\".",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999963724525,
+      "temperature": 0.9999999963724525,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Rapanea",
+        "raw_score": 4.558301657791047,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_10",
+      "node_type": "kg",
+      "content": "Benzoin or benjamin is a balsamic resin obtained from the bark of several species of trees in the genus \"Styrax\". It is used in perfumes, some kinds of incense, as a flavoring, and medicine (see tincture of benzoin). It is distinct from the chemical compound benzoin, which is ultimately derived from benzoin resin; the resin, however, does not contain this compound.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999812166236,
+      "temperature": 0.9999999812166236,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Benzoin (resin)",
+        "raw_score": 3.012851653127989,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_9",
+      "node_type": "kg",
+      "content": "Storax or snowbell is the common names of Styrax, a genus of about 130 species of large shrubs or small trees in the family Styracaceae, mostly native to warm temperate to tropical regions of the Northern Hemisphere, with the majority in eastern and southeastern Asia, but also crossing the equator in South America. The resin obtained from the tree is called storax or benzoin (not to be confused with the \"Liquidambar\" storax balsam).",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.062249132189120905,
+      "temperature": 0.062249132189120905,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Styrax",
+        "raw_score": 1.7105229045451191,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_6",
+      "node_type": "kg",
+      "content": "Pterostyrax, the epaulette tree, is a small genus of four species of deciduous large shrubs or small trees in the family Styracaceae, native to eastern Asia in China and Japan. They grow 4 - tall, with alternate, simple ovate leaves 6 - long and 4 - broad. The flowers are white, produced in dense panicles 8 - long. The fruit is an oblong dry drupe, with longitudinal ribs or narrow wings (the wings are absent in the related genus \"Styrax\", whence the name \"Pterostyrax\", \"winged styrax\").",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.999999976354479,
+      "temperature": 0.999999976354479,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Pterostyrax",
+        "raw_score": 1.5824975430179544,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "memory_mem_1",
+      "node_type": "memory",
+      "content": "Template: for compositional multi-hop questions, first solve the intermediate entity and then ask for the final attribute.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9599998077388796,
+      "temperature": 0.7575674237843062,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.96,
+        "tag": "compositional_template",
+        "memory_kind": "template",
+        "raw_score": 0.10321444589654852,
+        "source": "memory",
+        "diffusion_delta": -0.11686114687750293,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "memory_mem_3",
+      "node_type": "memory",
+      "content": "Template: when evidence already grounds the answer, switch from branching to short verification and synthesis.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.8799999941722468,
+      "temperature": 1.699578593406597,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.88,
+        "tag": "verification_then_stop",
+        "memory_kind": "template",
+        "raw_score": 0.5402520674688597,
+        "source": "memory",
+        "diffusion_delta": -0.039330577354306895,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "state_2",
+      "node_type": "state",
+      "content": "How many species are in the genus Myrsine?",
+      "depth": 1,
+      "parent_id": "state_1",
+      "value": 0.6898765408388853,
+      "temperature": 1.5471997512883886,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.7025924982816004,
+        "evidence_support": 0.836502000293477,
+        "memory_usefulness": 0.5139667251540021,
+        "answerability": 0.7909782728740112,
+        "uncertainty": 0.14942963994717415
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_5",
+          "doc_4",
+          "doc_3",
+          "doc_6"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "goal_slot_name": "myrsine_species_count",
+        "goal_slot_role": "generic",
+        "goal_terminal": false,
+        "diffusion_delta": 0.02162713722682219,
+        "diffusion_gain": 0.02162713722682219
+      }
+    },
+    {
+      "node_id": "kg_doc_4",
+      "node_type": "kg",
+      "content": "Myrsine is a genus of flowering plants in the family Primulaceae. It was formerly placed in the family Myrsinaceae before this was merged into the Primulaceae. It is found nearly worldwide, primarily in tropical and subtropical areas. It contains about 200 species, including several notable radiations, such as the matipo of New Zealand and the kōlea of Hawaiʻ i (the New Zealand \"black matipo\", \"Pittosporum tenuifolium\", is not related to \"Myrsine\"). In the United States, members of this genus are known as colicwood. Some species, especially \"M. africana\", are grown as ornamental shrubs.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9205752596607366,
+      "temperature": 0.9205752596607366,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Myrsine",
+        "raw_score": 1.3079521927465445,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_3",
+      "node_type": "kg",
+      "content": "Ardisia (coralberry or marlberry) is a genus of flowering plants in the family Primulaceae. It was in the former Myrsinaceae family now recognised as the myrsine sub-family Myrsinoideae. They are distributed in the Americas, Asia, Australia, and the Pacific Islands, mainly in the tropics. There are 400 to 500 species.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.3027471670519825,
+      "temperature": 0.3027471670519825,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Ardisia",
+        "raw_score": 1.1646375318284723,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "state_3",
+      "node_type": "state",
+      "content": "How many species are in the genus Styrax?",
+      "depth": 1,
+      "parent_id": "state_1",
+      "value": 0.7539333305158565,
+      "temperature": 1.4969571161871236,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.5891329022862304,
+        "evidence_support": 0.5027973061894476,
+        "memory_usefulness": 0.5139667251540021,
+        "answerability": 0.6241259258219966,
+        "uncertainty": 0.20949648488589942
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_6",
+          "doc_2",
+          "doc_1",
+          "doc_7"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "goal_slot_name": "styrax_species_count",
+        "goal_slot_role": "generic",
+        "goal_terminal": false,
+        "diffusion_delta": 0.23026360699408865,
+        "diffusion_gain": 0.23026360699408865
+      }
+    },
+    {
+      "node_id": "kg_doc_2",
+      "node_type": "kg",
+      "content": "Styrax litseoides is a species of flowering plant in the genus \"Styrax\" and family Styracaceae. It is endemic to Vietnam.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9396032707913802,
+      "temperature": 0.9396032707913802,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Styrax litseoides",
+        "raw_score": 0.7377829861942846,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_1",
+      "node_type": "kg",
+      "content": "Styrax crotonoides is a species of plant in the genus \"Styrax\" and family Styracaceae. It is found in Peninsular Malaysia and Singapore.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.6820289618451486,
+      "temperature": 0.6820289618451486,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Styrax crotonoides",
+        "raw_score": 0.7253810980543167,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_7",
+      "node_type": "kg",
+      "content": "Styrax vilcabambae (syn. \"Pamphilia vilcabambae\" D.R.Simpson) is a species of flowering plant in the genus \"Styrax\" and the family Styracaceae. It is endemic to Peru.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999995561282179,
+      "temperature": 0.9999995561282179,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Styrax vilcabambae",
+        "raw_score": 1.3008524972569555,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "state_4",
+      "node_type": "state",
+      "content": "Compare the number of species in Myrsine and Styrax to determine which is greater.?",
+      "depth": 2,
+      "parent_id": "state_2",
+      "value": 0.7936140321219542,
+      "temperature": 1.7679738869315353,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.8365754526492281,
+        "evidence_support": 0.9257566789148417,
+        "memory_usefulness": 0.5987166547061086,
+        "answerability": 0.8901510667301482,
+        "uncertainty": 0.13336379779532848
+      },
+      "metadata": {
+        "kind": "comparison",
+        "evidence_ids": [
+          "doc_10",
+          "doc_5",
+          "doc_4",
+          "doc_2"
+        ],
+        "memory_ids": [
+          "mem_3",
+          "mem_1"
+        ],
+        "diffusion_delta": 0.15657312662523504,
+        "diffusion_gain": 0.15657312662523504
+      }
+    },
+    {
+      "node_id": "memory_mem_4",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'How many species are in the genus Myrsine' is 200.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999940171427,
+      "temperature": 1.2821396331539652,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "intermediate_answer",
+        "target_question": "How many species are in the genus Myrsine?",
+        "target_question_norm": "how many species are in the genus myrsine",
+        "relation_signature": "generic",
+        "answer_text": "200",
+        "support_score": 0.9999999940171427,
+        "evidence_ids": [
+          "doc_5",
+          "doc_4"
+        ],
+        "slot_name": "myrsine_species_count",
+        "slot_role": "generic",
+        "terminal": false,
+        "derived_from_state": "state_2",
+        "diffusion_delta": -0.006984689271861244,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "memory_mem_5",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'Which genus has the most number of species, Myrsine or Styrax' is Myrsine.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999940171427,
+      "temperature": 1.2799999940171427,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "tdca_run",
+        "memory_kind": "answer_candidate",
+        "target_question": "Which genus has the most number of species, Myrsine or Styrax?",
+        "target_question_norm": "which genus has the most number of species myrsine or styrax",
+        "relation_signature": "generic",
+        "answer_text": "Myrsine",
+        "support_score": 0.9999999940171427,
+        "derived_from_state": "state_1",
+        "composed_from": [
+          "memory_mem_4",
+          "memory_mem_4"
+        ],
+        "slot_role": "target_attribute",
+        "terminal": true,
+        "coverage_count": 2,
+        "coverage_ratio": 1.0,
+        "composition_kind": "pick_one",
+        "diffusion_delta": -0.06545576835873801,
+        "diffusion_gain": 0.0,
+        "score": 0.9999999940171427,
+        "raw_score": 12.489532771335803
+      }
+    },
+    {
+      "node_id": "state_5",
+      "node_type": "state",
+      "content": "Is the answer Myrsine?",
+      "depth": 1,
+      "parent_id": "state_1",
+      "value": 0.6699192430442681,
+      "temperature": 0.5282704660559456,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.6755887016198286,
+        "evidence_support": 0.9602876250850574,
+        "memory_usefulness": 0.0988845538758629,
+        "answerability": 0.8165074489061651,
+        "uncertainty": 0.12714822748468968
+      },
+      "metadata": {
+        "kind": "comparison",
+        "evidence_ids": [
+          "doc_5",
+          "doc_4",
+          "doc_3",
+          "doc_9"
+        ],
+        "memory_ids": [
+          "mem_3",
+          "mem_1"
+        ],
+        "diffusion_delta": 0.20725428670149776,
+        "diffusion_gain": 0.20725428670149776
+      }
+    },
+    {
+      "node_id": "state_6",
+      "node_type": "state",
+      "content": "Is the answer Styrax?",
+      "depth": 1,
+      "parent_id": "state_1",
+      "value": 0.6741804423603664,
+      "temperature": 0.7540794072196657,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.6788233896672409,
+        "evidence_support": 0.969801413459799,
+        "memory_usefulness": 0.0945000622585985,
+        "answerability": 0.8212643430935359,
+        "uncertainty": 0.1254357455772362
+      },
+      "metadata": {
+        "kind": "comparison",
+        "evidence_ids": [
+          "doc_7",
+          "doc_2",
+          "doc_1",
+          "doc_8"
+        ],
+        "memory_ids": [
+          "mem_3",
+          "mem_1"
+        ],
+        "diffusion_delta": 0.022781151089077634,
+        "diffusion_gain": 0.022781151089077634
+      }
+    },
+    {
+      "node_id": "kg_doc_8",
+      "node_type": "kg",
+      "content": "Styrax fraserensis is a species of flowering plant in the genus \"Styrax\" and family Styracaceae. It is a tree endemic to Peninsular Malaysia. It is threatened by habitat loss.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0,
+      "temperature": 0.0,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Styrax fraserensis",
+        "raw_score": 0.8935188076425529,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "memory_mem_6",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'Compare the number of species in Myrsine and Styrax to determine which is greater.' is 200.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999739239441,
+      "temperature": 1.2802848955150268,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "intermediate_answer",
+        "target_question": "Compare the number of species in Myrsine and Styrax to determine which is greater.?",
+        "target_question_norm": "compare the number of species in myrsine and styrax to determine which is greater",
+        "relation_signature": "comparison",
+        "answer_text": "200",
+        "support_score": 0.9999999739239441,
+        "evidence_ids": [
+          "doc_10",
+          "doc_5",
+          "doc_4"
+        ],
+        "slot_name": "",
+        "slot_role": "",
+        "terminal": false,
+        "derived_from_state": "state_4",
+        "diffusion_delta": 0.09364018716470701,
+        "diffusion_gain": 0.09364018716470701
+      }
+    },
+    {
+      "node_id": "state_8",
+      "node_type": "state",
+      "content": "How many species does Myrsine have?",
+      "depth": 2,
+      "parent_id": "state_5",
+      "value": 0.477771997722406,
+      "temperature": 0.4389061299741215,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.5652636348247215,
+        "evidence_support": 0.6358021345112129,
+        "memory_usefulness": 0.0,
+        "answerability": 0.5542647036192428,
+        "uncertainty": 0.1855556157879817
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_5",
+          "doc_4",
+          "doc_10",
+          "doc_3"
+        ],
+        "memory_ids": [],
+        "diffusion_delta": -0.18892360365886107,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "state_9",
+      "node_type": "state",
+      "content": "How many species does Styrax have?",
+      "depth": 2,
+      "parent_id": "state_5",
+      "value": 0.5705879249923801,
+      "temperature": 0.5235098292948487,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.6279770991963256,
+        "evidence_support": 0.8202535003100486,
+        "memory_usefulness": 0.0,
+        "answerability": 0.6464903865186606,
+        "uncertainty": 0.15235436994419124
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_5",
+          "doc_10",
+          "doc_2",
+          "doc_1"
+        ],
+        "memory_ids": [],
+        "diffusion_delta": -0.26375945077598173,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "state_10",
+      "node_type": "state",
+      "content": "Which genus has more species: Myrsine or Styrax?",
+      "depth": 2,
+      "parent_id": "state_5",
+      "value": 0.6176784790467772,
+      "temperature": 0.5411257862460621,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.7777311590610902,
+        "evidence_support": 0.7526852271850245,
+        "memory_usefulness": 0.0,
+        "answerability": 0.7036153408652396,
+        "uncertainty": 0.16451665910669558
+      },
+      "metadata": {
+        "kind": "comparison",
+        "evidence_ids": [
+          "doc_5",
+          "doc_10",
+          "doc_9",
+          "doc_6"
+        ],
+        "memory_ids": [],
+        "diffusion_delta": -0.27332080019962246,
+        "diffusion_gain": 0.0
+      }
+    }
+  ],
+  "edges": [
+    {
+      "source": "state_1",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.9999999889020175
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_10",
+      "edge_type": "supports",
+      "weight": 0.5608833705268291
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.062249132189120905
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.0025147836089440025
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.0679336425691247
+    },
+    {
+      "source": "state_1",
+      "target": "state_2",
+      "edge_type": "refines",
+      "weight": 0.9
+    },
+    {
+      "source": "state_1",
+      "target": "state_3",
+      "edge_type": "refines",
+      "weight": 0.9
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_5",
+      "edge_type": "recalls",
+      "weight": 0.999999993210855
+    },
+    {
+      "source": "state_1",
+      "target": "state_5",
+      "edge_type": "refines",
+      "weight": 0.78
+    },
+    {
+      "source": "state_1",
+      "target": "state_6",
+      "edge_type": "refines",
+      "weight": 0.76
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.9999999889020175
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.9999999940171427
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.8515133839057392
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.9999999940171427
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.9999999905093782
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.8515133839057392
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "state_8",
+      "edge_type": "supports",
+      "weight": 0.9999999963724525
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "state_9",
+      "edge_type": "supports",
+      "weight": 0.9999999877902185
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "state_10",
+      "edge_type": "supports",
+      "weight": 0.9999999901163642
+    },
+    {
+      "source": "kg_doc_10",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.5608833705268291
+    },
+    {
+      "source": "kg_doc_10",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.9999999739239441
+    },
+    {
+      "source": "kg_doc_10",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.9999999739239441
+    },
+    {
+      "source": "kg_doc_10",
+      "target": "state_8",
+      "edge_type": "supports",
+      "weight": 0.08169971799501179
+    },
+    {
+      "source": "kg_doc_10",
+      "target": "state_9",
+      "edge_type": "supports",
+      "weight": 0.6405070128298787
+    },
+    {
+      "source": "kg_doc_10",
+      "target": "state_10",
+      "edge_type": "supports",
+      "weight": 0.5053704642536848
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.062249132189120905
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "state_10",
+      "edge_type": "supports",
+      "weight": 0.043022106067479055
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.999999976354479
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "state_10",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.0025147836089440025
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_2",
+      "edge_type": "recalls",
+      "weight": 0.9599998077388796
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_3",
+      "edge_type": "recalls",
+      "weight": 0.0033372941664414034
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_4",
+      "edge_type": "recalls",
+      "weight": 0.09309994301487697
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "memory_mem_4",
+      "edge_type": "recalls",
+      "weight": 0.9599998077388796
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_5",
+      "edge_type": "recalls",
+      "weight": 0.012456657227784029
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_6",
+      "edge_type": "recalls",
+      "weight": 0.01130475499139293
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "memory_mem_6",
+      "edge_type": "recalls",
+      "weight": 0.09309994301487697
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.0679336425691247
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_2",
+      "edge_type": "recalls",
+      "weight": 0.0679336425691247
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_3",
+      "edge_type": "recalls",
+      "weight": 0.00023522682050113709
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_4",
+      "edge_type": "recalls",
+      "weight": 0.14445120663426353
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "memory_mem_4",
+      "edge_type": "recalls",
+      "weight": 0.0679336425691247
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_5",
+      "edge_type": "recalls",
+      "weight": 0.191263803089623
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_6",
+      "edge_type": "recalls",
+      "weight": 0.17769536952580406
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "memory_mem_6",
+      "edge_type": "recalls",
+      "weight": 0.14445120663426353
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.9999999940171427
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.6730040065698113
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.3027471670519825
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_2",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.9599998077388796
+    },
+    {
+      "source": "state_2",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.0679336425691247
+    },
+    {
+      "source": "state_2",
+      "target": "state_3",
+      "edge_type": "refines",
+      "weight": 0.84
+    },
+    {
+      "source": "state_2",
+      "target": "state_4",
+      "edge_type": "refines",
+      "weight": 0.8
+    },
+    {
+      "source": "state_2",
+      "target": "memory_mem_4",
+      "edge_type": "derives",
+      "weight": 0.9999999940171427
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.6730040065698113
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.40274028516482135
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.6730040065698113
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.9205752596607366
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.40274028516482135
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "state_8",
+      "edge_type": "supports",
+      "weight": 0.27160427264997333
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.3027471670519825
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.3027471670519825
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.2134462075187674
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "state_8",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.999999976354479
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.0055946360244161965
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.0043960234341767325
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_3",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.0033372941664414034
+    },
+    {
+      "source": "state_3",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.00023522682050113709
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.0055946360244161965
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "state_6",
+      "edge_type": "supports",
+      "weight": 0.9396032707913802
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "state_9",
+      "edge_type": "supports",
+      "weight": 0.005148427677085656
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.0043960234341767325
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "state_6",
+      "edge_type": "supports",
+      "weight": 0.6820289618451486
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "state_9",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "state_6",
+      "edge_type": "supports",
+      "weight": 0.9999995561282179
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_10",
+      "edge_type": "supports",
+      "weight": 0.9999999739239441
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.8515133839057392
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.40274028516482135
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_4",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.14445120663426353
+    },
+    {
+      "source": "state_4",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.09309994301487697
+    },
+    {
+      "source": "state_4",
+      "target": "state_3",
+      "edge_type": "refines",
+      "weight": 0.84
+    },
+    {
+      "source": "state_4",
+      "target": "memory_mem_6",
+      "edge_type": "derives",
+      "weight": 0.9999999739239441
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "state_2",
+      "edge_type": "recalls",
+      "weight": 0.9999999940171427
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.9999999940171427
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.6730040065698113
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.3027471670519825
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.9599998077388796
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.0679336425691247
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "memory_mem_5",
+      "edge_type": "derives",
+      "weight": 0.9999999940171427
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.999999993210855
+    },
+    {
+      "source": "state_5",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.9999999905093782
+    },
+    {
+      "source": "state_5",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.9205752596607366
+    },
+    {
+      "source": "state_5",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.2134462075187674
+    },
+    {
+      "source": "state_5",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_5",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.191263803089623
+    },
+    {
+      "source": "state_5",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.012456657227784029
+    },
+    {
+      "source": "state_5",
+      "target": "state_8",
+      "edge_type": "refines",
+      "weight": 0.9
+    },
+    {
+      "source": "state_5",
+      "target": "state_9",
+      "edge_type": "refines",
+      "weight": 0.9
+    },
+    {
+      "source": "state_5",
+      "target": "state_10",
+      "edge_type": "refines",
+      "weight": 0.8
+    },
+    {
+      "source": "state_6",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.9999995561282179
+    },
+    {
+      "source": "state_6",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.9396032707913802
+    },
+    {
+      "source": "state_6",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.6820289618451486
+    },
+    {
+      "source": "state_6",
+      "target": "kg_doc_8",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_6",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.17769536952580406
+    },
+    {
+      "source": "state_6",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.01130475499139293
+    },
+    {
+      "source": "kg_doc_8",
+      "target": "state_6",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "state_4",
+      "edge_type": "recalls",
+      "weight": 0.9999999739239441
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_10",
+      "edge_type": "supports",
+      "weight": 0.9999999739239441
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.8515133839057392
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.40274028516482135
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.14445120663426353
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.09309994301487697
+    },
+    {
+      "source": "state_8",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.9999999963724525
+    },
+    {
+      "source": "state_8",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.27160427264997333
+    },
+    {
+      "source": "state_8",
+      "target": "kg_doc_10",
+      "edge_type": "supports",
+      "weight": 0.08169971799501179
+    },
+    {
+      "source": "state_8",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_9",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.9999999877902185
+    },
+    {
+      "source": "state_9",
+      "target": "kg_doc_10",
+      "edge_type": "supports",
+      "weight": 0.6405070128298787
+    },
+    {
+      "source": "state_9",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.005148427677085656
+    },
+    {
+      "source": "state_9",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_10",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.9999999901163642
+    },
+    {
+      "source": "state_10",
+      "target": "kg_doc_10",
+      "edge_type": "supports",
+      "weight": 0.5053704642536848
+    },
+    {
+      "source": "state_10",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.043022106067479055
+    },
+    {
+      "source": "state_10",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.0
+    }
+  ]
+}

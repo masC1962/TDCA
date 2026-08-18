@@ -1,0 +1,171 @@
+{
+  "question": "Which  French ace pilot and adventurer fly L'Oiseau Blanc",
+  "final_answer": "Charles Nungesser",
+  "best_node": {
+    "node_id": "state_1",
+    "node_type": "state",
+    "content": "Which French ace pilot and adventurer fly L'Oiseau Blanc?",
+    "depth": 0,
+    "parent_id": null,
+    "value": 0.7130401948308942,
+    "temperature": 1.6210218665654572,
+    "expanded": true,
+    "visit_count": 1,
+    "persistent": false,
+    "score_breakdown": {
+      "task_progress": 0.8649945958637065,
+      "evidence_support": 0.6029252819520778,
+      "memory_usefulness": 0.8820682746050714,
+      "answerability": 0.7014626409760389,
+      "uncertainty": 0.19147344924862597
+    },
+    "metadata": {
+      "diffusion_delta": 0.1508844186862135,
+      "diffusion_gain": 0.1508844186862135
+    }
+  },
+  "final_synthesis_node_ids": [
+    "state_5",
+    "state_9",
+    "state_2",
+    "memory_mem_7",
+    "state_1"
+  ],
+  "answer_history": [
+    {
+      "node_id": "",
+      "answer_text": "Charles Nungesser",
+      "previous_answer": "",
+      "confidence": 0.28,
+      "score": 0.16880000000000003,
+      "source": "closed_book_initial",
+      "step": 0,
+      "evidence_ids": [],
+      "kind": "anytime_answer"
+    },
+    {
+      "node_id": "memory_mem_4",
+      "content": "Conclusion: The answer to 'Who is a French ace pilot and adventurer who flew L'Oiseau Blanc' is Jean Metzinger.",
+      "answer_text": "Jean Metzinger",
+      "value": 0.6731942860931185,
+      "evidence_ids": [
+        "doc_1",
+        "doc_6",
+        "doc_4"
+      ],
+      "step": 1
+    },
+    {
+      "node_id": "state_1",
+      "answer_text": "Charles Nungesser",
+      "previous_answer": "Charles Nungesser",
+      "confidence": 0.95,
+      "score": 0.8390300123368429,
+      "source": "expansion_candidate",
+      "step": 0,
+      "evidence_ids": [
+        "doc_1",
+        "doc_4",
+        "doc_10",
+        "doc_6"
+      ],
+      "kind": "anytime_answer"
+    },
+    {
+      "node_id": "memory_mem_5",
+      "content": "Conclusion: The answer to 'Who is a French ace pilot and adventurer who flew L'Oiseau Blanc' is Charles Nungesser.",
+      "answer_text": "Charles Nungesser",
+      "value": 0.6900000000000001,
+      "evidence_ids": [
+        "doc_1"
+      ],
+      "step": 2
+    },
+    {
+      "node_id": "memory_mem_6",
+      "content": "Conclusion: The answer to 'Who flew L'Oiseau Blanc with Charles Nungesser' is François Coli.",
+      "answer_text": "François Coli",
+      "value": 0.9999999890522113,
+      "confidence": 0.9828385972357933,
+      "evidence_ids": [
+        "doc_7",
+        "doc_1",
+        "doc_10"
+      ],
+      "step": 5,
+      "kind": "intermediate_answer"
+    },
+    {
+      "node_id": "memory_mem_7",
+      "content": "Conclusion: The answer to 'Who was Charles Nungesser's co-pilot on L'Oiseau Blanc' is François Coli.",
+      "answer_text": "François Coli",
+      "value": 0.874,
+      "evidence_ids": [
+        "doc_1",
+        "doc_7"
+      ],
+      "step": 6
+    },
+    {
+      "node_id": "state_2",
+      "answer_text": "François Coli",
+      "previous_answer": "Charles Nungesser",
+      "confidence": 0.7965971430465593,
+      "score": 1.0,
+      "source": "final_synthesis",
+      "step": 10,
+      "evidence_ids": [
+        "doc_1",
+        "doc_6",
+        "doc_4",
+        "doc_5"
+      ],
+      "kind": "anytime_answer"
+    },
+    {
+      "node_id": "memory_mem_8",
+      "content": "Conclusion: The answer to 'Who is a French ace pilot and adventurer who flew L'Oiseau Blanc' is François Coli.",
+      "answer_text": "François Coli",
+      "value": 0.7912,
+      "evidence_ids": [
+        "doc_1"
+      ],
+      "step": 11
+    },
+    {
+      "node_id": "state_1",
+      "answer_text": "Charles Nungesser",
+      "source": "answer_judge",
+      "choice": "A",
+      "candidate_source": "expansion_candidate",
+      "base_score": 0.9173350724493531,
+      "judge_confidence": 0.0,
+      "judge_reason": "Original question asks for a French ace pilot and adventurer who flew L'Oiseau Blanc; Charles Nungesser fits both descriptors and is explicitly named as such in doc_5 and doc_3.",
+      "step": 10,
+      "kind": "final_answer_selection"
+    }
+  ],
+  "anytime_answer": "François Coli",
+  "anytime_answer_score": 1.0,
+  "anytime_answer_source": "final_synthesis",
+  "anytime_answer_node_id": "state_2",
+  "stats": {
+    "steps": 10,
+    "llm_calls": 17,
+    "generated_tokens": 975,
+    "token_budget_remaining": 225,
+    "total_nodes": 24,
+    "kg_nodes": 9,
+    "memory_nodes": 7,
+    "state_nodes": 8,
+    "deleted_state_nodes": 4,
+    "scheduler_mode": "tdca",
+    "scoring_mode": "hybrid",
+    "stop_reason": "final_synthesis_reserve",
+    "goal_kind": "bridge",
+    "goal_completion": 0.92,
+    "anytime_answer": "François Coli",
+    "anytime_answer_score": 1.0,
+    "anytime_answer_source": "final_synthesis"
+  }
+}

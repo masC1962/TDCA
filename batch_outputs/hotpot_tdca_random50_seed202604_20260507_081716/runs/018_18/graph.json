@@ -1,0 +1,897 @@
+{
+  "nodes": [
+    {
+      "node_id": "state_1",
+      "node_type": "state",
+      "content": "What singer who was the seventh place finalist on the 7th season of American Idol first recorded the song Like My Mother Does?",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.6430186173361517,
+      "temperature": 0.9772265485408564,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.838417030665675,
+        "evidence_support": 0.5247559725461026,
+        "memory_usefulness": 0.48467843292460755,
+        "answerability": 0.7623779862730513,
+        "uncertainty": 0.20554392494170154
+      },
+      "metadata": {
+        "diffusion_delta": 0.37131136832987643,
+        "diffusion_gain": 0.37131136832987643
+      }
+    },
+    {
+      "node_id": "kg_doc_10",
+      "node_type": "kg",
+      "content": "\"Like My Mother Does\" is a song written by Nathan Chapman, Liz Rose, and Nikki Williams. It was first recorded by American country artist Kristy Lee Cook from her 2008 album, \"Why Wait\". It was later recorded and released as a single by country music singers Jesse Lee and Lauren Alaina in 2010 and 2011, respectively. Alaina's recording became the first version of the song to chart; it debuted at number 49 on the U.S. \"Billboard\" Hot Country Songs chart, and later reached a peak of number 36 on the chart in October 2011.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999979259847,
+      "temperature": 0.9999999979259847,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Like My Mother Does",
+        "raw_score": 14.733872870057576,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_6",
+      "node_type": "kg",
+      "content": "Kristy Lee Cook (born January 18, 1984) is an American country singer who was the seventh place finalist on the seventh season of \"American Idol\". In 2005, Cook released her first album called \"Devoted\". In June 2008, Cook signed to 19 Recordings and Arista Nashville. She released her post-\"Idol\" album, \"Why Wait\", on September 16, 2008. This album has produced her first chart single, \"15 Minutes of Shame\", a Top 30 hit on the \"Billboard\" country charts. Her first single for Broken Bow Records, \"Airborne Ranger Infantry\", was released on October 16, 2012.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.04951194776474965,
+      "temperature": 0.04951194776474965,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Kristy Lee Cook",
+        "raw_score": 4.419338101687172,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_8",
+      "node_type": "kg",
+      "content": "Anatoliy Vladimirovich \"Anthony\" Fedorov (Russian: Анатолий Владимирович Федоров , ; born May 4, 1985) is an American singer and actor who is former lead singer for the Chicago band 7th Heaven. He rose to fame as the fourth place finalist on the fourth season of \"American Idol\".",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999799652417,
+      "temperature": 0.9999999799652417,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Anthony Fedorov",
+        "raw_score": 4.488736544591991,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_7",
+      "node_type": "kg",
+      "content": "Allison Iraheta (born April 27, 1992) is an American singer from Los Angeles, California, who was the fourth place finalist on the eighth season of \"American Idol\". Prior to \"Idol\", Iraheta won the Telemundo competition \"\". Following the conclusion of \"Idol\", Iraheta was signed to a record deal with 19 Entertainment and Jive Records. Her debut album \"Just Like You\" was released on December 1, 2009. She is currently the lead singer in the band Halo Circus.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.02959522535487211,
+      "temperature": 0.02959522535487211,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Allison Iraheta",
+        "raw_score": 3.9238964335477426,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "memory_mem_1",
+      "node_type": "memory",
+      "content": "Template: for compositional multi-hop questions, first solve the intermediate entity and then ask for the final attribute.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9599999911729391,
+      "temperature": 1.3559134853962571,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.96,
+        "tag": "compositional_template",
+        "memory_kind": "template",
+        "raw_score": 1.152211153893699,
+        "source": "memory",
+        "diffusion_delta": 0.14564268089576915,
+        "diffusion_gain": 0.14564268089576915
+      }
+    },
+    {
+      "node_id": "memory_mem_3",
+      "node_type": "memory",
+      "content": "Template: when evidence already grounds the answer, switch from branching to short verification and synthesis.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.08675046706981968,
+      "temperature": 0.16542973295211452,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.88,
+        "tag": "verification_then_stop",
+        "memory_kind": "template",
+        "raw_score": 2.049733912816006,
+        "source": "memory",
+        "diffusion_delta": 0.07867926588229485,
+        "diffusion_gain": 0.07867926588229485
+      }
+    },
+    {
+      "node_id": "state_2",
+      "node_type": "state",
+      "content": "Who was the seventh place finalist on the 7th season of American Idol?",
+      "depth": 1,
+      "parent_id": "state_1",
+      "value": 0.629250197696519,
+      "temperature": 0.9115361295102254,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.7155424026558249,
+        "evidence_support": 0.6423516044499051,
+        "memory_usefulness": 0.5139667766205794,
+        "answerability": 0.7354615165106669,
+        "uncertainty": 0.18437671119901705
+      },
+      "metadata": {
+        "kind": "bridge",
+        "evidence_ids": [
+          "doc_8",
+          "doc_3",
+          "doc_1",
+          "doc_6"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "goal_slot_name": "idol_finalist",
+        "goal_slot_role": "bridge_entity",
+        "goal_terminal": false,
+        "diffusion_delta": 0.2029158026187714,
+        "diffusion_gain": 0.2029158026187714
+      }
+    },
+    {
+      "node_id": "kg_doc_3",
+      "node_type": "kg",
+      "content": "Tim Suburban Urban (born May 1, 1989) is an American singer-songwriter and actor who was the seventh place finalist on the ninth season of \"American Idol\". Urban's debut album and EP titled \"Heart of Me\" was released on November 8, 2010 through iTunes.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.28470322893456845,
+      "temperature": 0.28470322893456845,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Tim Urban",
+        "raw_score": 2.8121678535444175,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_1",
+      "node_type": "kg",
+      "content": "Lil Rounds (born October 20, 1984) is an American singer from Memphis, Tennessee, who was the seventh place finalist on the eighth season of \"American Idol\". Following the conclusion of \"Idol\", Rounds was signed to a record deal with Bungalo Records. Her debut album was to be released in 2010 but has been pushed back for a 2011 release. Rounds is now recording her album independently.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.13752037131349226,
+      "temperature": 0.13752037131349226,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Lil Rounds",
+        "raw_score": 2.5960979857256086,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "state_3",
+      "node_type": "state",
+      "content": "Who first recorded the song 'Like My Mother Does'?",
+      "depth": 1,
+      "parent_id": "state_1",
+      "value": 0.597787687811693,
+      "temperature": 0.9782796183397711,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.6193775256100555,
+        "evidence_support": 0.5191775963320963,
+        "memory_usefulness": 0.4817171496524984,
+        "answerability": 0.5453030838803339,
+        "uncertainty": 0.20654803266022265
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_10",
+          "doc_6",
+          "doc_7",
+          "doc_4"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "goal_slot_name": "first_recording_artist",
+        "goal_slot_role": "target_attribute",
+        "goal_terminal": true,
+        "diffusion_delta": 0.10149156093363942,
+        "diffusion_gain": 0.10149156093363942
+      }
+    },
+    {
+      "node_id": "kg_doc_4",
+      "node_type": "kg",
+      "content": "Without Regret is the first major-label (and second overall) album from \"American Idol\" season two seventh place finalist, Kimberly Caldwell. The album was released on April 19, 2011.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0,
+      "temperature": 0.0,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Without Regret",
+        "raw_score": 1.5789287320388676,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "memory_mem_4",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'Who was the seventh place finalist on the 7th season of American Idol' is Kristy Lee Cook.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999799652417,
+      "temperature": 1.0044018741852845,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "intermediate_answer",
+        "target_question": "Who was the seventh place finalist on the 7th season of American Idol?",
+        "target_question_norm": "who was the seventh place finalist on the 7th season of american idol",
+        "relation_signature": "generic",
+        "answer_text": "Kristy Lee Cook",
+        "support_score": 0.9999999799652417,
+        "evidence_ids": [
+          "doc_8",
+          "doc_3"
+        ],
+        "slot_name": "idol_finalist",
+        "slot_role": "bridge_entity",
+        "terminal": false,
+        "derived_from_state": "state_2",
+        "diffusion_delta": -0.02093202991693599,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "memory_mem_5",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'Who first recorded the song 'Like My Mother Does'' is Nathan Chapman.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999979259847,
+      "temperature": 1.068186665922393,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "derived_fact",
+        "target_question": "Who first recorded the song 'Like My Mother Does'?",
+        "target_question_norm": "who first recorded the song like my mother does",
+        "relation_signature": "mother",
+        "answer_text": "Nathan Chapman",
+        "support_score": 0.9999999979259847,
+        "evidence_ids": [
+          "doc_10"
+        ],
+        "slot_type": "person",
+        "slot_role": "target_attribute",
+        "slot_name": "first_recording_artist",
+        "depends_on": [],
+        "terminal": true,
+        "derived_from_state": "state_1",
+        "diffusion_delta": 0.06818666799640838,
+        "diffusion_gain": 0.06818666799640838
+      }
+    },
+    {
+      "node_id": "memory_mem_6",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'What singer who was the seventh place finalist on the 7th season of American Idol first recorded the song Like My Mother Does' is Kristy Lee Cook.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999979259847,
+      "temperature": 1.4889711463808624,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "tdca_run",
+        "memory_kind": "answer_candidate",
+        "target_question": "What singer who was the seventh place finalist on the 7th season of American Idol first recorded the song Like My Mother Does?",
+        "target_question_norm": "what singer who was the seventh place finalist on the 7th season of american idol first recorded the song like my mother does",
+        "relation_signature": "mother",
+        "answer_text": "Kristy Lee Cook",
+        "support_score": 0.9999999979259847,
+        "derived_from_state": "state_1",
+        "composed_from": [
+          "memory_mem_4",
+          "memory_mem_5"
+        ],
+        "slot_role": "target_attribute",
+        "terminal": true,
+        "coverage_count": 1,
+        "coverage_ratio": 1.0,
+        "composition_kind": "attribute_after_bridge",
+        "diffusion_delta": 0.0006016194990656754,
+        "diffusion_gain": 0.0006016194990656754,
+        "score": 0.9999999979259847,
+        "raw_score": 16.90990646078119,
+        "evidence_ids": [
+          "doc_10"
+        ]
+      }
+    },
+    {
+      "node_id": "state_4",
+      "node_type": "state",
+      "content": "Does the evidence support that What singer who was the seventh place finalist on the 7th season of American Idol first recorded the song Like My Mother Does?",
+      "depth": 1,
+      "parent_id": "state_1",
+      "value": 0.5674981276727327,
+      "temperature": 0.26986664519177034,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.8373048483187697,
+        "evidence_support": 0.5214848479963813,
+        "memory_usefulness": 0.06610589567209038,
+        "answerability": 0.7607424239981907,
+        "uncertainty": 0.20613272736065136
+      },
+      "metadata": {
+        "kind": "verification",
+        "evidence_ids": [
+          "doc_10",
+          "doc_8",
+          "doc_6",
+          "doc_7"
+        ],
+        "memory_ids": [
+          "mem_3",
+          "mem_1"
+        ],
+        "diffusion_delta": -0.06470031110179658,
+        "diffusion_gain": 0.0
+      }
+    }
+  ],
+  "edges": [
+    {
+      "source": "state_1",
+      "target": "kg_doc_10",
+      "edge_type": "supports",
+      "weight": 0.9999999973274556
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.04951194776474965
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_8",
+      "edge_type": "supports",
+      "weight": 0.04929313632719701
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.04617985182014344
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.009356874676276019
+    },
+    {
+      "source": "state_1",
+      "target": "state_2",
+      "edge_type": "refines",
+      "weight": 1.0
+    },
+    {
+      "source": "state_1",
+      "target": "state_3",
+      "edge_type": "refines",
+      "weight": 0.9
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_5",
+      "edge_type": "derives",
+      "weight": 0.9999999979259847
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_6",
+      "edge_type": "derives",
+      "weight": 1.0
+    },
+    {
+      "source": "state_1",
+      "target": "state_4",
+      "edge_type": "verifies",
+      "weight": 0.38
+    },
+    {
+      "source": "kg_doc_10",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.9999999973274556
+    },
+    {
+      "source": "kg_doc_10",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.9999999979259847
+    },
+    {
+      "source": "kg_doc_10",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.9999999976610332
+    },
+    {
+      "source": "kg_doc_10",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.9999999973274556
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.04951194776474965
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.03835519473820791
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.04134907408872595
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.04951194776474965
+    },
+    {
+      "source": "kg_doc_8",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.04929313632719701
+    },
+    {
+      "source": "kg_doc_8",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.9999999799652417
+    },
+    {
+      "source": "kg_doc_8",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.9999999799652417
+    },
+    {
+      "source": "kg_doc_8",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.0429696983317294
+    },
+    {
+      "source": "kg_doc_8",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.04929313632719701
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.02959522535487211
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.04617985182014344
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_2",
+      "edge_type": "recalls",
+      "weight": 0.9599999038694302
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_3",
+      "edge_type": "recalls",
+      "weight": 0.9599999902804548
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "memory_mem_4",
+      "edge_type": "recalls",
+      "weight": 0.9599999038694302
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_4",
+      "edge_type": "recalls",
+      "weight": 0.0454613242743611
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.009356874676276019
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_2",
+      "edge_type": "recalls",
+      "weight": 0.06793364937172863
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_3",
+      "edge_type": "recalls",
+      "weight": 0.003434309024542027
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "memory_mem_4",
+      "edge_type": "recalls",
+      "weight": 0.06793364937172863
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_4",
+      "edge_type": "recalls",
+      "weight": 0.08675046706981968
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_8",
+      "edge_type": "supports",
+      "weight": 0.9999999799652417
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.28470322893456845
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.13752037131349226
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_2",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.9599999038694302
+    },
+    {
+      "source": "state_2",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.06793364937172863
+    },
+    {
+      "source": "state_2",
+      "target": "state_3",
+      "edge_type": "refines",
+      "weight": 0.84
+    },
+    {
+      "source": "state_2",
+      "target": "memory_mem_4",
+      "edge_type": "derives",
+      "weight": 0.9999999799652417
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.28470322893456845
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.28470322893456845
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.13752037131349226
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.13752037131349226
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_10",
+      "edge_type": "supports",
+      "weight": 0.9999999979259847
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.03835519473820791
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.02959522535487211
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_3",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.9599999902804548
+    },
+    {
+      "source": "state_3",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.003434309024542027
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "state_2",
+      "edge_type": "recalls",
+      "weight": 0.9999999799652417
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_8",
+      "edge_type": "supports",
+      "weight": 0.9999999799652417
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.28470322893456845
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.13752037131349226
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.9599999038694302
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.06793364937172863
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "memory_mem_6",
+      "edge_type": "derives",
+      "weight": 0.9999999799652417
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.9999999979259847
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "memory_mem_6",
+      "edge_type": "recalls",
+      "weight": 0.9999999979259847
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 1.0
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_10",
+      "edge_type": "supports",
+      "weight": 0.9999999973274556
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.04951194776474965
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_8",
+      "edge_type": "supports",
+      "weight": 0.04929313632719701
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "memory_mem_5",
+      "edge_type": "recalls",
+      "weight": 0.9999999979259847
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_10",
+      "edge_type": "supports",
+      "weight": 0.9999999976610332
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_8",
+      "edge_type": "supports",
+      "weight": 0.0429696983317294
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.04134907408872595
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_4",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.08675046706981968
+    },
+    {
+      "source": "state_4",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.0454613242743611
+    }
+  ]
+}

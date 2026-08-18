@@ -1,0 +1,983 @@
+{
+  "nodes": [
+    {
+      "node_id": "state_1",
+      "node_type": "state",
+      "content": "Who is the female star in Gone with the Wind married to?",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.6360039661019242,
+      "temperature": 0.3186078028212762,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.8335116526912599,
+        "evidence_support": 0.5103283902684115,
+        "memory_usefulness": 0.48672266765716377,
+        "answerability": 0.7551641951342057,
+        "uncertainty": 0.20814088975168593
+      },
+      "metadata": {
+        "diffusion_delta": -0.08995931393217554,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "kg_doc_6",
+      "node_type": "kg",
+      "content": "Gone with the Wind is a 1939 American epic historical romance film adapted from Margaret Mitchell's 1936 novel of the same name. The film was produced by David O. Selznick of Selznick International Pictures and directed by Victor Fleming. Set in the American South against the backdrop of the American Civil War and Reconstruction era, the film tells the story of Scarlett O'Hara, the strong - willed daughter of a Georgia plantation owner, from her romantic pursuit of Ashley Wilkes, who is married to his cousin, Melanie Hamilton, to her marriage to Rhett Butler. The leading roles are portrayed by Vivien Leigh (Scarlett), Clark Gable (Rhett), Leslie Howard (Ashley), and Olivia de Havilland (Melanie).",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999861802288,
+      "temperature": 0.9999999861802288,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Gone with the Wind (film)",
+        "raw_score": 0.19636717263713707,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_18",
+      "node_type": "kg",
+      "content": "With Vivien Leigh's star turn due to her performance as Scarlett O'Hara in \"Gone with the Wind\" (1939), Korda shelved \"21 Days\" for two years before releasing it to Columbia Pictures. Bosley Crowther in his review for \"The New York Times\", said, \"True, it is no deathless drama—is little more than a cultivated penny-thriller, in fact—and Miss Leigh, as the party of the second part, is required to devote her charm and talents to nothing more constructive than making the apparently inevitable parting from poor Mr. Olivier seem exceedingly painful, indeed. But it is a highly charged \"meller,\" rigid throughout with suspense and nicely laced with much tender emotion.\"",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.10222294820856173,
+      "temperature": 0.10222294820856173,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "21 Days",
+        "raw_score": 0.15027869627311244,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_4",
+      "node_type": "kg",
+      "content": "The Wizard of Oz is a 1939 American musical fantasy film produced by Metro - Goldwyn - Mayer. Widely considered to be one of the greatest films in cinema history, it is the best - known and most commercially successful adaptation of L. Frank Baum's 1900 children's book, The Wonderful Wizard of Oz. It was directed primarily by Victor Fleming (who left production to take over direction on the troubled Gone with the Wind production). It stars Judy Garland as Dorothy Gale, alongside Ray Bolger, Jack Haley, Bert Lahr, Frank Morgan, Billie Burke and Margaret Hamilton, with Charley Grapewin, Pat Walshe and Clara Blandick, Terry (billed as Toto), and the Singer Midgets as the Munchkins.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.012012156162131596,
+      "temperature": 0.012012156162131596,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "The Wizard of Oz (1939 film)",
+        "raw_score": 0.13382282521414132,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_1",
+      "node_type": "kg",
+      "content": "Laura Hope Crews (December 12, 1879 -- November 12, 1942) was a leading actress of the American stage in the first decades of the 20th century who is best remembered today for her later work as a character actress in motion pictures of the 1930s. Her best - known film role was Aunt Pittypat in Gone with the Wind.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999994148941485,
+      "temperature": 0.9999994148941485,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Laura Hope Crews",
+        "raw_score": 0.1644325113278468,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "memory_mem_3",
+      "node_type": "memory",
+      "content": "Template: when evidence already grounds the answer, switch from branching to short verification and synthesis.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.8799999914225256,
+      "temperature": 1.0395071026055671,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.88,
+        "tag": "verification_then_stop",
+        "memory_kind": "template",
+        "raw_score": 0.7453475836409518,
+        "source": "memory",
+        "diffusion_delta": -0.031955760049528825,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "memory_mem_1",
+      "node_type": "memory",
+      "content": "Template: for compositional multi-hop questions, first solve the intermediate entity and then ask for the final attribute.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9599999038694302,
+      "temperature": 0.7626199608557654,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.96,
+        "tag": "compositional_template",
+        "memory_kind": "template",
+        "raw_score": 0.24204254009683338,
+        "source": "memory",
+        "diffusion_delta": -0.0662293884492452,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "state_2",
+      "node_type": "state",
+      "content": "Who is the female star in Gone with the Wind?",
+      "depth": 1,
+      "parent_id": "state_1",
+      "value": 0.6304421352808623,
+      "temperature": 1.8475137359011709,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.7803702299109534,
+        "evidence_support": 0.5572386441231247,
+        "memory_usefulness": 0.5139667766205794,
+        "answerability": 0.742255685697926,
+        "uncertainty": 0.19969704405783756
+      },
+      "metadata": {
+        "kind": "bridge",
+        "evidence_ids": [
+          "doc_1",
+          "doc_6",
+          "doc_18",
+          "doc_4"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "goal_slot_name": "female_star",
+        "goal_slot_role": "bridge_entity",
+        "goal_terminal": false,
+        "diffusion_delta": -0.07608170735611264,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "state_3",
+      "node_type": "state",
+      "content": "Who played Scarlett O'Hara in Gone with the Wind?",
+      "depth": 2,
+      "parent_id": "state_2",
+      "value": 0.6306765396477154,
+      "temperature": 1.383853548591818,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.7212534311376897,
+        "evidence_support": 0.688178540779301,
+        "memory_usefulness": 0.5139667251540021,
+        "answerability": 0.6531801794805596,
+        "uncertainty": 0.17612786265972583
+      },
+      "metadata": {
+        "kind": "bridge",
+        "evidence_ids": [
+          "doc_14",
+          "doc_6",
+          "doc_5",
+          "doc_2"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "diffusion_delta": 0.13699987174538175,
+        "diffusion_gain": 0.13699987174538175
+      }
+    },
+    {
+      "node_id": "kg_doc_14",
+      "node_type": "kg",
+      "content": "Scarlett O'Hara Scarlett O'Hara as portrayed by Vivien Leigh in the 1939 film adaptation of Gone with the Wind First appearance Gone with the Wind Created by Margaret Mitchell Portrayed by Vivien Leigh (Gone with the Wind) Joanne Whalley (Scarlett) Information Full name Katie Scarlett O'Hara Gender Female Family Gerald O'Hara (father, deceased) Ellen Robillard O'Hara (mother, deceased) Susan Elinor ``Suellen ''O'Hara Benteen (sister) Caroline Irene`` Carreen'' O'Hara (sister) Gerald O'Hara Jr. (name of 3 brothers, all deceased) Spouse (s) Charles Hamilton (1st; deceased) Frank Kennedy (2nd; deceased) Rhett Butler (3rd) Children Wade Hampton Hamilton (son with Charles) Ella Lorena Kennedy (daughter with Frank) Eugenie Victoria ``Bonnie Blue ''Butler (daughter with Rhett; deceased) Katie Colum`` Cat'' Butler (daughter with Rhett in Scarlett) Relatives Langston Butler (father - in - law named in Scarlett; deceased) Eleanor Butler (mother - in - law in sequel Scarlett) Ross Butler (brother - in - law named in Scarlett) Rosemary Butler (sister - in - law) Pauline Robillard (maternal aunt) Eulalie Robillard (maternal aunt) Philippe Robillard (cousin of her mother) James O'Hara (paternal uncle) Andrew O'Hara (paternal uncle) Pierre Robillard (maternal grandfather) Solange Prudhomme Robillard (maternal grandmother) Katie Scarlett O'Hara (paternal grandmother) Will Benteen (brother - in - law) Unnamed Benteen (niece or nephew, via Suellen and Will) Melanie Hamilton (sister - in - law) Beau Wilkes (nephew) Religion Roman Catholicism Nationality Confederate, American",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999996865166016,
+      "temperature": 0.9999996865166016,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Scarlett O'Hara",
+        "raw_score": 0.049414679348992546,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_5",
+      "node_type": "kg",
+      "content": "Melanie Hamilton Wilkes is a fictional character first appearing in the novel \"Gone with the Wind\" by Margaret Mitchell. In the 1939 film she was portrayed by Olivia de Havilland. Melanie is Scarlett O'Hara's sister-in-law and eventually her best friend.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.18008998324565886,
+      "temperature": 0.18008998324565886,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Melanie Hamilton",
+        "raw_score": 0.17920526525161634,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_2",
+      "node_type": "kg",
+      "content": "``Frankly, my dear, I do n't give a damn ''is a line from the 1939 film Gone with the Wind starring Clark Gable and Vivien Leigh. The line is spoken by Rhett Butler (Gable), as his last words to Scarlett O'Hara (Leigh), in response to her tearful question:`` Where shall I go? What shall I do?'' Scarlett clings to the hope that she can win him back. This line is also partially spoken by Rhett Butler in Margaret Mitchell's novel Gone with the Wind, published in 1936, from which the film is derived.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0,
+      "temperature": 0.0,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Frankly, my dear, I don't give a damn",
+        "raw_score": 0.09638568794226664,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "state_4",
+      "node_type": "state",
+      "content": "Who was Vivien Leigh married to?",
+      "depth": 2,
+      "parent_id": "state_2",
+      "value": 0.7227347195607802,
+      "temperature": 1.3228766268318226,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.6830148603548263,
+        "evidence_support": 0.8805249903484194,
+        "memory_usefulness": 0.8799999913575839,
+        "answerability": 0.6948079497196643,
+        "uncertainty": 0.14150550173728452
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_6",
+          "doc_14",
+          "doc_17",
+          "doc_2"
+        ],
+        "memory_ids": [
+          "mem_3"
+        ],
+        "diffusion_delta": 0.3951710979075329,
+        "diffusion_gain": 0.3951710979075329
+      }
+    },
+    {
+      "node_id": "kg_doc_17",
+      "node_type": "kg",
+      "content": "Darlings of the Gods is a 1989 Australian mini series about the 1948 trip to Australia by Laurence Olivier and Vivien Leigh and the Old Vic Company, where Olivier and Leigh met Peter Finch.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.016436088996462213,
+      "temperature": 0.016436088996462213,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Darlings of the Gods",
+        "raw_score": 0.13136560013605966,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "memory_mem_4",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'Who is the female star in Gone with the Wind' is Vivien Leigh.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999994148941485,
+      "temperature": 1.2547467339035185,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "intermediate_answer",
+        "target_question": "Who is the female star in Gone with the Wind?",
+        "target_question_norm": "who is the female star in gone with the wind",
+        "relation_signature": "generic",
+        "answer_text": "Vivien Leigh",
+        "support_score": 0.9999994148941485,
+        "evidence_ids": [
+          "doc_1"
+        ],
+        "slot_name": "female_star",
+        "slot_type": "",
+        "slot_role": "bridge_entity",
+        "terminal": false,
+        "path_terminal": false,
+        "composition_kind": "",
+        "derived_from_state": "state_2",
+        "diffusion_delta": 0.06774413117628608,
+        "diffusion_gain": 0.06774413117628608
+      }
+    },
+    {
+      "node_id": "state_5",
+      "node_type": "state",
+      "content": "Who is Vivien Leigh married to?",
+      "depth": 2,
+      "parent_id": "state_2",
+      "value": 0.6570942687080729,
+      "temperature": 1.095996477901778,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.7134494058717339,
+        "evidence_support": 0.8684340814409284,
+        "memory_usefulness": 0.10687926378558509,
+        "answerability": 0.8069443134477369,
+        "uncertainty": 0.14368186534063287
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_6",
+          "doc_14",
+          "doc_17",
+          "doc_2"
+        ],
+        "memory_ids": [
+          "mem_3"
+        ],
+        "diffusion_delta": 0.26109227075723573,
+        "diffusion_gain": 0.26109227075723573
+      }
+    },
+    {
+      "node_id": "memory_mem_5",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'Who played Scarlett O'Hara in Gone with the Wind' is Vivien Leigh.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 1.0,
+      "temperature": 0.8699803220399019,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "intermediate_answer",
+        "target_question": "Who played Scarlett O'Hara in Gone with the Wind?",
+        "target_question_norm": "who played scarlett o hara in gone with the wind",
+        "relation_signature": "generic",
+        "answer_text": "Vivien Leigh",
+        "support_score": 1.0,
+        "evidence_ids": [
+          "doc_14",
+          "doc_6"
+        ],
+        "slot_name": "",
+        "slot_type": "",
+        "slot_role": "",
+        "terminal": false,
+        "path_terminal": false,
+        "composition_kind": "",
+        "derived_from_state": "state_3",
+        "diffusion_delta": 0.0436331745451809,
+        "diffusion_gain": 0.0436331745451809
+      }
+    }
+  ],
+  "edges": [
+    {
+      "source": "state_1",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.9999999845493373
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_18",
+      "edge_type": "supports",
+      "weight": 0.020656795987485675
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.012012156162131596
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.05583647553504284
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.006980404078404376
+    },
+    {
+      "source": "state_1",
+      "target": "state_2",
+      "edge_type": "refines",
+      "weight": 1.0
+    },
+    {
+      "source": "state_1",
+      "target": "state_5",
+      "edge_type": "refines",
+      "weight": 0.94
+    },
+    {
+      "source": "state_1",
+      "target": "state_4",
+      "edge_type": "refines",
+      "weight": 0.8
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.9999999845493373
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.11447787335210102
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.3763573950420003
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.9999999861802288
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.11447787335210102
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.9999999854737923
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.3763573950420003
+    },
+    {
+      "source": "kg_doc_18",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.020656795987485675
+    },
+    {
+      "source": "kg_doc_18",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.10222294820856173
+    },
+    {
+      "source": "kg_doc_18",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.10222294820856173
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.012012156162131596
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.9999994148941485
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.9999994148941485
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.05583647553504284
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_2",
+      "edge_type": "recalls",
+      "weight": 0.06793364937172863
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_3",
+      "edge_type": "recalls",
+      "weight": 0.00044502272633235607
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_4",
+      "edge_type": "recalls",
+      "weight": 0.1583365233007407
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "memory_mem_4",
+      "edge_type": "recalls",
+      "weight": 0.06793364937172863
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_5",
+      "edge_type": "recalls",
+      "weight": 0.10687926378558509
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "memory_mem_5",
+      "edge_type": "recalls",
+      "weight": 0.00044502272633235607
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.006980404078404376
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_2",
+      "edge_type": "recalls",
+      "weight": 0.9599999038694302
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_3",
+      "edge_type": "recalls",
+      "weight": 0.006301276767976407
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "memory_mem_4",
+      "edge_type": "recalls",
+      "weight": 0.9599999038694302
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "memory_mem_5",
+      "edge_type": "recalls",
+      "weight": 0.006301276767976407
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.9999994148941485
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.11447787335210102
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_18",
+      "edge_type": "supports",
+      "weight": 0.10222294820856173
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_2",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.9599999038694302
+    },
+    {
+      "source": "state_2",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.06793364937172863
+    },
+    {
+      "source": "state_2",
+      "target": "state_3",
+      "edge_type": "refines",
+      "weight": 0.95
+    },
+    {
+      "source": "state_2",
+      "target": "state_4",
+      "edge_type": "refines",
+      "weight": 0.9
+    },
+    {
+      "source": "state_2",
+      "target": "memory_mem_4",
+      "edge_type": "derives",
+      "weight": 0.9999994148941485
+    },
+    {
+      "source": "state_2",
+      "target": "state_5",
+      "edge_type": "refines",
+      "weight": 0.84
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_14",
+      "edge_type": "supports",
+      "weight": 0.9999996865166016
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.3763573950420003
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.18008998324565886
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_3",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.006301276767976407
+    },
+    {
+      "source": "state_3",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.00044502272633235607
+    },
+    {
+      "source": "state_3",
+      "target": "state_5",
+      "edge_type": "refines",
+      "weight": 0.84
+    },
+    {
+      "source": "state_3",
+      "target": "memory_mem_5",
+      "edge_type": "derives",
+      "weight": 1.0
+    },
+    {
+      "source": "kg_doc_14",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.9999996865166016
+    },
+    {
+      "source": "kg_doc_14",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.7610499945166099
+    },
+    {
+      "source": "kg_doc_14",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.7368681774080643
+    },
+    {
+      "source": "kg_doc_14",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.9999996865166016
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.18008998324565886
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.18008998324565886
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.9999999861802288
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_14",
+      "edge_type": "supports",
+      "weight": 0.7610499945166099
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_17",
+      "edge_type": "supports",
+      "weight": 0.016436088996462213
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_4",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.1583365233007407
+    },
+    {
+      "source": "kg_doc_17",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.016436088996462213
+    },
+    {
+      "source": "kg_doc_17",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.006192186855843257
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "state_2",
+      "edge_type": "recalls",
+      "weight": 0.9999994148941485
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.9999994148941485
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.11447787335210102
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_18",
+      "edge_type": "supports",
+      "weight": 0.10222294820856173
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.9599999038694302
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.06793364937172863
+    },
+    {
+      "source": "state_5",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.9999999854737923
+    },
+    {
+      "source": "state_5",
+      "target": "kg_doc_14",
+      "edge_type": "supports",
+      "weight": 0.7368681774080643
+    },
+    {
+      "source": "state_5",
+      "target": "kg_doc_17",
+      "edge_type": "supports",
+      "weight": 0.006192186855843257
+    },
+    {
+      "source": "state_5",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_5",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.10687926378558509
+    },
+    {
+      "source": "state_5",
+      "target": "state_4",
+      "edge_type": "refines",
+      "weight": 0.9
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "state_3",
+      "edge_type": "recalls",
+      "weight": 1.0
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_14",
+      "edge_type": "supports",
+      "weight": 0.9999996865166016
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.3763573950420003
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.18008998324565886
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.006301276767976407
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.00044502272633235607
+    }
+  ]
+}

@@ -1,0 +1,118 @@
+{
+  "question": "In which football league does the son of Souleyman Sané play?",
+  "final_answer": "Premier League",
+  "best_node": {
+    "node_id": "state_3",
+    "node_type": "state",
+    "content": "Which football league does Leroy Sané play in?",
+    "depth": 2,
+    "parent_id": "state_2",
+    "value": 0.7010240857933261,
+    "temperature": 1.359152014993963,
+    "expanded": true,
+    "visit_count": 1,
+    "persistent": false,
+    "score_breakdown": {
+      "task_progress": 0.8340457582141638,
+      "evidence_support": 0.918316401164653,
+      "memory_usefulness": 0.0,
+      "answerability": 0.7864309278550538,
+      "uncertainty": 0.13470304779036246
+    },
+    "metadata": {
+      "kind": "retrieval",
+      "evidence_ids": [
+        "doc_1",
+        "doc_3",
+        "doc_10",
+        "doc_6"
+      ],
+      "memory_ids": [],
+      "diffusion_delta": 0.32428320334845395,
+      "diffusion_gain": 0.32428320334845395
+    }
+  },
+  "final_synthesis_node_ids": [
+    "state_2",
+    "state_3",
+    "memory_mem_5",
+    "state_1"
+  ],
+  "answer_history": [
+    {
+      "node_id": "memory_mem_4",
+      "content": "Conclusion: The answer to 'Who is the son of Souleyman Sané' is Leroy Sané.",
+      "answer_text": "Leroy Sané",
+      "value": 1.0,
+      "confidence": 1.0,
+      "evidence_ids": [
+        "doc_1"
+      ],
+      "step": 1,
+      "kind": "intermediate_answer"
+    },
+    {
+      "node_id": "memory_mem_5",
+      "content": "Conclusion: The answer to 'Which football league does Leroy Sané play in' is Premier League.",
+      "answer_text": "Premier League",
+      "value": 0.874,
+      "evidence_ids": [
+        "doc_1",
+        "doc_3"
+      ],
+      "step": 2
+    },
+    {
+      "node_id": "state_3",
+      "answer_text": "Premier League",
+      "previous_answer": "",
+      "confidence": 0.95,
+      "score": 0.822592224745617,
+      "source": "expansion_candidate",
+      "step": 1,
+      "evidence_ids": [
+        "doc_1",
+        "doc_3",
+        "doc_10",
+        "doc_6"
+      ],
+      "kind": "anytime_answer"
+    },
+    {
+      "node_id": "state_3",
+      "answer_text": "Premier League",
+      "source": "answer_judge",
+      "choice": "A",
+      "candidate_source": "expansion_candidate",
+      "base_score": 1.0,
+      "rerank_score": 0.830844838400482,
+      "judge_confidence": 0.0,
+      "judge_reason": "",
+      "step": 3,
+      "kind": "final_answer_selection"
+    }
+  ],
+  "anytime_answer": "Premier League",
+  "anytime_answer_score": 0.822592224745617,
+  "anytime_answer_source": "expansion_candidate",
+  "anytime_answer_node_id": "state_3",
+  "stats": {
+    "steps": 3,
+    "llm_calls": 6,
+    "generated_tokens": 550,
+    "token_budget_remaining": 650,
+    "total_nodes": 13,
+    "kg_nodes": 6,
+    "memory_nodes": 4,
+    "state_nodes": 3,
+    "deleted_state_nodes": 0,
+    "scheduler_mode": "tdca",
+    "scoring_mode": "hybrid",
+    "stop_reason": "frontier_empty",
+    "goal_kind": "bridge",
+    "goal_completion": 0.0,
+    "anytime_answer": "Premier League",
+    "anytime_answer_score": 0.822592224745617,
+    "anytime_answer_source": "expansion_candidate"
+  }
+}

@@ -1,0 +1,1406 @@
+{
+  "nodes": [
+    {
+      "node_id": "state_1",
+      "node_type": "state",
+      "content": "What is the birth city of the director of the movie Inception?",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.7609495787680356,
+      "temperature": 0.2065253049471648,
+      "expanded": true,
+      "visit_count": 1,
+      "score_breakdown": {
+        "task_progress": 0.8916685409913556,
+        "evidence_support": 0.6813780617392812,
+        "memory_usefulness": 0.8106678175069111,
+        "answerability": 0.8406890308696405,
+        "uncertainty": 0.17735194888692937
+      },
+      "metadata": {}
+    },
+    {
+      "node_id": "evidence_doc_4",
+      "node_type": "evidence",
+      "content": "For a composition question, identify the intermediate entity before retrieving its attribute.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999966603483,
+      "temperature": 0.99999999053387,
+      "expanded": false,
+      "visit_count": 0,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Reasoning Pattern",
+        "raw_score": 3.7772988152849662,
+        "source": "evidence"
+      }
+    },
+    {
+      "node_id": "evidence_doc_1",
+      "node_type": "evidence",
+      "content": "Inception is a 2010 science fiction film directed by Christopher Nolan.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.8482901099613834,
+      "temperature": 0.36275613294469233,
+      "expanded": false,
+      "visit_count": 0,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Inception Overview",
+        "raw_score": 1.3405956801981194,
+        "source": "evidence"
+      }
+    },
+    {
+      "node_id": "evidence_doc_2",
+      "node_type": "evidence",
+      "content": "Christopher Nolan is a film director born in London.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 1.0,
+      "temperature": 0.12246105337070066,
+      "expanded": false,
+      "visit_count": 0,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Christopher Nolan Biography",
+        "raw_score": 1.9987129709910234,
+        "source": "evidence"
+      }
+    },
+    {
+      "node_id": "evidence_doc_3",
+      "node_type": "evidence",
+      "content": "Leonardo DiCaprio starred in Inception and was born in Los Angeles.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 1.0,
+      "temperature": 0.0,
+      "expanded": false,
+      "visit_count": 0,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Leonardo DiCaprio Fact",
+        "raw_score": 0.8297479328886093,
+        "source": "evidence"
+      }
+    },
+    {
+      "node_id": "memory_mem_1",
+      "node_type": "memory",
+      "content": "For compositional multi-hop questions, first solve the intermediate entity and then ask for the final attribute.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9599999949879089,
+      "temperature": 0.9599999934118431,
+      "expanded": false,
+      "visit_count": 0,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.96,
+        "tag": "compositional_template",
+        "raw_score": 1.4571601864317516,
+        "source": "memory"
+      }
+    },
+    {
+      "node_id": "memory_mem_3",
+      "node_type": "memory",
+      "content": "When evidence already grounds the answer, switch from branching to short verification and synthesis.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.8799999928581078,
+      "temperature": 0.6613356416019791,
+      "expanded": false,
+      "visit_count": 0,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.88,
+        "tag": "verification_then_stop",
+        "raw_score": 1.0950817879818844,
+        "source": "memory"
+      }
+    },
+    {
+      "node_id": "memory_mem_2",
+      "node_type": "memory",
+      "content": "For comparison questions, split the problem into one sub-question per entity before comparing them.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.8999999959321004,
+      "temperature": 0.6558872957511791,
+      "expanded": false,
+      "visit_count": 0,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.9,
+        "tag": "comparison_template",
+        "raw_score": 1.0619254007931982,
+        "source": "memory"
+      }
+    },
+    {
+      "node_id": "state_2",
+      "node_type": "state",
+      "content": "Who is the director of the movie Inception?",
+      "depth": 1,
+      "parent_id": "state_1",
+      "value": 0.8236432588341863,
+      "temperature": 0.34759400241150784,
+      "expanded": true,
+      "visit_count": 1,
+      "score_breakdown": {
+        "task_progress": 0.8475426493697009,
+        "evidence_support": 0.9241450471657872,
+        "memory_usefulness": 0.8106678147252409,
+        "answerability": 0.8954058569162269,
+        "uncertainty": 0.1336538915101583
+      },
+      "metadata": {
+        "kind": "bridge",
+        "evidence_ids": [
+          "doc_4",
+          "doc_1",
+          "doc_2",
+          "doc_3"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3",
+          "mem_2"
+        ]
+      }
+    },
+    {
+      "node_id": "state_3",
+      "node_type": "state",
+      "content": "Verify the relation chain 'director -> birth city' for the movie Inception.?",
+      "depth": 1,
+      "parent_id": "state_1",
+      "value": 0.6487425725650245,
+      "temperature": 0.2433696814521101,
+      "expanded": true,
+      "visit_count": 1,
+      "score_breakdown": {
+        "task_progress": 0.7410738750378862,
+        "evidence_support": 0.6110015932486849,
+        "memory_usefulness": 0.8079436459079405,
+        "answerability": 0.6388341299576757,
+        "uncertainty": 0.19001971321523672
+      },
+      "metadata": {
+        "kind": "verification",
+        "evidence_ids": [
+          "doc_4",
+          "doc_1",
+          "doc_3",
+          "doc_2"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_2",
+          "mem_3"
+        ]
+      }
+    },
+    {
+      "node_id": "answer_4",
+      "node_type": "answer",
+      "content": "Candidate answer: Christopher Nolan",
+      "depth": 1,
+      "parent_id": "state_1",
+      "value": 0.7577517981274514,
+      "temperature": 0.6130764018002828,
+      "expanded": false,
+      "visit_count": 0,
+      "score_breakdown": {
+        "task_progress": 0.5082754058766387,
+        "evidence_support": 0.6713982525783488,
+        "memory_usefulness": 0.8799999928581078,
+        "answerability": 0.6356991262891744,
+        "uncertainty": 0.1791483145358972
+      },
+      "metadata": {
+        "kind": "answer",
+        "evidence_ids": [
+          "doc_5",
+          "doc_2",
+          "doc_1"
+        ],
+        "memory_ids": [
+          "mem_3"
+        ]
+      }
+    },
+    {
+      "node_id": "evidence_doc_5",
+      "node_type": "evidence",
+      "content": "Interstellar is another Christopher Nolan film.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999217954579,
+      "temperature": 0.9999999217954579,
+      "expanded": false,
+      "visit_count": 0,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Distractor Film",
+        "raw_score": 1.3058506074611458,
+        "source": "evidence"
+      }
+    },
+    {
+      "node_id": "state_5",
+      "node_type": "state",
+      "content": "Which evidence title is most likely to resolve the missing entity in: Who is the director of the movie Inception? Consider Reasoning Pattern?",
+      "depth": 2,
+      "parent_id": "state_2",
+      "value": 0.6786370423052199,
+      "temperature": 0.279811097123182,
+      "expanded": false,
+      "visit_count": 0,
+      "score_breakdown": {
+        "task_progress": 0.7558348371100833,
+        "evidence_support": 0.6544161875786763,
+        "memory_usefulness": 0.7333456948524723,
+        "answerability": 0.7605414271226715,
+        "uncertainty": 0.18220508623583825
+      },
+      "metadata": {
+        "kind": "bridge",
+        "evidence_ids": [
+          "doc_4",
+          "doc_2",
+          "doc_1",
+          "doc_3"
+        ],
+        "memory_ids": [
+          "mem_3",
+          "mem_1",
+          "mem_2",
+          "mem_4"
+        ]
+      }
+    },
+    {
+      "node_id": "memory_mem_4",
+      "node_type": "memory",
+      "content": "Template: when evidence becomes sufficient, switch from branching to short verification and synthesis.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0,
+      "temperature": 0.0,
+      "expanded": false,
+      "visit_count": 0,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.7511999954690092,
+        "source": "memory",
+        "kind": "strategy_template",
+        "raw_score": 1.464482852391648
+      }
+    },
+    {
+      "node_id": "state_6",
+      "node_type": "state",
+      "content": "Verify the strongest evidence sentence before answering: Who is the director of the movie Inception?",
+      "depth": 2,
+      "parent_id": "state_2",
+      "value": 0.677325762449715,
+      "temperature": 0.2722039932979557,
+      "expanded": false,
+      "visit_count": 0,
+      "score_breakdown": {
+        "task_progress": 0.7528319303231998,
+        "evidence_support": 0.6455841087937249,
+        "memory_usefulness": 0.7594542130948269,
+        "answerability": 0.7561253877301958,
+        "uncertainty": 0.1837948604171295
+      },
+      "metadata": {
+        "kind": "verification",
+        "evidence_ids": [
+          "doc_4",
+          "doc_1",
+          "doc_2",
+          "doc_3"
+        ],
+        "memory_ids": [
+          "mem_2",
+          "mem_3",
+          "mem_1",
+          "mem_4"
+        ]
+      }
+    },
+    {
+      "node_id": "state_7",
+      "node_type": "state",
+      "content": "Which evidence title is most likely to resolve the missing entity in: Verify the relation chain 'director -> birth city' for the movie Inception.? Consider Reasoning Pattern?",
+      "depth": 2,
+      "parent_id": "state_3",
+      "value": 0.6513345891478278,
+      "temperature": 0.2419403546255292,
+      "expanded": true,
+      "visit_count": 1,
+      "score_breakdown": {
+        "task_progress": 0.7631417678205142,
+        "evidence_support": 0.5517241537204666,
+        "memory_usefulness": 0.7712619953344456,
+        "answerability": 0.7314176324157888,
+        "uncertainty": 0.200689652330316
+      },
+      "metadata": {
+        "kind": "bridge",
+        "evidence_ids": [
+          "doc_4",
+          "doc_3",
+          "doc_2",
+          "doc_1"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3",
+          "mem_2",
+          "mem_4"
+        ]
+      }
+    },
+    {
+      "node_id": "state_8",
+      "node_type": "state",
+      "content": "Verify the strongest evidence sentence before answering: Verify the relation chain 'director -> birth city' for the movie Inception.?",
+      "depth": 2,
+      "parent_id": "state_3",
+      "value": 0.6394678022020533,
+      "temperature": 0.17497501064030327,
+      "expanded": true,
+      "visit_count": 1,
+      "score_breakdown": {
+        "task_progress": 0.7229865627150133,
+        "evidence_support": 0.5578036158284703,
+        "memory_usefulness": 0.8120640781986146,
+        "answerability": 0.7122351412475685,
+        "uncertainty": 0.19959534915087535
+      },
+      "metadata": {
+        "kind": "verification",
+        "evidence_ids": [
+          "doc_4",
+          "doc_1",
+          "doc_3",
+          "doc_2"
+        ],
+        "memory_ids": [
+          "mem_2",
+          "mem_1",
+          "mem_3",
+          "mem_4"
+        ]
+      }
+    },
+    {
+      "node_id": "state_9",
+      "node_type": "state",
+      "content": "Verify the strongest evidence sentence before answering: Which evidence title is most likely to resolve the missing entity in: Verify the relation chain 'director -> birth city' for the movie Inception.? Consider Reasoning Pattern?",
+      "depth": 3,
+      "parent_id": "state_7",
+      "value": 0.6439052302950918,
+      "temperature": 0.3338188238598856,
+      "expanded": true,
+      "visit_count": 1,
+      "score_breakdown": {
+        "task_progress": 0.756433899369745,
+        "evidence_support": 0.5319951288652629,
+        "memory_usefulness": 0.7920810491211334,
+        "answerability": 0.7215531199881869,
+        "uncertainty": 0.20424087680425268
+      },
+      "metadata": {
+        "kind": "verification",
+        "evidence_ids": [
+          "doc_4",
+          "doc_3",
+          "doc_2",
+          "doc_1"
+        ],
+        "memory_ids": [
+          "mem_2",
+          "mem_3",
+          "mem_1",
+          "mem_4"
+        ]
+      }
+    },
+    {
+      "node_id": "answer_10",
+      "node_type": "answer",
+      "content": "Candidate answer: Los Angeles",
+      "depth": 3,
+      "parent_id": "state_7",
+      "value": 0.751199999142973,
+      "temperature": 0.8862189259795991,
+      "expanded": false,
+      "visit_count": 0,
+      "score_breakdown": {
+        "task_progress": 0.6200000000000001,
+        "evidence_support": 1.0,
+        "memory_usefulness": 0.8799999928581078,
+        "answerability": 0.7999999999999999,
+        "uncertainty": 0.12
+      },
+      "metadata": {
+        "kind": "answer",
+        "evidence_ids": [
+          "doc_3"
+        ],
+        "memory_ids": [
+          "mem_3"
+        ]
+      }
+    },
+    {
+      "node_id": "answer_11",
+      "node_type": "answer",
+      "content": "Candidate answer: London",
+      "depth": 3,
+      "parent_id": "state_8",
+      "value": 0.751199999142973,
+      "temperature": 0.9929621726001048,
+      "expanded": false,
+      "visit_count": 0,
+      "score_breakdown": {
+        "task_progress": 0.6200000000000001,
+        "evidence_support": 1.0,
+        "memory_usefulness": 0.8799999928581078,
+        "answerability": 0.7999999999999999,
+        "uncertainty": 0.12
+      },
+      "metadata": {
+        "kind": "answer",
+        "evidence_ids": [
+          "doc_2"
+        ],
+        "memory_ids": [
+          "mem_3"
+        ]
+      }
+    }
+  ],
+  "edges": [
+    {
+      "source": "state_1",
+      "target": "evidence_doc_4",
+      "edge_type": "supports",
+      "weight": 0.99999999053387
+    },
+    {
+      "source": "state_1",
+      "target": "evidence_doc_1",
+      "edge_type": "supports",
+      "weight": 0.36275613294469233
+    },
+    {
+      "source": "state_1",
+      "target": "evidence_doc_2",
+      "edge_type": "supports",
+      "weight": 0.12246105337070066
+    },
+    {
+      "source": "state_1",
+      "target": "evidence_doc_3",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.9599999934118431
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.6613356416019791
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_2",
+      "edge_type": "recalls",
+      "weight": 0.6558872957511791
+    },
+    {
+      "source": "state_1",
+      "target": "state_2",
+      "edge_type": "refines",
+      "weight": 0.96
+    },
+    {
+      "source": "state_1",
+      "target": "state_3",
+      "edge_type": "verifies",
+      "weight": 0.78
+    },
+    {
+      "source": "state_1",
+      "target": "answer_4",
+      "edge_type": "leads_to_answer",
+      "weight": 1.0
+    },
+    {
+      "source": "evidence_doc_4",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.99999999053387
+    },
+    {
+      "source": "evidence_doc_4",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.9999999843701909
+    },
+    {
+      "source": "evidence_doc_4",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.9999999919495189
+    },
+    {
+      "source": "evidence_doc_4",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.9999999918798455
+    },
+    {
+      "source": "evidence_doc_4",
+      "target": "state_6",
+      "edge_type": "supports",
+      "weight": 0.9999999944322873
+    },
+    {
+      "source": "evidence_doc_4",
+      "target": "state_7",
+      "edge_type": "supports",
+      "weight": 0.9999999946010327
+    },
+    {
+      "source": "evidence_doc_4",
+      "target": "state_8",
+      "edge_type": "supports",
+      "weight": 0.9999999958077457
+    },
+    {
+      "source": "evidence_doc_4",
+      "target": "state_9",
+      "edge_type": "supports",
+      "weight": 0.9999999966603483
+    },
+    {
+      "source": "evidence_doc_1",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.36275613294469233
+    },
+    {
+      "source": "evidence_doc_1",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.8482901099613834
+    },
+    {
+      "source": "evidence_doc_1",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.2220031945478507
+    },
+    {
+      "source": "evidence_doc_1",
+      "target": "answer_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "evidence_doc_1",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.15288131196745458
+    },
+    {
+      "source": "evidence_doc_1",
+      "target": "state_6",
+      "edge_type": "supports",
+      "weight": 0.29116822315516244
+    },
+    {
+      "source": "evidence_doc_1",
+      "target": "state_7",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "evidence_doc_1",
+      "target": "state_8",
+      "edge_type": "supports",
+      "weight": 0.11560723584919494
+    },
+    {
+      "source": "evidence_doc_1",
+      "target": "state_9",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "evidence_doc_2",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.12246105337070066
+    },
+    {
+      "source": "evidence_doc_2",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.45153175543070484
+    },
+    {
+      "source": "evidence_doc_2",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "evidence_doc_2",
+      "target": "answer_4",
+      "edge_type": "supports",
+      "weight": 0.3427965833612398
+    },
+    {
+      "source": "evidence_doc_2",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.308832383277507
+    },
+    {
+      "source": "evidence_doc_2",
+      "target": "state_6",
+      "edge_type": "supports",
+      "weight": 0.14983338193828558
+    },
+    {
+      "source": "evidence_doc_2",
+      "target": "state_7",
+      "edge_type": "supports",
+      "weight": 0.09050701735627027
+    },
+    {
+      "source": "evidence_doc_2",
+      "target": "state_8",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "evidence_doc_2",
+      "target": "state_9",
+      "edge_type": "supports",
+      "weight": 0.05538876776018937
+    },
+    {
+      "source": "evidence_doc_2",
+      "target": "answer_11",
+      "edge_type": "supports",
+      "weight": 1.0
+    },
+    {
+      "source": "evidence_doc_3",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "evidence_doc_3",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "evidence_doc_3",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.12539742173889962
+    },
+    {
+      "source": "evidence_doc_3",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "evidence_doc_3",
+      "target": "state_6",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "evidence_doc_3",
+      "target": "state_7",
+      "edge_type": "supports",
+      "weight": 0.10344831283990051
+    },
+    {
+      "source": "evidence_doc_3",
+      "target": "state_8",
+      "edge_type": "supports",
+      "weight": 0.06530018335716009
+    },
+    {
+      "source": "evidence_doc_3",
+      "target": "state_9",
+      "edge_type": "supports",
+      "weight": 0.06399026107017738
+    },
+    {
+      "source": "evidence_doc_3",
+      "target": "answer_10",
+      "edge_type": "supports",
+      "weight": 1.0
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.9599999934118431
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_2",
+      "edge_type": "recalls",
+      "weight": 0.9599999901177646
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_3",
+      "edge_type": "recalls",
+      "weight": 0.9599999949879089
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_5",
+      "edge_type": "recalls",
+      "weight": 0.5866913980910371
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_6",
+      "edge_type": "recalls",
+      "weight": 0.4564789596560063
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_7",
+      "edge_type": "recalls",
+      "weight": 0.9599999939440906
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_8",
+      "edge_type": "recalls",
+      "weight": 0.7241281604651287
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_9",
+      "edge_type": "recalls",
+      "weight": 0.7180313225221363
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.6613356416019791
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_2",
+      "edge_type": "recalls",
+      "weight": 0.6613356393327171
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_3",
+      "edge_type": "recalls",
+      "weight": 0.3354174830131527
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "answer_4",
+      "edge_type": "recalls",
+      "weight": 0.8799999928581078
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_5",
+      "edge_type": "recalls",
+      "weight": 0.8799999916139074
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_6",
+      "edge_type": "recalls",
+      "weight": 0.6189084320930603
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_7",
+      "edge_type": "recalls",
+      "weight": 0.5825239967248006
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_8",
+      "edge_type": "recalls",
+      "weight": 0.42647534856395025
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_9",
+      "edge_type": "recalls",
+      "weight": 0.6841621032706584
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "answer_10",
+      "edge_type": "recalls",
+      "weight": 0.8799999928581078
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "answer_11",
+      "edge_type": "recalls",
+      "weight": 0.8799999928581078
+    },
+    {
+      "source": "memory_mem_2",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.6558872957511791
+    },
+    {
+      "source": "memory_mem_2",
+      "target": "state_2",
+      "edge_type": "recalls",
+      "weight": 0.6558872935006121
+    },
+    {
+      "source": "memory_mem_2",
+      "target": "state_3",
+      "edge_type": "recalls",
+      "weight": 0.6558872968279722
+    },
+    {
+      "source": "memory_mem_2",
+      "target": "state_5",
+      "edge_type": "recalls",
+      "weight": 0.24472974775894918
+    },
+    {
+      "source": "memory_mem_2",
+      "target": "state_6",
+      "edge_type": "recalls",
+      "weight": 0.8999999940965934
+    },
+    {
+      "source": "memory_mem_2",
+      "target": "state_7",
+      "edge_type": "recalls",
+      "weight": 0.5525507380443403
+    },
+    {
+      "source": "memory_mem_2",
+      "target": "state_8",
+      "edge_type": "recalls",
+      "weight": 0.8999999959321004
+    },
+    {
+      "source": "memory_mem_2",
+      "target": "state_9",
+      "edge_type": "recalls",
+      "weight": 0.8999999949716083
+    },
+    {
+      "source": "state_2",
+      "target": "evidence_doc_4",
+      "edge_type": "supports",
+      "weight": 0.9999999843701909
+    },
+    {
+      "source": "state_2",
+      "target": "evidence_doc_1",
+      "edge_type": "supports",
+      "weight": 0.8482901099613834
+    },
+    {
+      "source": "state_2",
+      "target": "evidence_doc_2",
+      "edge_type": "supports",
+      "weight": 0.45153175543070484
+    },
+    {
+      "source": "state_2",
+      "target": "evidence_doc_3",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_2",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.9599999901177646
+    },
+    {
+      "source": "state_2",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.6613356393327171
+    },
+    {
+      "source": "state_2",
+      "target": "memory_mem_2",
+      "edge_type": "recalls",
+      "weight": 0.6558872935006121
+    },
+    {
+      "source": "state_2",
+      "target": "state_5",
+      "edge_type": "refines",
+      "weight": 0.74
+    },
+    {
+      "source": "state_2",
+      "target": "state_6",
+      "edge_type": "verifies",
+      "weight": 0.66
+    },
+    {
+      "source": "state_2",
+      "target": "answer_4",
+      "edge_type": "state_transition",
+      "weight": 0.8954058569162269
+    },
+    {
+      "source": "state_3",
+      "target": "evidence_doc_4",
+      "edge_type": "supports",
+      "weight": 0.9999999919495189
+    },
+    {
+      "source": "state_3",
+      "target": "evidence_doc_1",
+      "edge_type": "supports",
+      "weight": 0.2220031945478507
+    },
+    {
+      "source": "state_3",
+      "target": "evidence_doc_3",
+      "edge_type": "supports",
+      "weight": 0.12539742173889962
+    },
+    {
+      "source": "state_3",
+      "target": "evidence_doc_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_3",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.9599999949879089
+    },
+    {
+      "source": "state_3",
+      "target": "memory_mem_2",
+      "edge_type": "recalls",
+      "weight": 0.6558872968279722
+    },
+    {
+      "source": "state_3",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.3354174830131527
+    },
+    {
+      "source": "state_3",
+      "target": "state_7",
+      "edge_type": "refines",
+      "weight": 0.74
+    },
+    {
+      "source": "state_3",
+      "target": "state_8",
+      "edge_type": "verifies",
+      "weight": 0.66
+    },
+    {
+      "source": "state_3",
+      "target": "answer_4",
+      "edge_type": "state_transition",
+      "weight": 0.6388341299576757
+    },
+    {
+      "source": "answer_4",
+      "target": "evidence_doc_5",
+      "edge_type": "supports",
+      "weight": 0.9999999217954579
+    },
+    {
+      "source": "answer_4",
+      "target": "evidence_doc_2",
+      "edge_type": "supports",
+      "weight": 0.3427965833612398
+    },
+    {
+      "source": "answer_4",
+      "target": "evidence_doc_1",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "answer_4",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.8799999928581078
+    },
+    {
+      "source": "evidence_doc_5",
+      "target": "answer_4",
+      "edge_type": "supports",
+      "weight": 0.9999999217954579
+    },
+    {
+      "source": "state_5",
+      "target": "evidence_doc_4",
+      "edge_type": "supports",
+      "weight": 0.9999999918798455
+    },
+    {
+      "source": "state_5",
+      "target": "evidence_doc_2",
+      "edge_type": "supports",
+      "weight": 0.308832383277507
+    },
+    {
+      "source": "state_5",
+      "target": "evidence_doc_1",
+      "edge_type": "supports",
+      "weight": 0.15288131196745458
+    },
+    {
+      "source": "state_5",
+      "target": "evidence_doc_3",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_5",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.8799999916139074
+    },
+    {
+      "source": "state_5",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.5866913980910371
+    },
+    {
+      "source": "state_5",
+      "target": "memory_mem_2",
+      "edge_type": "recalls",
+      "weight": 0.24472974775894918
+    },
+    {
+      "source": "state_5",
+      "target": "memory_mem_4",
+      "edge_type": "recalls",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "state_5",
+      "edge_type": "recalls",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "state_6",
+      "edge_type": "recalls",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "state_7",
+      "edge_type": "recalls",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "state_8",
+      "edge_type": "recalls",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "state_9",
+      "edge_type": "recalls",
+      "weight": 0.0
+    },
+    {
+      "source": "state_6",
+      "target": "evidence_doc_4",
+      "edge_type": "supports",
+      "weight": 0.9999999944322873
+    },
+    {
+      "source": "state_6",
+      "target": "evidence_doc_1",
+      "edge_type": "supports",
+      "weight": 0.29116822315516244
+    },
+    {
+      "source": "state_6",
+      "target": "evidence_doc_2",
+      "edge_type": "supports",
+      "weight": 0.14983338193828558
+    },
+    {
+      "source": "state_6",
+      "target": "evidence_doc_3",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_6",
+      "target": "memory_mem_2",
+      "edge_type": "recalls",
+      "weight": 0.8999999940965934
+    },
+    {
+      "source": "state_6",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.6189084320930603
+    },
+    {
+      "source": "state_6",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.4564789596560063
+    },
+    {
+      "source": "state_6",
+      "target": "memory_mem_4",
+      "edge_type": "recalls",
+      "weight": 0.0
+    },
+    {
+      "source": "state_7",
+      "target": "evidence_doc_4",
+      "edge_type": "supports",
+      "weight": 0.9999999946010327
+    },
+    {
+      "source": "state_7",
+      "target": "evidence_doc_3",
+      "edge_type": "supports",
+      "weight": 0.10344831283990051
+    },
+    {
+      "source": "state_7",
+      "target": "evidence_doc_2",
+      "edge_type": "supports",
+      "weight": 0.09050701735627027
+    },
+    {
+      "source": "state_7",
+      "target": "evidence_doc_1",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_7",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.9599999939440906
+    },
+    {
+      "source": "state_7",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.5825239967248006
+    },
+    {
+      "source": "state_7",
+      "target": "memory_mem_2",
+      "edge_type": "recalls",
+      "weight": 0.5525507380443403
+    },
+    {
+      "source": "state_7",
+      "target": "memory_mem_4",
+      "edge_type": "recalls",
+      "weight": 0.0
+    },
+    {
+      "source": "state_7",
+      "target": "state_9",
+      "edge_type": "verifies",
+      "weight": 0.66
+    },
+    {
+      "source": "state_7",
+      "target": "answer_10",
+      "edge_type": "leads_to_answer",
+      "weight": 1.0
+    },
+    {
+      "source": "state_8",
+      "target": "evidence_doc_4",
+      "edge_type": "supports",
+      "weight": 0.9999999958077457
+    },
+    {
+      "source": "state_8",
+      "target": "evidence_doc_1",
+      "edge_type": "supports",
+      "weight": 0.11560723584919494
+    },
+    {
+      "source": "state_8",
+      "target": "evidence_doc_3",
+      "edge_type": "supports",
+      "weight": 0.06530018335716009
+    },
+    {
+      "source": "state_8",
+      "target": "evidence_doc_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_8",
+      "target": "memory_mem_2",
+      "edge_type": "recalls",
+      "weight": 0.8999999959321004
+    },
+    {
+      "source": "state_8",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.7241281604651287
+    },
+    {
+      "source": "state_8",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.42647534856395025
+    },
+    {
+      "source": "state_8",
+      "target": "memory_mem_4",
+      "edge_type": "recalls",
+      "weight": 0.0
+    },
+    {
+      "source": "state_8",
+      "target": "state_9",
+      "edge_type": "refines",
+      "weight": 0.74
+    },
+    {
+      "source": "state_8",
+      "target": "answer_11",
+      "edge_type": "leads_to_answer",
+      "weight": 1.0
+    },
+    {
+      "source": "state_9",
+      "target": "evidence_doc_4",
+      "edge_type": "supports",
+      "weight": 0.9999999966603483
+    },
+    {
+      "source": "state_9",
+      "target": "evidence_doc_3",
+      "edge_type": "supports",
+      "weight": 0.06399026107017738
+    },
+    {
+      "source": "state_9",
+      "target": "evidence_doc_2",
+      "edge_type": "supports",
+      "weight": 0.05538876776018937
+    },
+    {
+      "source": "state_9",
+      "target": "evidence_doc_1",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_9",
+      "target": "memory_mem_2",
+      "edge_type": "recalls",
+      "weight": 0.8999999949716083
+    },
+    {
+      "source": "state_9",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.6841621032706584
+    },
+    {
+      "source": "state_9",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.7180313225221363
+    },
+    {
+      "source": "state_9",
+      "target": "memory_mem_4",
+      "edge_type": "recalls",
+      "weight": 0.0
+    },
+    {
+      "source": "state_9",
+      "target": "answer_10",
+      "edge_type": "state_transition",
+      "weight": 0.7215531199881869
+    },
+    {
+      "source": "answer_10",
+      "target": "evidence_doc_3",
+      "edge_type": "supports",
+      "weight": 1.0
+    },
+    {
+      "source": "answer_10",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.8799999928581078
+    },
+    {
+      "source": "answer_11",
+      "target": "evidence_doc_2",
+      "edge_type": "supports",
+      "weight": 1.0
+    },
+    {
+      "source": "answer_11",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.8799999928581078
+    }
+  ]
+}

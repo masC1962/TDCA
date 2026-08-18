@@ -1,0 +1,347 @@
+{
+  "nodes": [
+    {
+      "node_id": "state_1",
+      "node_type": "state",
+      "content": "Which performance act has a higher instrument to person ratio, Badly Drawn Boy or Wolf Alice?",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.7087599443288297,
+      "temperature": 0.5999728895119816,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.857751236228719,
+        "evidence_support": 0.6048645450797747,
+        "memory_usefulness": 0.8799999937263376,
+        "answerability": 0.6824322725398874,
+        "uncertainty": 0.16322167278723604
+      },
+      "metadata": {
+        "diffusion_delta": 0.0724200717389838,
+        "diffusion_gain": 0.0724200717389838
+      }
+    },
+    {
+      "node_id": "kg_doc_1",
+      "node_type": "kg",
+      "content": "Title: Wolf Alice. Wolf Alice are a four-piece alternative rock band from North London, formed initially as a two-person band in 2010. Its members since 2012 are Ellie Rowsell (vocals, guitar), Joff Oddie (guitars, vocals), Theo Ellis (bass), and Joel Amey (drums, vocals).",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.999999994708491,
+      "temperature": 0.999999994708491,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Wolf Alice",
+        "raw_score": 9.288586744832754,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_10",
+      "node_type": "kg",
+      "content": "Title: Under an Hour. Under an Hour is the second full-length album from Portland-based experimental pop/rock group Menomena. The album was originally composed and performed as accompaniment for a performance by Portland dance company Monster Squad. Consisting of three instrumental tracks, the album is considered to be an experimental soundtrack along the lines of Peter Gabriel's or Badly Drawn Boy's soundtrack for \"About a Boy\".",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.21477758604067737,
+      "temperature": 0.21477758604067737,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Under an Hour",
+        "raw_score": 5.053809323016575,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_2",
+      "node_type": "kg",
+      "content": "Title: Tom Rothrock. Tom Rothrock is an international record producer, composer, musician and owner of Bong Load Records. Tom Rothrock has worked with James Blunt, Foo Fighters, Moby, Beck, Badly Drawn Boy, R. L. Burnside, Athlete, Sloan, Gwen Stefani, Motörhead, Elbow, Stevie Nicks, Poison, Elliott Smith, Richard Thompson, Yonder Mountain String Band. Rothrock has also composed or contributed to soundtracks for notable motion pictures such as \"About A Boy\", \"Good Will Hunting\", \"Collateral\" and \"The SpongeBob SquarePants Movie\".",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.1708989519815304,
+      "temperature": 0.1708989519815304,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Tom Rothrock",
+        "raw_score": 4.710363452366679,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_8",
+      "node_type": "kg",
+      "content": "Title: The Hour of Bewilderbeast. The Hour of Bewilderbeast is the debut studio album by British musician Badly Drawn Boy, released on 26 June 2000. Damon Gough, who performs as Badly Drawn Boy, wrote, produced, and played several instruments on the album's eighteen tracks, several of which also feature accompaniment by members of the British indie rock bands Alfie and Doves. \"The Hour of Bewilderbeast\" was released to great critical acclaim and went on to win the 2000 Mercury Prize, and has sold 455,000 copies in the United Kingdom as of September 2011.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0,
+      "temperature": 0.0,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "The Hour of Bewilderbeast",
+        "raw_score": 3.954152051497203,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "memory_tmpl_3",
+      "node_type": "memory",
+      "content": "Template: when evidence already grounds the answer, switch from branching to short verification and synthesis.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.879999997158048,
+      "temperature": 0.8799999937263376,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.88,
+        "tag": "verification_then_stop",
+        "memory_kind": "template",
+        "raw_score": 3.0964632219612387,
+        "source": "memory",
+        "diffusion_delta": -0.17280355182146623,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "memory_tmpl_4",
+      "node_type": "memory",
+      "content": "Template: for nested relation questions, solve the intermediate relation first, then query the target attribute, then verify the chain.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.11100500765620816,
+      "temperature": 0.07480696557372725,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.758776433441565,
+        "source": "tdca_run",
+        "kind": "strategy_template",
+        "memory_kind": "template",
+        "raw_score": 0.45299631040464466,
+        "diffusion_delta": -0.03619804208248091,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "memory_tmpl_1",
+      "node_type": "memory",
+      "content": "Template: for compositional multi-hop questions, first solve the intermediate entity and then ask for the final attribute.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.12085632526824933,
+      "temperature": 0.08144582982877241,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.96,
+        "tag": "compositional_template",
+        "memory_kind": "template",
+        "raw_score": 0.38981996619071047,
+        "source": "memory",
+        "diffusion_delta": -0.03941049543947692,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "memory_tmpl_2",
+      "node_type": "memory",
+      "content": "Template: for comparison questions, split the problem into one sub-question per entity before comparing them.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.08217526344170711,
+      "temperature": 0.055378421506301775,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.9,
+        "tag": "comparison_template",
+        "memory_kind": "template",
+        "raw_score": 0.2827252020266385,
+        "source": "memory",
+        "diffusion_delta": -0.02679684193540534,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "memory_mem_6",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'Which performance act has a higher instrument to person ratio, Badly Drawn Boy or Wolf Alice' is Wolf Alice.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.7912,
+      "temperature": 1.1025672339877712,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "answer_candidate",
+        "target_question": "Which performance act has a higher instrument to person ratio, Badly Drawn Boy or Wolf Alice?",
+        "target_question_norm": "which performance act has a higher instrument to person ratio badly drawn boy or wolf alice",
+        "relation_signature": "generic",
+        "answer_text": "Wolf Alice",
+        "support_score": 0.6048645450797747,
+        "evidence_ids": [
+          "doc_1"
+        ],
+        "derived_from_state": "state_1"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "source": "state_1",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.999999994708491
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_10",
+      "edge_type": "supports",
+      "weight": 0.20972909545105833
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.1708989519815304
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_8",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_1",
+      "target": "memory_tmpl_3",
+      "edge_type": "recalls",
+      "weight": 0.8799999937263376
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_6",
+      "edge_type": "derives",
+      "weight": 0.86
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.999999994708491
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.999999994708491
+    },
+    {
+      "source": "kg_doc_10",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.20972909545105833
+    },
+    {
+      "source": "kg_doc_10",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.20972909545105833
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.1708989519815304
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.1708989519815304
+    },
+    {
+      "source": "kg_doc_8",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_8",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_tmpl_3",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.8799999937263376
+    },
+    {
+      "source": "memory_tmpl_3",
+      "target": "memory_mem_6",
+      "edge_type": "recalls",
+      "weight": 0.8799999937263376
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.86
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.999999994708491
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_10",
+      "edge_type": "supports",
+      "weight": 0.20972909545105833
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.1708989519815304
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_8",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "memory_tmpl_3",
+      "edge_type": "recalls",
+      "weight": 0.8799999937263376
+    }
+  ]
+}

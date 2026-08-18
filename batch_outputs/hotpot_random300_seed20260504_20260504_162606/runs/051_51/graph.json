@@ -1,0 +1,760 @@
+{
+  "nodes": [
+    {
+      "node_id": "state_1",
+      "node_type": "state",
+      "content": "The evil clown is a subversion of the traditional comic clown character with the modern archetype popularised by a book that follows the experiences of how many children?",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.7595185902317593,
+      "temperature": 0.9495413004684837,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.9147584959116856,
+        "evidence_support": 0.7492896938578986,
+        "memory_usefulness": 0.5139668023538719,
+        "answerability": 0.8746448469289493,
+        "uncertainty": 0.16512785510557826
+      },
+      "metadata": {
+        "diffusion_delta": -0.07916968502938448,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "kg_doc_5",
+      "node_type": "kg",
+      "content": "The evil clown is a subversion of the traditional comic clown character, in which the playful trope is instead rendered as disturbing through the use of horror elements and dark humor. The modern archetype of the evil clown was popularized by Stephen King's 1986 novel \"It\". The character can be seen as playing off the sense of unease felt by sufferers of coulrophobia.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999967946672,
+      "temperature": 0.9999999967946672,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Evil clown",
+        "raw_score": 8.145816891685007,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_4",
+      "node_type": "kg",
+      "content": "It is a 1986 horror novel by American author Stephen King. It was his 22nd book and 18th novel written under his own name. The story follows the experiences of seven children as they are terrorized by a being that exploits the fears and phobias of its victims to disguise itself while hunting its prey. \"It\" primarily appears in the form of a clown to attract its preferred prey of young children.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999970439821,
+      "temperature": 0.9999999970439821,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "It (novel)",
+        "raw_score": 12.891919601916698,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_8",
+      "node_type": "kg",
+      "content": "\"A Rape in Cyberspace, or How an Evil Clown, a Haitian Trickster Spirit, Two Wizards, and a Cast of Dozens Turned a Database into a Society\" is an article written by freelance journalist Julian Dibbell and first published in \"The Village Voice\" in 1993. The article was later included in Dibbell's book \"My Tiny Life\" on his LambdaMOO experiences.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.8278257402526856,
+      "temperature": 0.8278257402526856,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "A Rape in Cyberspace",
+        "raw_score": 3.149739674344892,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_2",
+      "node_type": "kg",
+      "content": "Hagwon (] ) is the Korean-language word for a for-profit private institute, academy or cram school prevalent in South Korea. Although most widely known for their role as \"cram schools\", where children can study to improve scores, hagwon actually perform several educational functions: they provide supplementary education that many children need just to keep up with the regular school curriculum, remedial education for the children who fall behind in their work, training in areas not covered in schools, and preparation for students striving to improve test scores and preparing for the high school and university entrance examinations (the university entrance exam is also called suneung (수능)). Many other children, particularly younger children, attend nonacademic hagwon for piano lessons, art instruction, swimming, and taekwondo (태권도). Most young children attend a hagwon. Hagwon also play a social role, and many children, especially the younger ones, say they like going to hagwon because they are able to make new friends; many children ask to be sent because their friends attend. There are many hagwon for adults too, such as flower arrangement and driving-license hagwon. The term is also sometimes used to describe similar institutions operated by Korean Americans in the United States.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.373514430510823,
+      "temperature": 0.373514430510823,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Hagwon",
+        "raw_score": 7.175427398591414,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "memory_mem_1",
+      "node_type": "memory",
+      "content": "Template: for compositional multi-hop questions, first solve the intermediate entity and then ask for the final attribute.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9599999519347127,
+      "temperature": 0.15086550767369117,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.96,
+        "tag": "compositional_template",
+        "memory_kind": "template",
+        "raw_score": 0.10177918922399565,
+        "source": "memory",
+        "diffusion_delta": -0.035898755628468115,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "memory_mem_3",
+      "node_type": "memory",
+      "content": "Template: when evidence already grounds the answer, switch from branching to short verification and synthesis.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.879999992913875,
+      "temperature": 0.720164764702731,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.88,
+        "tag": "verification_then_stop",
+        "memory_kind": "template",
+        "raw_score": 1.661276412193822,
+        "source": "memory",
+        "diffusion_delta": 0.027896492138758444,
+        "diffusion_gain": 0.027896492138758444
+      }
+    },
+    {
+      "node_id": "state_2",
+      "node_type": "state",
+      "content": "What book popularized the modern evil clown archetype?",
+      "depth": 1,
+      "parent_id": "state_1",
+      "value": 0.5333825967624828,
+      "temperature": 0.8306147146227669,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.5847526097778887,
+        "evidence_support": 0.5915183710044853,
+        "memory_usefulness": 0.5139667251540021,
+        "answerability": 0.5503046400476972,
+        "uncertainty": 0.19352669321919264
+      },
+      "metadata": {
+        "kind": "bridge",
+        "evidence_ids": [
+          "doc_5",
+          "doc_8",
+          "doc_4",
+          "doc_9"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "diffusion_delta": 2.7701208507036057e-05,
+        "diffusion_gain": 2.7701208507036057e-05
+      }
+    },
+    {
+      "node_id": "kg_doc_9",
+      "node_type": "kg",
+      "content": "Frenchy the Clown is the title character in \"National Lampoon\"'s \"Evil Clown Comics\", which ran in the late 1980s and early 1990s.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0,
+      "temperature": 0.0,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Frenchy the Clown",
+        "raw_score": 1.6245623454347626,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "state_3",
+      "node_type": "state",
+      "content": "How many children's experiences does 'It' follow?",
+      "depth": 1,
+      "parent_id": "state_1",
+      "value": 0.6177173174933628,
+      "temperature": 1.356328820940409,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.6598212833186112,
+        "evidence_support": 0.9139128653755946,
+        "memory_usefulness": 0.0,
+        "answerability": 0.6933200690514336,
+        "uncertainty": 0.13549568423239297
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_4",
+          "doc_8",
+          "doc_2",
+          "doc_5"
+        ],
+        "memory_ids": [],
+        "diffusion_delta": 0.09307878653109736,
+        "diffusion_gain": 0.09307878653109736
+      }
+    },
+    {
+      "node_id": "state_4",
+      "node_type": "state",
+      "content": "How many children are followed in Stephen King's 1986 novel 'It'?",
+      "depth": 1,
+      "parent_id": "state_1",
+      "value": 0.5703422989516567,
+      "temperature": 1.559815614368112,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.6045310373751981,
+        "evidence_support": 0.8020966339912241,
+        "memory_usefulness": 0.0,
+        "answerability": 0.7283210442683392,
+        "uncertainty": 0.15562260588157967
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_4",
+          "doc_5",
+          "doc_2",
+          "doc_8"
+        ],
+        "memory_ids": [],
+        "diffusion_delta": 0.32615922438896017,
+        "diffusion_gain": 0.32615922438896017
+      }
+    },
+    {
+      "node_id": "memory_mem_4",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'What book popularized the modern evil clown archetype' is Evil clown.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.999999995341603,
+      "temperature": 0.5547176034609347,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "tdca_run",
+        "memory_kind": "derived_fact",
+        "target_question": "What book popularized the modern evil clown archetype?",
+        "target_question_norm": "what book popularized the modern evil clown archetype",
+        "relation_signature": "generic",
+        "answer_text": "Evil clown",
+        "support_score": 0.999999995341603,
+        "evidence_ids": [
+          "doc_5"
+        ],
+        "slot_type": "title",
+        "slot_role": "bridge_entity",
+        "slot_name": "evil_clown_archetype_source",
+        "depends_on": [],
+        "terminal": false,
+        "derived_from_state": "state_1",
+        "diffusion_delta": -0.019873654426265874,
+        "diffusion_gain": 0.0,
+        "score": 0.999999995341603,
+        "raw_score": 9.858117680061673
+      }
+    },
+    {
+      "node_id": "memory_mem_5",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'How many children's experiences does 'It' follow' is seven.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.92,
+      "temperature": 0.9964821965313022,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "derived_fact",
+        "target_question": "How many children's experiences does 'It' follow?",
+        "target_question_norm": "how many children s experiences does it follow",
+        "relation_signature": "generic",
+        "answer_text": "seven",
+        "support_score": 0.9139128653755946,
+        "evidence_ids": [
+          "doc_4",
+          "doc_8"
+        ],
+        "derived_from_state": "state_3",
+        "diffusion_delta": 0.08424978038729902,
+        "diffusion_gain": 0.08424978038729902
+      }
+    },
+    {
+      "node_id": "memory_mem_6",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'How many children are followed in Stephen King's 1986 novel 'It'' is seven.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.92,
+      "temperature": 0.9313083073674044,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "derived_fact",
+        "target_question": "How many children are followed in Stephen King's 1986 novel 'It'?",
+        "target_question_norm": "how many children are followed in stephen king s 1986 novel it",
+        "relation_signature": "generic",
+        "answer_text": "seven",
+        "support_score": 0.8020966339912241,
+        "evidence_ids": [
+          "doc_4",
+          "doc_5"
+        ],
+        "derived_from_state": "state_4",
+        "diffusion_delta": 0.10126264733169754,
+        "diffusion_gain": 0.10126264733169754
+      }
+    }
+  ],
+  "edges": [
+    {
+      "source": "state_1",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.9999999967946672
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.49857939092112985
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_8",
+      "edge_type": "supports",
+      "weight": 0.22240634052799865
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.9599999519347127
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.06793365277303111
+    },
+    {
+      "source": "state_1",
+      "target": "state_2",
+      "edge_type": "refines",
+      "weight": 1.0
+    },
+    {
+      "source": "state_1",
+      "target": "state_3",
+      "edge_type": "refines",
+      "weight": 0.94
+    },
+    {
+      "source": "state_1",
+      "target": "state_4",
+      "edge_type": "refines",
+      "weight": 1.0
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_4",
+      "edge_type": "derives",
+      "weight": 0.999999995341603
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.9999999967946672
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.999999995341603
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.6041932714247253
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.6041932714247253
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.49857939092112985
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.004497537294452494
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.9999999904985036
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.9999999965577228
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.9999999904985036
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.9999999965577228
+    },
+    {
+      "source": "kg_doc_8",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.22240634052799865
+    },
+    {
+      "source": "kg_doc_8",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.1830367466673677
+    },
+    {
+      "source": "kg_doc_8",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.8278257402526856
+    },
+    {
+      "source": "kg_doc_8",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_8",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.8278257402526856
+    },
+    {
+      "source": "kg_doc_8",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.2840426715687665
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.14292167376526235
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.2840426715687665
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.14292167376526235
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.9599999519347127
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_2",
+      "edge_type": "recalls",
+      "weight": 0.0038724430621916816
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.06793365277303111
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_2",
+      "edge_type": "recalls",
+      "weight": 0.0679336425691247
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.999999995341603
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_8",
+      "edge_type": "supports",
+      "weight": 0.1830367466673677
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.004497537294452494
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_2",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.0038724430621916816
+    },
+    {
+      "source": "state_2",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.0679336425691247
+    },
+    {
+      "source": "state_2",
+      "target": "memory_mem_4",
+      "edge_type": "recalls",
+      "weight": 0.9999999943162519
+    },
+    {
+      "source": "state_2",
+      "target": "state_4",
+      "edge_type": "refines",
+      "weight": 0.9
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.9999999904985036
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_8",
+      "edge_type": "supports",
+      "weight": 0.8278257402526856
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.2840426715687665
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_3",
+      "target": "memory_mem_5",
+      "edge_type": "derives",
+      "weight": 1.0
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.9999999965577228
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.6041932714247253
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.14292167376526235
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_8",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_4",
+      "target": "memory_mem_6",
+      "edge_type": "derives",
+      "weight": 1.0
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.999999995341603
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "state_2",
+      "edge_type": "recalls",
+      "weight": 0.9999999943162519
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "state_3",
+      "edge_type": "recalls",
+      "weight": 1.0
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.9999999904985036
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_8",
+      "edge_type": "supports",
+      "weight": 0.8278257402526856
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.2840426715687665
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "state_4",
+      "edge_type": "recalls",
+      "weight": 1.0
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.9999999965577228
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.6041932714247253
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_8",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.14292167376526235
+    }
+  ]
+}

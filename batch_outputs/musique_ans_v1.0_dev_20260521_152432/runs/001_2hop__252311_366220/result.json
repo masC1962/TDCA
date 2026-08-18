@@ -1,0 +1,122 @@
+{
+  "question": "Who founded the company that distributed the film UHF?",
+  "final_answer": "Kevin Smith",
+  "best_node": {
+    "node_id": "state_1",
+    "node_type": "state",
+    "content": "Who founded the company that distributed the film UHF?",
+    "depth": 0,
+    "parent_id": null,
+    "value": 0.7209908508298164,
+    "temperature": 0.1522841804488888,
+    "expanded": true,
+    "visit_count": 1,
+    "persistent": false,
+    "score_breakdown": {
+      "task_progress": 0.9002127281319912,
+      "evidence_support": 0.7065080239176208,
+      "memory_usefulness": 0.5139667766205794,
+      "answerability": 0.7532540119588105,
+      "uncertainty": 0.17282855569482825
+    },
+    "metadata": {
+      "diffusion_delta": -0.027162652888320565,
+      "diffusion_gain": 0.0
+    }
+  },
+  "final_synthesis_node_ids": [
+    "state_3",
+    "state_2",
+    "state_5",
+    "state_4",
+    "state_1"
+  ],
+  "answer_history": [
+    {
+      "node_id": "memory_mem_4",
+      "content": "Conclusion: The answer to 'Which company distributed the film UHF' is SModcast Pictures.",
+      "answer_text": "SModcast Pictures",
+      "value": 0.7381604850311032,
+      "evidence_ids": [
+        "doc_10"
+      ],
+      "step": 1
+    },
+    {
+      "node_id": "state_2",
+      "answer_text": "SModcast Pictures",
+      "previous_answer": "",
+      "confidence": 0.8023483532946774,
+      "score": 0.7631189329245058,
+      "source": "expansion_candidate",
+      "step": 0,
+      "evidence_ids": [
+        "doc_10",
+        "doc_19",
+        "doc_12",
+        "doc_11"
+      ],
+      "kind": "anytime_answer"
+    },
+    {
+      "node_id": "memory_mem_5",
+      "content": "Conclusion: The answer to 'Who founded the company that distributed UHF' is Mike Medavoy.",
+      "answer_text": "Mike Medavoy",
+      "value": 0.9999999848862379,
+      "confidence": 0.7198847662488208,
+      "evidence_ids": [
+        "doc_10"
+      ],
+      "step": 2,
+      "kind": "intermediate_answer"
+    },
+    {
+      "node_id": "memory_mem_6",
+      "content": "Conclusion: The answer to 'Who founded that company' is Kevin Smith.",
+      "answer_text": "Kevin Smith",
+      "value": 1.0,
+      "confidence": 1.0,
+      "evidence_ids": [
+        "doc_10"
+      ],
+      "step": 5,
+      "kind": "intermediate_answer"
+    },
+    {
+      "node_id": "state_1",
+      "answer_text": "Kevin Smith",
+      "source": "answer_judge",
+      "choice": "B",
+      "candidate_source": "final_synthesis",
+      "base_score": 0.87,
+      "rerank_score": 0.9183999995480068,
+      "judge_confidence": 0.95,
+      "judge_reason": "Kevin Smith founded SModcast Pictures, which distributed UHF, directly answering the question.",
+      "step": 5,
+      "kind": "final_answer_selection"
+    }
+  ],
+  "anytime_answer": "SModcast Pictures",
+  "anytime_answer_score": 0.7631189329245058,
+  "anytime_answer_source": "expansion_candidate",
+  "anytime_answer_node_id": "state_2",
+  "stats": {
+    "steps": 5,
+    "llm_calls": 10,
+    "generated_tokens": 833,
+    "token_budget_remaining": 367,
+    "total_nodes": 18,
+    "kg_nodes": 8,
+    "memory_nodes": 5,
+    "state_nodes": 5,
+    "deleted_state_nodes": 0,
+    "scheduler_mode": "tdca",
+    "scoring_mode": "hybrid",
+    "stop_reason": "frontier_empty",
+    "goal_kind": "bridge",
+    "goal_completion": 0.0,
+    "anytime_answer": "SModcast Pictures",
+    "anytime_answer_score": 0.7631189329245058,
+    "anytime_answer_source": "expansion_candidate"
+  }
+}

@@ -1,0 +1,180 @@
+{
+  "question": "Which dog's ancestors include Gordon and Irish Setters: the Manchester Terrier or the Scotch Collie?",
+  "final_answer": "Scotch Collie",
+  "best_node": {
+    "node_id": "state_1",
+    "node_type": "state",
+    "content": "Which dog's ancestors include Gordon and Irish Setters: the Manchester Terrier or the Scotch Collie?",
+    "depth": 0,
+    "parent_id": null,
+    "value": 0.7219384538563144,
+    "temperature": 1.0008347174068521,
+    "expanded": true,
+    "visit_count": 1,
+    "persistent": false,
+    "score_breakdown": {
+      "task_progress": 0.8714127864767967,
+      "evidence_support": 0.6218023131670487,
+      "memory_usefulness": 0.8770627489221289,
+      "answerability": 0.7109011565835244,
+      "uncertainty": 0.1880755836299312
+    },
+    "metadata": {
+      "diffusion_delta": 0.049132115270415944,
+      "diffusion_gain": 0.049132115270415944
+    }
+  },
+  "final_synthesis_node_ids": [
+    "state_3",
+    "state_2",
+    "state_6",
+    "memory_mem_6",
+    "state_1"
+  ],
+  "answer_history": [
+    {
+      "node_id": "",
+      "answer_text": "the Scotch Collie",
+      "previous_answer": "",
+      "confidence": 0.28,
+      "score": 0.16880000000000003,
+      "source": "closed_book_initial",
+      "step": 0,
+      "evidence_ids": [],
+      "kind": "anytime_answer"
+    },
+    {
+      "node_id": "state_1",
+      "answer_text": "Scotch Collie",
+      "previous_answer": "the Scotch Collie",
+      "confidence": 0.95,
+      "score": 0.8433564509241247,
+      "source": "expansion_candidate",
+      "step": 0,
+      "evidence_ids": [
+        "doc_8",
+        "doc_4",
+        "doc_10",
+        "doc_3"
+      ],
+      "kind": "anytime_answer"
+    },
+    {
+      "node_id": "memory_mem_4",
+      "content": "Conclusion: The answer to 'Does the Manchester Terrier's ancestry include Gordon and Irish Setters' is No.",
+      "answer_text": "No",
+      "value": 0.9999999824544454,
+      "confidence": 0.9891573812230615,
+      "evidence_ids": [
+        "doc_8",
+        "doc_4",
+        "doc_10"
+      ],
+      "step": 2,
+      "kind": "intermediate_answer"
+    },
+    {
+      "node_id": "state_3",
+      "answer_text": "Scotch Collie",
+      "previous_answer": "Scotch Collie",
+      "confidence": 0.99,
+      "score": 0.9166399051538892,
+      "source": "expansion_candidate",
+      "step": 1,
+      "evidence_ids": [
+        "doc_8",
+        "doc_4",
+        "doc_10",
+        "doc_1"
+      ],
+      "kind": "anytime_answer"
+    },
+    {
+      "node_id": "memory_mem_5",
+      "content": "Conclusion: The answer to 'Does the Scotch Collie's ancestry include Gordon and Irish Setters' is Yes.",
+      "answer_text": "Yes",
+      "value": 1.0,
+      "confidence": 1.0,
+      "evidence_ids": [
+        "doc_8",
+        "doc_4",
+        "doc_10"
+      ],
+      "step": 3,
+      "kind": "intermediate_answer"
+    },
+    {
+      "node_id": "memory_mem_6",
+      "content": "Conclusion: The answer to 'Do Gordon and Irish Setters appear in the ancestry of the Manchester Terrier' is No.",
+      "answer_text": "No",
+      "value": 0.9999999844711879,
+      "confidence": 0.95,
+      "evidence_ids": [
+        "doc_4",
+        "doc_10",
+        "doc_8"
+      ],
+      "step": 6,
+      "kind": "intermediate_answer"
+    },
+    {
+      "node_id": "state_3",
+      "answer_text": "Scotch Collie",
+      "previous_answer": "Scotch Collie",
+      "confidence": 0.8397888445051322,
+      "score": 1.0,
+      "source": "final_synthesis",
+      "step": 7,
+      "evidence_ids": [
+        "doc_8",
+        "doc_4",
+        "doc_10",
+        "doc_1"
+      ],
+      "kind": "anytime_answer"
+    },
+    {
+      "node_id": "memory_mem_7",
+      "content": "Conclusion: The answer to 'Which dog's ancestors include Gordon and Irish Setters: the Manchester Terrier or the Scotch Collie' is Scotch Collie.",
+      "answer_text": "Scotch Collie",
+      "value": 0.0,
+      "evidence_ids": [],
+      "step": 8
+    },
+    {
+      "node_id": "state_1",
+      "answer_text": "Scotch Collie",
+      "source": "answer_judge",
+      "choice": "A",
+      "candidate_source": "expansion_candidate",
+      "base_score": 0.9206490600801505,
+      "judge_confidence": 0.0,
+      "judge_reason": "",
+      "step": 7,
+      "kind": "final_answer_selection"
+    }
+  ],
+  "anytime_answer": "Scotch Collie",
+  "anytime_answer_score": 1.0,
+  "anytime_answer_source": "final_synthesis",
+  "anytime_answer_node_id": "state_3",
+  "stats": {
+    "steps": 7,
+    "llm_calls": 14,
+    "generated_tokens": 1125,
+    "token_budget_remaining": 75,
+    "total_nodes": 18,
+    "kg_nodes": 7,
+    "memory_nodes": 6,
+    "state_nodes": 5,
+    "deleted_state_nodes": 2,
+    "scheduler_mode": "tdca",
+    "scoring_mode": "hybrid",
+    "stop_reason": "frontier_empty",
+    "goal_kind": "alternative_choice",
+    "goal_completion": 1.0,
+    "anytime_answer": "Scotch Collie",
+    "anytime_answer_score": 1.0,
+    "anytime_answer_source": "final_synthesis"
+  }
+}

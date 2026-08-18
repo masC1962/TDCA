@@ -1,0 +1,997 @@
+{
+  "nodes": [
+    {
+      "node_id": "state_1",
+      "node_type": "state",
+      "content": "Lee Sung-jae stars in the film Barking Dogs Never Bite which is what film genre?",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.7736908995128814,
+      "temperature": 0.23293718374975034,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.9243343868205414,
+        "evidence_support": 0.7774540788839448,
+        "memory_usefulness": 0.5139667251540021,
+        "answerability": 0.8887270394419723,
+        "uncertainty": 0.16005826580088994
+      },
+      "metadata": {
+        "diffusion_delta": -0.06882259276350036,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "kg_doc_9",
+      "node_type": "kg",
+      "content": "Ghost in Love (; aka Suicide Ghost Club) is a 1999 South Korean film written by Li Hong-zhou and directed by Lee Kwang-hoon. The film stars Kim Hee-sun in the title role as the girlfriend of a man she suspects of cheating on her. She throws herself underneath an oncoming train (with some help from nearby ghosts), and discovers that in the afterlife she can roam as a ghost and take revenge, if she wants to, on her former boyfriend, who has quickly moved on. Lee Sung-jae also stars as Kantorates, a ghost who befriends the protagonist. The film was released on August 14, 1999.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999932243185,
+      "temperature": 0.9999999932243185,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Ghost in Love",
+        "raw_score": 7.85093735351128,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_2",
+      "node_type": "kg",
+      "content": "Lee Sung-jae (born August 23, 1970) is a South Korean actor. Among his notable works include the films \"Art Museum by the Zoo\", \"Attack the Gas Station\", \"Barking Dogs Never Bite\", and \"Kick the Moon\", as well as the television series \"Lie\" and \"A Wife's Credentials\".",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9213781644145096,
+      "temperature": 0.9213781644145096,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Lee Sung-jae",
+        "raw_score": 4.643701182259658,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_8",
+      "node_type": "kg",
+      "content": "Barking Dogs Never Bite (Korean: 플란다스의 개 , also known as \"A Higher Animal\" and \"Dog of Flanders\") is a 2000 South Korean dark comedy-drama film. The film's original Korean title is a satirical take on \"A Dog of Flanders\", a European pet story that is very popular in parts of East Asia. It is also the directorial debut of Bong Joon-ho, who would later go on to direct \"Memories of Murder\" in 2003, \"The Host\" in 2006, and \"Snowpiercer\" in 2013.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999909916727,
+      "temperature": 0.9999999909916727,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Barking Dogs Never Bite",
+        "raw_score": 4.820865266441087,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_1",
+      "node_type": "kg",
+      "content": "Hallelooya (or Hallelujah) is a 2016 Malayalam film, directed by Sudhi Aanna in his feature film debut and starring Narain and Meghana Raj in the lead roles. It also features Sudheer Karamana, Sunil Sukhada, K. B. Ganesh Kumar, Sasi Kalinga, Saju Navodaya and Master Eric in significant roles. The film, produced by K. M. Surendran under the banner of Barking Dogs Seldom Bite Films, was released in May 2016.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.5742751024858187,
+      "temperature": 0.5742751024858187,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Hallelooya",
+        "raw_score": 3.984762306865183,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "memory_mem_1",
+      "node_type": "memory",
+      "content": "Template: for compositional multi-hop questions, first solve the intermediate entity and then ask for the final attribute.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9599999038694302,
+      "temperature": 0.5347399808096158,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.96,
+        "tag": "compositional_template",
+        "memory_kind": "template",
+        "raw_score": 0.12560431602693925,
+        "source": "memory",
+        "diffusion_delta": -0.32141257378564303,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "memory_mem_3",
+      "node_type": "memory",
+      "content": "Template: when evidence already grounds the answer, switch from branching to short verification and synthesis.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.06793364937172863,
+      "temperature": 0.030392832230667674,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.88,
+        "tag": "verification_then_stop",
+        "memory_kind": "template",
+        "raw_score": 0.09531281578369331,
+        "source": "memory",
+        "diffusion_delta": -0.023529785401306604,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "state_2",
+      "node_type": "state",
+      "content": "What is the title of the film starring Lee Sung-jae that is referenced in the question?",
+      "depth": 1,
+      "parent_id": "state_1",
+      "value": 0.7140780304596879,
+      "temperature": 1.8644270816170982,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.7626619623543426,
+        "evidence_support": 0.8235155755519878,
+        "memory_usefulness": 0.5178193847938408,
+        "answerability": 0.8184244544426605,
+        "uncertainty": 0.15176719640064218
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_9",
+          "doc_6",
+          "doc_8",
+          "doc_2"
+        ],
+        "memory_ids": [
+          "mem_2",
+          "mem_1"
+        ],
+        "goal_slot_name": "film_title",
+        "goal_slot_role": "generic",
+        "goal_terminal": false,
+        "diffusion_delta": 0.13114097142864667,
+        "diffusion_gain": 0.13114097142864667
+      }
+    },
+    {
+      "node_id": "kg_doc_6",
+      "node_type": "kg",
+      "content": "Dance with the Wind (Korean: 바람의 전설 ; \"Baramui jeonseol\") is a 2004 South Korean film starring Lee Sung-jae and Park Sol-mi, and is the directorial debut of Park Jung-woo. The story is adapted from a 1999 book by novelist Ji Seong-sa.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.6470311578796571,
+      "temperature": 0.6470311578796571,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Dance with the Wind",
+        "raw_score": 6.63562473806987,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "memory_mem_2",
+      "node_type": "memory",
+      "content": "Template: for comparison questions, split the problem into one sub-question per entity before comparing them.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.8999999908008992,
+      "temperature": 0.8360101920155991,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.9,
+        "tag": "comparison_template",
+        "memory_kind": "template",
+        "raw_score": 1.394227561552614,
+        "source": "memory",
+        "diffusion_delta": 0.06093493907727077,
+        "diffusion_gain": 0.06093493907727077
+      }
+    },
+    {
+      "node_id": "state_3",
+      "node_type": "state",
+      "content": "What is the genre of the film 'Barking Dogs Never Bite'?",
+      "depth": 2,
+      "parent_id": "state_2",
+      "value": 0.7271020064750221,
+      "temperature": 1.7508965756357258,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.7890716170814545,
+        "evidence_support": 0.8266812267101602,
+        "memory_usefulness": 0.5139667766205794,
+        "answerability": 0.83334061335508,
+        "uncertainty": 0.15119737919217116
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_8",
+          "doc_2",
+          "doc_1",
+          "doc_7"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "diffusion_delta": 0.3187659777530605,
+        "diffusion_gain": 0.3187659777530605
+      }
+    },
+    {
+      "node_id": "kg_doc_7",
+      "node_type": "kg",
+      "content": "The Barking Dogs (often called Les Barking Dogs) is an Anglo-French alternative rock band formed in Paris in 1988 and separated at the end of 1996.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0,
+      "temperature": 0.0,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Barking Dogs",
+        "raw_score": 2.344023511783741,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "memory_mem_4",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'What is the title of the film starring Lee Sung-jae that is referenced in the question' is Ghost in Love.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.782,
+      "temperature": 1.5339690755375068,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "derived_fact",
+        "target_question": "What is the title of the film starring Lee Sung-jae that is referenced in the question?",
+        "target_question_norm": "what is the title of the film starring lee sung jae that is referenced in the question",
+        "relation_signature": "generic",
+        "answer_text": "Ghost in Love",
+        "support_score": 0.8235155755519878,
+        "evidence_ids": [
+          "doc_9",
+          "doc_6"
+        ],
+        "derived_from_state": "state_2",
+        "diffusion_delta": 0.17586397390531516,
+        "diffusion_gain": 0.17586397390531516
+      }
+    },
+    {
+      "node_id": "memory_mem_5",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'What is the genre of the film 'Barking Dogs Never Bite'' is dark comedy-drama.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.874,
+      "temperature": 1.3882539246979024,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "derived_fact",
+        "target_question": "What is the genre of the film 'Barking Dogs Never Bite'?",
+        "target_question_norm": "what is the genre of the film barking dogs never bite",
+        "relation_signature": "generic",
+        "answer_text": "dark comedy-drama",
+        "support_score": 0.8266812267101602,
+        "evidence_ids": [
+          "doc_8",
+          "doc_2"
+        ],
+        "derived_from_state": "state_3",
+        "diffusion_delta": 0.2765113274941129,
+        "diffusion_gain": 0.2765113274941129
+      }
+    },
+    {
+      "node_id": "state_4",
+      "node_type": "state",
+      "content": "What genre is the film 'Barking Dogs Never Bite'?",
+      "depth": 1,
+      "parent_id": "state_1",
+      "value": 0.7330625772385848,
+      "temperature": 0.8531949350816751,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.8346342863295556,
+        "evidence_support": 0.9606890774398693,
+        "memory_usefulness": 0.0016986122570206252,
+        "answerability": 0.9003445387199347,
+        "uncertainty": 0.12707596606082353
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_8",
+          "doc_2",
+          "doc_1",
+          "doc_7"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "diffusion_delta": 0.5332098106992363,
+        "diffusion_gain": 0.5332098106992363
+      }
+    },
+    {
+      "node_id": "memory_mem_6",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'What genre is the film 'Barking Dogs Never Bite'' is dark comedy-drama.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.874,
+      "temperature": 0.8839079841547887,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "derived_fact",
+        "target_question": "What genre is the film 'Barking Dogs Never Bite'?",
+        "target_question_norm": "what genre is the film barking dogs never bite",
+        "relation_signature": "generic",
+        "answer_text": "dark comedy-drama",
+        "support_score": 0.9606890774398693,
+        "evidence_ids": [
+          "doc_8",
+          "doc_2"
+        ],
+        "derived_from_state": "state_4",
+        "diffusion_delta": -0.2350464876477686,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "memory_mem_7",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'Lee Sung-jae stars in the film Barking Dogs Never Bite which is what film genre' is dark comedy-drama.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.82,
+      "temperature": 1.1,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "answer_candidate",
+        "target_question": "Lee Sung-jae stars in the film Barking Dogs Never Bite which is what film genre?",
+        "target_question_norm": "lee sung jae stars in the film barking dogs never bite which is what film genre",
+        "relation_signature": "generic",
+        "answer_text": "dark comedy-drama",
+        "support_score": 0.0,
+        "derived_from_state": "state_1",
+        "composed_from": [
+          null,
+          null
+        ],
+        "slot_role": "target_attribute",
+        "terminal": true,
+        "coverage_count": 2,
+        "coverage_ratio": 1.0,
+        "composition_kind": "attribute_after_bridge"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "source": "state_1",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.999999984841199
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.5549081729266906
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_8",
+      "edge_type": "supports",
+      "weight": 0.4931145495971055
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.002922202794268003
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.00020125522019964163
+    },
+    {
+      "source": "state_1",
+      "target": "state_2",
+      "edge_type": "refines",
+      "weight": 1.0
+    },
+    {
+      "source": "state_1",
+      "target": "state_4",
+      "edge_type": "refines",
+      "weight": 0.94
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_7",
+      "edge_type": "derives",
+      "weight": 0.2
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.999999984841199
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.9999999932243185
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.9999999932243185
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.5549081729266906
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.6533624624286477
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.6533624624286477
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.9213781644145096
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.9213781644145096
+    },
+    {
+      "source": "kg_doc_8",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.4931145495971055
+    },
+    {
+      "source": "kg_doc_8",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.22897859150036948
+    },
+    {
+      "source": "kg_doc_8",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.9999999909916727
+    },
+    {
+      "source": "kg_doc_8",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.22897859150036948
+    },
+    {
+      "source": "kg_doc_8",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.9999999909916727
+    },
+    {
+      "source": "kg_doc_8",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.9999999904652289
+    },
+    {
+      "source": "kg_doc_8",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.9999999904652289
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.4657724411867946
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.4657724411867946
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.5742751024858187
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.5742751024858187
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.002922202794268003
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_2",
+      "edge_type": "recalls",
+      "weight": 0.13563877878678235
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_3",
+      "edge_type": "recalls",
+      "weight": 0.014937976457892242
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "memory_mem_4",
+      "edge_type": "recalls",
+      "weight": 0.13563877878678235
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "memory_mem_5",
+      "edge_type": "recalls",
+      "weight": 0.014937976457892242
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_4",
+      "edge_type": "recalls",
+      "weight": 0.003178329569888296
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "memory_mem_6",
+      "edge_type": "recalls",
+      "weight": 0.003178329569888296
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.00020125522019964163
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_3",
+      "edge_type": "recalls",
+      "weight": 0.0010300323500909959
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "memory_mem_5",
+      "edge_type": "recalls",
+      "weight": 0.0010300323500909959
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_4",
+      "edge_type": "recalls",
+      "weight": 0.00021889494415295427
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "memory_mem_6",
+      "edge_type": "recalls",
+      "weight": 0.00021889494415295427
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.9999999932243185
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.6470311578796571
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_8",
+      "edge_type": "supports",
+      "weight": 0.22897859150036948
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_2",
+      "target": "memory_mem_2",
+      "edge_type": "recalls",
+      "weight": 0.8999999908008992
+    },
+    {
+      "source": "state_2",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.13563877878678235
+    },
+    {
+      "source": "state_2",
+      "target": "state_3",
+      "edge_type": "refines",
+      "weight": 1.0
+    },
+    {
+      "source": "state_2",
+      "target": "memory_mem_4",
+      "edge_type": "derives",
+      "weight": 0.85
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.6470311578796571
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.6470311578796571
+    },
+    {
+      "source": "memory_mem_2",
+      "target": "state_2",
+      "edge_type": "recalls",
+      "weight": 0.8999999908008992
+    },
+    {
+      "source": "memory_mem_2",
+      "target": "memory_mem_4",
+      "edge_type": "recalls",
+      "weight": 0.8999999908008992
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_8",
+      "edge_type": "supports",
+      "weight": 0.9999999909916727
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.6533624624286477
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.4657724411867946
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_3",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.014937976457892242
+    },
+    {
+      "source": "state_3",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.0010300323500909959
+    },
+    {
+      "source": "state_3",
+      "target": "memory_mem_5",
+      "edge_type": "derives",
+      "weight": 0.95
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "state_2",
+      "edge_type": "recalls",
+      "weight": 0.85
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.9999999932243185
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.6470311578796571
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_8",
+      "edge_type": "supports",
+      "weight": 0.22897859150036948
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "memory_mem_2",
+      "edge_type": "recalls",
+      "weight": 0.8999999908008992
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.13563877878678235
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "state_3",
+      "edge_type": "recalls",
+      "weight": 0.95
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_8",
+      "edge_type": "supports",
+      "weight": 0.9999999909916727
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.6533624624286477
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.4657724411867946
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.014937976457892242
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.0010300323500909959
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_8",
+      "edge_type": "supports",
+      "weight": 0.9999999904652289
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.9213781644145096
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.5742751024858187
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_4",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.003178329569888296
+    },
+    {
+      "source": "state_4",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.00021889494415295427
+    },
+    {
+      "source": "state_4",
+      "target": "memory_mem_6",
+      "edge_type": "derives",
+      "weight": 0.9606890774398693
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "state_4",
+      "edge_type": "recalls",
+      "weight": 0.9606890774398693
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_8",
+      "edge_type": "supports",
+      "weight": 0.9999999904652289
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.9213781644145096
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.5742751024858187
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.003178329569888296
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.00021889494415295427
+    },
+    {
+      "source": "memory_mem_7",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.2
+    }
+  ]
+}

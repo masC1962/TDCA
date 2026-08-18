@@ -1,0 +1,523 @@
+{
+  "nodes": [
+    {
+      "node_id": "state_1",
+      "node_type": "state",
+      "content": "In which county is Kimbrough Memorial Stadium located?",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.6201055789847558,
+      "temperature": 0.10430583109593422,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.8622334993140243,
+        "evidence_support": 0.59480440974713,
+        "memory_usefulness": 0.0,
+        "answerability": 0.7974022048735651,
+        "uncertainty": 0.19293520624551658
+      },
+      "metadata": {
+        "diffusion_delta": -0.016318324812984175,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "kg_doc_5",
+      "node_type": "kg",
+      "content": "Kimbrough Memorial Stadium is a stadium in Canyon, Texas. It is owned by Canyon Independent School District, and is primarily primarily used for American football. It is the home stadium for Canyon High School and Randall High School of Canyon Independent School District, and is the former home of West Texas A&M University. The stadium holds 20,000 people and was built in 1959. It was originally called Buffalo Bowl on Canyon Hill but was renamed Kimbrough Memorial Stadium in 1971 in honor of the late West Texas State University football coach and athletic director Frank Kimbrough.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999969638393,
+      "temperature": 0.9999999969638393,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Kimbrough Memorial Stadium",
+        "raw_score": 11.166433826351142,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_7",
+      "node_type": "kg",
+      "content": "Historic Broken Bow Memorial Stadium has served as the home of the Broken Bow Savages, since it was constructed in 1936 by the National Youth Administration, a part of the Works Progress Administration.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.22435168470856987,
+      "temperature": 0.22435168470856987,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Broken Bow Memorial Stadium",
+        "raw_score": 5.583979624365254,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_17",
+      "node_type": "kg",
+      "content": "Canyon is a city in, and the county seat of, Randall County, Texas, United States. The population was 13,303 at the 2010 census. It is part of the Amarillo, Texas, metropolitan statistical area. Canyon is the home of West Texas A&M University and Panhandle–Plains Historical Museum, and the world-famous outdoor musical drama \"Texas\".",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999975015652,
+      "temperature": 0.9999999975015652,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Canyon, Texas",
+        "raw_score": 4.80335767980087,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_4",
+      "node_type": "kg",
+      "content": "A Nigerian State is a federated political entity, which shares sovereignty with the Federal Government of Nigeria, There are 36 States in Nigeria, which are bound together by a federal agreement. There is also a territory called the Federal Capital Territory (FCT), which is not a state, but a territory, under the direct control of the Federal Government. The States are further divided into a total of 774 Local Government Areas. Under the Nigerian Constitution, states have the power to ratify constitutional amendments.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.10982313395365872,
+      "temperature": 0.10982313395365872,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "States of Nigeria",
+        "raw_score": 4.100464551656337,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "state_2",
+      "node_type": "state",
+      "content": "In which city is Kimbrough Memorial Stadium located?",
+      "depth": 1,
+      "parent_id": "state_1",
+      "value": 0.6065468831087782,
+      "temperature": 1.3664827810446747,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.8206397858843096,
+        "evidence_support": 0.6121758408362046,
+        "memory_usefulness": 0.0,
+        "answerability": 0.7810879204181024,
+        "uncertainty": 0.18980834864948315
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_5",
+          "doc_7",
+          "doc_4",
+          "doc_17"
+        ],
+        "memory_ids": [],
+        "goal_slot_name": "stadium_location_city",
+        "goal_slot_role": "generic",
+        "goal_terminal": false,
+        "diffusion_delta": -0.03157916796331284,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "state_3",
+      "node_type": "state",
+      "content": "In which county is Canyon, Texas located?",
+      "depth": 2,
+      "parent_id": "state_2",
+      "value": 0.663959816932043,
+      "temperature": 1.4088128040772556,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.7945674438730022,
+        "evidence_support": 0.8149042466853,
+        "memory_usefulness": 0.0,
+        "answerability": 0.83245212334265,
+        "uncertainty": 0.15331723559664598
+      },
+      "metadata": {
+        "kind": "bridge",
+        "evidence_ids": [
+          "doc_17",
+          "doc_5",
+          "doc_4",
+          "doc_15"
+        ],
+        "memory_ids": [],
+        "diffusion_delta": 0.339230770909293,
+        "diffusion_gain": 0.339230770909293
+      }
+    },
+    {
+      "node_id": "kg_doc_15",
+      "node_type": "kg",
+      "content": "Usually, a federation is formed at two levels: the central government and the regions (states, provinces, territories), and little to nothing is said about second or third level administrative political entities. Brazil is an exception, because the 1988 Constitution included the municipalities as autonomous political entities making the federation tripartite, encompassing the Union, the States, and the municipalities. Each state is divided into municipalities (municípios) with their own legislative council (câmara de vereadores) and a mayor (prefeito), which are partly autonomous from both Federal and State Government. Each municipality has a \"little constitution\", called \"organic law\" (lei orgânica). Mexico is an intermediate case, in that municipalities are granted full-autonomy by the federal constitution and their existence as autonomous entities (municipio libre, \"free municipality\") is established by the federal government and cannot be revoked by the states' constitutions. Moreover, the federal constitution determines which powers and competencies belong exclusively to the municipalities and not to the constituent states. However, municipalities do not have an elected legislative assembly.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0,
+      "temperature": 0.0,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Federalism",
+        "raw_score": 2.8076182754818886,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "memory_mem_4",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'In which city is Kimbrough Memorial Stadium located' is Canyon, Texas.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 1.0,
+      "temperature": 0.8779421419220291,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "intermediate_answer",
+        "target_question": "In which city is Kimbrough Memorial Stadium located?",
+        "target_question_norm": "in which city is kimbrough memorial stadium located",
+        "relation_signature": "generic",
+        "answer_text": "Canyon, Texas",
+        "support_score": 1.0,
+        "evidence_ids": [
+          "doc_5"
+        ],
+        "slot_name": "stadium_location_city",
+        "slot_role": "generic",
+        "terminal": false,
+        "derived_from_state": "state_2",
+        "diffusion_delta": 0.04405072649883768,
+        "diffusion_gain": 0.04405072649883768
+      }
+    },
+    {
+      "node_id": "memory_mem_5",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'In which county is Canyon, Texas located' is Randall County.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 1.0,
+      "temperature": 1.0607921121353054,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "intermediate_answer",
+        "target_question": "In which county is Canyon, Texas located?",
+        "target_question_norm": "in which county is canyon texas located",
+        "relation_signature": "generic",
+        "answer_text": "Randall County",
+        "support_score": 1.0,
+        "evidence_ids": [
+          "doc_17",
+          "doc_5"
+        ],
+        "slot_name": "city_county",
+        "slot_role": "bridge_entity",
+        "terminal": false,
+        "derived_from_state": "state_3",
+        "diffusion_delta": 0.19298984233531558,
+        "diffusion_gain": 0.19298984233531558
+      }
+    }
+  ],
+  "edges": [
+    {
+      "source": "state_1",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.9999999968278435
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.18960882266641646
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_17",
+      "edge_type": "supports",
+      "weight": 0.07580935870670964
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_1",
+      "target": "state_2",
+      "edge_type": "refines",
+      "weight": 1.0
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.9999999968278435
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.9999999969638393
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.6298084958690348
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.9999999969638393
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.6298084958690348
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.18960882266641646
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.22435168470856987
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.22435168470856987
+    },
+    {
+      "source": "kg_doc_17",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.07580935870670964
+    },
+    {
+      "source": "kg_doc_17",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_17",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.9999999975015652
+    },
+    {
+      "source": "kg_doc_17",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_17",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.9999999975015652
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.04287171802198945
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.10982313395365872
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.04287171802198945
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.10982313395365872
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.9999999969638393
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.22435168470856987
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.04287171802198945
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_17",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_2",
+      "target": "state_3",
+      "edge_type": "refines",
+      "weight": 0.84
+    },
+    {
+      "source": "state_2",
+      "target": "memory_mem_4",
+      "edge_type": "derives",
+      "weight": 1.0
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_17",
+      "edge_type": "supports",
+      "weight": 0.9999999975015652
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.6298084958690348
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.10982313395365872
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_15",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_3",
+      "target": "memory_mem_5",
+      "edge_type": "derives",
+      "weight": 1.0
+    },
+    {
+      "source": "kg_doc_15",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_15",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "state_2",
+      "edge_type": "recalls",
+      "weight": 1.0
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.9999999969638393
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.22435168470856987
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.04287171802198945
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_17",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "state_3",
+      "edge_type": "recalls",
+      "weight": 1.0
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_17",
+      "edge_type": "supports",
+      "weight": 0.9999999975015652
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.6298084958690348
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.10982313395365872
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_15",
+      "edge_type": "supports",
+      "weight": 0.0
+    }
+  ]
+}

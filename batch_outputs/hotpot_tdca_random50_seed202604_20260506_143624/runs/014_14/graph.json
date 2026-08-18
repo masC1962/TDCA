@@ -1,0 +1,841 @@
+{
+  "nodes": [
+    {
+      "node_id": "state_1",
+      "node_type": "state",
+      "content": "The Nike Hoop Summit has had many current NBA players as former participants, including what German player from the Dallas Mavericks?",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.8505927011142953,
+      "temperature": 1.0519155023026723,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.9899905276996186,
+        "evidence_support": 0.9705603755871135,
+        "memory_usefulness": 0.48672266765716377,
+        "answerability": 0.8852801877935568,
+        "uncertainty": 0.12529913239431956
+      },
+      "metadata": {
+        "diffusion_delta": 0.3397763870395625,
+        "diffusion_gain": 0.3397763870395625
+      }
+    },
+    {
+      "node_id": "kg_doc_4",
+      "node_type": "kg",
+      "content": "The Nike Hoop Summit is an international men's basketball all-star game sponsored by Nike, held once a year since 1995, which features the USA Basketball Men's Junior Select Team against a World Select Team of international players. The players demonstrate their skills and hope to attract attention from either NBA scouts or colleges. A number of current NBA players have participated in this event in the past, including Kevin Garnett, Derrick Rose, Kevin Durant, also John Wall for the U.S.A. team, and Dirk Nowitzki, Tony Parker, Nicolas Batum, Serge Ibaka, Enes Kanter, and Patrick Mills for the World Select team. In the 2010 edition of the event, Enes Kanter scored 34 points and surpassed the event's record of 33 points set by Dirk Nowitzki in 1998. Bismack Biyombo recorded the first triple-double in Hoop Summit history in 2011 with 12 points, 11 rebounds, and 10 blocks. In 2012, Shabazz Muhammad scored 35 points to break Enes Kanter's Hoop Summit scoring record.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.999999993938442,
+      "temperature": 0.999999993938442,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Nike Hoop Summit",
+        "raw_score": 7.49923033795213,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_6",
+      "node_type": "kg",
+      "content": "The 1980 NBA Expansion Draft was the seventh expansion draft of the National Basketball Association (NBA). The draft was held on May 28, 1980, so that the newly founded Dallas Mavericks could acquire players for the upcoming 1980–81 season. Dallas had been awarded the expansion team on February 3, 1980. In an NBA expansion draft, new NBA teams are allowed to acquire players from the previously established teams in the league. Not all players on a given team are available during an expansion draft, since each team can protect a certain number of players from being selected. In this draft, each of the twenty-two other NBA teams had protected eight players from their roster and the Mavericks selected twenty-two unprotected players, one from each team.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9411207711605954,
+      "temperature": 0.9411207711605954,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "1980 NBA Expansion Draft",
+        "raw_score": 9.151355878326678,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_10",
+      "node_type": "kg",
+      "content": "Dirk Werner Nowitzki (] ) (born June 19, 1978) is a German professional basketball player for the Dallas Mavericks of the National Basketball Association (NBA). An alumnus of Röntgen Gymnasium and the DJK Würzburg basketball club, Nowitzki was chosen as the ninth pick in the 1998 NBA draft by the Milwaukee Bucks and immediately traded to the Mavericks, where he has played since. Listed at 7 ft , Nowitzki is considered to be one of the greatest power forwards of all time.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999872496084,
+      "temperature": 0.9999999872496084,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Dirk Nowitzki",
+        "raw_score": 4.877945959524905,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_2",
+      "node_type": "kg",
+      "content": "Seth Adham Curry (born August 23, 1990) is an American professional basketball player for the Dallas Mavericks of the National Basketball Association (NBA). A native of Charlotte, North Carolina, Curry played collegiately for one year at Liberty University before transferring to Duke. He is the son of former NBA player Dell Curry and the younger brother of current NBA player Stephen Curry.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0,
+      "temperature": 0.0,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Seth Curry",
+        "raw_score": 7.766410779690412,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "memory_mem_3",
+      "node_type": "memory",
+      "content": "Template: when evidence already grounds the answer, switch from branching to short verification and synthesis.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.8799999914225256,
+      "temperature": 0.3797335294980238,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.88,
+        "tag": "verification_then_stop",
+        "memory_kind": "template",
+        "raw_score": 0.09531281578369331,
+        "source": "memory",
+        "diffusion_delta": -0.2064950430818963,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "memory_mem_1",
+      "node_type": "memory",
+      "content": "Template: for compositional multi-hop questions, first solve the intermediate entity and then ask for the final attribute.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9599998077388796,
+      "temperature": 1.254352117017246,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.96,
+        "tag": "compositional_template",
+        "memory_kind": "template",
+        "raw_score": 0.12560431602693925,
+        "source": "memory",
+        "diffusion_delta": 0.4572275052371312,
+        "diffusion_gain": 0.4572275052371312
+      }
+    },
+    {
+      "node_id": "state_2",
+      "node_type": "state",
+      "content": "Who is a German player on the Dallas Mavericks?",
+      "depth": 1,
+      "parent_id": "state_1",
+      "value": 0.5654170417487541,
+      "temperature": 1.1396060739179448,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.5890142126555904,
+        "evidence_support": 0.6294535666340892,
+        "memory_usefulness": 0.5139667251540021,
+        "answerability": 0.6647267833170446,
+        "uncertainty": 0.18669835800586393
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_10",
+          "doc_6",
+          "doc_9",
+          "doc_2"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "goal_slot_name": "german_nba_player_on_mavericks",
+        "goal_slot_role": "target_attribute",
+        "goal_terminal": true,
+        "diffusion_delta": 0.19291873516948999,
+        "diffusion_gain": 0.19291873516948999
+      }
+    },
+    {
+      "node_id": "kg_doc_9",
+      "node_type": "kg",
+      "content": "The 2010–11 Dallas Mavericks season was the 31st season of the franchise in the National Basketball Association (NBA). The Mavericks won the NBA Championship after defeating the Miami Heat in 6 games in the 2011 NBA Finals. The Mavs playoff run came with a 6-game first round series against the Portland Trail Blazers, a series in which the Mavericks blew a 23-point lead in Game 4, but still won the series. In the conference semi-finals, the Mavericks run was motivated with a sweep of the champions of the previous two seasons, the Los Angeles Lakers. The series against the Lakers also became the birth of the Mavericks Royal Blue-Out games in the AAC, with almost all fans wearing T-shirts that read \"The Time is Now\". In the Western Conference Finals against the Oklahoma City Thunder, the Mavericks won the last 3 games winning by 4th quarter comebacks, to win their second Western Conference Championship, and a trip to the NBA Finals for the first time since 2006, with a rematch against the Heat. Following a disappointing Game 1, the Mavericks pulled the biggest comeback in NBA Finals history in Game 2 to even the series at 1 game each. After a loss in Game 3, the Mavericks won the last two games in Dallas to take a 3–2 series lead heading to Game 6 in Miami. The Mavericks won their first NBA Championship in Game 6 to clinch the first major sports championship in the Dallas-Fort Worth area since the Dallas Stars in 1999, and the first title in Mavericks franchise history. The Mavericks are the third team to win an NBA title in the state of Texas, joining the Houston Rockets and San Antonio Spurs. The Mavericks are also the third team to win a major sports championship in the Dallas-Fort Worth area, joining the Dallas Cowboys' five Super Bowl titles and the Dallas Stars' only Stanley Cup, leaving the Texas Rangers as the only team to not win a major sports title in the area, as they have not won the World Series. The Mavericks championship parade was held on June 16, 2011 in downtown Dallas.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.029917691729847533,
+      "temperature": 0.029917691729847533,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "2010–11 Dallas Mavericks season",
+        "raw_score": 3.3244799219659216,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "memory_mem_4",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'Who is a German player on the Dallas Mavericks' is Dirk Nowitzki.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.874,
+      "temperature": 1.2642047221200496,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "derived_fact",
+        "target_question": "Who is a German player on the Dallas Mavericks?",
+        "target_question_norm": "who is a german player on the dallas mavericks",
+        "relation_signature": "generic",
+        "answer_text": "Dirk Nowitzki",
+        "support_score": 0.6294535666340892,
+        "evidence_ids": [
+          "doc_10"
+        ],
+        "derived_from_state": "state_2",
+        "diffusion_delta": 0.1687954458876133,
+        "diffusion_gain": 0.1687954458876133
+      }
+    },
+    {
+      "node_id": "memory_mem_5",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'The Nike Hoop Summit has had many current NBA players as former participants, including what German player from the Dallas Mavericks' is Dirk Nowitzki.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.874,
+      "temperature": 1.154,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "tdca_run",
+        "memory_kind": "answer_candidate",
+        "target_question": "The Nike Hoop Summit has had many current NBA players as former participants, including what German player from the Dallas Mavericks?",
+        "target_question_norm": "the nike hoop summit has had many current nba players as former participants including what german player from the dallas mavericks",
+        "relation_signature": "generic",
+        "answer_text": "Dirk Nowitzki",
+        "support_score": 0.9705603755871135,
+        "derived_from_state": "state_1",
+        "composed_from": [
+          "memory_mem_4",
+          "memory_mem_4"
+        ],
+        "slot_role": "target_attribute",
+        "terminal": true,
+        "coverage_count": 1,
+        "coverage_ratio": 1.0,
+        "composition_kind": "attribute_after_bridge",
+        "diffusion_delta": -0.04886717137257013,
+        "diffusion_gain": 0.0,
+        "score": 0.874,
+        "raw_score": 19.63593766077053,
+        "evidence_ids": [
+          "doc_4",
+          "doc_6",
+          "doc_10"
+        ]
+      }
+    },
+    {
+      "node_id": "state_3",
+      "node_type": "state",
+      "content": "Did that German player participate in the Nike Hoop Summit?",
+      "depth": 1,
+      "parent_id": "state_1",
+      "value": 0.529702222582027,
+      "temperature": 0.5776764211037098,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.6307341359822798,
+        "evidence_support": 0.6962768705361168,
+        "memory_usefulness": 0.0034641777354421322,
+        "answerability": 0.6081384352680583,
+        "uncertainty": 0.174670163303499
+      },
+      "metadata": {
+        "kind": "bridge",
+        "evidence_ids": [
+          "doc_7",
+          "doc_5",
+          "doc_4",
+          "doc_10"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "diffusion_delta": -0.22694298691987913,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "kg_doc_7",
+      "node_type": "kg",
+      "content": "Keijuro Matsui (popularly known as KJ) (born October 16, 1985) was a guard for the Columbia Lions basketball team at Columbia University. He is the first Japanese native basketball player in NCAA Division I history. Matsui also played in the 2005 Nike Hoop Summit for the World Select Team, only the second Japanese to do so. In the summit he scored seven points in 11 minutes.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999644448476,
+      "temperature": 0.9999999644448476,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Keijuro Matsui",
+        "raw_score": 3.415542937559014,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_5",
+      "node_type": "kg",
+      "content": "Terrance Eugene Ferguson (born May 17, 1998) is an American professional basketball player for the Oklahoma City Thunder of the National Basketball Association (NBA). He completed high school at Advanced Preparatory International in Dallas, Texas, where he was a top-20 player in the Class of 2016. Ferguson made separate commitments to both Alabama and Arizona before deciding to skip college and play overseas in 2016–17. Ferguson is a three-time gold medalist with Team USA, and in 2016, he participated in the McDonald's All-American Game and the Nike Hoop Summit, winning the MVP award at the latter.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.3925537766273859,
+      "temperature": 0.3925537766273859,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Terrance Ferguson",
+        "raw_score": 2.7777702925509766,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "state_4",
+      "node_type": "state",
+      "content": "Did Dirk Nowitzki participate in the Nike Hoop Summit?",
+      "depth": 1,
+      "parent_id": "state_1",
+      "value": 0.4773655442793419,
+      "temperature": 0.2801326834269916,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.5828649148396812,
+        "evidence_support": 0.6672497495284739,
+        "memory_usefulness": 0.0034641777354421322,
+        "answerability": 0.573624874764237,
+        "uncertainty": 0.1798950450848747
+      },
+      "metadata": {
+        "kind": "verification",
+        "evidence_ids": [
+          "doc_4",
+          "doc_10",
+          "doc_7",
+          "doc_5"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "diffusion_delta": -0.004177637470764162,
+        "diffusion_gain": 0.0
+      }
+    }
+  ],
+  "edges": [
+    {
+      "source": "state_1",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.9999999800136317
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.9411207711605954
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_10",
+      "edge_type": "supports",
+      "weight": 0.6393409206100054
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.043611077915083805
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.09344534389180187
+    },
+    {
+      "source": "state_1",
+      "target": "state_2",
+      "edge_type": "refines",
+      "weight": 1.0
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_5",
+      "edge_type": "derives",
+      "weight": 0.9705603755871135
+    },
+    {
+      "source": "state_1",
+      "target": "state_3",
+      "edge_type": "refines",
+      "weight": 0.94
+    },
+    {
+      "source": "state_1",
+      "target": "state_4",
+      "edge_type": "verifies",
+      "weight": 0.95
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.9999999800136317
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.22333253513065152
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.999999993938442
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.9999999800136317
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.9411207711605954
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.25890714601857007
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.25890714601857007
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.9411207711605954
+    },
+    {
+      "source": "kg_doc_10",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.6393409206100054
+    },
+    {
+      "source": "kg_doc_10",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.9999999872496084
+    },
+    {
+      "source": "kg_doc_10",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.9999999872496084
+    },
+    {
+      "source": "kg_doc_10",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_10",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.33449950511850596
+    },
+    {
+      "source": "kg_doc_10",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.6393409206100054
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.043611077915083805
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_2",
+      "edge_type": "recalls",
+      "weight": 0.0679336425691247
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "memory_mem_4",
+      "edge_type": "recalls",
+      "weight": 0.0679336425691247
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_3",
+      "edge_type": "recalls",
+      "weight": 0.00044641794429622173
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_4",
+      "edge_type": "recalls",
+      "weight": 0.00044641794429622173
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.09344534389180187
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_2",
+      "edge_type": "recalls",
+      "weight": 0.9599998077388796
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "memory_mem_4",
+      "edge_type": "recalls",
+      "weight": 0.9599998077388796
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_3",
+      "edge_type": "recalls",
+      "weight": 0.006481937526588042
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_4",
+      "edge_type": "recalls",
+      "weight": 0.006481937526588042
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "memory_mem_5",
+      "edge_type": "recalls",
+      "weight": 0.09344534389180187
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_10",
+      "edge_type": "supports",
+      "weight": 0.9999999872496084
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.25890714601857007
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.029917691729847533
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_2",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.9599998077388796
+    },
+    {
+      "source": "state_2",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.0679336425691247
+    },
+    {
+      "source": "state_2",
+      "target": "memory_mem_4",
+      "edge_type": "derives",
+      "weight": 0.95
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.029917691729847533
+    },
+    {
+      "source": "kg_doc_9",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.029917691729847533
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "state_2",
+      "edge_type": "recalls",
+      "weight": 0.95
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_10",
+      "edge_type": "supports",
+      "weight": 0.9999999872496084
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.25890714601857007
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_9",
+      "edge_type": "supports",
+      "weight": 0.029917691729847533
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.9599998077388796
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.0679336425691247
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "memory_mem_5",
+      "edge_type": "derives",
+      "weight": 0.874
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.9705603755871135
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.9999999800136317
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.9411207711605954
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_10",
+      "edge_type": "supports",
+      "weight": 0.6393409206100054
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.09344534389180187
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.9999999644448476
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.3925537766273859
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.22333253513065152
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_10",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_3",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.006481937526588042
+    },
+    {
+      "source": "state_3",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.00044641794429622173
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.9999999644448476
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.13144046029386158
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.3925537766273859
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.999999993938442
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_10",
+      "edge_type": "supports",
+      "weight": 0.33449950511850596
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.13144046029386158
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_4",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.006481937526588042
+    },
+    {
+      "source": "state_4",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.00044641794429622173
+    }
+  ]
+}

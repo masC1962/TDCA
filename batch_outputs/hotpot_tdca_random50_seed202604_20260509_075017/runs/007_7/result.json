@@ -1,0 +1,113 @@
+{
+  "question": "What is the name of the 1999 film directed by Roman Polanski and starring his wife Emmanuelle Seigner that was a world-wide success but critically and commercially unsuccessful in North America?",
+  "final_answer": "The Ninth Gate",
+  "best_node": {
+    "node_id": "state_2",
+    "node_type": "state",
+    "content": "What is the title of the 1999 film directed by Roman Polanski and starring Emmanuelle Seigner?",
+    "depth": 1,
+    "parent_id": "state_1",
+    "value": 0.8314288912905422,
+    "temperature": 1.261611671235984,
+    "expanded": true,
+    "visit_count": 1,
+    "persistent": false,
+    "score_breakdown": {
+      "task_progress": 0.7955279469053289,
+      "evidence_support": 0.9946900399176339,
+      "memory_usefulness": 0.8770627489221289,
+      "answerability": 0.8906783532921503,
+      "uncertainty": 0.12095579281482588
+    },
+    "metadata": {
+      "kind": "retrieval",
+      "evidence_ids": [
+        "doc_10",
+        "doc_4",
+        "doc_7",
+        "doc_5"
+      ],
+      "memory_ids": [
+        "mem_1",
+        "mem_3"
+      ],
+      "goal_slot_name": "film_title",
+      "goal_slot_role": "target_attribute",
+      "goal_terminal": true,
+      "diffusion_delta": 0.8151224293622079,
+      "diffusion_gain": 0.8151224293622079
+    }
+  },
+  "final_synthesis_node_ids": [
+    "state_2",
+    "state_3",
+    "memory_mem_4",
+    "state_1"
+  ],
+  "answer_history": [
+    {
+      "node_id": "memory_mem_4",
+      "content": "Conclusion: The answer to 'What is the title of the 1999 film directed by Roman Polanski and starring Emmanuelle Seigner' is Frantic.",
+      "answer_text": "Frantic",
+      "value": 0.9151148367242232,
+      "evidence_ids": [
+        "doc_10",
+        "doc_4",
+        "doc_7"
+      ],
+      "step": 1
+    },
+    {
+      "node_id": "state_2",
+      "answer_text": "The Ninth Gate",
+      "previous_answer": "",
+      "confidence": 0.9946900399176339,
+      "score": 0.9165312386772905,
+      "source": "expansion_candidate",
+      "step": 0,
+      "evidence_ids": [
+        "doc_10",
+        "doc_4",
+        "doc_7",
+        "doc_5"
+      ],
+      "kind": "anytime_answer"
+    },
+    {
+      "node_id": "state_2",
+      "answer_text": "The Ninth Gate",
+      "source": "answer_judge",
+      "choice": "A",
+      "candidate_source": "expansion_candidate",
+      "base_score": 0.9403408323479552,
+      "rerank_score": 0.6040721804837443,
+      "judge_confidence": 0.94,
+      "judge_reason": "The Ninth Gate matches year, director, star, and the described reception pattern; Frantic is from 1988.",
+      "step": 1,
+      "kind": "final_answer_selection"
+    }
+  ],
+  "anytime_answer": "The Ninth Gate",
+  "anytime_answer_score": 0.9165312386772905,
+  "anytime_answer_source": "expansion_candidate",
+  "anytime_answer_node_id": "state_2",
+  "stats": {
+    "steps": 1,
+    "llm_calls": 15,
+    "generated_tokens": 1163,
+    "token_budget_remaining": 37,
+    "total_nodes": 11,
+    "kg_nodes": 5,
+    "memory_nodes": 3,
+    "state_nodes": 3,
+    "deleted_state_nodes": 0,
+    "scheduler_mode": "tdca",
+    "scoring_mode": "hybrid",
+    "stop_reason": "final_synthesis_reserve",
+    "goal_kind": "bridge",
+    "goal_completion": 0.0,
+    "anytime_answer": "The Ninth Gate",
+    "anytime_answer_score": 0.9165312386772905,
+    "anytime_answer_source": "expansion_candidate"
+  }
+}

@@ -1,0 +1,167 @@
+{
+  "question": "The Gate is a song from the album scheduled for release in what month?",
+  "final_answer": "November",
+  "best_node": {
+    "node_id": "state_1",
+    "node_type": "state",
+    "content": "The Gate is a song from the album scheduled for release in what month?",
+    "depth": 0,
+    "parent_id": null,
+    "value": 0.8391819582086029,
+    "temperature": 1.1184299927998596,
+    "expanded": true,
+    "visit_count": 1,
+    "persistent": false,
+    "score_breakdown": {
+      "task_progress": 0.9551353964541649,
+      "evidence_support": 0.8680452836887204,
+      "memory_usefulness": 0.6798464288036565,
+      "answerability": 0.9340226418443601,
+      "uncertainty": 0.14375184893603032
+    },
+    "metadata": {
+      "diffusion_delta": 0.03071782811073631,
+      "diffusion_gain": 0.03071782811073631
+    }
+  },
+  "final_synthesis_node_ids": [
+    "state_2",
+    "state_3",
+    "state_5",
+    "state_4",
+    "state_1"
+  ],
+  "answer_history": [
+    {
+      "node_id": "",
+      "answer_text": "September",
+      "previous_answer": "",
+      "confidence": 0.28,
+      "score": 0.16880000000000003,
+      "source": "closed_book_initial",
+      "step": 0,
+      "evidence_ids": [],
+      "kind": "anytime_answer"
+    },
+    {
+      "node_id": "memory_mem_4",
+      "content": "Conclusion: The answer to 'What is the title of the album that contains the song 'The Gate'' is Utopia.",
+      "answer_text": "Utopia",
+      "value": 1.0,
+      "confidence": 1.0,
+      "evidence_ids": [
+        "doc_10"
+      ],
+      "step": 2,
+      "kind": "intermediate_answer"
+    },
+    {
+      "node_id": "memory_mem_5",
+      "content": "Conclusion: The answer to 'In what month was the album 'Utopia' scheduled for release' is November.",
+      "answer_text": "November",
+      "value": 0.874,
+      "evidence_ids": [
+        "doc_4",
+        "doc_10"
+      ],
+      "step": 3
+    },
+    {
+      "node_id": "state_3",
+      "answer_text": "November",
+      "previous_answer": "September",
+      "confidence": 0.95,
+      "score": 0.8936395647739066,
+      "source": "expansion_candidate",
+      "step": 2,
+      "evidence_ids": [
+        "doc_4",
+        "doc_10",
+        "doc_2",
+        "doc_6"
+      ],
+      "kind": "anytime_answer"
+    },
+    {
+      "node_id": "memory_mem_6",
+      "content": "Conclusion: The answer to 'What is the release month of Björk's album 'Utopia'' is November.",
+      "answer_text": "November",
+      "value": 0.9108,
+      "evidence_ids": [
+        "doc_4",
+        "doc_10"
+      ],
+      "step": 4
+    },
+    {
+      "node_id": "memory_mem_7",
+      "content": "Conclusion: The answer to 'When was the album 'Utopia' scheduled for release' is 2017.",
+      "answer_text": "2017",
+      "value": 0.874,
+      "evidence_ids": [
+        "doc_4",
+        "doc_10"
+      ],
+      "step": 5
+    },
+    {
+      "node_id": "state_1",
+      "answer_text": "November",
+      "previous_answer": "November",
+      "confidence": 0.9340226418443601,
+      "score": 1.0,
+      "source": "final_synthesis",
+      "step": 7,
+      "evidence_ids": [
+        "doc_10",
+        "doc_2",
+        "doc_1",
+        "doc_7"
+      ],
+      "kind": "anytime_answer"
+    },
+    {
+      "node_id": "memory_mem_8",
+      "content": "Conclusion: The answer to 'The Gate is a song from the album scheduled for release in what month' is November.",
+      "answer_text": "November",
+      "value": 0.0,
+      "evidence_ids": [],
+      "step": 8
+    },
+    {
+      "node_id": "state_1",
+      "answer_text": "November",
+      "source": "answer_judge",
+      "choice": "A",
+      "candidate_source": "anytime",
+      "base_score": 1.0,
+      "judge_confidence": 0.0,
+      "judge_reason": "Original question asks for month; 'November' directly answers it.",
+      "step": 7,
+      "kind": "final_answer_selection"
+    }
+  ],
+  "anytime_answer": "November",
+  "anytime_answer_score": 1.0,
+  "anytime_answer_source": "final_synthesis",
+  "anytime_answer_node_id": "state_1",
+  "stats": {
+    "steps": 7,
+    "llm_calls": 13,
+    "generated_tokens": 726,
+    "token_budget_remaining": 474,
+    "total_nodes": 21,
+    "kg_nodes": 8,
+    "memory_nodes": 8,
+    "state_nodes": 5,
+    "deleted_state_nodes": 2,
+    "scheduler_mode": "tdca",
+    "scoring_mode": "hybrid",
+    "stop_reason": "frontier_empty",
+    "goal_kind": "bridge",
+    "goal_completion": 0.0,
+    "anytime_answer": "November",
+    "anytime_answer_score": 1.0,
+    "anytime_answer_source": "final_synthesis"
+  }
+}

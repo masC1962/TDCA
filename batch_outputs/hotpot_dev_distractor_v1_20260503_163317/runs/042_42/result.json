@@ -1,0 +1,163 @@
+{
+  "question": "A Japanese manga series based on a 16 year old high school student Ichitaka Seto, is written and illustrated by someone born in what year?",
+  "final_answer": "1962",
+  "best_node": {
+    "node_id": "state_2",
+    "node_type": "state",
+    "content": "Who wrote and illustrated the manga series 'I\"s'?",
+    "depth": 1,
+    "parent_id": "state_1",
+    "value": 0.7145774700436807,
+    "temperature": 1.056755670508869,
+    "expanded": true,
+    "visit_count": 1,
+    "persistent": false,
+    "score_breakdown": {
+      "task_progress": 0.649158938152463,
+      "evidence_support": 0.8913881812668345,
+      "memory_usefulness": 0.9133737522807308,
+      "answerability": 0.6804766993290694,
+      "uncertainty": 0.13955012737196978
+    },
+    "metadata": {
+      "kind": "bridge",
+      "evidence_ids": [
+        "doc_10",
+        "doc_4",
+        "doc_6",
+        "doc_2"
+      ],
+      "memory_ids": [
+        "mem_1",
+        "mem_3"
+      ],
+      "diffusion_delta": 0.03594183759632252,
+      "diffusion_gain": 0.03594183759632252
+    }
+  },
+  "final_synthesis_node_ids": [
+    "state_4",
+    "state_2",
+    "memory_mem_5",
+    "state_3",
+    "state_1"
+  ],
+  "answer_history": [
+    {
+      "node_id": "",
+      "answer_text": "1972",
+      "previous_answer": "",
+      "confidence": 0.28,
+      "score": 0.16880000000000003,
+      "source": "closed_book_initial",
+      "step": 0,
+      "evidence_ids": [],
+      "kind": "anytime_answer"
+    },
+    {
+      "node_id": "memory_mem_4",
+      "content": "Conclusion: The answer to 'Who wrote and illustrated the manga series 'I\"s'' is Akira Sugano.",
+      "answer_text": "Akira Sugano",
+      "value": 0.7423697822713423,
+      "evidence_ids": [
+        "doc_6"
+      ],
+      "step": 1
+    },
+    {
+      "node_id": "memory_mem_5",
+      "content": "Conclusion: The answer to 'When was Masakazu Katsura born' is December 10, 1962.",
+      "answer_text": "December 10, 1962",
+      "value": 0.874,
+      "evidence_ids": [
+        "doc_2"
+      ],
+      "step": 3
+    },
+    {
+      "node_id": "state_4",
+      "answer_text": "December 10, 1962",
+      "previous_answer": "1972",
+      "confidence": 0.95,
+      "score": 0.8383619373216784,
+      "source": "expansion_candidate",
+      "step": 2,
+      "evidence_ids": [
+        "doc_2",
+        "doc_10",
+        "doc_6",
+        "doc_5"
+      ],
+      "kind": "anytime_answer"
+    },
+    {
+      "node_id": "state_4",
+      "answer_text": "December 10, 1962",
+      "previous_answer": "December 10, 1962",
+      "confidence": 0.95,
+      "score": 0.9383619373216784,
+      "source": "grounded",
+      "step": 2,
+      "evidence_ids": [
+        "doc_2",
+        "doc_10",
+        "doc_6",
+        "doc_5"
+      ],
+      "kind": "anytime_answer"
+    },
+    {
+      "node_id": "memory_mem_6",
+      "content": "Conclusion: The answer to 'In what year was Masakazu Katsura born' is 1962.",
+      "answer_text": "1962",
+      "value": 0.92,
+      "evidence_ids": [
+        "doc_2"
+      ],
+      "step": 4
+    },
+    {
+      "node_id": "memory_mem_7",
+      "content": "Conclusion: The answer to 'A Japanese manga series based on a 16 year old high school student Ichitaka Seto, is written and illustrated by someone born in what year' is 1962.",
+      "answer_text": "1962",
+      "value": 0.0,
+      "evidence_ids": [],
+      "step": 6
+    },
+    {
+      "node_id": "state_2",
+      "answer_text": "1962",
+      "source": "answer_judge",
+      "choice": "A",
+      "candidate_source": "final_synthesis",
+      "base_score": 0.7918716129666787,
+      "judge_confidence": 0.0,
+      "judge_reason": "Original question asks for birth year, not full date.",
+      "step": 5,
+      "kind": "final_answer_selection"
+    }
+  ],
+  "anytime_answer": "December 10, 1962",
+  "anytime_answer_score": 0.9383619373216784,
+  "anytime_answer_source": "grounded",
+  "anytime_answer_node_id": "state_4",
+  "stats": {
+    "steps": 5,
+    "llm_calls": 10,
+    "generated_tokens": 612,
+    "token_budget_remaining": 588,
+    "total_nodes": 17,
+    "kg_nodes": 7,
+    "memory_nodes": 6,
+    "state_nodes": 4,
+    "deleted_state_nodes": 1,
+    "scheduler_mode": "tdca",
+    "scoring_mode": "hybrid",
+    "stop_reason": "frontier_empty",
+    "goal_kind": "bridge",
+    "goal_completion": 0.0,
+    "anytime_answer": "December 10, 1962",
+    "anytime_answer_score": 0.9383619373216784,
+    "anytime_answer_source": "grounded"
+  }
+}

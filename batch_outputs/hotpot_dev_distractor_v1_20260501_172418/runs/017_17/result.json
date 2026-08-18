@@ -1,0 +1,111 @@
+{
+  "question": "Are Giuseppe Verdi and Ambroise Thomas both Opera composers ?",
+  "final_answer": "Yes",
+  "best_node": {
+    "node_id": "state_1",
+    "node_type": "state",
+    "content": "Are Giuseppe Verdi and Ambroise Thomas both Opera composers ?",
+    "depth": 0,
+    "parent_id": null,
+    "value": 0.7767524438243263,
+    "temperature": 0.8924417842320644,
+    "expanded": true,
+    "visit_count": 1,
+    "persistent": false,
+    "score_breakdown": {
+      "task_progress": 0.8965569262646742,
+      "evidence_support": 0.6957556654843357,
+      "memory_usefulness": 0.8820682746050714,
+      "answerability": 0.8478778327421678,
+      "uncertainty": 0.17476398021281958
+    },
+    "metadata": {
+      "diffusion_delta": -0.021203280322216633,
+      "diffusion_gain": 0.0
+    }
+  },
+  "final_synthesis_node_ids": [
+    "state_3",
+    "state_2",
+    "state_4",
+    "state_1"
+  ],
+  "answer_history": [
+    {
+      "node_id": "",
+      "answer_text": "Yes",
+      "previous_answer": "",
+      "confidence": 0.28,
+      "score": 0.16880000000000003,
+      "source": "closed_book_initial",
+      "step": 0,
+      "evidence_ids": [],
+      "kind": "anytime_answer"
+    },
+    {
+      "node_id": "memory_mem_4",
+      "content": "Conclusion: The answer to 'Was Giuseppe Verdi an opera composer' is Giuseppe Verdi was an Italian opera composer.",
+      "answer_text": "Giuseppe Verdi was an Italian opera composer",
+      "value": 0.9999999764871867,
+      "confidence": 0.9727157051716732,
+      "evidence_ids": [
+        "doc_8",
+        "doc_4",
+        "doc_5"
+      ],
+      "step": 2,
+      "kind": "intermediate_answer"
+    },
+    {
+      "node_id": "memory_mem_5",
+      "content": "Conclusion: The answer to 'Was Ambroise Thomas an opera composer' is Yes, Ambroise Thomas was a French composer, best known for his operas \"Mignon\" (1866) and \"Hamlet\" (1868).",
+      "answer_text": "Yes, Ambroise Thomas was a French composer, best known for his operas \"Mignon\" (1866) and \"Hamlet\" (1868)",
+      "value": 0.9999999848887504,
+      "confidence": 0.95,
+      "evidence_ids": [
+        "doc_7"
+      ],
+      "step": 3,
+      "kind": "intermediate_answer"
+    },
+    {
+      "node_id": "state_1",
+      "answer_text": "Yes",
+      "previous_answer": "Yes",
+      "confidence": 0.8478778327421678,
+      "score": 0.9231425464292607,
+      "source": "final_synthesis",
+      "step": 6,
+      "evidence_ids": [
+        "doc_7",
+        "doc_6",
+        "doc_8",
+        "doc_1"
+      ],
+      "kind": "anytime_answer"
+    }
+  ],
+  "anytime_answer": "Yes",
+  "anytime_answer_score": 0.9231425464292607,
+  "anytime_answer_source": "final_synthesis",
+  "anytime_answer_node_id": "state_1",
+  "stats": {
+    "steps": 6,
+    "llm_calls": 13,
+    "generated_tokens": 1012,
+    "token_budget_remaining": 188,
+    "total_nodes": 17,
+    "kg_nodes": 9,
+    "memory_nodes": 4,
+    "state_nodes": 4,
+    "deleted_state_nodes": 2,
+    "scheduler_mode": "tdca",
+    "scoring_mode": "hybrid",
+    "stop_reason": "frontier_empty_with_anytime_answer",
+    "goal_kind": "comparison",
+    "goal_completion": 0.0,
+    "anytime_answer": "Yes",
+    "anytime_answer_score": 0.9231425464292607,
+    "anytime_answer_source": "final_synthesis"
+  }
+}

@@ -1,0 +1,144 @@
+{
+  "question": "Are both Disney Magazine and The Ring still in publication?",
+  "final_answer": "No",
+  "best_node": {
+    "node_id": "state_1",
+    "node_type": "state",
+    "content": "Are both Disney Magazine and The Ring still in publication?",
+    "depth": 0,
+    "parent_id": null,
+    "value": 0.8330006148298196,
+    "temperature": 1.2041606403466338,
+    "expanded": true,
+    "visit_count": 1,
+    "persistent": false,
+    "score_breakdown": {
+      "task_progress": 0.9320241652406297,
+      "evidence_support": 0.800071074237146,
+      "memory_usefulness": 0.9133737522807308,
+      "answerability": 0.900035537118573,
+      "uncertainty": 0.15598720663731372
+    },
+    "metadata": {
+      "diffusion_delta": 0.011991760531295803,
+      "diffusion_gain": 0.011991760531295803
+    }
+  },
+  "final_synthesis_node_ids": [
+    "state_2",
+    "state_4",
+    "state_3",
+    "memory_mem_4",
+    "state_1"
+  ],
+  "answer_history": [
+    {
+      "node_id": "",
+      "answer_text": "No",
+      "previous_answer": "",
+      "confidence": 0.28,
+      "score": 0.16880000000000003,
+      "source": "closed_book_initial",
+      "step": 0,
+      "evidence_ids": [],
+      "kind": "anytime_answer"
+    },
+    {
+      "node_id": "memory_mem_4",
+      "content": "Conclusion: The answer to 'Is The Ring magazine still in publication' is The magazine is currently owned by Oscar De La Hoya's Golden Boy Enterprises, which acquired it in 2007.",
+      "answer_text": "The magazine is currently owned by Oscar De La Hoya's Golden Boy Enterprises, which acquired it in 2007",
+      "value": 0.9999999761586913,
+      "confidence": 0.95,
+      "evidence_ids": [
+        "doc_9"
+      ],
+      "step": 2,
+      "kind": "intermediate_answer"
+    },
+    {
+      "node_id": "memory_mem_5",
+      "content": "Conclusion: The answer to 'Is Disney Magazine still in publication' is Disney Magazine was published quarterly from December 1965 to April 2005.",
+      "answer_text": "Disney Magazine was published quarterly from December 1965 to April 2005",
+      "value": 0.9999999890695012,
+      "confidence": 0.9528046893607263,
+      "evidence_ids": [
+        "doc_6",
+        "doc_7"
+      ],
+      "step": 3,
+      "kind": "intermediate_answer"
+    },
+    {
+      "node_id": "memory_mem_6",
+      "content": "Conclusion: The answer to 'When did Disney Magazine cease publication' is April 2005.",
+      "answer_text": "April 2005",
+      "value": 0.9999999934027486,
+      "confidence": 0.971514627294644,
+      "evidence_ids": [
+        "doc_6",
+        "doc_7"
+      ],
+      "step": 4,
+      "kind": "intermediate_answer"
+    },
+    {
+      "node_id": "state_1",
+      "answer_text": "No",
+      "previous_answer": "No",
+      "confidence": 0.900035537118573,
+      "score": 0.9997999836038763,
+      "source": "final_synthesis",
+      "step": 6,
+      "evidence_ids": [
+        "doc_6",
+        "doc_3",
+        "doc_9",
+        "doc_10"
+      ],
+      "kind": "anytime_answer"
+    },
+    {
+      "node_id": "memory_mem_7",
+      "content": "Conclusion: The answer to 'Are both Disney Magazine and The Ring still in publication' is No.",
+      "answer_text": "No",
+      "value": 0.0,
+      "evidence_ids": [],
+      "step": 7
+    },
+    {
+      "node_id": "state_1",
+      "answer_text": "No",
+      "source": "answer_judge",
+      "choice": "A",
+      "candidate_source": "anytime",
+      "base_score": 1.0,
+      "judge_confidence": 0.0,
+      "judge_reason": "",
+      "step": 6,
+      "kind": "final_answer_selection"
+    }
+  ],
+  "anytime_answer": "No",
+  "anytime_answer_score": 0.9997999836038763,
+  "anytime_answer_source": "final_synthesis",
+  "anytime_answer_node_id": "state_1",
+  "stats": {
+    "steps": 6,
+    "llm_calls": 13,
+    "generated_tokens": 907,
+    "token_budget_remaining": 293,
+    "total_nodes": 25,
+    "kg_nodes": 10,
+    "memory_nodes": 6,
+    "state_nodes": 9,
+    "deleted_state_nodes": 0,
+    "scheduler_mode": "tdca",
+    "scoring_mode": "hybrid",
+    "stop_reason": "final_synthesis_reserve",
+    "goal_kind": "comparison",
+    "goal_completion": 0.0,
+    "anytime_answer": "No",
+    "anytime_answer_score": 0.9997999836038763,
+    "anytime_answer_source": "final_synthesis"
+  }
+}

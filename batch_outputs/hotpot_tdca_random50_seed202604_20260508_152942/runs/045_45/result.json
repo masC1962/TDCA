@@ -1,0 +1,141 @@
+{
+  "question": "In what year did construction begin on the stadium where the 2013 America East Men's Lacrosse Tournament was held?",
+  "final_answer": "2000",
+  "best_node": {
+    "node_id": "state_2",
+    "node_type": "state",
+    "content": "What is the name of the stadium where the 2013 America East Men's Lacrosse Tournament was held?",
+    "depth": 1,
+    "parent_id": "state_1",
+    "value": 0.6253900446660783,
+    "temperature": 1.7662638185079995,
+    "expanded": true,
+    "visit_count": 2,
+    "persistent": false,
+    "score_breakdown": {
+      "task_progress": 0.7421965348096005,
+      "evidence_support": 0.5946956906164718,
+      "memory_usefulness": 0.5139667937761075,
+      "answerability": 0.7341899505713938,
+      "uncertainty": 0.19295477568903507
+    },
+    "metadata": {
+      "kind": "bridge",
+      "evidence_ids": [
+        "doc_6",
+        "doc_2",
+        "doc_5",
+        "doc_10"
+      ],
+      "memory_ids": [
+        "mem_1",
+        "mem_3"
+      ],
+      "goal_slot_name": "stadium_name",
+      "goal_slot_role": "bridge_entity",
+      "goal_terminal": false,
+      "diffusion_delta": 0.10291690805431175,
+      "diffusion_gain": 0.10291690805431175,
+      "goal_retry": 1
+    }
+  },
+  "final_synthesis_node_ids": [
+    "state_2",
+    "state_3",
+    "memory_mem_5",
+    "state_1"
+  ],
+  "answer_history": [
+    {
+      "node_id": "memory_mem_4",
+      "content": "Conclusion: The answer to 'What is the name of the stadium where the 2013 America East Men's Lacrosse Tournament was held' is LaValle Stadium.",
+      "answer_text": "LaValle Stadium",
+      "value": 1.0,
+      "confidence": 1.0,
+      "evidence_ids": [
+        "doc_6"
+      ],
+      "step": 1,
+      "kind": "intermediate_answer"
+    },
+    {
+      "node_id": "state_2",
+      "answer_text": "2000",
+      "previous_answer": "",
+      "confidence": 0.95,
+      "score": 0.8276164352310924,
+      "source": "expansion_candidate",
+      "step": 0,
+      "evidence_ids": [
+        "doc_6",
+        "doc_2",
+        "doc_10",
+        "doc_5"
+      ],
+      "kind": "anytime_answer"
+    },
+    {
+      "node_id": "state_2",
+      "answer_text": "2000",
+      "previous_answer": "2000",
+      "confidence": 1.0,
+      "score": 0.9211553952100989,
+      "source": "expansion_candidate",
+      "step": 1,
+      "evidence_ids": [
+        "doc_6",
+        "doc_2",
+        "doc_10",
+        "doc_5"
+      ],
+      "kind": "anytime_answer"
+    },
+    {
+      "node_id": "memory_mem_5",
+      "content": "Conclusion: The answer to 'In what year did construction begin on Kenneth P. LaValle Stadium' is 2000.",
+      "answer_text": "2000",
+      "value": 0.92,
+      "evidence_ids": [
+        "doc_5",
+        "doc_2"
+      ],
+      "step": 3
+    },
+    {
+      "node_id": "state_2",
+      "answer_text": "2000",
+      "source": "answer_judge",
+      "choice": "A",
+      "candidate_source": "expansion_candidate",
+      "base_score": 0.9712794393348884,
+      "rerank_score": 0.5953056424877996,
+      "judge_confidence": 0.0,
+      "judge_reason": "",
+      "step": 4,
+      "kind": "final_answer_selection"
+    }
+  ],
+  "anytime_answer": "2000",
+  "anytime_answer_score": 0.9211553952100989,
+  "anytime_answer_source": "expansion_candidate",
+  "anytime_answer_node_id": "state_2",
+  "stats": {
+    "steps": 4,
+    "llm_calls": 7,
+    "generated_tokens": 543,
+    "token_budget_remaining": 657,
+    "total_nodes": 13,
+    "kg_nodes": 6,
+    "memory_nodes": 4,
+    "state_nodes": 3,
+    "deleted_state_nodes": 0,
+    "scheduler_mode": "tdca",
+    "scoring_mode": "hybrid",
+    "stop_reason": "frontier_empty",
+    "goal_kind": "bridge",
+    "goal_completion": 0.0,
+    "anytime_answer": "2000",
+    "anytime_answer_score": 0.9211553952100989,
+    "anytime_answer_source": "expansion_candidate"
+  }
+}

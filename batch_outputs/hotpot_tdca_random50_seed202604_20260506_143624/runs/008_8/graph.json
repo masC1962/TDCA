@@ -1,0 +1,899 @@
+{
+  "nodes": [
+    {
+      "node_id": "state_1",
+      "node_type": "state",
+      "content": "What sport is played by both Justin Gimelstob and Angelique Kerber?",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.7650313448710183,
+      "temperature": 1.2585928675747848,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.8886372648097363,
+        "evidence_support": 0.6724625435580476,
+        "memory_usefulness": 0.8820682746050714,
+        "answerability": 0.8362312717790238,
+        "uncertainty": 0.17895674215955143
+      },
+      "metadata": {
+        "diffusion_delta": 0.36143519992705075,
+        "diffusion_gain": 0.36143519992705075
+      }
+    },
+    {
+      "node_id": "kg_doc_5",
+      "node_type": "kg",
+      "content": "Angelique Kerber (] ; born 18 January 1988) is a German professional tennis player and former world No. 1. Having made her professional debut in 2003, Kerber rose to prominence upon reaching the semifinals of the 2011 US Open as the no. 92 ranked player in the world. She ascended to the top of the rankings on 12 September 2016, thus becoming the twenty-second and oldest player to achieve the number one ranking for the first time and the first new number one player since Victoria Azarenka in 2012.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 1.0,
+      "temperature": 1.0,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Angelique Kerber",
+        "raw_score": 4.884335187234219,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_4",
+      "node_type": "kg",
+      "content": "Justin Jeremy Gimelstob (born January 26, 1977) is a retired American tennis player. Gimelstob has been a resident of Morristown, New Jersey, and as of 2009 lived in Santa Monica, California.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.3449250942225484,
+      "temperature": 0.3449250942225484,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Justin Gimelstob",
+        "raw_score": 2.157710910970603,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_7",
+      "node_type": "kg",
+      "content": "Justin Gimelstob and Sébastien Lareau were the defending champions but only Gimelstob competed that year with Jared Palmer.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999303126031,
+      "temperature": 0.9999999303126031,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "2001 Kroger St. Jude International – Doubles",
+        "raw_score": 2.6985321819653367,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_2",
+      "node_type": "kg",
+      "content": "Justin Gimelstob and Byron Talbot were the defending champions, but Talbot did not partner this year. Gimelstob partnered Patrick Galbraith.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.8238089048474462,
+      "temperature": 0.8238089048474462,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "1999 Nottingham Open – Doubles",
+        "raw_score": 0.5091216389238642,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "memory_mem_1",
+      "node_type": "memory",
+      "content": "Template: for compositional multi-hop questions, first solve the intermediate entity and then ask for the final attribute.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.8841365672456091,
+      "temperature": 0.6255429697763819,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.96,
+        "tag": "compositional_template",
+        "memory_kind": "template",
+        "raw_score": 0.7353886326762097,
+        "source": "memory",
+        "diffusion_delta": -0.030539674576914866,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "memory_mem_3",
+      "node_type": "memory",
+      "content": "Template: when evidence already grounds the answer, switch from branching to short verification and synthesis.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.8799999819645339,
+      "temperature": 1.0944526847965819,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.88,
+        "tag": "verification_then_stop",
+        "memory_kind": "template",
+        "raw_score": 2.307700193660816,
+        "source": "memory",
+        "diffusion_delta": 0.21445270283204798,
+        "diffusion_gain": 0.21445270283204798
+      }
+    },
+    {
+      "node_id": "state_2",
+      "node_type": "state",
+      "content": "What sport does Angelique Kerber play?",
+      "depth": 1,
+      "parent_id": "state_1",
+      "value": 0.6934727272727274,
+      "temperature": 1.2451048661304158,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.7581818181818183,
+        "evidence_support": 1.0,
+        "memory_usefulness": 0.0,
+        "answerability": 0.7727272727272727,
+        "uncertainty": 0.12
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_5"
+        ],
+        "memory_ids": [],
+        "goal_slot_name": "sport_of_angelique_kerber",
+        "goal_slot_role": "target_attribute",
+        "goal_terminal": true,
+        "diffusion_delta": -0.11714356672528936,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "state_3",
+      "node_type": "state",
+      "content": "What sport does Justin Gimelstob play?",
+      "depth": 2,
+      "parent_id": "state_2",
+      "value": 0.658799090909091,
+      "temperature": 1.0846554227009606,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.728229154327177,
+        "evidence_support": 0.9119039298392906,
+        "memory_usefulness": 0.0,
+        "answerability": 0.728679237646918,
+        "uncertainty": 0.13585729262892768
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_7",
+          "doc_2",
+          "doc_3",
+          "doc_10"
+        ],
+        "memory_ids": [],
+        "diffusion_delta": 0.17033362556675402,
+        "diffusion_gain": 0.17033362556675402
+      }
+    },
+    {
+      "node_id": "kg_doc_3",
+      "node_type": "kg",
+      "content": "Justin Gimelstob and Richey Reneberg were the defending champions, but Gimelstob did not participate this year. Reneberg partnered Jared Palmer, successfully defending his title.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.15757539098636397,
+      "temperature": 0.15757539098636397,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "2000 Franklin Templeton Tennis Classic – Doubles",
+        "raw_score": 0.42883486328599835,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_10",
+      "node_type": "kg",
+      "content": "Justin Gimelstob and Nathan Healey were the defending champions, but Gimelstob did not participate this year. Healey partnered Ashley Fisher, losing in the first round.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0,
+      "temperature": 0.0,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "2006 China Open – Men's Doubles",
+        "raw_score": 0.4244005843117258,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "memory_mem_4",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'What sport does Angelique Kerber play' is tennis.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 1.0,
+      "temperature": 0.5747190919242257,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "intermediate_answer",
+        "target_question": "What sport does Angelique Kerber play?",
+        "target_question_norm": "what sport does angelique kerber play",
+        "relation_signature": "generic",
+        "answer_text": "tennis",
+        "support_score": 1.0,
+        "evidence_ids": [
+          "doc_5"
+        ],
+        "slot_name": "sport_of_angelique_kerber",
+        "slot_role": "target_attribute",
+        "terminal": true,
+        "derived_from_state": "state_2",
+        "diffusion_delta": 0.17320144935636017,
+        "diffusion_gain": 0.17320144935636017
+      }
+    },
+    {
+      "node_id": "state_4",
+      "node_type": "state",
+      "content": "What sport is associated with the tournaments Justin Gimelstob competed in (e.g., Kroger St. Jude International, Nottingham Open, Franklin Templeton Tennis Classic)?",
+      "depth": 3,
+      "parent_id": "state_3",
+      "value": 0.6620747815667719,
+      "temperature": 0.5624509364452266,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.7487616455482455,
+        "evidence_support": 0.8706893318263904,
+        "memory_usefulness": 0.0037750058401921564,
+        "answerability": 0.8262537568222861,
+        "uncertainty": 0.14327592027124972
+      },
+      "metadata": {
+        "kind": "bridge",
+        "evidence_ids": [
+          "doc_7",
+          "doc_8",
+          "doc_4",
+          "doc_5"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "diffusion_delta": 0.059526632679235636,
+        "diffusion_gain": 0.059526632679235636
+      }
+    },
+    {
+      "node_id": "kg_doc_8",
+      "node_type": "kg",
+      "content": "The 2001 Canada Masters – Doubles was the men's doubles event of the one hundred and twelfth edition of the Canada Masters; a WTA Tier I tournament and the most prestigious men's tennis tournament held in Canada. Sébastien Lareau and Daniel Nestor were the defending champions but they competed with different partners that year, Lareau with Justin Gimelstob and Nestor with Sandon Stolle. Gimelstob and Lareau lost in the first round to Mark Knowles and Brian MacPhie, as did Nestor and Stolle to Jan-Michael Gambill and Simon Larose. Jiří Novák and David Rikl won in the final 6–4, 3–6, 6–3 against Donald Johnson and Jared Palmer.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.7413787333401776,
+      "temperature": 0.7413787333401776,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "2001 Canada Masters – Doubles",
+        "raw_score": 1.4362732835558385,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "memory_mem_5",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'What sport does Justin Gimelstob play' is tennis.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 1.0,
+      "temperature": 0.4014580507190458,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "intermediate_answer",
+        "target_question": "What sport does Justin Gimelstob play?",
+        "target_question_norm": "what sport does justin gimelstob play",
+        "relation_signature": "generic",
+        "answer_text": "tennis",
+        "support_score": 1.0,
+        "evidence_ids": [
+          "doc_7",
+          "doc_2"
+        ],
+        "slot_name": "sport_of_justin_gimelstob",
+        "slot_role": "target_attribute",
+        "terminal": true,
+        "derived_from_state": "state_3",
+        "diffusion_delta": 0.09901148219353839,
+        "diffusion_gain": 0.09901148219353839
+      }
+    },
+    {
+      "node_id": "memory_mem_6",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'What sport is played by both Justin Gimelstob and Angelique Kerber' is tennis.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 1.0,
+      "temperature": 1.6202370765332468,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "tdca_run",
+        "memory_kind": "answer_candidate",
+        "target_question": "What sport is played by both Justin Gimelstob and Angelique Kerber?",
+        "target_question_norm": "what sport is played by both justin gimelstob and angelique kerber",
+        "relation_signature": "generic",
+        "answer_text": "tennis",
+        "support_score": 1.0,
+        "derived_from_state": "state_1",
+        "composed_from": [
+          "memory_mem_4",
+          "memory_mem_5"
+        ],
+        "slot_role": "target_attribute",
+        "terminal": true,
+        "coverage_count": 2,
+        "coverage_ratio": 1.0,
+        "composition_kind": "attribute_after_bridge",
+        "diffusion_delta": 0.12734340065064176,
+        "diffusion_gain": 0.12734340065064176,
+        "score": 1.0,
+        "raw_score": 11.156360396307907,
+        "evidence_ids": [
+          "doc_5"
+        ]
+      }
+    },
+    {
+      "node_id": "state_5",
+      "node_type": "state",
+      "content": "Does the evidence support that What sport is played by both Justin Gimelstob and Angelique Kerber?",
+      "depth": 1,
+      "parent_id": "state_1",
+      "value": 0.6513736728017988,
+      "temperature": 0.5421947594775527,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.8922332231536529,
+        "evidence_support": 0.6830388916283908,
+        "memory_usefulness": 0.11674226862056278,
+        "answerability": 0.8415194458141954,
+        "uncertainty": 0.17705299950688963
+      },
+      "metadata": {
+        "kind": "verification",
+        "evidence_ids": [
+          "doc_5",
+          "doc_7",
+          "doc_4",
+          "doc_8"
+        ],
+        "memory_ids": [
+          "mem_3",
+          "mem_1"
+        ],
+        "diffusion_delta": 0.08744633874126073,
+        "diffusion_gain": 0.08744633874126073
+      }
+    }
+  ],
+  "edges": [
+    {
+      "source": "state_1",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.9999999928935468
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.3449250942225484
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.0014033151841743286
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.05472019803369047
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.8799999819645339
+    },
+    {
+      "source": "state_1",
+      "target": "state_2",
+      "edge_type": "refines",
+      "weight": 0.9
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_6",
+      "edge_type": "derives",
+      "weight": 1.0
+    },
+    {
+      "source": "state_1",
+      "target": "state_5",
+      "edge_type": "verifies",
+      "weight": 0.38
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.9999999928935468
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 1.0
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 1.0
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.9999999914700591
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.9999999928935468
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.3449250942225484
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.005954645785912985
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.11895468398482507
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.3449250942225484
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.0014033151841743286
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.9999989548311349
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.9999999303126031
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.9999989548311349
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.3660777917867225
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.0014033151841743286
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.8238089048474462
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.8238089048474462
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.05472019803369047
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_4",
+      "edge_type": "recalls",
+      "weight": 0.00704505339638655
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_5",
+      "edge_type": "recalls",
+      "weight": 0.05709907419124839
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.8799999819645339
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_4",
+      "edge_type": "recalls",
+      "weight": 0.0005049582839977627
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_5",
+      "edge_type": "recalls",
+      "weight": 0.17638546304987715
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "memory_mem_6",
+      "edge_type": "recalls",
+      "weight": 0.8799999819645339
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 1.0
+    },
+    {
+      "source": "state_2",
+      "target": "state_3",
+      "edge_type": "refines",
+      "weight": 0.84
+    },
+    {
+      "source": "state_2",
+      "target": "memory_mem_4",
+      "edge_type": "derives",
+      "weight": 1.0
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.9999989548311349
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.8238089048474462
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.15757539098636397
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_10",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_3",
+      "target": "state_4",
+      "edge_type": "refines",
+      "weight": 0.8
+    },
+    {
+      "source": "state_3",
+      "target": "memory_mem_5",
+      "edge_type": "derives",
+      "weight": 1.0
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.15757539098636397
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.15757539098636397
+    },
+    {
+      "source": "kg_doc_10",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_10",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "state_2",
+      "edge_type": "recalls",
+      "weight": 1.0
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 1.0
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "memory_mem_6",
+      "edge_type": "derives",
+      "weight": 1.0
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.9999999303126031
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_8",
+      "edge_type": "supports",
+      "weight": 0.7413787333401776
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.005954645785912985
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_4",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.00704505339638655
+    },
+    {
+      "source": "state_4",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.0005049582839977627
+    },
+    {
+      "source": "kg_doc_8",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.7413787333401776
+    },
+    {
+      "source": "kg_doc_8",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "state_3",
+      "edge_type": "recalls",
+      "weight": 1.0
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.9999989548311349
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.8238089048474462
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.15757539098636397
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_10",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "memory_mem_6",
+      "edge_type": "derives",
+      "weight": 1.0
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 1.0
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.9999999928935468
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.3449250942225484
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.0014033151841743286
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.8799999819645339
+    },
+    {
+      "source": "state_5",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.9999999914700591
+    },
+    {
+      "source": "state_5",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.3660777917867225
+    },
+    {
+      "source": "state_5",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.11895468398482507
+    },
+    {
+      "source": "state_5",
+      "target": "kg_doc_8",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_5",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.17638546304987715
+    },
+    {
+      "source": "state_5",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.05709907419124839
+    }
+  ]
+}

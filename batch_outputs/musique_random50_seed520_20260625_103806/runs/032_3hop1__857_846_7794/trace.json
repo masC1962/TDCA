@@ -1,0 +1,451 @@
+{
+  "trace": [
+    {
+      "step": 1,
+      "expanded_node_id": "state_1",
+      "expanded_content": "In 2010, what was the population of the city where the Yongle emperor greeted the person to whom the edict was addressed?",
+      "created_node_ids": [
+        "state_2",
+        "state_3"
+      ],
+      "created_types": [
+        "state",
+        "state"
+      ],
+      "reused_node_ids": [
+        "state_3"
+      ],
+      "llm_calls": 5,
+      "generated_tokens": 821,
+      "token_budget_remaining": 379,
+      "frontier_snapshot": [
+        {
+          "node_id": "state_3",
+          "temp": 1.1348,
+          "value": 0.8122,
+          "depth": 1,
+          "slot_bonus": 0.0
+        },
+        {
+          "node_id": "state_2",
+          "temp": 0.8957,
+          "value": 0.6586,
+          "depth": 1,
+          "slot_bonus": 0.0
+        }
+      ],
+      "goal_completion": 1.0,
+      "anytime_answer": "",
+      "anytime_answer_score": 0.0,
+      "anytime_answer_source": ""
+    },
+    {
+      "step": 2,
+      "expanded_node_id": "state_2",
+      "expanded_content": "Where was the Yongle Emperor's court located when he greeted Deshin Shekpa in 1407?",
+      "created_node_ids": [
+        "state_4",
+        "memory_mem_4"
+      ],
+      "created_types": [
+        "state",
+        "memory"
+      ],
+      "reused_node_ids": [
+        "state_3",
+        "state_3"
+      ],
+      "llm_calls": 7,
+      "generated_tokens": 975,
+      "token_budget_remaining": 225,
+      "frontier_snapshot": [
+        {
+          "node_id": "state_3",
+          "temp": 1.1795,
+          "value": 0.8122,
+          "depth": 1,
+          "slot_bonus": 0.0
+        },
+        {
+          "node_id": "state_4",
+          "temp": 0.6139,
+          "value": 0.6053,
+          "depth": 2,
+          "slot_bonus": 0.0
+        }
+      ],
+      "goal_completion": 1.0,
+      "anytime_answer": "",
+      "anytime_answer_score": 0.0,
+      "anytime_answer_source": ""
+    },
+    {
+      "step": 3,
+      "expanded_node_id": "state_3",
+      "expanded_content": "What was the population of Nanjing in 2010?",
+      "created_node_ids": [
+        "state_5",
+        "memory_mem_5",
+        "memory_mem_6"
+      ],
+      "created_types": [
+        "state",
+        "memory",
+        "memory"
+      ],
+      "reused_node_ids": [],
+      "llm_calls": 8,
+      "generated_tokens": 1011,
+      "token_budget_remaining": 189,
+      "frontier_snapshot": [
+        {
+          "node_id": "state_4",
+          "temp": 0.9985,
+          "value": 0.6053,
+          "depth": 2,
+          "slot_bonus": 0.0
+        },
+        {
+          "node_id": "state_5",
+          "temp": 0.4947,
+          "value": 0.6597,
+          "depth": 2,
+          "slot_bonus": 0.0
+        }
+      ],
+      "goal_completion": 1.0,
+      "anytime_answer": "8.005 million",
+      "anytime_answer_score": 0.9475,
+      "anytime_answer_source": "memory"
+    },
+    {
+      "step": 3,
+      "event": "final_admission_trace",
+      "sample_id": "3hop1__857_846_7794",
+      "candidate_entered_buffer": true,
+      "buffer_record_count": 4,
+      "root_memory_exists": true,
+      "root_memory_answer": "8.005 million",
+      "formed_root_memory": true,
+      "final_candidate_count": 1,
+      "why_no_final_candidate": "",
+      "candidate_attempts": [
+        {
+          "score_admission_precondition_passed": false,
+          "score_admission_precondition_fail_reasons": [
+            "precondition_failed_root_alignment"
+          ],
+          "inferred_hop_count": 3,
+          "is_longhop": true,
+          "active_dependency_floor": 0.55,
+          "active_last_hop_floor": 0.6,
+          "floor_check_passed": false,
+          "floor_check_fail_reasons": [
+            "root_alignment_below_active_floor"
+          ],
+          "final_chain_score_old": 0.7189187520520188,
+          "final_chain_score_old_components": {
+            "root_alignment": 0.3888888888888889,
+            "slot_coverage": 1.0,
+            "evidence_support": 0.9309826491489834,
+            "dependency_satisfaction": 0.75,
+            "answer_type_match": 0.35,
+            "chain_compactness": 0.88
+          },
+          "final_chain_score_v2": 0.6047157991241159,
+          "final_chain_score_v2_components": {
+            "root_alignment": 0.3888888888888889,
+            "dependency_satisfaction": 0.75,
+            "last_hop_support": 0.7,
+            "answer_type_match": 0.35,
+            "evidence_support": 0.9309826491489834,
+            "chain_compactness": 0.88,
+            "slot_coverage": 1.0
+          },
+          "last_hop_verification": {
+            "last_hop_support": 0.7,
+            "last_hop_reason": "path_terminal_relation_match",
+            "root_relation": "generic",
+            "candidate_role_guess": "date",
+            "support_anchor_found": false,
+            "support_bridge_found": false,
+            "support_relation_match": true
+          },
+          "bridge_entity_check": {
+            "is_likely_bridge_entity": false,
+            "bridge_reasons": []
+          },
+          "expected_answer_type": "number",
+          "candidate_answer_type": "date",
+          "source_node_id": "memory_mem_5",
+          "answer_text": "8.005 million",
+          "target_question": "What was the population of Nanjing in 2010",
+          "hard_floors": {
+            "hop_count": 3.0,
+            "inferred_hop_count": 3.0,
+            "is_longhop": true,
+            "min_root_alignment": 0.55,
+            "min_dependency_satisfaction": 0.55,
+            "min_last_hop_support": 0.6,
+            "active_dependency_floor": 0.55,
+            "active_last_hop_floor": 0.6
+          },
+          "terminal_chain_closure_enabled": true,
+          "terminal_chain_closure_score": 0.7859603009152129,
+          "terminal_chain_closure_info": {
+            "path_completeness": 0.82,
+            "dependency_closure": 0.75,
+            "last_hop_entailment": 0.7,
+            "terminality": 0.82,
+            "root_consistency": 0.72,
+            "evidence_grounding": 0.9309826491489834,
+            "closure_fail_reasons": [],
+            "candidate_chain": [
+              {
+                "node_id": "memory_mem_5",
+                "role": "target_attribute",
+                "text": "Conclusion: The answer to 'What was the population of Nanjing in 2010' is 8.005 million.",
+                "answer": "8.005 million"
+              },
+              {
+                "node_id": "memory_mem_4",
+                "role": "depends_on",
+                "text": "Conclusion: The answer to 'Where was the Yongle Emperor's court located when he greeted Deshin Shekpa in 1407' is Nanjing.",
+                "answer": "Nanjing"
+              }
+            ],
+            "root_anchor_found": true,
+            "bridge_slots_covered": 0,
+            "bridge_slots_total": 0,
+            "candidate_is_consumed_as_bridge": false,
+            "candidate_is_terminal_leaf": true,
+            "chain_node_ids": [
+              "memory_mem_4",
+              "memory_mem_5"
+            ],
+            "tcc_score_threshold": 0.7,
+            "tcc_dimension_floors": {
+              "path_completeness": 0.45,
+              "dependency_closure": 0.45,
+              "last_hop_entailment": 0.5,
+              "terminality": 0.6,
+              "root_consistency": 0.55
+            }
+          },
+          "terminal_chain_closure_gate_passed": true,
+          "terminal_chain_closure_reject_reasons": []
+        },
+        {
+          "score_admission_precondition_passed": false,
+          "score_admission_precondition_fail_reasons": [
+            "precondition_failed_root_alignment"
+          ],
+          "inferred_hop_count": 3,
+          "is_longhop": true,
+          "active_dependency_floor": 0.55,
+          "active_last_hop_floor": 0.6,
+          "floor_check_passed": false,
+          "floor_check_fail_reasons": [
+            "root_alignment_below_active_floor"
+          ],
+          "final_chain_score_old": 0.7189187520520188,
+          "final_chain_score_old_components": {
+            "root_alignment": 0.3888888888888889,
+            "slot_coverage": 1.0,
+            "evidence_support": 0.9309826491489834,
+            "dependency_satisfaction": 0.75,
+            "answer_type_match": 0.35,
+            "chain_compactness": 0.88
+          },
+          "final_chain_score_v2": 0.6047157991241159,
+          "final_chain_score_v2_components": {
+            "root_alignment": 0.3888888888888889,
+            "dependency_satisfaction": 0.75,
+            "last_hop_support": 0.7,
+            "answer_type_match": 0.35,
+            "evidence_support": 0.9309826491489834,
+            "chain_compactness": 0.88,
+            "slot_coverage": 1.0
+          },
+          "last_hop_verification": {
+            "last_hop_support": 0.7,
+            "last_hop_reason": "path_terminal_relation_match",
+            "root_relation": "generic",
+            "candidate_role_guess": "date",
+            "support_anchor_found": false,
+            "support_bridge_found": false,
+            "support_relation_match": true
+          },
+          "bridge_entity_check": {
+            "is_likely_bridge_entity": false,
+            "bridge_reasons": []
+          },
+          "expected_answer_type": "number",
+          "candidate_answer_type": "date",
+          "source_node_id": "memory_mem_5",
+          "answer_text": "8.005 million",
+          "target_question": "What was the population of Nanjing in 2010",
+          "hard_floors": {
+            "hop_count": 3.0,
+            "inferred_hop_count": 3.0,
+            "is_longhop": true,
+            "min_root_alignment": 0.55,
+            "min_dependency_satisfaction": 0.55,
+            "min_last_hop_support": 0.6,
+            "active_dependency_floor": 0.55,
+            "active_last_hop_floor": 0.6
+          },
+          "terminal_chain_closure_enabled": true,
+          "terminal_chain_closure_score": 0.7859603009152129,
+          "terminal_chain_closure_info": {
+            "path_completeness": 0.82,
+            "dependency_closure": 0.75,
+            "last_hop_entailment": 0.7,
+            "terminality": 0.82,
+            "root_consistency": 0.72,
+            "evidence_grounding": 0.9309826491489834,
+            "closure_fail_reasons": [],
+            "candidate_chain": [
+              {
+                "node_id": "memory_mem_5",
+                "role": "target_attribute",
+                "text": "Conclusion: The answer to 'What was the population of Nanjing in 2010' is 8.005 million.",
+                "answer": "8.005 million"
+              },
+              {
+                "node_id": "memory_mem_4",
+                "role": "depends_on",
+                "text": "Conclusion: The answer to 'Where was the Yongle Emperor's court located when he greeted Deshin Shekpa in 1407' is Nanjing.",
+                "answer": "Nanjing"
+              }
+            ],
+            "root_anchor_found": true,
+            "bridge_slots_covered": 0,
+            "bridge_slots_total": 0,
+            "candidate_is_consumed_as_bridge": false,
+            "candidate_is_terminal_leaf": true,
+            "chain_node_ids": [
+              "memory_mem_4",
+              "memory_mem_5"
+            ],
+            "tcc_score_threshold": 0.7,
+            "tcc_dimension_floors": {
+              "path_completeness": 0.45,
+              "dependency_closure": 0.45,
+              "last_hop_entailment": 0.5,
+              "terminality": 0.6,
+              "root_consistency": 0.55
+            }
+          },
+          "terminal_chain_closure_gate_passed": true,
+          "terminal_chain_closure_reject_reasons": []
+        },
+        {
+          "score_admission_precondition_passed": false,
+          "score_admission_precondition_fail_reasons": [
+            "precondition_failed_root_alignment"
+          ],
+          "inferred_hop_count": 3,
+          "is_longhop": true,
+          "active_dependency_floor": 0.55,
+          "active_last_hop_floor": 0.6,
+          "floor_check_passed": false,
+          "floor_check_fail_reasons": [
+            "root_alignment_below_active_floor"
+          ],
+          "final_chain_score_old": 0.7189187520520188,
+          "final_chain_score_old_components": {
+            "root_alignment": 0.3888888888888889,
+            "slot_coverage": 1.0,
+            "evidence_support": 0.9309826491489834,
+            "dependency_satisfaction": 0.75,
+            "answer_type_match": 0.35,
+            "chain_compactness": 0.88
+          },
+          "final_chain_score_v2": 0.6047157991241159,
+          "final_chain_score_v2_components": {
+            "root_alignment": 0.3888888888888889,
+            "dependency_satisfaction": 0.75,
+            "last_hop_support": 0.7,
+            "answer_type_match": 0.35,
+            "evidence_support": 0.9309826491489834,
+            "chain_compactness": 0.88,
+            "slot_coverage": 1.0
+          },
+          "last_hop_verification": {
+            "last_hop_support": 0.7,
+            "last_hop_reason": "path_terminal_relation_match",
+            "root_relation": "generic",
+            "candidate_role_guess": "date",
+            "support_anchor_found": false,
+            "support_bridge_found": false,
+            "support_relation_match": true
+          },
+          "bridge_entity_check": {
+            "is_likely_bridge_entity": false,
+            "bridge_reasons": []
+          },
+          "expected_answer_type": "number",
+          "candidate_answer_type": "date",
+          "source_node_id": "memory_mem_5",
+          "answer_text": "8.005 million",
+          "target_question": "What was the population of Nanjing in 2010",
+          "hard_floors": {
+            "hop_count": 3.0,
+            "inferred_hop_count": 3.0,
+            "is_longhop": true,
+            "min_root_alignment": 0.55,
+            "min_dependency_satisfaction": 0.55,
+            "min_last_hop_support": 0.6,
+            "active_dependency_floor": 0.55,
+            "active_last_hop_floor": 0.6
+          },
+          "terminal_chain_closure_enabled": true,
+          "terminal_chain_closure_score": 0.7859603009152129,
+          "terminal_chain_closure_info": {
+            "path_completeness": 0.82,
+            "dependency_closure": 0.75,
+            "last_hop_entailment": 0.7,
+            "terminality": 0.82,
+            "root_consistency": 0.72,
+            "evidence_grounding": 0.9309826491489834,
+            "closure_fail_reasons": [],
+            "candidate_chain": [
+              {
+                "node_id": "memory_mem_5",
+                "role": "target_attribute",
+                "text": "Conclusion: The answer to 'What was the population of Nanjing in 2010' is 8.005 million.",
+                "answer": "8.005 million"
+              },
+              {
+                "node_id": "memory_mem_4",
+                "role": "depends_on",
+                "text": "Conclusion: The answer to 'Where was the Yongle Emperor's court located when he greeted Deshin Shekpa in 1407' is Nanjing.",
+                "answer": "Nanjing"
+              }
+            ],
+            "root_anchor_found": true,
+            "bridge_slots_covered": 0,
+            "bridge_slots_total": 0,
+            "candidate_is_consumed_as_bridge": false,
+            "candidate_is_terminal_leaf": true,
+            "chain_node_ids": [
+              "memory_mem_4",
+              "memory_mem_5"
+            ],
+            "tcc_score_threshold": 0.7,
+            "tcc_dimension_floors": {
+              "path_completeness": 0.45,
+              "dependency_closure": 0.45,
+              "last_hop_entailment": 0.5,
+              "terminality": 0.6,
+              "root_consistency": 0.55
+            }
+          },
+          "terminal_chain_closure_gate_passed": true,
+          "terminal_chain_closure_reject_reasons": []
+        }
+      ]
+    }
+  ]
+}

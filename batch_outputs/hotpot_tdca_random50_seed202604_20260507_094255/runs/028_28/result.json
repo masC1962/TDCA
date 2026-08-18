@@ -1,0 +1,149 @@
+{
+  "question": "How large of the area is the nature reserve south of Seacroft Esplanade?",
+  "final_answer": "4.3 km2",
+  "best_node": {
+    "node_id": "state_3",
+    "node_type": "state",
+    "content": "What is the area of Gibraltar Point nature reserve?",
+    "depth": 2,
+    "parent_id": "state_2",
+    "value": 0.7548067191823024,
+    "temperature": 1.3129519649879544,
+    "expanded": true,
+    "visit_count": 1,
+    "persistent": false,
+    "score_breakdown": {
+      "task_progress": 0.7936386875799781,
+      "evidence_support": 0.9010763538448554,
+      "memory_usefulness": 0.5139667251540021,
+      "answerability": 0.8596290860133368,
+      "uncertainty": 0.13780625630792603
+    },
+    "metadata": {
+      "kind": "retrieval",
+      "evidence_ids": [
+        "doc_9",
+        "doc_10",
+        "doc_3",
+        "doc_2"
+      ],
+      "memory_ids": [
+        "mem_1",
+        "mem_3"
+      ],
+      "diffusion_delta": 0.31442322294761915,
+      "diffusion_gain": 0.31442322294761915
+    }
+  },
+  "final_synthesis_node_ids": [
+    "state_2",
+    "state_3",
+    "memory_mem_5",
+    "state_1"
+  ],
+  "answer_history": [
+    {
+      "node_id": "memory_mem_4",
+      "content": "Conclusion: The answer to 'What is the name of the nature reserve south of Seacroft Esplanade' is Gibraltar Point nature reserve.",
+      "answer_text": "Gibraltar Point nature reserve",
+      "value": 1.0,
+      "confidence": 1.0,
+      "evidence_ids": [
+        "doc_3"
+      ],
+      "step": 1,
+      "kind": "intermediate_answer"
+    },
+    {
+      "node_id": "memory_mem_5",
+      "content": "Conclusion: The answer to 'What is the area of Gibraltar Point nature reserve' is 4.3 km2.",
+      "answer_text": "4.3 km2",
+      "value": 0.874,
+      "evidence_ids": [
+        "doc_9",
+        "doc_3",
+        "doc_10"
+      ],
+      "step": 2
+    },
+    {
+      "node_id": "state_3",
+      "answer_text": "4.3 km2",
+      "previous_answer": "",
+      "confidence": 0.95,
+      "score": 0.8723367628764526,
+      "source": "expansion_candidate",
+      "step": 1,
+      "evidence_ids": [
+        "doc_9",
+        "doc_3",
+        "doc_10",
+        "doc_2"
+      ],
+      "kind": "anytime_answer"
+    },
+    {
+      "node_id": "state_3",
+      "answer_text": "4.3 km²",
+      "previous_answer": "4.3 km2",
+      "confidence": 0.8596290860133368,
+      "score": 0.9769081802066938,
+      "source": "final_synthesis",
+      "step": 3,
+      "evidence_ids": [
+        "doc_9",
+        "doc_3",
+        "doc_10",
+        "doc_2"
+      ],
+      "kind": "anytime_answer"
+    },
+    {
+      "node_id": "memory_mem_6",
+      "content": "Conclusion: The answer to 'What is the area of Gibraltar Point nature reserve' is 4.3 km².",
+      "answer_text": "4.3 km²",
+      "value": 0.7912,
+      "evidence_ids": [
+        "doc_9",
+        "doc_3",
+        "doc_10"
+      ],
+      "step": 4
+    },
+    {
+      "node_id": "state_3",
+      "answer_text": "4.3 km2",
+      "source": "answer_judge",
+      "choice": "A",
+      "candidate_source": "expansion_candidate",
+      "base_score": 1.0,
+      "judge_confidence": 0.0,
+      "judge_reason": "A directly answers the area question with '4.3 km2' from verified evidence.",
+      "step": 3,
+      "kind": "final_answer_selection"
+    }
+  ],
+  "anytime_answer": "4.3 km²",
+  "anytime_answer_score": 0.9769081802066938,
+  "anytime_answer_source": "final_synthesis",
+  "anytime_answer_node_id": "state_3",
+  "stats": {
+    "steps": 3,
+    "llm_calls": 8,
+    "generated_tokens": 588,
+    "token_budget_remaining": 612,
+    "total_nodes": 16,
+    "kg_nodes": 8,
+    "memory_nodes": 5,
+    "state_nodes": 3,
+    "deleted_state_nodes": 0,
+    "scheduler_mode": "tdca",
+    "scoring_mode": "hybrid",
+    "stop_reason": "frontier_empty",
+    "goal_kind": "bridge",
+    "goal_completion": 0.0,
+    "anytime_answer": "4.3 km²",
+    "anytime_answer_score": 0.9769081802066938,
+    "anytime_answer_source": "final_synthesis"
+  }
+}

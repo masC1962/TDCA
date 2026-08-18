@@ -1,0 +1,164 @@
+{
+  "question": "What city does Paul Clyne and David Soares have in common?",
+  "final_answer": "Albany County",
+  "best_node": {
+    "node_id": "memory_mem_5",
+    "node_type": "memory",
+    "content": "Conclusion: The answer to 'What city does Paul Clyne and David Soares have in common' is Albany County, N.Y.",
+    "depth": 0,
+    "parent_id": null,
+    "value": 1.0,
+    "temperature": 1.28,
+    "expanded": false,
+    "visit_count": 0,
+    "persistent": true,
+    "score_breakdown": {},
+    "metadata": {
+      "source": "tdca_run",
+      "memory_kind": "answer_candidate",
+      "target_question": "What city does Paul Clyne and David Soares have in common?",
+      "target_question_norm": "what city does paul clyne and david soares have in common",
+      "relation_signature": "generic",
+      "answer_text": "Albany County",
+      "support_score": 1.0,
+      "derived_from_state": "state_1",
+      "composed_from": [
+        "memory_mem_4"
+      ],
+      "slot_role": "target_attribute",
+      "terminal": true,
+      "coverage_count": 2,
+      "coverage_ratio": 1.0,
+      "composition_kind": "attribute_after_bridge",
+      "diffusion_delta": -0.014304895391507921,
+      "diffusion_gain": 0.0,
+      "score": 1.0,
+      "raw_score": 12.890078611654118
+    }
+  },
+  "final_synthesis_node_ids": [
+    "state_3",
+    "state_5",
+    "state_7",
+    "state_6",
+    "state_1"
+  ],
+  "answer_history": [
+    {
+      "node_id": "memory_mem_4",
+      "content": "Conclusion: The answer to 'What county is David Soares the District Attorney of' is Albany County, N.Y.",
+      "answer_text": "Albany County, N.Y",
+      "value": 1.0,
+      "confidence": 1.0,
+      "evidence_ids": [
+        "doc_6",
+        "doc_2"
+      ],
+      "step": 1,
+      "kind": "intermediate_answer"
+    },
+    {
+      "node_id": "memory_mem_5",
+      "content": "Conclusion: The answer to 'What city does Paul Clyne and David Soares have in common' is Albany County, N.Y.",
+      "answer_text": "Albany County, N.Y",
+      "value": 1.0,
+      "score": 1.0,
+      "source": "composed_root_memory",
+      "evidence_ids": [
+        "doc_6",
+        "doc_2"
+      ],
+      "step": 1,
+      "kind": "composed_root_memory"
+    },
+    {
+      "node_id": "memory_mem_6",
+      "content": "Conclusion: The answer to 'What county was Paul Clyne the District Attorney of' is Albany County.",
+      "answer_text": "Albany County",
+      "value": 1.0,
+      "confidence": 1.0,
+      "evidence_ids": [
+        "doc_2",
+        "doc_6"
+      ],
+      "step": 2,
+      "kind": "intermediate_answer"
+    },
+    {
+      "node_id": "memory_mem_7",
+      "content": "Conclusion: The answer to 'What city is the seat of Albany County, New York' is Albany.",
+      "answer_text": "Albany",
+      "value": 0.9999999972845187,
+      "confidence": 0.95,
+      "evidence_ids": [
+        "doc_2",
+        "doc_6"
+      ],
+      "step": 3,
+      "kind": "intermediate_answer"
+    },
+    {
+      "node_id": "state_1",
+      "answer_text": "Albany",
+      "previous_answer": "",
+      "confidence": 0.95,
+      "score": 1.0,
+      "source": "expansion_candidate",
+      "step": 3,
+      "evidence_ids": [
+        "doc_2",
+        "doc_6",
+        "doc_1",
+        "doc_5"
+      ],
+      "kind": "anytime_answer"
+    },
+    {
+      "node_id": "memory_mem_8",
+      "content": "Conclusion: The answer to 'What city is David Soares the District Attorney of' is Albany.",
+      "answer_text": "Albany",
+      "value": 0.9108,
+      "evidence_ids": [
+        "doc_6",
+        "doc_2"
+      ],
+      "step": 5
+    },
+    {
+      "node_id": "memory_mem_5",
+      "answer_text": "Albany County",
+      "source": "answer_judge",
+      "choice": "A",
+      "candidate_source": "final_synthesis",
+      "base_score": 1.0,
+      "rerank_score": 0.7864,
+      "judge_confidence": 0.0,
+      "judge_reason": "Question asks for a city; 'Albany County' is not a city — incorrect granularity.",
+      "step": 7,
+      "kind": "final_answer_selection"
+    }
+  ],
+  "anytime_answer": "Albany",
+  "anytime_answer_score": 1.0,
+  "anytime_answer_source": "expansion_candidate",
+  "anytime_answer_node_id": "state_1",
+  "stats": {
+    "steps": 7,
+    "llm_calls": 13,
+    "generated_tokens": 942,
+    "token_budget_remaining": 258,
+    "total_nodes": 31,
+    "kg_nodes": 10,
+    "memory_nodes": 8,
+    "state_nodes": 13,
+    "deleted_state_nodes": 1,
+    "scheduler_mode": "tdca",
+    "scoring_mode": "hybrid",
+    "stop_reason": "final_synthesis_reserve",
+    "goal_kind": "bridge",
+    "goal_completion": 1.0,
+    "anytime_answer": "Albany",
+    "anytime_answer_score": 1.0,
+    "anytime_answer_source": "expansion_candidate"
+  }
+}

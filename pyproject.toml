@@ -1,0 +1,30 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "tdca-research"
+version = "0.1.0"
+description = "Training-free structured working-memory graph research framework for multi-hop QA"
+requires-python = ">=3.10"
+dependencies = [
+  "networkx>=3.0",
+  "numpy>=1.24",
+  "openai>=1.0",
+  "pydantic>=2.0",
+  "PyYAML>=6.0",
+  "scikit-learn>=1.2",
+]
+
+[project.optional-dependencies]
+dense = ["sentence-transformers>=3.0", "faiss-cpu>=1.8"]
+data = ["pyarrow>=14.0"]
+test = ["pytest>=8.0", "hypothesis>=6.0"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests_research"]
+addopts = "-q"

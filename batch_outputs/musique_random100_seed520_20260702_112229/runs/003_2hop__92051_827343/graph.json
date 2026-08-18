@@ -1,0 +1,1081 @@
+{
+  "nodes": [
+    {
+      "node_id": "state_1",
+      "node_type": "state",
+      "content": "Who is the sibling of the actress who played Susan Walker in Miracle on 34th street?",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.7930351765520429,
+      "temperature": 0.2900139741079588,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.9374048401064684,
+        "evidence_support": 0.8158965885484364,
+        "memory_usefulness": 0.5139667766205794,
+        "answerability": 0.9079482942742182,
+        "uncertainty": 0.15313861406128143
+      },
+      "metadata": {
+        "diffusion_delta": -0.06221722625609777,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "kg_doc_7",
+      "node_type": "kg",
+      "content": "Mara Elizabeth Wilson (born July 24, 1987) is an American writer and former child actress. She is known for playing Natalie Hillard in Mrs. Doubtfire (1993), Susan Walker in Miracle on 34th Street (1994), Matilda Wormwood in Matilda (1996) and Lily Stone in Thomas and the Magic Railroad (2000). Since retiring from film acting, Wilson has focused on writing.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.999999971828079,
+      "temperature": 0.999999971828079,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Mara Wilson",
+        "raw_score": 0.1384594627138416,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_6",
+      "node_type": "kg",
+      "content": "William James Remar (born December 31, 1953), is an American actor and voice actor. He played Richard, the on - off tycoon boyfriend of Kim Cattrall's character in Sex and the City, Ajax in The Warriors (1979), homicidal maniac Albert Ganz in the thriller 48 Hrs. (1982), gangster Dutch Schultz in The Cotton Club (1984), Lord Raiden in Mortal Kombat: Annihilation (1997), Giuseppe Salvatore in The CW TV series The Vampire Diaries, Jack Duff in Miracle on 34th Street (1994), and Harry Morgan in the Showtime TV series Dexter. Since 2009, he has done voiceover work in ads for Lexus luxury cars. James Remar also studied acting at The Neighborhood Playhouse School of the Theatre in New York City.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.631793274324011,
+      "temperature": 0.631793274324011,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "James Remar",
+        "raw_score": 0.12536221369404257,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_15",
+      "node_type": "kg",
+      "content": "Miracle on 34th Street (originally released in the United Kingdom as The Big Heart) is a 1947 American Christmas comedy - drama film written and directed by George Seaton and based on a story by Valentine Davies. It stars Maureen O'Hara, John Payne, Natalie Wood and Edmund Gwenn. The story takes place between Thanksgiving Day and Christmas Day in New York City, and focuses on the impact of a department store Santa Claus who claims to be the real Santa. The film has become a perennial Christmas favorite.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.5562391634346276,
+      "temperature": 0.5562391634346276,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Miracle on 34th Street",
+        "raw_score": 0.11891919885358475,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_19",
+      "node_type": "kg",
+      "content": "Bit parts are often significant in the story line and sometimes pivotal, as in Jack Albertson's role as a postal worker in the 1947 feature film Miracle on 34th Street. Some characters with bit parts attract significant attention. Constantin Stanislavski remarked that ``there are no small parts, only small actors. ''",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0,
+      "temperature": 0.0,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Bit part",
+        "raw_score": 0.05365665902044581,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "memory_mem_1",
+      "node_type": "memory",
+      "content": "Template: for compositional multi-hop questions, first solve the intermediate entity and then ask for the final attribute.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9599999038694302,
+      "temperature": 0.11943944411409013,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.96,
+        "tag": "compositional_template",
+        "memory_kind": "template",
+        "raw_score": 0.14547920377607462,
+        "source": "memory",
+        "diffusion_delta": -0.09404353726650513,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "memory_mem_3",
+      "node_type": "memory",
+      "content": "Template: when evidence already grounds the answer, switch from branching to short verification and synthesis.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.06793364937172863,
+      "temperature": 0.00846686853431459,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.88,
+        "tag": "verification_then_stop",
+        "memory_kind": "template",
+        "raw_score": 0.10913838275312691,
+        "source": "memory",
+        "diffusion_delta": -0.006663779250346872,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "state_2",
+      "node_type": "state",
+      "content": "Who played Susan Walker in Miracle on 34th Street?",
+      "depth": 1,
+      "parent_id": "state_1",
+      "value": 0.5724884348333529,
+      "temperature": 1.2607738779423587,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.7488821470881728,
+        "evidence_support": 0.6605777435366424,
+        "memory_usefulness": 0.0,
+        "answerability": 0.6588603003397497,
+        "uncertainty": 0.18109600616340435
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_7",
+          "doc_6",
+          "doc_15",
+          "doc_19"
+        ],
+        "memory_ids": [],
+        "goal_slot_name": "actress_playing_susan",
+        "goal_slot_role": "target_attribute",
+        "goal_terminal": true,
+        "diffusion_delta": -0.03060819891341171,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "state_3",
+      "node_type": "state",
+      "content": "Who are Mara Wilson's siblings?",
+      "depth": 2,
+      "parent_id": "state_2",
+      "value": 0.7533834177244407,
+      "temperature": 1.3349924375258377,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.47714285155758196,
+        "evidence_support": 0.4999999835727199,
+        "memory_usefulness": 0.0,
+        "answerability": 0.5642857060720743,
+        "uncertainty": 0.2100000029569104
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_7",
+          "doc_12",
+          "doc_19",
+          "doc_3"
+        ],
+        "memory_ids": [],
+        "diffusion_delta": 0.3357391580784892,
+        "diffusion_gain": 0.3357391580784892
+      }
+    },
+    {
+      "node_id": "kg_doc_12",
+      "node_type": "kg",
+      "content": "Mr. Noodle and his siblings -- Mr. Noodle's brother Mister Noodle, Ms Noodle, and Miss Noodle -- are characters who appear in the ``Elmo's World ''segments during the educational children's television program Sesame Street. Mr. Noodle was played by Broadway actor Bill Irwin, who had previously worked with Arlene Sherman, executive producer of Sesame Street and co-creator of`` Elmo's World'', in short films for the program.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0,
+      "temperature": 0.0,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Mr. Noodle",
+        "raw_score": 0.049667411729009577,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_3",
+      "node_type": "kg",
+      "content": "Chickasaw is a neighborhood in Louisville, Kentucky, USA. Its boundaries are West Broadway, 34th Street, Hale Avenue and Chickasaw Park.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0,
+      "temperature": 0.0,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Chickasaw, Louisville",
+        "raw_score": 0.04924853022042345,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "memory_mem_4",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'Who played Susan Walker in Miracle on 34th Street' is Mara Wilson.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 1.0,
+      "temperature": 0.7061813024576659,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "intermediate_answer",
+        "target_question": "Who played Susan Walker in Miracle on 34th Street?",
+        "target_question_norm": "who played susan walker in miracle on 34th street",
+        "relation_signature": "generic",
+        "answer_text": "Mara Wilson",
+        "support_score": 1.0,
+        "evidence_ids": [
+          "doc_7",
+          "doc_6"
+        ],
+        "slot_name": "actress_playing_susan",
+        "slot_type": "",
+        "slot_role": "target_attribute",
+        "terminal": true,
+        "path_terminal": false,
+        "composition_kind": "",
+        "derived_from_state": "state_2",
+        "diffusion_delta": -0.012212016212797994,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "state_4",
+      "node_type": "state",
+      "content": "Who is the sibling of Mara Wilson?",
+      "depth": 2,
+      "parent_id": "state_2",
+      "value": 0.7533834177244407,
+      "temperature": 0.8908516545942989,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.5857142809250592,
+        "evidence_support": 0.4999999859140395,
+        "memory_usefulness": 0.004174376035688262,
+        "answerability": 0.6214285643855911,
+        "uncertainty": 0.21000000253547288
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_7",
+          "doc_5",
+          "doc_16",
+          "doc_13"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "diffusion_delta": 0.023763321454512543,
+        "diffusion_gain": 0.023763321454512543
+      }
+    },
+    {
+      "node_id": "kg_doc_5",
+      "node_type": "kg",
+      "content": "Susan Banks is a fictional character on NBC's daytime drama Days of Our Lives. She was played by Eileen Davidson from November 4, 1996 to April 8, 1998, and again in 2014 and 2017. Susan is the mother of Elvis ``EJ ''DiMera, and once acted as Kristen Blake's doppelganger. In November 2011, it was announced that Brynn Thayer would take over the role of Susan, since Davidson was committed to The Young and the Restless. Thayer made her appearance on December 7, 2011.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0,
+      "temperature": 0.0,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Susan Banks",
+        "raw_score": 0.10074080733457913,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_16",
+      "node_type": "kg",
+      "content": "Susan Banks is a fictional character on NBC's daytime drama Days of Our Lives. She was played by Eileen Davidson from November 4, 1996 to April 8, 1998, and again in 2014 and 2017. Susan is the eccentric mother of Elvis ``EJ ''DiMera, and once acted as Kristen Blake's doppelganger. In November 2011, it was announced that Brynn Thayer would take over the role of Susan, since Davidson was committed to The Young and the Restless. Thayer made her brief one - off appearance as Susan on December 7, 2011.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0,
+      "temperature": 0.0,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Susan Banks",
+        "raw_score": 0.09544835554637178,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_13",
+      "node_type": "kg",
+      "content": "Kristen's attempt to force Susan into giving the child back ends with the death of Susan's identical sister, Penelope Kent. Fearing she'll be charged with murder, Kristen pretends to be Susan and is forced to marry Susan's boyfriend, Edmund Crumb (Adam Caine). In the meantime, ``Susan ''and Edmund go on a honeymoon and Laura is arrested for Kristen's murder. Edmund admits to Kristen's`` murder'' and they soon run into the real Susan who explains that Kristen sold her into a harem; it is then revealed that the dead person was Susan's other sibling, Penelope Kent. To get revenge against Kristen, Susan exchanges her freedom for Kristen to be sold to the harem.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0,
+      "temperature": 0.0,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Susan Banks",
+        "raw_score": 0.08423098409343009,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "state_5",
+      "node_type": "state",
+      "content": "Who is the actress who played Susan Walker in Miracle on 34th Street?",
+      "depth": 1,
+      "parent_id": "state_1",
+      "value": 0.6245045133610877,
+      "temperature": 1.0273909089861046,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.8280170377790929,
+        "evidence_support": 0.6538316237200211,
+        "memory_usefulness": 0.0015179549240603725,
+        "answerability": 0.798344383288582,
+        "uncertainty": 0.1823103077303962
+      },
+      "metadata": {
+        "kind": "bridge",
+        "evidence_ids": [
+          "doc_7",
+          "doc_6",
+          "doc_15",
+          "doc_4"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "diffusion_delta": 0.016147514092996973,
+        "diffusion_gain": 0.016147514092996973
+      }
+    },
+    {
+      "node_id": "kg_doc_4",
+      "node_type": "kg",
+      "content": "Kris Kringle (Edmund Gwenn) is indignant to find that the man assigned to play Santa in the annual Macy's Thanksgiving Day Parade (Percy Helton) is intoxicated. When he complains to event director Doris Walker (Maureen O'Hara), she persuades Kris to take his place. He does so well, he is hired to play Santa at Macy's flagship New York City store on 34th Street.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0,
+      "temperature": 0.0,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Miracle on 34th Street",
+        "raw_score": 0.08021163920921896,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "memory_mem_5",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'Who is the actress who played Susan Walker in Miracle on 34th Street' is Mara Wilson.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 1.0,
+      "temperature": 0.6970407798896363,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "intermediate_answer",
+        "target_question": "Who is the actress who played Susan Walker in Miracle on 34th Street?",
+        "target_question_norm": "who is the actress who played susan walker in miracle on 34th street",
+        "relation_signature": "generic",
+        "answer_text": "Mara Wilson",
+        "support_score": 1.0,
+        "evidence_ids": [
+          "doc_7",
+          "doc_6",
+          "doc_15"
+        ],
+        "slot_name": "",
+        "slot_type": "",
+        "slot_role": "",
+        "terminal": false,
+        "path_terminal": false,
+        "composition_kind": "",
+        "derived_from_state": "state_5",
+        "diffusion_delta": -0.045508003893724336,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "state_6",
+      "node_type": "state",
+      "content": "What are Mara Wilson's siblings' names?",
+      "depth": 3,
+      "parent_id": "state_3",
+      "value": 0.39399999135055613,
+      "temperature": 0.6111206753816678,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.4499999941557812,
+        "evidence_support": 0.49999998281112096,
+        "memory_usefulness": 0.0,
+        "answerability": 0.5499999914055604,
+        "uncertainty": 0.21000000309399822
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_7",
+          "doc_8",
+          "doc_19",
+          "doc_12"
+        ],
+        "memory_ids": [],
+        "diffusion_delta": 0.3721084923604064,
+        "diffusion_gain": 0.3721084923604064
+      }
+    },
+    {
+      "node_id": "kg_doc_8",
+      "node_type": "kg",
+      "content": "Susan Banks Eileen Davidson as Susan Banks Days of Our Lives character Portrayed by Eileen Davidson (1996 -- 98, 2014 -- 17) Brynn Thayer (2011) Stacy Haiduk (2018 --) Duration 1996 -- 98 2011 2014 2017 -- First appearance November 4, 1996 (1996 - 11 - 04) Created by James E. Reilly Introduced by Ken Corday and Tom Langan (1996) Ken Corday, Lisa de Cazotte and Greg Meng (2014) Ken Corday, Albert Alarr and Greg Meng (2017 -- 18) Classification Present; regular Profile Other names Susan Delilah Banks Kristen Blake Susan Crumb show Family Siblings Sister Mary Moira Banks Thomas Banks Penelope Kent Spouse John Black (1997) Edmund Crumb (1998 --?) Sons EJ DiMera Grandchildren Johnny DiMera Sydney DiMera",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0,
+      "temperature": 0.0,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Susan Banks",
+        "raw_score": 0.05477583491561401,
+        "dense_backend": "tfidf",
+        "source": "kg"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "source": "state_1",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.9999999027728618
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.631793274324011
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_15",
+      "edge_type": "supports",
+      "weight": 0.5562391634346276
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_19",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.005670176913199888
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.00040164278304160114
+    },
+    {
+      "source": "state_1",
+      "target": "state_2",
+      "edge_type": "refines",
+      "weight": 1.0
+    },
+    {
+      "source": "state_1",
+      "target": "state_4",
+      "edge_type": "refines",
+      "weight": 0.94
+    },
+    {
+      "source": "state_1",
+      "target": "state_5",
+      "edge_type": "refines",
+      "weight": 0.9
+    },
+    {
+      "source": "state_1",
+      "target": "state_3",
+      "edge_type": "refines",
+      "weight": 0.8
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.9999999027728618
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.9999998882890779
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.9999999671454398
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.9999998882890779
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.999999971828079
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.9999999039088421
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.9999999039088421
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "state_6",
+      "edge_type": "supports",
+      "weight": 0.9999999656222419
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.631793274324011
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.3211555987842069
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.3211555987842069
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.3076633435312001
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.3076633435312001
+    },
+    {
+      "source": "kg_doc_15",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.5562391634346276
+    },
+    {
+      "source": "kg_doc_15",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.26342593976317535
+    },
+    {
+      "source": "kg_doc_15",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.26342593976317535
+    },
+    {
+      "source": "kg_doc_15",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.286613373793085
+    },
+    {
+      "source": "kg_doc_15",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.286613373793085
+    },
+    {
+      "source": "kg_doc_19",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_19",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_19",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_19",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_19",
+      "target": "state_6",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.005670176913199888
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_4",
+      "edge_type": "recalls",
+      "weight": 0.007796493245419016
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_5",
+      "edge_type": "recalls",
+      "weight": 0.0028350884565999444
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "memory_mem_5",
+      "edge_type": "recalls",
+      "weight": 0.0028350884565999444
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.00040164278304160114
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_4",
+      "edge_type": "recalls",
+      "weight": 0.0005522588259575084
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_5",
+      "edge_type": "recalls",
+      "weight": 0.0002008213915208006
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "memory_mem_5",
+      "edge_type": "recalls",
+      "weight": 0.0002008213915208006
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.9999998882890779
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.3211555987842069
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_15",
+      "edge_type": "supports",
+      "weight": 0.26342593976317535
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_19",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_2",
+      "target": "state_3",
+      "edge_type": "refines",
+      "weight": 1.0
+    },
+    {
+      "source": "state_2",
+      "target": "memory_mem_4",
+      "edge_type": "derives",
+      "weight": 1.0
+    },
+    {
+      "source": "state_2",
+      "target": "state_4",
+      "edge_type": "refines",
+      "weight": 0.84
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.9999999671454398
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_12",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_19",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_3",
+      "target": "state_6",
+      "edge_type": "refines",
+      "weight": 0.9
+    },
+    {
+      "source": "kg_doc_12",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_12",
+      "target": "state_6",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "state_2",
+      "edge_type": "recalls",
+      "weight": 1.0
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.9999998882890779
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.3211555987842069
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_15",
+      "edge_type": "supports",
+      "weight": 0.26342593976317535
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_19",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.999999971828079
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_16",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_13",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_4",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.007796493245419016
+    },
+    {
+      "source": "state_4",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.0005522588259575084
+    },
+    {
+      "source": "state_4",
+      "target": "state_3",
+      "edge_type": "refines",
+      "weight": 0.84
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_16",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_13",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_5",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.9999999039088421
+    },
+    {
+      "source": "state_5",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.3076633435312001
+    },
+    {
+      "source": "state_5",
+      "target": "kg_doc_15",
+      "edge_type": "supports",
+      "weight": 0.286613373793085
+    },
+    {
+      "source": "state_5",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_5",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.0028350884565999444
+    },
+    {
+      "source": "state_5",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.0002008213915208006
+    },
+    {
+      "source": "state_5",
+      "target": "state_3",
+      "edge_type": "refines",
+      "weight": 0.9
+    },
+    {
+      "source": "state_5",
+      "target": "memory_mem_5",
+      "edge_type": "derives",
+      "weight": 1.0
+    },
+    {
+      "source": "state_5",
+      "target": "state_4",
+      "edge_type": "refines",
+      "weight": 0.84
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "state_5",
+      "edge_type": "recalls",
+      "weight": 1.0
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.9999999039088421
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.3076633435312001
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_15",
+      "edge_type": "supports",
+      "weight": 0.286613373793085
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.0028350884565999444
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.0002008213915208006
+    },
+    {
+      "source": "state_6",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.9999999656222419
+    },
+    {
+      "source": "state_6",
+      "target": "kg_doc_8",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_6",
+      "target": "kg_doc_19",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_6",
+      "target": "kg_doc_12",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_8",
+      "target": "state_6",
+      "edge_type": "supports",
+      "weight": 0.0
+    }
+  ]
+}

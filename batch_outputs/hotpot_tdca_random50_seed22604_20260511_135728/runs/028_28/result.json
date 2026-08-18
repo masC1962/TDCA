@@ -1,0 +1,113 @@
+{
+  "question": "Which major Australian city is close to the Pelican Point Power Station on the Lefevre Peninsula?",
+  "final_answer": "Adelaide",
+  "best_node": {
+    "node_id": "state_1",
+    "node_type": "state",
+    "content": "Which major Australian city is close to the Pelican Point Power Station on the Lefevre Peninsula?",
+    "depth": 0,
+    "parent_id": null,
+    "value": 0.7821694703293294,
+    "temperature": 0.8181502459086347,
+    "expanded": true,
+    "visit_count": 1,
+    "persistent": false,
+    "score_breakdown": {
+      "task_progress": 0.9322721285205877,
+      "evidence_support": 0.8008003780017284,
+      "memory_usefulness": 0.48672266765716377,
+      "answerability": 0.9004001890008643,
+      "uncertainty": 0.1558559319596889
+    },
+    "metadata": {
+      "diffusion_delta": 0.3999501103579605,
+      "diffusion_gain": 0.3999501103579605
+    }
+  },
+  "final_synthesis_node_ids": [
+    "state_2",
+    "memory_mem_4",
+    "state_1"
+  ],
+  "answer_history": [
+    {
+      "node_id": "memory_mem_4",
+      "content": "Conclusion: The answer to 'Which major Australian city is close to the Pelican Point Power Station on the Lefevre Peninsula' is Adelaide.",
+      "answer_text": "Adelaide",
+      "value": 0.92,
+      "evidence_ids": [
+        "doc_4",
+        "doc_6"
+      ],
+      "step": 1
+    },
+    {
+      "node_id": "state_1",
+      "answer_text": "Adelaide",
+      "previous_answer": "",
+      "confidence": 1.0,
+      "score": 0.9047151733658498,
+      "source": "expansion_candidate",
+      "step": 0,
+      "evidence_ids": [
+        "doc_4",
+        "doc_6",
+        "doc_9",
+        "doc_3"
+      ],
+      "kind": "anytime_answer"
+    },
+    {
+      "node_id": "memory_mem_4",
+      "answer_text": "Adelaide",
+      "previous_answer": "Adelaide",
+      "confidence": 1.0,
+      "score": 0.9503508809034461,
+      "source": "memory",
+      "step": 0,
+      "evidence_ids": [
+        "doc_4",
+        "doc_6",
+        "doc_9",
+        "doc_3"
+      ],
+      "kind": "anytime_answer"
+    },
+    {
+      "node_id": "state_1",
+      "answer_text": "Adelaide",
+      "source": "answer_judge",
+      "choice": "A",
+      "candidate_source": "expansion_candidate",
+      "base_score": 1.0,
+      "rerank_score": 0.9729999996145516,
+      "judge_confidence": 0.0,
+      "judge_reason": "",
+      "step": 1,
+      "kind": "final_answer_selection"
+    }
+  ],
+  "anytime_answer": "Adelaide",
+  "anytime_answer_score": 0.9503508809034461,
+  "anytime_answer_source": "memory",
+  "anytime_answer_node_id": "memory_mem_4",
+  "stats": {
+    "steps": 1,
+    "llm_calls": 3,
+    "generated_tokens": 68,
+    "token_budget_remaining": 1132,
+    "total_nodes": 9,
+    "kg_nodes": 4,
+    "memory_nodes": 3,
+    "state_nodes": 2,
+    "deleted_state_nodes": 0,
+    "scheduler_mode": "tdca",
+    "scoring_mode": "hybrid",
+    "stop_reason": "llm_stop_with_root_memory",
+    "goal_kind": "single_hop",
+    "goal_completion": 1.0,
+    "anytime_answer": "Adelaide",
+    "anytime_answer_score": 0.9503508809034461,
+    "anytime_answer_source": "memory"
+  }
+}

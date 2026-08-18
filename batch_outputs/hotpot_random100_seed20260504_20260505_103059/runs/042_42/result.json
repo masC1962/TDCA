@@ -1,0 +1,144 @@
+{
+  "question": "Are Wake Forest University and Pennsylvania State University both located in the US?",
+  "final_answer": "Yes",
+  "best_node": {
+    "node_id": "state_1",
+    "node_type": "state",
+    "content": "Are Wake Forest University and Pennsylvania State University both located in the US?",
+    "depth": 0,
+    "parent_id": null,
+    "value": 0.8421664906557931,
+    "temperature": 1.1698230051983876,
+    "expanded": true,
+    "visit_count": 1,
+    "persistent": false,
+    "score_breakdown": {
+      "task_progress": 0.9382173245825036,
+      "evidence_support": 0.8182862487720693,
+      "memory_usefulness": 0.9133737522807308,
+      "answerability": 0.9091431243860347,
+      "uncertainty": 0.1527084752210275
+    },
+    "metadata": {
+      "diffusion_delta": 0.04792496609189212,
+      "diffusion_gain": 0.04792496609189212
+    }
+  },
+  "final_synthesis_node_ids": [
+    "state_2",
+    "state_5",
+    "state_3",
+    "memory_mem_4",
+    "state_1"
+  ],
+  "answer_history": [
+    {
+      "node_id": "state_1",
+      "answer_text": "Yes",
+      "previous_answer": "",
+      "confidence": 0.7909999944126214,
+      "score": 0.9296916199067721,
+      "source": "direct_rag",
+      "step": 0,
+      "evidence_ids": [
+        "doc_4",
+        "doc_10",
+        "doc_5",
+        "doc_7"
+      ],
+      "kind": "anytime_answer"
+    },
+    {
+      "node_id": "state_1",
+      "answer_text": "Yes",
+      "confidence": 0.7909999944126214,
+      "score": 0.7909999944126214,
+      "source": "direct_rag",
+      "step": 0,
+      "evidence_ids": [
+        "doc_4",
+        "doc_10",
+        "doc_5",
+        "doc_7"
+      ],
+      "kind": "direct_rag_candidate"
+    },
+    {
+      "node_id": "memory_mem_4",
+      "content": "Conclusion: The answer to 'Is Wake Forest University a located in the U' is Winston-Salem, North Carolina.",
+      "answer_text": "Winston-Salem, North Carolina",
+      "value": 0.9999999867685752,
+      "confidence": 0.99,
+      "evidence_ids": [
+        "doc_1",
+        "doc_2"
+      ],
+      "step": 2,
+      "kind": "intermediate_answer"
+    },
+    {
+      "node_id": "memory_mem_5",
+      "content": "Conclusion: The answer to 'Is Pennsylvania State University a located in the U' is Pennsylvania.",
+      "answer_text": "Pennsylvania",
+      "value": 0.9999999938330696,
+      "confidence": 0.95,
+      "evidence_ids": [
+        "doc_4"
+      ],
+      "step": 3,
+      "kind": "intermediate_answer"
+    },
+    {
+      "node_id": "memory_mem_6",
+      "content": "Conclusion: The answer to 'Is Pennsylvania State University located in the United States' is Pennsylvania.",
+      "answer_text": "Pennsylvania",
+      "value": 0.9999999937473252,
+      "confidence": 0.95,
+      "evidence_ids": [
+        "doc_4",
+        "doc_8"
+      ],
+      "step": 4,
+      "kind": "intermediate_answer"
+    },
+    {
+      "node_id": "state_1",
+      "answer_text": "Yes",
+      "source": "answer_judge",
+      "choice": "A",
+      "candidate_source": "direct_rag",
+      "base_score": 1.0,
+      "judge_confidence": 0.0,
+      "judge_reason": "",
+      "direct_rag_floor_applied": false,
+      "step": 7,
+      "kind": "final_answer_selection"
+    }
+  ],
+  "anytime_answer": "Yes",
+  "anytime_answer_score": 0.9296916199067721,
+  "anytime_answer_source": "direct_rag",
+  "anytime_answer_node_id": "state_1",
+  "direct_rag_answer": "Yes",
+  "direct_rag_score": 0.7909999944126214,
+  "direct_rag_node_id": "state_1",
+  "stats": {
+    "steps": 7,
+    "llm_calls": 12,
+    "generated_tokens": 870,
+    "token_budget_remaining": 330,
+    "total_nodes": 20,
+    "kg_nodes": 8,
+    "memory_nodes": 5,
+    "state_nodes": 7,
+    "deleted_state_nodes": 1,
+    "scheduler_mode": "tdca",
+    "scoring_mode": "hybrid",
+    "stop_reason": "final_synthesis_reserve",
+    "goal_kind": "comparison",
+    "goal_completion": 0.0,
+    "anytime_answer": "Yes",
+    "anytime_answer_score": 0.9296916199067721,
+    "anytime_answer_source": "direct_rag"
+  }
+}

@@ -1,0 +1,301 @@
+{
+  "nodes": [
+    {
+      "node_id": "state_1",
+      "node_type": "state",
+      "content": "Are Local H and For Against both from the United States?",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.6708595459818627,
+      "temperature": 0.9014906090616455,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.8300000000000001,
+        "evidence_support": 0.5,
+        "memory_usefulness": 0.820496216515522,
+        "answerability": 0.75,
+        "uncertainty": 0.21
+      },
+      "metadata": {
+        "diffusion_delta": 0.1255933094118754,
+        "diffusion_gain": 0.1255933094118754
+      }
+    },
+    {
+      "node_id": "kg_doc_4",
+      "node_type": "kg",
+      "content": "For a composition question, identify the intermediate entity before retrieving its attribute.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 1.0,
+      "temperature": 1.0,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Reasoning Pattern",
+        "raw_score": 3.7772988152849662,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_3",
+      "node_type": "kg",
+      "content": "Leonardo DiCaprio starred in Inception and was born in Los Angeles.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0,
+      "temperature": 0.0,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Leonardo DiCaprio Fact",
+        "raw_score": 1.3138960095720436,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "memory_mem_3",
+      "node_type": "memory",
+      "content": "Template: when evidence already grounds the answer, switch from branching to short verification and synthesis.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.8799999984640889,
+      "temperature": 0.6807182500920284,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.88,
+        "tag": "verification_then_stop",
+        "memory_kind": "template",
+        "raw_score": 7.238200321361049,
+        "source": "memory",
+        "diffusion_delta": -0.19928174837206059,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "memory_mem_1",
+      "node_type": "memory",
+      "content": "Template: for compositional multi-hop questions, first solve the intermediate entity and then ask for the final attribute.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.7609924358073331,
+      "temperature": 0.42110452739561083,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.96,
+        "tag": "compositional_template",
+        "memory_kind": "template",
+        "raw_score": 4.081375207232402,
+        "source": "memory",
+        "diffusion_delta": -0.0945052158557626,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "memory_mem_2",
+      "node_type": "memory",
+      "content": "Template: for comparison questions, split the problem into one sub-question per entity before comparing them.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0869480031648404,
+      "temperature": 0.04763763767721791,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.9,
+        "tag": "comparison_template",
+        "memory_kind": "template",
+        "raw_score": 1.8036700317597363,
+        "source": "memory",
+        "diffusion_delta": -0.010932277589971735,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "memory_mem_7",
+      "node_type": "memory",
+      "content": "Template: for nested relation questions, solve the intermediate relation first, then query the target attribute, then verify the chain.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.07266678238725865,
+      "temperature": 0.043954779622745986,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.758776433441565,
+        "source": "tdca_run",
+        "kind": "strategy_template",
+        "memory_kind": "template",
+        "raw_score": 1.9147644359910032,
+        "diffusion_delta": -0.00982140700721136,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "memory_mem_17",
+      "node_type": "memory",
+      "content": "Template: for comparison questions, decompose into one attribute query per entity before final comparison.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.048268311803681206,
+      "temperature": 0.022555301192665758,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.7248658750583714,
+        "source": "tdca_run",
+        "kind": "strategy_template",
+        "memory_kind": "template",
+        "raw_score": 1.5236013568405016,
+        "diffusion_delta": -0.007167796666764061,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "memory_mem_18",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'What science fantasy young adult series, told in first person, has a set of companion books narrating the stories of enslaved worlds and alien species' is Leonardo DiCaprio Fact.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0,
+      "temperature": 0.0,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.7457344696248972,
+        "source": "tdca_run",
+        "memory_kind": "answer_candidate",
+        "target_question": "What science fantasy young adult series, told in first person, has a set of companion books narrating the stories of enslaved worlds and alien species?",
+        "target_question_norm": "what science fantasy young adult series told in first person has a set of companion books narrating the stories of enslaved worlds and alien species",
+        "relation_signature": "generic",
+        "answer_text": "Leonardo DiCaprio Fact",
+        "support_score": 0.6698787014290118,
+        "evidence_ids": [
+          "doc_3"
+        ],
+        "derived_from_state": "state_1",
+        "raw_score": 1.5087020501738069,
+        "diffusion_delta": 0.0,
+        "diffusion_gain": 0.0
+      }
+    }
+  ],
+  "edges": [
+    {
+      "source": "state_1",
+      "target": "kg_doc_4",
+      "edge_type": "supports",
+      "weight": 1.0
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_3",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.8799999972237108
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.7609924358073331
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_2",
+      "edge_type": "recalls",
+      "weight": 0.0869480031648404
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_7",
+      "edge_type": "recalls",
+      "weight": 0.07266678238725865
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_17",
+      "edge_type": "recalls",
+      "weight": 0.048268311803681206
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_18",
+      "edge_type": "recalls",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_4",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 1.0
+    },
+    {
+      "source": "kg_doc_3",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.8799999972237108
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.7609924358073331
+    },
+    {
+      "source": "memory_mem_2",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.0869480031648404
+    },
+    {
+      "source": "memory_mem_7",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.07266678238725865
+    },
+    {
+      "source": "memory_mem_17",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.048268311803681206
+    },
+    {
+      "source": "memory_mem_18",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.0
+    }
+  ]
+}

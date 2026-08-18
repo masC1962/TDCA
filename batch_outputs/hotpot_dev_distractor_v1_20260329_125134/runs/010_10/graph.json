@@ -1,0 +1,1372 @@
+{
+  "nodes": [
+    {
+      "node_id": "state_1",
+      "node_type": "state",
+      "content": "What is the name of the fight song of the university whose main campus is in Lawrence, Kansas and whose branch campuses are in the Kansas City metropolitan area?",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.7340784326189005,
+      "temperature": 0.4080175386484633,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.8677084191209103,
+        "evidence_support": 0.632523386446973,
+        "memory_usefulness": 0.8601500850686137,
+        "answerability": 0.7762616932234865,
+        "uncertainty": 0.1587962581684843
+      },
+      "metadata": {
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "kg_doc_10",
+      "node_type": "kg",
+      "content": "Title: University of Kansas. The University of Kansas, often referred to as KU or Kansas, is a public research university in the U.S. state of Kansas. The main campus in Lawrence, one of the largest college towns in Kansas, is on Mount Oread, the highest elevation in Lawrence. Two branch campuses are in the Kansas City metropolitan area: the Edwards Campus in Overland Park, and the university's medical school and hospital in Kansas City. There are also educational and research sites in Parsons, Topeka, Garden City, Hays, and Leavenworth, and branches of the medical school in Wichita and Salina. The university is one of the 62 members of the Association of American Universities.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.99999999695781,
+      "temperature": 0.99999999695781,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "University of Kansas",
+        "raw_score": 11.065947873205722,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_8",
+      "node_type": "kg",
+      "content": "Title: University of the Incarnate Word. The University of the Incarnate Word (UIW) is a private Catholic university whose main campus is located in San Antonio and Alamo Heights, Texas, United States. Founded in 1881 by the Sisters of Charity of the Incarnate Word, the university's main campus is located on 154 acre .",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.2650467763192024,
+      "temperature": 0.2650467763192024,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "University of the Incarnate Word",
+        "raw_score": 6.827334713524083,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_5",
+      "node_type": "kg",
+      "content": "Title: Kansas Song. Kansas Song (We’re From Kansas) is a fight song of the University of Kansas.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999960995296,
+      "temperature": 0.9999999960995296,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Kansas Song",
+        "raw_score": 4.220423939168692,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_2",
+      "node_type": "kg",
+      "content": "Title: University of Missouri–Kansas City. The University of Missouri–Kansas City (UMKC) is a public research university serving the greater Kansas City metropolitan area. Located in Kansas City, Missouri, UMKC is one of four system campuses that collectively constitute the University of Missouri. UMKC is spread across multiple locales; the main Volker Campus, home to the majority of university operations, is located in Kansas City's Rockhill neighborhood, east of the Country Club Plaza, and adjacent to both the Stowers Institute for Medical Research and the world-renowned Linda Hall Library. In 2017 the University, in collaboration with Truman Medical Center, Children's Mercy Hospital, the Missouri Health Department, the Jackson County Medical Examiners Office, and the Missouri Department of Mental Health Behavioral Medicine, formed the UMKC Health Sciences District on Hospital Hill. This district is a first-in-the-nation partnership between local and state governments, the university, and these nationally recognized healthcare faculties, designed to promote collaboration in research, innovation, education, grant funding, and community outreach, for the advancement of health and wellness in the greater Kansas City metropolitan area. Also in 2017, the university announced plans to expand its metropolitan identity with the construction of a downtown Campus for the Arts, located near the Kauffman Center for the Performing Arts. The university's enrollment as of 2015 exceeded more than 16,600 students.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999869472794,
+      "temperature": 0.9999999869472794,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "University of Missouri–Kansas City",
+        "raw_score": 8.906291750969393,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "memory_tmpl_1",
+      "node_type": "memory",
+      "content": "Template: for compositional multi-hop questions, first solve the intermediate entity and then ask for the final attribute.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9599999959543724,
+      "temperature": 0.9599999959543724,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.96,
+        "tag": "compositional_template",
+        "memory_kind": "template",
+        "raw_score": 1.0110287542790324,
+        "source": "memory"
+      }
+    },
+    {
+      "node_id": "memory_tmpl_3",
+      "node_type": "memory",
+      "content": "Template: when evidence already grounds the answer, switch from branching to short verification and synthesis.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.7805844293051372,
+      "temperature": 0.7805844293051372,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.88,
+        "tag": "verification_then_stop",
+        "memory_kind": "template",
+        "raw_score": 0.7607715066685797,
+        "source": "memory"
+      }
+    },
+    {
+      "node_id": "memory_tmpl_4",
+      "node_type": "memory",
+      "content": "Template: for nested relation questions, solve the intermediate relation first, then query the target attribute, then verify the chain.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.7587764278581757,
+      "temperature": 0.7587764278581757,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.758776433441565,
+        "source": "tdca_run",
+        "kind": "strategy_template",
+        "memory_kind": "template",
+        "raw_score": 1.1682190761873232
+      }
+    },
+    {
+      "node_id": "memory_tmpl_2",
+      "node_type": "memory",
+      "content": "Template: for comparison questions, split the problem into one sub-question per entity before comparing them.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.5617102702764047,
+      "temperature": 0.5617102702764047,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.9,
+        "tag": "comparison_template",
+        "memory_kind": "template",
+        "raw_score": 0.7399706654735906,
+        "source": "memory"
+      }
+    },
+    {
+      "node_id": "state_2",
+      "node_type": "state",
+      "content": "What is the name of the university with a main campus in Lawrence, Kansas and branch campuses in the Kansas City metropolitan area?",
+      "depth": 1,
+      "parent_id": "state_1",
+      "value": 0.7490265512427774,
+      "temperature": 0.39880467605714165,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.8262324751497699,
+        "evidence_support": 0.728952642611795,
+        "memory_usefulness": 0.8702922122321306,
+        "answerability": 0.7863810832106594,
+        "uncertainty": 0.1433675771821128
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_10",
+          "doc_2",
+          "doc_8",
+          "doc_1"
+        ],
+        "memory_ids": [
+          "tmpl_1",
+          "tmpl_3",
+          "tmpl_4",
+          "tmpl_2"
+        ]
+      }
+    },
+    {
+      "node_id": "kg_doc_1",
+      "node_type": "kg",
+      "content": "Title: North Kansas City, Missouri. North Kansas City is a city in Clay County, Missouri, United States that despite the similarity in name to its larger counterpart, Kansas City, is an independent municipality part of the Kansas City metropolitan area. The population was 4,208 at the 2010 census. Originally a northern suburb across the Missouri River from Kansas City, Missouri, it is now almost completely surrounded by Kansas City, which has annexed far to the north of North Kansas City's northern city limits. North Kansas City also adjoins the small municipality of Avondale.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.1717455714735693,
+      "temperature": 0.1717455714735693,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "North Kansas City, Missouri",
+        "raw_score": 4.629551333861416,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "state_3",
+      "node_type": "state",
+      "content": "What is the fight song of the University of Kansas?",
+      "depth": 1,
+      "parent_id": "state_1",
+      "value": 0.7311448243957239,
+      "temperature": 0.8651156530810962,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.5787274857896114,
+        "evidence_support": 0.5176292594684974,
+        "memory_usefulness": 0.7924458410580982,
+        "answerability": 0.5950051059247249,
+        "uncertainty": 0.17717931848504043
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_5",
+          "doc_10",
+          "doc_2",
+          "doc_8"
+        ],
+        "memory_ids": [
+          "tmpl_4",
+          "tmpl_1",
+          "tmpl_3",
+          "tmpl_2"
+        ]
+      }
+    },
+    {
+      "node_id": "state_4",
+      "node_type": "state",
+      "content": "What is the name of the university with a main campus in Lawrence, Kansas?",
+      "depth": 2,
+      "parent_id": "state_2",
+      "value": 0.7013175179608719,
+      "temperature": 1.0648157460796297,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.7223805384722566,
+        "evidence_support": 0.7579353581901309,
+        "memory_usefulness": 0.7924458410580982,
+        "answerability": 0.7437295838569703,
+        "uncertainty": 0.13873034268957907
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_10",
+          "doc_2",
+          "doc_8",
+          "doc_1"
+        ],
+        "memory_ids": [
+          "tmpl_4",
+          "tmpl_1",
+          "tmpl_3",
+          "tmpl_2"
+        ]
+      }
+    },
+    {
+      "node_id": "state_5",
+      "node_type": "state",
+      "content": "What is the name of the university with branch campuses in the Kansas City metropolitan area?",
+      "depth": 2,
+      "parent_id": "state_2",
+      "value": 0.7455616710426325,
+      "temperature": 0.35620926917342255,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.7792100883100177,
+        "evidence_support": 0.8099751130304724,
+        "memory_usefulness": 0.7924458439736697,
+        "answerability": 0.78879708032476,
+        "uncertainty": 0.13040398191512442
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_10",
+          "doc_2",
+          "doc_1",
+          "doc_7"
+        ],
+        "memory_ids": [
+          "tmpl_4",
+          "tmpl_1",
+          "tmpl_3",
+          "tmpl_2"
+        ]
+      }
+    },
+    {
+      "node_id": "kg_doc_7",
+      "node_type": "kg",
+      "content": "Title: Kansas City metropolitan area. The Kansas City metropolitan area is a 15-county metropolitan area anchored by Kansas City, Missouri, that straddles the border between the U.S. states of Missouri and Kansas. With a population of about 2,340,000, it ranks as the second largest metropolitan area with its core in Missouri (after Greater St. Louis). Alongside Kansas City, the area includes a number of other cities and suburbs, the largest being Overland Park, Kansas; Kansas City, Kansas; Olathe, Kansas; and Independence, Missouri; each over 100,000 in population. The Mid-America Regional Council (MARC) serves as the Council of Governments and the Metropolitan Planning Organization for the area.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0,
+      "temperature": 0.0,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Kansas City metropolitan area",
+        "raw_score": 4.482096966095295,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "state_6",
+      "node_type": "state",
+      "content": "Is the University of Kansas the same as the University of Missouri–Kansas City?",
+      "depth": 2,
+      "parent_id": "state_2",
+      "value": 0.6704002185864567,
+      "temperature": 0.44141752228673725,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.6659118283281429,
+        "evidence_support": 0.8656280945623019,
+        "memory_usefulness": 0.7924458439736697,
+        "answerability": 0.6699569044240081,
+        "uncertainty": 0.1214995048700317
+      },
+      "metadata": {
+        "kind": "verification",
+        "evidence_ids": [
+          "doc_2",
+          "doc_10",
+          "doc_8",
+          "doc_5"
+        ],
+        "memory_ids": [
+          "tmpl_4",
+          "tmpl_1",
+          "tmpl_3",
+          "tmpl_2"
+        ]
+      }
+    },
+    {
+      "node_id": "state_7",
+      "node_type": "state",
+      "content": "What is the main campus city of the university with branch campuses in the Kansas City metropolitan area?",
+      "depth": 3,
+      "parent_id": "state_5",
+      "value": 0.7696261309428674,
+      "temperature": 0.4646425556197533,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.8089964953833588,
+        "evidence_support": 0.8398050797685896,
+        "memory_usefulness": 0.7924458439736697,
+        "answerability": 0.813235873217628,
+        "uncertainty": 0.12563118723702565
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_10",
+          "doc_2",
+          "doc_8",
+          "doc_7"
+        ],
+        "memory_ids": [
+          "tmpl_4",
+          "tmpl_1",
+          "tmpl_3",
+          "tmpl_2"
+        ]
+      }
+    },
+    {
+      "node_id": "memory_mem_6",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'What is the name of the university with branch campuses in the Kansas City metropolitan area' is University of Kansas.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9499999995385647,
+      "temperature": 1.1292165183705594,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "tdca_run",
+        "memory_kind": "derived_fact",
+        "target_question": "What is the name of the university with branch campuses in the Kansas City metropolitan area?",
+        "target_question_norm": "what is the name of the university with branch campuses in the kansas city metropolitan area",
+        "relation_signature": "generic",
+        "answer_text": "University of Kansas",
+        "support_score": 0.8099751130304724,
+        "evidence_ids": [
+          "doc_10",
+          "doc_2"
+        ],
+        "derived_from_state": "state_5",
+        "diffusion_gain": 0.0,
+        "score": 0.95,
+        "raw_score": 20.58794178120535
+      }
+    },
+    {
+      "node_id": "memory_mem_7",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'What is the main campus city of the university with branch campuses in the Kansas City metropolitan area' is The Kansas Jayhawks.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.92,
+      "temperature": 1.1735946541832016,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "derived_fact",
+        "target_question": "What is the main campus city of the university with branch campuses in the Kansas City metropolitan area?",
+        "target_question_norm": "what is the main campus city of the university with branch campuses in the kansas city metropolitan area",
+        "relation_signature": "generic",
+        "answer_text": "The Kansas Jayhawks",
+        "support_score": 0.8398050797685896,
+        "evidence_ids": [
+          "doc_10",
+          "doc_2"
+        ],
+        "derived_from_state": "state_7",
+        "diffusion_gain": 0.0
+      }
+    }
+  ],
+  "edges": [
+    {
+      "source": "state_1",
+      "target": "kg_doc_10",
+      "edge_type": "supports",
+      "weight": 0.9999999965747436
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_8",
+      "edge_type": "supports",
+      "weight": 0.2650467763192024
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.17542493420674923
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_1",
+      "target": "memory_tmpl_1",
+      "edge_type": "recalls",
+      "weight": 0.9599999959543724
+    },
+    {
+      "source": "state_1",
+      "target": "memory_tmpl_3",
+      "edge_type": "recalls",
+      "weight": 0.7603001741828549
+    },
+    {
+      "source": "state_1",
+      "target": "memory_tmpl_4",
+      "edge_type": "recalls",
+      "weight": 0.5794062365777172
+    },
+    {
+      "source": "state_1",
+      "target": "memory_tmpl_2",
+      "edge_type": "recalls",
+      "weight": 0.42892533531462845
+    },
+    {
+      "source": "state_1",
+      "target": "state_2",
+      "edge_type": "refines",
+      "weight": 0.9
+    },
+    {
+      "source": "state_1",
+      "target": "state_3",
+      "edge_type": "refines",
+      "weight": 0.8
+    },
+    {
+      "source": "kg_doc_10",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.9999999965747436
+    },
+    {
+      "source": "kg_doc_10",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.99999999695781
+    },
+    {
+      "source": "kg_doc_10",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.03525852283746507
+    },
+    {
+      "source": "kg_doc_10",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.9999999946639982
+    },
+    {
+      "source": "kg_doc_10",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.9999999922996415
+    },
+    {
+      "source": "kg_doc_10",
+      "target": "state_6",
+      "edge_type": "supports",
+      "weight": 0.7312562021773245
+    },
+    {
+      "source": "kg_doc_10",
+      "target": "state_7",
+      "edge_type": "supports",
+      "weight": 0.9999999956366987
+    },
+    {
+      "source": "kg_doc_10",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.9999999922996415
+    },
+    {
+      "source": "kg_doc_10",
+      "target": "memory_mem_7",
+      "edge_type": "supports",
+      "weight": 0.9999999956366987
+    },
+    {
+      "source": "kg_doc_8",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.2650467763192024
+    },
+    {
+      "source": "kg_doc_8",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.014232355912424256
+    },
+    {
+      "source": "kg_doc_8",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_8",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.23864101444866448
+    },
+    {
+      "source": "kg_doc_8",
+      "target": "state_6",
+      "edge_type": "supports",
+      "weight": 0.08571094976144011
+    },
+    {
+      "source": "kg_doc_8",
+      "target": "state_7",
+      "edge_type": "supports",
+      "weight": 0.030854721813078353
+    },
+    {
+      "source": "kg_doc_8",
+      "target": "memory_mem_7",
+      "edge_type": "supports",
+      "weight": 0.030854721813078353
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.17542493420674923
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.9999999960995296
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "state_6",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.45790528826578014
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.030977383887940958
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.5158707217162635
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.6199502337613032
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "state_6",
+      "edge_type": "supports",
+      "weight": 0.9999999869472794
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "state_7",
+      "edge_type": "supports",
+      "weight": 0.6796101639004805
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.6199502337613032
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "memory_mem_7",
+      "edge_type": "supports",
+      "weight": 0.6796101639004805
+    },
+    {
+      "source": "memory_tmpl_1",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.9599999959543724
+    },
+    {
+      "source": "memory_tmpl_1",
+      "target": "state_2",
+      "edge_type": "recalls",
+      "weight": 0.9599999951591242
+    },
+    {
+      "source": "memory_tmpl_1",
+      "target": "state_3",
+      "edge_type": "recalls",
+      "weight": 0.8261152570497154
+    },
+    {
+      "source": "memory_tmpl_1",
+      "target": "state_4",
+      "edge_type": "recalls",
+      "weight": 0.8261152570497154
+    },
+    {
+      "source": "memory_tmpl_1",
+      "target": "state_5",
+      "edge_type": "recalls",
+      "weight": 0.8261152600891638
+    },
+    {
+      "source": "memory_tmpl_1",
+      "target": "state_6",
+      "edge_type": "recalls",
+      "weight": 0.8261152600891638
+    },
+    {
+      "source": "memory_tmpl_1",
+      "target": "state_7",
+      "edge_type": "recalls",
+      "weight": 0.047143498556153955
+    },
+    {
+      "source": "memory_tmpl_1",
+      "target": "memory_mem_6",
+      "edge_type": "recalls",
+      "weight": 0.8261152600891638
+    },
+    {
+      "source": "memory_tmpl_1",
+      "target": "memory_mem_7",
+      "edge_type": "recalls",
+      "weight": 0.047143498556153955
+    },
+    {
+      "source": "memory_tmpl_3",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.7603001741828549
+    },
+    {
+      "source": "memory_tmpl_3",
+      "target": "state_2",
+      "edge_type": "recalls",
+      "weight": 0.7805844293051372
+    },
+    {
+      "source": "memory_tmpl_3",
+      "target": "state_3",
+      "edge_type": "recalls",
+      "weight": 0.5654664852172043
+    },
+    {
+      "source": "memory_tmpl_3",
+      "target": "state_4",
+      "edge_type": "recalls",
+      "weight": 0.5654664852172043
+    },
+    {
+      "source": "memory_tmpl_3",
+      "target": "state_5",
+      "edge_type": "recalls",
+      "weight": 0.5654664872976719
+    },
+    {
+      "source": "memory_tmpl_3",
+      "target": "state_6",
+      "edge_type": "recalls",
+      "weight": 0.5654664872976719
+    },
+    {
+      "source": "memory_tmpl_3",
+      "target": "state_7",
+      "edge_type": "recalls",
+      "weight": 0.03251801139997077
+    },
+    {
+      "source": "memory_tmpl_4",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.5794062365777172
+    },
+    {
+      "source": "memory_tmpl_4",
+      "target": "state_2",
+      "edge_type": "recalls",
+      "weight": 0.5199750027281566
+    },
+    {
+      "source": "memory_tmpl_4",
+      "target": "state_3",
+      "edge_type": "recalls",
+      "weight": 0.758776425066481
+    },
+    {
+      "source": "memory_tmpl_4",
+      "target": "state_4",
+      "edge_type": "recalls",
+      "weight": 0.758776425066481
+    },
+    {
+      "source": "memory_tmpl_4",
+      "target": "state_5",
+      "edge_type": "recalls",
+      "weight": 0.7587764278581757
+    },
+    {
+      "source": "memory_tmpl_4",
+      "target": "state_6",
+      "edge_type": "recalls",
+      "weight": 0.7587764278581757
+    },
+    {
+      "source": "memory_tmpl_4",
+      "target": "state_7",
+      "edge_type": "recalls",
+      "weight": 0.043055158844798755
+    },
+    {
+      "source": "memory_tmpl_4",
+      "target": "memory_mem_6",
+      "edge_type": "recalls",
+      "weight": 0.7587764278581757
+    },
+    {
+      "source": "memory_tmpl_2",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.42892533531462845
+    },
+    {
+      "source": "memory_tmpl_2",
+      "target": "state_2",
+      "edge_type": "recalls",
+      "weight": 0.38492932647348843
+    },
+    {
+      "source": "memory_tmpl_2",
+      "target": "state_3",
+      "edge_type": "recalls",
+      "weight": 0.5617102682097569
+    },
+    {
+      "source": "memory_tmpl_2",
+      "target": "state_4",
+      "edge_type": "recalls",
+      "weight": 0.5617102682097569
+    },
+    {
+      "source": "memory_tmpl_2",
+      "target": "state_5",
+      "edge_type": "recalls",
+      "weight": 0.5617102702764047
+    },
+    {
+      "source": "memory_tmpl_2",
+      "target": "state_6",
+      "edge_type": "recalls",
+      "weight": 0.5617102702764047
+    },
+    {
+      "source": "memory_tmpl_2",
+      "target": "state_7",
+      "edge_type": "recalls",
+      "weight": 0.032347750235563556
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_10",
+      "edge_type": "supports",
+      "weight": 0.99999999695781
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.45790528826578014
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_8",
+      "edge_type": "supports",
+      "weight": 0.014232355912424256
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_2",
+      "target": "memory_tmpl_1",
+      "edge_type": "recalls",
+      "weight": 0.9599999951591242
+    },
+    {
+      "source": "state_2",
+      "target": "memory_tmpl_3",
+      "edge_type": "recalls",
+      "weight": 0.7805844293051372
+    },
+    {
+      "source": "state_2",
+      "target": "memory_tmpl_4",
+      "edge_type": "recalls",
+      "weight": 0.5199750027281566
+    },
+    {
+      "source": "state_2",
+      "target": "memory_tmpl_2",
+      "edge_type": "recalls",
+      "weight": 0.38492932647348843
+    },
+    {
+      "source": "state_2",
+      "target": "state_4",
+      "edge_type": "refines",
+      "weight": 0.9
+    },
+    {
+      "source": "state_2",
+      "target": "state_5",
+      "edge_type": "refines",
+      "weight": 0.8
+    },
+    {
+      "source": "state_2",
+      "target": "state_6",
+      "edge_type": "verifies",
+      "weight": 0.7
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.1717455714735693
+    },
+    {
+      "source": "kg_doc_1",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.1717455714735693
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.9999999960995296
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_10",
+      "edge_type": "supports",
+      "weight": 0.03525852283746507
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.030977383887940958
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_8",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_3",
+      "target": "memory_tmpl_4",
+      "edge_type": "recalls",
+      "weight": 0.758776425066481
+    },
+    {
+      "source": "state_3",
+      "target": "memory_tmpl_1",
+      "edge_type": "recalls",
+      "weight": 0.8261152570497154
+    },
+    {
+      "source": "state_3",
+      "target": "memory_tmpl_3",
+      "edge_type": "recalls",
+      "weight": 0.5654664852172043
+    },
+    {
+      "source": "state_3",
+      "target": "memory_tmpl_2",
+      "edge_type": "recalls",
+      "weight": 0.5617102682097569
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_10",
+      "edge_type": "supports",
+      "weight": 0.9999999946639982
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.5158707217162635
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_8",
+      "edge_type": "supports",
+      "weight": 0.23864101444866448
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_4",
+      "target": "memory_tmpl_4",
+      "edge_type": "recalls",
+      "weight": 0.758776425066481
+    },
+    {
+      "source": "state_4",
+      "target": "memory_tmpl_1",
+      "edge_type": "recalls",
+      "weight": 0.8261152570497154
+    },
+    {
+      "source": "state_4",
+      "target": "memory_tmpl_3",
+      "edge_type": "recalls",
+      "weight": 0.5654664852172043
+    },
+    {
+      "source": "state_4",
+      "target": "memory_tmpl_2",
+      "edge_type": "recalls",
+      "weight": 0.5617102682097569
+    },
+    {
+      "source": "state_5",
+      "target": "kg_doc_10",
+      "edge_type": "supports",
+      "weight": 0.9999999922996415
+    },
+    {
+      "source": "state_5",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.6199502337613032
+    },
+    {
+      "source": "state_5",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.1717455714735693
+    },
+    {
+      "source": "state_5",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_5",
+      "target": "memory_tmpl_4",
+      "edge_type": "recalls",
+      "weight": 0.7587764278581757
+    },
+    {
+      "source": "state_5",
+      "target": "memory_tmpl_1",
+      "edge_type": "recalls",
+      "weight": 0.8261152600891638
+    },
+    {
+      "source": "state_5",
+      "target": "memory_tmpl_3",
+      "edge_type": "recalls",
+      "weight": 0.5654664872976719
+    },
+    {
+      "source": "state_5",
+      "target": "memory_tmpl_2",
+      "edge_type": "recalls",
+      "weight": 0.5617102702764047
+    },
+    {
+      "source": "state_5",
+      "target": "state_7",
+      "edge_type": "refines",
+      "weight": 0.8
+    },
+    {
+      "source": "state_5",
+      "target": "memory_mem_6",
+      "edge_type": "derives",
+      "weight": 0.95
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "state_7",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "memory_mem_7",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_6",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.9999999869472794
+    },
+    {
+      "source": "state_6",
+      "target": "kg_doc_10",
+      "edge_type": "supports",
+      "weight": 0.7312562021773245
+    },
+    {
+      "source": "state_6",
+      "target": "kg_doc_8",
+      "edge_type": "supports",
+      "weight": 0.08571094976144011
+    },
+    {
+      "source": "state_6",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_6",
+      "target": "memory_tmpl_4",
+      "edge_type": "recalls",
+      "weight": 0.7587764278581757
+    },
+    {
+      "source": "state_6",
+      "target": "memory_tmpl_1",
+      "edge_type": "recalls",
+      "weight": 0.8261152600891638
+    },
+    {
+      "source": "state_6",
+      "target": "memory_tmpl_3",
+      "edge_type": "recalls",
+      "weight": 0.5654664872976719
+    },
+    {
+      "source": "state_6",
+      "target": "memory_tmpl_2",
+      "edge_type": "recalls",
+      "weight": 0.5617102702764047
+    },
+    {
+      "source": "state_7",
+      "target": "kg_doc_10",
+      "edge_type": "supports",
+      "weight": 0.9999999956366987
+    },
+    {
+      "source": "state_7",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.6796101639004805
+    },
+    {
+      "source": "state_7",
+      "target": "kg_doc_8",
+      "edge_type": "supports",
+      "weight": 0.030854721813078353
+    },
+    {
+      "source": "state_7",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_7",
+      "target": "memory_tmpl_4",
+      "edge_type": "recalls",
+      "weight": 0.043055158844798755
+    },
+    {
+      "source": "state_7",
+      "target": "memory_tmpl_1",
+      "edge_type": "recalls",
+      "weight": 0.047143498556153955
+    },
+    {
+      "source": "state_7",
+      "target": "memory_tmpl_3",
+      "edge_type": "recalls",
+      "weight": 0.03251801139997077
+    },
+    {
+      "source": "state_7",
+      "target": "memory_tmpl_2",
+      "edge_type": "recalls",
+      "weight": 0.032347750235563556
+    },
+    {
+      "source": "state_7",
+      "target": "memory_mem_6",
+      "edge_type": "recalls",
+      "weight": 0.9499999995385647
+    },
+    {
+      "source": "state_7",
+      "target": "state_3",
+      "edge_type": "verifies",
+      "weight": 0.1
+    },
+    {
+      "source": "state_7",
+      "target": "memory_mem_7",
+      "edge_type": "derives",
+      "weight": 1.0
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "state_5",
+      "edge_type": "recalls",
+      "weight": 0.95
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_10",
+      "edge_type": "supports",
+      "weight": 0.9999999922996415
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.6199502337613032
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_1",
+      "edge_type": "supports",
+      "weight": 0.1717455714735693
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "memory_tmpl_1",
+      "edge_type": "recalls",
+      "weight": 0.8261152600891638
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "memory_tmpl_4",
+      "edge_type": "recalls",
+      "weight": 0.7587764278581757
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "state_7",
+      "edge_type": "recalls",
+      "weight": 0.9499999995385647
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "memory_mem_7",
+      "edge_type": "recalls",
+      "weight": 0.9499999995385647
+    },
+    {
+      "source": "memory_mem_7",
+      "target": "state_7",
+      "edge_type": "recalls",
+      "weight": 1.0
+    },
+    {
+      "source": "memory_mem_7",
+      "target": "kg_doc_10",
+      "edge_type": "supports",
+      "weight": 0.9999999956366987
+    },
+    {
+      "source": "memory_mem_7",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.6796101639004805
+    },
+    {
+      "source": "memory_mem_7",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_7",
+      "target": "kg_doc_8",
+      "edge_type": "supports",
+      "weight": 0.030854721813078353
+    },
+    {
+      "source": "memory_mem_7",
+      "target": "memory_mem_6",
+      "edge_type": "recalls",
+      "weight": 0.9499999995385647
+    },
+    {
+      "source": "memory_mem_7",
+      "target": "memory_tmpl_1",
+      "edge_type": "recalls",
+      "weight": 0.047143498556153955
+    }
+  ]
+}

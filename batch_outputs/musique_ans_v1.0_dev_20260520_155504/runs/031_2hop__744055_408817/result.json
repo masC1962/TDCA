@@ -1,0 +1,138 @@
+{
+  "question": "Who is the lead singer of the band performing Bang Bang Rock & Roll?",
+  "final_answer": "Eddie Argos",
+  "best_node": {
+    "node_id": "state_3",
+    "node_type": "state",
+    "content": "Who is the lead singer of Art Brut?",
+    "depth": 2,
+    "parent_id": "state_2",
+    "value": 0.6670988903199927,
+    "temperature": 1.2300358589147384,
+    "expanded": true,
+    "visit_count": 1,
+    "persistent": false,
+    "score_breakdown": {
+      "task_progress": 0.7343766410513906,
+      "evidence_support": 0.7267762169960683,
+      "memory_usefulness": 0.5139667251540021,
+      "answerability": 0.7724790175889432,
+      "uncertainty": 0.1691802809407077
+    },
+    "metadata": {
+      "kind": "retrieval",
+      "evidence_ids": [
+        "doc_9",
+        "doc_3",
+        "doc_1",
+        "doc_14"
+      ],
+      "memory_ids": [
+        "mem_1",
+        "mem_3"
+      ],
+      "diffusion_delta": 0.2820736211404785,
+      "diffusion_gain": 0.2820736211404785
+    }
+  },
+  "final_synthesis_node_ids": [
+    "state_2",
+    "state_3",
+    "memory_mem_4",
+    "memory_mem_5",
+    "state_1"
+  ],
+  "answer_history": [
+    {
+      "node_id": "memory_mem_4",
+      "content": "Conclusion: The answer to 'Which band performed the album 'Bang Bang Rock & Roll'' is Art Brut.",
+      "answer_text": "Art Brut",
+      "value": 1.0,
+      "confidence": 1.0,
+      "evidence_ids": [
+        "doc_3"
+      ],
+      "step": 1,
+      "kind": "intermediate_answer"
+    },
+    {
+      "node_id": "memory_mem_5",
+      "content": "Conclusion: The answer to 'Who is the lead singer of Art Brut' is Eddie Argos.",
+      "answer_text": "Eddie Argos",
+      "value": 0.91908,
+      "evidence_ids": [
+        "doc_9",
+        "doc_3"
+      ],
+      "step": 2
+    },
+    {
+      "node_id": "state_3",
+      "answer_text": "Eddie Argos",
+      "previous_answer": "",
+      "confidence": 0.999,
+      "score": 0.8546631136941565,
+      "source": "expansion_candidate",
+      "step": 1,
+      "evidence_ids": [
+        "doc_9",
+        "doc_3",
+        "doc_1",
+        "doc_14"
+      ],
+      "kind": "anytime_answer"
+    },
+    {
+      "node_id": "state_1",
+      "answer_text": "Eddie Argos",
+      "previous_answer": "Eddie Argos",
+      "confidence": 0.9912325443518458,
+      "score": 0.9453636720562962,
+      "source": "final_synthesis",
+      "step": 3,
+      "evidence_ids": [
+        "doc_3",
+        "doc_9",
+        "doc_13",
+        "doc_1"
+      ],
+      "kind": "anytime_answer"
+    },
+    {
+      "node_id": "state_3",
+      "answer_text": "Eddie Argos",
+      "source": "answer_judge",
+      "choice": "A",
+      "candidate_source": "expansion_candidate",
+      "base_score": 1.0,
+      "rerank_score": 0.829923076800289,
+      "judge_confidence": 0.0,
+      "judge_reason": "",
+      "step": 3,
+      "kind": "final_answer_selection"
+    }
+  ],
+  "anytime_answer": "Eddie Argos",
+  "anytime_answer_score": 0.9453636720562962,
+  "anytime_answer_source": "final_synthesis",
+  "anytime_answer_node_id": "state_1",
+  "stats": {
+    "steps": 3,
+    "llm_calls": 7,
+    "generated_tokens": 622,
+    "token_budget_remaining": 578,
+    "total_nodes": 14,
+    "kg_nodes": 7,
+    "memory_nodes": 4,
+    "state_nodes": 3,
+    "deleted_state_nodes": 0,
+    "scheduler_mode": "tdca",
+    "scoring_mode": "hybrid",
+    "stop_reason": "frontier_empty",
+    "goal_kind": "bridge",
+    "goal_completion": 0.0,
+    "anytime_answer": "Eddie Argos",
+    "anytime_answer_score": 0.9453636720562962,
+    "anytime_answer_source": "final_synthesis"
+  }
+}

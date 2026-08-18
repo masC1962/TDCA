@@ -1,0 +1,112 @@
+{
+  "question": "In which county is Kimbrough Memorial Stadium located?",
+  "final_answer": "Randall County",
+  "best_node": {
+    "node_id": "state_1",
+    "node_type": "state",
+    "content": "In which county is Kimbrough Memorial Stadium located?",
+    "depth": 0,
+    "parent_id": null,
+    "value": 0.6201055789847558,
+    "temperature": 0.10430583109593422,
+    "expanded": true,
+    "visit_count": 1,
+    "persistent": false,
+    "score_breakdown": {
+      "task_progress": 0.8622334993140243,
+      "evidence_support": 0.59480440974713,
+      "memory_usefulness": 0.0,
+      "answerability": 0.7974022048735651,
+      "uncertainty": 0.19293520624551658
+    },
+    "metadata": {
+      "diffusion_delta": -0.016318324812984175,
+      "diffusion_gain": 0.0
+    }
+  },
+  "final_synthesis_node_ids": [
+    "state_3",
+    "state_2",
+    "memory_mem_4",
+    "state_1"
+  ],
+  "answer_history": [
+    {
+      "node_id": "memory_mem_4",
+      "content": "Conclusion: The answer to 'In which city is Kimbrough Memorial Stadium located' is Canyon, Texas.",
+      "answer_text": "Canyon, Texas",
+      "value": 1.0,
+      "confidence": 1.0,
+      "evidence_ids": [
+        "doc_5"
+      ],
+      "step": 1,
+      "kind": "intermediate_answer"
+    },
+    {
+      "node_id": "memory_mem_5",
+      "content": "Conclusion: The answer to 'In which county is Canyon, Texas located' is Randall County.",
+      "answer_text": "Randall County",
+      "value": 1.0,
+      "confidence": 1.0,
+      "evidence_ids": [
+        "doc_17",
+        "doc_5"
+      ],
+      "step": 2,
+      "kind": "intermediate_answer"
+    },
+    {
+      "node_id": "state_1",
+      "answer_text": "Randall County",
+      "previous_answer": "",
+      "confidence": 0.7974022048735651,
+      "score": 0.7742268708785252,
+      "source": "final_synthesis",
+      "step": 3,
+      "evidence_ids": [
+        "doc_5",
+        "doc_7",
+        "doc_17",
+        "doc_4"
+      ],
+      "kind": "anytime_answer"
+    },
+    {
+      "node_id": "state_1",
+      "answer_text": "Randall County",
+      "source": "answer_judge",
+      "choice": "A",
+      "candidate_source": "final_synthesis",
+      "base_score": 0.8239487149420913,
+      "rerank_score": 0.6691521656458407,
+      "judge_confidence": 0.0,
+      "judge_reason": "",
+      "step": 3,
+      "kind": "final_answer_selection"
+    }
+  ],
+  "anytime_answer": "Randall County",
+  "anytime_answer_score": 0.7742268708785252,
+  "anytime_answer_source": "final_synthesis",
+  "anytime_answer_node_id": "state_1",
+  "stats": {
+    "steps": 3,
+    "llm_calls": 8,
+    "generated_tokens": 544,
+    "token_budget_remaining": 656,
+    "total_nodes": 10,
+    "kg_nodes": 5,
+    "memory_nodes": 2,
+    "state_nodes": 3,
+    "deleted_state_nodes": 0,
+    "scheduler_mode": "tdca",
+    "scoring_mode": "hybrid",
+    "stop_reason": "frontier_empty",
+    "goal_kind": "bridge",
+    "goal_completion": 0.5,
+    "anytime_answer": "Randall County",
+    "anytime_answer_score": 0.7742268708785252,
+    "anytime_answer_source": "final_synthesis"
+  }
+}

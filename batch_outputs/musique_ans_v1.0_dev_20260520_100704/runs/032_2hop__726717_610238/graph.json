@@ -1,0 +1,1847 @@
+{
+  "nodes": [
+    {
+      "node_id": "state_1",
+      "node_type": "state",
+      "content": "What is the network which National Cycle Route 57 is part of an example of?",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.8415189534763028,
+      "temperature": 0.17944223568123543,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.9701641530120422,
+        "evidence_support": 0.9122475088589475,
+        "memory_usefulness": 0.5139667251540021,
+        "answerability": 0.9561237544294737,
+        "uncertainty": 0.13579544840538946
+      },
+      "metadata": {
+        "diffusion_delta": -0.01950836549864393,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "kg_doc_13",
+      "node_type": "kg",
+      "content": "National Cycle Route 57 is part of the United Kingdom's National Cycle Network. When complete, it will run west to east from Farmington, Gloucestershire near Northleach to Welwyn Garden City in Hertfordshire.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999954155138,
+      "temperature": 0.9999999954155138,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "National Cycle Route 57",
+        "raw_score": 7.557820924183504,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_15",
+      "node_type": "kg",
+      "content": "The National Cycle Network (NCN) is the national cycling route network of the United Kingdom, which was established to encourage cycling throughout Britain, as well as for the purposes of bicycle touring. It was created by the charity Sustrans who were aided by a £42.5 million National Lottery grant. In 2017, the 16,575 mile network was used for over 786 million trips.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999962393485,
+      "temperature": 0.9999999962393485,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "National Cycle Network",
+        "raw_score": 8.87277512856523,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_6",
+      "node_type": "kg",
+      "content": "CBS will broadcast Super Bowl LIII, as part of an annual cycle between the three main broadcast television partners of the NFL.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.3206743392918823,
+      "temperature": 0.3206743392918823,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Super Bowl LIII",
+        "raw_score": 5.550014658852932,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "kg_doc_8",
+      "node_type": "kg",
+      "content": "Circus Time was a variety program presented in the United States by television network ABC as part of its 1956-57 season.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.3405543043363156,
+      "temperature": 0.3405543043363156,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Circus Time",
+        "raw_score": 5.9505954906721525,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "memory_mem_1",
+      "node_type": "memory",
+      "content": "Template: for compositional multi-hop questions, first solve the intermediate entity and then ask for the final attribute.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9599998077388796,
+      "temperature": 0.8591392559126393,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.96,
+        "tag": "compositional_template",
+        "memory_kind": "template",
+        "raw_score": 0.08219405071628709,
+        "source": "memory",
+        "diffusion_delta": 0.10177735762332651,
+        "diffusion_gain": 0.10177735762332651
+      }
+    },
+    {
+      "node_id": "memory_mem_3",
+      "node_type": "memory",
+      "content": "Template: when evidence already grounds the answer, switch from branching to short verification and synthesis.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.08338123870035324,
+      "temperature": 0.9215790796486285,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "score": 0.88,
+        "tag": "verification_then_stop",
+        "memory_kind": "template",
+        "raw_score": 0.06230839328492731,
+        "source": "memory",
+        "diffusion_delta": 0.05187194871191014,
+        "diffusion_gain": 0.05187194871191014
+      }
+    },
+    {
+      "node_id": "state_2",
+      "node_type": "state",
+      "content": "What network is National Cycle Route 57 part of?",
+      "depth": 1,
+      "parent_id": "state_1",
+      "value": 0.6374917330684671,
+      "temperature": 1.2639664661514072,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.7941472208882574,
+        "evidence_support": 0.7384420523862774,
+        "memory_usefulness": 0.0,
+        "answerability": 0.8076825646546771,
+        "uncertainty": 0.16708043057047006
+      },
+      "metadata": {
+        "kind": "bridge",
+        "evidence_ids": [
+          "doc_13",
+          "doc_15",
+          "doc_8",
+          "doc_2"
+        ],
+        "memory_ids": [],
+        "goal_slot_name": "ncn_entity",
+        "goal_slot_role": "bridge_entity",
+        "goal_terminal": false,
+        "diffusion_delta": -0.04397547245330724,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "kg_doc_2",
+      "node_type": "kg",
+      "content": "National Route 28 is a national highway connecting Kobe and Tokushima in Japan. It is the only national highway that traverses through Awaji Island as the route uses ferries to connect the two cities of Naruto, Tokushima and Akashi, Hyōgo.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.08883963225850068,
+      "temperature": 0.08883963225850068,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Japan National Route 28",
+        "raw_score": 4.127335347209143,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "state_3",
+      "node_type": "state",
+      "content": "What is the National Cycle Network?",
+      "depth": 2,
+      "parent_id": "state_2",
+      "value": 0.7722954484726553,
+      "temperature": 1.7505032221568642,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.7836825747871244,
+        "evidence_support": 0.9655822335367913,
+        "memory_usefulness": 0.5139667251540021,
+        "answerability": 0.875098809076088,
+        "uncertainty": 0.12619519796337755
+      },
+      "metadata": {
+        "kind": "bridge",
+        "evidence_ids": [
+          "doc_13",
+          "doc_15",
+          "doc_7",
+          "doc_8"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "diffusion_delta": 0.0011410623632261974,
+        "diffusion_gain": 0.0011410623632261974
+      }
+    },
+    {
+      "node_id": "kg_doc_7",
+      "node_type": "kg",
+      "content": "René Wenzel (born 20 April 1960, Copenhagen, Denmark) is a Danish cycle racing coach, working as a consultant. He is a former coach of USA Cycling's national junior team, Koege Cykel Ring in Denmark, and first cycling teacher at a sports college in Denmark, the Gentofte Studenter Kursus.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.01020025875184225,
+      "temperature": 0.01020025875184225,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "René Wenzel",
+        "raw_score": 3.169499555744597,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "state_4",
+      "node_type": "state",
+      "content": "Is the National Cycle Network an example of a broader category of networks?",
+      "depth": 2,
+      "parent_id": "state_2",
+      "value": 0.8152310935963657,
+      "temperature": 1.783247071454077,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.8526099857334986,
+        "evidence_support": 0.9963642114333666,
+        "memory_usefulness": 0.5139667251540021,
+        "answerability": 0.9212590287936063,
+        "uncertainty": 0.120654441941994
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_13",
+          "doc_15",
+          "doc_6",
+          "doc_16"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "diffusion_delta": 0.013940808768405866,
+        "diffusion_gain": 0.013940808768405866
+      }
+    },
+    {
+      "node_id": "kg_doc_16",
+      "node_type": "kg",
+      "content": "Arkansas Highway 242 (AR 242, Hwy. 242) is an east–west state highway in Phillips County, Arkansas. The route of runs from Highway 44 near Helena-West Helena north through the city and through the St. Francis National Forest to Highway 1 near Lexa. A segment of the route is part of the Mississippi River Trail, essentially a bicycle-friendly version of the Great River Road.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0,
+      "temperature": 0.0,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Arkansas Highway 242",
+        "raw_score": 3.5068652578353867,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "memory_mem_4",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'What network is National Cycle Route 57 part of' is National Cycle Route 57.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999954155138,
+      "temperature": 0.6883691359670022,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "intermediate_answer",
+        "target_question": "What network is National Cycle Route 57 part of?",
+        "target_question_norm": "what network is national cycle route 57 part of",
+        "relation_signature": "generic",
+        "answer_text": "National Cycle Network",
+        "support_score": 0.9999999954155138,
+        "evidence_ids": [
+          "doc_13",
+          "doc_15"
+        ],
+        "slot_name": "ncn_entity",
+        "slot_role": "bridge_entity",
+        "terminal": false,
+        "derived_from_state": "state_2",
+        "diffusion_delta": -0.01895373208038098,
+        "diffusion_gain": 0.0
+      }
+    },
+    {
+      "node_id": "state_5",
+      "node_type": "state",
+      "content": "What type of network is the National Cycle Network?",
+      "depth": 3,
+      "parent_id": "state_3",
+      "value": 0.731457062510913,
+      "temperature": 1.1521629802894244,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.8175508623722753,
+        "evidence_support": 0.9792219934026193,
+        "memory_usefulness": 0.002091808076471015,
+        "answerability": 0.8973033043936173,
+        "uncertainty": 0.12374004118752853
+      },
+      "metadata": {
+        "kind": "bridge",
+        "evidence_ids": [
+          "doc_15",
+          "doc_13",
+          "doc_8",
+          "doc_7"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "diffusion_delta": 0.05821717948513294,
+        "diffusion_gain": 0.05821717948513294
+      }
+    },
+    {
+      "node_id": "memory_mem_5",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'What is the National Cycle Network' is National Cycle Route 57.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.888335654853848,
+      "temperature": 1.0318256469735156,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "derived_fact",
+        "target_question": "What is the National Cycle Network?",
+        "target_question_norm": "what is the national cycle network",
+        "relation_signature": "generic",
+        "answer_text": "National Cycle Route 57",
+        "support_score": 0.9655822335367913,
+        "evidence_ids": [
+          "doc_13",
+          "doc_15"
+        ],
+        "slot_name": "",
+        "slot_role": "",
+        "terminal": false,
+        "derived_from_state": "state_3",
+        "diffusion_delta": 0.003096872458005384,
+        "diffusion_gain": 0.003096872458005384
+      }
+    },
+    {
+      "node_id": "state_6",
+      "node_type": "state",
+      "content": "What broader category of transportation infrastructure does the National Cycle Network belong to?",
+      "depth": 3,
+      "parent_id": "state_4",
+      "value": 0.6898019205983742,
+      "temperature": 2.4571562916854393,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.7775096915827586,
+        "evidence_support": 0.9474266947004213,
+        "memory_usefulness": 0.044319552388839514,
+        "answerability": 0.7660210396579029,
+        "uncertainty": 0.12946319495392417
+      },
+      "metadata": {
+        "kind": "bridge",
+        "evidence_ids": [
+          "doc_13",
+          "doc_15",
+          "doc_8",
+          "doc_10"
+        ],
+        "memory_ids": [
+          "mem_3",
+          "mem_1"
+        ],
+        "diffusion_delta": 0.1644385906296142,
+        "diffusion_gain": 0.1644385906296142
+      }
+    },
+    {
+      "node_id": "kg_doc_10",
+      "node_type": "kg",
+      "content": "The Great King () is a 1942 German drama film directed by Veit Harlan and starring Otto Gebühr. It depicts the life of Frederick the Great, who ruled Prussia from 1740 to 1786. It received the rare \"Film of the Nation\" distinction. It was part of a popular cycle of \"Prussian films\".",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0,
+      "temperature": 0.0,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "The Great King",
+        "raw_score": 2.1021785144993492,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "memory_mem_6",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'Is the National Cycle Network an example of a broader category of networks' is Yes.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.9999999927390173,
+      "temperature": 1.1544228657952365,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "intermediate_answer",
+        "target_question": "Is the National Cycle Network an example of a broader category of networks?",
+        "target_question_norm": "is the national cycle network an example of a broader category of networks",
+        "relation_signature": "generic",
+        "answer_text": "Yes",
+        "support_score": 0.9999999927390173,
+        "evidence_ids": [
+          "doc_13",
+          "doc_15"
+        ],
+        "slot_name": "",
+        "slot_role": "",
+        "terminal": false,
+        "derived_from_state": "state_4",
+        "diffusion_delta": 0.01220006492719028,
+        "diffusion_gain": 0.01220006492719028
+      }
+    },
+    {
+      "node_id": "state_7",
+      "node_type": "state",
+      "content": "What kind of network is the National Cycle Network?",
+      "depth": 1,
+      "parent_id": "state_1",
+      "value": 0.731480221689674,
+      "temperature": 0.2371362859738833,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.8175508623722753,
+        "evidence_support": 0.9792219934026193,
+        "memory_usefulness": 0.0022848012328123496,
+        "answerability": 0.8973033043936173,
+        "uncertainty": 0.12374004118752853
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_15",
+          "doc_13",
+          "doc_8",
+          "doc_7"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "diffusion_delta": 0.05402271621677279,
+        "diffusion_gain": 0.05402271621677279
+      }
+    },
+    {
+      "node_id": "state_8",
+      "node_type": "state",
+      "content": "What is the broader category of transportation infrastructure that the National Cycle Network belongs to?",
+      "depth": 4,
+      "parent_id": "state_6",
+      "value": 0.7086196711096617,
+      "temperature": 2.42233398752478,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.7998401243405013,
+        "evidence_support": 0.9271315874268139,
+        "memory_usefulness": 0.03021264879125325,
+        "answerability": 0.8712581014057147,
+        "uncertainty": 0.1331163142631735
+      },
+      "metadata": {
+        "kind": "bridge",
+        "evidence_ids": [
+          "doc_13",
+          "doc_15",
+          "doc_2",
+          "doc_5"
+        ],
+        "memory_ids": [
+          "mem_3",
+          "mem_1"
+        ],
+        "diffusion_delta": 0.4962582504518489,
+        "diffusion_gain": 0.4962582504518489
+      }
+    },
+    {
+      "node_id": "kg_doc_5",
+      "node_type": "kg",
+      "content": "State Route 264 is a state highway in central Utah that connects Sanpete County to Carbon County through Flat Canyon, Boulger Canyon, Upper Huntington Canyon, and Eccles Canyon. It is part of The Energy Loop, a National Scenic Byway.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.0,
+      "temperature": 0.0,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "title": "Utah State Route 264",
+        "raw_score": 3.760716822700381,
+        "source": "kg"
+      }
+    },
+    {
+      "node_id": "memory_mem_7",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'What broader category of transportation infrastructure does the National Cycle Network belong to' is National Cycle Route 57.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.874,
+      "temperature": 1.4046898518326336,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "derived_fact",
+        "target_question": "What broader category of transportation infrastructure does the National Cycle Network belong to?",
+        "target_question_norm": "what broader category of transportation infrastructure does the national cycle network belong to",
+        "relation_signature": "generic",
+        "answer_text": "National Cycle Route 57",
+        "support_score": 0.9474266947004213,
+        "evidence_ids": [
+          "doc_13",
+          "doc_15"
+        ],
+        "slot_name": "",
+        "slot_role": "",
+        "terminal": false,
+        "derived_from_state": "state_6",
+        "diffusion_delta": 0.08561239079586702,
+        "diffusion_gain": 0.08561239079586702
+      }
+    },
+    {
+      "node_id": "state_9",
+      "node_type": "state",
+      "content": "What is the broader category or type of network that the National Cycle Network belongs to?",
+      "depth": 4,
+      "parent_id": "state_5",
+      "value": 0.74488471256555,
+      "temperature": 1.1282665748047123,
+      "expanded": true,
+      "visit_count": 1,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.824518030057801,
+        "evidence_support": 0.9997136630659305,
+        "memory_usefulness": 0.028060490410293897,
+        "answerability": 0.9075491392252729,
+        "uncertainty": 0.12005154064813252
+      },
+      "metadata": {
+        "kind": "bridge",
+        "evidence_ids": [
+          "doc_13",
+          "doc_15",
+          "doc_8",
+          "doc_2"
+        ],
+        "memory_ids": [
+          "mem_3",
+          "mem_1"
+        ],
+        "diffusion_delta": 0.23915996131027217,
+        "diffusion_gain": 0.23915996131027217
+      }
+    },
+    {
+      "node_id": "memory_mem_8",
+      "node_type": "memory",
+      "content": "Conclusion: The answer to 'What is the broader category of transportation infrastructure that the National Cycle Network belongs to' is National Cycle Route 57.",
+      "depth": 0,
+      "parent_id": null,
+      "value": 0.8529610604326688,
+      "temperature": 1.8193519645540555,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": true,
+      "score_breakdown": {},
+      "metadata": {
+        "source": "memory",
+        "memory_kind": "derived_fact",
+        "target_question": "What is the broader category of transportation infrastructure that the National Cycle Network belongs to?",
+        "target_question_norm": "what is the broader category of transportation infrastructure that the national cycle network belongs to",
+        "relation_signature": "generic",
+        "answer_text": "National Cycle Route 57",
+        "support_score": 0.9271315874268139,
+        "evidence_ids": [
+          "doc_13",
+          "doc_15"
+        ],
+        "slot_name": "",
+        "slot_role": "",
+        "terminal": false,
+        "derived_from_state": "state_8",
+        "diffusion_delta": 0.4178063093948272,
+        "diffusion_gain": 0.4178063093948272
+      }
+    },
+    {
+      "node_id": "state_10",
+      "node_type": "state",
+      "content": "What type of network is the National Cycle Network classified as?",
+      "depth": 2,
+      "parent_id": "state_7",
+      "value": 0.6977602666641328,
+      "temperature": 0.6801899254874622,
+      "expanded": false,
+      "visit_count": 0,
+      "persistent": false,
+      "score_breakdown": {
+        "task_progress": 0.7947541732383933,
+        "evidence_support": 0.9121729077147311,
+        "memory_usefulness": 0.0024443420045131025,
+        "answerability": 0.8637787615496734,
+        "uncertainty": 0.13580887661134838
+      },
+      "metadata": {
+        "kind": "retrieval",
+        "evidence_ids": [
+          "doc_15",
+          "doc_13",
+          "doc_8",
+          "doc_7"
+        ],
+        "memory_ids": [
+          "mem_1",
+          "mem_3"
+        ],
+        "diffusion_delta": -0.23762706861946958,
+        "diffusion_gain": 0.0
+      }
+    }
+  ],
+  "edges": [
+    {
+      "source": "state_1",
+      "target": "kg_doc_13",
+      "edge_type": "supports",
+      "weight": 0.9999999951676101
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_15",
+      "edge_type": "supports",
+      "weight": 0.8244950225502847
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.05110248117911378
+    },
+    {
+      "source": "state_1",
+      "target": "kg_doc_8",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.0022380316120097707
+    },
+    {
+      "source": "state_1",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.00015743314895936848
+    },
+    {
+      "source": "state_1",
+      "target": "state_2",
+      "edge_type": "refines",
+      "weight": 1.0
+    },
+    {
+      "source": "state_1",
+      "target": "state_7",
+      "edge_type": "refines",
+      "weight": 0.94
+    },
+    {
+      "source": "kg_doc_13",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.9999999951676101
+    },
+    {
+      "source": "kg_doc_13",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.9999999954155138
+    },
+    {
+      "source": "kg_doc_13",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.9999999944531321
+    },
+    {
+      "source": "kg_doc_13",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.9999999927390173
+    },
+    {
+      "source": "kg_doc_13",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.9999999954155138
+    },
+    {
+      "source": "kg_doc_13",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.9584439906749858
+    },
+    {
+      "source": "kg_doc_13",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.9999999944531321
+    },
+    {
+      "source": "kg_doc_13",
+      "target": "state_6",
+      "edge_type": "supports",
+      "weight": 0.9999999951241411
+    },
+    {
+      "source": "kg_doc_13",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.9999999927390173
+    },
+    {
+      "source": "kg_doc_13",
+      "target": "state_7",
+      "edge_type": "supports",
+      "weight": 0.9584439906749858
+    },
+    {
+      "source": "kg_doc_13",
+      "target": "state_8",
+      "edge_type": "supports",
+      "weight": 0.9999999935925394
+    },
+    {
+      "source": "kg_doc_13",
+      "target": "memory_mem_7",
+      "edge_type": "supports",
+      "weight": 0.9999999951241411
+    },
+    {
+      "source": "kg_doc_13",
+      "target": "state_9",
+      "edge_type": "supports",
+      "weight": 0.9999999952722356
+    },
+    {
+      "source": "kg_doc_13",
+      "target": "memory_mem_8",
+      "edge_type": "supports",
+      "weight": 0.9999999935925394
+    },
+    {
+      "source": "kg_doc_13",
+      "target": "state_10",
+      "edge_type": "supports",
+      "weight": 0.8243458191901137
+    },
+    {
+      "source": "kg_doc_15",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.8244950225502847
+    },
+    {
+      "source": "kg_doc_15",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.47688410935704084
+    },
+    {
+      "source": "kg_doc_15",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.9311644726204504
+    },
+    {
+      "source": "kg_doc_15",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.9927284301277158
+    },
+    {
+      "source": "kg_doc_15",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.47688410935704084
+    },
+    {
+      "source": "kg_doc_15",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.9999999961302528
+    },
+    {
+      "source": "kg_doc_15",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.9311644726204504
+    },
+    {
+      "source": "kg_doc_15",
+      "target": "state_6",
+      "edge_type": "supports",
+      "weight": 0.8948533942767015
+    },
+    {
+      "source": "kg_doc_15",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.9927284301277158
+    },
+    {
+      "source": "kg_doc_15",
+      "target": "state_7",
+      "edge_type": "supports",
+      "weight": 0.9999999961302528
+    },
+    {
+      "source": "kg_doc_15",
+      "target": "state_8",
+      "edge_type": "supports",
+      "weight": 0.8542631812610884
+    },
+    {
+      "source": "kg_doc_15",
+      "target": "memory_mem_7",
+      "edge_type": "supports",
+      "weight": 0.8948533942767015
+    },
+    {
+      "source": "kg_doc_15",
+      "target": "state_9",
+      "edge_type": "supports",
+      "weight": 0.9994273308596252
+    },
+    {
+      "source": "kg_doc_15",
+      "target": "memory_mem_8",
+      "edge_type": "supports",
+      "weight": 0.8542631812610884
+    },
+    {
+      "source": "kg_doc_15",
+      "target": "state_10",
+      "edge_type": "supports",
+      "weight": 0.9999999962393485
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.05110248117911378
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.3206743392918823
+    },
+    {
+      "source": "kg_doc_6",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.3206743392918823
+    },
+    {
+      "source": "kg_doc_8",
+      "target": "state_1",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_8",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.08754259221631036
+    },
+    {
+      "source": "kg_doc_8",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_8",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.08754259221631036
+    },
+    {
+      "source": "kg_doc_8",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.31140401862960115
+    },
+    {
+      "source": "kg_doc_8",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_8",
+      "target": "state_6",
+      "edge_type": "supports",
+      "weight": 0.07341505957531305
+    },
+    {
+      "source": "kg_doc_8",
+      "target": "state_7",
+      "edge_type": "supports",
+      "weight": 0.31140401862960115
+    },
+    {
+      "source": "kg_doc_8",
+      "target": "memory_mem_7",
+      "edge_type": "supports",
+      "weight": 0.07341505957531305
+    },
+    {
+      "source": "kg_doc_8",
+      "target": "state_9",
+      "edge_type": "supports",
+      "weight": 0.08945635874043043
+    },
+    {
+      "source": "kg_doc_8",
+      "target": "state_10",
+      "edge_type": "supports",
+      "weight": 0.3405543043363156
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.0022380316120097707
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_3",
+      "edge_type": "recalls",
+      "weight": 0.005145036071439989
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_4",
+      "edge_type": "recalls",
+      "weight": 0.0043832760735281
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_5",
+      "edge_type": "recalls",
+      "weight": 0.004459841612485961
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "memory_mem_5",
+      "edge_type": "recalls",
+      "weight": 0.005145036071439989
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_6",
+      "edge_type": "recalls",
+      "weight": 0.003958316142213867
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "memory_mem_6",
+      "edge_type": "recalls",
+      "weight": 0.0043832760735281
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_7",
+      "edge_type": "recalls",
+      "weight": 0.0045728909643999085
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_8",
+      "edge_type": "recalls",
+      "weight": 0.004813765718990098
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "memory_mem_7",
+      "edge_type": "recalls",
+      "weight": 0.003958316142213867
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_9",
+      "edge_type": "recalls",
+      "weight": 0.004442586250427454
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "memory_mem_8",
+      "edge_type": "recalls",
+      "weight": 0.004813765718990098
+    },
+    {
+      "source": "memory_mem_1",
+      "target": "state_10",
+      "edge_type": "recalls",
+      "weight": 0.0045728909643999085
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_1",
+      "edge_type": "recalls",
+      "weight": 0.00015743314895936848
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_3",
+      "edge_type": "recalls",
+      "weight": 0.00036228446733733646
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_4",
+      "edge_type": "recalls",
+      "weight": 0.00030993361105722373
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_5",
+      "edge_type": "recalls",
+      "weight": 0.00031097015031428986
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "memory_mem_5",
+      "edge_type": "recalls",
+      "weight": 0.00036228446733733646
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_6",
+      "edge_type": "recalls",
+      "weight": 0.06099494999172557
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "memory_mem_6",
+      "edge_type": "recalls",
+      "weight": 0.00030993361105722373
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_7",
+      "edge_type": "recalls",
+      "weight": 0.00031579304462629634
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_8",
+      "edge_type": "recalls",
+      "weight": 0.036850265227129954
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "memory_mem_7",
+      "edge_type": "recalls",
+      "weight": 0.06099494999172557
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_9",
+      "edge_type": "recalls",
+      "weight": 0.03389411216917891
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "memory_mem_8",
+      "edge_type": "recalls",
+      "weight": 0.036850265227129954
+    },
+    {
+      "source": "memory_mem_3",
+      "target": "state_10",
+      "edge_type": "recalls",
+      "weight": 0.00031579304462629634
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_13",
+      "edge_type": "supports",
+      "weight": 0.9999999954155138
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_15",
+      "edge_type": "supports",
+      "weight": 0.47688410935704084
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_8",
+      "edge_type": "supports",
+      "weight": 0.08754259221631036
+    },
+    {
+      "source": "state_2",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_2",
+      "target": "state_3",
+      "edge_type": "refines",
+      "weight": 0.9
+    },
+    {
+      "source": "state_2",
+      "target": "state_4",
+      "edge_type": "refines",
+      "weight": 0.8
+    },
+    {
+      "source": "state_2",
+      "target": "memory_mem_4",
+      "edge_type": "derives",
+      "weight": 0.9999999954155138
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "state_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "memory_mem_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "state_8",
+      "edge_type": "supports",
+      "weight": 0.08883963225850068
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "state_9",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_2",
+      "target": "memory_mem_8",
+      "edge_type": "supports",
+      "weight": 0.08883963225850068
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_13",
+      "edge_type": "supports",
+      "weight": 0.9999999944531321
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_15",
+      "edge_type": "supports",
+      "weight": 0.9311644726204504
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.01020025875184225
+    },
+    {
+      "source": "state_3",
+      "target": "kg_doc_8",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_3",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.005145036071439989
+    },
+    {
+      "source": "state_3",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.00036228446733733646
+    },
+    {
+      "source": "state_3",
+      "target": "state_5",
+      "edge_type": "refines",
+      "weight": 0.9
+    },
+    {
+      "source": "state_3",
+      "target": "memory_mem_5",
+      "edge_type": "derives",
+      "weight": 0.9655822335367913
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "state_3",
+      "edge_type": "supports",
+      "weight": 0.01020025875184225
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "state_5",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "memory_mem_5",
+      "edge_type": "supports",
+      "weight": 0.01020025875184225
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "state_7",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_7",
+      "target": "state_10",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_13",
+      "edge_type": "supports",
+      "weight": 0.9999999927390173
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_15",
+      "edge_type": "supports",
+      "weight": 0.9927284301277158
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.3206743392918823
+    },
+    {
+      "source": "state_4",
+      "target": "kg_doc_16",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_4",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.0043832760735281
+    },
+    {
+      "source": "state_4",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.00030993361105722373
+    },
+    {
+      "source": "state_4",
+      "target": "state_6",
+      "edge_type": "refines",
+      "weight": 0.9
+    },
+    {
+      "source": "state_4",
+      "target": "memory_mem_6",
+      "edge_type": "derives",
+      "weight": 0.9999999927390173
+    },
+    {
+      "source": "kg_doc_16",
+      "target": "state_4",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_16",
+      "target": "memory_mem_6",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "state_2",
+      "edge_type": "recalls",
+      "weight": 0.9999999954155138
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_13",
+      "edge_type": "supports",
+      "weight": 0.9999999954155138
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_15",
+      "edge_type": "supports",
+      "weight": 0.47688410935704084
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_4",
+      "target": "kg_doc_8",
+      "edge_type": "supports",
+      "weight": 0.08754259221631036
+    },
+    {
+      "source": "state_5",
+      "target": "kg_doc_15",
+      "edge_type": "supports",
+      "weight": 0.9999999961302528
+    },
+    {
+      "source": "state_5",
+      "target": "kg_doc_13",
+      "edge_type": "supports",
+      "weight": 0.9584439906749858
+    },
+    {
+      "source": "state_5",
+      "target": "kg_doc_8",
+      "edge_type": "supports",
+      "weight": 0.31140401862960115
+    },
+    {
+      "source": "state_5",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_5",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.004459841612485961
+    },
+    {
+      "source": "state_5",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.00031097015031428986
+    },
+    {
+      "source": "state_5",
+      "target": "state_9",
+      "edge_type": "refines",
+      "weight": 0.9
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "state_3",
+      "edge_type": "recalls",
+      "weight": 0.9655822335367913
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_13",
+      "edge_type": "supports",
+      "weight": 0.9999999944531321
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_15",
+      "edge_type": "supports",
+      "weight": 0.9311644726204504
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.01020025875184225
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "kg_doc_8",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.005145036071439989
+    },
+    {
+      "source": "memory_mem_5",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.00036228446733733646
+    },
+    {
+      "source": "state_6",
+      "target": "kg_doc_13",
+      "edge_type": "supports",
+      "weight": 0.9999999951241411
+    },
+    {
+      "source": "state_6",
+      "target": "kg_doc_15",
+      "edge_type": "supports",
+      "weight": 0.8948533942767015
+    },
+    {
+      "source": "state_6",
+      "target": "kg_doc_8",
+      "edge_type": "supports",
+      "weight": 0.07341505957531305
+    },
+    {
+      "source": "state_6",
+      "target": "kg_doc_10",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_6",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.06099494999172557
+    },
+    {
+      "source": "state_6",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.003958316142213867
+    },
+    {
+      "source": "state_6",
+      "target": "state_8",
+      "edge_type": "refines",
+      "weight": 0.9
+    },
+    {
+      "source": "state_6",
+      "target": "memory_mem_7",
+      "edge_type": "derives",
+      "weight": 0.95
+    },
+    {
+      "source": "kg_doc_10",
+      "target": "state_6",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_10",
+      "target": "memory_mem_7",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "state_4",
+      "edge_type": "recalls",
+      "weight": 0.9999999927390173
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_13",
+      "edge_type": "supports",
+      "weight": 0.9999999927390173
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_15",
+      "edge_type": "supports",
+      "weight": 0.9927284301277158
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_6",
+      "edge_type": "supports",
+      "weight": 0.3206743392918823
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "kg_doc_16",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.0043832760735281
+    },
+    {
+      "source": "memory_mem_6",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.00030993361105722373
+    },
+    {
+      "source": "state_7",
+      "target": "kg_doc_15",
+      "edge_type": "supports",
+      "weight": 0.9999999961302528
+    },
+    {
+      "source": "state_7",
+      "target": "kg_doc_13",
+      "edge_type": "supports",
+      "weight": 0.9584439906749858
+    },
+    {
+      "source": "state_7",
+      "target": "kg_doc_8",
+      "edge_type": "supports",
+      "weight": 0.31140401862960115
+    },
+    {
+      "source": "state_7",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_7",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.0045728909643999085
+    },
+    {
+      "source": "state_7",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.00031579304462629634
+    },
+    {
+      "source": "state_7",
+      "target": "state_10",
+      "edge_type": "refines",
+      "weight": 0.9
+    },
+    {
+      "source": "state_8",
+      "target": "kg_doc_13",
+      "edge_type": "supports",
+      "weight": 0.9999999935925394
+    },
+    {
+      "source": "state_8",
+      "target": "kg_doc_15",
+      "edge_type": "supports",
+      "weight": 0.8542631812610884
+    },
+    {
+      "source": "state_8",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.08883963225850068
+    },
+    {
+      "source": "state_8",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_8",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.036850265227129954
+    },
+    {
+      "source": "state_8",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.004813765718990098
+    },
+    {
+      "source": "state_8",
+      "target": "memory_mem_8",
+      "edge_type": "derives",
+      "weight": 0.9271315874268139
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "state_8",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "kg_doc_5",
+      "target": "memory_mem_8",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_7",
+      "target": "state_6",
+      "edge_type": "recalls",
+      "weight": 0.95
+    },
+    {
+      "source": "memory_mem_7",
+      "target": "kg_doc_13",
+      "edge_type": "supports",
+      "weight": 0.9999999951241411
+    },
+    {
+      "source": "memory_mem_7",
+      "target": "kg_doc_15",
+      "edge_type": "supports",
+      "weight": 0.8948533942767015
+    },
+    {
+      "source": "memory_mem_7",
+      "target": "kg_doc_8",
+      "edge_type": "supports",
+      "weight": 0.07341505957531305
+    },
+    {
+      "source": "memory_mem_7",
+      "target": "kg_doc_10",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_7",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.06099494999172557
+    },
+    {
+      "source": "memory_mem_7",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.003958316142213867
+    },
+    {
+      "source": "state_9",
+      "target": "kg_doc_13",
+      "edge_type": "supports",
+      "weight": 0.9999999952722356
+    },
+    {
+      "source": "state_9",
+      "target": "kg_doc_15",
+      "edge_type": "supports",
+      "weight": 0.9994273308596252
+    },
+    {
+      "source": "state_9",
+      "target": "kg_doc_8",
+      "edge_type": "supports",
+      "weight": 0.08945635874043043
+    },
+    {
+      "source": "state_9",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_9",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.03389411216917891
+    },
+    {
+      "source": "state_9",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.004442586250427454
+    },
+    {
+      "source": "memory_mem_8",
+      "target": "state_8",
+      "edge_type": "recalls",
+      "weight": 0.9271315874268139
+    },
+    {
+      "source": "memory_mem_8",
+      "target": "kg_doc_13",
+      "edge_type": "supports",
+      "weight": 0.9999999935925394
+    },
+    {
+      "source": "memory_mem_8",
+      "target": "kg_doc_15",
+      "edge_type": "supports",
+      "weight": 0.8542631812610884
+    },
+    {
+      "source": "memory_mem_8",
+      "target": "kg_doc_2",
+      "edge_type": "supports",
+      "weight": 0.08883963225850068
+    },
+    {
+      "source": "memory_mem_8",
+      "target": "kg_doc_5",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "memory_mem_8",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.036850265227129954
+    },
+    {
+      "source": "memory_mem_8",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.004813765718990098
+    },
+    {
+      "source": "state_10",
+      "target": "kg_doc_15",
+      "edge_type": "supports",
+      "weight": 0.9999999962393485
+    },
+    {
+      "source": "state_10",
+      "target": "kg_doc_13",
+      "edge_type": "supports",
+      "weight": 0.8243458191901137
+    },
+    {
+      "source": "state_10",
+      "target": "kg_doc_8",
+      "edge_type": "supports",
+      "weight": 0.3405543043363156
+    },
+    {
+      "source": "state_10",
+      "target": "kg_doc_7",
+      "edge_type": "supports",
+      "weight": 0.0
+    },
+    {
+      "source": "state_10",
+      "target": "memory_mem_1",
+      "edge_type": "recalls",
+      "weight": 0.0045728909643999085
+    },
+    {
+      "source": "state_10",
+      "target": "memory_mem_3",
+      "edge_type": "recalls",
+      "weight": 0.00031579304462629634
+    }
+  ]
+}

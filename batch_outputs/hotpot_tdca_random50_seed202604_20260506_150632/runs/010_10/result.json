@@ -1,0 +1,147 @@
+{
+  "question": "What was the code name of the campaign where Joe Foss received a Medal of Honor?",
+  "final_answer": "Operation Watchtower",
+  "best_node": {
+    "node_id": "state_3",
+    "node_type": "state",
+    "content": "What was the code name of the Guadalcanal Campaign?",
+    "depth": 1,
+    "parent_id": "state_1",
+    "value": 0.6651797797495403,
+    "temperature": 0.7715555061050555,
+    "expanded": true,
+    "visit_count": 1,
+    "persistent": false,
+    "score_breakdown": {
+      "task_progress": 0.7739056229968233,
+      "evidence_support": 0.8938400676377156,
+      "memory_usefulness": 0.006662147618680677,
+      "answerability": 0.7469200338188579,
+      "uncertainty": 0.1391087878252112
+    },
+    "metadata": {
+      "kind": "retrieval",
+      "evidence_ids": [
+        "doc_4",
+        "doc_7",
+        "doc_1",
+        "doc_6"
+      ],
+      "memory_ids": [
+        "mem_1",
+        "mem_3"
+      ],
+      "diffusion_delta": 0.4549842481131398,
+      "diffusion_gain": 0.4549842481131398
+    }
+  },
+  "final_synthesis_node_ids": [
+    "state_2",
+    "state_3",
+    "memory_mem_5",
+    "state_1"
+  ],
+  "answer_history": [
+    {
+      "node_id": "memory_mem_4",
+      "content": "Conclusion: The answer to 'What campaign was Joe Foss involved in when he received the Medal of Honor' is Guadalcanal Campaign.",
+      "answer_text": "Guadalcanal Campaign",
+      "value": 1.0,
+      "confidence": 1.0,
+      "evidence_ids": [
+        "doc_7"
+      ],
+      "step": 1,
+      "kind": "intermediate_answer"
+    },
+    {
+      "node_id": "state_2",
+      "answer_text": "Guadalcanal Campaign",
+      "previous_answer": "",
+      "confidence": 0.95,
+      "score": 0.7879785473849676,
+      "source": "expansion_candidate",
+      "step": 0,
+      "evidence_ids": [
+        "doc_7",
+        "doc_3",
+        "doc_10",
+        "doc_8"
+      ],
+      "kind": "anytime_answer"
+    },
+    {
+      "node_id": "memory_mem_5",
+      "content": "Conclusion: The answer to 'What was the code name of the Guadalcanal Campaign' is Operation Watchtower.",
+      "answer_text": "Operation Watchtower",
+      "value": 0.874,
+      "evidence_ids": [
+        "doc_4",
+        "doc_7"
+      ],
+      "step": 3
+    },
+    {
+      "node_id": "state_3",
+      "answer_text": "Operation Watchtower",
+      "previous_answer": "Guadalcanal Campaign",
+      "confidence": 0.7469200338188579,
+      "score": 0.8322290447012213,
+      "source": "final_synthesis",
+      "step": 3,
+      "evidence_ids": [
+        "doc_4",
+        "doc_7",
+        "doc_1",
+        "doc_6"
+      ],
+      "kind": "anytime_answer"
+    },
+    {
+      "node_id": "memory_mem_5",
+      "content": "Conclusion: The answer to 'What was the code name of the Guadalcanal Campaign' is Operation Watchtower.",
+      "answer_text": "Operation Watchtower",
+      "value": 0.95,
+      "evidence_ids": [
+        "doc_4",
+        "doc_7"
+      ],
+      "step": 4
+    },
+    {
+      "node_id": "state_3",
+      "answer_text": "Operation Watchtower",
+      "source": "answer_judge",
+      "choice": "A",
+      "candidate_source": "final_synthesis",
+      "base_score": 0.9537033650404949,
+      "judge_confidence": 0.0,
+      "judge_reason": "",
+      "step": 3,
+      "kind": "final_answer_selection"
+    }
+  ],
+  "anytime_answer": "Operation Watchtower",
+  "anytime_answer_score": 0.8322290447012213,
+  "anytime_answer_source": "final_synthesis",
+  "anytime_answer_node_id": "state_3",
+  "stats": {
+    "steps": 3,
+    "llm_calls": 7,
+    "generated_tokens": 493,
+    "token_budget_remaining": 707,
+    "total_nodes": 14,
+    "kg_nodes": 7,
+    "memory_nodes": 4,
+    "state_nodes": 3,
+    "deleted_state_nodes": 0,
+    "scheduler_mode": "tdca",
+    "scoring_mode": "hybrid",
+    "stop_reason": "frontier_empty",
+    "goal_kind": "bridge",
+    "goal_completion": 0.0,
+    "anytime_answer": "Operation Watchtower",
+    "anytime_answer_score": 0.8322290447012213,
+    "anytime_answer_source": "final_synthesis"
+  }
+}

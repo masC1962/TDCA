@@ -1,0 +1,146 @@
+{
+  "question": "Which genus has the most number of species, Myrsine or Styrax?",
+  "final_answer": "Styrax",
+  "best_node": {
+    "node_id": "state_1",
+    "node_type": "state",
+    "content": "Which genus has the most number of species, Myrsine or Styrax?",
+    "depth": 0,
+    "parent_id": null,
+    "value": 0.7581942602507782,
+    "temperature": 0.674924784631023,
+    "expanded": true,
+    "visit_count": 1,
+    "persistent": false,
+    "score_breakdown": {
+      "task_progress": 0.925350171102904,
+      "evidence_support": 0.7804416797144234,
+      "memory_usefulness": 0.5139667251540021,
+      "answerability": 0.7902208398572117,
+      "uncertainty": 0.1595204976514038
+    },
+    "metadata": {
+      "diffusion_delta": 0.008139770769230892,
+      "diffusion_gain": 0.008139770769230892
+    }
+  },
+  "final_synthesis_node_ids": [
+    "state_4",
+    "state_5",
+    "state_2",
+    "state_6",
+    "state_1"
+  ],
+  "answer_history": [
+    {
+      "node_id": "state_1",
+      "answer_text": "Styrax",
+      "previous_answer": "",
+      "confidence": 0.8929406973593093,
+      "score": 0.9349996462855766,
+      "source": "direct_rag",
+      "step": 0,
+      "evidence_ids": [
+        "doc_5",
+        "doc_10",
+        "doc_9",
+        "doc_6"
+      ],
+      "kind": "anytime_answer"
+    },
+    {
+      "node_id": "state_1",
+      "answer_text": "Styrax",
+      "confidence": 0.8929406973593093,
+      "score": 0.8929406973593093,
+      "source": "direct_rag",
+      "step": 0,
+      "evidence_ids": [
+        "doc_5",
+        "doc_10",
+        "doc_9",
+        "doc_6"
+      ],
+      "kind": "direct_rag_candidate"
+    },
+    {
+      "node_id": "memory_mem_4",
+      "content": "Conclusion: The answer to 'How many species are in the genus Myrsine' is 200.",
+      "answer_text": "200",
+      "value": 0.9999999940171427,
+      "confidence": 0.95,
+      "evidence_ids": [
+        "doc_5",
+        "doc_4"
+      ],
+      "step": 2,
+      "kind": "intermediate_answer"
+    },
+    {
+      "node_id": "memory_mem_5",
+      "content": "Conclusion: The answer to 'Compare the number of species in Myrsine and Styrax to determine which is greater.' is 200.",
+      "answer_text": "200",
+      "value": 0.9999999739239441,
+      "confidence": 0.95,
+      "evidence_ids": [
+        "doc_10",
+        "doc_5",
+        "doc_4"
+      ],
+      "step": 4,
+      "kind": "intermediate_answer"
+    },
+    {
+      "node_id": "memory_mem_6",
+      "content": "Conclusion: The answer to 'Compare the number of species in Myrsine and Styrax to determine which has more.' is 200.",
+      "answer_text": "200",
+      "value": 0.9999999917003057,
+      "confidence": 0.95,
+      "evidence_ids": [
+        "doc_5",
+        "doc_10"
+      ],
+      "step": 5,
+      "kind": "intermediate_answer"
+    },
+    {
+      "node_id": "state_1",
+      "answer_text": "Styrax",
+      "source": "answer_judge",
+      "choice": "A",
+      "candidate_source": "direct_rag",
+      "base_score": 1.0,
+      "judge_confidence": 0.0,
+      "judge_reason": "A directly answers the comparison question with evidence-grounded genus name.",
+      "direct_rag_floor_applied": false,
+      "step": 5,
+      "kind": "final_answer_selection"
+    }
+  ],
+  "anytime_answer": "Styrax",
+  "anytime_answer_score": 0.9349996462855766,
+  "anytime_answer_source": "direct_rag",
+  "anytime_answer_node_id": "state_1",
+  "direct_rag_answer": "Styrax",
+  "direct_rag_score": 0.8929406973593093,
+  "direct_rag_node_id": "state_1",
+  "stats": {
+    "steps": 5,
+    "llm_calls": 12,
+    "generated_tokens": 934,
+    "token_budget_remaining": 266,
+    "total_nodes": 20,
+    "kg_nodes": 9,
+    "memory_nodes": 5,
+    "state_nodes": 6,
+    "deleted_state_nodes": 0,
+    "scheduler_mode": "tdca",
+    "scoring_mode": "hybrid",
+    "stop_reason": "final_synthesis_reserve",
+    "goal_kind": "comparison",
+    "goal_completion": 0.5,
+    "anytime_answer": "Styrax",
+    "anytime_answer_score": 0.9349996462855766,
+    "anytime_answer_source": "direct_rag"
+  }
+}

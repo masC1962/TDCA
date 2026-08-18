@@ -1,0 +1,100 @@
+{
+  "question": "What was the percentage that the Dow Jones fell when the US had the highest unemployment rate?",
+  "final_answer": "22.61%",
+  "best_node": {
+    "node_id": "state_1",
+    "node_type": "state",
+    "content": "What was the percentage that the Dow Jones fell when the US had the highest unemployment rate?",
+    "depth": 0,
+    "parent_id": null,
+    "value": 0.8684871286118564,
+    "temperature": 0.3217038859629418,
+    "expanded": true,
+    "visit_count": 1,
+    "persistent": false,
+    "score_breakdown": {
+      "task_progress": 0.9983495409582146,
+      "evidence_support": 0.995145708700631,
+      "memory_usefulness": 0.5327483999474903,
+      "answerability": 0.8975728543503154,
+      "uncertainty": 0.12087377243388642
+    },
+    "metadata": {
+      "diffusion_delta": 0.008438212427157865,
+      "diffusion_gain": 0.008438212427157865
+    }
+  },
+  "final_synthesis_node_ids": [
+    "state_3",
+    "state_2",
+    "memory_mem_4",
+    "state_9",
+    "state_1"
+  ],
+  "answer_history": [
+    {
+      "node_id": "memory_mem_4",
+      "content": "Conclusion: The answer to 'What was the highest unemployment rate in US history and in which year did it occur' is 1933.",
+      "answer_text": "1933",
+      "value": 0.9999999926006864,
+      "confidence": 0.85,
+      "evidence_ids": [
+        "doc_12"
+      ],
+      "step": 3,
+      "kind": "intermediate_answer"
+    },
+    {
+      "node_id": "state_1",
+      "answer_text": "22.61%",
+      "previous_answer": "",
+      "confidence": 0.8975728543503154,
+      "score": 0.8981546614041697,
+      "source": "final_synthesis",
+      "step": 7,
+      "evidence_ids": [
+        "doc_2",
+        "doc_17",
+        "doc_15",
+        "doc_3"
+      ],
+      "kind": "anytime_answer"
+    },
+    {
+      "node_id": "state_1",
+      "answer_text": "22.61%",
+      "source": "answer_judge",
+      "choice": "A",
+      "candidate_source": "final_synthesis",
+      "base_score": 0.8918243673583448,
+      "rerank_score": 0.7475662337437745,
+      "judge_confidence": 0.95,
+      "judge_reason": "A directly answers the percentage Dow Jones fell; B gives a year, not the percentage.",
+      "step": 7,
+      "kind": "final_answer_selection"
+    }
+  ],
+  "anytime_answer": "22.61%",
+  "anytime_answer_score": 0.8981546614041697,
+  "anytime_answer_source": "final_synthesis",
+  "anytime_answer_node_id": "state_1",
+  "stats": {
+    "steps": 7,
+    "llm_calls": 14,
+    "generated_tokens": 1121,
+    "token_budget_remaining": 79,
+    "total_nodes": 21,
+    "kg_nodes": 10,
+    "memory_nodes": 3,
+    "state_nodes": 8,
+    "deleted_state_nodes": 1,
+    "scheduler_mode": "tdca",
+    "scoring_mode": "hybrid",
+    "stop_reason": "final_synthesis_reserve",
+    "goal_kind": "bridge",
+    "goal_completion": 0.0,
+    "anytime_answer": "22.61%",
+    "anytime_answer_score": 0.8981546614041697,
+    "anytime_answer_source": "final_synthesis"
+  }
+}

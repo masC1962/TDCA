@@ -1,0 +1,144 @@
+{
+  "question": "In what county is William W. Blair's birthplace located?",
+  "final_answer": "Holley",
+  "best_node": {
+    "node_id": "state_2",
+    "node_type": "state",
+    "content": "What city was William W. Blair born in?",
+    "depth": 1,
+    "parent_id": "state_1",
+    "value": 0.5778077551248025,
+    "temperature": 0.6419511247519096,
+    "expanded": true,
+    "visit_count": 1,
+    "persistent": false,
+    "score_breakdown": {
+      "task_progress": 0.7154106453545963,
+      "evidence_support": 0.7217960157488126,
+      "memory_usefulness": 0.0,
+      "answerability": 0.6608980078744063,
+      "uncertainty": 0.17007671716521372
+    },
+    "metadata": {
+      "kind": "retrieval",
+      "evidence_ids": [
+        "doc_16",
+        "doc_9",
+        "doc_10",
+        "doc_5"
+      ],
+      "memory_ids": [],
+      "goal_slot_name": "birthplace_city",
+      "goal_slot_role": "target_attribute",
+      "goal_terminal": true,
+      "diffusion_delta": 0.4084807069150843,
+      "diffusion_gain": 0.4084807069150843
+    }
+  },
+  "final_synthesis_node_ids": [
+    "state_3",
+    "memory_mem_4",
+    "memory_mem_6",
+    "state_2",
+    "state_1"
+  ],
+  "answer_history": [
+    {
+      "node_id": "memory_mem_4",
+      "content": "Conclusion: The answer to 'What county is Holley, New York located in' is Orleans County.",
+      "answer_text": "Orleans County",
+      "value": 0.9999999964034323,
+      "confidence": 0.8846947619397889,
+      "evidence_ids": [
+        "doc_18",
+        "doc_16"
+      ],
+      "step": 1,
+      "kind": "intermediate_answer"
+    },
+    {
+      "node_id": "memory_mem_5",
+      "content": "Conclusion: The answer to 'What city was William W. Blair born in' is Holley.",
+      "answer_text": "Holley",
+      "value": 0.7217960157488126,
+      "evidence_ids": [
+        "doc_16"
+      ],
+      "step": 1
+    },
+    {
+      "node_id": "state_3",
+      "answer_text": "Orleans County",
+      "previous_answer": "",
+      "confidence": 1.0,
+      "score": 0.8806221544150892,
+      "source": "expansion_candidate",
+      "step": 0,
+      "evidence_ids": [
+        "doc_18",
+        "doc_16",
+        "doc_8",
+        "doc_9"
+      ],
+      "kind": "anytime_answer"
+    },
+    {
+      "node_id": "memory_mem_6",
+      "content": "Conclusion: The answer to 'In what county is William W. Blair's birthplace located' is Orleans County.",
+      "answer_text": "Orleans County",
+      "value": 0.999999994394893,
+      "confidence": 0.95,
+      "evidence_ids": [
+        "doc_16"
+      ],
+      "step": 2,
+      "kind": "intermediate_answer"
+    },
+    {
+      "node_id": "memory_mem_5",
+      "content": "Conclusion: The answer to 'What city was William W. Blair born in' is Holley.",
+      "answer_text": "Holley",
+      "value": 0.7217960149966687,
+      "evidence_ids": [
+        "doc_16"
+      ],
+      "step": 5
+    },
+    {
+      "node_id": "state_2",
+      "answer_text": "Holley",
+      "source": "answer_judge",
+      "choice": "A",
+      "candidate_source": "grounded",
+      "base_score": 0.9117057002693154,
+      "rerank_score": 0.7866856246698778,
+      "judge_confidence": 0.0,
+      "judge_reason": "",
+      "step": 5,
+      "kind": "final_answer_selection"
+    }
+  ],
+  "anytime_answer": "Orleans County",
+  "anytime_answer_score": 0.8806221544150892,
+  "anytime_answer_source": "expansion_candidate",
+  "anytime_answer_node_id": "state_3",
+  "stats": {
+    "steps": 5,
+    "llm_calls": 9,
+    "generated_tokens": 630,
+    "token_budget_remaining": 570,
+    "total_nodes": 16,
+    "kg_nodes": 8,
+    "memory_nodes": 5,
+    "state_nodes": 3,
+    "deleted_state_nodes": 1,
+    "scheduler_mode": "tdca",
+    "scoring_mode": "hybrid",
+    "stop_reason": "frontier_empty",
+    "goal_kind": "bridge",
+    "goal_completion": 0.92,
+    "anytime_answer": "Orleans County",
+    "anytime_answer_score": 0.8806221544150892,
+    "anytime_answer_source": "expansion_candidate"
+  }
+}

@@ -1,0 +1,162 @@
+{
+  "question": "In what county was Duffy Jackson born?",
+  "final_answer": "Nassau County",
+  "best_node": {
+    "node_id": "state_3",
+    "node_type": "state",
+    "content": "What is the county of Freeport, New York?",
+    "depth": 2,
+    "parent_id": "state_2",
+    "value": 0.7110108381482293,
+    "temperature": 2.109969280137011,
+    "expanded": true,
+    "visit_count": 1,
+    "persistent": false,
+    "score_breakdown": {
+      "task_progress": 0.6966548086784018,
+      "evidence_support": 0.9061275885499211,
+      "memory_usefulness": 0.5139667251540021,
+      "answerability": 0.8102066514178178,
+      "uncertainty": 0.1368970340610142
+    },
+    "metadata": {
+      "kind": "bridge",
+      "evidence_ids": [
+        "doc_1",
+        "doc_5",
+        "doc_10",
+        "doc_6"
+      ],
+      "memory_ids": [
+        "mem_1",
+        "mem_3"
+      ],
+      "diffusion_delta": 0.14656779263317787,
+      "diffusion_gain": 0.14656779263317787
+    }
+  },
+  "final_synthesis_node_ids": [
+    "state_3",
+    "state_6",
+    "memory_mem_5",
+    "state_2",
+    "state_1"
+  ],
+  "answer_history": [
+    {
+      "node_id": "",
+      "answer_text": "Los Angeles County",
+      "previous_answer": "",
+      "confidence": 0.28,
+      "score": 0.16880000000000003,
+      "source": "closed_book_initial",
+      "step": 0,
+      "evidence_ids": [],
+      "kind": "anytime_answer"
+    },
+    {
+      "node_id": "memory_mem_4",
+      "content": "Conclusion: Duffy Jackson was born in Washburn.",
+      "answer_text": "Washburn",
+      "value": 0.7247037022828499,
+      "evidence_ids": [
+        "doc_10",
+        "doc_8"
+      ],
+      "step": 2
+    },
+    {
+      "node_id": "state_2",
+      "answer_text": "Washburn",
+      "previous_answer": "Los Angeles County",
+      "confidence": 0.7247037022828499,
+      "score": 0.68283414399992,
+      "source": "expansion_candidate",
+      "step": 1,
+      "evidence_ids": [
+        "doc_10",
+        "doc_8",
+        "doc_9",
+        "doc_5"
+      ],
+      "kind": "anytime_answer"
+    },
+    {
+      "node_id": "memory_mem_5",
+      "content": "Conclusion: The answer to 'What is the county of Freeport, New York' is Nassau County.",
+      "answer_text": "Nassau County",
+      "value": 0.9016000000000001,
+      "evidence_ids": [
+        "doc_1",
+        "doc_5",
+        "doc_10"
+      ],
+      "step": 3
+    },
+    {
+      "node_id": "state_3",
+      "answer_text": "Nassau County",
+      "previous_answer": "Washburn",
+      "confidence": 0.98,
+      "score": 0.9044618215427851,
+      "source": "expansion_candidate",
+      "step": 2,
+      "evidence_ids": [
+        "doc_1",
+        "doc_5",
+        "doc_10",
+        "doc_6"
+      ],
+      "kind": "anytime_answer"
+    },
+    {
+      "node_id": "memory_mem_6",
+      "content": "Conclusion: The answer to 'In what county is Freeport, New York located' is Nassau County.",
+      "answer_text": "Nassau County",
+      "value": 1.0,
+      "confidence": 1.0,
+      "evidence_ids": [
+        "doc_1",
+        "doc_5",
+        "doc_10"
+      ],
+      "step": 6,
+      "kind": "intermediate_answer"
+    },
+    {
+      "node_id": "state_3",
+      "answer_text": "Nassau County",
+      "source": "answer_judge",
+      "choice": "A",
+      "candidate_source": "anytime",
+      "base_score": 0.9661720412940822,
+      "judge_confidence": 0.0,
+      "judge_reason": "Duffy Jackson was born in Freeport, NY, which is in Nassau County.",
+      "step": 7,
+      "kind": "final_answer_selection"
+    }
+  ],
+  "anytime_answer": "Nassau County",
+  "anytime_answer_score": 0.9044618215427851,
+  "anytime_answer_source": "expansion_candidate",
+  "anytime_answer_node_id": "state_3",
+  "stats": {
+    "steps": 7,
+    "llm_calls": 14,
+    "generated_tokens": 957,
+    "token_budget_remaining": 243,
+    "total_nodes": 19,
+    "kg_nodes": 9,
+    "memory_nodes": 5,
+    "state_nodes": 5,
+    "deleted_state_nodes": 2,
+    "scheduler_mode": "tdca",
+    "scoring_mode": "hybrid",
+    "stop_reason": "frontier_empty",
+    "goal_kind": "bridge",
+    "goal_completion": 0.0,
+    "anytime_answer": "Nassau County",
+    "anytime_answer_score": 0.9044618215427851,
+    "anytime_answer_source": "expansion_candidate"
+  }
+}
