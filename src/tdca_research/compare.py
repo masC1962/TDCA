@@ -93,8 +93,10 @@ def main() -> None:
     parser.add_argument("--base", required=True)
     parser.add_argument("--new", required=True)
     parser.add_argument("--output", required=True)
+    parser.add_argument("--seed", type=int, default=520)
+    parser.add_argument("--samples", type=int, default=10000)
     args = parser.parse_args()
-    write_json(args.output, compare(args.base, args.new))
+    write_json(args.output, compare(args.base, args.new, seed=args.seed, samples=args.samples))
 
 
 if __name__ == "__main__":

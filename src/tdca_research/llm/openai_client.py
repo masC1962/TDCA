@@ -9,7 +9,13 @@ from typing import Any
 from openai import OpenAI
 
 from ..utils import safe_error, stable_hash, write_json
-from .base import BaseLLM, Generation, InfrastructureError, StructuredOutputError
+from .base import (
+    BaseLLM,
+    Generation,
+    InfrastructureError,
+    ProviderRefusalError,
+    StructuredOutputError,
+)
 
 
 class OpenAICompatibleLLM(BaseLLM):
@@ -90,6 +96,11 @@ class OpenAICompatibleLLM(BaseLLM):
                 return generation
             except Exception as exc:
                 last_error = exc
+                if _is_provider_refusal(exc):
+                    # Policy refusals are deterministic for an identical prompt;
+                    # retrying only spends calls and still should not fail a whole
+                    # reasoning episode as an infrastructure outage.
+                    raise ProviderRefusalError(safe_error(exc), provider_attempts=attempt + 1) from exc
                 if attempt < self.max_api_attempts - 1:
                     time.sleep(2**attempt)
         raise InfrastructureError(
@@ -127,3 +138,14 @@ class OpenAICompatibleLLM(BaseLLM):
             if text.lstrip().startswith("json"):
                 text = text.lstrip()[4:].lstrip()
         return json.loads(text)
+
+
+def _is_provider_refusal(exc: BaseException) -> bool:
+    text = str(exc).casefold()
+    return any(code in text for code in (
+        "data_inspection_failed",
+        "inappropriate content",
+        "content_policy_violation",
+        "content_filter",
+        "safety refusal",
+    ))

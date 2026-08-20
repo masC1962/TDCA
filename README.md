@@ -11,6 +11,17 @@ conclusions as typed and evidence-provenanced claims, retrieves for the current
 unresolved slot, and schedules work by expected information utility per cost.
 Generation, verification and final synthesis are separate calls.
 
+The research tree also includes an isolated next-generation method,
+`dynamic_hypergraph_tdca`: a transactional Dynamic Reasoning Hypergraph with
+CandidateSets, independent raw scoring, lazy branching, bounded revision, an
+event-triggered graph editor, normalized operation scheduling, and graph-grounded
+answers. Its design and sealed development protocol are documented in
+[`docs/dynamic_hypergraph_tdca.md`](docs/dynamic_hypergraph_tdca.md). The original
+`structured_tdca` code path and historical artifacts remain frozen for comparison.
+The corresponding development results, paired intervals, budget curve, and known
+negative results are in
+[`docs/dynamic_hypergraph_results_20260820.md`](docs/dynamic_hypergraph_results_20260820.md).
+
 ## Install
 
 ```bash

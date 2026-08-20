@@ -67,9 +67,17 @@ class ResearchConfig:
         self.validate()
 
     def validate(self) -> None:
-        supported_methods = {
+        self._validate_common({
             "structured_tdca", "closed_book", "bm25_rag", "dense_rag", "hybrid_rag", "ircot",
-        }
+        })
+
+    def _validate_common(self, supported_methods: set[str]) -> None:
+        """Validate shared experiment fields without changing static semantics.
+
+        Dynamic methods use a separate config subclass and pass their own explicit
+        method set.  Keeping this helper here avoids weakening the static method
+        whitelist or adding dynamic-only fields to historical resolved configs.
+        """
         if self.method not in supported_methods:
             raise ValueError(
                 f"method {self.method!r} is not a native controlled adapter; external official baselines "

@@ -45,6 +45,10 @@ class Budget:
             self.usage.provider_completion_tokens += max(0, int(generation.completion_tokens))
 
     def record_infrastructure_failure(self, error: BaseException) -> None:
+        self.record_provider_failure(error)
+
+    def record_provider_failure(self, error: BaseException) -> None:
+        """Account for a provider attempt that produced no billable Generation."""
         self.usage.provider_attempts += max(0, int(getattr(error, "provider_attempts", 0)))
 
     def record_retrieval(self) -> None:

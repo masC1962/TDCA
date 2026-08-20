@@ -46,6 +46,7 @@ def main() -> None:
     parser.add_argument("--main-run", required=True)
     parser.add_argument("--hipporag-artifact", required=True)
     parser.add_argument("--expected-count", type=int, default=200)
+    parser.add_argument("--bootstrap-seed", type=int, default=520)
     parser.add_argument("--output-dir", required=True)
     parser.add_argument(
         "--allow-legacy-schema",
@@ -123,7 +124,7 @@ def main() -> None:
     hippo_rows_path.write_text(
         "".join(json.dumps(row, ensure_ascii=False) + "\n" for row in hippo_eval["rows"]), encoding="utf-8",
     )
-    paired = compare(hippo_rows_path, main_rows_path, seed=520, samples=10000)
+    paired = compare(hippo_rows_path, main_rows_path, seed=args.bootstrap_seed, samples=10000)
     _write_json(output / "paired_comparison.json", paired)
 
     before = hippo.get("shared_cache_before", {})

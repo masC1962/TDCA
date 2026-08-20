@@ -186,6 +186,15 @@ def run(
                 config.evidence_char_budget,
             )
             retrieval_trace, reasoning_trace = [], []
+        elif config.method == "dynamic_hypergraph_tdca":
+            from .dynamic.config import DynamicResearchConfig
+            from .dynamic.engine import DynamicHypergraphReasoner
+
+            if not isinstance(config, DynamicResearchConfig):
+                raise TypeError("dynamic_hypergraph_tdca requires DynamicResearchConfig")
+            prediction, retrieval_trace, reasoning_trace = DynamicHypergraphReasoner(
+                llm, retriever, config,
+            ).solve(example.inference_view())
         else:
             prediction, retrieval_trace, reasoning_trace = StructuredReasoner(llm, retriever, config).solve(example)
         predictions.append(prediction)
@@ -205,6 +214,16 @@ def run(
     writer.write_rows("reasoning_traces.jsonl", reasoning_rows)
     writer.write_rows("per_example_metrics.jsonl", metric_rows)
     writer.write_metrics(metrics, by_hop, predictions, by_type)
+    if config.method == "dynamic_hypergraph_tdca":
+        from .dynamic.metrics import dynamic_mechanism_metrics
+
+        dynamic_metrics, dynamic_by_hop, graph_rows, dynamic_rows = dynamic_mechanism_metrics(
+            selected, reasoning_rows,
+        )
+        writer.write_rows("dynamic_graphs.jsonl", graph_rows)
+        writer.write_rows("dynamic_per_example_metrics.jsonl", dynamic_rows)
+        write_json(run_dir / "dynamic_metrics.json", dynamic_metrics)
+        write_json(run_dir / "dynamic_metrics_by_hop.json", dynamic_by_hop)
     write_json(run_dir / "split_manifest.json", manifest_data)
     writer.finalize_manifest()
     writer.checksums()

@@ -11,6 +11,18 @@ class InfrastructureError(RuntimeError):
         self.provider_attempts = max(0, int(provider_attempts))
 
 
+class ProviderRefusalError(RuntimeError):
+    """A request was understood by the provider but declined by a policy gate.
+
+    This is a recoverable model outcome, rather than a transport or runtime
+    failure.  Callers may abandon the affected graph operation and continue.
+    """
+
+    def __init__(self, message: str, provider_attempts: int = 1) -> None:
+        super().__init__(message)
+        self.provider_attempts = max(0, int(provider_attempts))
+
+
 @dataclass
 class Generation:
     text: str

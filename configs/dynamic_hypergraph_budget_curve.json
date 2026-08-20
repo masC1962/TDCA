@@ -1,0 +1,19 @@
+{
+  "schema_version": "matched-compute-budget-curve-v1",
+  "development_safety_cap": {
+    "max_llm_calls": 16,
+    "max_total_tokens": 16000,
+    "max_retrieval_calls": 8
+  },
+  "formal_budget_points": [
+    {"max_llm_calls": 8, "max_total_tokens": 8000, "max_retrieval_calls": 4},
+    {"max_llm_calls": 12, "max_total_tokens": 12000, "max_retrieval_calls": 6},
+    {"max_llm_calls": 16, "max_total_tokens": 16000, "max_retrieval_calls": 8},
+    {"max_llm_calls": 24, "max_total_tokens": 24000, "max_retrieval_calls": 12}
+  ],
+  "matched_compute_rules": [
+    "Use the same model, retriever, corpus, split IDs, top_k and cache policy for compared native methods.",
+    "Report realized provider calls, logical LLM calls, prompt/completion tokens, retrieval calls and wall time.",
+    "Compare quality at every common budget point; do not treat the development safety cap as the formal budget."
+  ]
+}
