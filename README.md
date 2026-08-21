@@ -22,6 +22,16 @@ The corresponding development results, paired intervals, budget curve, and known
 negative results are in
 [`docs/dynamic_hypergraph_results_20260820.md`](docs/dynamic_hypergraph_results_20260820.md).
 
+`dynamic_hypergraph_tdca_v2` is an independent, training-free successor in
+`src/tdca_research/dynamic_v2/`. It adds typed directional belief diffusion,
+explicit relational JOIN materialization, event-triggered structural editing,
+versioned revision cascades, graph-state-driven EVC allocation, measured allocation
+cost ledgers, and three-way ANSWER/ABSTAIN/BUDGET_EXHAUSTED termination. The method,
+invariants, equations, and fail-closed evaluation gate are documented in
+[`docs/dynamic_hypergraph_tdca_v2.md`](docs/dynamic_hypergraph_tdca_v2.md).
+The first mechanism-complete smoke run is a documented negative result; see
+[`docs/dynamic_hypergraph_tdca_v2_smoke_results_20260821.md`](docs/dynamic_hypergraph_tdca_v2_smoke_results_20260821.md).
+
 ## Install
 
 ```bash
@@ -144,6 +154,20 @@ The research tests include a structural offline smoke over 20 real MuSiQue rows.
 mock run tests execution and provenance only; it is never reported as accuracy.
 
 ## Experiment gates
+
+For Dynamic Hypergraph v2, use the separate runner:
+
+```bash
+bash scripts/run_dynamic_v2_research.sh tests
+bash scripts/run_dynamic_v2_research.sh smoke20
+bash scripts/run_dynamic_v2_research.sh development50
+bash scripts/run_dynamic_v2_research.sh budget_curve50
+```
+
+`heldout200` and `cross_heldout200` fail closed until
+`configs/dynamic_v2_hard_gate.json` is explicitly opened after every registered hard
+gate passes. The seed is frozen at `20260820`; HotpotQA and 2Wiki use the same frozen
+post-MuSiQue parameters and their own disjoint manifests.
 
 1. Stage 1: adapters, leakage, metrics, budgets and integration tests.
 2. Stage 2: Qwen-plus 20-row smoke; no crashes or ambiguous empty answers.

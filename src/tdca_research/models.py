@@ -8,6 +8,7 @@ from typing import Any
 class RunStatus(str, Enum):
     ANSWER = "answer"
     ABSTAIN = "abstain"
+    BUDGET_EXHAUSTED = "budget_exhausted"
     INFRASTRUCTURE_FAILURE = "infrastructure_failure"
 
 

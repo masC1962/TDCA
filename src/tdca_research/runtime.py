@@ -186,6 +186,15 @@ def run(
                 config.evidence_char_budget,
             )
             retrieval_trace, reasoning_trace = [], []
+        elif config.method == "dynamic_hypergraph_tdca_v2":
+            from .dynamic_v2.config import DynamicV2ResearchConfig
+            from .dynamic_v2.engine import DynamicHypergraphV2Reasoner
+
+            if not isinstance(config, DynamicV2ResearchConfig):
+                raise TypeError("dynamic_hypergraph_tdca_v2 requires DynamicV2ResearchConfig")
+            prediction, retrieval_trace, reasoning_trace = DynamicHypergraphV2Reasoner(
+                llm, retriever, config,
+            ).solve(example.inference_view())
         elif config.method == "dynamic_hypergraph_tdca":
             from .dynamic.config import DynamicResearchConfig
             from .dynamic.engine import DynamicHypergraphReasoner
@@ -224,6 +233,14 @@ def run(
         writer.write_rows("dynamic_per_example_metrics.jsonl", dynamic_rows)
         write_json(run_dir / "dynamic_metrics.json", dynamic_metrics)
         write_json(run_dir / "dynamic_metrics_by_hop.json", dynamic_by_hop)
+    elif config.method == "dynamic_hypergraph_tdca_v2":
+        from .dynamic_v2.metrics import dynamic_v2_metrics
+
+        v2_metrics, v2_by_hop, graph_rows, v2_rows = dynamic_v2_metrics(selected, reasoning_rows)
+        writer.write_rows("dynamic_v2_graphs.jsonl", graph_rows)
+        writer.write_rows("dynamic_v2_per_example_metrics.jsonl", v2_rows)
+        write_json(run_dir / "dynamic_v2_metrics.json", v2_metrics)
+        write_json(run_dir / "dynamic_v2_metrics_by_hop.json", v2_by_hop)
     write_json(run_dir / "split_manifest.json", manifest_data)
     writer.finalize_manifest()
     writer.checksums()

@@ -250,6 +250,9 @@ def evaluate_predictions(examples: list[QAExample], predictions: list[Prediction
         "f1": sum(row["f1"] for row in rows) / max(1, len(rows)),
         "answered_rate": len(answered) / max(1, len(rows)),
         "abstention_rate": sum(row["status"] == RunStatus.ABSTAIN.value for row in rows) / max(1, len(rows)),
+        "budget_exhaustion_rate": sum(
+            row["status"] == RunStatus.BUDGET_EXHAUSTED.value for row in rows
+        ) / max(1, len(rows)),
         "infrastructure_failure_rate": len(infrastructure) / max(1, len(rows)),
         "selective_accuracy": sum(row["exact_match"] for row in answered) / max(1, len(answered)),
         "support_precision": sum(row["support_precision"] for row in rows) / max(1, len(rows)),
