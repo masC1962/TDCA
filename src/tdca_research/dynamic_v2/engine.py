@@ -27,7 +27,7 @@ from ..dynamic.terminal import GraphGroundedTerminalReasoner
 from ..llm import BaseLLM, InfrastructureError, ProviderRefusalError, StructuredOutputError
 from ..models import Prediction, RetrievalHit, RunStatus, Usage
 from ..retrieval import BaseRetriever
-from ..utils import normalize_text
+from ..utils import normalize_text, stable_hash
 from .allocator import AdaptiveComputationAllocator, ComputationPacket
 from .config import DynamicV2ResearchConfig
 from .controller import V2GraphController
@@ -35,6 +35,8 @@ from .editor import EventTriggeredGraphEditorV2
 from .extraction import TypedClaimExtractor
 from .graph import DynamicReasoningHypergraphV2, TerminationKind
 from .join import JoinCandidate, MultiHopJoinEngine
+from .memory import RelationLightCorpusMemory
+from .query_graph import types_compatible
 from .revision import BeliefRevisionDetector
 from .termination import MetaDecision, MetaStopPolicy
 from .verifier import MultiSampleIndependentVerifier
@@ -43,10 +45,17 @@ from .verifier import MultiSampleIndependentVerifier
 class DynamicHypergraphV2Reasoner:
     """Graph-state-driven training-free reasoning and computation allocation."""
 
-    def __init__(self, llm: BaseLLM, retriever: BaseRetriever, config: DynamicV2ResearchConfig) -> None:
+    def __init__(
+        self, llm: BaseLLM, retriever: BaseRetriever, config: DynamicV2ResearchConfig,
+        corpus_memory: RelationLightCorpusMemory | None = None,
+    ) -> None:
         self.llm = llm
         self.retriever = retriever
         self.config = config
+        self.corpus_memory = corpus_memory or (
+            RelationLightCorpusMemory.from_retriever(retriever)
+            if config.relation_light_memory else None
+        )
 
     def solve(self, value: DynamicInferenceInput | dict[str, Any]) -> tuple[Prediction, list[dict], list[dict]]:
         example = value if isinstance(value, DynamicInferenceInput) else DynamicInferenceInput.from_view(value)
@@ -193,7 +202,10 @@ class DynamicHypergraphV2Reasoner:
                     # The exact failed action is never selected again on unchanged
                     # state; this makes failure a deterministic abstain candidate.
                     if packet.operation.operation_type == OperationType.MERGE:
-                        attempted_joins.add(str(packet.operation.payload.get("join_signature", "")))
+                        attempted_joins.add(str(
+                            packet.operation.payload.get("join_attempt_key")
+                            or packet.operation.payload.get("join_signature", "")
+                        ))
                     # Failure changes the engine's attempted/recovery state even
                     # when it does not mutate the graph. Recompute the ready set so
                     # a second retrieval or another join can receive budget.
@@ -341,13 +353,22 @@ class DynamicHypergraphV2Reasoner:
                     claim.node_id for claim in direct_claims
                     if graph.claim_semantics[claim.node_id].join_depth == 0
                 }
-                if dependencies and raw_direct_ids:
+                target_local_raw_ids = {
+                    claim.node_id for claim in claims
+                    if graph.claim_semantics[claim.node_id].join_depth == 0
+                    and claim.status in {
+                        CandidateStatus.SCORED,
+                        CandidateStatus.RETAINED,
+                        CandidateStatus.REVISED,
+                    }
+                }
+                if dependencies and target_local_raw_ids:
                     dependency_ids = set(dependencies)
                     sufficient_chains = [
                         claim for claim in direct_claims
                         if graph.claim_semantics[claim.node_id].join_depth > 0
                         and _premise_closure(graph, (claim.node_id,)) & dependency_ids
-                        and _premise_closure(graph, (claim.node_id,)) & raw_direct_ids
+                        and _premise_closure(graph, (claim.node_id,)) & target_local_raw_ids
                     ]
                     sufficient_chains.sort(key=lambda value: (
                         graph.claim_semantics[value.node_id].join_depth,
@@ -365,7 +386,7 @@ class DynamicHypergraphV2Reasoner:
                         continue
                 joins = [
                     row for row in join_engine.discover(graph, branch.branch_id, subgoal.node_id)
-                    if row.signature not in attempted_joins
+                    if _join_attempt_key(graph, row) not in attempted_joins
                     and _nary_relevant(graph, row, set(dependencies))
                 ]
                 if len(attempted_joins) >= self.config.max_join_attempts_per_question:
@@ -390,6 +411,7 @@ class DynamicHypergraphV2Reasoner:
                         if _premise_closure(graph, row.premise_ids) & dependency_ids
                     ]
                     joins = sorted(chain_joins, key=lambda row: (
+                        -int(row.join_kind in {"numeric_argmax", "numeric_argmin"}),
                         -int(bool(row.projection_premise_id)),
                         -len(_premise_closure(graph, row.premise_ids) & dependency_ids),
                         -int(bool(_premise_closure(graph, row.premise_ids) & direct_ids)),
@@ -409,6 +431,7 @@ class DynamicHypergraphV2Reasoner:
                         {
                             "mode": "validate_join", "premise_ids": list(join.premise_ids),
                             "binding": join.binding, "join_signature": join.signature,
+                            "join_attempt_key": _join_attempt_key(graph, join),
                             "join_depth": join.join_depth,
                             "orientation": join.orientation,
                             "open_endpoints": list(join.open_endpoints),
@@ -534,6 +557,7 @@ class DynamicHypergraphV2Reasoner:
             all_hits.extend(value for value in hits if value.passage.passage_id not in existing_hits)
             existing = {(node.passage_id, node.retrieval_query) for node in graph.evidence()}
             rows = []
+            activated_hits = []
             for hit in hits:
                 if (hit.passage.passage_id, query) in existing:
                     continue
@@ -548,10 +572,22 @@ class DynamicHypergraphV2Reasoner:
                     "retrieval_query": query,
                     "retriever_identity": hit.retriever,
                 })
+                activated_hits.append(hit)
+            memory_activation = {}
+            if self.corpus_memory is not None and rows:
+                memory_activation = self.corpus_memory.activate(
+                    activated_hits,
+                    [str(row["node_id"]) for row in rows],
+                    graph.question,
+                    operation.target_id,
+                    operation.branch_id,
+                    query,
+                ).to_payload()
+                memory_activation["corpus_memory_fingerprint"] = self.corpus_memory.fingerprint
             actual = GraphOperation(
                 operation.operation_id, OperationType.RETRIEVE, operation.target_id,
                 operation.source_ids, operation.branch_id,
-                {"query": query, "evidence": rows},
+                {"query": query, "evidence": rows, "memory_activation": memory_activation},
                 "adaptive_retrieval_for_heated_region", "adaptive_retriever_v2",
                 {"retrieval_calls": 1.0, "top_k": float(request["retrieval_top_k"])},
             )
@@ -635,7 +671,9 @@ class DynamicHypergraphV2Reasoner:
                 str(operation.payload.get("join_kind", "relational_path")),
                 dict(operation.payload.get("deterministic_validation", {})),
             )
-            attempted_joins.add(candidate.signature)
+            attempted_joins.add(str(
+                operation.payload.get("join_attempt_key") or candidate.signature
+            ))
             actual = join_engine.propose(
                 graph, candidate, operation.operation_id, request["max_tokens"],
             )
@@ -708,6 +746,11 @@ class DynamicHypergraphV2Reasoner:
         if len(dependencies) != 1 or dependencies[0] not in by_id:
             return operation
         source = by_id[dependencies[0]]
+        if not types_compatible(
+            str(root.get("answer_type", "entity")),
+            str(source.get("answer_type", "entity")),
+        ):
+            return operation
         similarity = _template_similarity(
             str(root.get("question_template", "")), str(source.get("question_template", "")),
         )
@@ -724,8 +767,11 @@ class DynamicHypergraphV2Reasoner:
         normalized_root = next(row for row in normalized_rows if row.get("node_id") == "subgoal_root")
         normalized_root["question_template"] = str(source.get("question_template", ""))
         normalized_root["instantiated_question"] = str(source.get("instantiated_question", ""))
-        normalized_root["variable_bindings"] = {}
-        normalized_root["dependencies"] = [dependencies[0]]
+        normalized_root["variable_bindings"] = dict(source.get("variable_bindings", {}))
+        normalized_root["dependencies"] = list(source.get("dependencies", []))
+        value.payload["subgoals"] = [
+            row for row in normalized_rows if row.get("node_id") != dependencies[0]
+        ]
         return value
 
     @staticmethod
@@ -971,8 +1017,39 @@ def _template_similarity(left: str, right: str) -> float:
     }
     def tokens(value):
         normalized = re.sub(r"\$[A-Za-z][A-Za-z0-9_]*", " variable ", value.casefold())
-        return {token for token in re.findall(r"[a-z0-9]+", normalized) if token not in stop}
+        return {
+            _light_stem(token)
+            for token in re.findall(r"[a-z0-9]+", normalized)
+            if token not in stop
+        }
     left_tokens, right_tokens = tokens(left), tokens(right)
     if not left_tokens or not right_tokens:
         return 0.0
-    return len(left_tokens & right_tokens) / len(left_tokens | right_tokens)
+    intersection = len(left_tokens & right_tokens)
+    return max(
+        intersection / len(left_tokens | right_tokens),
+        intersection / min(len(left_tokens), len(right_tokens)),
+    )
+
+
+def _light_stem(token: str) -> str:
+    for suffix in ("ization", "ation", "tion", "ingly", "edly", "ing", "ed"):
+        if token.endswith(suffix) and len(token) - len(suffix) >= 4:
+            return token[:-len(suffix)]
+    return token
+
+
+def _join_attempt_key(
+    graph: DynamicReasoningHypergraphV2, candidate: JoinCandidate,
+) -> str:
+    """Bind a failed JOIN to the premise belief state that was evaluated."""
+    return stable_hash({
+        "signature": candidate.signature,
+        "premise_versions": {
+            node_id: (
+                graph.belief_states[node_id].version
+                if node_id in graph.belief_states else 0
+            )
+            for node_id in candidate.premise_ids
+        },
+    })

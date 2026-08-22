@@ -35,7 +35,9 @@ class TypedDirectionalDiffusion:
                 "support_influence": state.support_influence,
                 "contradiction_pressure": state.contradiction_pressure,
                 "downstream_answer_impact": state.downstream_answer_impact,
-                "computation_heat": self._initial_heat(state),
+                "computation_heat": max(
+                    self._initial_heat(state), self._memory_activation_heat(graph, node_id),
+                ),
             }
             for node_id, state in graph.belief_states.items()
         }
@@ -46,6 +48,8 @@ class TypedDirectionalDiffusion:
         for iteration in range(1, self.config.diffusion_steps + 1):
             incoming: dict[tuple[str, str], list[float]] = defaultdict(list)
             for message in messages:
+                if message.source not in values:
+                    continue
                 source_value = values.get(message.source, {}).get(message.channel, 0.0)
                 incoming[(message.target, message.channel)].append(source_value * message.weight)
             next_values: dict[str, dict[str, float]] = {}
@@ -89,6 +93,21 @@ class TypedDirectionalDiffusion:
         graph.diffusion_history.append(snapshot)
         return snapshot
 
+    def _memory_activation_heat(
+        self, graph: DynamicReasoningHypergraphV2, node_id: str,
+    ) -> float:
+        passage = graph.activated_passages.get(node_id)
+        if passage is None:
+            return 0.0
+        overlap = max((
+            graph.activated_entities[entity_id].query_overlap
+            for entity_id in passage.entity_ids
+            if entity_id in graph.activated_entities
+        ), default=0.0)
+        rank_signal = 1.0 / max(1, passage.rank)
+        boost = self.config.activation_entity_boost
+        return _unit(boost * overlap + (1.0 - boost) * rank_signal)
+
     def _initial_heat(self, state) -> float:
         numerator = (
             self.config.heat_weight_uncertainty * state.uncertainty
@@ -109,6 +128,18 @@ class TypedDirectionalDiffusion:
     @staticmethod
     def _messages(graph: DynamicReasoningHypergraphV2) -> list[TypedMessage]:
         rows: list[TypedMessage] = []
+        # Entity activation enters the proof graph through immutable grounding
+        # links. It seeds evidence heat above and remains explicit in the audit
+        # trace even though corpus entities are not mutable proof nodes.
+        for edge in graph.cross_layer_edges:
+            if edge.edge_type != "entity_mentioned_in_evidence":
+                continue
+            entity = graph.activated_entities.get(edge.source)
+            if entity is not None and edge.target in graph.belief_states:
+                rows.append(TypedMessage(
+                    edge.source, edge.target, "computation_heat",
+                    entity.query_overlap, "memory_query_activation",
+                ))
         for claim in graph.claims():
             if not graph.belief_states.get(claim.node_id) or not graph.belief_states[claim.node_id].valid:
                 continue

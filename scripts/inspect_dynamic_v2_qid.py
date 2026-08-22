@@ -14,7 +14,43 @@ def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--run", type=Path, required=True)
     parser.add_argument("--qid", required=True)
+    parser.add_argument("--final-proof", action="store_true")
     args = parser.parse_args()
+    if args.final_proof:
+        graph_row = next(
+            row for row in rows(args.run / "dynamic_v2_graphs.jsonl")
+            if str(row.get("qid")) == args.qid
+        )
+        graph = graph_row["graph"]
+        claims = {
+            node_id: {
+                "subject": node.get("subject"), "relation": node.get("relation"),
+                "value": node.get("value"), "target_subgoal": node.get("target_subgoal"),
+                "status": node.get("status"),
+                "dependencies": node.get("dependency_claim_ids", []),
+                "support": (node.get("score") or {}).get("absolute_support"),
+                "raw_score": (node.get("score") or {}).get("raw", {}),
+                "relative_weight": (node.get("score") or {}).get("relative_weight"),
+                "evidence_gap": (node.get("score") or {}).get("evidence_gap"),
+                "answers_subgoal": (node.get("provenance") or {}).get("metadata", {}).get("answers_subgoal"),
+                "join_depth": (graph.get("claim_semantics", {}).get(node_id) or {}).get("join_depth"),
+            }
+            for node_id, node in graph.get("nodes", {}).items()
+            if node.get("kind") == "claim"
+        }
+        print(json.dumps({
+            "question": graph.get("question"),
+            "subgoals": {
+                node_id: node for node_id, node in graph.get("nodes", {}).items()
+                if node.get("kind") == "subgoal"
+            },
+            "query_graph": graph.get("query_graph", {}),
+            "claims": claims,
+            "branches": graph.get("branches", {}),
+            "join_attempts": graph.get("join_attempt_history", []),
+            "termination": graph.get("termination_history", []),
+        }, ensure_ascii=False, indent=2))
+        return
     output = []
     for row in rows(args.run / "reasoning_traces.jsonl"):
         if str(row.get("qid")) != args.qid:

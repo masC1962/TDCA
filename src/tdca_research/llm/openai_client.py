@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import json
 import os
+import re
 import time
 from pathlib import Path
 from typing import Any
@@ -115,7 +116,10 @@ class OpenAICompatibleLLM(BaseLLM):
         key = self._cache_key(messages, max_tokens, temperature, schema_name)
         generation = self._request(messages, max_tokens, temperature, schema_name)
         try:
-            value = self._parse_json(generation.text)
+            value = self._parse_json(
+                generation.text,
+                allow_complete_array_prefix=generation.finish_reason in {"length", "max_tokens"},
+            )
         except json.JSONDecodeError as exc:
             # Invalid structured output is not a successful cached response. Do not
             # hide an extra provider call inside this method: callers own the budget.
@@ -130,14 +134,62 @@ class OpenAICompatibleLLM(BaseLLM):
         return value, generation
 
     @staticmethod
-    def _parse_json(raw: str) -> Any:
+    def _parse_json(raw: str, *, allow_complete_array_prefix: bool = False) -> Any:
         text = raw.strip()
         if text.startswith("```"):
             lines = text.splitlines()
             text = "\n".join(lines[1:-1]) if len(lines) >= 3 else text
             if text.lstrip().startswith("json"):
                 text = text.lstrip()[4:].lstrip()
-        return json.loads(text)
+        try:
+            return json.loads(text)
+        except json.JSONDecodeError as original:
+            # Deterministic syntax-only recovery.  Providers occasionally wrap a
+            # valid object in a short preamble or leave a trailing comma.  This
+            # never invents, deletes, or rewrites semantic field content.
+            start = text.find("{")
+            if start < 0:
+                raise original
+            candidate = re.sub(r",\s*([}\]])", r"\1", text[start:])
+            try:
+                value, _ = json.JSONDecoder().raw_decode(candidate)
+                return value
+            except json.JSONDecodeError:
+                if allow_complete_array_prefix:
+                    recovered = _complete_object_array_prefix(candidate)
+                    if recovered is not None:
+                        return recovered
+                raise original
+
+
+def _complete_object_array_prefix(text: str) -> dict[str, list[dict[str, Any]]] | None:
+    """Recover only fully decoded rows from a length-truncated claims/scores array.
+
+    No incomplete row is repaired and no semantic field is invented.  Recovery
+    is deliberately restricted to the two batched schemas whose consumers
+    already define deterministic handling for omitted rows.
+    """
+    match = re.match(r'\s*\{\s*"(claims|scores)"\s*:\s*\[', text)
+    if match is None:
+        return None
+    key = match.group(1)
+    decoder = json.JSONDecoder()
+    cursor = match.end()
+    rows: list[dict[str, Any]] = []
+    while cursor < len(text):
+        while cursor < len(text) and (text[cursor].isspace() or text[cursor] == ","):
+            cursor += 1
+        if cursor >= len(text) or text[cursor] == "]":
+            break
+        try:
+            value, end = decoder.raw_decode(text, cursor)
+        except json.JSONDecodeError:
+            break
+        if not isinstance(value, dict):
+            return None
+        rows.append(value)
+        cursor = end
+    return {key: rows} if rows else None
 
 
 def _is_provider_refusal(exc: BaseException) -> bool:

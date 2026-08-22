@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from collections import defaultdict
+import re
 from typing import Any
 
 from ..budget import Budget
@@ -9,18 +10,20 @@ from ..llm import BaseLLM
 from ..utils import bounded_context, estimate_message_tokens, normalize_text
 from .config import DynamicV2ResearchConfig
 from .graph import DynamicReasoningHypergraphV2
+from .query_graph import canonical_type
 
 
-TYPED_EXTRACTION_SYSTEM = """Extract atomic typed relational claims from only the supplied evidence.
-Return JSON only as {claims:[...]}. Each claim must contain subject, relation, value, subject_type,
-value_type, evidence_ids, source_spans, qualifiers, extraction_confidence, and answers_subgoal.
-Every source span must be a short verbatim substring of a referenced evidence item. Claims may describe
-useful intermediate relations even when they do not directly answer the subgoal. Do not use prior
-knowledge, compare candidates, perform multi-hop composition, or return explanatory prose. Use generic
-semantic types rather than dataset-specific labels. Every claim must also contain answer_position as one of
-subject, value, or none. Use subject/value only when that exact field is the direct answer to the stated
-subgoal; answers_subgoal must then be true. Use none and answers_subgoal=false otherwise. Return an empty list
-when evidence is insufficient."""
+TYPED_EXTRACTION_SYSTEM = """Extract a small coverage-preserving set of atomic typed relational claims from
+only the supplied evidence. Return JSON only as {claims:[...]}. Each compact claim object must contain exactly
+subject, relation, value, subject_type, value_type, evidence_ids, extraction_confidence, answer_position,
+and quote.
+answer_position is subject, value, or none; use subject/value only when that exact field directly answers the
+subgoal. Put direct-answer claims first, then relations needed to connect dependency entities. Use short
+relation/type strings and evidence IDs. Also include quote: one short verbatim substring (at most 15 words)
+from a referenced evidence item that directly states the claim. Include no qualifiers, reasons, prose, or
+redundant fields.
+Do not use prior knowledge, compare candidates, compose multiple facts, reverse the evidence direction, or
+merge sentences. Return an empty list when evidence is insufficient."""
 
 
 class TypedClaimExtractor:
@@ -45,12 +48,22 @@ class TypedClaimExtractor:
         if not evidence:
             self.last_diagnostics = {"raw": 0, "accepted": 0, "rejections": {"no_evidence": 1}}
             return None
-        context = bounded_context([
-            f"[{node.node_id}] title={node.title}\n{node.source_span}" for node in evidence
-        ], self.config.evidence_char_budget)
         dependencies = "\n".join(
             _claim_line(graph.node(node_id, ClaimNode)) for node_id in dependency_claim_ids
         ) or "(none)"
+        focus_terms = _focus_terms(
+            graph, subgoal_id, instantiated_question, dependency_claim_ids,
+        )
+        focused_rows = [
+            f"[{node.node_id}] title={node.title}\n"
+            f"{_focused_span(node, focus_terms, self.config)}"
+            for node in evidence
+        ]
+        context = bounded_context(focused_rows, self.config.evidence_char_budget)
+        query_constraint = next((
+            row for row in graph.query_graph.get("constraints", [])
+            if str(row.get("subgoal_id")) == subgoal_id
+        ), {})
         cap = min(
             self.config.max_extracted_claims_per_round,
             max(1, int(candidate_cap)) if candidate_cap is not None else self.config.max_extracted_claims_per_round,
@@ -67,6 +80,7 @@ class TypedClaimExtractor:
             {"role": "user", "content": (
                 f"Root question: {graph.question}\nSubgoal: {instantiated_question}\n"
                 f"Expected answer type: {graph.node(subgoal_id, SubgoalNode).answer_type}\n"
+                f"Unresolved query constraint: {query_constraint}\n"
                 f"Claim cap: {cap}\nDependency claims:\n{dependencies}\nEvidence:\n{context}"
             )},
         ]
@@ -103,12 +117,14 @@ class TypedClaimExtractor:
             subject = str(raw.get("subject", "")).strip()
             relation = str(raw.get("relation", "")).strip()
             value = str(raw.get("value", "")).strip()
-            subject_type = _type(raw.get("subject_type"))
-            value_type = _type(raw.get("value_type"))
+            source_triple = {"subject": subject, "relation": relation, "value": value}
+            subject_type = canonical_type(raw.get("subject_type"))
+            value_type = canonical_type(raw.get("value_type"))
+            expected_type = canonical_type(graph.node(subgoal_id, SubgoalNode).answer_type)
+            value, canonicalization = _canonicalize_typed_value(value, expected_type)
             answer_position = str(raw.get("answer_position", "")).strip().lower()
             if answer_position not in {"subject", "value", "none"}:
                 answer_position = "value" if bool(raw.get("answers_subgoal", False)) else "none"
-            source_triple = {"subject": subject, "relation": relation, "value": value}
             if answer_position == "subject":
                 subject, value = value, subject
                 subject_type, value_type = value_type, subject_type
@@ -118,6 +134,9 @@ class TypedClaimExtractor:
                 aliases[str(item)] for item in raw.get("evidence_ids", []) if str(item) in aliases
             ))
             spans = [str(item).strip() for item in raw.get("source_spans", []) if str(item).strip()]
+            quote = str(raw.get("quote", "")).strip()
+            if quote:
+                spans.append(quote)
             span_matches = {
                 node.node_id: [
                     span for span in spans
@@ -157,7 +176,10 @@ class TypedClaimExtractor:
                 "subject_type": subject_type,
                 "value_type": value_type,
                 "answer_type": value_type,
-                "qualifiers": raw.get("qualifiers", {}) if isinstance(raw.get("qualifiers"), dict) else {},
+                "qualifiers": {
+                    **(raw.get("qualifiers", {}) if isinstance(raw.get("qualifiers"), dict) else {}),
+                    **({"value_canonicalization": canonicalization} if canonicalization else {}),
+                },
                 "evidence_refs": evidence_ids,
                 "source_spans": grounded_spans[:3],
                 "dependency_claim_ids": dependency_claim_ids,
@@ -169,7 +191,10 @@ class TypedClaimExtractor:
                 "extraction_mode": "typed_evidence_extraction",
             })
         self.last_diagnostics = {
-            "raw": len(raw_rows), "accepted": len(rows), "rejections": dict(sorted(rejections.items())),
+            "raw": len(raw_rows), "accepted": len(rows),
+            "focused_evidence_count": len(focused_rows),
+            "focus_term_count": len(focus_terms),
+            "rejections": dict(sorted(rejections.items())),
         }
         if not rows:
             return None
@@ -217,3 +242,86 @@ def _cooccurring_sentence(text: str, subject: str, value: str) -> str:
         if normalized_subject in normalized and normalized_value in normalized:
             return sentence.strip()
     return ""
+
+
+def _canonicalize_typed_value(value: str, expected_type: str) -> tuple[str, dict[str, str]]:
+    """Normalize common structured-evidence scalars without adding semantics.
+
+    The original model tuple remains in ``source_triple`` and the exact evidence
+    span remains provenance.  This only removes display attributes from a named
+    location or units/context from a typed scalar, so joins operate on an atomic
+    endpoint rather than an infobox fragment.
+    """
+    text = str(value).strip()
+    if not text:
+        return text, {}
+    if expected_type in {
+        "location", "city", "country", "state", "province", "region",
+        "continent", "river", "mountain",
+    }:
+        match = re.match(r"^(.+?)\s+-\s+(?:location|located[_ ]in)\b", text, re.IGNORECASE)
+        if match and match.group(1).strip():
+            return match.group(1).strip(), {
+                "kind": "structured_location_field",
+                "original_value": text,
+            }
+    if expected_type == "distance":
+        match = re.match(r"^\s*([+-]?\d+(?:[.,]\d+)?)\b(?:\s+|$)", text)
+        if match and match.group(1) != text:
+            return match.group(1), {
+                "kind": "typed_scalar",
+                "original_value": text,
+            }
+    return text, {}
+
+
+def _focus_terms(
+    graph: DynamicReasoningHypergraphV2,
+    subgoal_id: str,
+    question: str,
+    dependency_claim_ids: list[str],
+) -> set[str]:
+    values = [question, graph.question]
+    for claim_id in dependency_claim_ids:
+        claim = graph.node(claim_id, ClaimNode)
+        values.extend([claim.subject, claim.value])
+    for row in graph.query_graph.get("constraints", []):
+        if str(row.get("subgoal_id")) == subgoal_id:
+            values.extend(str(value) for value in row.get("known_entities", []))
+    stop = {
+        "what", "which", "where", "when", "who", "whose", "how", "the", "a", "an",
+        "is", "was", "were", "are", "did", "does", "do", "of", "in", "to", "and",
+    }
+    return {
+        token for value in values for token in re.findall(r"[a-z0-9]+", normalize_text(value))
+        if len(token) > 2 and token not in stop
+    }
+
+
+def _focused_span(
+    evidence: EvidenceNode,
+    focus_terms: set[str],
+    config: DynamicV2ResearchConfig,
+) -> str:
+    sentences = [
+        value.strip() for value in re.split(r"(?<=[.!?])\s+|\n+", evidence.source_span)
+        if value.strip()
+    ]
+    if not sentences:
+        return evidence.source_span
+    scored = []
+    title_terms = set(re.findall(r"[a-z0-9]+", normalize_text(evidence.title)))
+    for index, sentence in enumerate(sentences):
+        terms = set(re.findall(r"[a-z0-9]+", normalize_text(sentence)))
+        score = 2 * len(terms & focus_terms) + len(terms & title_terms)
+        scored.append((score, index, sentence))
+    cap = min(len(scored), config.extraction_focus_sentences_per_evidence)
+    selected_indices = {
+        index for _, index, _ in sorted(scored, key=lambda row: (-row[0], row[1]))[:cap]
+    }
+    selected = " ".join(
+        sentence for index, sentence in enumerate(sentences) if index in selected_indices
+    )
+    if len(selected) < config.extraction_focus_min_chars:
+        return evidence.source_span[: max(config.extraction_focus_min_chars, len(selected))]
+    return selected

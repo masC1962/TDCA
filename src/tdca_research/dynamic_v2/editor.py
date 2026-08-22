@@ -1,9 +1,17 @@
 from __future__ import annotations
 
+from copy import deepcopy
 import re
 
 from ..budget import Budget
-from ..dynamic.graph import BranchState, ClaimNode, GraphOperation, OperationType, SubgoalNode
+from ..dynamic.graph import (
+    BranchState,
+    ClaimNode,
+    GraphInvariantError,
+    GraphOperation,
+    OperationType,
+    SubgoalNode,
+)
 from ..llm import BaseLLM
 from ..utils import estimate_message_tokens, normalize_text
 from .config import DynamicV2ResearchConfig
@@ -82,6 +90,23 @@ class EventTriggeredGraphEditorV2:
             self.last_diagnostics = {"accepted": False, "reason": "unsafe_or_duplicate_subgoal"}
             return None
         node_id = f"subgoal_dynamic_v2_{graph.step + 1}"
+        # The model may select a currently known node that is downstream of the
+        # target as a dependency.  The proposed node is then valid in isolation,
+        # but attaching target -> proposed -> downstream -> target would create
+        # an execution cycle.  Preflight the complete edit on an isolated DAG so
+        # an untrusted editor proposal is rejected as a no-op, never surfaced as
+        # an infrastructure/invariant failure.
+        execution = deepcopy(graph.execution_graph)
+        try:
+            execution.add_node(node_id, dependencies)
+            if target.variable_bindings:
+                target_dependencies = list(dict.fromkeys([node_id] + target.dependencies))
+            else:
+                target_dependencies = [node_id]
+            execution.replace_dependencies(target_id, target_dependencies)
+        except GraphInvariantError:
+            self.last_diagnostics = {"accepted": False, "reason": "unsafe_execution_cycle"}
+            return None
         self.last_diagnostics = {"accepted": True, "event": event, "node_id": node_id}
         return GraphOperation(
             operation_id, OperationType.EXPAND, node_id, dependencies, branch.branch_id,

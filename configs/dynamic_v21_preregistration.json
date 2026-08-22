@@ -1,0 +1,40 @@
+{
+  "schema_version": "dynamic-hypergraph-v2.1-preregistration-v1",
+  "registered_at": "2026-08-22",
+  "baseline_commit": "97198bef951f88726b213bf199ca53ce8226d13c",
+  "seed": 20260820,
+  "training": false,
+  "provider": "qwen-plus",
+  "development_protocol": {
+    "split_manifest": "configs/splits/musique_dynamic_seed20260820.json",
+    "smoke_split": "smoke",
+    "development_split": "development",
+    "heldout_split": "heldout",
+    "smoke_is_regression_only": true,
+    "development_is_disjoint_from_smoke_and_heldout": true,
+    "heldout_is_fail_closed": true
+  },
+  "architecture": {
+    "corpus_memory": "persistent relation-light passage/entity/alias graph",
+    "activated_graph": "question-local query-aware evidence/entity activation",
+    "proof_hypergraph": "question-local typed claims, bindings, joins, beliefs and revisions",
+    "controller_only_mutation": true,
+    "operation_fidelity_allocation": true,
+    "query_aware_cross_layer_diffusion": true
+  },
+  "forbidden": [
+    "training_or_finetuning",
+    "oracle_fields_during_inference",
+    "question_id_or_answer_specific_rules",
+    "post_heldout_tuning",
+    "manual_gate_override"
+  ],
+  "campaign_budget": {
+    "maximum_uncached_provider_calls": 1500,
+    "maximum_provider_reported_tokens": 1500000
+  },
+  "stop_policy": {
+    "success": "all hard gates pass, configuration freezes, and heldout is run exactly once",
+    "safe_failure": "campaign API cap is reached while a hard gate remains closed; heldout is not run"
+  }
+}

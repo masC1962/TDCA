@@ -2,15 +2,24 @@ from __future__ import annotations
 
 import json
 from itertools import combinations
-from dataclasses import dataclass, field
+from dataclasses import dataclass, field, replace
+import re
 from typing import Any
 
 from ..budget import Budget
-from ..dynamic.graph import CandidateStatus, ClaimNode, EvidenceNode, GraphOperation, OperationType
+from ..dynamic.graph import (
+    CandidateStatus,
+    ClaimNode,
+    EvidenceNode,
+    GraphOperation,
+    OperationType,
+    SubgoalNode,
+)
 from ..llm import BaseLLM
 from ..utils import estimate_message_tokens, normalize_text, stable_hash
 from .config import DynamicV2ResearchConfig
 from .graph import DynamicReasoningHypergraphV2
+from .query_graph import types_compatible
 
 
 JOIN_SYSTEM = """Validate one proposed typed conjunctive hypergraph JOIN using only the supplied premise
@@ -98,11 +107,47 @@ class MultiHopJoinEngine:
                         continue
                     if candidate.signature not in existing:
                         rows.append(candidate)
+        # A directly answering child claim may carry an explicit dependency
+        # established by the planner and independently checked by the verifier,
+        # even when surface aliases prevent endpoint equality. Materialize that
+        # dependency as an auditable projection JOIN instead of silently
+        # committing or discarding the claim.
+        accessible = {row.node_id: row for row in claims}
+        for projection in claims:
+            if projection.target_subgoal != target_subgoal:
+                continue
+            for dependency_id in projection.dependency_claim_ids:
+                dependency = accessible.get(dependency_id)
+                if dependency is None or dependency.node_id == projection.node_id:
+                    continue
+                constraint = {
+                    "left_premise": dependency.node_id,
+                    "left_endpoint": "verified_dependency",
+                    "right_premise": projection.node_id,
+                    "right_endpoint": "declared_dependency",
+                    "orientation": "declared_dependency_binding",
+                    "binding": dependency.node_id,
+                    "left_type": graph.claim_semantics[dependency.node_id].value_type,
+                    "right_type": graph.claim_semantics[projection.node_id].subject_type,
+                    "type_compatible": True,
+                }
+                candidate = _build_candidate(
+                    graph, (dependency.node_id, projection.node_id),
+                    (constraint,), target_subgoal, self.config.max_join_depth,
+                )
+                if candidate is not None and candidate.signature not in existing:
+                    rows.append(candidate)
         rows.extend(_explicit_set_candidates(
             graph,
             claims,
             target_subgoal,
             self.config.max_join_arity,
+            self.config.max_join_depth,
+            max(0, self.config.max_join_frontier_candidates - len(rows)),
+            existing,
+        ))
+        rows.extend(_numeric_comparison_candidates(
+            graph, claims, target_subgoal, self.config.max_join_arity,
             self.config.max_join_depth,
             max(0, self.config.max_join_frontier_candidates - len(rows)),
             existing,
@@ -147,6 +192,7 @@ class MultiHopJoinEngine:
         candidates = sorted(
             unique.values(),
             key=lambda row: (
+                -float(row.deterministic_validation.get("goal_alignment", 0.0)),
                 -int(bool(row.projection_premise_id)),
                 len(row.premise_ids),
                 row.join_depth,
@@ -178,6 +224,25 @@ class MultiHopJoinEngine:
                 "deterministic_validation": candidate.deterministic_validation,
             }
             return None
+        numeric_comparison = _deterministic_numeric_comparison_claim(
+            graph, candidate, premises,
+        )
+        if numeric_comparison is not None:
+            self.last_diagnostics = {
+                "accepted": True,
+                "reason_codes": [
+                    "explicit_query_comparison",
+                    "independently_verified_numeric_premises",
+                    "deterministic_arg_projection",
+                    "no_additional_generation",
+                ],
+            }
+            return self._operation(
+                graph, candidate, numeric_comparison, operation_id,
+                "query_constrained_numeric_comparison",
+                "deterministic_numeric_comparison_join_v21",
+                {"llm_calls": 0.0, "tokens": 0.0},
+            )
         projection = next((
             row for row in premises if row.node_id == candidate.projection_premise_id
         ), None)
@@ -224,6 +289,26 @@ class MultiHopJoinEngine:
                     "deterministic_projection_join_v2",
                     {"llm_calls": 0.0, "tokens": 0.0},
                 )
+        symbolic = (
+            _deterministic_path_claim(graph, candidate, premises, self.config)
+            if self.config.deterministic_goal_path_join else None
+        )
+        if symbolic is not None:
+            self.last_diagnostics = {
+                "accepted": True,
+                "reason_codes": [
+                    "canonical_entity_unification",
+                    "independently_verified_path_premises",
+                    "goal_aligned_symbolic_composition",
+                    "no_additional_generation",
+                ],
+            }
+            return self._operation(
+                graph, candidate, symbolic, operation_id,
+                "goal_aligned_canonical_path_composition",
+                "deterministic_path_join_v21",
+                {"llm_calls": 0.0, "tokens": 0.0},
+            )
         blocks = []
         for claim in premises:
             evidence = [graph.node(node_id, EvidenceNode) for node_id in claim.evidence_refs]
@@ -427,8 +512,7 @@ def _scalar_text(value: Any) -> str:
 
 
 def _compatible(left: str, right: str) -> bool:
-    left, right = left.lower(), right.lower()
-    return left == right or "entity" in {left, right} or {left, right} <= {"country", "location"}
+    return types_compatible(left, right)
 
 
 def _accessible_claims(
@@ -464,7 +548,10 @@ def _endpoint_unifications(left, left_semantics, right, right_semantics):
     """Enumerate valid length-two relational paths without relation-name rules."""
     rows = []
     if (
-        left_semantics.normalized_value == right_semantics.normalized_subject
+        _same_entity(
+            left_semantics.normalized_value, left_semantics.canonical_value_id,
+            right_semantics.normalized_subject, right_semantics.canonical_subject_id,
+        )
         and _compatible(left_semantics.value_type, right_semantics.subject_type)
     ):
         rows.append((
@@ -472,7 +559,10 @@ def _endpoint_unifications(left, left_semantics, right, right_semantics):
             (left.subject, right.value),
         ))
     if (
-        right_semantics.normalized_value == left_semantics.normalized_subject
+        _same_entity(
+            right_semantics.normalized_value, right_semantics.canonical_value_id,
+            left_semantics.normalized_subject, left_semantics.canonical_subject_id,
+        )
         and _compatible(right_semantics.value_type, left_semantics.subject_type)
     ):
         rows.append((
@@ -480,7 +570,10 @@ def _endpoint_unifications(left, left_semantics, right, right_semantics):
             (right.subject, left.value),
         ))
     if (
-        left_semantics.normalized_subject == right_semantics.normalized_subject
+        _same_entity(
+            left_semantics.normalized_subject, left_semantics.canonical_subject_id,
+            right_semantics.normalized_subject, right_semantics.canonical_subject_id,
+        )
         and _compatible(left_semantics.subject_type, right_semantics.subject_type)
     ):
         rows.append((
@@ -488,7 +581,10 @@ def _endpoint_unifications(left, left_semantics, right, right_semantics):
             (left.value, right.value),
         ))
     if (
-        left_semantics.normalized_value == right_semantics.normalized_value
+        _same_entity(
+            left_semantics.normalized_value, left_semantics.canonical_value_id,
+            right_semantics.normalized_value, right_semantics.canonical_value_id,
+        )
         and _compatible(left_semantics.value_type, right_semantics.value_type)
     ):
         rows.append((
@@ -496,6 +592,79 @@ def _endpoint_unifications(left, left_semantics, right, right_semantics):
             (left.subject, right.subject),
         ))
     return [row for row in rows if row[3] and normalize_text(row[4][0]) != normalize_text(row[4][1])]
+
+
+def _same_entity(
+    left_text: str, left_id: str, right_text: str, right_id: str,
+) -> bool:
+    if left_id and right_id and left_id == right_id:
+        return True
+    return bool(left_text and right_text and left_text == right_text)
+
+
+def _deterministic_path_claim(
+    graph: DynamicReasoningHypergraphV2,
+    candidate: JoinCandidate,
+    premises: list[ClaimNode],
+    config: DynamicV2ResearchConfig,
+) -> dict[str, Any] | None:
+    if candidate.join_kind not in {"relational_path", "conjunctive_relational_path"}:
+        return None
+    if len(candidate.open_endpoints) != 2:
+        return None
+    # A target-local claim alone contributes only 0.20.  Requiring an actual
+    # query anchor (0.45) prevents structurally valid but question-irrelevant
+    # paths from consuming the proof frontier.
+    if float(candidate.deterministic_validation.get("goal_alignment", 0.0)) < 0.45:
+        return None
+    if any(
+        row.score.absolute_support < config.commit_support_threshold
+        or row.score.raw.grounding < config.commit_support_threshold
+        or row.score.raw.entailment < config.commit_support_threshold
+        or row.score.raw.type_match < config.commit_support_threshold
+        for row in premises
+    ):
+        return None
+    left, right = candidate.open_endpoints
+    constraint = next((
+        row for row in graph.query_graph.get("constraints", [])
+        if str(row.get("subgoal_id")) == candidate.target_subgoal
+    ), {})
+    known = {normalize_text(value) for value in constraint.get("known_entities", [])}
+    if normalize_text(right) in known and normalize_text(left) not in known:
+        left, right = right, left
+    left_type = _endpoint_type(graph, premises, left)
+    right_type = _endpoint_type(graph, premises, right)
+    return {
+        "subject": left,
+        "relation": "composed_path:" + " -> ".join(row.relation for row in premises),
+        "value": right,
+        "subject_type": left_type,
+        "value_type": right_type,
+        "derivation_confidence": min(row.score.absolute_support for row in premises),
+        "type_match": min(row.score.raw.type_match for row in premises),
+        "dependency_consistency": min(
+            row.score.raw.dependency_consistency for row in premises
+        ),
+        "qualifiers": {
+            "validation": "canonical_entity_unification_and_independent_raw_scoring",
+            "proof_premise_ids": list(candidate.premise_ids),
+            "join_kind": candidate.join_kind,
+        },
+    }
+
+
+def _endpoint_type(
+    graph: DynamicReasoningHypergraphV2, premises: list[ClaimNode], endpoint: str,
+) -> str:
+    normalized = normalize_text(endpoint)
+    for claim in premises:
+        semantics = graph.claim_semantics[claim.node_id]
+        if semantics.normalized_subject == normalized:
+            return semantics.subject_type
+        if semantics.normalized_value == normalized:
+            return semantics.value_type
+    return "entity"
 
 
 def _constraint_row(
@@ -614,6 +783,7 @@ def _build_candidate(
         _qualifier_members(graph.claim_semantics[node_id].qualifiers)
         for node_id in premise_ids
     ))) if join_kind == "set_intersection" else []
+    goal_alignment = _goal_alignment(graph, target_subgoal, premise_ids, open_endpoints)
     return JoinCandidate(
         premise_ids=premise_ids,
         binding=";".join(sorted({str(value["binding"]) for value in constraints})),
@@ -636,6 +806,7 @@ def _build_candidate(
             "types_compatible": True,
             "independent_support": independent_support,
             "set_intersection_members": intersection_members,
+            "goal_alignment": goal_alignment,
         },
     )
 
@@ -800,6 +971,140 @@ def _explicit_set_candidates(
     return rows
 
 
+def _comparison_mode(question: str) -> str:
+    tokens = set(normalize_text(question).split())
+    maximize = tokens & {
+        "more", "most", "higher", "highest", "larger", "largest",
+        "greater", "greatest", "longer", "longest",
+    }
+    minimize = tokens & {
+        "less", "least", "lower", "lowest", "smaller", "smallest",
+        "fewer", "fewest", "shorter", "shortest",
+    }
+    if bool(maximize) == bool(minimize):
+        return ""
+    return "argmax" if maximize else "argmin"
+
+
+def _numeric_value(value: str) -> float | None:
+    match = re.match(r"^\s*([+-]?\d+(?:[.,]\d+)?)\b", str(value))
+    if not match:
+        return None
+    try:
+        return float(match.group(1).replace(",", ""))
+    except ValueError:
+        return None
+
+
+def _numeric_comparison_candidates(
+    graph: DynamicReasoningHypergraphV2,
+    claims: list[ClaimNode],
+    target_subgoal: str,
+    max_arity: int,
+    max_depth: int,
+    cap: int,
+    existing: set[str],
+) -> list[JoinCandidate]:
+    """Create bounded argmax/argmin JOINs only for explicit comparison queries."""
+    mode = _comparison_mode(graph.node(target_subgoal, SubgoalNode).question_template)
+    if not mode or cap <= 0:
+        return []
+    groups: dict[str, list[ClaimNode]] = {}
+    for claim in claims:
+        if claim.target_subgoal != target_subgoal or _numeric_value(claim.value) is None:
+            continue
+        groups.setdefault(normalize_text(claim.relation), []).append(claim)
+    rows: list[JoinCandidate] = []
+    for relation, group in sorted(groups.items()):
+        unique = {normalize_text(row.subject): row for row in group if normalize_text(row.subject)}
+        ordered = sorted(unique.values(), key=lambda row: row.node_id)
+        for arity in range(2, min(max_arity, len(ordered)) + 1):
+            for premise_rows in combinations(ordered, arity):
+                premise_ids = tuple(row.node_id for row in premise_rows)
+                anchor = premise_ids[0]
+                constraints = tuple({
+                    "left_premise": anchor,
+                    "left_endpoint": "value",
+                    "right_premise": node_id,
+                    "right_endpoint": "value",
+                    "orientation": "numeric_comparison",
+                    "binding": relation,
+                    "left_type": "number",
+                    "right_type": "number",
+                    "type_compatible": True,
+                } for node_id in premise_ids[1:])
+                base = _build_candidate(
+                    graph, premise_ids, constraints, target_subgoal, max_depth,
+                )
+                if base is None:
+                    continue
+                numeric = {
+                    row.node_id: float(_numeric_value(row.value)) for row in premise_rows
+                }
+                best_value = (max if mode == "argmax" else min)(numeric.values())
+                selected = sorted(
+                    node_id for node_id, value in numeric.items() if value == best_value
+                )
+                if len(selected) != 1:
+                    continue
+                signature = stable_hash({
+                    "premises": sorted(premise_ids), "target": target_subgoal,
+                    "join_kind": f"numeric_{mode}", "relation": relation,
+                })
+                if signature in existing:
+                    continue
+                candidate = replace(
+                    base,
+                    signature=signature,
+                    join_kind=f"numeric_{mode}",
+                    deterministic_validation={
+                        **base.deterministic_validation,
+                        "numeric_values": numeric,
+                        "selected_premise_id": selected[0],
+                        "comparison_mode": mode,
+                        "goal_alignment": max(
+                            0.8, float(base.deterministic_validation.get("goal_alignment", 0.0)),
+                        ),
+                    },
+                )
+                rows.append(candidate)
+                if len(rows) >= cap:
+                    return rows
+    return rows
+
+
+def _deterministic_numeric_comparison_claim(
+    graph: DynamicReasoningHypergraphV2,
+    candidate: JoinCandidate,
+    premises: list[ClaimNode],
+) -> dict[str, Any] | None:
+    if candidate.join_kind not in {"numeric_argmax", "numeric_argmin"}:
+        return None
+    selected_id = str(candidate.deterministic_validation.get("selected_premise_id", ""))
+    selected = next((row for row in premises if row.node_id == selected_id), None)
+    if selected is None:
+        return None
+    semantics = graph.claim_semantics[selected.node_id]
+    return {
+        "subject": "comparison:" + candidate.target_subgoal,
+        "relation": f"{candidate.join_kind}:{normalize_text(selected.relation)}",
+        "value": selected.subject,
+        "subject_type": "comparison",
+        "value_type": semantics.subject_type,
+        "derivation_confidence": min(row.score.absolute_support for row in premises),
+        "type_match": min(row.score.raw.type_match for row in premises),
+        "dependency_consistency": min(
+            row.score.raw.dependency_consistency for row in premises
+        ),
+        "qualifiers": {
+            "validation": "explicit_query_numeric_comparison_and_independent_raw_scoring",
+            "proof_premise_ids": list(candidate.premise_ids),
+            "numeric_values": candidate.deterministic_validation.get("numeric_values", {}),
+            "join_kind": candidate.join_kind,
+        },
+    }
+
+
 def _dominance_prune(candidates: list[JoinCandidate]) -> list[JoinCandidate]:
     """Remove only structurally equivalent candidates; never drop extra constraints."""
     best: dict[tuple[Any, ...], JoinCandidate] = {}
@@ -814,11 +1119,43 @@ def _dominance_prune(candidates: list[JoinCandidate]) -> list[JoinCandidate]:
         if current is None or (row.join_depth, row.signature) < (current.join_depth, current.signature):
             best[key] = row
     return sorted(best.values(), key=lambda row: (
+        -float(row.deterministic_validation.get("goal_alignment", 0.0)),
         -int(bool(row.projection_premise_id)),
         len(row.premise_ids),
         row.join_depth,
         row.signature,
     ))
+
+
+def _goal_alignment(
+    graph: DynamicReasoningHypergraphV2,
+    target_subgoal: str,
+    premise_ids: tuple[str, ...],
+    open_endpoints: tuple[str, ...],
+) -> float:
+    constraint = next((
+        row for row in graph.query_graph.get("constraints", [])
+        if str(row.get("subgoal_id")) == target_subgoal
+    ), {})
+    known = {
+        normalize_text(value) for value in constraint.get("known_entities", [])
+        if normalize_text(value)
+    }
+    endpoint_values = {normalize_text(value) for value in open_endpoints if normalize_text(value)}
+    known_anchor = 1.0 if known & endpoint_values else 0.0
+    input_variables = set(str(value) for value in constraint.get("input_variables", []))
+    dependency_subgoals = {
+        graph.node(node_id, ClaimNode).target_subgoal for node_id in premise_ids
+    }
+    dependency_coverage = 1.0 if any(
+        variable.removeprefix("?answer:") in dependency_subgoals
+        for variable in input_variables
+    ) else 0.0
+    target_claim = any(
+        graph.node(node_id, ClaimNode).target_subgoal == target_subgoal
+        for node_id in premise_ids
+    )
+    return min(1.0, 0.45 * known_anchor + 0.35 * dependency_coverage + 0.20 * target_claim)
 
 
 def _depends_on(

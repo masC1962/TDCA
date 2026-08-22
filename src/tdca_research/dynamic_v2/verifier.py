@@ -6,7 +6,6 @@ from typing import Any
 
 from ..budget import Budget, BudgetExceeded
 from ..dynamic.candidates import (
-    VERIFY_SYSTEM,
     _blend,
     _dependency_consistency,
     _deterministic_raw,
@@ -29,15 +28,14 @@ from .config import DynamicV2ResearchConfig
 from .graph import DynamicReasoningHypergraphV2
 
 
-V2_VERIFY_SYSTEM = VERIFY_SYSTEM + """ The candidate tuple is canonicalized so its value is the proposed
-subgoal answer whenever it is marked as answering the subgoal. Entailment and type_match must score whether
-that value directly answers the exact subgoal, not merely whether some relation in the tuple is true. Give
-low entailment to a grounded fact that answers a different question or projects the wrong entity/date. Every
-score must independently return answer_position as subject, value, or none for the supplied candidate tuple;
-use none unless that exact field directly answers the subgoal. It must also return contradiction_candidate_ids.
-List an ID only when the two claims are logically mutually exclusive; different values of a multi-valued
-relation are not contradictions. Return score rows only for entries labeled Candidate; entries labeled Existing
-comparison claim are context for contradiction checks."""
+V2_VERIFY_SYSTEM = """Independently score each Candidate against only its referenced evidence and stated
+dependencies. Return JSON only as {scores:[...]}, one compact row per Candidate and no rows for Existing
+comparison claims. Each row contains exactly candidate_id, grounding, entailment, type_match,
+dependency_consistency, contradiction_risk, raw_model_confidence, answer_position, and
+contradiction_candidate_ids. Scores are in [0,1]. answer_position is subject, value, or none; use none unless
+that exact field directly answers the subgoal. Score a true but question-irrelevant tuple low on entailment.
+List contradiction IDs only for logically mutually exclusive claims, never merely different values of a
+multi-valued relation. Do not rank, normalize, omit candidates, explain, or add reasons."""
 
 
 class MultiSampleIndependentVerifier:
@@ -216,6 +214,15 @@ class MultiSampleIndependentVerifier:
                 projection_votes[candidate.node_id],
                 "value" if candidate.provenance.metadata.get("answers_subgoal", False) else "none",
             )
+            structural_position = _structural_projection(
+                graph, subgoal_id, candidate, expected_type,
+            )
+            if structural_position != "none":
+                # Query-graph bindings are a harder constraint than an LLM's
+                # answer-position label.  When exactly one tuple endpoint is a
+                # bound input, the other endpoint is the only possible output
+                # projection.  This changes orientation, never support scores.
+                position = structural_position
             semantics = graph.claim_semantics[candidate.node_id]
             projection_by_id[candidate.node_id] = _type_corrected_projection(
                 position, semantics.subject_type, semantics.value_type, expected_type,
@@ -309,9 +316,56 @@ def _projection_type_compatible(proposed: str, expected: str) -> bool:
         "count": "number", "quantity": "number", "percentage": "number",
         "company": "organization", "institution": "organization", "division": "organization",
     }
-    left = aliases.get(str(proposed).strip().lower().replace("-", "_"), str(proposed).strip().lower())
-    right = aliases.get(str(expected).strip().lower().replace("-", "_"), str(expected).strip().lower())
-    return right in {"", "entity", "thing"} or left == right
+    def options(value: str) -> set[str]:
+        normalized = str(value).strip().lower().replace("-", "_").replace(" ", "_")
+        return {
+            aliases.get(item, item) for item in normalized.split("_or_") if item
+        }
+
+    left = options(proposed)
+    right = options(expected)
+    return bool(right & {"", "entity", "thing"}) or bool(left & right)
+
+
+def _structural_projection(
+    graph: DynamicReasoningHypergraphV2,
+    subgoal_id: str,
+    candidate: ClaimNode,
+    expected_type: str,
+) -> str:
+    """Project the unbound endpoint of a query-constrained tuple.
+
+    The rule is label-free: anchors come only from the compiled query graph and
+    controller-owned dependency assignments.  It deliberately abstains unless
+    exactly one endpoint is bound and the other has the requested type.
+    """
+    anchors = {
+        normalize_text(str(value))
+        for row in graph.query_graph.get("constraints", [])
+        if str(row.get("subgoal_id")) == subgoal_id
+        for value in row.get("known_entities", [])
+        if normalize_text(str(value))
+    }
+    branch = graph.branches.get(candidate.branch_id)
+    subgoal = graph.node(subgoal_id, SubgoalNode)
+    if branch is not None:
+        for dependency_id in subgoal.dependencies:
+            claim_id = branch.assignments.get(dependency_id)
+            dependency = graph.nodes.get(str(claim_id))
+            if isinstance(dependency, ClaimNode):
+                value = normalize_text(dependency.value)
+                if value:
+                    anchors.add(value)
+    subject_bound = normalize_text(candidate.subject) in anchors
+    value_bound = normalize_text(candidate.value) in anchors
+    if subject_bound == value_bound:
+        return "none"
+    semantics = graph.claim_semantics[candidate.node_id]
+    if subject_bound and _projection_type_compatible(semantics.value_type, expected_type):
+        return "value"
+    if value_bound and _projection_type_compatible(semantics.subject_type, expected_type):
+        return "subject"
+    return "none"
 
 
 def _semantic_group_profiles(

@@ -122,6 +122,28 @@ class DynamicPlanner:
             "confidence": 0.1,
             "uncertainty": 0.9,
         }
+        # Some providers repeat the final executable question as both the last
+        # provisional subgoal and the root objective.  Keeping both creates a
+        # fake extra hop and can leave an unresolved terminal node after the
+        # complete proof has already been built.  Collapse only exact structural
+        # duplicates (variable names are alpha-normalized), and inherit the
+        # duplicate's real dependencies/bindings.  No semantic similarity or
+        # question-specific rule is used.
+        duplicate = next((
+            row for row in reversed(normalized_rows)
+            if _template_signature(row["question_template"])
+            == _template_signature(root["question_template"])
+            and not any(
+                row["node_id"] in other["dependencies"]
+                for other in normalized_rows if other is not row
+            )
+        ), None)
+        if duplicate is not None:
+            root["question_template"] = duplicate["question_template"]
+            root["instantiated_question"] = duplicate["instantiated_question"]
+            root["dependencies"] = list(duplicate["dependencies"])
+            root["variable_bindings"] = dict(duplicate["variable_bindings"])
+            normalized_rows = [row for row in normalized_rows if row is not duplicate]
         return GraphOperation(
             operation_id="op_0001_expand_initial",
             operation_type=OperationType.EXPAND,
@@ -151,6 +173,11 @@ def direct_fallback_operation(question: str) -> GraphOperation:
 def _identifier(value: str, fallback: str) -> str:
     normalized = re.sub(r"[^A-Za-z0-9_]", "_", value.strip())
     return normalized or fallback
+
+
+def _template_signature(value: str) -> str:
+    alpha_normalized = re.sub(r"\$[A-Za-z][A-Za-z0-9_]*", "$variable", value)
+    return " ".join(alpha_normalized.casefold().split())
 
 
 def _root_answer_type(question: str, proposed: str) -> str:

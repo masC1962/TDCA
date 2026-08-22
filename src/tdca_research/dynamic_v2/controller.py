@@ -26,8 +26,11 @@ from .belief import GraphBeliefUpdater
 from .config import DynamicV2ResearchConfig
 from .diffusion import TypedDirectionalDiffusion
 from .graph import (
+    ActivatedEntityState,
+    ActivatedPassageState,
     AllocationRecord,
     ClaimSemantics,
+    CrossLayerEdge,
     DynamicReasoningHypergraphV2,
     JoinAttemptRecord,
     OperationFeedbackStats,
@@ -35,6 +38,7 @@ from .graph import (
     SupersessionRecord,
     TerminationRecord,
 )
+from .query_graph import canonical_type, compile_query_graph, type_lineage
 from .allocator import (
     feedback_key,
     operation_family,
@@ -179,6 +183,8 @@ class V2GraphController(GraphController):
                 selected=True,
                 completed=bool(completed),
                 failure_reason=str(failure_reason),
+                fidelity_level=str(trace.get("fidelity_level", "medium")),
+                fidelity_fraction=float(trace.get("fidelity_fraction", 0.65)),
             ))
         else:
             existing.actual_cost = measured
@@ -195,6 +201,63 @@ class V2GraphController(GraphController):
         updated.seal_controller_state()
         updated.validate()
         return updated
+
+    def _expand(self, graph, operation, changes) -> None:
+        super()._expand(graph, operation, changes)
+        if not self.config.query_graph_compiler:
+            return
+        query_graph = compile_query_graph(graph.question, graph.subgoals())
+        graph.query_graph = query_graph.to_payload()
+
+    def _retrieve(self, graph, operation, changes) -> None:
+        super()._retrieve(graph, operation, changes)
+        activation = operation.payload.get("memory_activation", {})
+        if not isinstance(activation, dict):
+            raise GraphInvariantError("memory activation must be a mapping")
+        if not activation:
+            return
+        fingerprint = str(activation.get("corpus_memory_fingerprint", ""))
+        if graph.corpus_memory_fingerprint and fingerprint != graph.corpus_memory_fingerprint:
+            raise GraphInvariantError("corpus memory fingerprint changed within a question")
+        graph.corpus_memory_fingerprint = fingerprint
+        for row in activation.get("passages", []):
+            state = ActivatedPassageState(
+                passage_id=str(row["passage_id"]),
+                evidence_node_id=str(row["evidence_node_id"]),
+                subgoal_id=str(row["subgoal_id"]),
+                branch_id=str(row["branch_id"]),
+                query=str(row["query"]),
+                rank=int(row["rank"]),
+                score=float(row["score"]),
+                entity_ids=[str(value) for value in row.get("entity_ids", [])],
+            )
+            if state.evidence_node_id not in graph.nodes:
+                raise GraphInvariantError("activation references missing retrieved evidence")
+            graph.activated_passages[state.evidence_node_id] = state
+        for row in activation.get("entities", []):
+            state = ActivatedEntityState(
+                entity_id=str(row["entity_id"]),
+                canonical_name=str(row["canonical_name"]),
+                aliases=[str(value) for value in row.get("aliases", [])],
+                passage_ids=[str(value) for value in row.get("passage_ids", [])],
+                query_overlap=float(row.get("query_overlap", 0.0)),
+            )
+            existing = graph.activated_entities.get(state.entity_id)
+            if existing is not None:
+                state.aliases = list(dict.fromkeys(existing.aliases + state.aliases))
+                state.passage_ids = list(dict.fromkeys(existing.passage_ids + state.passage_ids))
+                state.query_overlap = max(existing.query_overlap, state.query_overlap)
+            graph.activated_entities[state.entity_id] = state
+        known_edges = {(row.source, row.target, row.edge_type) for row in graph.cross_layer_edges}
+        for row in activation.get("edges", []):
+            edge = CrossLayerEdge(
+                source=str(row["source"]), target=str(row["target"]),
+                edge_type=str(row["edge_type"]),
+            )
+            signature = (edge.source, edge.target, edge.edge_type)
+            if signature not in known_edges:
+                graph.cross_layer_edges.append(edge)
+                known_edges.add(signature)
 
     def _reconcile_outcome(
         self, graph, allocation, packet, measured, progressed, failure_reason,
@@ -215,8 +278,18 @@ class V2GraphController(GraphController):
             "evidence_gap_reduction": pre.get("evidence_gap", 1.0) - post.get("evidence_gap", 1.0),
             "entropy_reduction": pre.get("entropy", 1.0) - post.get("entropy", 1.0),
             "dependency_unlock_gain": post.get("dependency_unlock", 0.0) - pre.get("dependency_unlock", 0.0),
-            "evidence_novelty": post.get("evidence_count", 0.0) - pre.get("evidence_count", 0.0),
-            "answer_chain_progress": post.get("answer_chain_progress", 0.0) - pre.get("answer_chain_progress", 0.0),
+            "evidence_novelty": (
+                post.get("evidence_count", 0.0) - pre.get("evidence_count", 0.0)
+                + post.get("grounded_claim_count", 0.0)
+                - pre.get("grounded_claim_count", 0.0)
+            ),
+            "answer_chain_progress": (
+                post.get("answer_chain_progress", 0.0)
+                - pre.get("answer_chain_progress", 0.0)
+                + 0.25 * (
+                    post.get("proof_leaf_count", 0.0) - pre.get("proof_leaf_count", 0.0)
+                )
+            ),
             "contradiction_resolution": (
                 pre.get("contradiction_pressure", 0.0) - post.get("contradiction_pressure", 0.0)
             ),
@@ -372,6 +445,7 @@ class V2GraphController(GraphController):
             deterministic_validation=dict(operation.payload.get("deterministic_validation", {})),
             model_validation=dict(metadata),
             accepted=bool(completed),
+            proof_leaf_ids=_proof_leaf_ids(graph, premise_ids),
             rejection_reason=failure_reason or "join_rejected",
             creation_cost=measured,
             downstream_unlock=0.0,
@@ -409,7 +483,26 @@ class V2GraphController(GraphController):
                 extraction_mode=str(row.get("extraction_mode", "typed_evidence_extraction")),
                 join_depth=int(row.get("join_depth", 0)),
                 join_signature=str(row.get("join_signature", "")),
+                canonical_subject_id=_canonical_entity_id(graph, node.subject),
+                canonical_value_id=_canonical_entity_id(graph, node.value),
+                subject_type_lineage=list(type_lineage(row.get("subject_type", "entity"))),
+                value_type_lineage=list(type_lineage(
+                    row.get("value_type", row.get("answer_type", "entity"))
+                )),
             )
+            for entity_id, role in (
+                (graph.claim_semantics[node_id].canonical_subject_id, "grounds_claim_subject"),
+                (graph.claim_semantics[node_id].canonical_value_id, "grounds_claim_value"),
+            ):
+                if not entity_id or entity_id not in graph.activated_entities:
+                    continue
+                edge = CrossLayerEdge(entity_id, node_id, role)
+                signature = (edge.source, edge.target, edge.edge_type)
+                if signature not in {
+                    (value.source, value.target, value.edge_type)
+                    for value in graph.cross_layer_edges
+                }:
+                    graph.cross_layer_edges.append(edge)
 
     def _merge(self, graph, operation, changes) -> None:
         if operation.payload.get("mode") != "derive_join":
@@ -531,6 +624,14 @@ class V2GraphController(GraphController):
             extraction_mode="typed_relational_join",
             join_depth=join_depth,
             join_signature=signature,
+            canonical_subject_id=_canonical_entity_id(graph, claim.subject),
+            canonical_value_id=_canonical_entity_id(graph, claim.value),
+            subject_type_lineage=list(type_lineage(
+                row.get("subject_type", semantics_rows[0].subject_type)
+            )),
+            value_type_lineage=list(type_lineage(
+                row.get("value_type", semantics_rows[-1].value_type)
+            )),
         )
         graph.join_attempt_history.append(JoinAttemptRecord(
             attempt_id=f"join_attempt_{operation.operation_id}",
@@ -559,6 +660,7 @@ class V2GraphController(GraphController):
             ),
             model_validation=dict(operation.payload.get("validation", {})),
             accepted=True,
+            proof_leaf_ids=_proof_leaf_ids(graph, source_ids),
             conclusion_node_id=node_id,
             creation_cost={
                 str(key): float(value) for key, value in operation.estimated_cost.items()
@@ -697,6 +799,8 @@ class V2GraphController(GraphController):
             },
             selected=True,
             completed=True,
+            fidelity_level=str(row.get("fidelity_level", "medium")),
+            fidelity_fraction=float(row.get("fidelity_fraction", 0.65)),
         ))
 
 
@@ -734,6 +838,42 @@ def _downstream_cascade(
 def _node_status(node: Any) -> str:
     status = getattr(node, "status", None)
     return status.value if hasattr(status, "value") else str(status)
+
+
+def _canonical_entity_id(graph: DynamicReasoningHypergraphV2, surface: str) -> str:
+    normalized = normalize_text(surface)
+    if not normalized:
+        return ""
+    for entity_id, row in graph.activated_entities.items():
+        if any(normalize_text(alias) == normalized for alias in row.aliases):
+            return entity_id
+    # Literals and entities absent from the activated corpus still receive a
+    # stable question-local identity; this does not assert a corpus relation.
+    return f"local_entity_{stable_hash(normalized)[:16]}"
+
+
+def _proof_leaf_ids(
+    graph: DynamicReasoningHypergraphV2, premise_ids: list[str],
+) -> list[str]:
+    leaves: set[str] = set()
+    queue = list(premise_ids)
+    seen = set(queue)
+    while queue:
+        node_id = queue.pop()
+        node = graph.nodes.get(node_id)
+        semantics = graph.claim_semantics.get(node_id)
+        if (
+            isinstance(node, ClaimNode) and semantics is not None
+            and semantics.join_depth > 0 and node.dependency_claim_ids
+        ):
+            for dependency_id in node.dependency_claim_ids:
+                if dependency_id not in seen:
+                    seen.add(dependency_id)
+                    queue.append(dependency_id)
+            continue
+        if isinstance(node, ClaimNode):
+            leaves.add(node_id)
+    return sorted(leaves)
 
 
 def _join_constraints_connected(

@@ -28,16 +28,19 @@ from tdca_research.dynamic_v2.editor import EventTriggeredGraphEditorV2
 from tdca_research.dynamic_v2.engine import (
     DynamicHypergraphV2Reasoner,
     _execution_packet,
+    _join_attempt_key,
     _nary_relevant,
 )
-from tdca_research.dynamic_v2.extraction import TypedClaimExtractor
+from tdca_research.dynamic_v2.extraction import TypedClaimExtractor, _canonicalize_typed_value
 from tdca_research.dynamic_v2.graph import DynamicReasoningHypergraphV2, TerminationKind
 from tdca_research.dynamic_v2.join import MultiHopJoinEngine
+from tdca_research.dynamic_v2.memory import RelationLightCorpusMemory
+from tdca_research.dynamic_v2.query_graph import compile_query_graph, types_compatible
 from tdca_research.dynamic_v2.revision import BeliefRevisionDetector
 from tdca_research.dynamic_v2.termination import MetaStopPolicy
 from tdca_research.dynamic_v2.verifier import MultiSampleIndependentVerifier
 from tdca_research.llm import DeterministicMockLLM
-from tdca_research.models import Usage
+from tdca_research.models import Passage, Usage
 from tdca_research.retrieval import BM25Retriever
 
 
@@ -167,6 +170,72 @@ def test_v2_graph_roundtrip_and_controller_seal_detects_external_mutation():
         restored.validate()
 
 
+def test_relation_light_memory_activates_three_layer_state_through_controller():
+    cfg = config()
+    passages = [
+        Passage("p1", "Alpha Institute", "Alpha Institute was founded in Beta City."),
+        Passage("p2", "Beta City", "Beta City is located in Gamma Country."),
+    ]
+    memory = RelationLightCorpusMemory.build(passages)
+    hits = BM25Retriever(passages).search("Alpha Institute Beta City", 2)
+    controller = V2GraphController(cfg)
+    graph = empty_graph(cfg)
+    graph = controller.apply(graph, operation(1, OperationType.EXPAND, payload={"subgoals": [{
+        "node_id": "s_root", "question_template": graph.question,
+        "instantiated_question": graph.question, "dependencies": [],
+        "variable_bindings": {}, "answer_type": "country", "terminal": True,
+    }]}))
+    evidence_ids = [f"e{index}" for index in range(1, len(hits) + 1)]
+    activation = memory.activate(
+        hits, evidence_ids, graph.question, "s_root", "branch_root",
+        "Alpha Institute Beta City",
+    ).to_payload()
+    activation["corpus_memory_fingerprint"] = memory.fingerprint
+    graph = controller.apply(graph, operation(2, OperationType.RETRIEVE, payload={
+        "query": "Alpha Institute Beta City",
+        "memory_activation": activation,
+        "evidence": [{
+            "node_id": evidence_id, "document_id": hit.passage.passage_id,
+            "passage_id": hit.passage.passage_id, "title": hit.passage.title,
+            "source_span": hit.passage.text, "retrieval_rank": hit.rank,
+            "retrieval_score": hit.raw_score, "retrieval_query": hit.query,
+            "retriever_identity": hit.retriever,
+        } for evidence_id, hit in zip(evidence_ids, hits)],
+    }))
+    assert graph.corpus_memory_fingerprint == memory.fingerprint
+    assert len(graph.activated_passages) == 2
+    assert graph.activated_entities
+    assert graph.cross_layer_edges
+    assert graph.query_graph["variables"][0]["expected_type"] == "country"
+    restored = DynamicReasoningHypergraphV2.from_dict(graph.to_dict())
+    assert restored.canonical_json() == graph.canonical_json()
+    assert any(
+        row["edge_type"] == "memory_query_activation"
+        for row in graph.diffusion_history[-1].typed_messages
+    )
+
+
+def test_query_graph_and_hierarchical_types_are_training_free_and_generic():
+    cfg, _, graph = chain_graph()
+    compiled = compile_query_graph(graph.question, graph.subgoals())
+    assert compiled.variables
+    assert compiled.constraints
+    assert types_compatible("city", "location")
+    assert types_compatible("company", "organization")
+    assert not types_compatible("date", "location")
+
+
+def test_adaptive_allocator_exposes_operation_fidelity_alternatives():
+    cfg, _, graph = chain_graph()
+    allocator = AdaptiveComputationAllocator(cfg)
+    packets = allocator.allocate(graph, [operation(
+        99, OperationType.RETRIEVE, payload={"query": "missing relation"},
+    )], Budget(16, 6000, 200, Usage()))
+    assert {row.fidelity_level for row in packets} == {"low", "medium", "high"}
+    assert len({row.requested_budget["retrieval_top_k"] for row in packets}) >= 2
+    assert all(row.trace()["fidelity_fraction"] > 0 for row in packets)
+
+
 def test_typed_join_is_discovered_and_materializes_multi_premise_hyperedge():
     cfg, _, graph = joined_graph()
     joined = [value for value in graph.claim_semantics.values() if value.join_depth > 0]
@@ -181,6 +250,29 @@ def test_typed_join_is_discovered_and_materializes_multi_premise_hyperedge():
         DeterministicMockLLM(), Budget(16, 6000, 200, Usage()), cfg,
     )
     assert not engine.discover(graph, "branch_root", "s_root")
+
+
+def test_failed_join_key_changes_only_after_controller_belief_update():
+    cfg, controller, graph = chain_graph()
+    engine = MultiHopJoinEngine(
+        DeterministicMockLLM(), Budget(16, 6000, 200, Usage()), cfg,
+    )
+    candidate = engine.discover(graph, "branch_root", "s_root")[0]
+    before = _join_attempt_key(graph, candidate)
+    claim = graph.node("c2")
+    graph = controller.apply(graph, operation(90, OperationType.VERIFY, payload={
+        "scores": {"c2": {
+            **claim.score.raw.__dict__, "absolute_support": 0.61,
+            "relative_weight": claim.score.relative_weight,
+            "set_entropy": claim.score.set_entropy,
+            "evidence_gap": 0.39, "status": "scored",
+        }},
+    }))
+    refreshed = next(
+        row for row in engine.discover(graph, "branch_root", "s_root")
+        if row.signature == candidate.signature
+    )
+    assert _join_attempt_key(graph, refreshed) != before
 
 
 def test_join_discovers_shared_object_path_without_relation_specific_rules():
@@ -233,12 +325,14 @@ def test_join_sees_assigned_parent_claim_from_child_branch_lineage():
     assert any(set(row.premise_ids) == {"c1", "c3"} for row in candidates)
 
 
-def test_join_allows_auditable_variable_binding_projection():
+def test_join_allows_auditable_variable_binding_projection_despite_surface_alias_mismatch():
     cfg, controller, graph = chain_graph()
     graph = controller.apply(graph, operation(5, OperationType.BRANCH, payload={
         "mode": "candidates",
         "candidates": [{
-            "node_id": "c3", "subject": "Beta City", "relation": "chartered in",
+            # Deliberately does not string-match c1.value. The verified,
+            # controller-recorded dependency is the auditable binding.
+            "node_id": "c3", "subject": "The greater Beta municipal area", "relation": "chartered in",
             "value": "1600", "subject_type": "location", "value_type": "date",
             "answer_type": "date", "evidence_refs": ["e2"],
             "source_spans": ["Beta City was chartered in 1600"],
@@ -289,6 +383,7 @@ def test_join_allows_auditable_variable_binding_projection():
         if set(row.premise_ids) == {"c1", "c3"}
     )
     assert candidate.projection_premise_id == "c3"
+    assert candidate.orientation == "declared_dependency_binding"
     sibling_augmented = next(
         row for row in engine.discover(graph, "branch_root", "s_root")
         if set(row.premise_ids) == {"c1", "c2", "c3"}
@@ -343,10 +438,16 @@ def test_allocator_records_complete_evc_and_produces_non_uniform_budget_packets(
         operation(12, OperationType.COMMIT, payload={"candidate_id": "c1"}, sources=["c1"]),
     ]
     packets = allocator.allocate(graph, operations, budget)
-    assert len(packets) == 3
+    assert len(packets) == 7
+    assert {packet.operation.operation_id for packet in packets} == {
+        operation.operation_id for operation in operations
+    }
     assert all(packet.raw.__dict__ and packet.normalized.__dict__ for packet in packets)
     assert len({packet.requested_budget["max_tokens"] for packet in packets}) > 1
-    selected = packets[0]
+    selected = next(
+        packet for packet in packets
+        if packet.operation.operation_type == OperationType.COMMIT
+    )
     attached = allocator.attach(selected.operation, selected)
     graph = controller.apply(graph, attached)
     record = graph.allocation_history[-1]
@@ -442,6 +543,47 @@ def test_event_triggered_editor_proposes_only_controller_applied_structural_edit
     assert updated.operation_history[-1].reason == "event_triggered:missing_terminal_path"
 
 
+def test_event_triggered_editor_rejects_attachment_cycle_before_controller_apply():
+    cfg = config()
+    controller = V2GraphController(cfg)
+    graph = empty_graph(cfg)
+    graph = controller.apply(graph, operation(80, OperationType.EXPAND, payload={"subgoals": [
+        {
+            "node_id": "s_target", "question_template": "Who played Victrola?",
+            "instantiated_question": "Who played Victrola?", "dependencies": [],
+            "variable_bindings": {}, "answer_type": "person", "terminal": False,
+        },
+        {
+            "node_id": "s_downstream", "question_template": "Who was the character named after?",
+            "instantiated_question": "Who was the character named after?",
+            "dependencies": ["s_target"], "variable_bindings": {},
+            "answer_type": "person", "terminal": True,
+        },
+    ]}))
+    before = graph.state_hash()
+    editor = EventTriggeredGraphEditorV2(
+        DeterministicMockLLM(json_responses=[{"operations": [{
+            "operation": "EXPAND",
+            "subgoal": {
+                "question_template": "Which missing relation identifies the performer?",
+                "answer_type": "person",
+                "dependencies": ["s_downstream"],
+                "variable_bindings": {},
+            },
+        }]}]),
+        Budget(16, 6000, 200, Usage()),
+        cfg,
+    )
+    proposal = editor.propose(
+        graph, "high_uncertainty_no_join", graph.branches["branch_root"],
+        "op_v2_editor_cycle", "s_target", 500,
+    )
+    assert proposal is None
+    assert editor.last_diagnostics["reason"] == "unsafe_execution_cycle"
+    assert graph.state_hash() == before
+    graph.validate()
+
+
 def test_failed_selected_allocation_keeps_predicted_evc_and_measured_cost():
     cfg, controller, graph = chain_graph()
     allocator = AdaptiveComputationAllocator(cfg)
@@ -497,7 +639,7 @@ def test_subject_answer_projection_canonicalizes_claim_value_for_slot_binding():
             "subject_type": "organization",
             "value_type": "location",
             "evidence_ids": ["e1"],
-            "source_spans": ["Alpha was founded in Beta City"],
+            "quote": "Alpha was founded in Beta City",
             "qualifiers": {},
             "extraction_confidence": 0.9,
             "answers_subgoal": True,
@@ -517,6 +659,68 @@ def test_subject_answer_projection_canonicalizes_claim_value_for_slot_binding():
     assert claim.subject == "Beta City"
     assert claim.relation == "inverse_of:was founded in"
     assert claim.provenance.metadata["source_triple"]["value"] == "Beta City"
+
+
+def test_typed_value_canonicalization_keeps_atomic_infobox_and_scalar_endpoints():
+    location, location_audit = _canonicalize_typed_value(
+        "Thaba Putsoa - location Maloti Mountains, Lesotho", "location",
+    )
+    distance, distance_audit = _canonicalize_typed_value(
+        "45 miles northwest of Nashville", "distance",
+    )
+    assert location == "Thaba Putsoa"
+    assert location_audit["original_value"].startswith("Thaba Putsoa")
+    assert distance == "45"
+    assert distance_audit["kind"] == "typed_scalar"
+    assert _canonicalize_typed_value("8.11 million", "number")[0] == "8.11 million"
+    assert _canonicalize_typed_value("323-272 BC", "date")[0] == "323-272 BC"
+
+
+def test_query_binding_projects_unbound_endpoint_despite_model_none_vote():
+    cfg = config()
+    controller = V2GraphController(cfg)
+    graph = empty_graph(cfg)
+    graph = controller.apply(graph, operation(81, OperationType.EXPAND, payload={"subgoals": [{
+        "node_id": "s_dev", "question_template": "Who develops Mozilla Sunbird?",
+        "instantiated_question": "Who develops Mozilla Sunbird?", "dependencies": [],
+        "variable_bindings": {}, "answer_type": "person_or_organization", "terminal": True,
+    }]}))
+    graph = controller.apply(graph, operation(82, OperationType.RETRIEVE, target="s_dev", payload={
+        "query": "Mozilla Sunbird developer", "evidence": [{
+            "node_id": "e_dev", "document_id": "p_dev", "passage_id": "p_dev",
+            "title": "Mozilla Sunbird", "source_span": "Mozilla Sunbird was developed by Mozilla Foundation.",
+            "retrieval_rank": 1, "retrieval_score": 1.0,
+            "retrieval_query": "Mozilla Sunbird developer", "retriever_identity": "fixture",
+        }],
+    }))
+    graph = controller.apply(graph, operation(83, OperationType.BRANCH, target="s_dev", payload={
+        "mode": "candidates", "candidates": [{
+            "node_id": "c_dev", "subject": "Mozilla Sunbird", "relation": "developed by",
+            "value": "Mozilla Foundation", "subject_type": "software",
+            "value_type": "organization", "answer_type": "organization",
+            "evidence_refs": ["e_dev"],
+            "source_spans": ["Mozilla Sunbird was developed by Mozilla Foundation."],
+            "dependency_claim_ids": [], "extraction_confidence": 0.9,
+            "answers_subgoal": False, "answer_position": "none",
+        }]},
+    ))
+    verifier = MultiSampleIndependentVerifier(
+        DeterministicMockLLM(json_responses=[{"scores": [{
+            "candidate_id": "c_dev", "grounding": 1.0, "entailment": 0.9,
+            "type_match": 1.0, "dependency_consistency": 1.0,
+            "contradiction_risk": 0.0, "raw_model_confidence": 0.9,
+            "answer_position": "none", "contradiction_candidate_ids": [],
+        }]}]),
+        Budget(16, 6000, 200, Usage()), cfg,
+    )
+    proposal = verifier.propose(
+        graph, "s_dev", "branch_root", "Who develops Mozilla Sunbird?",
+        "op_v2_verify_binding", 1, 700,
+    )
+    assert proposal is not None
+    graph = controller.apply(graph, proposal)
+    assert graph.node("c_dev").provenance.metadata["verified_answer_position"] == "value"
+    assert graph.node("c_dev").provenance.metadata["answers_subgoal"] is True
 
 
 def test_verifier_can_recover_a_missed_subject_projection_through_controller():
@@ -542,6 +746,7 @@ def test_verifier_can_recover_a_missed_subject_projection_through_controller():
 
 def test_join_rejects_non_scalar_derived_fields_before_controller_transaction():
     cfg, _, graph = chain_graph()
+    cfg.deterministic_goal_path_join = False
     engine = MultiHopJoinEngine(
         DeterministicMockLLM(json_responses=[{
             "valid": True,
@@ -825,3 +1030,90 @@ def test_explicit_set_intersection_requires_a_real_shared_member():
     assert intersection.join_kind == "set_intersection"
     assert intersection.deterministic_validation["set_intersection_members"] == ["bea"]
     assert len(intersection.constraints) == 2
+
+
+def test_explicit_numeric_comparison_materializes_deterministic_argmax_join():
+    cfg = config(max_join_arity=4)
+    controller = V2GraphController(cfg)
+    graph = DynamicReasoningHypergraphV2(
+        "Which university won more national championships?",
+        GraphLimits(
+            cfg.max_candidates_per_subgoal, cfg.max_active_branches,
+            cfg.max_graph_nodes, cfg.max_hyperedges, cfg.max_graph_revisions,
+            cfg.max_revision_per_candidate, cfg.max_graph_depth,
+            cfg.max_graph_operations, cfg.max_retrieval_calls,
+        ),
+    )
+    graph.branches["branch_root"] = BranchState(
+        "branch_root", None, {}, [], 1.0, BranchStatus.ACTIVE, 0,
+    )
+    graph.seal_controller_state()
+    graph = controller.apply(graph, operation(90, OperationType.EXPAND, target="s_compare", payload={
+        "subgoals": [{
+            "node_id": "s_compare",
+            "question_template": "Which university won more national championships?",
+            "instantiated_question": "Which university won more national championships?",
+            "dependencies": [], "variable_bindings": {},
+            "answer_type": "university", "terminal": True,
+        }],
+    }))
+    graph = controller.apply(graph, operation(91, OperationType.RETRIEVE, target="s_compare", payload={
+        "query": "university national championships", "evidence": [
+            {
+                "node_id": "e_clemson", "document_id": "p_clemson", "passage_id": "p_clemson",
+                "title": "Clemson", "source_span": "Clemson University won 5 national championships.",
+                "retrieval_rank": 1, "retrieval_score": 1.0,
+                "retrieval_query": "university national championships", "retriever_identity": "fixture",
+            },
+            {
+                "node_id": "e_carolina", "document_id": "p_carolina", "passage_id": "p_carolina",
+                "title": "South Carolina", "source_span": "University of South Carolina won 10 national championships.",
+                "retrieval_rank": 2, "retrieval_score": 0.9,
+                "retrieval_query": "university national championships", "retriever_identity": "fixture",
+            },
+        ],
+    }))
+    graph = controller.apply(graph, operation(92, OperationType.BRANCH, target="s_compare", payload={
+        "mode": "candidates", "candidates": [
+            {
+                "node_id": "c_clemson", "subject": "Clemson University",
+                "relation": "national championships", "value": "5",
+                "subject_type": "university", "value_type": "number", "answer_type": "number",
+                "evidence_refs": ["e_clemson"], "source_spans": ["won 5 national championships"],
+                "dependency_claim_ids": [], "extraction_confidence": 0.9,
+            },
+            {
+                "node_id": "c_carolina", "subject": "University of South Carolina",
+                "relation": "national championships", "value": "10",
+                "subject_type": "university", "value_type": "number", "answer_type": "number",
+                "evidence_refs": ["e_carolina"], "source_spans": ["won 10 national championships"],
+                "dependency_claim_ids": [], "extraction_confidence": 0.9,
+            },
+        ],
+    }))
+    graph = controller.apply(graph, operation(93, OperationType.VERIFY, target="s_compare", payload={
+        "scores": {node_id: {
+            "grounding": 1.0, "entailment": 0.95, "type_match": 1.0,
+            "dependency_consistency": 1.0, "retrieval_support": 1.0,
+            "contradiction_risk": 0.0, "raw_model_confidence": 0.95,
+            "absolute_support": 0.95, "relative_weight": 0.5,
+            "set_entropy": 1.0, "evidence_gap": 0.05, "status": "scored",
+        } for node_id in ("c_clemson", "c_carolina")},
+    }))
+    engine = MultiHopJoinEngine(
+        DeterministicMockLLM(), Budget(16, 6000, 200, Usage()), cfg,
+    )
+    candidate = next(
+        row for row in engine.discover(graph, "branch_root", "s_compare")
+        if row.join_kind == "numeric_argmax"
+    )
+    proposal = engine.propose(graph, candidate, "op_v2_numeric_compare", 500)
+    assert proposal is not None
+    assert proposal.estimated_cost["llm_calls"] == 0.0
+    graph = controller.apply(graph, proposal)
+    conclusion = next(
+        graph.node(node_id) for node_id, semantics in graph.claim_semantics.items()
+        if semantics.join_signature == candidate.signature
+    )
+    assert conclusion.value == "University of South Carolina"
+    assert len(conclusion.dependency_claim_ids) == 2

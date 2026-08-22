@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import re
 from dataclasses import asdict, dataclass
 from pathlib import Path
 from typing import Any, Iterable
@@ -66,6 +67,51 @@ def _content_hash(claim: str, evidence: str) -> str:
         {"claim": claim, "evidence": evidence}, ensure_ascii=False, sort_keys=True,
     ).encode("utf-8")
     return hashlib.sha256(payload).hexdigest()
+
+
+_LEXICAL_STOPWORDS = {
+    "a", "an", "and", "are", "as", "at", "be", "been", "by",
+    "during", "for", "from", "had", "has", "have", "he", "her", "his",
+    "in", "is", "it", "its", "of", "on", "or", "that", "the", "their",
+    "them", "they", "this", "to", "was", "were", "will", "with",
+}
+_DIRECTIONAL_TERMS = {"after", "before", "less", "more", "under", "over", "until", "since"}
+
+
+def _lexical_tokens(text: str) -> list[str]:
+    return [
+        token for token in re.findall(r"[a-z0-9]+(?:[.,][0-9]+)?", text.casefold())
+        if token not in _LEXICAL_STOPWORDS
+    ]
+
+
+def _direct_support_audit(item: RevisionInput) -> dict[str, Any]:
+    """Conservative, label-free guard against revising a belief its evidence restates.
+
+    It only suppresses an LLM refutation when the evidence covers nearly all claim
+    content. Missing claim-side numbers or directional comparators are treated as
+    explicit conflicts, so a superficially similar changed date/quantity does not
+    pass the guard. Page-title tokens are excluded because the page context already
+    establishes the subject and need not be repeated in every evidence sentence.
+    """
+    page_tokens = set(_lexical_tokens(item.page))
+    claim_tokens = [token for token in _lexical_tokens(item.claim) if token not in page_tokens]
+    evidence_tokens = set(_lexical_tokens(item.evidence))
+    covered = sum(token in evidence_tokens for token in claim_tokens)
+    coverage = covered / max(1, len(claim_tokens))
+    claim_numbers = set(re.findall(r"\d+(?:[.,]\d+)?", item.claim.casefold()))
+    evidence_numbers = set(re.findall(r"\d+(?:[.,]\d+)?", item.evidence.casefold()))
+    missing_numbers = sorted(claim_numbers - evidence_numbers)
+    claim_directionals = set(_lexical_tokens(item.claim)) & _DIRECTIONAL_TERMS
+    evidence_directionals = set(_lexical_tokens(item.evidence)) & _DIRECTIONAL_TERMS
+    missing_directionals = sorted(claim_directionals - evidence_directionals)
+    return {
+        "coverage": coverage,
+        "claim_content_token_count": len(claim_tokens),
+        "missing_claim_numbers": missing_numbers,
+        "missing_directional_terms": missing_directionals,
+        "no_explicit_value_conflict": not missing_numbers and not missing_directionals,
+    }
 
 
 def load_unlabeled_inputs(
@@ -292,10 +338,17 @@ def apply_natural_revision_episode(
             "extraction_confidence": assessment.confidence,
         }],
     }))
+    direct_support = _direct_support_audit(item)
+    direct_support_override = (
+        direct_support["coverage"] >= config.revision_lexical_support_override_threshold
+        and direct_support["claim_content_token_count"] >= 3
+        and direct_support["no_explicit_value_conflict"]
+    )
     contradiction = (
         assessment.relation == "refutes"
         and assessment.contradiction_entailment >= config.contradiction_threshold
         and assessment.grounding >= config.retain_support_threshold
+        and not direct_support_override
     )
     incoming_support = max(assessment.grounding, assessment.confidence)
     prior_support = max(0.0, 0.95 - 0.70 * assessment.contradiction_entailment) if contradiction else 0.95
@@ -344,6 +397,8 @@ def apply_natural_revision_episode(
     )
     trace = {
         "contradiction_gate_passed": contradiction,
+        "direct_support_override": direct_support_override,
+        "direct_support_audit": direct_support,
         "trigger_count": len(triggers),
         "trigger": asdict(triggers[0]) if triggers else None,
         "supersession_count": len(graph.supersession_history),
@@ -365,6 +420,10 @@ def predict_items(
         assessment, generation = scorer.assess(item)
         graph, decision = apply_natural_revision_episode(item, assessment, config)
         provider_attempts = int(generation.metadata.get("provider_attempts", 1))
+        provider_reported_tokens = (
+            0 if generation.cached
+            else generation.prompt_tokens + generation.completion_tokens
+        )
         predictions.append({
             "item_id": item.item_id,
             "case_id": item.case_id,
@@ -374,7 +433,7 @@ def predict_items(
             "usage": {
                 "provider_calls": 0 if generation.cached else provider_attempts,
                 "logical_calls": 1,
-                "provider_reported_tokens": generation.prompt_tokens + generation.completion_tokens,
+                "provider_reported_tokens": provider_reported_tokens,
                 "prompt_tokens": generation.prompt_tokens,
                 "completion_tokens": generation.completion_tokens,
                 "cached": generation.cached,

@@ -19,17 +19,24 @@ class DynamicV2ResearchConfig(DynamicResearchConfig):
     """
 
     method: str = "dynamic_hypergraph_tdca_v2"
-    prompt_version: str = "dynamic-hypergraph-v2"
+    prompt_version: str = "dynamic-hypergraph-v2.1"
+    architecture_version: str = "relation-light-memory-proof-hypergraph-v2.1"
 
-    max_extracted_claims_per_round: int = 6
+    max_extracted_claims_per_round: int = 8
     max_join_arity: int = 4
     max_join_proposals_per_step: int = 3
     max_join_attempts_per_question: int = 6
     max_join_depth: int = 4
     max_join_frontier_candidates: int = 48
     join_min_premise_support: float = 0.55
-    typed_extraction_max_tokens: int = 850
+    typed_extraction_max_tokens: int = 900
     join_validation_max_tokens: int = 650
+    extraction_focus_sentences_per_evidence: int = 3
+    extraction_focus_min_chars: int = 120
+    structured_output_recovery: bool = True
+    relation_light_memory: bool = True
+    query_graph_compiler: bool = True
+    deterministic_goal_path_join: bool = True
 
     diffusion_steps: int = 3
     diffusion_restart: float = 0.40
@@ -73,10 +80,13 @@ class DynamicV2ResearchConfig(DynamicResearchConfig):
     allocation_mid_heat_threshold: float = 0.34
     max_independent_verifications: int = 2
     max_adaptive_top_k: int = 15
+    allocation_fidelity_levels: int = 3
+    activation_entity_boost: float = 0.35
 
     revision_support_drop_threshold: float = 0.20
     revision_entropy_rise_threshold: float = 0.20
     revision_evidence_gap_rise_threshold: float = 0.20
+    revision_lexical_support_override_threshold: float = 0.80
     natural_revision_precision_threshold: float = 0.80
 
     def validate(self) -> None:
@@ -93,6 +103,9 @@ class DynamicV2ResearchConfig(DynamicResearchConfig):
             "diffusion_steps": self.diffusion_steps,
             "max_independent_verifications": self.max_independent_verifications,
             "max_adaptive_top_k": self.max_adaptive_top_k,
+            "extraction_focus_sentences_per_evidence": self.extraction_focus_sentences_per_evidence,
+            "extraction_focus_min_chars": self.extraction_focus_min_chars,
+            "allocation_fidelity_levels": self.allocation_fidelity_levels,
             "outcome_feedback_cooldown_failures": self.outcome_feedback_cooldown_failures,
             "outcome_feedback_cooldown_steps": self.outcome_feedback_cooldown_steps,
         }
@@ -116,6 +129,8 @@ class DynamicV2ResearchConfig(DynamicResearchConfig):
             raise ValueError("outcome_feedback_prior_strength must be positive")
         if not 0.0 <= self.join_min_premise_support <= 1.0:
             raise ValueError("join_min_premise_support must be in [0,1]")
+        if not 0.0 <= self.activation_entity_boost <= 1.0:
+            raise ValueError("activation_entity_boost must be in [0,1]")
         weights = [
             value for name, value in asdict(self).items()
             if name.startswith("heat_weight_")

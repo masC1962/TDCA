@@ -233,6 +233,35 @@ def test_initial_planner_preserves_valid_root_rewrite_and_binding():
     assert root["variable_bindings"] == {"$leader": "subgoal_1"}
 
 
+def test_initial_planner_collapses_alpha_equivalent_terminal_subgoal_and_root():
+    response = {
+        "subgoals": [
+            {
+                "local_id": "actor", "question_template": "Who played the Terminator?",
+                "answer_type": "person", "dependencies": [], "variable_bindings": {},
+            },
+            {
+                "local_id": "law", "question_template": "What law was passed by $actor?",
+                "answer_type": "law", "dependencies": ["actor"],
+                "variable_bindings": {"$actor": "actor"},
+            },
+        ],
+        "root_dependencies": ["law"],
+        "root_question_template": "What law was passed by $bridge?",
+        "root_variable_bindings": {"$bridge": "law"},
+        "root_answer_type": "law",
+    }
+    cfg = _config()
+    budget = Budget(cfg.max_llm_calls, cfg.max_total_tokens, cfg.final_reserve_tokens, Usage())
+    operation = DynamicPlanner(
+        DeterministicMockLLM(json_responses=[response]), budget, cfg,
+    ).initial_expand("What was the name of the law passed by the actor from Terminator?")
+    rows = operation.payload["subgoals"]
+    assert [row["node_id"] for row in rows] == ["subgoal_1", "subgoal_root"]
+    assert rows[-1]["dependencies"] == ["subgoal_1"]
+    assert rows[-1]["variable_bindings"] == {"$actor": "subgoal_1"}
+
+
 def test_initial_planner_drops_runtime_unbound_subgoals():
     response = {
         "subgoals": [{

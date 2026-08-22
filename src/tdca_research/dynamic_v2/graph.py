@@ -41,6 +41,38 @@ class ClaimSemantics:
     extraction_mode: str = "typed_evidence_extraction"
     join_depth: int = 0
     join_signature: str = ""
+    canonical_subject_id: str = ""
+    canonical_value_id: str = ""
+    subject_type_lineage: list[str] = field(default_factory=list)
+    value_type_lineage: list[str] = field(default_factory=list)
+
+
+@dataclass
+class ActivatedPassageState:
+    passage_id: str
+    evidence_node_id: str
+    subgoal_id: str
+    branch_id: str
+    query: str
+    rank: int
+    score: float
+    entity_ids: list[str] = field(default_factory=list)
+
+
+@dataclass
+class ActivatedEntityState:
+    entity_id: str
+    canonical_name: str
+    aliases: list[str]
+    passage_ids: list[str]
+    query_overlap: float
+
+
+@dataclass
+class CrossLayerEdge:
+    source: str
+    target: str
+    edge_type: str
 
 
 @dataclass
@@ -99,6 +131,8 @@ class AllocationRecord:
     selected: bool = False
     completed: bool = False
     failure_reason: str = ""
+    fidelity_level: str = "medium"
+    fidelity_fraction: float = 0.65
 
 
 @dataclass
@@ -120,6 +154,7 @@ class JoinAttemptRecord:
     deterministic_validation: dict[str, Any]
     model_validation: dict[str, Any]
     accepted: bool
+    proof_leaf_ids: list[str] = field(default_factory=list)
     conclusion_node_id: str = ""
     rejection_reason: str = ""
     creation_cost: dict[str, float] = field(default_factory=dict)
@@ -208,6 +243,11 @@ class DynamicReasoningHypergraphV2(DynamicReasoningHypergraph):
     supersession_history: list[SupersessionRecord] = field(default_factory=list)
     invalidated_hyperedges: list[str] = field(default_factory=list)
     termination_history: list[TerminationRecord] = field(default_factory=list)
+    corpus_memory_fingerprint: str = ""
+    query_graph: dict[str, Any] = field(default_factory=dict)
+    activated_passages: dict[str, ActivatedPassageState] = field(default_factory=dict)
+    activated_entities: dict[str, ActivatedEntityState] = field(default_factory=dict)
+    cross_layer_edges: list[CrossLayerEdge] = field(default_factory=list)
     controller_state_hash: str = ""
 
     def state_payload(self) -> dict[str, Any]:
@@ -229,6 +269,15 @@ class DynamicReasoningHypergraphV2(DynamicReasoningHypergraph):
             "supersession_history": _primitive(self.supersession_history),
             "invalidated_hyperedges": sorted(set(self.invalidated_hyperedges)),
             "termination_history": _primitive(self.termination_history),
+            "corpus_memory_fingerprint": self.corpus_memory_fingerprint,
+            "query_graph": _primitive(self.query_graph),
+            "activated_passages": {
+                key: _primitive(value) for key, value in sorted(self.activated_passages.items())
+            },
+            "activated_entities": {
+                key: _primitive(value) for key, value in sorted(self.activated_entities.items())
+            },
+            "cross_layer_edges": _primitive(self.cross_layer_edges),
         })
         return payload
 
@@ -319,6 +368,8 @@ class DynamicReasoningHypergraphV2(DynamicReasoningHypergraph):
                 raise GraphInvariantError(f"JOIN attempt {row.attempt_id} support outside [0,1]")
             if row.accepted and row.conclusion_node_id not in self.nodes:
                 raise GraphInvariantError(f"accepted JOIN attempt {row.attempt_id} lacks conclusion")
+            if row.proof_leaf_ids and any(node_id not in self.nodes for node_id in row.proof_leaf_ids):
+                raise GraphInvariantError(f"JOIN attempt {row.attempt_id} has missing proof leaf")
         outcome_ids = [row.outcome_id for row in self.operation_outcome_history]
         if len(outcome_ids) != len(set(outcome_ids)):
             raise GraphInvariantError("operation outcome ids must be unique")
@@ -336,6 +387,25 @@ class DynamicReasoningHypergraphV2(DynamicReasoningHypergraph):
                 raise GraphInvariantError(f"feedback posterior value outside [0,1] for {key}")
             if not 0.0 <= stats.posterior_success <= 1.0:
                 raise GraphInvariantError(f"feedback posterior success outside [0,1] for {key}")
+        for evidence_id, row in self.activated_passages.items():
+            if evidence_id != row.evidence_node_id or evidence_id not in self.nodes:
+                raise GraphInvariantError("activated passage must reference its evidence node")
+            if not 0.0 <= float(row.score) or row.rank <= 0:
+                raise GraphInvariantError("activated passage has invalid retrieval state")
+        for entity_id, row in self.activated_entities.items():
+            if entity_id != row.entity_id or not row.canonical_name:
+                raise GraphInvariantError("activated entity key/id or name is invalid")
+            if not 0.0 <= float(row.query_overlap) <= 1.0:
+                raise GraphInvariantError("activated entity overlap outside [0,1]")
+        valid_cross_nodes = set(self.nodes) | set(self.activated_entities)
+        for edge in self.cross_layer_edges:
+            if edge.source not in valid_cross_nodes or edge.target not in valid_cross_nodes:
+                raise GraphInvariantError("cross-layer edge references missing state")
+        if self.query_graph:
+            variables = self.query_graph.get("variables", [])
+            constraints = self.query_graph.get("constraints", [])
+            if not variables or not constraints:
+                raise GraphInvariantError("query graph must contain variables and constraints")
         if self.controller_state_hash and not allow_unsealed:
             actual = stable_hash(self.state_payload())
             if actual != self.controller_state_hash:
@@ -387,6 +457,19 @@ class DynamicReasoningHypergraphV2(DynamicReasoningHypergraph):
             TerminationRecord(
                 **{**row, "outcome": TerminationKind(row["outcome"])}
             ) for row in value.get("termination_history", [])
+        ]
+        graph.corpus_memory_fingerprint = str(value.get("corpus_memory_fingerprint", ""))
+        graph.query_graph = dict(value.get("query_graph", {}))
+        graph.activated_passages = {
+            str(key): ActivatedPassageState(**row)
+            for key, row in value.get("activated_passages", {}).items()
+        }
+        graph.activated_entities = {
+            str(key): ActivatedEntityState(**row)
+            for key, row in value.get("activated_entities", {}).items()
+        }
+        graph.cross_layer_edges = [
+            CrossLayerEdge(**row) for row in value.get("cross_layer_edges", [])
         ]
         graph.controller_state_hash = str(value.get("controller_state_hash", ""))
         graph.validate()

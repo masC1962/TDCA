@@ -1,8 +1,47 @@
 from tdca_research.dynamic_v2.config import DynamicV2ResearchConfig
-from tdca_research.dynamic_v2.engine import DynamicHypergraphV2Reasoner
+from tdca_research.dynamic_v2.engine import DynamicHypergraphV2Reasoner, _template_similarity
+from tdca_research.dynamic.graph import GraphOperation, OperationType
 from tdca_research.llm import DeterministicMockLLM
 from tdca_research.models import Passage, RunStatus
 from tdca_research.retrieval import BM25Retriever
+
+
+def test_v2_normalizer_really_collapses_duplicate_final_subgoal_into_root():
+    operation = GraphOperation(
+        "op_plan", OperationType.EXPAND, "subgoal_root", [], "branch_root",
+        {"subgoals": [
+            {
+                "node_id": "subgoal_1", "question_template": "Who leads Alpha?",
+                "instantiated_question": "Who leads Alpha?", "dependencies": [],
+                "variable_bindings": {}, "answer_type": "person", "terminal": False,
+            },
+            {
+                "node_id": "subgoal_2", "question_template": "Where was $leader born?",
+                "instantiated_question": "Where was $leader born?",
+                "dependencies": ["subgoal_1"],
+                "variable_bindings": {"$leader": "subgoal_1"},
+                "answer_type": "location", "terminal": False,
+            },
+            {
+                "node_id": "subgoal_root", "question_template": "Where was $bridge born?",
+                "instantiated_question": "Where was $bridge born?",
+                "dependencies": ["subgoal_2"], "variable_bindings": {},
+                "answer_type": "location", "terminal": True,
+            },
+        ]}, "test_plan", "offline_test",
+    )
+    normalized = DynamicHypergraphV2Reasoner._normalize_initial_plan(operation)
+    rows = normalized.payload["subgoals"]
+    assert [row["node_id"] for row in rows] == ["subgoal_1", "subgoal_root"]
+    assert rows[-1]["dependencies"] == ["subgoal_1"]
+    assert rows[-1]["variable_bindings"] == {"$leader": "subgoal_1"}
+
+
+def test_v2_template_overlap_recognizes_inflected_full_question_restatement():
+    assert _template_similarity(
+        "What was the population reduction in $place due to the Black Death?",
+        "As a result of the Black Death, how much was the population reduced in the place?",
+    ) >= 0.55
 
 
 def test_v2_end_to_end_answer_has_diffusion_allocation_and_typed_claims():
@@ -57,7 +96,10 @@ def test_v2_end_to_end_answer_has_diffusion_allocation_and_typed_claims():
     assert retrieval
     final = reasoning[-1]["graph_snapshot"]
     assert final["graph_schema_version"] == "dynamic-hypergraph-v2"
-    assert final["claim_semantics"]["claim_v2_3_subgoal_root_1"]["value_type"] == "location"
+    assert any(
+        row["value_type"] == "location"
+        for row in final["claim_semantics"].values()
+    )
     assert final["diffusion_history"]
     assert final["allocation_history"]
     assert all(row["actual_cost"] for row in final["allocation_history"])

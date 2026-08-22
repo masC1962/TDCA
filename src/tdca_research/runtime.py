@@ -165,6 +165,11 @@ def run(
     global_retriever = build_retriever(
         retriever_kind, corpus, config.dense_model, config.dense_fallback, config.dense_index_path,
     ) if corpus is not None else None
+    global_corpus_memory = None
+    if global_retriever is not None and config.method == "dynamic_hypergraph_tdca_v2":
+        from .dynamic_v2.memory import RelationLightCorpusMemory
+
+        global_corpus_memory = RelationLightCorpusMemory.from_retriever(global_retriever)
     for example_index, example in enumerate(selected[len(predictions):], start=len(predictions) + 1):
         passages = corpus if corpus is not None else example.passages
         retriever = global_retriever or build_retriever(
@@ -193,7 +198,7 @@ def run(
             if not isinstance(config, DynamicV2ResearchConfig):
                 raise TypeError("dynamic_hypergraph_tdca_v2 requires DynamicV2ResearchConfig")
             prediction, retrieval_trace, reasoning_trace = DynamicHypergraphV2Reasoner(
-                llm, retriever, config,
+                llm, retriever, config, corpus_memory=global_corpus_memory,
             ).solve(example.inference_view())
         elif config.method == "dynamic_hypergraph_tdca":
             from .dynamic.config import DynamicResearchConfig

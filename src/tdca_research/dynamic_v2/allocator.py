@@ -48,6 +48,8 @@ class ComputationPacket:
     region_key: str = ""
     pre_state_summary: dict[str, float] = field(default_factory=dict)
     feedback_prior: dict[str, float] = field(default_factory=dict)
+    fidelity_level: str = "medium"
+    fidelity_fraction: float = 0.65
 
     def trace(self) -> dict:
         return {
@@ -64,6 +66,8 @@ class ComputationPacket:
             "allocator_mode": self.allocator_mode,
             "pre_state_summary": dict(self.pre_state_summary),
             "feedback_prior": dict(self.feedback_prior),
+            "fidelity_level": self.fidelity_level,
+            "fidelity_fraction": self.fidelity_fraction,
         }
 
 
@@ -83,7 +87,16 @@ class AdaptiveComputationAllocator:
             self.last_packets = []
             return []
         mode = self.config.allocator_mode
-        raw_rows = [self._signals(graph, operation) for operation in operations]
+        expanded: list[tuple[int, GraphOperation, str, float, EVCSignals]] = []
+        for index, operation in enumerate(operations):
+            base = self._signals(graph, operation)
+            levels = self._fidelity_options(operation)
+            for name, fraction in levels:
+                expanded.append((
+                    index, operation, name, fraction,
+                    self._fidelity_signals(base, fraction),
+                ))
+        raw_rows = [row[4] for row in expanded]
         names = tuple(EVCSignals.__dataclass_fields__)
         columns = {
             name: _minmax([float(getattr(row, name)) for row in raw_rows]) for name in names
@@ -96,8 +109,10 @@ class AdaptiveComputationAllocator:
         }
         packets: list[tuple[int, ComputationPacket]] = []
         serial_start = self.allocation_serial
-        for index, operation in enumerate(operations):
-            normalized = EVCSignals(**{name: columns[name][index] for name in names})
+        for packet_index, (index, operation, fidelity_name, fidelity_fraction, raw_row) in enumerate(expanded):
+            normalized = EVCSignals(**{
+                name: columns[name][packet_index] for name in names
+            })
             if mode == "adaptive_evc":
                 evc = self._adaptive_evc(normalized)
             elif mode == "uniform":
@@ -109,14 +124,15 @@ class AdaptiveComputationAllocator:
             rkey = operation_region_key(operation)
             prior = feedback_prior(graph, family, rkey)
             packets.append((index, ComputationPacket(
-                allocation_id=f"allocation_{serial_start + index + 1:06d}",
+                allocation_id=f"allocation_{serial_start + packet_index + 1:06d}",
                 operation=operation,
                 target_region=region,
                 predicted_evc=evc,
-                raw=raw_rows[index],
+                raw=raw_row,
                 normalized=normalized,
                 requested_budget=self._budget_packet(
-                    operation, raw_rows[index].graph_heat, remaining, prior,
+                    operation, raw_row.graph_heat, remaining, prior,
+                    fidelity_fraction=fidelity_fraction,
                 ),
                 remaining_global_budget=dict(remaining),
                 allocator_mode=mode,
@@ -124,8 +140,10 @@ class AdaptiveComputationAllocator:
                 region_key=rkey,
                 pre_state_summary=summarize_operation_region(graph, operation),
                 feedback_prior=prior,
+                fidelity_level=fidelity_name,
+                fidelity_fraction=fidelity_fraction,
             )))
-        self.allocation_serial += len(operations)
+        self.allocation_serial += len(expanded)
         if mode == "adaptive_evc":
             packets.sort(key=lambda row: (
                 -row[1].predicted_evc,
@@ -141,6 +159,50 @@ class AdaptiveComputationAllocator:
             packets.sort(key=lambda row: row[0])
         self.last_packets = [packet for _, packet in packets]
         return self.last_packets
+
+    def _fidelity_options(self, operation: GraphOperation) -> list[tuple[str, float]]:
+        mode = str(operation.payload.get("mode", ""))
+        if operation.operation_type == OperationType.BRANCH and mode == "extract_typed":
+            # The smoke trace showed that low/medium JSON caps truncate atomic
+            # claim coverage. A full schema is the minimum viable extraction;
+            # adaptation occurs in passage/span activation and candidate count.
+            return [("high", 1.0)]
+        if operation.operation_type == OperationType.MERGE and mode == "validate_join":
+            # JOIN validation has a compact but irreducible audit schema.
+            return [("high", 1.0)]
+        adjustable = operation.operation_type in {
+            OperationType.RETRIEVE, OperationType.BRANCH, OperationType.VERIFY,
+            OperationType.MERGE, OperationType.EXPAND,
+        }
+        if self.config.allocator_mode != "adaptive_evc" or not adjustable:
+            return [("medium", self.config.allocation_mid_token_fraction)]
+        rows = [
+            ("low", self.config.allocation_min_token_fraction),
+            ("medium", self.config.allocation_mid_token_fraction),
+            ("high", 1.0),
+        ]
+        return rows[: self.config.allocation_fidelity_levels]
+
+    @staticmethod
+    def _fidelity_signals(base: EVCSignals, fraction: float) -> EVCSignals:
+        # Score *marginal* progress rather than total progress. Diminishing gains
+        # make a cheap pass preferable until graph heat/impact justifies deeper
+        # compute; failed cheap passes can then expose a new high-value action.
+        fraction = max(0.1, min(1.0, float(fraction)))
+        gain = fraction ** 0.5
+        efficiency = gain / fraction
+        return EVCSignals(
+            graph_heat=base.graph_heat * fraction,
+            uncertainty_reduction=base.uncertainty_reduction * efficiency,
+            answer_impact=base.answer_impact * gain,
+            dependency_unlock=base.dependency_unlock * efficiency,
+            evidence_novelty=base.evidence_novelty * efficiency,
+            recovery_value=base.recovery_value * efficiency,
+            observed_value=base.observed_value * efficiency,
+            expected_cost=base.expected_cost * fraction,
+            graph_growth_risk=base.graph_growth_risk * fraction,
+            failure_cooldown=base.failure_cooldown,
+        )
 
     def _adaptive_evc(self, normalized: EVCSignals) -> float:
         return max(0.0, (
@@ -229,6 +291,7 @@ class AdaptiveComputationAllocator:
         heat: float,
         remaining: dict[str, int],
         prior: dict[str, float],
+        fidelity_fraction: float | None = None,
     ) -> dict[str, int]:
         assignment_branch = (
             operation.operation_type == OperationType.BRANCH
@@ -244,7 +307,13 @@ class AdaptiveComputationAllocator:
             OperationType.RETRIEVE: 0,
             OperationType.PRUNE: 0,
         }[operation.operation_type]
-        if self.config.allocator_mode != "adaptive_evc":
+        if fidelity_fraction is not None:
+            fraction = max(0.1, min(1.0, float(fidelity_fraction)))
+            verifications = max(1, int(round(
+                self.config.max_independent_verifications * fraction
+            )))
+            packet_heat = fraction
+        elif self.config.allocator_mode != "adaptive_evc":
             fraction = self.config.allocation_mid_token_fraction
             verifications = 1
             packet_heat = 0.5
@@ -382,6 +451,15 @@ def summarize_operation_region(
         if graph.claim_semantics.get(node.node_id)
         and graph.claim_semantics[node.node_id].join_depth > 0
     ]
+    grounded_claims = [
+        node for node in active_claims
+        if node.evidence_refs and node.provenance.metadata.get("source_spans")
+    ]
+    proof_leaves = {
+        leaf_id
+        for row in graph.join_attempt_history if row.accepted
+        for leaf_id in (row.proof_leaf_ids or row.premise_ids)
+    }
     accepted_answers = [row for row in graph.answers() if row.status == AnswerStatus.ACCEPTED]
     completed = [row for row in graph.subgoals() if row.status == SubgoalStatus.RESOLVED]
     total_subgoals = max(1, len(graph.subgoals()))
@@ -396,6 +474,8 @@ def summarize_operation_region(
         "active_claim_count": float(len(active_claims)),
         "evidence_count": float(len(evidence)),
         "join_count": float(len(joined)),
+        "grounded_claim_count": float(len(grounded_claims)),
+        "proof_leaf_count": float(len(proof_leaves)),
         "accepted_answer_count": float(len(accepted_answers)),
         "completed_subgoal_count": float(len(completed)),
         "uncertainty": avg("uncertainty", 1.0),
@@ -439,5 +519,8 @@ def _minmax(values: list[float]) -> list[float]:
         return [max(0.0, min(1.0, values[0]))] if values else []
     low, high = min(values), max(values)
     if high - low <= 1e-12:
-        return [0.5 for _ in values]
+        # Preserve absolute signal when the ready set has no variance. Returning
+        # 0.5 erased cooldowns and made identical graph regions look neutral.
+        value = max(0.0, min(1.0, values[0]))
+        return [value for _ in values]
     return [(value - low) / (high - low) for value in values]

@@ -38,6 +38,20 @@ def usage(path: Path) -> dict[str, Any]:
             + int(cost.get("provider_completion_tokens", 0)),
         }
     report = read_json(path)
+    if report.get("schema_version") == "dynamic-v2-usage-adjustment-v1":
+        adjustment = report.get("usage", {})
+        required = {"provider_calls", "provider_reported_tokens"}
+        complete = required.issubset(adjustment) and bool(report.get("accounting_complete"))
+        return {
+            "path": recorded_path,
+            "type": "usage_adjustment",
+            "complete": complete,
+            "usage_sha256": digest(path),
+            "provider_calls": int(adjustment.get("provider_calls", 0)),
+            "provider_reported_tokens": int(adjustment.get("provider_reported_tokens", 0)),
+            "reason": str(report.get("reason", "")),
+            "source_paths": [str(value) for value in report.get("source_paths", [])],
+        }
     metrics = report.get("metrics", {})
     required = {"provider_calls", "provider_reported_tokens", "complete_predictions"}
     complete = required.issubset(metrics) and bool(metrics.get("complete_predictions"))

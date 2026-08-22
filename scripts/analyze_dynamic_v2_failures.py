@@ -9,7 +9,9 @@ from typing import Any
 
 
 LABEL_ORDER = (
-    "provider_or_infrastructure_failure",
+    "infrastructure_failure",
+    "provider_refusal",
+    "structured_output_failure",
     "retrieval_miss",
     "query_formulation_or_missing_binding_miss",
     "claim_extraction_miss",
@@ -94,13 +96,37 @@ def analyze(run_dir: Path, baseline_commit: str) -> dict[str, Any]:
         def add(label: str, rule: str, evidence: dict[str, Any]) -> None:
             labels.append({"label": label, "inference_rule": rule, "evidence": evidence})
 
-        if model_failures or float(metric.get("infrastructure_failure", 0.0) or 0.0) > 0:
+        structured_failures = [
+            row for row in model_failures if row.get("error_type") == "StructuredOutputError"
+        ]
+        refusals = [
+            row for row in model_failures if row.get("error_type") == "ProviderRefusalError"
+        ]
+        infrastructure_failures = [
+            row for row in model_failures
+            if row.get("error_type") not in {"StructuredOutputError", "ProviderRefusalError"}
+        ]
+        if infrastructure_failures or float(metric.get("infrastructure_failure", 0.0) or 0.0) > 0:
             add(
-                "provider_or_infrastructure_failure",
-                "A provider/infrastructure trace event or metric was recorded.",
+                "infrastructure_failure",
+                "A transport/runtime infrastructure event or official infrastructure metric was recorded.",
                 {
-                    "event_count": len(model_failures),
-                    "error_types": sorted({str(row.get("error_type", "")) for row in model_failures}),
+                    "event_count": len(infrastructure_failures),
+                    "error_types": sorted({str(row.get("error_type", "")) for row in infrastructure_failures}),
+                },
+            )
+        if refusals:
+            add(
+                "provider_refusal", "The provider declined a valid request via a policy gate.",
+                {"event_count": len(refusals)},
+            )
+        if structured_failures:
+            add(
+                "structured_output_failure",
+                "A provider response was received but remained undecodable after syntax-only recovery.",
+                {
+                    "event_count": len(structured_failures),
+                    "stages": sorted({str(row.get("stage", "")) for row in structured_failures}),
                 },
             )
         if not all_gold_recalled:
@@ -228,7 +254,7 @@ def analyze(run_dir: Path, baseline_commit: str) -> dict[str, Any]:
     main_counts = Counter(row["main_cause"] for row in cases)
     all_counts = Counter(label["label"] for row in cases for label in row["labels"])
     return {
-        "schema_version": "dynamic-v2-failure-taxonomy-v1",
+        "schema_version": "dynamic-v2-failure-taxonomy-v2",
         "source_run": str(run_dir),
         "baseline_commit": baseline_commit,
         "methodology": {

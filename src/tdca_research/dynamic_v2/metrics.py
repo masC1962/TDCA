@@ -58,6 +58,15 @@ def dynamic_v2_metrics(
         budget_shapes = {
             tuple(sorted((row.get("requested_budget") or {}).items())) for row in allocations
         }
+        fidelity_levels = {
+            str(row.get("fidelity_level", "medium")) for row in allocations
+        }
+        memory_messages = [
+            message
+            for snapshot in graph.get("diffusion_history", [])
+            for message in snapshot.get("typed_messages", [])
+            if message.get("edge_type") == "memory_query_activation"
+        ]
         complete_evc = bool(allocations) and all(
             row.get("evc_components_raw") and row.get("evc_components_normalized")
             and row.get("requested_budget") and row.get("actual_cost")
@@ -75,7 +84,9 @@ def dynamic_v2_metrics(
         )
         accepted_nary = [
             row for row in join_attempts
-            if row.get("accepted") and len(row.get("premise_ids", [])) >= 3
+            if row.get("accepted") and len(
+                row.get("proof_leaf_ids") or row.get("premise_ids", [])
+            ) >= 3
         ]
         answer_support_closure = set()
         for answer in answers.values():
@@ -121,7 +132,13 @@ def dynamic_v2_metrics(
             "typed_message_count": sum(
                 len(value.get("typed_messages", [])) for value in graph.get("diffusion_history", [])
             ),
+            "query_graph_present": bool(graph.get("query_graph")),
+            "activated_passage_count": len(graph.get("activated_passages", {})),
+            "activated_entity_count": len(graph.get("activated_entities", {})),
+            "cross_layer_edge_count": len(graph.get("cross_layer_edges", [])),
+            "memory_activation_message_count": len(memory_messages),
             "allocation_count": len(allocations),
+            "selected_fidelity_level_count": len(fidelity_levels),
             "non_uniform_allocation": len(budget_shapes) > 1,
             "complete_evc_trace": complete_evc,
             "complete_outcome_feedback_trace": complete_outcome_feedback,
@@ -130,7 +147,8 @@ def dynamic_v2_metrics(
                 for row in allocations
             ),
             "nary_join_attempt_count": sum(
-                len(row.get("premise_ids", [])) >= 3 for row in join_attempts
+                len(row.get("proof_leaf_ids") or row.get("premise_ids", [])) >= 3
+                for row in join_attempts
             ),
             "nary_join_accepted_count": len(accepted_nary),
             "nary_join_downstream_used_count": len(downstream_nary),
@@ -179,6 +197,8 @@ def _aggregate(rows: list[dict[str, Any]]) -> dict[str, Any]:
     numeric = (
         "claim_count", "typed_claim_rate", "join_count", "auditable_join_count",
         "diffusion_count", "typed_message_count", "allocation_count",
+        "activated_passage_count", "activated_entity_count", "cross_layer_edge_count",
+        "memory_activation_message_count", "selected_fidelity_level_count",
         "nary_join_attempt_count", "nary_join_accepted_count", "nary_join_downstream_used_count",
         "natural_revision_count", "natural_revision_correct", "natural_revision_wrong",
         "natural_revision_unknown", "unsupported_answer_count",
@@ -189,6 +209,7 @@ def _aggregate(rows: list[dict[str, Any]]) -> dict[str, Any]:
         "auditable_three_or_four_hop_join_case", "candidate_presence", "candidate_survival",
         "non_uniform_allocation", "complete_evc_trace", "controller_state_hash_present",
         "complete_outcome_feedback_trace", "feedback_influenced_allocation",
+        "query_graph_present",
     ):
         result[f"{key}_rate"] = mean(float(bool(row[key])) for row in rows)
     correct = sum(int(row["natural_revision_correct"]) for row in rows)

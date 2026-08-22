@@ -1,0 +1,81 @@
+{
+  "schema_version": "dynamic-hypergraph-v2.1-stop-report-v1",
+  "status": "SAFE_FAILURE",
+  "stop_reason": "campaign_provider_reported_token_cap_exceeded",
+  "seed": 20260820,
+  "training_used": false,
+  "provider": "qwen-plus",
+  "heldout_opened": false,
+  "post_evaluation_tuning_performed": false,
+  "campaign": {
+    "provider_calls": 1421,
+    "provider_call_cap": 1500,
+    "provider_reported_tokens": 1571736,
+    "provider_reported_token_cap": 1500000,
+    "accounting_complete": true,
+    "ledger_sha256": "00042bec686ee1c698da083b84f8484187e723b2908de66291becbd3a416113b"
+  },
+  "development_evidence": {
+    "v1_run": "research_outputs/musique_distractor_development_dynamic_hypergraph_tdca_1787255747641016385",
+    "adaptive_v2_run": "research_outputs/musique_distractor_development_dynamic_hypergraph_tdca_v2_1787426416019937028",
+    "adaptive_v2_resolved_config_sha256": "8f732bfcd8afdcaf12c29e31f9e506d0f9b9f9ec545081c3b37f4fac6c4b7e08",
+    "v1_candidate_presence": 0.42,
+    "v2_candidate_presence": 0.52,
+    "candidate_presence_absolute_gain": 0.10,
+    "v1_full_chain_completion": 0.48,
+    "v2_full_chain_completion": 0.60,
+    "full_chain_absolute_gain": 0.12,
+    "v1_f1": 0.4244444444444444,
+    "v2_f1": 0.3844444444444444,
+    "auditable_three_or_four_hop_join_cases": 15,
+    "downstream_used_nary_join_cases": 6,
+    "non_uniform_allocation_cases": 50,
+    "feedback_influenced_allocation_cases": 15,
+    "complete_evc_trace_cases": 50,
+    "complete_outcome_feedback_trace_cases": 50,
+    "infrastructure_failure_rate": 0.0,
+    "unsupported_answer_count": 0,
+    "termination_outcomes": {
+      "ANSWER": 30,
+      "ABSTAIN": 15,
+      "BUDGET_EXHAUSTED": 5
+    }
+  },
+  "revision_evaluation": {
+    "path": "research_outputs/dynamic_v2_revision_evaluation_score.json",
+    "sha256": "19e0a9e885083947335f9879042d2c5b7f060db879948e1b00d8858a30305d52",
+    "count": 60,
+    "accuracy": 0.8833333333333333,
+    "precision": 0.9259259259259259,
+    "recall": 0.8333333333333334,
+    "false_positive_rate": 0.06666666666666667,
+    "passed": true
+  },
+  "matched_compute": {
+    "adaptive_complete": true,
+    "uniform_complete": false,
+    "uniform_completed_examples": 37,
+    "uniform_total_examples": 50,
+    "uniform_partial_provider_calls": 192,
+    "uniform_partial_provider_reported_tokens": 206791,
+    "fixed_order_started": false,
+    "pareto_gate_evaluable": false,
+    "pareto_gate_passed": false
+  },
+  "hard_gate": {
+    "passed": false,
+    "closed_reasons": [
+      "campaign token budget exceeded",
+      "uniform matched-compute control incomplete",
+      "fixed-order matched-compute control absent",
+      "Pareto improvement point therefore not established"
+    ]
+  },
+  "verification": {
+    "pytest_command": "PYTHONPATH=/workspace/TDCA:/workspace/TDCA/src pytest -q tests_research tests",
+    "pytest_passed": true,
+    "pytest_test_count": 180,
+    "git_diff_check_passed": true
+  },
+  "preregistration_sha256": "2df013ec1049038c0ba008f9cf5c0bda855da77b812abe45cf7c8e4b64eff622"
+}
