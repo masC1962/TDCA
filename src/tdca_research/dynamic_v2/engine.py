@@ -1,7 +1,8 @@
 from __future__ import annotations
 
 import time
-from dataclasses import dataclass
+from copy import deepcopy
+from dataclasses import dataclass, replace
 from typing import Any
 
 from ..budget import Budget, BudgetExceeded
@@ -100,13 +101,14 @@ class DynamicHypergraphV2Reasoner:
                 })
                 if decision.outcome != TerminationKind.CONTINUE:
                     break
-                packet = packets[0]
+                packet = _execution_packet(packets[0])
                 usage_before = (
                     budget.usage.llm_calls,
                     budget.usage.total_tokens,
                     budget.usage.retrieval_calls,
                 )
                 failure_reason = ""
+                outcome_metadata: dict[str, Any] = {}
                 allocation_exhausted = False
                 try:
                     graph, progressed = self._execute(
@@ -147,6 +149,8 @@ class DynamicHypergraphV2Reasoner:
                                 controller, graph, allocator.attach(actual, packet), reasoning_trace, packet,
                             )
                             progressed = True
+                if packet.operation.operation_type == OperationType.MERGE:
+                    outcome_metadata = dict(join_engine.last_diagnostics)
                 actual_cost = {
                     "llm_calls": float(budget.usage.llm_calls - usage_before[0]),
                     "tokens": float(budget.usage.total_tokens - usage_before[1]),
@@ -155,12 +159,23 @@ class DynamicHypergraphV2Reasoner:
                 graph = controller.reconcile_allocation(
                     graph, packet, actual_cost, progressed,
                     failure_reason or ("operation_produced_no_commit" if not progressed else ""),
+                    outcome_metadata=outcome_metadata,
                 )
+                outcome = graph.operation_outcome_history[-1]
                 reasoning_trace.append({
                     "event": "allocation_reconciled",
                     "allocation": packet.trace(),
                     "actual_cost": actual_cost,
                     "progressed": progressed,
+                    "post_state_summary": outcome.post_state_summary,
+                    "state_delta": outcome.state_delta,
+                    "actual_utility_components_raw": outcome.actual_utility_components_raw,
+                    "actual_utility_components_normalized": (
+                        outcome.actual_utility_components_normalized
+                    ),
+                    "actual_utility": outcome.actual_utility,
+                    "statistics_before": outcome.statistics_before,
+                    "statistics_after": outcome.statistics_after,
                     "failure_reason": (
                         failure_reason
                         or ("operation_produced_no_commit" if not progressed else "")
@@ -351,6 +366,7 @@ class DynamicHypergraphV2Reasoner:
                 joins = [
                     row for row in join_engine.discover(graph, branch.branch_id, subgoal.node_id)
                     if row.signature not in attempted_joins
+                    and _nary_relevant(graph, row, set(dependencies))
                 ]
                 if len(attempted_joins) >= self.config.max_join_attempts_per_question:
                     joins = []
@@ -375,11 +391,13 @@ class DynamicHypergraphV2Reasoner:
                     ]
                     joins = sorted(chain_joins, key=lambda row: (
                         -int(bool(row.projection_premise_id)),
+                        -len(_premise_closure(graph, row.premise_ids) & dependency_ids),
                         -int(bool(_premise_closure(graph, row.premise_ids) & direct_ids)),
                         -sum(
                             normalize_text(endpoint) in direct_endpoints
                             for endpoint in row.open_endpoints
                         ),
+                        len(row.premise_ids),
                         row.join_depth,
                         row.premise_ids,
                     ))
@@ -395,6 +413,10 @@ class DynamicHypergraphV2Reasoner:
                             "orientation": join.orientation,
                             "open_endpoints": list(join.open_endpoints),
                             "projection_premise_id": join.projection_premise_id,
+                            "variable_bindings": join.variable_bindings,
+                            "constraints": [dict(value) for value in join.constraints],
+                            "join_kind": join.join_kind,
+                            "deterministic_validation": join.deterministic_validation,
                         },
                         sources=list(join.premise_ids),
                     ))
@@ -461,15 +483,19 @@ class DynamicHypergraphV2Reasoner:
                     continue
                 retrieval_rounds = len({node.retrieval_query for node in evidence})
                 if retrieval_rounds < self.config.max_retrieval_rounds_per_subgoal:
-                    operations.append(self._placeholder(
-                        graph, OperationType.RETRIEVE, subgoal, branch,
-                        {
-                            "query": f"{question} Find a missing relation that connects the existing typed claims.",
-                            "dependency_claim_ids": dependencies,
-                        },
-                        sources=[claim.node_id for claim in claims],
-                    ))
-                    continue
+                    query = _missing_binding_query(
+                        graph, subgoal, branch, question, dependencies, claims, evidence,
+                    )
+                    if query:
+                        operations.append(self._placeholder(
+                            graph, OperationType.RETRIEVE, subgoal, branch,
+                            {
+                                "query": query,
+                                "dependency_claim_ids": dependencies,
+                            },
+                            sources=[claim.node_id for claim in claims],
+                        ))
+                        continue
                 if self.config.enable_adaptive_planning:
                     event_name = "high_uncertainty_no_join" if claims else "missing_terminal_path"
                     event = (branch.branch_id, subgoal.node_id, event_name)
@@ -599,8 +625,15 @@ class DynamicHypergraphV2Reasoner:
                 str(operation.payload["binding"]), operation.target_id,
                 str(operation.payload["join_signature"]), int(operation.payload["join_depth"]),
                 str(operation.payload.get("orientation", "value_subject")),
-                tuple(str(value) for value in operation.payload.get("open_endpoints", []))[:2],
+                tuple(str(value) for value in operation.payload.get("open_endpoints", [])),
                 str(operation.payload.get("projection_premise_id", "")),
+                {
+                    str(key): [str(item) for item in value]
+                    for key, value in operation.payload.get("variable_bindings", {}).items()
+                },
+                tuple(dict(value) for value in operation.payload.get("constraints", [])),
+                str(operation.payload.get("join_kind", "relational_path")),
+                dict(operation.payload.get("deterministic_validation", {})),
             )
             attempted_joins.add(candidate.signature)
             actual = join_engine.propose(
@@ -654,7 +687,6 @@ class DynamicHypergraphV2Reasoner:
             "graph_state_generated_computation_candidate", "v2_ready_operation_builder",
             {"llm_calls": 0.0, "tokens": 0.0},
         )
-
     @staticmethod
     def _normalize_initial_plan(operation: GraphOperation) -> GraphOperation:
         """Collapse a near-duplicate final subgoal/root pair into an alias.
@@ -791,6 +823,18 @@ class DynamicHypergraphV2Reasoner:
         )
 
 
+def _execution_packet(packet: ComputationPacket) -> ComputationPacket:
+    """Give every selected action an ID unique across no-op graph states.
+
+    Ready-operation IDs describe state candidates and may repeat when a rejected
+    model proposal leaves `graph.step` unchanged. Allocation IDs, in contrast,
+    are monotonic within the question, so they safely namespace the actual action.
+    """
+    operation = deepcopy(packet.operation)
+    operation.operation_id = f"{operation.operation_id}_{packet.allocation_id}"
+    return replace(packet, operation=operation)
+
+
 def _unique_operations(values: list[GraphOperation]) -> list[GraphOperation]:
     rows = {}
     for value in values:
@@ -834,6 +878,88 @@ def _premise_closure(
                 closure.add(dependency_id)
                 queue.append(dependency_id)
     return closure
+
+
+def _nary_relevant(
+    graph: DynamicReasoningHypergraphV2,
+    candidate: JoinCandidate,
+    dependency_ids: set[str],
+) -> bool:
+    """Reject redundant n-ary frontiers before they can consume a model call."""
+    if len(candidate.premise_ids) < 3:
+        return True
+    if candidate.join_kind == "set_intersection":
+        return bool(candidate.deterministic_validation.get("set_intersection_members"))
+    closure = _premise_closure(graph, candidate.premise_ids)
+    if len(closure & dependency_ids) >= 2:
+        return True
+    orientations = {str(row.get("orientation", "")) for row in candidate.constraints}
+    if (
+        candidate.join_kind == "conjunctive_relational_path"
+        and orientations == {"value_subject"}
+        and len(candidate.open_endpoints) == 2
+    ):
+        return True
+    if candidate.join_kind == "shared_role_conjunction":
+        relations = {
+            graph.claim_semantics[node_id].normalized_relation
+            for node_id in candidate.premise_ids
+        }
+        return len(relations) == len(candidate.premise_ids)
+    return False
+
+
+def _missing_binding_query(
+    graph: DynamicReasoningHypergraphV2,
+    subgoal,
+    branch,
+    question: str,
+    dependency_ids: list[str],
+    claims: list[ClaimNode],
+    evidence: list[Any],
+) -> str:
+    """Choose a novel query from unresolved typed graph state, never oracle fields."""
+    existing = {normalize_text(row.retrieval_query) for row in evidence}
+    dependencies = [
+        graph.node(node_id, ClaimNode) for node_id in dependency_ids
+        if isinstance(graph.nodes.get(node_id), ClaimNode)
+    ]
+    dependency_values = list(dict.fromkeys(
+        value for claim in dependencies for value in (claim.value, claim.subject) if value
+    ))[:4]
+    frontier = sorted(
+        (
+            claim for claim in claims
+            if claim.status not in {CandidateStatus.INVALID, CandidateStatus.ARCHIVED}
+        ),
+        key=lambda row: (
+            -graph.belief_states.get(row.node_id).evidence_gap
+            if graph.belief_states.get(row.node_id) is not None else 0.0,
+            row.node_id,
+        ),
+    )
+    frontier_values = list(dict.fromkeys(
+        value for claim in frontier[:3] for value in (claim.subject, claim.value) if value
+    ))[:5]
+    answer_type = str(getattr(subgoal, "answer_type", "entity") or "entity")
+    candidates = []
+    if dependency_values:
+        candidates.append(
+            f"{question} Resolve the missing {answer_type} binding from "
+            f"{' ; '.join(dependency_values)}."
+        )
+    if frontier_values:
+        candidates.append(
+            f"{question} Find evidence connecting {' ; '.join(frontier_values)} "
+            f"to an answer of type {answer_type}."
+        )
+    candidates.append(
+        f"{question} Find a missing typed relation for the unresolved {answer_type} binding."
+    )
+    for candidate in candidates:
+        if normalize_text(candidate) not in existing:
+            return candidate
+    return ""
 
 
 def _template_similarity(left: str, right: str) -> float:

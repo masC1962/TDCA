@@ -29,8 +29,17 @@ from .graph import (
     AllocationRecord,
     ClaimSemantics,
     DynamicReasoningHypergraphV2,
+    JoinAttemptRecord,
+    OperationFeedbackStats,
+    OperationOutcomeRecord,
     SupersessionRecord,
     TerminationRecord,
+)
+from .allocator import (
+    feedback_key,
+    operation_family,
+    operation_region_key,
+    summarize_operation_region,
 )
 
 
@@ -121,6 +130,7 @@ class V2GraphController(GraphController):
         actual_cost: dict[str, float],
         completed: bool,
         failure_reason: str = "",
+        outcome_metadata: dict[str, Any] | None = None,
     ) -> DynamicReasoningHypergraphV2:
         """Record the outcome of every selected allocation, including failures.
 
@@ -136,8 +146,8 @@ class V2GraphController(GraphController):
             if row.allocation_id == packet.allocation_id
         ), None)
         measured = {str(key): float(value) for key, value in actual_cost.items()}
+        trace = packet.trace()
         if existing is None:
-            trace = packet.trace()
             updated.allocation_history.append(AllocationRecord(
                 allocation_id=packet.allocation_id,
                 operation_id=packet.operation.operation_id,
@@ -157,6 +167,15 @@ class V2GraphController(GraphController):
                     str(key): int(value) for key, value in trace["remaining_global_budget"].items()
                 },
                 actual_cost=measured,
+                allocator_mode=str(trace.get("allocator_mode", "adaptive_evc")),
+                pre_state_summary={
+                    str(key): float(value)
+                    for key, value in trace.get("pre_state_summary", {}).items()
+                },
+                feedback_prior={
+                    str(key): float(value)
+                    for key, value in trace.get("feedback_prior", {}).items()
+                },
                 selected=True,
                 completed=bool(completed),
                 failure_reason=str(failure_reason),
@@ -165,9 +184,198 @@ class V2GraphController(GraphController):
             existing.actual_cost = measured
             existing.completed = bool(completed)
             existing.failure_reason = str(failure_reason)
+        existing = existing or updated.allocation_history[-1]
+        self._reconcile_outcome(
+            updated, existing, packet, measured, bool(completed), str(failure_reason),
+        )
+        self._reconcile_join_attempt(
+            updated, packet, measured, bool(completed), str(failure_reason),
+            outcome_metadata or {},
+        )
         updated.seal_controller_state()
         updated.validate()
         return updated
+
+    def _reconcile_outcome(
+        self, graph, allocation, packet, measured, progressed, failure_reason,
+    ) -> None:
+        operation = packet.operation
+        pre = {
+            str(key): float(value)
+            for key, value in packet.pre_state_summary.items()
+        }
+        post = summarize_operation_region(graph, operation)
+        delta = {
+            key: float(post.get(key, 0.0) - pre.get(key, 0.0))
+            for key in sorted(set(pre) | set(post))
+        }
+        raw = {
+            "uncertainty_reduction": pre.get("uncertainty", 1.0) - post.get("uncertainty", 1.0),
+            "support_gain": post.get("absolute_support", 0.0) - pre.get("absolute_support", 0.0),
+            "evidence_gap_reduction": pre.get("evidence_gap", 1.0) - post.get("evidence_gap", 1.0),
+            "entropy_reduction": pre.get("entropy", 1.0) - post.get("entropy", 1.0),
+            "dependency_unlock_gain": post.get("dependency_unlock", 0.0) - pre.get("dependency_unlock", 0.0),
+            "evidence_novelty": post.get("evidence_count", 0.0) - pre.get("evidence_count", 0.0),
+            "answer_chain_progress": post.get("answer_chain_progress", 0.0) - pre.get("answer_chain_progress", 0.0),
+            "contradiction_resolution": (
+                pre.get("contradiction_pressure", 0.0) - post.get("contradiction_pressure", 0.0)
+            ),
+            "cost": self._normalized_actual_cost(packet, measured),
+        }
+        normalized = {
+            key: _unit_positive(value) for key, value in raw.items()
+        }
+        weights = {
+            "uncertainty_reduction": self.config.actual_utility_weight_uncertainty,
+            "support_gain": self.config.actual_utility_weight_support,
+            "evidence_gap_reduction": self.config.actual_utility_weight_evidence_gap,
+            "entropy_reduction": self.config.actual_utility_weight_entropy,
+            "dependency_unlock_gain": self.config.actual_utility_weight_unlock,
+            "evidence_novelty": self.config.actual_utility_weight_novelty,
+            "answer_chain_progress": self.config.actual_utility_weight_chain_progress,
+            "contradiction_resolution": self.config.actual_utility_weight_contradiction_resolution,
+        }
+        benefit_weight = sum(float(value) for value in weights.values())
+        benefit = sum(
+            float(weights[key]) * normalized[key] for key in weights
+        )
+        cost_weight = float(self.config.actual_utility_weight_cost)
+        denominator = max(1e-12, benefit_weight + cost_weight)
+        utility = max(-1.0, min(1.0, (
+            benefit - cost_weight * normalized["cost"]
+        ) / denominator))
+        family = packet.operation_family or operation_family(operation)
+        region = packet.region_key or operation_region_key(operation)
+        before = self._feedback_snapshot(graph, family, region)
+        for key in (feedback_key(family, region), feedback_key(family)):
+            self._update_feedback(graph, key, utility, normalized["cost"], progressed)
+        after = self._feedback_snapshot(graph, family, region)
+        allocation.post_state_summary = post
+        allocation.state_delta = delta
+        allocation.actual_utility_components_raw = raw
+        allocation.actual_utility_components_normalized = normalized
+        allocation.actual_utility = utility
+        allocation.feedback_applied = True
+        graph.operation_outcome_history.append(OperationOutcomeRecord(
+            outcome_id=f"outcome_{packet.allocation_id}",
+            allocation_id=packet.allocation_id,
+            operation_id=operation.operation_id,
+            step=graph.step,
+            operation_family=family,
+            region_key=region,
+            pre_state_summary=pre,
+            post_state_summary=post,
+            state_delta=delta,
+            actual_utility_components_raw=raw,
+            actual_utility_components_normalized=normalized,
+            actual_utility=utility,
+            actual_cost=measured,
+            progressed=progressed,
+            failure_reason=failure_reason,
+            statistics_before=before,
+            statistics_after=after,
+        ))
+
+    def _update_feedback(self, graph, key, utility, normalized_cost, progressed) -> None:
+        stats = graph.operation_feedback.setdefault(key, OperationFeedbackStats())
+        stats.observations += 1
+        stats.successes += int(progressed)
+        stats.no_ops += int(not progressed)
+        stats.cumulative_utility += (float(utility) + 1.0) / 2.0
+        stats.cumulative_cost += float(normalized_cost)
+        prior = float(self.config.outcome_feedback_prior_strength)
+        stats.posterior_value = (
+            prior * 0.5 + stats.cumulative_utility
+        ) / (prior + stats.observations)
+        stats.posterior_success = (
+            prior * 0.5 + stats.successes
+        ) / (prior + stats.observations)
+        if progressed:
+            stats.consecutive_failures = 0
+        else:
+            stats.consecutive_failures += 1
+            if stats.consecutive_failures >= self.config.outcome_feedback_cooldown_failures:
+                stats.cooldown_until_step = max(
+                    stats.cooldown_until_step,
+                    graph.step + self.config.outcome_feedback_cooldown_steps,
+                )
+
+    @staticmethod
+    def _feedback_snapshot(graph, family, region) -> dict[str, float]:
+        stats = graph.operation_feedback.get(
+            feedback_key(family, region), OperationFeedbackStats(),
+        )
+        return {
+            "observations": float(stats.observations),
+            "successes": float(stats.successes),
+            "no_ops": float(stats.no_ops),
+            "posterior_value": float(stats.posterior_value),
+            "posterior_success": float(stats.posterior_success),
+            "consecutive_failures": float(stats.consecutive_failures),
+            "cooldown_until_step": float(stats.cooldown_until_step),
+        }
+
+    @staticmethod
+    def _normalized_actual_cost(packet, measured) -> float:
+        request = packet.requested_budget
+        parts = []
+        if float(measured.get("llm_calls", 0.0)) > 0.0:
+            parts.append(min(1.0, float(measured["llm_calls"])))
+        if float(measured.get("tokens", 0.0)) > 0.0:
+            parts.append(min(1.0, float(measured["tokens"]) / max(1, request.get("max_tokens", 0))))
+        if float(measured.get("retrieval_calls", 0.0)) > 0.0:
+            parts.append(min(1.0, float(measured["retrieval_calls"])))
+        return sum(parts) / len(parts) if parts else 0.0
+
+    def _reconcile_join_attempt(
+        self, graph, packet, measured, completed, failure_reason, metadata,
+    ) -> None:
+        operation = packet.operation
+        if operation.operation_type != OperationType.MERGE:
+            return
+        existing = next((
+            row for row in graph.join_attempt_history
+            if row.operation_id == operation.operation_id
+        ), None)
+        outcome = graph.operation_outcome_history[-1]
+        if existing is not None:
+            existing.creation_cost = measured
+            existing.downstream_unlock = _unit_positive(
+                outcome.actual_utility_components_raw.get("dependency_unlock_gain", 0.0)
+                + outcome.actual_utility_components_raw.get("answer_chain_progress", 0.0)
+            )
+            return
+        premise_ids = [str(value) for value in operation.payload.get("premise_ids", operation.source_ids)]
+        graph.join_attempt_history.append(JoinAttemptRecord(
+            attempt_id=f"join_attempt_{operation.operation_id}",
+            step=graph.step,
+            operation_id=operation.operation_id,
+            target_subgoal=operation.target_id,
+            branch_id=operation.branch_id,
+            premise_ids=premise_ids,
+            premise_versions={
+                node_id: graph.belief_states.get(node_id).version
+                if graph.belief_states.get(node_id) is not None else 0
+                for node_id in premise_ids
+            },
+            variable_bindings={
+                str(key): [str(item) for item in value]
+                for key, value in operation.payload.get("variable_bindings", {}).items()
+            },
+            constraints=[dict(value) for value in operation.payload.get("constraints", [])],
+            join_kind=str(operation.payload.get("join_kind", "relational_path")),
+            signature=str(operation.payload.get("join_signature", "")),
+            independent_support={
+                node_id: float(graph.node(node_id, ClaimNode).score.absolute_support)
+                for node_id in premise_ids
+            },
+            deterministic_validation=dict(operation.payload.get("deterministic_validation", {})),
+            model_validation=dict(metadata),
+            accepted=bool(completed),
+            rejection_reason=failure_reason or "join_rejected",
+            creation_cost=measured,
+            downstream_unlock=0.0,
+        ))
 
     def _create_candidates(self, graph, operation, changes) -> None:
         before = set(graph.nodes)
@@ -214,8 +422,24 @@ class V2GraphController(GraphController):
         if not 2 <= len(source_ids) <= self.config.max_join_arity:
             raise GraphInvariantError("JOIN requires two to max_join_arity unique premises")
         sources = [graph.node(node_id, ClaimNode) for node_id in source_ids]
-        if any(node.status in {CandidateStatus.INVALID, CandidateStatus.ARCHIVED} for node in sources):
-            raise GraphInvariantError("JOIN premise is invalid")
+        if any(
+            node.status in {
+                CandidateStatus.PROPOSED, CandidateStatus.INVALID, CandidateStatus.ARCHIVED,
+            }
+            or node.score.absolute_support < self.config.join_min_premise_support
+            for node in sources
+        ):
+            raise GraphInvariantError("JOIN premise is unsupported, unverified, or invalid")
+        constraints = operation.payload.get("constraints", [])
+        bindings = operation.payload.get("variable_bindings", {})
+        if not isinstance(constraints, list) or not isinstance(bindings, dict):
+            raise GraphInvariantError("JOIN constraints and variable bindings must be typed collections")
+        if len(source_ids) >= 3 and (
+            len(constraints) < len(source_ids) - 1
+            or not bindings
+            or not _join_constraints_connected(source_ids, constraints)
+        ):
+            raise GraphInvariantError("n-ary JOIN premises must form one constrained connected component")
         node_id = str(row.get("node_id", ""))
         edge_id = str(row.get("edge_id", ""))
         if not node_id or node_id in graph.nodes or not edge_id or edge_id in graph.hyperedges:
@@ -308,6 +532,38 @@ class V2GraphController(GraphController):
             join_depth=join_depth,
             join_signature=signature,
         )
+        graph.join_attempt_history.append(JoinAttemptRecord(
+            attempt_id=f"join_attempt_{operation.operation_id}",
+            step=graph.step,
+            operation_id=operation.operation_id,
+            target_subgoal=target_subgoal,
+            branch_id=operation.branch_id,
+            premise_ids=source_ids,
+            premise_versions={
+                source.node_id: graph.belief_states.get(source.node_id).version
+                if graph.belief_states.get(source.node_id) is not None else 0
+                for source in sources
+            },
+            variable_bindings={
+                str(key): [str(item) for item in value]
+                for key, value in operation.payload.get("variable_bindings", {}).items()
+            },
+            constraints=[dict(value) for value in operation.payload.get("constraints", [])],
+            join_kind=str(operation.payload.get("join_kind", "relational_path")),
+            signature=signature,
+            independent_support={
+                source.node_id: float(source.score.absolute_support) for source in sources
+            },
+            deterministic_validation=dict(
+                operation.payload.get("deterministic_validation", {})
+            ),
+            model_validation=dict(operation.payload.get("validation", {})),
+            accepted=True,
+            conclusion_node_id=node_id,
+            creation_cost={
+                str(key): float(value) for key, value in operation.estimated_cost.items()
+            },
+        ))
         changes["created_nodes"].append(node_id)
         changes["created_hyperedges"].append(edge_id)
 
@@ -432,6 +688,13 @@ class V2GraphController(GraphController):
                     operation.estimated_cost or {"llm_calls": 0.0, "tokens": 0.0, "retrieval_calls": 0.0}
                 ).items()
             },
+            allocator_mode=str(row.get("allocator_mode", "adaptive_evc")),
+            pre_state_summary={
+                str(key): float(value) for key, value in row.get("pre_state_summary", {}).items()
+            },
+            feedback_prior={
+                str(key): float(value) for key, value in row.get("feedback_prior", {}).items()
+            },
             selected=True,
             completed=True,
         ))
@@ -473,6 +736,31 @@ def _node_status(node: Any) -> str:
     return status.value if hasattr(status, "value") else str(status)
 
 
+def _join_constraints_connected(
+    premise_ids: list[str], constraints: list[dict[str, Any]],
+) -> bool:
+    adjacency = {node_id: set() for node_id in premise_ids}
+    for row in constraints:
+        if not isinstance(row, dict):
+            return False
+        left = str(row.get("left_premise", ""))
+        right = str(row.get("right_premise", ""))
+        if left not in adjacency or right not in adjacency or left == right:
+            return False
+        if not bool(row.get("type_compatible", False)):
+            return False
+        adjacency[left].add(right)
+        adjacency[right].add(left)
+    seen = {premise_ids[0]}
+    queue = [premise_ids[0]]
+    while queue:
+        for node_id in adjacency[queue.pop()]:
+            if node_id not in seen:
+                seen.add(node_id)
+                queue.append(node_id)
+    return seen == set(premise_ids)
+
+
 def _canonical_type(value: Any) -> str:
     normalized = str(value).strip().lower().replace("-", "_")
     aliases = {
@@ -488,3 +776,8 @@ def _unit(value: Any) -> float:
         return max(0.0, min(1.0, float(value)))
     except (TypeError, ValueError):
         return 0.0
+
+
+def _unit_positive(value: Any) -> float:
+    """Normalize a signed improvement without erasing its raw audit value."""
+    return _unit(max(0.0, float(value)))

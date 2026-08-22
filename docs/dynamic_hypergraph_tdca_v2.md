@@ -17,8 +17,9 @@ mutation is deterministic and transactional inside `V2GraphController`.
 ## State and invariants
 
 The state contains typed subgoals, evidence, canonicalized claims, answers,
-multi-source hyperedges, branch assignments, and four histories: diffusion,
-allocation, supersession, and termination. Each claim retains separate:
+multi-source hyperedges, branch assignments, and auditable diffusion, allocation,
+operation-outcome, JOIN-attempt, supersession, and termination histories. Each claim
+retains separate:
 
 - absolute support;
 - relative weight among actual answer alternatives;
@@ -64,17 +65,21 @@ for audit and revision.
 
 ## Explicit JOIN and revision
 
-JOIN discovery is deterministic: compatible paths may unify value-to-subject,
-subject-to-value, a shared subject, or a shared value. Candidate ranking prioritizes
-dependency-lineage coverage and the shortest sufficient chain, and a per-question
-attempt cap bounds graph growth. There are no entity-, relation-, dataset-, or
-question-ID rules. Qwen validates open-endpoint compositions using cited grounded
-spans. A valid result creates both a new typed claim and a multi-premise hyperedge.
+JOIN discovery is deterministic and variadic (arity 2--4): compatible paths may
+unify value-to-subject, subject-to-value, a shared subject, a shared value, or an
+explicit set member. Only connected typed constraint frontiers are enumerated.
+Relational n-ary candidates must cover multiple independent dependencies, form a
+pure connected path, or carry non-redundant shared-role constraints; explicit set
+intersections must have a deterministically non-empty common member. Candidate
+ranking prioritizes dependency-lineage coverage and the smallest sufficient premise
+set. There are no entity-, relation-, dataset-, question-ID, or answer rules.
 
-For a pure variable-binding projection, Qwen has already independently scored both
-premises and the target premise's dependency consistency. Exact endpoint/type
-matching plus the normal support gate therefore materializes the projection
-hyperedge deterministically without another generation call. Sequential
+Every premise must independently pass grounding, entailment, and absolute-support
+gates. For a pure variable-binding projection, exact endpoint/type matching plus the
+normal support gate may materialize the hyperedge deterministically, but a sibling
+candidate that merely shares the same ancestor is never treated as a necessary
+premise. Qwen-validated n-ary conclusions must report use of every premise and
+satisfaction of every declared constraint. Sequential
 decompositions are explicit dependency-claim plus current-relation joins before slot
 commit, so three/four-hop paths form auditable nested state rather than implicit
 string substitution.
@@ -91,12 +96,12 @@ components and uses the deterministic additive policy:
 
 \[
 \widehat{\mathrm{EVC}}(o)=\max\{0,
-w_h h+w_u u+w_a a+w_d d+w_n n+w_r r-w_c c-w_g g\}.
+w_h h+w_u u+w_a a+w_d d+w_n n+w_r r+w_o o-w_c c-w_g g-w_f f\}.
 \]
 
 The terms are graph heat, expected uncertainty reduction, downstream answer impact,
 dependency unlock, evidence novelty, recovery value, expected cost, and graph-growth
-risk. The selected packet controls completion tokens, retrieval top-k, claim cap,
+risk, observed local value, and failure cooldown. The selected packet controls completion tokens, retrieval top-k, claim cap,
 verification samples, branch width, and revision allowance within global caps.
 Structured calls have schema-safe token floors coupled to output cardinality: low
 heat reduces candidate count but cannot request an unserializable JSON budget.
@@ -105,6 +110,30 @@ Every selected allocation, including a rejected proposal or malformed model outp
 gets a globally unique ledger row with predicted EVC, requested resources, measured
 LLM/token/retrieval deltas, completion state, and failure reason. Thus failed calls
 cannot disappear from matched-compute or Pareto accounting.
+
+After reconciliation, the controller records pre/post region summaries, normalized
+and raw utility components, actual cost, and a conservative posterior. Feedback is
+question-local and causally keyed by operation family, target region, source-node
+set, and structural input context. Therefore an identical rejected JOIN is cooled
+down, while extraction over newly arrived evidence does not inherit the cost of an
+earlier evidence batch. Family-wide statistics are serialized for audit but cannot
+control a different region. Fresh questions always start from the same prior.
+
+The same graph engine exposes `adaptive_evc`, `uniform`, and `fixed_order` allocator
+modes. The hard gate accepts a Pareto claim only when all three use the same ordered
+sample IDs, model, configuration, and global caps and adaptive dominates both
+controls with at least one strict quality or cost improvement.
+
+## Public natural-revision suite
+
+`scripts/build_revision_suite.py` deterministically selects real Wikipedia revision
+examples from the official VitaminC test split (upstream commit
+`be6febb761b0b2807687e61e0b5282e459df2fa0`, CC BY-SA 3.0). Development contains 10
+REFUTES and 10 non-revision controls; frozen evaluation contains 30 REFUTES and 30
+controls, with global `case_id` disjointness and seed `20260820`. Prediction inputs
+and labels are separate manifests. `predict` cannot accept a label path; `score`
+opens the sealed labels only after a complete prediction artifact exists. The frozen
+gate is precision >= 0.80, recall >= 0.60, and false-positive rate <= 0.10.
 
 ## Meta-stop and protocol
 
@@ -125,5 +154,5 @@ remain closed until all infrastructure, reasoning, dynamic-revision, allocation,
 Pareto, and termination requirements pass. `scripts/evaluate_dynamic_v2_gate.py`
 produces the auditable decision report; it does not silently open the gate.
 
-The first mechanism-complete smoke run is an explicit negative result; see
-[`dynamic_hypergraph_tdca_v2_smoke_results_20260821.md`](dynamic_hypergraph_tdca_v2_smoke_results_20260821.md).
+The current closure result is still explicitly negative; see
+[`dynamic_hypergraph_tdca_v2_closure_20260822.md`](dynamic_hypergraph_tdca_v2_closure_20260822.md).

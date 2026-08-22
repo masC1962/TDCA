@@ -46,6 +46,9 @@ def main() -> None:
     parser.add_argument("--max_total_tokens", type=int)
     parser.add_argument("--max_retrieval_calls", type=int)
     parser.add_argument("--max_graph_operations", type=int)
+    parser.add_argument(
+        "--allocator_mode", choices=["adaptive_evc", "uniform", "fixed_order"],
+    )
     parser.add_argument("--memory_mode", choices=["none", "text", "typed"])
     parser.add_argument("--verifier", choices=["none", "self", "independent"])
     parser.add_argument("--finalization", choices=["direct", "structured"])
@@ -58,13 +61,22 @@ def main() -> None:
     args = parser.parse_args()
     loaded = _load_config(args.config, args.method)
     dynamic_overrides = {}
-    if isinstance(loaded, DynamicResearchConfig):
+    if isinstance(loaded, DynamicV2ResearchConfig):
+        dynamic_overrides = {
+            "allocator_mode": args.allocator_mode,
+            "max_retrieval_calls": args.max_retrieval_calls,
+            "max_graph_operations": args.max_graph_operations,
+        }
+    elif isinstance(loaded, DynamicResearchConfig):
         dynamic_overrides = {
             "dynamic_ablation": args.dynamic_ablation,
             "max_retrieval_calls": args.max_retrieval_calls,
             "max_graph_operations": args.max_graph_operations,
         }
-    elif args.dynamic_ablation or args.max_retrieval_calls or args.max_graph_operations:
+    elif (
+        args.dynamic_ablation or args.max_retrieval_calls
+        or args.max_graph_operations or args.allocator_mode
+    ):
         parser.error("dynamic-only flags require --method dynamic_hypergraph_tdca")
     config = loaded.merged(
         method=args.method, dataset=args.dataset, dataset_path=args.dataset_path, setting=args.setting,
@@ -78,7 +90,7 @@ def main() -> None:
         max_total_tokens=args.max_total_tokens,
         **dynamic_overrides,
     )
-    if isinstance(config, DynamicResearchConfig):
+    if isinstance(config, DynamicResearchConfig) and not isinstance(config, DynamicV2ResearchConfig):
         config = config.apply_ablation()
     print(run(config, resume_dir=args.resume_dir))
 

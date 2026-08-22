@@ -87,9 +87,81 @@ class AllocationRecord:
     requested_budget: dict[str, int]
     remaining_global_budget: dict[str, int]
     actual_cost: dict[str, float] = field(default_factory=dict)
+    allocator_mode: str = "adaptive_evc"
+    pre_state_summary: dict[str, float] = field(default_factory=dict)
+    feedback_prior: dict[str, float] = field(default_factory=dict)
+    post_state_summary: dict[str, float] = field(default_factory=dict)
+    state_delta: dict[str, float] = field(default_factory=dict)
+    actual_utility_components_raw: dict[str, float] = field(default_factory=dict)
+    actual_utility_components_normalized: dict[str, float] = field(default_factory=dict)
+    actual_utility: float = 0.0
+    feedback_applied: bool = False
     selected: bool = False
     completed: bool = False
     failure_reason: str = ""
+
+
+@dataclass
+class JoinAttemptRecord:
+    """Auditable accepted or rejected conjunctive inference attempt."""
+
+    attempt_id: str
+    step: int
+    operation_id: str
+    target_subgoal: str
+    branch_id: str
+    premise_ids: list[str]
+    premise_versions: dict[str, int]
+    variable_bindings: dict[str, list[str]]
+    constraints: list[dict[str, Any]]
+    join_kind: str
+    signature: str
+    independent_support: dict[str, float]
+    deterministic_validation: dict[str, Any]
+    model_validation: dict[str, Any]
+    accepted: bool
+    conclusion_node_id: str = ""
+    rejection_reason: str = ""
+    creation_cost: dict[str, float] = field(default_factory=dict)
+    downstream_unlock: float = 0.0
+
+
+@dataclass
+class OperationOutcomeRecord:
+    """One selected computation and its measured within-question value."""
+
+    outcome_id: str
+    allocation_id: str
+    operation_id: str
+    step: int
+    operation_family: str
+    region_key: str
+    pre_state_summary: dict[str, float]
+    post_state_summary: dict[str, float]
+    state_delta: dict[str, float]
+    actual_utility_components_raw: dict[str, float]
+    actual_utility_components_normalized: dict[str, float]
+    actual_utility: float
+    actual_cost: dict[str, float]
+    progressed: bool
+    failure_reason: str
+    statistics_before: dict[str, float]
+    statistics_after: dict[str, float]
+
+
+@dataclass
+class OperationFeedbackStats:
+    """Conservative, deterministic posterior maintained only inside one graph."""
+
+    observations: int = 0
+    successes: int = 0
+    no_ops: int = 0
+    cumulative_utility: float = 0.0
+    cumulative_cost: float = 0.0
+    posterior_value: float = 0.5
+    posterior_success: float = 0.5
+    consecutive_failures: int = 0
+    cooldown_until_step: int = 0
 
 
 @dataclass
@@ -130,6 +202,9 @@ class DynamicReasoningHypergraphV2(DynamicReasoningHypergraph):
     belief_states: dict[str, BeliefState] = field(default_factory=dict)
     diffusion_history: list[DiffusionSnapshot] = field(default_factory=list)
     allocation_history: list[AllocationRecord] = field(default_factory=list)
+    join_attempt_history: list[JoinAttemptRecord] = field(default_factory=list)
+    operation_outcome_history: list[OperationOutcomeRecord] = field(default_factory=list)
+    operation_feedback: dict[str, OperationFeedbackStats] = field(default_factory=dict)
     supersession_history: list[SupersessionRecord] = field(default_factory=list)
     invalidated_hyperedges: list[str] = field(default_factory=list)
     termination_history: list[TerminationRecord] = field(default_factory=list)
@@ -146,6 +221,11 @@ class DynamicReasoningHypergraphV2(DynamicReasoningHypergraph):
             },
             "diffusion_history": _primitive(self.diffusion_history),
             "allocation_history": _primitive(self.allocation_history),
+            "join_attempt_history": _primitive(self.join_attempt_history),
+            "operation_outcome_history": _primitive(self.operation_outcome_history),
+            "operation_feedback": {
+                key: _primitive(value) for key, value in sorted(self.operation_feedback.items())
+            },
             "supersession_history": _primitive(self.supersession_history),
             "invalidated_hyperedges": sorted(set(self.invalidated_hyperedges)),
             "termination_history": _primitive(self.termination_history),
@@ -212,6 +292,50 @@ class DynamicReasoningHypergraphV2(DynamicReasoningHypergraph):
                 raise GraphInvariantError(f"allocation {row.allocation_id} lacks complete EVC trace")
             if row.completed and not row.actual_cost:
                 raise GraphInvariantError(f"completed allocation {row.allocation_id} lacks actual cost")
+            if row.feedback_applied:
+                if not row.pre_state_summary or not row.post_state_summary or not row.state_delta:
+                    raise GraphInvariantError(
+                        f"allocation {row.allocation_id} lacks outcome-aware state delta"
+                    )
+                if not row.actual_utility_components_raw or not row.actual_utility_components_normalized:
+                    raise GraphInvariantError(
+                        f"allocation {row.allocation_id} lacks normalized actual utility"
+                    )
+                if not -1.0 <= float(row.actual_utility) <= 1.0:
+                    raise GraphInvariantError(
+                        f"allocation {row.allocation_id} actual utility outside [-1,1]"
+                    )
+        attempt_ids = [row.attempt_id for row in self.join_attempt_history]
+        if len(attempt_ids) != len(set(attempt_ids)):
+            raise GraphInvariantError("JOIN attempt ids must be unique")
+        for row in self.join_attempt_history:
+            if len(row.premise_ids) < 2 or len(row.premise_ids) != len(set(row.premise_ids)):
+                raise GraphInvariantError(f"JOIN attempt {row.attempt_id} has invalid premises")
+            if any(node_id not in self.nodes for node_id in row.premise_ids):
+                raise GraphInvariantError(f"JOIN attempt {row.attempt_id} references missing premise")
+            if set(row.premise_versions) != set(row.premise_ids):
+                raise GraphInvariantError(f"JOIN attempt {row.attempt_id} lacks premise versions")
+            if any(not 0.0 <= float(value) <= 1.0 for value in row.independent_support.values()):
+                raise GraphInvariantError(f"JOIN attempt {row.attempt_id} support outside [0,1]")
+            if row.accepted and row.conclusion_node_id not in self.nodes:
+                raise GraphInvariantError(f"accepted JOIN attempt {row.attempt_id} lacks conclusion")
+        outcome_ids = [row.outcome_id for row in self.operation_outcome_history]
+        if len(outcome_ids) != len(set(outcome_ids)):
+            raise GraphInvariantError("operation outcome ids must be unique")
+        for row in self.operation_outcome_history:
+            if row.allocation_id not in set(allocation_ids):
+                raise GraphInvariantError(f"outcome {row.outcome_id} lacks allocation ledger row")
+            if not -1.0 <= float(row.actual_utility) <= 1.0:
+                raise GraphInvariantError(f"outcome {row.outcome_id} utility outside [-1,1]")
+        for key, stats in self.operation_feedback.items():
+            if stats.observations < 0 or stats.successes < 0 or stats.no_ops < 0:
+                raise GraphInvariantError(f"negative feedback counter for {key}")
+            if stats.successes > stats.observations or stats.no_ops > stats.observations:
+                raise GraphInvariantError(f"invalid feedback counter for {key}")
+            if not 0.0 <= stats.posterior_value <= 1.0:
+                raise GraphInvariantError(f"feedback posterior value outside [0,1] for {key}")
+            if not 0.0 <= stats.posterior_success <= 1.0:
+                raise GraphInvariantError(f"feedback posterior success outside [0,1] for {key}")
         if self.controller_state_hash and not allow_unsealed:
             actual = stable_hash(self.state_payload())
             if actual != self.controller_state_hash:
@@ -247,6 +371,16 @@ class DynamicReasoningHypergraphV2(DynamicReasoningHypergraph):
         }
         graph.diffusion_history = [DiffusionSnapshot(**row) for row in value.get("diffusion_history", [])]
         graph.allocation_history = [AllocationRecord(**row) for row in value.get("allocation_history", [])]
+        graph.join_attempt_history = [
+            JoinAttemptRecord(**row) for row in value.get("join_attempt_history", [])
+        ]
+        graph.operation_outcome_history = [
+            OperationOutcomeRecord(**row) for row in value.get("operation_outcome_history", [])
+        ]
+        graph.operation_feedback = {
+            str(key): OperationFeedbackStats(**row)
+            for key, row in value.get("operation_feedback", {}).items()
+        }
         graph.supersession_history = [SupersessionRecord(**row) for row in value.get("supersession_history", [])]
         graph.invalidated_hyperedges = [str(item) for item in value.get("invalidated_hyperedges", [])]
         graph.termination_history = [

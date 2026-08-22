@@ -22,10 +22,12 @@ class DynamicV2ResearchConfig(DynamicResearchConfig):
     prompt_version: str = "dynamic-hypergraph-v2"
 
     max_extracted_claims_per_round: int = 6
-    max_join_arity: int = 3
+    max_join_arity: int = 4
     max_join_proposals_per_step: int = 3
     max_join_attempts_per_question: int = 6
     max_join_depth: int = 4
+    max_join_frontier_candidates: int = 48
+    join_min_premise_support: float = 0.55
     typed_extraction_max_tokens: int = 850
     join_validation_max_tokens: int = 650
 
@@ -47,7 +49,23 @@ class DynamicV2ResearchConfig(DynamicResearchConfig):
     evc_weight_recovery: float = 0.75
     evc_weight_cost: float = 1.0
     evc_weight_growth_risk: float = 0.50
+    evc_weight_observed_value: float = 1.00
+    evc_weight_failure_cooldown: float = 1.00
     meta_stop_evc_threshold: float = 0.08
+
+    allocator_mode: str = "adaptive_evc"
+    outcome_feedback_prior_strength: float = 2.0
+    outcome_feedback_cooldown_failures: int = 2
+    outcome_feedback_cooldown_steps: int = 2
+    actual_utility_weight_uncertainty: float = 1.0
+    actual_utility_weight_support: float = 1.0
+    actual_utility_weight_evidence_gap: float = 1.0
+    actual_utility_weight_entropy: float = 0.5
+    actual_utility_weight_unlock: float = 0.75
+    actual_utility_weight_novelty: float = 0.5
+    actual_utility_weight_chain_progress: float = 1.0
+    actual_utility_weight_contradiction_resolution: float = 0.75
+    actual_utility_weight_cost: float = 1.0
 
     allocation_min_token_fraction: float = 0.35
     allocation_mid_token_fraction: float = 0.65
@@ -59,7 +77,7 @@ class DynamicV2ResearchConfig(DynamicResearchConfig):
     revision_support_drop_threshold: float = 0.20
     revision_entropy_rise_threshold: float = 0.20
     revision_evidence_gap_rise_threshold: float = 0.20
-    natural_revision_precision_threshold: float = 0.60
+    natural_revision_precision_threshold: float = 0.80
 
     def validate(self) -> None:
         self._validate_common({"dynamic_hypergraph_tdca_v2"})
@@ -71,9 +89,12 @@ class DynamicV2ResearchConfig(DynamicResearchConfig):
             "max_join_proposals_per_step": self.max_join_proposals_per_step,
             "max_join_attempts_per_question": self.max_join_attempts_per_question,
             "max_join_depth": self.max_join_depth,
+            "max_join_frontier_candidates": self.max_join_frontier_candidates,
             "diffusion_steps": self.diffusion_steps,
             "max_independent_verifications": self.max_independent_verifications,
             "max_adaptive_top_k": self.max_adaptive_top_k,
+            "outcome_feedback_cooldown_failures": self.outcome_feedback_cooldown_failures,
+            "outcome_feedback_cooldown_steps": self.outcome_feedback_cooldown_steps,
         }
         invalid = [name for name, value in positive.items() if int(value) <= 0]
         if invalid:
@@ -89,9 +110,17 @@ class DynamicV2ResearchConfig(DynamicResearchConfig):
                 raise ValueError(f"{name} must be in [0,1]")
         if self.diffusion_min_delta < 0:
             raise ValueError("diffusion_min_delta must be non-negative")
+        if self.allocator_mode not in {"adaptive_evc", "uniform", "fixed_order"}:
+            raise ValueError("allocator_mode must be adaptive_evc, uniform, or fixed_order")
+        if self.outcome_feedback_prior_strength <= 0:
+            raise ValueError("outcome_feedback_prior_strength must be positive")
+        if not 0.0 <= self.join_min_premise_support <= 1.0:
+            raise ValueError("join_min_premise_support must be in [0,1]")
         weights = [
             value for name, value in asdict(self).items()
-            if name.startswith("heat_weight_") or name.startswith("evc_weight_")
+            if name.startswith("heat_weight_")
+            or name.startswith("evc_weight_")
+            or name.startswith("actual_utility_weight_")
         ]
         if any(float(value) < 0 for value in weights):
             raise ValueError("heat/EVC weights must be non-negative")

@@ -53,6 +53,8 @@ def dynamic_v2_metrics(
             if value.get("status") not in {"invalid", "archived"}
         }
         allocations = graph.get("allocation_history", [])
+        join_attempts = graph.get("join_attempt_history", [])
+        outcomes = graph.get("operation_outcome_history", [])
         budget_shapes = {
             tuple(sorted((row.get("requested_budget") or {}).items())) for row in allocations
         }
@@ -62,6 +64,34 @@ def dynamic_v2_metrics(
             and row.get("predicted_evc") is not None
             for row in allocations
         )
+        complete_outcome_feedback = bool(allocations) and len(outcomes) == len(allocations) and all(
+            row.get("feedback_applied")
+            and row.get("pre_state_summary") and row.get("post_state_summary")
+            and row.get("state_delta")
+            and row.get("actual_utility_components_raw")
+            and row.get("actual_utility_components_normalized")
+            and row.get("actual_utility") is not None
+            for row in allocations
+        )
+        accepted_nary = [
+            row for row in join_attempts
+            if row.get("accepted") and len(row.get("premise_ids", [])) >= 3
+        ]
+        answer_support_closure = set()
+        for answer in answers.values():
+            answer_support_closure.update(answer.get("supporting_claims", []))
+            queue = list(answer.get("supporting_claims", []))
+            while queue:
+                claim = claims.get(str(queue.pop()), {})
+                for dependency_id in claim.get("dependency_claim_ids", []):
+                    if dependency_id not in answer_support_closure:
+                        answer_support_closure.add(dependency_id)
+                        queue.append(dependency_id)
+        downstream_nary = [
+            row for row in accepted_nary
+            if row.get("conclusion_node_id") in answer_support_closure
+            or claims.get(str(row.get("conclusion_node_id")), {}).get("status") == "committed"
+        ]
         revisions = [row for row in graph.get("supersession_history", []) if row.get("natural")]
         revision_labels = [_revision_label(row, claims, example) for row in revisions]
         known_labels = [value for value in revision_labels if value in {"correct", "wrong"}]
@@ -94,6 +124,16 @@ def dynamic_v2_metrics(
             "allocation_count": len(allocations),
             "non_uniform_allocation": len(budget_shapes) > 1,
             "complete_evc_trace": complete_evc,
+            "complete_outcome_feedback_trace": complete_outcome_feedback,
+            "feedback_influenced_allocation": any(
+                float((row.get("feedback_prior") or {}).get("observations", 0.0)) > 0.0
+                for row in allocations
+            ),
+            "nary_join_attempt_count": sum(
+                len(row.get("premise_ids", [])) >= 3 for row in join_attempts
+            ),
+            "nary_join_accepted_count": len(accepted_nary),
+            "nary_join_downstream_used_count": len(downstream_nary),
             "natural_revision_count": len(revisions),
             "natural_revision_correct": revision_labels.count("correct"),
             "natural_revision_wrong": revision_labels.count("wrong"),
@@ -139,6 +179,7 @@ def _aggregate(rows: list[dict[str, Any]]) -> dict[str, Any]:
     numeric = (
         "claim_count", "typed_claim_rate", "join_count", "auditable_join_count",
         "diffusion_count", "typed_message_count", "allocation_count",
+        "nary_join_attempt_count", "nary_join_accepted_count", "nary_join_downstream_used_count",
         "natural_revision_count", "natural_revision_correct", "natural_revision_wrong",
         "natural_revision_unknown", "unsupported_answer_count",
     )
@@ -147,6 +188,7 @@ def _aggregate(rows: list[dict[str, Any]]) -> dict[str, Any]:
     for key in (
         "auditable_three_or_four_hop_join_case", "candidate_presence", "candidate_survival",
         "non_uniform_allocation", "complete_evc_trace", "controller_state_hash_present",
+        "complete_outcome_feedback_trace", "feedback_influenced_allocation",
     ):
         result[f"{key}_rate"] = mean(float(bool(row[key])) for row in rows)
     correct = sum(int(row["natural_revision_correct"]) for row in rows)

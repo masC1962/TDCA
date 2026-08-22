@@ -1,6 +1,8 @@
 from __future__ import annotations
 
-from dataclasses import dataclass
+import json
+from itertools import combinations
+from dataclasses import dataclass, field
 from typing import Any
 
 from ..budget import Budget
@@ -11,13 +13,14 @@ from .config import DynamicV2ResearchConfig
 from .graph import DynamicReasoningHypergraphV2
 
 
-JOIN_SYSTEM = """Validate one proposed relational join using only the supplied premise claims and their
-evidence. Return JSON only with valid, reason_codes, and derived_claim. derived_claim must contain subject,
-relation, value, subject_type, value_type, derivation_confidence, type_match, dependency_consistency, and
-qualifiers. The derived claim must follow from all premises jointly; copying one premise is invalid. Do not
-use prior knowledge or question-specific rules. The sole exception is a named variable-binding projection
-premise: its tuple may be preserved when the other premise establishes its dependency binding. Return
-valid=false when the shared binding does not license the composition."""
+JOIN_SYSTEM = """Validate one proposed typed conjunctive hypergraph JOIN using only the supplied premise
+claims and their grounded evidence. Return JSON only with valid, reason_codes, premise_use,
+constraint_satisfaction, and derived_claim. derived_claim must contain subject, relation, value,
+subject_type, value_type, derivation_confidence, type_match, dependency_consistency, and qualifiers.
+Every premise and declared binding constraint must be necessary for the conclusion; copying one premise
+is invalid. Do not use prior knowledge or question-specific rules. A named variable-binding projection
+premise may preserve its tuple only when every other premise establishes one of its dependency bindings.
+Return valid=false when a type, binding, conjunction, shared-role, or set-intersection constraint fails."""
 
 
 @dataclass(frozen=True)
@@ -28,8 +31,12 @@ class JoinCandidate:
     signature: str
     join_depth: int
     orientation: str = "value_subject"
-    open_endpoints: tuple[str, str] = ("", "")
+    open_endpoints: tuple[str, ...] = ("", "")
     projection_premise_id: str = ""
+    variable_bindings: dict[str, list[str]] = field(default_factory=dict)
+    constraints: tuple[dict[str, Any], ...] = ()
+    join_kind: str = "relational_path"
+    deterministic_validation: dict[str, Any] = field(default_factory=dict)
 
 
 class MultiHopJoinEngine:
@@ -57,6 +64,7 @@ class MultiHopJoinEngine:
             if semantics.join_depth > 0 and node_id in graph.nodes
         }
         rows: list[JoinCandidate] = []
+        link_rows: list[dict[str, Any]] = []
         for left_index, left in enumerate(claims):
             left_semantics = graph.claim_semantics[left.node_id]
             for right in claims[left_index + 1:]:
@@ -68,42 +76,84 @@ class MultiHopJoinEngine:
                 for first, second, orientation, binding, endpoints in _endpoint_unifications(
                     left, left_semantics, right, right_semantics,
                 ):
-                    projection_premise_id = _projection_premise(
-                        graph, first, second, target_subgoal,
+                    constraint = _constraint_row(
+                        first, second, orientation, binding, graph,
                     )
-                    normalized_endpoints = tuple(normalize_text(value) for value in endpoints)
-                    if (
+                    link_rows.append(constraint)
+                    candidate = _build_candidate(
+                        graph,
+                        (first.node_id, second.node_id),
+                        (constraint,),
+                        target_subgoal,
+                        self.config.max_join_depth,
+                    )
+                    if candidate is None:
+                        continue
+                    normalized_endpoints = tuple(
+                        normalize_text(value) for value in candidate.open_endpoints
+                    )
+                    if len(normalized_endpoints) == 2 and (
                         normalized_endpoints[0], normalized_endpoints[1], target_subgoal,
                     ) in existing_endpoints:
                         continue
-                    depth = max(left_semantics.join_depth, right_semantics.join_depth) + 1
-                    if depth > self.config.max_join_depth:
-                        continue
-                    signature = stable_hash({
-                        "premises": [first.node_id, second.node_id],
-                        "binding": binding,
-                        "orientation": orientation,
-                        "open_endpoints": normalized_endpoints,
-                        "projection_premise_id": projection_premise_id,
-                        "target": target_subgoal,
-                    })
-                    if signature in existing:
-                        continue
-                    rows.append(JoinCandidate(
-                        premise_ids=(first.node_id, second.node_id),
-                        binding=binding,
-                        target_subgoal=target_subgoal,
-                        signature=signature,
-                        join_depth=depth,
-                        orientation=orientation,
-                        open_endpoints=endpoints,
-                        projection_premise_id=projection_premise_id,
-                    ))
+                    if candidate.signature not in existing:
+                        rows.append(candidate)
+        rows.extend(_explicit_set_candidates(
+            graph,
+            claims,
+            target_subgoal,
+            self.config.max_join_arity,
+            self.config.max_join_depth,
+            max(0, self.config.max_join_frontier_candidates - len(rows)),
+            existing,
+        ))
+        # Expand only connected typed frontiers. This is bounded by a global
+        # structural cap and never enumerates arbitrary claim combinations.
+        frontier = [row for row in rows if len(row.premise_ids) == 2]
+        seen_frontiers = {
+            (row.premise_ids, _constraint_signature(row.constraints)) for row in frontier
+        }
+        while frontier and len(rows) < self.config.max_join_frontier_candidates:
+            current = frontier.pop(0)
+            if len(current.premise_ids) >= self.config.max_join_arity:
+                continue
+            current_ids = set(current.premise_ids)
+            for link in link_rows:
+                pair = {str(link["left_premise"]), str(link["right_premise"])}
+                overlap = pair & current_ids
+                outside = pair - current_ids
+                if len(overlap) != 1 or len(outside) != 1:
+                    continue
+                new_id = next(iter(outside))
+                premise_ids = tuple(sorted((*current_ids, new_id)))
+                if _derivation_cycle(graph, premise_ids):
+                    continue
+                constraints = tuple((*current.constraints, link))
+                frontier_key = (premise_ids, _constraint_signature(constraints))
+                if frontier_key in seen_frontiers:
+                    continue
+                seen_frontiers.add(frontier_key)
+                candidate = _build_candidate(
+                    graph, premise_ids, constraints, target_subgoal,
+                    self.config.max_join_depth,
+                )
+                if candidate is None or candidate.signature in existing:
+                    continue
+                rows.append(candidate)
+                frontier.append(candidate)
+                if len(rows) >= self.config.max_join_frontier_candidates:
+                    break
         unique = {row.signature: row for row in rows}
-        return sorted(
+        candidates = sorted(
             unique.values(),
-            key=lambda row: (row.join_depth, row.premise_ids),
+            key=lambda row: (
+                -int(bool(row.projection_premise_id)),
+                len(row.premise_ids),
+                row.join_depth,
+                row.premise_ids,
+            ),
         )
+        return _dominance_prune(candidates)[: self.config.max_join_frontier_candidates]
 
     def propose(
         self,
@@ -113,6 +163,21 @@ class MultiHopJoinEngine:
         token_budget: int | None = None,
     ) -> GraphOperation | None:
         premises = [graph.node(node_id, ClaimNode) for node_id in candidate.premise_ids]
+        unsupported = [
+            row.node_id for row in premises
+            if row.status in {CandidateStatus.PROPOSED, CandidateStatus.INVALID, CandidateStatus.ARCHIVED}
+            or row.score.absolute_support < self.config.join_min_premise_support
+            or row.score.raw.grounding < self.config.join_min_premise_support
+            or row.score.raw.entailment < self.config.join_min_premise_support
+        ]
+        if unsupported:
+            self.last_diagnostics = {
+                "accepted": False,
+                "reason_codes": ["unsupported_or_unverified_premise"],
+                "premise_ids": unsupported,
+                "deterministic_validation": candidate.deterministic_validation,
+            }
+            return None
         projection = next((
             row for row in premises if row.node_id == candidate.projection_premise_id
         ), None)
@@ -150,6 +215,7 @@ class MultiHopJoinEngine:
                     "qualifiers": {
                         "projection_premise_id": projection.node_id,
                         "validation": "independent_raw_scoring",
+                        "join_kind": candidate.join_kind,
                     },
                 }
                 return self._operation(
@@ -185,8 +251,10 @@ class MultiHopJoinEngine:
             {"role": "user", "content": (
                 f"Root question: {graph.question}\nShared binding: {candidate.binding}\n"
                 f"Join orientation: {candidate.orientation}\n"
-                f"Required open endpoints: {candidate.open_endpoints[0]} <-> "
-                f"{candidate.open_endpoints[1]}\n"
+                f"Required open endpoints: {list(candidate.open_endpoints)}\n"
+                f"Join kind: {candidate.join_kind}\n"
+                f"Variable bindings: {candidate.variable_bindings}\n"
+                f"Typed constraints: {list(candidate.constraints)}\n"
                 f"Allowed variable-binding projection premise: "
                 f"{candidate.projection_premise_id or 'none'}\n"
                 f"Target subgoal: {candidate.target_subgoal}\n\n" + "\n\n".join(blocks)
@@ -198,7 +266,7 @@ class MultiHopJoinEngine:
         ))
         self.budget.require(max_tokens, estimated_prompt_tokens=estimate_message_tokens(messages))
         data, generation = self.llm.generate_json(
-            messages, "dynamic_v2_typed_join_validation_v1", max_tokens, self.config.temperature,
+            messages, "dynamic_v2_conjunctive_join_validation_v2", max_tokens, self.config.temperature,
         )
         self.budget.record_generation(generation)
         derived = data.get("derived_claim", {})
@@ -216,6 +284,27 @@ class MultiHopJoinEngine:
             }
             return None
         derived = normalized_derived
+        if len(candidate.premise_ids) >= 3:
+            premise_use = data.get("premise_use", {})
+            used_ids = set(premise_use) if isinstance(premise_use, dict) else {
+                str(value) for value in premise_use if isinstance(premise_use, list)
+            }
+            constraint_rows = data.get("constraint_satisfaction", [])
+            constraints_covered = (
+                isinstance(constraint_rows, list)
+                and len(constraint_rows) >= len(candidate.constraints)
+                and all(
+                    isinstance(row, dict) and bool(row.get("satisfied", False))
+                    for row in constraint_rows
+                )
+            )
+            if used_ids != set(candidate.premise_ids) or not constraints_covered:
+                self.last_diagnostics = {
+                    "accepted": False,
+                    "reason_codes": ["incomplete_nary_premise_or_constraint_use"],
+                    "used_premise_ids": sorted(used_ids),
+                }
+                return None
         derived_endpoints = {
             normalize_text(derived["subject"]), normalize_text(derived["value"]),
         }
@@ -236,7 +325,12 @@ class MultiHopJoinEngine:
             normalize_text(derived["relation"]),
             normalize_text(derived["value"]),
         )
-        if derived_endpoints != required_endpoints and not projection_match:
+        endpoint_match = (
+            derived_endpoints == required_endpoints
+            if len(required_endpoints) <= 2
+            else derived_endpoints <= required_endpoints and len(derived_endpoints) == 2
+        )
+        if not endpoint_match and not projection_match:
             self.last_diagnostics = {"accepted": False, "reason_codes": ["join_endpoint_mismatch"]}
             return None
         if derived_triple in premise_triples and not projection_match:
@@ -245,6 +339,9 @@ class MultiHopJoinEngine:
         self.last_diagnostics = {
             "accepted": True,
             "reason_codes": [str(value) for value in data.get("reason_codes", [])][:5],
+            "premise_use": data.get("premise_use", {}),
+            "constraint_satisfaction": data.get("constraint_satisfaction", []),
+            "deterministic_validation": candidate.deterministic_validation,
         }
         node_id = f"join_claim_{graph.step + 1}_{candidate.signature[:12]}"
         return self._operation(
@@ -271,6 +368,10 @@ class MultiHopJoinEngine:
             payload={
                 "mode": "derive_join",
                 "binding": candidate.binding,
+                "variable_bindings": candidate.variable_bindings,
+                "constraints": [dict(value) for value in candidate.constraints],
+                "join_kind": candidate.join_kind,
+                "deterministic_validation": candidate.deterministic_validation,
                 "join_signature": candidate.signature,
                 "validation": {
                     "valid": True,
@@ -301,6 +402,10 @@ class MultiHopJoinEngine:
             list(candidate.premise_ids), graph.node(candidate.premise_ids[0], ClaimNode).branch_id,
             {
                 "mode": "derive_join", "binding": candidate.binding,
+                "variable_bindings": candidate.variable_bindings,
+                "constraints": [dict(value) for value in candidate.constraints],
+                "join_kind": candidate.join_kind,
+                "deterministic_validation": candidate.deterministic_validation,
                 "join_signature": signature,
                 "validation": {"valid": True, "reason_codes": ["offline_fixture"]},
                 "claim": {
@@ -391,6 +496,329 @@ def _endpoint_unifications(left, left_semantics, right, right_semantics):
             (left.subject, right.subject),
         ))
     return [row for row in rows if row[3] and normalize_text(row[4][0]) != normalize_text(row[4][1])]
+
+
+def _constraint_row(
+    left: ClaimNode,
+    right: ClaimNode,
+    orientation: str,
+    binding: str,
+    graph: DynamicReasoningHypergraphV2,
+) -> dict[str, Any]:
+    endpoints = {
+        "value_subject": ("value", "subject"),
+        "shared_subject": ("subject", "subject"),
+        "shared_value": ("value", "value"),
+    }[orientation]
+    left_semantics = graph.claim_semantics[left.node_id]
+    right_semantics = graph.claim_semantics[right.node_id]
+    left_type = (
+        left_semantics.value_type if endpoints[0] == "value" else left_semantics.subject_type
+    )
+    right_type = (
+        right_semantics.value_type if endpoints[1] == "value" else right_semantics.subject_type
+    )
+    return {
+        "left_premise": left.node_id,
+        "left_endpoint": endpoints[0],
+        "right_premise": right.node_id,
+        "right_endpoint": endpoints[1],
+        "orientation": orientation,
+        "binding": normalize_text(binding),
+        "left_type": left_type,
+        "right_type": right_type,
+        "type_compatible": _compatible(left_type, right_type),
+    }
+
+
+def _build_candidate(
+    graph: DynamicReasoningHypergraphV2,
+    premise_ids: tuple[str, ...],
+    constraints: tuple[dict[str, Any], ...],
+    target_subgoal: str,
+    max_join_depth: int,
+) -> JoinCandidate | None:
+    premise_ids = tuple(sorted(dict.fromkeys(premise_ids)))
+    if len(premise_ids) < 2 or _derivation_cycle(graph, premise_ids):
+        return None
+    covered = {
+        str(value[key])
+        for value in constraints
+        for key in ("left_premise", "right_premise")
+    }
+    if covered != set(premise_ids) or not _constraints_connected(premise_ids, constraints):
+        return None
+    if any(not bool(value.get("type_compatible", False)) for value in constraints):
+        return None
+    semantics = [graph.claim_semantics[node_id] for node_id in premise_ids]
+    depth = max(value.join_depth for value in semantics) + 1
+    if depth > max_join_depth:
+        return None
+    used_endpoints = {
+        (str(value["left_premise"]), str(value["left_endpoint"])) for value in constraints
+    } | {
+        (str(value["right_premise"]), str(value["right_endpoint"])) for value in constraints
+    }
+    endpoint_rows: list[tuple[str, str]] = []
+    for node_id in premise_ids:
+        claim = graph.node(node_id, ClaimNode)
+        for endpoint, raw_value in (("subject", claim.subject), ("value", claim.value)):
+            if (node_id, endpoint) not in used_endpoints:
+                endpoint_rows.append((normalize_text(raw_value), raw_value))
+    open_endpoints = tuple(dict.fromkeys(
+        raw for normalized, raw in endpoint_rows if normalized
+    ))
+    projection = _projection_premise_many(graph, premise_ids, target_subgoal)
+    if len(open_endpoints) < 2 and projection:
+        claim = graph.node(projection, ClaimNode)
+        open_endpoints = (claim.subject, claim.value)
+    if len(open_endpoints) < 2:
+        return None
+    bindings: dict[str, list[str]] = {}
+    for constraint in constraints:
+        binding = str(constraint["binding"])
+        key = f"?v_{stable_hash(binding)[:8]}"
+        bindings.setdefault(key, []).extend([
+            binding,
+            f"{constraint['left_premise']}.{constraint['left_endpoint']}",
+            f"{constraint['right_premise']}.{constraint['right_endpoint']}",
+        ])
+    bindings = {
+        key: list(dict.fromkeys(values)) for key, values in sorted(bindings.items())
+    }
+    orientations = {str(value["orientation"]) for value in constraints}
+    if _has_explicit_set_semantics(graph, premise_ids):
+        join_kind = "set_intersection"
+    elif len(premise_ids) >= 3 and orientations <= {"shared_subject", "shared_value"}:
+        join_kind = "shared_role_conjunction"
+    elif len(premise_ids) >= 3:
+        join_kind = "conjunctive_relational_path"
+    elif orientations <= {"shared_subject", "shared_value"}:
+        join_kind = "shared_role"
+    else:
+        join_kind = "relational_path"
+    signature_payload = {
+        "premises": list(premise_ids),
+        "constraints": _constraint_signature(constraints),
+        "open_endpoints": [normalize_text(value) for value in open_endpoints],
+        "projection_premise_id": projection,
+        "join_kind": join_kind,
+        "target": target_subgoal,
+    }
+    signature = stable_hash(signature_payload)
+    independent_support = {
+        node_id: float(graph.node(node_id, ClaimNode).score.absolute_support)
+        for node_id in premise_ids
+    }
+    intersection_members = sorted(set.intersection(*(
+        _qualifier_members(graph.claim_semantics[node_id].qualifiers)
+        for node_id in premise_ids
+    ))) if join_kind == "set_intersection" else []
+    return JoinCandidate(
+        premise_ids=premise_ids,
+        binding=";".join(sorted({str(value["binding"]) for value in constraints})),
+        target_subgoal=target_subgoal,
+        signature=signature,
+        join_depth=depth,
+        orientation=(
+            str(constraints[0]["orientation"])
+            if len(constraints) == 1 else "conjunctive"
+        ),
+        open_endpoints=open_endpoints,
+        projection_premise_id=projection,
+        variable_bindings=bindings,
+        constraints=tuple(dict(value) for value in constraints),
+        join_kind=join_kind,
+        deterministic_validation={
+            "connected": True,
+            "acyclic_derivation": True,
+            "all_premises_constrained": True,
+            "types_compatible": True,
+            "independent_support": independent_support,
+            "set_intersection_members": intersection_members,
+        },
+    )
+
+
+def _constraints_connected(
+    premise_ids: tuple[str, ...], constraints: tuple[dict[str, Any], ...],
+) -> bool:
+    adjacency = {node_id: set() for node_id in premise_ids}
+    for row in constraints:
+        left, right = str(row["left_premise"]), str(row["right_premise"])
+        adjacency.setdefault(left, set()).add(right)
+        adjacency.setdefault(right, set()).add(left)
+    seen = {premise_ids[0]}
+    queue = [premise_ids[0]]
+    while queue:
+        for node_id in adjacency.get(queue.pop(), set()):
+            if node_id not in seen:
+                seen.add(node_id)
+                queue.append(node_id)
+    return seen == set(premise_ids)
+
+
+def _constraint_signature(constraints: tuple[dict[str, Any], ...]) -> tuple[str, ...]:
+    return tuple(sorted(stable_hash({
+        key: row.get(key) for key in (
+            "left_premise", "left_endpoint", "right_premise", "right_endpoint",
+            "orientation", "binding", "left_type", "right_type",
+        )
+    }) for row in constraints))
+
+
+def _derivation_cycle(
+    graph: DynamicReasoningHypergraphV2, premise_ids: tuple[str, ...],
+) -> bool:
+    premise_set = set(premise_ids)
+    for node_id in premise_ids:
+        semantics = graph.claim_semantics[node_id]
+        if semantics.join_depth <= 0:
+            continue
+        if (_derivation_ancestors(graph, node_id) - {node_id}) & premise_set:
+            return True
+    return False
+
+
+def _derivation_ancestors(
+    graph: DynamicReasoningHypergraphV2, claim_id: str,
+) -> set[str]:
+    closure = {claim_id}
+    queue = [claim_id]
+    while queue:
+        node = graph.nodes.get(queue.pop())
+        if not isinstance(node, ClaimNode):
+            continue
+        semantics = graph.claim_semantics.get(node.node_id)
+        if semantics is None or semantics.join_depth <= 0:
+            continue
+        for dependency_id in node.dependency_claim_ids:
+            if dependency_id not in closure:
+                closure.add(dependency_id)
+                queue.append(dependency_id)
+    return closure
+
+
+def _projection_premise_many(
+    graph: DynamicReasoningHypergraphV2,
+    premise_ids: tuple[str, ...],
+    target_subgoal: str,
+) -> str:
+    premise_set = set(premise_ids)
+    for node_id in premise_ids:
+        candidate = graph.node(node_id, ClaimNode)
+        if candidate.target_subgoal != target_subgoal or not candidate.dependency_claim_ids:
+            continue
+        dependency_lineage: set[str] = set()
+        for dependency_id in candidate.dependency_claim_ids:
+            dependency_lineage.update(_dependency_closure(graph, dependency_id))
+        others = premise_set - {node_id}
+        if others and all(
+            other in dependency_lineage
+            for other in others
+        ):
+            return node_id
+    return ""
+
+
+def _has_explicit_set_semantics(
+    graph: DynamicReasoningHypergraphV2, premise_ids: tuple[str, ...],
+) -> bool:
+    markers = {"set_members", "set_semantics", "collection_members"}
+    return all(
+        bool(markers & set(graph.claim_semantics[node_id].qualifiers))
+        for node_id in premise_ids
+    )
+
+
+def _qualifier_members(qualifiers: dict[str, str]) -> set[str]:
+    values: list[Any] = []
+    for key in ("set_members", "set_semantics", "collection_members"):
+        if key not in qualifiers:
+            continue
+        raw: Any = qualifiers[key]
+        if isinstance(raw, str):
+            try:
+                raw = json.loads(raw)
+            except json.JSONDecodeError:
+                raw = [
+                    value.strip().strip("'\"")
+                    for value in raw.strip("[](){} ").replace(";", ",").replace("|", ",").split(",")
+                ]
+        values.extend(raw if isinstance(raw, list) else [raw])
+    return {normalize_text(str(value)) for value in values if normalize_text(str(value))}
+
+
+def _explicit_set_candidates(
+    graph: DynamicReasoningHypergraphV2,
+    claims: list[ClaimNode],
+    target_subgoal: str,
+    max_arity: int,
+    max_depth: int,
+    cap: int,
+    existing: set[str],
+) -> list[JoinCandidate]:
+    """Enumerate only premise groups indexed by a real shared set member."""
+    if cap <= 0:
+        return []
+    by_member: dict[str, list[str]] = {}
+    for claim in claims:
+        members = _qualifier_members(graph.claim_semantics[claim.node_id].qualifiers)
+        for member in members:
+            by_member.setdefault(member, []).append(claim.node_id)
+    rows: list[JoinCandidate] = []
+    seen: set[str] = set()
+    for member, node_ids in sorted(by_member.items()):
+        unique_ids = sorted(set(node_ids))
+        for arity in range(2, min(max_arity, len(unique_ids)) + 1):
+            for premise_group in combinations(unique_ids, arity):
+                if _derivation_cycle(graph, premise_group):
+                    continue
+                anchor = premise_group[0]
+                constraints = tuple({
+                    "left_premise": anchor,
+                    "left_endpoint": "set_members",
+                    "right_premise": node_id,
+                    "right_endpoint": "set_members",
+                    "orientation": "set_intersection",
+                    "binding": member,
+                    "left_type": "set_member",
+                    "right_type": "set_member",
+                    "type_compatible": True,
+                } for node_id in premise_group[1:])
+                candidate = _build_candidate(
+                    graph, premise_group, constraints, target_subgoal, max_depth,
+                )
+                if candidate is None or candidate.signature in existing or candidate.signature in seen:
+                    continue
+                if not candidate.deterministic_validation.get("set_intersection_members"):
+                    continue
+                seen.add(candidate.signature)
+                rows.append(candidate)
+                if len(rows) >= cap:
+                    return rows
+    return rows
+
+
+def _dominance_prune(candidates: list[JoinCandidate]) -> list[JoinCandidate]:
+    """Remove only structurally equivalent candidates; never drop extra constraints."""
+    best: dict[tuple[Any, ...], JoinCandidate] = {}
+    for row in candidates:
+        key = (
+            row.target_subgoal,
+            row.premise_ids,
+            tuple(sorted(normalize_text(value) for value in row.open_endpoints)),
+            _constraint_signature(row.constraints),
+        )
+        current = best.get(key)
+        if current is None or (row.join_depth, row.signature) < (current.join_depth, current.signature):
+            best[key] = row
+    return sorted(best.values(), key=lambda row: (
+        -int(bool(row.projection_premise_id)),
+        len(row.premise_ids),
+        row.join_depth,
+        row.signature,
+    ))
 
 
 def _depends_on(

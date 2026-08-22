@@ -161,13 +161,17 @@ For Dynamic Hypergraph v2, use the separate runner:
 bash scripts/run_dynamic_v2_research.sh tests
 bash scripts/run_dynamic_v2_research.sh smoke20
 bash scripts/run_dynamic_v2_research.sh development50
+bash scripts/run_dynamic_v2_research.sh matched_allocators50
 bash scripts/run_dynamic_v2_research.sh budget_curve50
+bash scripts/run_dynamic_v2_research.sh revision_development
 ```
 
-`heldout200` and `cross_heldout200` fail closed until
-`configs/dynamic_v2_hard_gate.json` is explicitly opened after every registered hard
-gate passes. The seed is frozen at `20260820`; HotpotQA and 2Wiki use the same frozen
-post-MuSiQue parameters and their own disjoint manifests.
+`heldout200` and `cross_heldout200` fail closed unless `TDCA_V2_GATE_REPORT` points to
+a passing `dynamic-hypergraph-v2-gate-evaluation-v2` report. Editing a status bit is
+not sufficient. The seed is frozen at `20260820`; HotpotQA and 2Wiki use the same
+frozen post-MuSiQue parameters and their own disjoint manifests. The current closure
+smoke remains a negative result, so development-50 and all sealed stages must not be
+run; see `docs/dynamic_hypergraph_tdca_v2_closure_20260822.md`.
 
 1. Stage 1: adapters, leakage, metrics, budgets and integration tests.
 2. Stage 2: Qwen-plus 20-row smoke; no crashes or ambiguous empty answers.

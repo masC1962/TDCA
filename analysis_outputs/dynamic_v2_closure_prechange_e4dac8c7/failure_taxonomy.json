@@ -1,0 +1,1182 @@
+{
+  "schema_version": "dynamic-v2-failure-taxonomy-v1",
+  "source_run": "research_outputs/musique_distractor_smoke_dynamic_hypergraph_tdca_v2_1787319567455752323",
+  "baseline_commit": "e4dac8c7621b0d0e28534954260eec23feea1012",
+  "methodology": {
+    "kind": "deterministic_trace-derived_failure_attribution",
+    "causal_warning": "Labels are reproducible symptoms inferred from frozen metrics and traces; evc_misallocation and query-formulation labels are hypotheses, not sole-cause proofs.",
+    "label_order_for_main_cause": [
+      "provider_or_infrastructure_failure",
+      "retrieval_miss",
+      "query_formulation_or_missing_binding_miss",
+      "claim_extraction_miss",
+      "type_or_binding_mismatch",
+      "join_verification_rejection",
+      "join_expressivity_failure",
+      "candidate_commit_or_survival_failure",
+      "final_synthesis_failure",
+      "premature_stop",
+      "evc_misallocation",
+      "budget_exhaustion",
+      "correct_or_no_observed_failure"
+    ]
+  },
+  "count": 20,
+  "main_cause_counts": {
+    "correct_or_no_observed_failure": 4,
+    "join_verification_rejection": 3,
+    "provider_or_infrastructure_failure": 4,
+    "claim_extraction_miss": 4,
+    "type_or_binding_mismatch": 1,
+    "retrieval_miss": 4
+  },
+  "all_label_counts": {
+    "correct_or_no_observed_failure": 4,
+    "join_verification_rejection": 12,
+    "final_synthesis_failure": 4,
+    "evc_misallocation": 9,
+    "budget_exhaustion": 9,
+    "provider_or_infrastructure_failure": 4,
+    "claim_extraction_miss": 9,
+    "type_or_binding_mismatch": 7,
+    "join_expressivity_failure": 7,
+    "premature_stop": 1,
+    "retrieval_miss": 5,
+    "query_formulation_or_missing_binding_miss": 5
+  },
+  "cases": [
+    {
+      "qid": "2hop__16844_20510",
+      "hop_count": 2,
+      "status": "answer",
+      "f1": 1.0,
+      "main_cause": "correct_or_no_observed_failure",
+      "secondary_causes": [],
+      "labels": [
+        {
+          "label": "correct_or_no_observed_failure",
+          "inference_rule": "No listed failure rule fired and official F1 is 1.0.",
+          "evidence": {
+            "status": "answer",
+            "f1": 1.0
+          }
+        }
+      ]
+    },
+    {
+      "qid": "2hop__424908_500483",
+      "hop_count": 2,
+      "status": "budget_exhausted",
+      "f1": 0.0,
+      "main_cause": "join_verification_rejection",
+      "secondary_causes": [
+        "final_synthesis_failure",
+        "evc_misallocation",
+        "budget_exhaustion"
+      ],
+      "labels": [
+        {
+          "label": "join_verification_rejection",
+          "inference_rule": "At least one proposed JOIN was explicitly rejected in the reasoning trace.",
+          "evidence": {
+            "count": 2,
+            "reason_codes": [
+              [
+                "no_dependency_binding_for_composition"
+              ],
+              [
+                "no_composition_possible"
+              ]
+            ],
+            "signatures": [
+              "876cf93c51cf75fd3676349d7246e43557622d53f7dd28f87c86719cc5e16ace",
+              "21839ae94a63c1f8df9bac0ada055349df3ddc36e8ea2bceb8d6a3d05994b028"
+            ]
+          }
+        },
+        {
+          "label": "final_synthesis_failure",
+          "inference_rule": "A gold-answer candidate survived but the terminal answer was absent or not fully correct.",
+          "evidence": {
+            "status": "budget_exhausted",
+            "f1": 0.0,
+            "stop_reason": "positive_value_computation_exceeds_remaining_budget"
+          }
+        },
+        {
+          "label": "evc_misallocation",
+          "inference_rule": "Budget was exhausted before candidate/chain completion; this is an allocation symptom, not proof of sole causality.",
+          "evidence": {
+            "allocation_count": 20,
+            "candidate_presence": true,
+            "full_chain_complete": false,
+            "termination_reason": "positive_value_computation_exceeds_remaining_budget"
+          }
+        },
+        {
+          "label": "budget_exhaustion",
+          "inference_rule": "The terminal status is budget_exhausted.",
+          "evidence": {
+            "llm_calls": 13,
+            "total_tokens": 14409,
+            "retrieval_calls": 4,
+            "allocation_count": 20
+          }
+        }
+      ]
+    },
+    {
+      "qid": "2hop__511296_2684",
+      "hop_count": 2,
+      "status": "answer",
+      "f1": 1.0,
+      "main_cause": "correct_or_no_observed_failure",
+      "secondary_causes": [],
+      "labels": [
+        {
+          "label": "correct_or_no_observed_failure",
+          "inference_rule": "No listed failure rule fired and official F1 is 1.0.",
+          "evidence": {
+            "status": "answer",
+            "f1": 1.0
+          }
+        }
+      ]
+    },
+    {
+      "qid": "2hop__62951_64006",
+      "hop_count": 2,
+      "status": "budget_exhausted",
+      "f1": 0.0,
+      "main_cause": "join_verification_rejection",
+      "secondary_causes": [
+        "final_synthesis_failure",
+        "evc_misallocation",
+        "budget_exhaustion"
+      ],
+      "labels": [
+        {
+          "label": "join_verification_rejection",
+          "inference_rule": "At least one proposed JOIN was explicitly rejected in the reasoning trace.",
+          "evidence": {
+            "count": 5,
+            "reason_codes": [
+              [
+                "shared_subject_join_violated",
+                "no_shared_binding_with_marshall_plan_context"
+              ],
+              [
+                "shared_subject_join_requires_composition_not_copying",
+                "no_variable_binding_projection_premise"
+              ],
+              [
+                "shared_subject_join_requires_common_object_binding",
+                "no_common_geographic_scope_established"
+              ],
+              [
+                "join_endpoint_mismatch"
+              ],
+              [
+                "shared_subject_mismatch"
+              ]
+            ],
+            "signatures": [
+              "636492ad7165f5efec1f25747d39912970d8f1011e2c6225f94b5e26255650aa",
+              "10c95a7495479387c7262eec7096a64a875b024c48b1f32a2ab2e2f0661b2512",
+              "12badb08241315cb1fea31ed036fc32a6bf6b98b80abcfd7b38f448e92a751f5",
+              "09659bbbc5a54de41fe1ba6eb662f1d7b4d8e75de2d2d56ec669929395fb6136",
+              "64ce7eb7951c36b4137e714004a40c32877a3dd7f0241363d4e05c85afd18983"
+            ]
+          }
+        },
+        {
+          "label": "final_synthesis_failure",
+          "inference_rule": "A gold-answer candidate survived but the terminal answer was absent or not fully correct.",
+          "evidence": {
+            "status": "budget_exhausted",
+            "f1": 0.0,
+            "stop_reason": "selected_computation_exhausted_safety_cap"
+          }
+        },
+        {
+          "label": "evc_misallocation",
+          "inference_rule": "Budget was exhausted before candidate/chain completion; this is an allocation symptom, not proof of sole causality.",
+          "evidence": {
+            "allocation_count": 19,
+            "candidate_presence": true,
+            "full_chain_complete": false,
+            "termination_reason": "selected_computation_exhausted_safety_cap"
+          }
+        },
+        {
+          "label": "budget_exhaustion",
+          "inference_rule": "The terminal status is budget_exhausted.",
+          "evidence": {
+            "llm_calls": 12,
+            "total_tokens": 13692,
+            "retrieval_calls": 4,
+            "allocation_count": 19
+          }
+        }
+      ]
+    },
+    {
+      "qid": "2hop__84937_21969",
+      "hop_count": 2,
+      "status": "abstain",
+      "f1": 0.0,
+      "main_cause": "provider_or_infrastructure_failure",
+      "secondary_causes": [
+        "claim_extraction_miss",
+        "join_verification_rejection"
+      ],
+      "labels": [
+        {
+          "label": "provider_or_infrastructure_failure",
+          "inference_rule": "A provider/infrastructure trace event or metric was recorded.",
+          "evidence": {
+            "event_count": 2,
+            "error_types": [
+              "StructuredOutputError"
+            ]
+          }
+        },
+        {
+          "label": "claim_extraction_miss",
+          "inference_rule": "The answer occurs in retrieved context but no gold-answer candidate was materialized.",
+          "evidence": {
+            "answer_in_context": true,
+            "candidate_presence": false,
+            "verified_claim_count": 1
+          }
+        },
+        {
+          "label": "join_verification_rejection",
+          "inference_rule": "At least one proposed JOIN was explicitly rejected in the reasoning trace.",
+          "evidence": {
+            "count": 3,
+            "reason_codes": [
+              [
+                "join_endpoint_mismatch"
+              ],
+              [
+                "join_endpoint_mismatch"
+              ],
+              [
+                "join_endpoint_mismatch"
+              ]
+            ],
+            "signatures": [
+              "7b71d2ce076f86a9a56ace4b7bf7a9d3b21710dc62298223aa728e6515787b8b",
+              "b98d3c49744e66c12b1ae0a8d751ec5549d0fa19b154a66a9cb63d899e6ef4de",
+              "50a16554524ee55c5d39388967ddc2ad5f77d1b09dfbb7dd2831b16450373975"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "qid": "2hop__89764_827343",
+      "hop_count": 2,
+      "status": "answer",
+      "f1": 1.0,
+      "main_cause": "correct_or_no_observed_failure",
+      "secondary_causes": [],
+      "labels": [
+        {
+          "label": "correct_or_no_observed_failure",
+          "inference_rule": "No listed failure rule fired and official F1 is 1.0.",
+          "evidence": {
+            "status": "answer",
+            "f1": 1.0
+          }
+        }
+      ]
+    },
+    {
+      "qid": "3hop1__105767_443779_52195",
+      "hop_count": 3,
+      "status": "answer",
+      "f1": 1.0,
+      "main_cause": "correct_or_no_observed_failure",
+      "secondary_causes": [],
+      "labels": [
+        {
+          "label": "correct_or_no_observed_failure",
+          "inference_rule": "No listed failure rule fired and official F1 is 1.0.",
+          "evidence": {
+            "status": "answer",
+            "f1": 1.0
+          }
+        }
+      ]
+    },
+    {
+      "qid": "3hop1__132795_40769_64047",
+      "hop_count": 3,
+      "status": "answer",
+      "f1": 0.5,
+      "main_cause": "claim_extraction_miss",
+      "secondary_causes": [],
+      "labels": [
+        {
+          "label": "claim_extraction_miss",
+          "inference_rule": "The answer occurs in retrieved context but no gold-answer candidate was materialized.",
+          "evidence": {
+            "answer_in_context": true,
+            "candidate_presence": false,
+            "verified_claim_count": 3
+          }
+        }
+      ]
+    },
+    {
+      "qid": "3hop1__140786_2053_5289",
+      "hop_count": 3,
+      "status": "budget_exhausted",
+      "f1": 0.0,
+      "main_cause": "type_or_binding_mismatch",
+      "secondary_causes": [
+        "join_expressivity_failure",
+        "final_synthesis_failure",
+        "evc_misallocation",
+        "budget_exhaustion"
+      ],
+      "labels": [
+        {
+          "label": "type_or_binding_mismatch",
+          "inference_rule": "The official variable_binding_accuracy is below 1.0.",
+          "evidence": {
+            "variable_binding_accuracy": 0.5
+          }
+        },
+        {
+          "label": "join_expressivity_failure",
+          "inference_rule": "A 3/4-hop example lacks a full chain and materialized fewer than hop_count-1 JOIN states.",
+          "evidence": {
+            "hop_count": 3,
+            "join_count": 1,
+            "full_chain_complete": false
+          }
+        },
+        {
+          "label": "final_synthesis_failure",
+          "inference_rule": "A gold-answer candidate survived but the terminal answer was absent or not fully correct.",
+          "evidence": {
+            "status": "budget_exhausted",
+            "f1": 0.0,
+            "stop_reason": "selected_computation_exhausted_safety_cap"
+          }
+        },
+        {
+          "label": "evc_misallocation",
+          "inference_rule": "Budget was exhausted before candidate/chain completion; this is an allocation symptom, not proof of sole causality.",
+          "evidence": {
+            "allocation_count": 22,
+            "candidate_presence": true,
+            "full_chain_complete": false,
+            "termination_reason": "selected_computation_exhausted_safety_cap"
+          }
+        },
+        {
+          "label": "budget_exhaustion",
+          "inference_rule": "The terminal status is budget_exhausted.",
+          "evidence": {
+            "llm_calls": 11,
+            "total_tokens": 12551,
+            "retrieval_calls": 8,
+            "allocation_count": 22
+          }
+        }
+      ]
+    },
+    {
+      "qid": "3hop1__145924_131905_41948",
+      "hop_count": 3,
+      "status": "budget_exhausted",
+      "f1": 0.0,
+      "main_cause": "provider_or_infrastructure_failure",
+      "secondary_causes": [
+        "join_verification_rejection",
+        "final_synthesis_failure",
+        "evc_misallocation",
+        "budget_exhaustion"
+      ],
+      "labels": [
+        {
+          "label": "provider_or_infrastructure_failure",
+          "inference_rule": "A provider/infrastructure trace event or metric was recorded.",
+          "evidence": {
+            "event_count": 1,
+            "error_types": [
+              "StructuredOutputError"
+            ]
+          }
+        },
+        {
+          "label": "join_verification_rejection",
+          "inference_rule": "At least one proposed JOIN was explicitly rejected in the reasoning trace.",
+          "evidence": {
+            "count": 1,
+            "reason_codes": [
+              [
+                "no_composition_possible"
+              ]
+            ],
+            "signatures": [
+              "665cd586924a59fcaac1823b4eda3c1984c5c692b69043ee18a98d96cf69f015"
+            ]
+          }
+        },
+        {
+          "label": "final_synthesis_failure",
+          "inference_rule": "A gold-answer candidate survived but the terminal answer was absent or not fully correct.",
+          "evidence": {
+            "status": "budget_exhausted",
+            "f1": 0.0,
+            "stop_reason": "selected_computation_exhausted_safety_cap"
+          }
+        },
+        {
+          "label": "evc_misallocation",
+          "inference_rule": "Budget was exhausted before candidate/chain completion; this is an allocation symptom, not proof of sole causality.",
+          "evidence": {
+            "allocation_count": 20,
+            "candidate_presence": true,
+            "full_chain_complete": false,
+            "termination_reason": "selected_computation_exhausted_safety_cap"
+          }
+        },
+        {
+          "label": "budget_exhaustion",
+          "inference_rule": "The terminal status is budget_exhausted.",
+          "evidence": {
+            "llm_calls": 11,
+            "total_tokens": 13565,
+            "retrieval_calls": 4,
+            "allocation_count": 20
+          }
+        }
+      ]
+    },
+    {
+      "qid": "3hop1__337705_132457_51423",
+      "hop_count": 3,
+      "status": "abstain",
+      "f1": 0.0,
+      "main_cause": "claim_extraction_miss",
+      "secondary_causes": [
+        "join_verification_rejection",
+        "join_expressivity_failure",
+        "premature_stop"
+      ],
+      "labels": [
+        {
+          "label": "claim_extraction_miss",
+          "inference_rule": "The answer occurs in retrieved context but no gold-answer candidate was materialized.",
+          "evidence": {
+            "answer_in_context": true,
+            "candidate_presence": false,
+            "verified_claim_count": 1
+          }
+        },
+        {
+          "label": "join_verification_rejection",
+          "inference_rule": "At least one proposed JOIN was explicitly rejected in the reasoning trace.",
+          "evidence": {
+            "count": 1,
+            "reason_codes": [
+              [
+                "no_join_path_to_castle_or_city"
+              ]
+            ],
+            "signatures": [
+              "658df3c5865419e3879475840311f14c9c369d7cf9b05654abb365d373e31450"
+            ]
+          }
+        },
+        {
+          "label": "join_expressivity_failure",
+          "inference_rule": "A 3/4-hop example lacks a full chain and materialized fewer than hop_count-1 JOIN states.",
+          "evidence": {
+            "hop_count": 3,
+            "join_count": 0,
+            "full_chain_complete": false
+          }
+        },
+        {
+          "label": "premature_stop",
+          "inference_rule": "The run abstained despite retrieved answer text or a gold-answer candidate.",
+          "evidence": {
+            "answer_in_context": true,
+            "candidate_presence": false,
+            "termination_reason": "best_expected_value_not_above_marginal_cost_threshold"
+          }
+        }
+      ]
+    },
+    {
+      "qid": "3hop1__498954_160713_77246",
+      "hop_count": 3,
+      "status": "abstain",
+      "f1": 0.0,
+      "main_cause": "provider_or_infrastructure_failure",
+      "secondary_causes": [
+        "claim_extraction_miss",
+        "type_or_binding_mismatch",
+        "join_verification_rejection",
+        "join_expressivity_failure"
+      ],
+      "labels": [
+        {
+          "label": "provider_or_infrastructure_failure",
+          "inference_rule": "A provider/infrastructure trace event or metric was recorded.",
+          "evidence": {
+            "event_count": 3,
+            "error_types": [
+              "ProviderRefusalError"
+            ]
+          }
+        },
+        {
+          "label": "claim_extraction_miss",
+          "inference_rule": "The answer occurs in retrieved context but no gold-answer candidate was materialized.",
+          "evidence": {
+            "answer_in_context": true,
+            "candidate_presence": false,
+            "verified_claim_count": 1
+          }
+        },
+        {
+          "label": "type_or_binding_mismatch",
+          "inference_rule": "The official variable_binding_accuracy is below 1.0.",
+          "evidence": {
+            "variable_binding_accuracy": 0.0
+          }
+        },
+        {
+          "label": "join_verification_rejection",
+          "inference_rule": "At least one proposed JOIN was explicitly rejected in the reasoning trace.",
+          "evidence": {
+            "count": 1,
+            "reason_codes": [
+              [
+                "join_endpoint_mismatch"
+              ]
+            ],
+            "signatures": [
+              "df05205c96aa50034593cdee13fb85c154e977d9fb732004ffe5988103a0d880"
+            ]
+          }
+        },
+        {
+          "label": "join_expressivity_failure",
+          "inference_rule": "A 3/4-hop example lacks a full chain and materialized fewer than hop_count-1 JOIN states.",
+          "evidence": {
+            "hop_count": 3,
+            "join_count": 0,
+            "full_chain_complete": false
+          }
+        }
+      ]
+    },
+    {
+      "qid": "3hop1__801799_547811_41132",
+      "hop_count": 3,
+      "status": "abstain",
+      "f1": 0.0,
+      "main_cause": "retrieval_miss",
+      "secondary_causes": [
+        "query_formulation_or_missing_binding_miss",
+        "join_verification_rejection",
+        "join_expressivity_failure"
+      ],
+      "labels": [
+        {
+          "label": "retrieval_miss",
+          "inference_rule": "The official per-example metric reports all_gold_recalled=false.",
+          "evidence": {
+            "retrieval_calls": 3,
+            "retrieval_queries": [
+              "who is the composer of la fida ninfa?",
+              "what is the birth city of antonio vivaldi?",
+              "what is the birth city of antonio vivaldi? find a missing relation that connects the existing typed claims."
+            ],
+            "ordered_evidence_path_recall": 0.3333333333333333
+          }
+        },
+        {
+          "label": "query_formulation_or_missing_binding_miss",
+          "inference_rule": "Gold retrieval failed and the trace contains a generic fallback or repeated query.",
+          "evidence": {
+            "generic_fallback_queries": [
+              "what is the birth city of antonio vivaldi? find a missing relation that connects the existing typed claims."
+            ],
+            "repeated_query_count": 0
+          }
+        },
+        {
+          "label": "join_verification_rejection",
+          "inference_rule": "At least one proposed JOIN was explicitly rejected in the reasoning trace.",
+          "evidence": {
+            "count": 1,
+            "reason_codes": [
+              [
+                "no_dependency_binding_for_composer_birth_city"
+              ]
+            ],
+            "signatures": [
+              "fae559710851365333dc12e324c1164218a20fcab33dc5b82b1b368b04f200e0"
+            ]
+          }
+        },
+        {
+          "label": "join_expressivity_failure",
+          "inference_rule": "A 3/4-hop example lacks a full chain and materialized fewer than hop_count-1 JOIN states.",
+          "evidence": {
+            "hop_count": 3,
+            "join_count": 1,
+            "full_chain_complete": false
+          }
+        }
+      ]
+    },
+    {
+      "qid": "3hop2__326964_7845_7713",
+      "hop_count": 3,
+      "status": "answer",
+      "f1": 1.0,
+      "main_cause": "join_verification_rejection",
+      "secondary_causes": [],
+      "labels": [
+        {
+          "label": "join_verification_rejection",
+          "inference_rule": "At least one proposed JOIN was explicitly rejected in the reasoning trace.",
+          "evidence": {
+            "count": 1,
+            "reason_codes": [
+              [
+                "join_endpoint_mismatch"
+              ]
+            ],
+            "signatures": [
+              "c123c983c876d16da0abc953d20120ef4134642804efc1b9d8e1ad727771c71a"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "qid": "3hop2__90327_87184_76291",
+      "hop_count": 3,
+      "status": "budget_exhausted",
+      "f1": 0.0,
+      "main_cause": "claim_extraction_miss",
+      "secondary_causes": [
+        "join_expressivity_failure",
+        "evc_misallocation",
+        "budget_exhaustion"
+      ],
+      "labels": [
+        {
+          "label": "claim_extraction_miss",
+          "inference_rule": "The answer occurs in retrieved context but no gold-answer candidate was materialized.",
+          "evidence": {
+            "answer_in_context": true,
+            "candidate_presence": false,
+            "verified_claim_count": 3
+          }
+        },
+        {
+          "label": "join_expressivity_failure",
+          "inference_rule": "A 3/4-hop example lacks a full chain and materialized fewer than hop_count-1 JOIN states.",
+          "evidence": {
+            "hop_count": 3,
+            "join_count": 0,
+            "full_chain_complete": false
+          }
+        },
+        {
+          "label": "evc_misallocation",
+          "inference_rule": "Budget was exhausted before candidate/chain completion; this is an allocation symptom, not proof of sole causality.",
+          "evidence": {
+            "allocation_count": 18,
+            "candidate_presence": false,
+            "full_chain_complete": false,
+            "termination_reason": "selected_computation_exhausted_safety_cap"
+          }
+        },
+        {
+          "label": "budget_exhaustion",
+          "inference_rule": "The terminal status is budget_exhausted.",
+          "evidence": {
+            "llm_calls": 10,
+            "total_tokens": 13677,
+            "retrieval_calls": 6,
+            "allocation_count": 18
+          }
+        }
+      ]
+    },
+    {
+      "qid": "4hop1__107309_457883_650651_7262",
+      "hop_count": 4,
+      "status": "budget_exhausted",
+      "f1": 0.0,
+      "main_cause": "retrieval_miss",
+      "secondary_causes": [
+        "query_formulation_or_missing_binding_miss",
+        "claim_extraction_miss",
+        "type_or_binding_mismatch",
+        "join_verification_rejection",
+        "join_expressivity_failure",
+        "evc_misallocation",
+        "budget_exhaustion"
+      ],
+      "labels": [
+        {
+          "label": "retrieval_miss",
+          "inference_rule": "The official per-example metric reports all_gold_recalled=false.",
+          "evidence": {
+            "retrieval_calls": 3,
+            "retrieval_queries": [
+              "what country is palitaw from?",
+              "the embassy of the country where palitaw comes from is found in bandar seri begawan in country a. who was a prominent figure at the radio division of the creator of the biggest loser at country a?",
+              "the embassy of the country where palitaw comes from is found in bandar seri begawan in country a. who was a prominent figure at the radio division of the creator of the biggest loser at country a? find a missing relation that connects the existing typed claims."
+            ],
+            "ordered_evidence_path_recall": 0.5
+          }
+        },
+        {
+          "label": "query_formulation_or_missing_binding_miss",
+          "inference_rule": "Gold retrieval failed and the trace contains a generic fallback or repeated query.",
+          "evidence": {
+            "generic_fallback_queries": [
+              "the embassy of the country where palitaw comes from is found in bandar seri begawan in country a. who was a prominent figure at the radio division of the creator of the biggest loser at country a? find a missing relation that connects the existing typed claims."
+            ],
+            "repeated_query_count": 0
+          }
+        },
+        {
+          "label": "claim_extraction_miss",
+          "inference_rule": "The answer occurs in retrieved context but no gold-answer candidate was materialized.",
+          "evidence": {
+            "answer_in_context": true,
+            "candidate_presence": false,
+            "verified_claim_count": 1
+          }
+        },
+        {
+          "label": "type_or_binding_mismatch",
+          "inference_rule": "The official variable_binding_accuracy is below 1.0.",
+          "evidence": {
+            "variable_binding_accuracy": 0.0
+          }
+        },
+        {
+          "label": "join_verification_rejection",
+          "inference_rule": "At least one proposed JOIN was explicitly rejected in the reasoning trace.",
+          "evidence": {
+            "count": 4,
+            "reason_codes": [
+              [
+                "invalid_composition"
+              ],
+              [
+                "shared_value_mismatch",
+                "type_incompatibility",
+                "no_dependency_binding"
+              ],
+              [
+                "no_composition_possible"
+              ],
+              [
+                "no_dependency_binding"
+              ]
+            ],
+            "signatures": [
+              "41f0f9df7a0c038d5ad2d8d524f2e09feeaac7ac2ba064f58ea79935c15514f2",
+              "e81b02c2a25bdb7b2dc88d65517f27157fdce8d0016c96d4c908ca2289acc096",
+              "9fd6d96f7a1bac88bce41ae8b678dcbd2f3e369dedf97b86dd9b688ad9da1288",
+              "8e369def5a753c45975462730275a23e398aab2e7d7b8cec4d7565a9ae252695"
+            ]
+          }
+        },
+        {
+          "label": "join_expressivity_failure",
+          "inference_rule": "A 3/4-hop example lacks a full chain and materialized fewer than hop_count-1 JOIN states.",
+          "evidence": {
+            "hop_count": 4,
+            "join_count": 2,
+            "full_chain_complete": false
+          }
+        },
+        {
+          "label": "evc_misallocation",
+          "inference_rule": "Budget was exhausted before candidate/chain completion; this is an allocation symptom, not proof of sole causality.",
+          "evidence": {
+            "allocation_count": 17,
+            "candidate_presence": false,
+            "full_chain_complete": false,
+            "termination_reason": "selected_computation_exhausted_safety_cap"
+          }
+        },
+        {
+          "label": "budget_exhaustion",
+          "inference_rule": "The terminal status is budget_exhausted.",
+          "evidence": {
+            "llm_calls": 12,
+            "total_tokens": 13497,
+            "retrieval_calls": 3,
+            "allocation_count": 17
+          }
+        }
+      ]
+    },
+    {
+      "qid": "4hop1__152146_5274_458768_33637",
+      "hop_count": 4,
+      "status": "budget_exhausted",
+      "f1": 0.0,
+      "main_cause": "provider_or_infrastructure_failure",
+      "secondary_causes": [
+        "retrieval_miss",
+        "query_formulation_or_missing_binding_miss",
+        "claim_extraction_miss",
+        "type_or_binding_mismatch",
+        "join_verification_rejection",
+        "evc_misallocation",
+        "budget_exhaustion"
+      ],
+      "labels": [
+        {
+          "label": "provider_or_infrastructure_failure",
+          "inference_rule": "A provider/infrastructure trace event or metric was recorded.",
+          "evidence": {
+            "event_count": 1,
+            "error_types": [
+              "StructuredOutputError"
+            ]
+          }
+        },
+        {
+          "label": "retrieval_miss",
+          "inference_rule": "The official per-example metric reports all_gold_recalled=false.",
+          "evidence": {
+            "retrieval_calls": 3,
+            "retrieval_queries": [
+              "what is the record label of långa nätter?",
+              "what group is larger than sony music entertainment and has a headquarters in a city?",
+              "what group is larger than sony music entertainment and has a headquarters in a city? find a missing relation that connects the existing typed claims."
+            ],
+            "ordered_evidence_path_recall": 0.5
+          }
+        },
+        {
+          "label": "query_formulation_or_missing_binding_miss",
+          "inference_rule": "Gold retrieval failed and the trace contains a generic fallback or repeated query.",
+          "evidence": {
+            "generic_fallback_queries": [
+              "what group is larger than sony music entertainment and has a headquarters in a city? find a missing relation that connects the existing typed claims."
+            ],
+            "repeated_query_count": 0
+          }
+        },
+        {
+          "label": "claim_extraction_miss",
+          "inference_rule": "The answer occurs in retrieved context but no gold-answer candidate was materialized.",
+          "evidence": {
+            "answer_in_context": true,
+            "candidate_presence": false,
+            "verified_claim_count": 1
+          }
+        },
+        {
+          "label": "type_or_binding_mismatch",
+          "inference_rule": "The official variable_binding_accuracy is below 1.0.",
+          "evidence": {
+            "variable_binding_accuracy": 0.6666666666666666
+          }
+        },
+        {
+          "label": "join_verification_rejection",
+          "inference_rule": "At least one proposed JOIN was explicitly rejected in the reasoning trace.",
+          "evidence": {
+            "count": 1,
+            "reason_codes": [
+              [
+                "no_composition_path"
+              ]
+            ],
+            "signatures": [
+              "34239c854d93ad9bcb4774867d090ad0ffb27c90a544344d892b27ffb501d371"
+            ]
+          }
+        },
+        {
+          "label": "evc_misallocation",
+          "inference_rule": "Budget was exhausted before candidate/chain completion; this is an allocation symptom, not proof of sole causality.",
+          "evidence": {
+            "allocation_count": 17,
+            "candidate_presence": false,
+            "full_chain_complete": false,
+            "termination_reason": "selected_computation_exhausted_safety_cap"
+          }
+        },
+        {
+          "label": "budget_exhaustion",
+          "inference_rule": "The terminal status is budget_exhausted.",
+          "evidence": {
+            "llm_calls": 8,
+            "total_tokens": 11669,
+            "retrieval_calls": 3,
+            "allocation_count": 17
+          }
+        }
+      ]
+    },
+    {
+      "qid": "4hop1__51465_53706_795904_580996",
+      "hop_count": 4,
+      "status": "budget_exhausted",
+      "f1": 0.0,
+      "main_cause": "retrieval_miss",
+      "secondary_causes": [
+        "query_formulation_or_missing_binding_miss",
+        "type_or_binding_mismatch",
+        "join_verification_rejection",
+        "evc_misallocation",
+        "budget_exhaustion"
+      ],
+      "labels": [
+        {
+          "label": "retrieval_miss",
+          "inference_rule": "The official per-example metric reports all_gold_recalled=false.",
+          "evidence": {
+            "retrieval_calls": 4,
+            "retrieval_queries": [
+              "which state had the most billionaires in america during the gold rush?",
+              "where did the person who went to california during the gold rush work?",
+              "what shares a border with san francisco? original objective: what shares a border with the city where the person who went to the state where most billionaires in america live during the gold rush works?",
+              "what shares a border with san francisco? find a missing relation that connects the existing typed claims."
+            ],
+            "ordered_evidence_path_recall": 0.5
+          }
+        },
+        {
+          "label": "query_formulation_or_missing_binding_miss",
+          "inference_rule": "Gold retrieval failed and the trace contains a generic fallback or repeated query.",
+          "evidence": {
+            "generic_fallback_queries": [
+              "what shares a border with san francisco? find a missing relation that connects the existing typed claims."
+            ],
+            "repeated_query_count": 0
+          }
+        },
+        {
+          "label": "type_or_binding_mismatch",
+          "inference_rule": "The official variable_binding_accuracy is below 1.0.",
+          "evidence": {
+            "variable_binding_accuracy": 0.6666666666666666
+          }
+        },
+        {
+          "label": "join_verification_rejection",
+          "inference_rule": "At least one proposed JOIN was explicitly rejected in the reasoning trace.",
+          "evidence": {
+            "count": 3,
+            "reason_codes": [
+              [
+                "no_composition_possible"
+              ],
+              [
+                "binding_mismatch"
+              ],
+              [
+                "missing_dependency_chain"
+              ]
+            ],
+            "signatures": [
+              "a02d0fca5a021a502925b1ad0f72370894a5608085fb8c8f477b3db83040dee6",
+              "60fb20d34d84862d0f5ef28a0ee524f944840de3cb3505730b9f3a5af734401f",
+              "cb417776705403b0287d8c6779609d13f74c4bc7cf3b82f821875235f7b14bf8"
+            ]
+          }
+        },
+        {
+          "label": "evc_misallocation",
+          "inference_rule": "Budget was exhausted before candidate/chain completion; this is an allocation symptom, not proof of sole causality.",
+          "evidence": {
+            "allocation_count": 20,
+            "candidate_presence": false,
+            "full_chain_complete": false,
+            "termination_reason": "selected_computation_exhausted_safety_cap"
+          }
+        },
+        {
+          "label": "budget_exhaustion",
+          "inference_rule": "The terminal status is budget_exhausted.",
+          "evidence": {
+            "llm_calls": 13,
+            "total_tokens": 12837,
+            "retrieval_calls": 4,
+            "allocation_count": 20
+          }
+        }
+      ]
+    },
+    {
+      "qid": "4hop2__103790_39078_8987_8529",
+      "hop_count": 4,
+      "status": "budget_exhausted",
+      "f1": 0.0,
+      "main_cause": "retrieval_miss",
+      "secondary_causes": [
+        "query_formulation_or_missing_binding_miss",
+        "claim_extraction_miss",
+        "type_or_binding_mismatch",
+        "join_verification_rejection",
+        "join_expressivity_failure",
+        "evc_misallocation",
+        "budget_exhaustion"
+      ],
+      "labels": [
+        {
+          "label": "retrieval_miss",
+          "inference_rule": "The official per-example metric reports all_gold_recalled=false.",
+          "evidence": {
+            "retrieval_calls": 3,
+            "retrieval_queries": [
+              "which country is ivo werner from?",
+              "which country did czechoslovakia invade?",
+              "which country did czechoslovakia invade? find a missing relation that connects the existing typed claims."
+            ],
+            "ordered_evidence_path_recall": 0.5
+          }
+        },
+        {
+          "label": "query_formulation_or_missing_binding_miss",
+          "inference_rule": "Gold retrieval failed and the trace contains a generic fallback or repeated query.",
+          "evidence": {
+            "generic_fallback_queries": [
+              "which country did czechoslovakia invade? find a missing relation that connects the existing typed claims."
+            ],
+            "repeated_query_count": 0
+          }
+        },
+        {
+          "label": "claim_extraction_miss",
+          "inference_rule": "The answer occurs in retrieved context but no gold-answer candidate was materialized.",
+          "evidence": {
+            "answer_in_context": true,
+            "candidate_presence": false,
+            "verified_claim_count": 1
+          }
+        },
+        {
+          "label": "type_or_binding_mismatch",
+          "inference_rule": "The official variable_binding_accuracy is below 1.0.",
+          "evidence": {
+            "variable_binding_accuracy": 0.3333333333333333
+          }
+        },
+        {
+          "label": "join_verification_rejection",
+          "inference_rule": "At least one proposed JOIN was explicitly rejected in the reasoning trace.",
+          "evidence": {
+            "count": 6,
+            "reason_codes": [
+              [
+                "shared_value_mismatch",
+                "no_dependency_binding_for_composition"
+              ],
+              [
+                "self_invasion_invalid_dependency",
+                "no_binding_to_Soviet_Union_for_composition"
+              ],
+              [
+                "no_dependency_binding_for_composition"
+              ],
+              [
+                "no_dependency_binding_for_composition"
+              ],
+              [
+                "invalid_composition",
+                "self_invasion_violates_dependency"
+              ],
+              [
+                "invalid_self_reference",
+                "no_dependency_binding_for_composition"
+              ]
+            ],
+            "signatures": [
+              "4ab74b9f474adb97b0f391d8c2b6f4c38cf6b60ac99cabcac4083fc29b964570",
+              "431cc17ccf52618743a8ece9e54ff24e04ee795647c0b0762a0d33c3b5310dbc",
+              "158c76cf21233e2ef84d82d4eb12fd4b1d3a46f114ba38e84aa4b9cba583081b",
+              "5df4d9732b38f33500187533849b68557ab0ec4b2c6be37237785005395db114",
+              "161cbc9863598817a8a45ef01e493476ecf233b81360c697252bd5f42cdc3612",
+              "a1313d05b1ca18e0e88889fe0ce77f5303d7ed1c753392b2a1a6a941af2b276d"
+            ]
+          }
+        },
+        {
+          "label": "join_expressivity_failure",
+          "inference_rule": "A 3/4-hop example lacks a full chain and materialized fewer than hop_count-1 JOIN states.",
+          "evidence": {
+            "hop_count": 4,
+            "join_count": 0,
+            "full_chain_complete": false
+          }
+        },
+        {
+          "label": "evc_misallocation",
+          "inference_rule": "Budget was exhausted before candidate/chain completion; this is an allocation symptom, not proof of sole causality.",
+          "evidence": {
+            "allocation_count": 17,
+            "candidate_presence": false,
+            "full_chain_complete": false,
+            "termination_reason": "selected_computation_exhausted_safety_cap"
+          }
+        },
+        {
+          "label": "budget_exhaustion",
+          "inference_rule": "The terminal status is budget_exhausted.",
+          "evidence": {
+            "llm_calls": 13,
+            "total_tokens": 13089,
+            "retrieval_calls": 3,
+            "allocation_count": 17
+          }
+        }
+      ]
+    },
+    {
+      "qid": "4hop2__161602_474028_88460_21057",
+      "hop_count": 4,
+      "status": "answer",
+      "f1": 0.4,
+      "main_cause": "claim_extraction_miss",
+      "secondary_causes": [
+        "type_or_binding_mismatch"
+      ],
+      "labels": [
+        {
+          "label": "claim_extraction_miss",
+          "inference_rule": "The answer occurs in retrieved context but no gold-answer candidate was materialized.",
+          "evidence": {
+            "answer_in_context": true,
+            "candidate_presence": false,
+            "verified_claim_count": 3
+          }
+        },
+        {
+          "label": "type_or_binding_mismatch",
+          "inference_rule": "The official variable_binding_accuracy is below 1.0.",
+          "evidence": {
+            "variable_binding_accuracy": 0.0
+          }
+        }
+      ]
+    }
+  ]
+}

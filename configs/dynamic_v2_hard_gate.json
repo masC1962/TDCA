@@ -1,5 +1,5 @@
 {
-  "schema_version": "dynamic-hypergraph-v2-hard-gate-v1",
+  "schema_version": "dynamic-hypergraph-v2-hard-gate-v2",
   "status": "closed",
   "seed": 20260820,
   "infrastructure": {
@@ -10,23 +10,33 @@
   "reasoning_capability": {
     "candidate_presence_absolute_gain_over_v1": 0.10,
     "full_chain_completion_absolute_gain_over_v1": 0.10,
-    "minimum_auditable_three_or_four_hop_join_cases": 3
+    "minimum_auditable_three_or_four_hop_join_cases": 3,
+    "minimum_downstream_used_nary_join_cases": 3
   },
   "dynamic_behavior": {
     "adversarial_revision_must_pass": true,
-    "minimum_natural_revision_count": 5,
-    "minimum_natural_revision_precision": 0.60,
+    "public_revision_suite": "VitaminC real revisions, seed 20260820",
+    "minimum_should_revise_cases": 30,
+    "minimum_should_not_revise_cases": 30,
+    "minimum_natural_revision_precision": 0.80,
+    "minimum_natural_revision_recall": 0.60,
+    "maximum_natural_revision_false_positive_rate": 0.10,
     "non_uniform_allocation_required": true
   },
   "computation_allocation": {
     "complete_evc_trace": true,
+    "complete_outcome_feedback_trace": true,
+    "outcome_feedback_must_influence_later_allocation": true,
     "predicted_evc_recorded": true,
     "actual_cost_recorded": true,
     "pareto_improvement_required": true,
-    "pareto_cost_reduction_at_noninferior_f1": 0.10,
-    "pareto_noninferior_f1_tolerance": 0.01,
-    "pareto_quality_gain_at_matched_cost": 0.03,
-    "pareto_matched_cost_tolerance": 0.05
+    "matched_allocator_modes": ["adaptive_evc", "uniform", "fixed_order"],
+    "pareto_noninferior_quality_tolerance": 0.01,
+    "pareto_strict_quality_gain": 0.01,
+    "pareto_strict_cost_reduction": 0.05,
+    "pareto_matched_cost_tolerance": 0.05,
+    "provider_call_campaign_cap": 1500,
+    "provider_reported_token_campaign_cap": 1500000
   },
   "termination": {
     "unsupported_answer_count": 0,
