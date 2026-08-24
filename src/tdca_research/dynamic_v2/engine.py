@@ -77,7 +77,10 @@ class DynamicHypergraphV2Reasoner:
         try:
             planner = DynamicPlanner(self.llm, budget, self.config)
             try:
-                initial = self._normalize_initial_plan(planner.initial_expand(example.question))
+                initial = self._normalize_initial_plan(
+                    planner.initial_expand(example.question),
+                    self.config.terminal_dependency_closure,
+                )
                 graph = self._apply(controller, graph, initial, reasoning_trace, None)
             except (GraphInvariantError, ProviderRefusalError, StructuredOutputError) as exc:
                 self._record_model_or_plan_failure(reasoning_trace, budget, exc, "initial_plan")
@@ -368,6 +371,7 @@ class DynamicHypergraphV2Reasoner:
                 ), default=0)
                 has_new_evidence_batch = len(evidence) > last_extracted_evidence_count
                 extraction_key = (subgoal.node_id, branch.branch_id, len(evidence))
+                projection_key = (subgoal.node_id, branch.branch_id, len(evidence))
                 if not claims and extraction_key not in failed_extractions:
                     operations.append(self._placeholder(
                         graph, OperationType.BRANCH, subgoal, branch,
@@ -375,6 +379,23 @@ class DynamicHypergraphV2Reasoner:
                             "mode": "extract_typed", "question": question,
                             "dependency_claim_ids": dependencies,
                             "extraction_evidence_count": len(evidence),
+                        },
+                        sources=[node.node_id for node in evidence] + dependencies,
+                    ))
+                    continue
+                if (
+                    self.config.focused_empty_extraction_recovery
+                    and not claims
+                    and extraction_key in failed_extractions
+                    and projection_key not in goal_projection_attempts
+                ):
+                    operations.append(self._placeholder(
+                        graph, OperationType.BRANCH, subgoal, branch,
+                        {
+                            "mode": "extract_typed", "question": question,
+                            "dependency_claim_ids": dependencies,
+                            "extraction_evidence_count": len(evidence),
+                            "extraction_focus_mode": "direct_answer",
                         },
                         sources=[node.node_id for node in evidence] + dependencies,
                     ))
@@ -388,7 +409,6 @@ class DynamicHypergraphV2Reasoner:
                     claim.node_id for claim in direct_claims
                     if graph.claim_semantics[claim.node_id].join_depth == 0
                 }
-                projection_key = (subgoal.node_id, branch.branch_id, len(evidence))
                 if (
                     claims and not direct_claims
                     and projection_key not in goal_projection_attempts
@@ -404,11 +424,22 @@ class DynamicHypergraphV2Reasoner:
                         sources=[node.node_id for node in evidence] + dependencies,
                     ))
                     continue
-                # A proof chain must contain a raw claim independently judged to
-                # answer this slot.  Merely being a true target-local relation is
-                # insufficient: otherwise a high-support bridge fact can be
-                # projected through a JOIN and committed as the final answer.
-                target_local_raw_ids = set(raw_direct_ids)
+                # A compositional proof must connect the committed dependency to
+                # independently grounded target-local evidence.  The raw claim
+                # need not itself answer the question: requiring that would make
+                # genuine multi-hop joins impossible whenever no sentence states
+                # the final relation directly. JOIN validation and the terminal
+                # conjunctive readout still gate the derived answer.
+                target_local_raw_ids = {
+                    claim.node_id for claim in claims
+                    if graph.claim_semantics[claim.node_id].join_depth == 0
+                    and claim.evidence_refs
+                    and claim.status in {
+                        CandidateStatus.SCORED,
+                        CandidateStatus.RETAINED,
+                        CandidateStatus.REVISED,
+                    }
+                }
                 if dependencies and target_local_raw_ids:
                     dependency_ids = set(dependencies)
                     sufficient_chains = [
@@ -436,6 +467,11 @@ class DynamicHypergraphV2Reasoner:
                     if _join_attempt_key(graph, row) not in attempted_joins
                     and _nary_relevant(graph, row, set(dependencies))
                 ]
+                if self.config.goal_conditioned_join_frontier:
+                    joins = [
+                        row for row in joins
+                        if _join_can_answer_subgoal(graph, row, subgoal, branch)
+                    ]
                 if _charged_join_attempt_count(
                     graph,
                 ) >= self.config.max_join_attempts_per_question:
@@ -447,12 +483,12 @@ class DynamicHypergraphV2Reasoner:
                     # relation before committing the subgoal value. Intermediate
                     # bridge joins are allowed when their transitive premise closure
                     # contains a dependency; a later JOIN must still connect that
-                    # state to a direct answer claim. Entity/type equality remains
+                    # state to a target-local grounded claim. Entity/type equality remains
                     # the only discovery rule and Qwen validates every derivation.
-                    direct_ids = raw_direct_ids
+                    direct_ids = target_local_raw_ids
                     direct_endpoints = {
                         normalize_text(endpoint)
-                        for claim in direct_claims
+                        for claim in claims if claim.node_id in direct_ids
                         for endpoint in (claim.subject, claim.value)
                     }
                     chain_joins = [
@@ -463,6 +499,7 @@ class DynamicHypergraphV2Reasoner:
                     joins = sorted(chain_joins, key=lambda row: (
                         -int(row.join_kind in {"numeric_argmax", "numeric_argmin"}),
                         -int(bool(row.projection_premise_id)),
+                        -float(row.deterministic_validation.get("goal_alignment", 0.0)),
                         -len(_premise_closure(graph, row.premise_ids) & dependency_ids),
                         -int(bool(_premise_closure(graph, row.premise_ids) & direct_ids)),
                         -sum(
@@ -493,7 +530,8 @@ class DynamicHypergraphV2Reasoner:
                         },
                         sources=list(join.premise_ids),
                     ))
-                    continue
+                    if not self.config.goal_conditioned_join_frontier:
+                        continue
                 if direct_claims and not dependencies:
                     chosen = max(direct_claims, key=lambda value: (
                         graph.claim_semantics[value.node_id].join_depth,
@@ -554,10 +592,27 @@ class DynamicHypergraphV2Reasoner:
                         sources=[node.node_id for node in evidence] + dependencies,
                     ))
                     continue
-                retrieval_rounds = len({node.retrieval_query for node in evidence})
+                region_attempts = [
+                    row for row in graph.retrieval_attempt_history
+                    if row.target_subgoal == subgoal.node_id
+                    and row.branch_id == branch.branch_id
+                ]
+                # Legacy v2.2 graphs have no explicit attempt ledger.  Their
+                # evidence queries remain a conservative lower bound.
+                retrieval_rounds = (
+                    len(region_attempts) if (
+                        self.config.retrieval_attempt_aware_scheduling
+                        and graph.retrieval_attempt_history
+                    )
+                    else len({node.retrieval_query for node in evidence})
+                )
                 if retrieval_rounds < self.config.max_retrieval_rounds_per_subgoal:
                     query = _missing_binding_query(
                         graph, subgoal, branch, question, dependencies, claims, evidence,
+                        attempted_queries=(
+                            {row.normalized_query for row in region_attempts}
+                            if self.config.retrieval_attempt_aware_scheduling else set()
+                        ),
                     )
                     if query:
                         operations.append(self._placeholder(
@@ -606,12 +661,11 @@ class DynamicHypergraphV2Reasoner:
             hits = self.retriever.search(query, request["retrieval_top_k"])
             existing_hits = {value.passage.passage_id for value in all_hits}
             all_hits.extend(value for value in hits if value.passage.passage_id not in existing_hits)
-            existing = {(node.passage_id, node.retrieval_query) for node in graph.evidence()}
             rows = []
-            activated_hits = []
-            for hit in hits:
-                if (hit.passage.passage_id, query) in existing:
-                    continue
+            activated_hits = _novel_retrieval_hits_for_region(
+                graph, hits, operation.target_id, operation.branch_id,
+            )
+            for hit in activated_hits:
                 rows.append({
                     "node_id": f"evidence_v2_{graph.step + 1}_{len(rows) + 1}_{_safe(hit.passage.passage_id)}",
                     "document_id": hit.passage.passage_id,
@@ -623,7 +677,6 @@ class DynamicHypergraphV2Reasoner:
                     "retrieval_query": query,
                     "retriever_identity": hit.retriever,
                 })
-                activated_hits.append(hit)
             memory_activation = {}
             if self.corpus_memory is not None and rows:
                 memory_activation = self.corpus_memory.activate(
@@ -638,7 +691,13 @@ class DynamicHypergraphV2Reasoner:
             actual = GraphOperation(
                 operation.operation_id, OperationType.RETRIEVE, operation.target_id,
                 operation.source_ids, operation.branch_id,
-                {"query": query, "evidence": rows, "memory_activation": memory_activation},
+                {
+                    "query": query,
+                    "evidence": rows,
+                    "memory_activation": memory_activation,
+                    "allocated_top_k": int(request["retrieval_top_k"]),
+                    "hit_count": len(hits),
+                },
                 "adaptive_retrieval_for_heated_region", "adaptive_retriever_v2",
                 {"retrieval_calls": 1.0, "top_k": float(request["retrieval_top_k"])},
             )
@@ -649,7 +708,9 @@ class DynamicHypergraphV2Reasoner:
                 "query": query, "allocated_top_k": request["retrieval_top_k"],
                 "hits": [value.to_dict() for value in hits],
             })
-            return graph, True
+            return graph, (
+                bool(rows) if self.config.retrieval_attempt_aware_scheduling else True
+            )
         if operation.operation_type == OperationType.BRANCH:
             if str(operation.payload.get("mode", "")) == "assignments":
                 if request.get("branch_width", 0) < 2:
@@ -689,10 +750,33 @@ class DynamicHypergraphV2Reasoner:
                 operation.operation_id, request["max_tokens"], request["candidate_cap"],
                 str(operation.payload.get("extraction_focus_mode", "coverage")),
             )
+            reasoning_trace.append({
+                "event": "typed_extraction_diagnostic",
+                "operation_id": operation.operation_id,
+                "target_id": operation.target_id,
+                "branch_id": operation.branch_id,
+                "focus_mode": str(
+                    operation.payload.get("extraction_focus_mode", "coverage")
+                ),
+                "extraction_evidence_count": int(
+                    operation.payload.get("extraction_evidence_count", 0)
+                ),
+                "accepted": actual is not None,
+                "diagnostics": dict(extractor.last_diagnostics),
+            })
             if actual is None:
                 reasoning_trace.append({
-                    "event": "typed_extraction_rejected", "target_id": operation.target_id,
-                    "branch_id": operation.branch_id, "diagnostics": extractor.last_diagnostics,
+                    "event": "typed_extraction_rejected",
+                    "operation_id": operation.operation_id,
+                    "target_id": operation.target_id,
+                    "branch_id": operation.branch_id,
+                    "focus_mode": str(
+                        operation.payload.get("extraction_focus_mode", "coverage")
+                    ),
+                    "extraction_evidence_count": int(
+                        operation.payload.get("extraction_evidence_count", 0)
+                    ),
+                    "diagnostics": extractor.last_diagnostics,
                 })
                 return graph, False
             graph = self._apply(controller, graph, AdaptiveComputationAllocator.attach(actual, packet), reasoning_trace, packet)
@@ -778,7 +862,10 @@ class DynamicHypergraphV2Reasoner:
             {"llm_calls": 0.0, "tokens": 0.0},
         )
     @staticmethod
-    def _normalize_initial_plan(operation: GraphOperation) -> GraphOperation:
+    def _normalize_initial_plan(
+        operation: GraphOperation,
+        terminal_dependency_closure: bool = False,
+    ) -> GraphOperation:
         """Collapse a near-duplicate final subgoal/root pair into an alias.
 
         This prevents applying the same relation twice when a planner emits both a
@@ -795,28 +882,28 @@ class DynamicHypergraphV2Reasoner:
         by_id = {str(row.get("node_id")): row for row in rows if isinstance(row, dict)}
         root = by_id.get("subgoal_root")
         if not root:
-            return operation
+            return _close_terminal_dependency_gap(operation) if terminal_dependency_closure else operation
         dependencies = [str(value) for value in root.get("dependencies", [])]
         if len(dependencies) != 1 or dependencies[0] not in by_id:
-            return operation
+            return _close_terminal_dependency_gap(operation) if terminal_dependency_closure else operation
         source = by_id[dependencies[0]]
         if not _strict_output_type_compatible(
             str(root.get("answer_type", "entity")),
             str(source.get("answer_type", "entity")),
         ):
-            return operation
+            return _close_terminal_dependency_gap(operation) if terminal_dependency_closure else operation
         root_template = str(root.get("question_template", ""))
         consumes_dependency = any(
             str(source_id) == dependencies[0] and str(variable) in root_template
             for variable, source_id in (root.get("variable_bindings", {}) or {}).items()
         )
         if consumes_dependency:
-            return operation
+            return _close_terminal_dependency_gap(operation) if terminal_dependency_closure else operation
         similarity = _template_similarity(
             root_template, str(source.get("question_template", "")),
         )
         if similarity < 0.55:
-            return operation
+            return _close_terminal_dependency_gap(operation) if terminal_dependency_closure else operation
         value = GraphOperation(
             operation.operation_id, operation.operation_type, operation.target_id,
             list(operation.source_ids), operation.branch_id,
@@ -833,7 +920,7 @@ class DynamicHypergraphV2Reasoner:
         value.payload["subgoals"] = [
             row for row in normalized_rows if row.get("node_id") != dependencies[0]
         ]
-        return value
+        return _close_terminal_dependency_gap(value) if terminal_dependency_closure else value
 
     @staticmethod
     def _apply(controller, graph, operation, trace, packet):
@@ -1149,6 +1236,95 @@ def _committable(
     return margin >= config.commit_margin_threshold
 
 
+def _close_terminal_dependency_gap(operation: GraphOperation) -> GraphOperation:
+    """Make every emitted non-terminal frontier a prerequisite of the root.
+
+    Provider plans occasionally emit useful bridge subgoals while declaring the
+    terminal root independent.  That lets terminal evidence bypass unfinished
+    reasoning.  Only dependency-free roots are repaired, and only with sink
+    nodes already present in the provider plan; no semantic edge or answer label
+    is invented.
+    """
+    rows = operation.payload.get("subgoals", [])
+    if not isinstance(rows, list):
+        return operation
+    typed_rows = [row for row in rows if isinstance(row, dict)]
+    root = next((row for row in typed_rows if row.get("node_id") == "subgoal_root"), None)
+    if root is None or root.get("dependencies"):
+        return operation
+    nonterminal = {
+        str(row.get("node_id")): row
+        for row in typed_rows
+        if row.get("node_id") != "subgoal_root" and not bool(row.get("terminal", False))
+    }
+    if not nonterminal:
+        return operation
+    consumed = {
+        str(dependency)
+        for row in nonterminal.values()
+        for dependency in row.get("dependencies", [])
+        if str(dependency) in nonterminal
+    }
+    sinks = sorted(set(nonterminal) - consumed)
+    if not sinks:
+        return operation
+    value = GraphOperation(
+        operation.operation_id, operation.operation_type, operation.target_id,
+        list(operation.source_ids), operation.branch_id,
+        {**operation.payload, "subgoals": [dict(row) for row in rows]},
+        operation.reason, operation.proposed_by,
+        dict(operation.estimated_cost), dict(operation.utility_components),
+    )
+    normalized_root = next(
+        row for row in value.payload["subgoals"] if row.get("node_id") == "subgoal_root"
+    )
+    normalized_root["dependencies"] = sinks
+    normalized_root["dependency_repair"] = "terminal_sink_closure_v1"
+    return value
+
+
+def _join_can_answer_subgoal(
+    graph: DynamicReasoningHypergraphV2,
+    candidate: JoinCandidate,
+    subgoal: SubgoalNode,
+    branch: BranchState,
+) -> bool:
+    """Hard-filter JOINs that cannot project the requested slot output."""
+    if candidate.projection_premise_id:
+        return True
+    if candidate.join_kind in {"numeric_argmax", "numeric_argmin", "set_intersection"}:
+        return True
+    if len(candidate.open_endpoints) != 2:
+        return False
+    anchors = {
+        normalize_text(str(value))
+        for row in graph.query_graph.get("constraints", [])
+        if str(row.get("subgoal_id")) == subgoal.node_id
+        for value in row.get("known_entities", [])
+        if normalize_text(str(value))
+    }
+    for dependency_id in subgoal.dependencies:
+        assigned = graph.nodes.get(str(branch.assignments.get(dependency_id, "")))
+        if isinstance(assigned, ClaimNode):
+            anchors.update(normalize_text(value) for value in (assigned.subject, assigned.value) if value)
+    bound = [normalize_text(value) in anchors for value in candidate.open_endpoints]
+    if sum(bound) != 1:
+        return False
+    output = normalize_text(candidate.open_endpoints[bound.index(False)])
+    output_types: set[str] = set()
+    for node_id in candidate.premise_ids:
+        claim = graph.node(node_id, ClaimNode)
+        semantics = graph.claim_semantics[node_id]
+        if normalize_text(claim.subject) == output:
+            output_types.add(semantics.subject_type)
+        if normalize_text(claim.value) == output:
+            output_types.add(semantics.value_type)
+    return any(
+        _strict_output_type_compatible(value, subgoal.answer_type)
+        for value in output_types
+    )
+
+
 def _claim_answers_subgoal(
     graph: DynamicReasoningHypergraphV2,
     claim: ClaimNode,
@@ -1275,9 +1451,11 @@ def _missing_binding_query(
     dependency_ids: list[str],
     claims: list[ClaimNode],
     evidence: list[Any],
+    attempted_queries: set[str] | None = None,
 ) -> str:
     """Choose a novel query from unresolved typed graph state, never oracle fields."""
     existing = {normalize_text(row.retrieval_query) for row in evidence}
+    existing.update(attempted_queries or set())
     dependencies = [
         graph.node(node_id, ClaimNode) for node_id in dependency_ids
         if isinstance(graph.nodes.get(node_id), ClaimNode)
@@ -1328,6 +1506,31 @@ def _missing_binding_query(
         if normalize_text(candidate) not in existing:
             return candidate
     return ""
+
+
+def _novel_retrieval_hits_for_region(
+    graph: DynamicReasoningHypergraphV2,
+    hits: list[RetrievalHit],
+    target_subgoal: str,
+    branch_id: str,
+) -> list[RetrievalHit]:
+    """Keep only passage-level novelty inside one reasoning region.
+
+    A changed query is an audit event, not new evidence.  The same passage may
+    still be activated independently for another subgoal/branch, where it has a
+    different graph role.
+    """
+    seen = {
+        node.passage_id for node in graph.evidence(target_subgoal, branch_id)
+    }
+    novel = []
+    for hit in hits:
+        passage_id = hit.passage.passage_id
+        if passage_id in seen:
+            continue
+        seen.add(passage_id)
+        novel.append(hit)
+    return novel
 
 
 def _template_similarity(left: str, right: str) -> float:

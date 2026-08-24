@@ -33,6 +33,10 @@ class EVCSignals:
     failure_cooldown: float = 0.0
     terminal_gap: float = 0.0
     terminal_proximity: float = 0.0
+    expected_call_cost: float = 0.0
+    expected_token_cost: float = 0.0
+    expected_retrieval_cost: float = 0.0
+    retrieval_saturation: float = 0.0
 
 
 @dataclass(frozen=True)
@@ -89,32 +93,47 @@ class AdaptiveComputationAllocator:
             self.last_packets = []
             return []
         mode = self.config.allocator_mode
-        expanded: list[tuple[int, GraphOperation, str, float, EVCSignals]] = []
-        for index, operation in enumerate(operations):
-            base = self._signals(graph, operation)
-            levels = self._fidelity_options(operation)
-            for name, fraction in levels:
-                expanded.append((
-                    index, operation, name, fraction,
-                    self._fidelity_signals(base, fraction),
-                ))
-        raw_rows = [row[4] for row in expanded]
-        names = tuple(EVCSignals.__dataclass_fields__)
-        columns = {
-            name: _minmax([float(getattr(row, name)) for row in raw_rows]) for name in names
-        }
         remaining = {
             "llm_calls": max(0, budget.max_llm_calls - budget.usage.llm_calls),
             "tokens": max(0, budget.max_total_tokens - budget.usage.total_tokens),
             "retrieval_calls": max(0, graph.limits.max_retrieval_calls - graph.retrieval_calls),
             "graph_operations": max(0, graph.limits.max_graph_operations - len(graph.operation_history)),
         }
+        expanded: list[tuple[int, GraphOperation, str, float, EVCSignals]] = []
+        base_rows = [self._signals(graph, operation, budget) for operation in operations]
+        normalized_base_rows = self._normalize_base_signals(base_rows)
+        for index, operation in enumerate(operations):
+            base = base_rows[index]
+            levels = self._fidelity_options(operation)
+            for name, fraction in levels:
+                expanded.append((
+                    index, operation, name, fraction,
+                    self._fidelity_signals(base, fraction),
+                ))
+        names = tuple(EVCSignals.__dataclass_fields__)
+        if self.config.multi_resource_evc:
+            normalized_expanded = []
+            for index, operation in enumerate(operations):
+                for _, fraction in self._fidelity_options(operation):
+                    normalized_expanded.append(
+                        self._fidelity_signals(
+                            normalized_base_rows[index], fraction, clamp=True,
+                        )
+                    )
+        else:
+            raw_rows = [row[4] for row in expanded]
+            columns = {
+                name: _minmax([float(getattr(row, name)) for row in raw_rows])
+                for name in names
+            }
+            normalized_expanded = [
+                EVCSignals(**{name: columns[name][index] for name in names})
+                for index in range(len(expanded))
+            ]
         packets: list[tuple[int, ComputationPacket]] = []
         serial_start = self.allocation_serial
         for packet_index, (index, operation, fidelity_name, fidelity_fraction, raw_row) in enumerate(expanded):
-            normalized = EVCSignals(**{
-                name: columns[name][packet_index] for name in names
-            })
+            normalized = normalized_expanded[packet_index]
             if mode == "adaptive_evc":
                 evc = self._adaptive_evc(normalized)
             elif mode == "uniform":
@@ -124,7 +143,11 @@ class AdaptiveComputationAllocator:
             region = tuple(dict.fromkeys([operation.target_id, *operation.source_ids]))
             family = operation_family(operation)
             rkey = operation_region_key(operation)
-            prior = feedback_prior(graph, family, rkey)
+            prior = feedback_prior(
+                graph, family, rkey,
+                operation_coarse_region_key(operation),
+                use_hierarchical=self.config.hierarchical_within_question_feedback,
+            )
             packets.append((index, ComputationPacket(
                 allocation_id=f"allocation_{serial_start + packet_index + 1:06d}",
                 operation=operation,
@@ -190,14 +213,16 @@ class AdaptiveComputationAllocator:
         return rows[: self.config.allocation_fidelity_levels]
 
     @staticmethod
-    def _fidelity_signals(base: EVCSignals, fraction: float) -> EVCSignals:
+    def _fidelity_signals(
+        base: EVCSignals, fraction: float, *, clamp: bool = False,
+    ) -> EVCSignals:
         # Score *marginal* progress rather than total progress. Diminishing gains
         # make a cheap pass preferable until graph heat/impact justifies deeper
         # compute; failed cheap passes can then expose a new high-value action.
         fraction = max(0.1, min(1.0, float(fraction)))
         gain = fraction ** 0.5
         efficiency = gain / fraction
-        return EVCSignals(
+        row = EVCSignals(
             graph_heat=base.graph_heat * fraction,
             uncertainty_reduction=base.uncertainty_reduction * efficiency,
             answer_impact=base.answer_impact * gain,
@@ -210,10 +235,41 @@ class AdaptiveComputationAllocator:
             failure_cooldown=base.failure_cooldown,
             terminal_gap=base.terminal_gap * gain,
             terminal_proximity=base.terminal_proximity * gain,
+            expected_call_cost=base.expected_call_cost * (0.5 + 0.5 * fraction),
+            expected_token_cost=base.expected_token_cost * fraction,
+            expected_retrieval_cost=base.expected_retrieval_cost,
+            retrieval_saturation=base.retrieval_saturation,
         )
+        if not clamp:
+            return row
+        return EVCSignals(**{
+            name: _unit(float(getattr(row, name)))
+            for name in EVCSignals.__dataclass_fields__
+        })
+
+    @staticmethod
+    def _normalize_base_signals(rows: list[EVCSignals]) -> list[EVCSignals]:
+        """Normalize components across operations, before fidelity expansion.
+
+        This removes the v2.2 artifact where low/medium/high copies of a single
+        action created their own comparison range and therefore looked like
+        distinct reasoning opportunities.  Constant columns retain their
+        absolute [0,1] meaning rather than collapsing to an arbitrary midpoint.
+        """
+        if not rows:
+            return []
+        names = tuple(EVCSignals.__dataclass_fields__)
+        columns = {
+            name: _minmax([float(getattr(row, name)) for row in rows])
+            for name in names
+        }
+        return [
+            EVCSignals(**{name: columns[name][index] for name in names})
+            for index in range(len(rows))
+        ]
 
     def _adaptive_evc(self, normalized: EVCSignals) -> float:
-        return max(0.0, (
+        value = (
             self.config.evc_weight_heat * normalized.graph_heat
             + self.config.evc_weight_uncertainty_reduction * normalized.uncertainty_reduction
             + self.config.evc_weight_answer_impact * normalized.answer_impact
@@ -226,7 +282,17 @@ class AdaptiveComputationAllocator:
             - self.config.evc_weight_failure_cooldown * normalized.failure_cooldown
             + self.config.evc_weight_terminal_gap * normalized.terminal_gap
             + self.config.evc_weight_terminal_proximity * normalized.terminal_proximity
-        ))
+        )
+        if self.config.multi_resource_evc:
+            # Explicit resources replace the old scalar expected-cost proxy.
+            value += self.config.evc_weight_cost * normalized.expected_cost
+            value -= (
+                self.config.evc_weight_call_cost * normalized.expected_call_cost
+                + self.config.evc_weight_token_cost * normalized.expected_token_cost
+                + self.config.evc_weight_retrieval_cost * normalized.expected_retrieval_cost
+                + self.config.evc_weight_retrieval_saturation * normalized.retrieval_saturation
+            )
+        return max(0.0, value)
 
     @staticmethod
     def attach(operation: GraphOperation, packet: ComputationPacket) -> GraphOperation:
@@ -237,6 +303,7 @@ class AdaptiveComputationAllocator:
 
     def _signals(
         self, graph: DynamicReasoningHypergraphV2, operation: GraphOperation,
+        budget: Budget | None = None,
     ) -> EVCSignals:
         assignment_branch = (
             operation.operation_type == OperationType.BRANCH
@@ -280,7 +347,11 @@ class AdaptiveComputationAllocator:
         }.get(operation.operation_type, 0.05)
         family = operation_family(operation)
         rkey = operation_region_key(operation)
-        prior = feedback_prior(graph, family, rkey)
+        prior = feedback_prior(
+            graph, family, rkey,
+            operation_coarse_region_key(operation),
+            use_hierarchical=self.config.hierarchical_within_question_feedback,
+        )
         empirical_cost = float(prior.get("mean_cost", 0.0))
         terminal_context = operation.payload.get("_terminal_context", {})
         if not isinstance(terminal_context, dict):
@@ -291,6 +362,42 @@ class AdaptiveComputationAllocator:
             1.0 - terminal_gap
             if operation.operation_type == OperationType.COMMIT else 0.0
         )
+        call_demand = {
+            OperationType.EXPAND: 1.0,
+            OperationType.BRANCH: 0.0 if assignment_branch else 1.0,
+            OperationType.VERIFY: 1.0,
+            OperationType.MERGE: 1.0,
+        }.get(operation.operation_type, 0.0)
+        token_demand = base_cost if call_demand else 0.0
+        retrieval_demand = 1.0 if operation.operation_type == OperationType.RETRIEVE else 0.0
+        if budget is None:
+            call_pressure = token_pressure = retrieval_pressure = 0.5
+        else:
+            call_pressure = _shadow_price(
+                budget.max_llm_calls - budget.usage.llm_calls, budget.max_llm_calls,
+            )
+            token_pressure = _shadow_price(
+                budget.max_total_tokens - budget.usage.total_tokens, budget.max_total_tokens,
+            )
+            retrieval_pressure = _shadow_price(
+                graph.limits.max_retrieval_calls - graph.retrieval_calls,
+                graph.limits.max_retrieval_calls,
+            )
+        region_attempts = [
+            row for row in graph.retrieval_attempt_history
+            if row.target_subgoal == operation.target_id and row.branch_id == operation.branch_id
+        ]
+        retrieval_saturation = 0.0
+        if operation.operation_type == OperationType.RETRIEVE and region_attempts:
+            last = region_attempts[-1]
+            round_fraction = len(region_attempts) / max(
+                1, self.config.max_retrieval_rounds_per_subgoal,
+            )
+            zero_yield = 1.0 if last.new_evidence_count == 0 else 0.0
+            yield_fraction = 1.0 - min(
+                1.0, last.new_evidence_count / max(1, last.allocated_top_k),
+            )
+            retrieval_saturation = _unit(max(round_fraction, zero_yield, yield_fraction))
         return EVCSignals(
             graph_heat=heat,
             uncertainty_reduction=uncertainty * _operation_reduction(operation.operation_type),
@@ -304,6 +411,10 @@ class AdaptiveComputationAllocator:
             failure_cooldown=float(prior["cooldown_active"]),
             terminal_gap=terminal_gap * terminal_affinity,
             terminal_proximity=terminal_proximity,
+            expected_call_cost=call_demand * call_pressure,
+            expected_token_cost=token_demand * token_pressure,
+            expected_retrieval_cost=retrieval_demand * retrieval_pressure,
+            retrieval_saturation=retrieval_saturation,
         )
 
     def _budget_packet(
@@ -419,26 +530,77 @@ def operation_region_key(operation: GraphOperation) -> str:
     })[:16]
 
 
+def operation_coarse_region_key(operation: GraphOperation) -> str:
+    """Stable within-question region shared by contextual action variants."""
+    return stable_hash({
+        "target": operation.target_id,
+        "branch": operation.branch_id,
+        "family": operation_family(operation),
+    })[:16]
+
+
 def feedback_key(family: str, region_key: str = "*") -> str:
     return f"{family}|{region_key}"
 
 
 def feedback_prior(
     graph: DynamicReasoningHypergraphV2, family: str, region_key: str,
+    coarse_region_key: str | None = None,
+    *,
+    use_hierarchical: bool = False,
 ) -> dict[str, float]:
     exact = graph.operation_feedback.get(feedback_key(family, region_key))
     # Different subgoals can have radically different evidence and topology.
     # Family-wide statistics remain serialized for audit, but only causal
     # outcomes from the same target region control later allocation.
     stats = exact or OperationFeedbackStats()
-    mean_cost = stats.cumulative_cost / max(1, stats.observations)
+    coarse = (
+        graph.operation_feedback.get(feedback_key(family, coarse_region_key))
+        if use_hierarchical and coarse_region_key else None
+    )
+    exact_observations = float(stats.observations)
+    # The coarse ledger contains the exact observation too.  It is a back-off
+    # prior for unseen contextual variants, never an extra vote when exact data
+    # already exists.
+    coarse_observations = (
+        0.5 * float(coarse.observations)
+        if coarse is not None and exact_observations <= 0.0 else 0.0
+    )
+    observations = exact_observations + coarse_observations
+    if observations > 0.0:
+        coarse_value = coarse.posterior_value if coarse is not None else 0.5
+        coarse_success = coarse.posterior_success if coarse is not None else 0.5
+        posterior_value = (
+            exact_observations * stats.posterior_value
+            + coarse_observations * coarse_value
+        ) / observations
+        posterior_success = (
+            exact_observations * stats.posterior_success
+            + coarse_observations * coarse_success
+        ) / observations
+        cumulative_cost = stats.cumulative_cost + (
+            0.5 * coarse.cumulative_cost if coarse is not None else 0.0
+        )
+        mean_cost = cumulative_cost / observations
+    else:
+        posterior_value = posterior_success = 0.5
+        mean_cost = 0.0
+    cooldown_until = max(
+        stats.cooldown_until_step,
+        coarse.cooldown_until_step if coarse is not None else 0,
+    )
     return {
-        "observations": float(stats.observations),
-        "posterior_value": float(stats.posterior_value),
-        "posterior_success": float(stats.posterior_success),
-        "consecutive_failures": float(stats.consecutive_failures),
-        "cooldown_until_step": float(stats.cooldown_until_step),
-        "cooldown_active": float(graph.step < stats.cooldown_until_step),
+        "observations": observations,
+        "exact_observations": exact_observations,
+        "coarse_observations": coarse_observations,
+        "posterior_value": float(posterior_value),
+        "posterior_success": float(posterior_success),
+        "consecutive_failures": float(max(
+            stats.consecutive_failures,
+            coarse.consecutive_failures if coarse is not None else 0,
+        )),
+        "cooldown_until_step": float(cooldown_until),
+        "cooldown_active": float(graph.step < cooldown_until),
         "mean_cost": max(0.0, min(1.0, mean_cost)),
     }
 
@@ -611,6 +773,12 @@ def _minmax(values: list[float]) -> list[float]:
         value = max(0.0, min(1.0, values[0]))
         return [value for _ in values]
     return [(value - low) / (high - low) for value in values]
+
+
+def _shadow_price(remaining: int | float, capacity: int | float) -> float:
+    """Normalized deterministic scarcity price for a resource budget."""
+    ratio = max(0.0, min(1.0, float(remaining) / max(1.0, float(capacity))))
+    return 0.5 + 0.5 * (1.0 - ratio)
 
 
 def _unit(value: float) -> float:

@@ -37,6 +37,7 @@ from .graph import (
     JoinAttemptRecord,
     OperationFeedbackStats,
     OperationOutcomeRecord,
+    RetrievalAttemptRecord,
     SupersessionRecord,
     TerminalBeliefState,
     TerminationRecord,
@@ -45,6 +46,7 @@ from .query_graph import canonical_type, compile_query_graph, type_lineage
 from .allocator import (
     feedback_key,
     operation_family,
+    operation_coarse_region_key,
     operation_region_key,
     summarize_operation_region,
 )
@@ -273,6 +275,27 @@ class V2GraphController(GraphController):
 
     def _retrieve(self, graph, operation, changes) -> None:
         super()._retrieve(graph, operation, changes)
+        query = str(operation.payload.get("query", "")).strip()
+        evidence_rows = operation.payload.get("evidence", [])
+        if not query:
+            raise GraphInvariantError("retrieval attempt requires a non-empty query")
+        if not isinstance(evidence_rows, list):
+            raise GraphInvariantError("retrieval attempt evidence must be a list")
+        hit_count = int(operation.payload.get("hit_count", len(evidence_rows)))
+        allocated_top_k = int(operation.payload.get("allocated_top_k", hit_count))
+        graph.retrieval_attempt_history.append(RetrievalAttemptRecord(
+            attempt_id=f"retrieval_attempt_{operation.operation_id}",
+            operation_id=operation.operation_id,
+            step=graph.step,
+            target_subgoal=operation.target_id,
+            branch_id=operation.branch_id,
+            query=query,
+            normalized_query=normalize_text(query),
+            allocated_top_k=allocated_top_k,
+            hit_count=hit_count,
+            new_evidence_count=len(evidence_rows),
+            passage_ids=[str(row.get("passage_id", row.get("document_id", ""))) for row in evidence_rows],
+        ))
         activation = operation.payload.get("memory_activation", {})
         if not isinstance(activation, dict):
             raise GraphInvariantError("memory activation must be a mapping")
@@ -405,7 +428,11 @@ class V2GraphController(GraphController):
         family = packet.operation_family or operation_family(operation)
         region = packet.region_key or operation_region_key(operation)
         before = self._feedback_snapshot(graph, family, region)
-        for key in (feedback_key(family, region), feedback_key(family)):
+        keys = [feedback_key(family, region)]
+        if self.config.hierarchical_within_question_feedback:
+            keys.append(feedback_key(family, operation_coarse_region_key(operation)))
+        keys.append(feedback_key(family))
+        for key in dict.fromkeys(keys):
             self._update_feedback(graph, key, utility, normalized["cost"], progressed)
         after = self._feedback_snapshot(graph, family, region)
         allocation.post_state_summary = post

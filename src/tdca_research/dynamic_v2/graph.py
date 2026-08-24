@@ -19,7 +19,7 @@ from ..dynamic.graph import (
     _primitive,
     _revision_from_dict,
 )
-from ..utils import stable_hash
+from ..utils import normalize_text, stable_hash
 
 
 class TerminationKind(str, Enum):
@@ -133,6 +133,28 @@ class AllocationRecord:
     failure_reason: str = ""
     fidelity_level: str = "medium"
     fidelity_fraction: float = 0.65
+
+
+@dataclass
+class RetrievalAttemptRecord:
+    """Controller-owned ledger of every retrieval call, including zero-yield calls.
+
+    Evidence nodes cannot represent an empty or duplicate-only retrieval.  Keeping
+    attempts separately prevents the scheduler from mistaking such a call for an
+    untried round and spending the remaining retrieval budget on the same query.
+    """
+
+    attempt_id: str
+    operation_id: str
+    step: int
+    target_subgoal: str
+    branch_id: str
+    query: str
+    normalized_query: str
+    allocated_top_k: int
+    hit_count: int
+    new_evidence_count: int
+    passage_ids: list[str] = field(default_factory=list)
 
 
 @dataclass
@@ -268,6 +290,7 @@ class DynamicReasoningHypergraphV2(DynamicReasoningHypergraph):
     belief_states: dict[str, BeliefState] = field(default_factory=dict)
     diffusion_history: list[DiffusionSnapshot] = field(default_factory=list)
     allocation_history: list[AllocationRecord] = field(default_factory=list)
+    retrieval_attempt_history: list[RetrievalAttemptRecord] = field(default_factory=list)
     join_attempt_history: list[JoinAttemptRecord] = field(default_factory=list)
     operation_outcome_history: list[OperationOutcomeRecord] = field(default_factory=list)
     operation_feedback: dict[str, OperationFeedbackStats] = field(default_factory=dict)
@@ -294,6 +317,7 @@ class DynamicReasoningHypergraphV2(DynamicReasoningHypergraph):
             },
             "diffusion_history": _primitive(self.diffusion_history),
             "allocation_history": _primitive(self.allocation_history),
+            "retrieval_attempt_history": _primitive(self.retrieval_attempt_history),
             "join_attempt_history": _primitive(self.join_attempt_history),
             "operation_outcome_history": _primitive(self.operation_outcome_history),
             "operation_feedback": {
@@ -415,6 +439,30 @@ class DynamicReasoningHypergraphV2(DynamicReasoningHypergraph):
                     raise GraphInvariantError(
                         f"allocation {row.allocation_id} actual utility outside [-1,1]"
                     )
+        retrieval_attempt_ids = [row.attempt_id for row in self.retrieval_attempt_history]
+        if len(retrieval_attempt_ids) != len(set(retrieval_attempt_ids)):
+            raise GraphInvariantError("retrieval attempt ids must be unique")
+        for row in self.retrieval_attempt_history:
+            if row.target_subgoal not in self.nodes:
+                raise GraphInvariantError(
+                    f"retrieval attempt {row.attempt_id} references missing subgoal"
+                )
+            if not row.query or row.normalized_query != normalize_text(row.query):
+                raise GraphInvariantError(
+                    f"retrieval attempt {row.attempt_id} has invalid normalized query"
+                )
+            if min(row.allocated_top_k, row.hit_count, row.new_evidence_count) < 0:
+                raise GraphInvariantError(
+                    f"retrieval attempt {row.attempt_id} has a negative counter"
+                )
+            if row.new_evidence_count > row.hit_count:
+                raise GraphInvariantError(
+                    f"retrieval attempt {row.attempt_id} creates more evidence than hits"
+                )
+            if len(row.passage_ids) != row.new_evidence_count:
+                raise GraphInvariantError(
+                    f"retrieval attempt {row.attempt_id} evidence count mismatch"
+                )
         attempt_ids = [row.attempt_id for row in self.join_attempt_history]
         if len(attempt_ids) != len(set(attempt_ids)):
             raise GraphInvariantError("JOIN attempt ids must be unique")
@@ -502,6 +550,10 @@ class DynamicReasoningHypergraphV2(DynamicReasoningHypergraph):
         }
         graph.diffusion_history = [DiffusionSnapshot(**row) for row in value.get("diffusion_history", [])]
         graph.allocation_history = [AllocationRecord(**row) for row in value.get("allocation_history", [])]
+        graph.retrieval_attempt_history = [
+            RetrievalAttemptRecord(**row)
+            for row in value.get("retrieval_attempt_history", [])
+        ]
         graph.join_attempt_history = [
             JoinAttemptRecord(**row) for row in value.get("join_attempt_history", [])
         ]

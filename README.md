@@ -29,8 +29,12 @@ versioned revision cascades, graph-state-driven EVC allocation, measured allocat
 cost ledgers, and three-way ANSWER/ABSTAIN/BUDGET_EXHAUSTED termination. The method,
 invariants, equations, and fail-closed evaluation gate are documented in
 [`docs/dynamic_hypergraph_tdca_v2.md`](docs/dynamic_hypergraph_tdca_v2.md).
-The first mechanism-complete smoke run is a documented negative result; see
-[`docs/dynamic_hypergraph_tdca_v2_smoke_results_20260821.md`](docs/dynamic_hypergraph_tdca_v2_smoke_results_20260821.md).
+For a self-contained, paper-level Chinese description of the complete research idea,
+algorithm, implementation, current v2.2 evidence, limitations, and roadmap, see
+[`docs/tdca.md`](docs/tdca.md).
+The historical first mechanism-complete smoke was a negative result; the newer v2.2
+development campaign and its still-closed gate are recorded in
+[`docs/dynamic_v22_safe_stop_20260824.json`](docs/dynamic_v22_safe_stop_20260824.json).
 
 ## Install
 
@@ -169,9 +173,14 @@ bash scripts/run_dynamic_v2_research.sh revision_development
 `heldout200` and `cross_heldout200` fail closed unless `TDCA_V2_GATE_REPORT` points to
 a passing `dynamic-hypergraph-v2-gate-evaluation-v2` report. Editing a status bit is
 not sufficient. The seed is frozen at `20260820`; HotpotQA and 2Wiki use the same
-frozen post-MuSiQue parameters and their own disjoint manifests. The current closure
-smoke remains a negative result, so development-50 and all sealed stages must not be
-run; see `docs/dynamic_hypergraph_tdca_v2_closure_20260822.md`.
+frozen post-MuSiQue parameters and their own disjoint manifests. The later v2.2
+development-50 adaptive and uniform runs completed, but the fixed-order control and
+matched budget curve did not. The campaign then stopped at its provider-token cap.
+The hard gate therefore remains closed and sealed heldout stages must not be run;
+see `docs/dynamic_v22_safe_stop_20260824.json`. The subsequent v2.3 smoke
+mechanism study also stopped before matched controls; its exact positive and
+negative results are recorded in
+[`docs/dynamic_v23_safe_stop_20260825.md`](docs/dynamic_v23_safe_stop_20260825.md).
 
 1. Stage 1: adapters, leakage, metrics, budgets and integration tests.
 2. Stage 2: Qwen-plus 20-row smoke; no crashes or ambiguous empty answers.

@@ -20,6 +20,7 @@ from tdca_research.dynamic_v2.allocator import (
     ComputationPacket,
     EVCSignals,
     feedback_prior,
+    operation_coarse_region_key,
     operation_family,
     operation_region_key,
 )
@@ -32,7 +33,9 @@ from tdca_research.dynamic_v2.engine import (
     _claim_answers_subgoal,
     _execution_packet,
     _join_attempt_key,
+    _join_can_answer_subgoal,
     _missing_binding_query,
+    _novel_retrieval_hits_for_region,
     _nary_relevant,
     _suppress_terminal_expansion_when_commit_ready,
 )
@@ -41,6 +44,7 @@ from tdca_research.dynamic_v2.extraction import (
     _budget_aware_context,
     _canonicalize_typed_value,
     _fit_completion_to_remaining_budget,
+    _enumerated_sibling_values,
 )
 from tdca_research.dynamic_v2.graph import DynamicReasoningHypergraphV2, TerminationKind
 from tdca_research.dynamic_v2.join import MultiHopJoinEngine
@@ -56,6 +60,7 @@ from tdca_research.dynamic_v2.verifier import (
 from tdca_research.llm import DeterministicMockLLM
 from tdca_research.models import Passage, Usage
 from tdca_research.retrieval import BM25Retriever
+from tdca_research.utils import normalize_text
 
 
 def config(**overrides):
@@ -99,6 +104,34 @@ def test_initial_alias_collapse_rejects_incompatible_output_types():
     assert [row["node_id"] for row in normalized.payload["subgoals"]] == [
         "subgoal_1", "subgoal_root",
     ]
+
+
+def test_terminal_dependency_closure_repairs_only_dependency_free_root():
+    proposed = GraphOperation(
+        "op_plan", OperationType.EXPAND, "subgoal_root", [], "branch_root",
+        {"subgoals": [
+            {
+                "node_id": "subgoal_1", "question_template": "Where did Alpha die?",
+                "instantiated_question": "Where did Alpha die?", "dependencies": [],
+                "variable_bindings": {}, "answer_type": "city", "terminal": False,
+            },
+            {
+                "node_id": "subgoal_root", "question_template": "What else changed?",
+                "instantiated_question": "What else changed?", "dependencies": [],
+                "variable_bindings": {}, "answer_type": "thing", "terminal": True,
+            },
+        ]}, "test", "offline_test",
+    )
+    unchanged = DynamicHypergraphV2Reasoner._normalize_initial_plan(proposed)
+    repaired = DynamicHypergraphV2Reasoner._normalize_initial_plan(proposed, True)
+    assert next(
+        row for row in unchanged.payload["subgoals"] if row["node_id"] == "subgoal_root"
+    )["dependencies"] == []
+    root = next(
+        row for row in repaired.payload["subgoals"] if row["node_id"] == "subgoal_root"
+    )
+    assert root["dependencies"] == ["subgoal_1"]
+    assert root["dependency_repair"] == "terminal_sink_closure_v1"
 
 
 def empty_graph(cfg=None):
@@ -468,6 +501,20 @@ def test_typed_join_is_discovered_and_materializes_multi_premise_hyperedge():
         DeterministicMockLLM(), Budget(16, 6000, 200, Usage()), cfg,
     )
     assert not engine.discover(graph, "branch_root", "s_root")
+
+
+def test_goal_conditioned_join_filter_keeps_only_output_projecting_path():
+    cfg, _, graph = chain_graph()
+    engine = MultiHopJoinEngine(
+        DeterministicMockLLM(), Budget(16, 6000, 200, Usage()), cfg,
+    )
+    candidate = next(
+        row for row in engine.discover(graph, "branch_root", "s_root")
+        if set(row.premise_ids) == {"c1", "c2"}
+    )
+    assert _join_can_answer_subgoal(
+        graph, candidate, graph.node("s_root"), graph.branches["branch_root"],
+    )
 
 
 def test_failed_join_key_changes_only_after_controller_belief_update():
@@ -1488,6 +1535,122 @@ def test_outcome_feedback_changes_later_evc_and_budget_without_cross_question_st
     assert feedback_prior(
         graph, operation_family(other_region), operation_region_key(other_region),
     )["observations"] == 0.0
+
+
+def test_v23_retrieval_attempt_ledger_records_empty_calls_and_roundtrips():
+    cfg, _, graph = chain_graph()
+    controller = V2GraphController(cfg.merged(retrieval_attempt_aware_scheduling=True))
+    before = len(graph.retrieval_attempt_history)
+    graph = controller.apply(graph, operation(
+        330, OperationType.RETRIEVE,
+        payload={
+            "query": "a deterministic zero-yield query",
+            "evidence": [],
+            "allocated_top_k": 7,
+            "hit_count": 0,
+        },
+    ))
+    assert len(graph.retrieval_attempt_history) == before + 1
+    attempt = graph.retrieval_attempt_history[-1]
+    assert attempt.allocated_top_k == 7
+    assert attempt.hit_count == attempt.new_evidence_count == 0
+    assert not attempt.passage_ids
+    restored = DynamicReasoningHypergraphV2.from_dict(graph.to_dict())
+    assert restored.retrieval_attempt_history[-1] == attempt
+
+
+def test_v23_missing_binding_query_never_repeats_an_attempt_without_evidence():
+    _, _, graph = chain_graph()
+    subgoal = graph.node("s_root")
+    subgoal.question_template = "Which country contains Beta City?"
+    subgoal.instantiated_question = subgoal.question_template
+    query = _missing_binding_query(
+        graph, subgoal, graph.branches["branch_root"],
+        subgoal.instantiated_question, [], [], [],
+        attempted_queries={normalize_text(graph.question)},
+    )
+    assert query
+    assert normalize_text(query) != normalize_text(graph.question)
+
+
+def test_v23_changed_query_does_not_duplicate_a_passage_in_the_same_region():
+    _, _, graph = chain_graph()
+    retriever = BM25Retriever([
+        Passage("p1", "Alpha", "Alpha was founded in Beta City."),
+        Passage("p3", "Gamma", "Gamma is a new passage."),
+    ])
+    hits = retriever.search("Alpha Gamma", 2)
+    novel = _novel_retrieval_hits_for_region(
+        graph, hits, "s_root", "branch_root",
+    )
+    assert [row.passage.passage_id for row in novel] == ["p3"]
+
+
+def test_v23_enumeration_expansion_requires_same_kind_explicit_members():
+    text = (
+        "The park lies in Kielce County (Gmina Bieliny, Gmina Daleszyce, "
+        "Gmina Górno, Gmina Łagów)."
+    )
+    assert _enumerated_sibling_values(text, "Gmina Bieliny") == [
+        "Gmina Daleszyce", "Gmina Górno", "Gmina Łagów",
+    ]
+    assert _enumerated_sibling_values(
+        "Alice met Bob (CEO, writer, philanthropist).", "Bob",
+    ) == []
+
+
+def test_v23_multi_resource_signals_follow_budget_scarcity_without_fidelity_minmax():
+    _, _, graph = chain_graph()
+    cfg = config(
+        multi_resource_evc=True,
+        retrieval_attempt_aware_scheduling=True,
+    )
+    allocator = AdaptiveComputationAllocator(cfg)
+    branch = operation(340, OperationType.BRANCH, sources=["e1"])
+    fresh = allocator._signals(graph, branch, Budget(16, 6000, 0, Usage()))
+    scarce = allocator._signals(
+        graph, branch,
+        Budget(16, 6000, 0, Usage(llm_calls=15, prompt_tokens=5700)),
+    )
+    assert scarce.expected_call_cost > fresh.expected_call_cost
+    assert scarce.expected_token_cost > fresh.expected_token_cost
+
+    retrieve = operation(
+        341, OperationType.RETRIEVE,
+        payload={"query": "new relation query"},
+    )
+    packets = allocator.allocate(graph, [retrieve], Budget(16, 6000, 0, Usage()))
+    assert len(packets) == 3
+    assert len({row.normalized.expected_retrieval_cost for row in packets}) == 1
+    assert all(
+        0.0 <= value <= 1.0
+        for row in packets for value in row.normalized.__dict__.values()
+    )
+
+
+def test_v23_hierarchical_feedback_transfers_only_within_same_question_region():
+    _, _, graph = chain_graph()
+    cfg = config(
+        multi_resource_evc=True,
+        hierarchical_within_question_feedback=True,
+    )
+    controller = V2GraphController(cfg)
+    allocator = AdaptiveComputationAllocator(cfg)
+    budget = Budget(16, 6000, 0, Usage())
+    first_operation = operation(350, OperationType.BRANCH, sources=["e1"])
+    first = allocator.allocate(graph, [first_operation], budget)[0]
+    graph = controller.reconcile_allocation(
+        graph, first,
+        {"llm_calls": 1.0, "tokens": 500.0, "retrieval_calls": 0.0},
+        completed=False, failure_reason="no_candidates",
+    )
+    variant = operation(351, OperationType.BRANCH, sources=["e1", "e2"])
+    assert operation_region_key(variant) != operation_region_key(first_operation)
+    assert operation_coarse_region_key(variant) == operation_coarse_region_key(first_operation)
+    later = allocator.allocate(graph, [variant], budget)[0]
+    assert later.feedback_prior["exact_observations"] == 0.0
+    assert later.feedback_prior["coarse_observations"] == 0.5
+    assert later.feedback_prior["posterior_value"] < 0.5
     new_evidence_context = operation(
         35, OperationType.BRANCH, sources=["e1", "e2"],
     )

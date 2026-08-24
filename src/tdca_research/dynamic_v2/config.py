@@ -37,6 +37,7 @@ class DynamicV2ResearchConfig(DynamicResearchConfig):
     relation_light_memory: bool = True
     query_graph_compiler: bool = True
     deterministic_goal_path_join: bool = True
+    deterministic_enumeration_expansion: bool = False
 
     diffusion_steps: int = 3
     diffusion_restart: float = 0.40
@@ -60,7 +61,20 @@ class DynamicV2ResearchConfig(DynamicResearchConfig):
     evc_weight_failure_cooldown: float = 1.00
     evc_weight_terminal_gap: float = 1.25
     evc_weight_terminal_proximity: float = 0.75
+    evc_weight_call_cost: float = 0.75
+    evc_weight_token_cost: float = 0.75
+    evc_weight_retrieval_cost: float = 0.75
+    evc_weight_retrieval_saturation: float = 1.00
     meta_stop_evc_threshold: float = 0.08
+
+    # v2.3 features are opt-in so frozen v2.2 experiment configurations retain
+    # their original allocation semantics and remain reproducible.
+    multi_resource_evc: bool = False
+    hierarchical_within_question_feedback: bool = False
+    retrieval_attempt_aware_scheduling: bool = False
+    terminal_dependency_closure: bool = False
+    focused_empty_extraction_recovery: bool = False
+    goal_conditioned_join_frontier: bool = False
 
     # Terminal acceptance is a conjunctive readout over independent belief
     # channels.  These are initial development values, never learned weights.

@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from collections import defaultdict
+from copy import deepcopy
 import re
 from typing import Any
 
@@ -22,6 +23,11 @@ subgoal. Put direct-answer claims first, then relations needed to connect depend
 relation/type strings and evidence IDs. Also include quote: one short verbatim substring (at most 15 words)
 from a referenced evidence item that directly states the claim. Include no qualifiers, reasons, prose, or
 redundant fields.
+When one evidence sentence contains an explicit parenthetical or comma-separated
+enumeration of same-kind entities, emit a separate atomic claim for every relevant
+member up to the claim cap. Shared list membership is evidence, not by itself a
+direct answer: set answer_position=none unless the sentence explicitly states the
+requested relation.
 Do not use prior knowledge, compare candidates, compose multiple facts, reverse the evidence direction, or
 merge sentences. Return an empty list when evidence is insufficient."""
 
@@ -230,6 +236,11 @@ class TypedClaimExtractor:
                 "extraction_mode": "typed_evidence_extraction",
                 "extraction_focus_mode": focus_mode,
             })
+        if self.config.deterministic_enumeration_expansion and len(rows) < cap:
+            rows.extend(_expand_grounded_enumerations(
+                rows, available, existing, cap - len(rows),
+                graph.step + 1, subgoal_id,
+            ))
         self.last_diagnostics = {
             "raw": len(raw_rows), "accepted": len(rows),
             "focused_evidence_count": len(focused_rows),
@@ -399,6 +410,99 @@ def _canonicalize_typed_value(value: str, expected_type: str) -> tuple[str, dict
                 "original_value": text,
             }
     return text, {}
+
+
+def _expand_grounded_enumerations(
+    accepted_rows: list[dict[str, Any]],
+    evidence_by_id: dict[str, EvidenceNode],
+    existing_signatures: set[tuple[str, str, str]],
+    remaining_cap: int,
+    creation_step: int,
+    subgoal_id: str,
+) -> list[dict[str, Any]]:
+    """Atomize explicit same-kind enumerations anchored by an accepted claim.
+
+    This is deliberately conservative: expansion requires a parenthetical list
+    containing the accepted value and at least two members with the same lexical
+    head (for example ``Gmina A, Gmina B``).  It never invents a relation or marks
+    a sibling as directly answering the subgoal; later JOIN validation owns any
+    compositional conclusion.
+    """
+    if remaining_cap <= 0:
+        return []
+    expanded: list[dict[str, Any]] = []
+    for row in list(accepted_rows):
+        anchor = str(row.get("value", "")).strip()
+        for evidence_id in row.get("evidence_refs", []):
+            evidence = evidence_by_id.get(str(evidence_id))
+            if evidence is None:
+                continue
+            for sibling in _enumerated_sibling_values(evidence.source_span, anchor):
+                if normalize_text(sibling) == normalize_text(row.get("subject", "")):
+                    # Reusing the source entity as the enumerated object creates
+                    # a reflexive claim that the passage never states.
+                    continue
+                signature = (
+                    normalize_text(row.get("subject", "")),
+                    normalize_text(row.get("relation", "")),
+                    normalize_text(sibling),
+                )
+                if not all(signature) or signature in existing_signatures:
+                    continue
+                existing_signatures.add(signature)
+                candidate = deepcopy(row)
+                candidate["node_id"] = (
+                    f"claim_v2_{creation_step}_{subgoal_id}_enum_{len(expanded) + 1}"
+                )
+                candidate["value"] = sibling
+                candidate["source_spans"] = [evidence.source_span]
+                candidate["evidence_refs"] = [evidence.node_id]
+                candidate["answers_subgoal"] = False
+                candidate["answer_position"] = "none"
+                candidate["source_triple"] = {
+                    "subject": str(row.get("subject", "")),
+                    "relation": str(row.get("relation", "")),
+                    "value": sibling,
+                }
+                candidate["extraction_confidence"] = min(
+                    float(row.get("extraction_confidence", 0.0)), 0.95,
+                )
+                candidate["extraction_mode"] = "deterministic_enumeration_expansion"
+                candidate["qualifiers"] = {
+                    **dict(row.get("qualifiers", {})),
+                    "enumeration_anchor": anchor,
+                }
+                expanded.append(candidate)
+                if len(expanded) >= remaining_cap:
+                    return expanded
+    return expanded
+
+
+def _enumerated_sibling_values(text: str, anchor: str) -> list[str]:
+    normalized_anchor = normalize_text(anchor)
+    anchor_head = normalize_text(anchor).split(" ", 1)[0] if normalized_anchor else ""
+    if not anchor_head:
+        return []
+    siblings: list[str] = []
+    for group in re.findall(r"\(([^()]{3,500})\)", str(text)):
+        parts = [
+            re.sub(r"^(?:and|or)\s+", "", value.strip(), flags=re.IGNORECASE)
+            for value in re.split(r"\s*[,;]\s*|\s+and\s+", group)
+        ]
+        parts = [value.strip(" .") for value in parts if 1 < len(value.strip()) <= 100]
+        normalized_parts = [normalize_text(value) for value in parts]
+        if normalized_anchor not in normalized_parts:
+            continue
+        same_head = [
+            value for value, normalized in zip(parts, normalized_parts)
+            if normalized.split(" ", 1)[0] == anchor_head
+        ]
+        if len(same_head) < 2:
+            continue
+        siblings.extend(
+            value for value in same_head if normalize_text(value) != normalized_anchor
+        )
+    return list(dict.fromkeys(siblings))
 
 
 def _focus_terms(
