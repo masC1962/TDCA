@@ -210,9 +210,29 @@ def test_root_answer_type_uses_question_form_as_deterministic_guardrail():
     assert _root_answer_type("Who leads Alpha?", "country") == "person"
     assert _root_answer_type("When did it happen?", "entity") == "date"
     assert _root_answer_type("How many groups?", "entity") == "number"
+    assert _root_answer_type(
+        "The embassy is in Country A. Who led the broadcaster there?", "country",
+    ) == "person"
 
 
-def test_initial_planner_preserves_valid_root_rewrite_and_binding():
+def test_initial_planner_restores_trailing_root_objective_when_model_promotes_bridge():
+    question = "The embassy of the food's country is in Country A. Who led the radio division there?"
+    response = {
+        "subgoals": [], "root_dependencies": [],
+        "root_question_template": "What country is the food from?",
+        "root_variable_bindings": {}, "root_answer_type": "person",
+    }
+    cfg = _config()
+    budget = Budget(cfg.max_llm_calls, cfg.max_total_tokens, cfg.final_reserve_tokens, Usage())
+    operation = DynamicPlanner(
+        DeterministicMockLLM(json_responses=[response]), budget, cfg,
+    ).initial_expand(question)
+    root = operation.payload["subgoals"][-1]
+    assert root["question_template"] == question
+    assert root["answer_type"] == "person"
+
+
+def test_initial_planner_preserves_typed_executable_root_and_dependencies():
     response = {
         "subgoals": [{
             "local_id": "leader", "question_template": "Who leads Alpha?",
@@ -230,7 +250,41 @@ def test_initial_planner_preserves_valid_root_rewrite_and_binding():
     ).initial_expand("Where was the leader of Alpha born?")
     root = operation.payload["subgoals"][-1]
     assert root["question_template"] == "Where was $leader born?"
+    assert root["dependencies"] == ["subgoal_1"]
     assert root["variable_bindings"] == {"$leader": "subgoal_1"}
+
+
+def test_initial_planner_restores_literal_outer_objective_of_nested_chain():
+    response = {
+        "subgoals": [{
+            "local_id": "citizenship",
+            "question_template": "What is the country of citizenship of Rainer Ernst?",
+            "answer_type": "country", "dependencies": [], "variable_bindings": {},
+        }],
+        "root_dependencies": ["citizenship"],
+        "root_question_template": "What is the country of literature of $country?",
+        "root_variable_bindings": {"$country": "citizenship"},
+        "root_answer_type": "country",
+    }
+    question = (
+        "Border troops of the country of literature of the country of citizenship "
+        "of Rainer Ernst are from what country?"
+    )
+    cfg = _config()
+    budget = Budget(cfg.max_llm_calls, cfg.max_total_tokens, cfg.final_reserve_tokens, Usage())
+    operation = DynamicPlanner(
+        DeterministicMockLLM(json_responses=[response]), budget, cfg,
+    ).initial_expand(question)
+    rows = operation.payload["subgoals"]
+    assert [row["node_id"] for row in rows] == [
+        "subgoal_1", "subgoal_2", "subgoal_root",
+    ]
+    assert rows[1]["question_template"] == "What is the country of literature of $country?"
+    assert rows[-1]["question_template"] == (
+        "Border troops of the $nested_bridge are from what country?"
+    )
+    assert rows[-1]["dependencies"] == ["subgoal_2"]
+    assert rows[-1]["variable_bindings"] == {"$nested_bridge": "subgoal_2"}
 
 
 def test_initial_planner_collapses_alpha_equivalent_terminal_subgoal_and_root():
@@ -260,6 +314,34 @@ def test_initial_planner_collapses_alpha_equivalent_terminal_subgoal_and_root():
     assert [row["node_id"] for row in rows] == ["subgoal_1", "subgoal_root"]
     assert rows[-1]["dependencies"] == ["subgoal_1"]
     assert rows[-1]["variable_bindings"] == {"$actor": "subgoal_1"}
+    assert rows[-1]["question_template"] == "What law was passed by $actor?"
+
+
+def test_initial_planner_preserves_bounded_frontier_when_root_edges_are_incomplete():
+    response = {
+        "subgoals": [
+            {
+                "local_id": "useful", "question_template": "Who is Alpha's brother?",
+                "answer_type": "person", "dependencies": [], "variable_bindings": {},
+            },
+            {
+                "local_id": "dead", "question_template": "Who is Alpha's mother?",
+                "answer_type": "person", "dependencies": [], "variable_bindings": {},
+            },
+        ],
+        "root_dependencies": ["useful"],
+        "root_question_template": "Who is the mother of $brother?",
+        "root_variable_bindings": {"$brother": "useful"},
+        "root_answer_type": "person",
+    }
+    cfg = _config()
+    budget = Budget(cfg.max_llm_calls, cfg.max_total_tokens, cfg.final_reserve_tokens, Usage())
+    operation = DynamicPlanner(
+        DeterministicMockLLM(json_responses=[response]), budget, cfg,
+    ).initial_expand("Who is the mother of Alpha's brother?")
+    assert [row["node_id"] for row in operation.payload["subgoals"]] == [
+        "subgoal_1", "subgoal_2", "subgoal_root",
+    ]
 
 
 def test_initial_planner_drops_runtime_unbound_subgoals():

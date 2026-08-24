@@ -9,6 +9,7 @@ import sys
 import time
 from pathlib import Path
 
+from .campaign import CampaignBudgetExceeded, CampaignBudgetLedger
 from .baselines.simple import run_closed_book, run_rag
 from .baselines.ircot import run_ircot
 from .config import ResearchConfig
@@ -25,11 +26,34 @@ from .utils import sha256_file, write_json
 def build_llm(config: ResearchConfig, mock=None):
     if mock is not None:
         return mock
+    cache_dir = _resolved_api_cache_dir(config)
+    ledger = None
+    if config.campaign_ledger_path:
+        ledger = CampaignBudgetLedger(
+            config.campaign_ledger_path,
+            campaign_id=config.campaign_id,
+            provider_call_cap=config.campaign_provider_call_cap,
+            provider_token_cap=config.campaign_provider_token_cap,
+        )
     return OpenAICompatibleLLM(
-        config.llm_base_url, config.llm_model, config.api_cache_dir, config.prompt_version,
+        config.llm_base_url, config.llm_model, cache_dir, config.prompt_version,
         request_timeout_seconds=config.request_timeout_seconds,
         max_api_attempts=config.max_api_attempts,
+        campaign_ledger=ledger,
     )
+
+
+def _resolved_api_cache_dir(config: ResearchConfig) -> str:
+    root = Path(config.api_cache_dir)
+    if not config.isolate_api_cache_by_experiment_arm:
+        return str(root)
+    allocator = str(getattr(config, "allocator_mode", "none"))
+    values = [config.campaign_id or "uncampaigned", config.method, allocator, config.prompt_version]
+    safe = [
+        "".join(character if character.isalnum() or character in "-_." else "_" for character in value)
+        for value in values
+    ]
+    return str(root.joinpath(*safe))
 
 
 def _global_passages(path: str) -> list[Passage]:
@@ -175,42 +199,52 @@ def run(
         retriever = global_retriever or build_retriever(
             retriever_kind, passages, config.dense_model, config.dense_fallback, config.dense_index_path,
         )
-        if config.method in {"closed_book"}:
-            prediction = run_closed_book(example, llm, config.max_llm_calls, config.max_total_tokens, config.temperature)
-            retrieval_trace, reasoning_trace = [], []
-        elif config.method in {"bm25_rag", "dense_rag", "hybrid_rag"}:
-            prediction = run_rag(
-                example, llm, retriever, config.top_k, config.max_llm_calls,
-                config.max_total_tokens, config.temperature, config.evidence_char_budget,
-            )
-            retrieval_trace, reasoning_trace = [], []
-        elif config.method == "ircot":
-            prediction = run_ircot(
-                example, llm, retriever, config.top_k, config.max_steps, config.max_llm_calls,
-                config.max_total_tokens, config.final_reserve_tokens, config.temperature,
-                config.evidence_char_budget,
-            )
-            retrieval_trace, reasoning_trace = [], []
-        elif config.method == "dynamic_hypergraph_tdca_v2":
-            from .dynamic_v2.config import DynamicV2ResearchConfig
-            from .dynamic_v2.engine import DynamicHypergraphV2Reasoner
+        try:
+            if config.method in {"closed_book"}:
+                prediction = run_closed_book(example, llm, config.max_llm_calls, config.max_total_tokens, config.temperature)
+                retrieval_trace, reasoning_trace = [], []
+            elif config.method in {"bm25_rag", "dense_rag", "hybrid_rag"}:
+                prediction = run_rag(
+                    example, llm, retriever, config.top_k, config.max_llm_calls,
+                    config.max_total_tokens, config.temperature, config.evidence_char_budget,
+                )
+                retrieval_trace, reasoning_trace = [], []
+            elif config.method == "ircot":
+                prediction = run_ircot(
+                    example, llm, retriever, config.top_k, config.max_steps, config.max_llm_calls,
+                    config.max_total_tokens, config.final_reserve_tokens, config.temperature,
+                    config.evidence_char_budget,
+                )
+                retrieval_trace, reasoning_trace = [], []
+            elif config.method == "dynamic_hypergraph_tdca_v2":
+                from .dynamic_v2.config import DynamicV2ResearchConfig
+                from .dynamic_v2.engine import DynamicHypergraphV2Reasoner
 
-            if not isinstance(config, DynamicV2ResearchConfig):
-                raise TypeError("dynamic_hypergraph_tdca_v2 requires DynamicV2ResearchConfig")
-            prediction, retrieval_trace, reasoning_trace = DynamicHypergraphV2Reasoner(
-                llm, retriever, config, corpus_memory=global_corpus_memory,
-            ).solve(example.inference_view())
-        elif config.method == "dynamic_hypergraph_tdca":
-            from .dynamic.config import DynamicResearchConfig
-            from .dynamic.engine import DynamicHypergraphReasoner
+                if not isinstance(config, DynamicV2ResearchConfig):
+                    raise TypeError("dynamic_hypergraph_tdca_v2 requires DynamicV2ResearchConfig")
+                prediction, retrieval_trace, reasoning_trace = DynamicHypergraphV2Reasoner(
+                    llm, retriever, config, corpus_memory=global_corpus_memory,
+                ).solve(example.inference_view())
+            elif config.method == "dynamic_hypergraph_tdca":
+                from .dynamic.config import DynamicResearchConfig
+                from .dynamic.engine import DynamicHypergraphReasoner
 
-            if not isinstance(config, DynamicResearchConfig):
-                raise TypeError("dynamic_hypergraph_tdca requires DynamicResearchConfig")
-            prediction, retrieval_trace, reasoning_trace = DynamicHypergraphReasoner(
-                llm, retriever, config,
-            ).solve(example.inference_view())
-        else:
-            prediction, retrieval_trace, reasoning_trace = StructuredReasoner(llm, retriever, config).solve(example)
+                if not isinstance(config, DynamicResearchConfig):
+                    raise TypeError("dynamic_hypergraph_tdca requires DynamicResearchConfig")
+                prediction, retrieval_trace, reasoning_trace = DynamicHypergraphReasoner(
+                    llm, retriever, config,
+                ).solve(example.inference_view())
+            else:
+                prediction, retrieval_trace, reasoning_trace = StructuredReasoner(llm, retriever, config).solve(example)
+        except CampaignBudgetExceeded as exc:
+            writer.mark_interrupted(
+                reason="campaign_budget_exhausted",
+                completed=len(predictions),
+                total=len(selected),
+                next_qid=example.qid,
+                details={"campaign": exc.snapshot},
+            )
+            raise
         predictions.append(prediction)
         current_retrieval_rows = [{"qid": example.qid, **row} for row in retrieval_trace]
         current_reasoning_rows = [{"qid": example.qid, **row} for row in reasoning_trace]

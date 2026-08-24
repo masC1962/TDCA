@@ -26,6 +26,18 @@ Do not use prior knowledge, compare candidates, compose multiple facts, reverse 
 merge sentences. Return an empty list when evidence is insufficient."""
 
 
+DIRECT_ANSWER_EXTRACTION_SYSTEM = """Project only evidence-grounded candidates for the requested subgoal
+output variable. Return JSON only as {claims:[...]}, using the same exact compact claim schema: subject,
+relation, value, subject_type, value_type, evidence_ids, extraction_confidence, answer_position, and quote.
+Every returned row must set answer_position to subject or value, and that exact endpoint must answer the
+subgoal after applying the supplied dependency claims. Preserve answer-defining surface modifiers such as
+percentages, quantities, ranges, dates, negation, and collection membership; do not shorten a quantified
+answer to its head noun. Prefer the shortest evidence substring that is still a complete answer. Do not
+return true bridge or context facts that fail to fill the requested output variable. Do not use prior
+knowledge, compose unsupported facts, or add prose. Return an empty list when no supplied evidence directly
+supports an output candidate."""
+
+
 class TypedClaimExtractor:
     def __init__(self, llm: BaseLLM, budget: Budget, config: DynamicV2ResearchConfig) -> None:
         self.llm = llm
@@ -43,6 +55,7 @@ class TypedClaimExtractor:
         operation_id: str,
         token_budget: int | None = None,
         candidate_cap: int | None = None,
+        focus_mode: str = "coverage",
     ) -> GraphOperation | None:
         evidence = graph.evidence(subgoal_id, branch_id)
         if not evidence:
@@ -59,7 +72,6 @@ class TypedClaimExtractor:
             f"{_focused_span(node, focus_terms, self.config)}"
             for node in evidence
         ]
-        context = bounded_context(focused_rows, self.config.evidence_char_budget)
         query_constraint = next((
             row for row in graph.query_graph.get("constraints", [])
             if str(row.get("subgoal_id")) == subgoal_id
@@ -75,22 +87,46 @@ class TypedClaimExtractor:
         if cap <= 0:
             self.last_diagnostics = {"raw": 0, "accepted": 0, "rejections": {"claim_cap": 1}}
             return None
+        system_prompt = (
+            DIRECT_ANSWER_EXTRACTION_SYSTEM
+            if focus_mode == "direct_answer" else TYPED_EXTRACTION_SYSTEM
+        )
+        user_prefix = (
+            f"Root question: {graph.question}\nSubgoal: {instantiated_question}\n"
+            f"Expected answer type: {graph.node(subgoal_id, SubgoalNode).answer_type}\n"
+            f"Unresolved query constraint: {query_constraint}\n"
+            f"Extraction objective: {focus_mode}\n"
+            f"Claim cap: {cap}\nDependency claims:\n{dependencies}\nEvidence:\n"
+        )
+        context = _budget_aware_context(
+            focused_rows,
+            self.config.evidence_char_budget,
+            self.budget,
+            system_prompt,
+            user_prefix,
+        )
         messages = [
-            {"role": "system", "content": TYPED_EXTRACTION_SYSTEM},
-            {"role": "user", "content": (
-                f"Root question: {graph.question}\nSubgoal: {instantiated_question}\n"
-                f"Expected answer type: {graph.node(subgoal_id, SubgoalNode).answer_type}\n"
-                f"Unresolved query constraint: {query_constraint}\n"
-                f"Claim cap: {cap}\nDependency claims:\n{dependencies}\nEvidence:\n{context}"
-            )},
+            {"role": "system", "content": system_prompt},
+            {"role": "user", "content": user_prefix + context},
         ]
         max_tokens = max(128, min(
             int(token_budget or self.config.typed_extraction_max_tokens),
             self.config.typed_extraction_max_tokens,
         ))
-        self.budget.require(max_tokens, estimated_prompt_tokens=estimate_message_tokens(messages))
+        estimated_prompt_tokens = estimate_message_tokens(messages)
+        max_tokens = _fit_completion_to_remaining_budget(
+            self.budget, max_tokens, estimated_prompt_tokens,
+        )
+        self.budget.require(
+            max_tokens, estimated_prompt_tokens=estimated_prompt_tokens,
+        )
         data, generation = self.llm.generate_json(
-            messages, "dynamic_v2_typed_claim_extraction_v1", max_tokens, self.config.temperature,
+            messages,
+            (
+                "dynamic_v2_goal_conditioned_answer_projection_v1"
+                if focus_mode == "direct_answer" else "dynamic_v2_typed_claim_extraction_v1"
+            ),
+            max_tokens, self.config.temperature,
         )
         self.budget.record_generation(generation)
         available = {node.node_id: node for node in evidence}
@@ -129,6 +165,9 @@ class TypedClaimExtractor:
                 subject, value = value, subject
                 subject_type, value_type = value_type, subject_type
                 relation = f"inverse_of:{relation}"
+            if focus_mode == "direct_answer" and answer_position == "none":
+                rejections["not_an_output_projection"] += 1
+                continue
             signature = (normalize_text(subject), normalize_text(relation), normalize_text(value))
             evidence_ids = list(dict.fromkeys(
                 aliases[str(item)] for item in raw.get("evidence_ids", []) if str(item) in aliases
@@ -189,11 +228,18 @@ class TypedClaimExtractor:
                 "source_triple": source_triple,
                 "extraction_evidence_count": len(evidence),
                 "extraction_mode": "typed_evidence_extraction",
+                "extraction_focus_mode": focus_mode,
             })
         self.last_diagnostics = {
             "raw": len(raw_rows), "accepted": len(rows),
             "focused_evidence_count": len(focused_rows),
             "focus_term_count": len(focus_terms),
+            "focused_context_characters": len(context),
+            "budget_compacted_context": (
+                len(context) < len(bounded_context(
+                    focused_rows, self.config.evidence_char_budget,
+                ))
+            ),
             "rejections": dict(sorted(rejections.items())),
         }
         if not rows:
@@ -205,8 +251,14 @@ class TypedClaimExtractor:
             source_ids=[node.node_id for node in evidence] + dependency_claim_ids,
             branch_id=branch_id,
             payload={"mode": "candidates", "candidates": rows},
-            reason="typed_claim_extraction",
-            proposed_by="typed_claim_extractor_v2",
+            reason=(
+                "goal_conditioned_answer_projection"
+                if focus_mode == "direct_answer" else "typed_claim_extraction"
+            ),
+            proposed_by=(
+                "goal_conditioned_typed_projector_v22"
+                if focus_mode == "direct_answer" else "typed_claim_extractor_v2"
+            ),
             estimated_cost={
                 "llm_calls": 1.0,
                 "tokens": float(generation.prompt_tokens + generation.completion_tokens),
@@ -228,6 +280,80 @@ def _unit(value: Any) -> float:
         return max(0.0, min(1.0, float(value)))
     except (TypeError, ValueError):
         return 0.0
+
+
+def _fit_completion_to_remaining_budget(
+    budget: Budget,
+    requested_completion: int,
+    estimated_prompt_tokens: int,
+    minimum_completion: int = 128,
+) -> int:
+    """Use the largest schema-safe completion that fits the live token budget.
+
+    The allocator's packet is an upper bound.  Late in a reasoning trajectory,
+    the exact focused prompt can be larger than its coarse estimate; failing the
+    whole question while a smaller valid JSON completion still fits defeats
+    adaptive computation.  If even the schema-safe minimum cannot fit, retain
+    the request so ``Budget.require`` raises the normal audited exhaustion.
+    """
+    reserve = max(0, int(budget.final_reserve_tokens))
+    available = (
+        int(budget.max_total_tokens)
+        - int(budget.usage.total_tokens)
+        - max(0, int(estimated_prompt_tokens))
+        - reserve
+    )
+    if available < minimum_completion:
+        return int(requested_completion)
+    return min(int(requested_completion), available)
+
+
+def _budget_aware_context(
+    blocks: list[str],
+    configured_max_characters: int,
+    budget: Budget,
+    system_prompt: str,
+    user_prefix: str,
+    minimum_completion: int = 128,
+) -> str:
+    """Compact evidence only when the exact late-stage prompt would not fit."""
+    remaining = (
+        int(budget.max_total_tokens)
+        - int(budget.usage.total_tokens)
+        - max(0, int(budget.final_reserve_tokens))
+        - int(minimum_completion)
+    )
+    # ``estimate_message_tokens`` uses ceil(characters / 3) plus eight tokens
+    # per message.  Leave one extra token for integer rounding.
+    prompt_character_cap = max(0, 3 * (remaining - 17))
+    fixed_characters = len(system_prompt) + len(user_prefix)
+    context_cap = min(
+        int(configured_max_characters),
+        max(0, prompt_character_cap - fixed_characters),
+    )
+    context = bounded_context(blocks, context_cap)
+    # ``bounded_context`` preserves blank-line separators between evidence
+    # blocks, so enforce the budget against the assembled messages as the final
+    # authority instead of relying only on the character algebra above.
+    while context:
+        messages = [
+            {"role": "system", "content": system_prompt},
+            {"role": "user", "content": user_prefix + context},
+        ]
+        estimated = estimate_message_tokens(messages)
+        if budget.can_call(
+            minimum_completion, estimated_prompt_tokens=estimated,
+        ):
+            break
+        over = (
+            int(budget.usage.total_tokens)
+            + int(budget.final_reserve_tokens)
+            + int(minimum_completion)
+            + estimated
+            - int(budget.max_total_tokens)
+        )
+        context = context[:max(0, len(context) - max(16, 3 * over + 3))]
+    return context
 
 
 def _cooccurring_sentence(text: str, subject: str, value: str) -> str:

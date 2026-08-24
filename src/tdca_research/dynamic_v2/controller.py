@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from copy import deepcopy
 from dataclasses import asdict
+import re
 from typing import Any
 
 from ..dynamic.controller import GraphController
@@ -12,6 +13,7 @@ from ..dynamic.graph import (
     CandidateScoreProfile,
     CandidateStatus,
     ClaimNode,
+    EvidenceNode,
     GraphInvariantError,
     GraphOperation,
     Hyperedge,
@@ -36,6 +38,7 @@ from .graph import (
     OperationFeedbackStats,
     OperationOutcomeRecord,
     SupersessionRecord,
+    TerminalBeliefState,
     TerminationRecord,
 )
 from .query_graph import canonical_type, compile_query_graph, type_lineage
@@ -193,6 +196,7 @@ class V2GraphController(GraphController):
         existing = existing or updated.allocation_history[-1]
         self._reconcile_outcome(
             updated, existing, packet, measured, bool(completed), str(failure_reason),
+            outcome_metadata or {},
         )
         self._reconcile_join_attempt(
             updated, packet, measured, bool(completed), str(failure_reason),
@@ -204,10 +208,68 @@ class V2GraphController(GraphController):
 
     def _expand(self, graph, operation, changes) -> None:
         super()._expand(graph, operation, changes)
+        rewrite = operation.payload.get("target_rewrite")
+        if rewrite is not None:
+            self._rewrite_terminal_target(graph, operation, changes, rewrite)
         if not self.config.query_graph_compiler:
             return
         query_graph = compile_query_graph(graph.question, graph.subgoals())
         graph.query_graph = query_graph.to_payload()
+
+    @staticmethod
+    def _rewrite_terminal_target(graph, operation, changes, rewrite) -> None:
+        if not isinstance(rewrite, dict):
+            raise GraphInvariantError("target rewrite must be a mapping")
+        target_id = str(operation.payload.get("attach_target", ""))
+        bridge_id = str(operation.payload.get("attach_node", ""))
+        target = graph.node(target_id, SubgoalNode)
+        bridge = graph.node(bridge_id, SubgoalNode)
+        if not target.terminal or bridge.terminal:
+            raise GraphInvariantError("target rewrite must demote a terminal objective")
+        question = str(rewrite.get("question_template", "")).strip()
+        bindings = {
+            str(key): str(value)
+            for key, value in (rewrite.get("variable_bindings", {}) or {}).items()
+        }
+        dependencies = list(dict.fromkeys(
+            str(value) for value in rewrite.get("dependencies", [])
+        ))
+        variables = set(re.findall(r"\$[A-Za-z][A-Za-z0-9_]*", question))
+        if (
+            not question
+            or not variables
+            or set(bindings) != variables
+            or set(bindings.values()) != {bridge_id}
+            or dependencies != [bridge_id]
+            or canonical_type(rewrite.get("answer_type")) != canonical_type(target.answer_type)
+        ):
+            raise GraphInvariantError("unsafe terminal target rewrite")
+
+        # The old target was an intermediate objective. Move all of its local
+        # reasoning state to the new bridge before changing the target's meaning.
+        for node in graph.nodes.values():
+            if isinstance(node, (ClaimNode, EvidenceNode)) and node.target_subgoal == target_id:
+                node.target_subgoal = bridge_id
+                changes["updated_nodes"].append(node.node_id)
+        for branch in graph.branches.values():
+            if target_id in branch.assignments:
+                branch.assignments[bridge_id] = branch.assignments.pop(target_id)
+            if target_id in branch.completed_subgoals:
+                branch.completed_subgoals = list(dict.fromkeys(
+                    [value for value in branch.completed_subgoals if value != target_id]
+                    + [bridge_id]
+                ))
+
+        target.question_template = question
+        target.instantiated_question = question
+        target.dependencies = dependencies
+        target.variable_bindings = bindings
+        target.answer_type = str(rewrite.get("answer_type", target.answer_type))
+        target.status = SubgoalStatus.UNRESOLVED
+        target.confidence = min(target.confidence, 0.1)
+        target.uncertainty = max(target.uncertainty, 0.9)
+        graph.execution_graph.replace_dependencies(target_id, dependencies)
+        changes["updated_nodes"].extend([target_id, bridge_id])
 
     def _retrieve(self, graph, operation, changes) -> None:
         super()._retrieve(graph, operation, changes)
@@ -261,6 +323,7 @@ class V2GraphController(GraphController):
 
     def _reconcile_outcome(
         self, graph, allocation, packet, measured, progressed, failure_reason,
+        outcome_metadata,
     ) -> None:
         operation = packet.operation
         pre = {
@@ -268,6 +331,24 @@ class V2GraphController(GraphController):
             for key, value in packet.pre_state_summary.items()
         }
         post = summarize_operation_region(graph, operation)
+        terminal_after = outcome_metadata.get("terminal_state_after", {})
+        if isinstance(terminal_after, dict) and terminal_after:
+            post.update({
+                "terminal_gap": _unit(terminal_after.get("terminal_gap", 1.0)),
+                "terminal_absolute_support": _unit(
+                    terminal_after.get("absolute_support", 0.0)
+                ),
+                "terminal_relative_weight": _unit(
+                    terminal_after.get("relative_weight", 0.0)
+                ),
+                "terminal_entropy": _unit(terminal_after.get("entropy", 1.0)),
+                "terminal_evidence_gap": _unit(
+                    terminal_after.get("evidence_gap", 1.0)
+                ),
+                "terminal_chain_coverage": _unit(
+                    terminal_after.get("chain_coverage", 0.0)
+                ),
+            })
         delta = {
             key: float(post.get(key, 0.0) - pre.get(key, 0.0))
             for key in sorted(set(pre) | set(post))
@@ -293,6 +374,9 @@ class V2GraphController(GraphController):
             "contradiction_resolution": (
                 pre.get("contradiction_pressure", 0.0) - post.get("contradiction_pressure", 0.0)
             ),
+            "terminal_gap_reduction": (
+                pre.get("terminal_gap", 1.0) - post.get("terminal_gap", 1.0)
+            ),
             "cost": self._normalized_actual_cost(packet, measured),
         }
         normalized = {
@@ -307,6 +391,7 @@ class V2GraphController(GraphController):
             "evidence_novelty": self.config.actual_utility_weight_novelty,
             "answer_chain_progress": self.config.actual_utility_weight_chain_progress,
             "contradiction_resolution": self.config.actual_utility_weight_contradiction_resolution,
+            "terminal_gap_reduction": self.config.actual_utility_weight_terminal_gap,
         }
         benefit_weight = sum(float(value) for value in weights.values())
         benefit = sum(
@@ -466,6 +551,9 @@ class V2GraphController(GraphController):
             node.provenance.metadata["source_triple"] = dict(row.get("source_triple", {}))
             node.provenance.metadata["extraction_evidence_count"] = int(
                 row.get("extraction_evidence_count", 0)
+            )
+            node.provenance.metadata["extraction_focus_mode"] = str(
+                row.get("extraction_focus_mode", "coverage")
             )
             node.provenance.metadata["typed_qualifiers"] = (
                 dict(row.get("qualifiers", {})) if isinstance(row.get("qualifiers"), dict) else {}
@@ -695,6 +783,33 @@ class V2GraphController(GraphController):
     def _commit(self, graph, operation, changes) -> None:
         super()._commit(graph, operation, changes)
         if operation.payload.get("mode") == "answer":
+            answer_row = operation.payload.get("answer", {})
+            terminal_row = answer_row.get("terminal_belief")
+            if graph.terminal_readout_version:
+                if not isinstance(terminal_row, dict):
+                    raise GraphInvariantError("v2.2 answer COMMIT requires terminal belief readout")
+                terminal = TerminalBeliefState(**terminal_row)
+                node_id = str(answer_row.get("node_id", ""))
+                if terminal.answer_node_id != node_id or not terminal.accepted:
+                    raise GraphInvariantError("answer COMMIT terminal belief did not pass")
+                if terminal.rejection_reasons or not terminal.sufficient_chain:
+                    raise GraphInvariantError("answer COMMIT has rejected terminal channels")
+                if any((
+                    terminal.absolute_support < self.config.terminal_min_absolute_support,
+                    terminal.relative_margin < self.config.terminal_min_relative_margin,
+                    terminal.entropy > self.config.terminal_max_entropy,
+                    terminal.evidence_gap > self.config.terminal_max_evidence_gap,
+                    terminal.contradiction_pressure >= self.config.terminal_max_contradiction,
+                    terminal.answer_type_consistency < self.config.terminal_min_type_consistency,
+                    terminal.chain_coverage < self.config.terminal_min_chain_coverage,
+                )):
+                    raise GraphInvariantError("answer COMMIT terminal channels violate configured gate")
+                if set(terminal.supporting_claims) != set(answer_row.get("supporting_claims", [])):
+                    raise GraphInvariantError("answer COMMIT terminal claim support mismatch")
+                if set(terminal.supporting_evidence) != set(answer_row.get("supporting_evidence", [])):
+                    raise GraphInvariantError("answer COMMIT terminal evidence support mismatch")
+                graph.terminal_beliefs[node_id] = terminal
+                changes["updated_nodes"].append(node_id)
             return
         claim_id = str(operation.payload.get("candidate_id", ""))
         if claim_id and claim_id in graph.nodes:

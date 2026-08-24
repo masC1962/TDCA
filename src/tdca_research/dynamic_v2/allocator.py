@@ -31,6 +31,8 @@ class EVCSignals:
     expected_cost: float = 0.0
     graph_growth_risk: float = 0.0
     failure_cooldown: float = 0.0
+    terminal_gap: float = 0.0
+    terminal_proximity: float = 0.0
 
 
 @dataclass(frozen=True)
@@ -131,7 +133,11 @@ class AdaptiveComputationAllocator:
                 raw=raw_row,
                 normalized=normalized,
                 requested_budget=self._budget_packet(
-                    operation, raw_row.graph_heat, remaining, prior,
+                    operation, max(
+                        raw_row.graph_heat,
+                        0.75 * raw_row.terminal_gap,
+                        raw_row.terminal_proximity,
+                    ), remaining, prior,
                     fidelity_fraction=fidelity_fraction,
                 ),
                 remaining_global_budget=dict(remaining),
@@ -202,6 +208,8 @@ class AdaptiveComputationAllocator:
             expected_cost=base.expected_cost * fraction,
             graph_growth_risk=base.graph_growth_risk * fraction,
             failure_cooldown=base.failure_cooldown,
+            terminal_gap=base.terminal_gap * gain,
+            terminal_proximity=base.terminal_proximity * gain,
         )
 
     def _adaptive_evc(self, normalized: EVCSignals) -> float:
@@ -216,6 +224,8 @@ class AdaptiveComputationAllocator:
             - self.config.evc_weight_cost * normalized.expected_cost
             - self.config.evc_weight_growth_risk * normalized.graph_growth_risk
             - self.config.evc_weight_failure_cooldown * normalized.failure_cooldown
+            + self.config.evc_weight_terminal_gap * normalized.terminal_gap
+            + self.config.evc_weight_terminal_proximity * normalized.terminal_proximity
         ))
 
     @staticmethod
@@ -272,6 +282,15 @@ class AdaptiveComputationAllocator:
         rkey = operation_region_key(operation)
         prior = feedback_prior(graph, family, rkey)
         empirical_cost = float(prior.get("mean_cost", 0.0))
+        terminal_context = operation.payload.get("_terminal_context", {})
+        if not isinstance(terminal_context, dict):
+            terminal_context = {}
+        terminal_gap = _unit(float(terminal_context.get("terminal_gap", 1.0)))
+        terminal_affinity = _terminal_operation_affinity(operation, terminal_context)
+        terminal_proximity = (
+            1.0 - terminal_gap
+            if operation.operation_type == OperationType.COMMIT else 0.0
+        )
         return EVCSignals(
             graph_heat=heat,
             uncertainty_reduction=uncertainty * _operation_reduction(operation.operation_type),
@@ -283,6 +302,8 @@ class AdaptiveComputationAllocator:
             expected_cost=max(base_cost, empirical_cost),
             graph_growth_risk=growth,
             failure_cooldown=float(prior["cooldown_active"]),
+            terminal_gap=terminal_gap * terminal_affinity,
+            terminal_proximity=terminal_proximity,
         )
 
     def _budget_packet(
@@ -468,6 +489,9 @@ def summarize_operation_region(
         return sum(float(getattr(row, name)) for row in states) / len(states) if states else default
 
     chain_progress = min(1.0, len(completed) / total_subgoals + 0.25 * len(accepted_answers))
+    terminal_context = operation.payload.get("_terminal_context", {})
+    if not isinstance(terminal_context, dict):
+        terminal_context = {}
     return {
         "node_count": float(len(node_ids)),
         "claim_count": float(len(claims)),
@@ -485,7 +509,70 @@ def summarize_operation_region(
         "dependency_unlock": avg("dependency_unlock_value", 0.0),
         "contradiction_pressure": avg("contradiction_pressure", 0.0),
         "answer_chain_progress": chain_progress,
+        "terminal_gap": _unit(float(terminal_context.get("terminal_gap", 1.0))),
+        "terminal_absolute_support": _unit(float(
+            terminal_context.get("absolute_support", 0.0)
+        )),
+        "terminal_relative_weight": _unit(float(
+            terminal_context.get("relative_weight", 0.0)
+        )),
+        "terminal_entropy": _unit(float(terminal_context.get("entropy", 1.0))),
+        "terminal_evidence_gap": _unit(float(
+            terminal_context.get("evidence_gap", 1.0)
+        )),
+        "terminal_chain_coverage": _unit(float(
+            terminal_context.get("chain_coverage", 0.0)
+        )),
     }
+
+
+def _terminal_operation_affinity(
+    operation: GraphOperation, context: dict,
+) -> float:
+    reasons = {str(value) for value in context.get("rejection_reasons", [])}
+    if not reasons:
+        return 1.0 if operation.operation_type == OperationType.COMMIT else 0.25
+    affinities = {
+        OperationType.RETRIEVE: {
+            "evidence_gap_above_maximum": 1.0,
+            "missing_terminal_candidate": 0.85,
+            "unresolved_competing_branches": 0.75,
+            "insufficient_support_chain": 0.60,
+        },
+        OperationType.VERIFY: {
+            "absolute_support_below_minimum": 1.0,
+            "relative_margin_below_minimum": 0.90,
+            "claim_set_entropy_above_maximum": 0.90,
+            "answer_type_consistency_below_minimum": 0.85,
+            "contradiction_pressure_above_maximum": 0.75,
+        },
+        OperationType.MERGE: {
+            "insufficient_support_chain": 1.0,
+            "chain_coverage_below_minimum": 1.0,
+            "missing_terminal_candidate": 0.80,
+        },
+        OperationType.BRANCH: {
+            "missing_terminal_candidate": 1.0,
+            "absolute_support_below_minimum": 0.70,
+            "unresolved_competing_branches": 0.70,
+        },
+        OperationType.EXPAND: {
+            "missing_terminal_candidate": 0.90,
+            "insufficient_support_chain": 0.85,
+            "chain_coverage_below_minimum": 0.85,
+        },
+        OperationType.REVISE: {
+            "contradiction_pressure_above_maximum": 1.0,
+            "relative_margin_below_minimum": 0.50,
+        },
+        OperationType.COMMIT: {},
+        OperationType.PRUNE: {
+            "relative_margin_below_minimum": 0.60,
+            "claim_set_entropy_above_maximum": 0.60,
+        },
+    }
+    scores = affinities[operation.operation_type]
+    return max((scores.get(reason, 0.20) for reason in reasons), default=0.20)
 
 
 def _fixed_priority(value: OperationType) -> int:
@@ -524,3 +611,7 @@ def _minmax(values: list[float]) -> list[float]:
         value = max(0.0, min(1.0, values[0]))
         return [value for _ in values]
     return [(value - low) / (high - low) for value in values]
+
+
+def _unit(value: float) -> float:
+    return max(0.0, min(1.0, float(value)))

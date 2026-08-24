@@ -8,6 +8,7 @@ from typing import Any
 
 from ..budget import Budget
 from ..dynamic.graph import (
+    BranchStatus,
     CandidateStatus,
     ClaimNode,
     EvidenceNode,
@@ -209,12 +210,25 @@ class MultiHopJoinEngine:
         token_budget: int | None = None,
     ) -> GraphOperation | None:
         premises = [graph.node(node_id, ClaimNode) for node_id in candidate.premise_ids]
+        projection = next((
+            row for row in premises if row.node_id == candidate.projection_premise_id
+        ), None)
         unsupported = [
             row.node_id for row in premises
             if row.status in {CandidateStatus.PROPOSED, CandidateStatus.INVALID, CandidateStatus.ARCHIVED}
             or row.score.absolute_support < self.config.join_min_premise_support
             or row.score.raw.grounding < self.config.join_min_premise_support
-            or row.score.raw.entailment < self.config.join_min_premise_support
+            or (
+                row.score.raw.entailment < self.config.join_min_premise_support
+                and not (
+                    row is projection
+                    and row.score.absolute_support >= self.config.commit_support_threshold
+                    and row.score.raw.dependency_consistency >= self.config.commit_support_threshold
+                    and row.score.raw.type_match >= self.config.terminal_min_type_consistency
+                    and row.score.evidence_gap <= self.config.terminal_max_evidence_gap
+                    and row.score.raw.contradiction_risk < self.config.terminal_max_contradiction
+                )
+            )
         ]
         if unsupported:
             self.last_diagnostics = {
@@ -243,9 +257,6 @@ class MultiHopJoinEngine:
                 "deterministic_numeric_comparison_join_v21",
                 {"llm_calls": 0.0, "tokens": 0.0},
             )
-        projection = next((
-            row for row in premises if row.node_id == candidate.projection_premise_id
-        ), None)
         if projection is not None:
             other_support = min(
                 row.score.absolute_support for row in premises if row.node_id != projection.node_id
@@ -449,7 +460,7 @@ class MultiHopJoinEngine:
             operation_type=OperationType.MERGE,
             target_id=candidate.target_subgoal,
             source_ids=list(candidate.premise_ids),
-            branch_id=premises[0].branch_id,
+            branch_id=_join_branch_id(graph, premises, candidate.projection_premise_id),
             payload={
                 "mode": "derive_join",
                 "binding": candidate.binding,
@@ -484,7 +495,11 @@ class MultiHopJoinEngine:
         signature = candidate.signature
         return GraphOperation(
             operation_id, OperationType.MERGE, candidate.target_subgoal,
-            list(candidate.premise_ids), graph.node(candidate.premise_ids[0], ClaimNode).branch_id,
+            list(candidate.premise_ids), _join_branch_id(
+                graph,
+                [graph.node(node_id, ClaimNode) for node_id in candidate.premise_ids],
+                candidate.projection_premise_id,
+            ),
             {
                 "mode": "derive_join", "binding": candidate.binding,
                 "variable_bindings": candidate.variable_bindings,
@@ -509,6 +524,35 @@ def _scalar_text(value: Any) -> str:
     if isinstance(value, bool) or not isinstance(value, (str, int, float)):
         return ""
     return str(value).strip()
+
+
+def _join_branch_id(
+    graph: DynamicReasoningHypergraphV2,
+    premises: list[ClaimNode],
+    projection_premise_id: str = "",
+) -> str:
+    """Attach a JOIN to its live child branch, never an archived ancestor.
+
+    Accessible proof premises may legitimately come from an ancestor branch.
+    Using the first sorted premise therefore loses the derived state after a
+    branch split.  At most one live lineage is accessible to a discovery call;
+    fail closed if corrupted input exposes multiple active branches.
+    """
+    active = sorted({
+        claim.branch_id for claim in premises
+        if claim.branch_id in graph.branches
+        and graph.branches[claim.branch_id].status == BranchStatus.ACTIVE
+    })
+    if len(active) == 1:
+        return active[0]
+    if len(active) > 1:
+        raise ValueError("JOIN premises span multiple active branches")
+    projection = next((
+        claim for claim in premises if claim.node_id == projection_premise_id
+    ), None)
+    if projection is not None:
+        return projection.branch_id
+    return premises[0].branch_id
 
 
 def _compatible(left: str, right: str) -> bool:
@@ -878,7 +922,11 @@ def _projection_premise_many(
     premise_set = set(premise_ids)
     for node_id in premise_ids:
         candidate = graph.node(node_id, ClaimNode)
-        if candidate.target_subgoal != target_subgoal or not candidate.dependency_claim_ids:
+        if (
+            candidate.target_subgoal != target_subgoal
+            or not candidate.dependency_claim_ids
+            or not _verified_answer_projection(graph, candidate)
+        ):
             continue
         dependency_lineage: set[str] = set()
         for dependency_id in candidate.dependency_claim_ids:
@@ -890,6 +938,26 @@ def _projection_premise_many(
         ):
             return node_id
     return ""
+
+
+def _verified_answer_projection(
+    graph: DynamicReasoningHypergraphV2,
+    claim: ClaimNode,
+    seen: set[str] | None = None,
+) -> bool:
+    """Require an independently verified output projection for JOIN copying."""
+    seen = set(seen or ())
+    if claim.node_id in seen:
+        return False
+    seen.add(claim.node_id)
+    semantics = graph.claim_semantics[claim.node_id]
+    if semantics.join_depth == 0:
+        return bool(claim.provenance.metadata.get("answers_subgoal", False))
+    projection_id = str(semantics.qualifiers.get("projection_premise_id", ""))
+    projection = graph.nodes.get(projection_id)
+    return isinstance(projection, ClaimNode) and _verified_answer_projection(
+        graph, projection, seen,
+    )
 
 
 def _has_explicit_set_semantics(

@@ -103,3 +103,25 @@ matches their reported settings.
   `research_outputs/musique_distractor_development_ircot_1787256825790596574`
 - Paired results: `research_outputs/paired_dynamic_dev50/`
 - Gate: `configs/dynamic_heldout_gate.json`
+
+## Dynamic Hypergraph v2.2 development campaign (2026-08-24)
+
+The no-training v2.2 implementation reached its frozen development capability
+thresholds on the same MuSiQue development-50 sample: EM 0.520, F1 0.538,
+candidate presence 0.540, full-chain completion 0.580, 12 auditable 3/4-hop JOIN
+cases, 7 cases with a downstream-used n-ary JOIN, and zero unsupported answers.
+All 212 repository tests pass. The selected adaptive run used 336 logical model
+calls, 330,308 logical tokens, and 149 retrieval calls.
+
+The matched uniform control completed with F1 0.388, 352 logical calls, 367,790
+logical tokens, and 143 retrieval calls. Thus adaptive allocation improved answer
+quality and model-compute cost, but used six more retrieval calls and does not meet
+the preregistered all-primary-axis strict Pareto condition. The fixed-order arm was
+interrupted after 31/50 examples when the frozen development campaign reached its
+provider-token cap. Final campaign usage was 2,428 provider calls and 2,495,753 of
+2,500,000 provider-reported tokens, with zero pending requests.
+
+The v2.2 hard gate therefore remains closed. No budget curve or held-out run was
+launched after exhaustion. The machine-readable record is
+`docs/dynamic_v22_safe_stop_20260824.json`; the auditable request ledger is
+`analysis_outputs/dynamic_v22_campaign/campaign_budget.json`.

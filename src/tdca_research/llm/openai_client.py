@@ -9,6 +9,7 @@ from typing import Any
 
 from openai import OpenAI
 
+from ..campaign import CampaignBudgetExceeded, CampaignBudgetLedger
 from ..utils import safe_error, stable_hash, write_json
 from .base import (
     BaseLLM,
@@ -23,6 +24,7 @@ class OpenAICompatibleLLM(BaseLLM):
     def __init__(
         self, base_url: str, model_name: str, cache_dir: str, prompt_version: str,
         request_timeout_seconds: float = 120.0, max_api_attempts: int = 3,
+        campaign_ledger: CampaignBudgetLedger | None = None,
     ) -> None:
         api_key = os.getenv("LLM_API_KEY") or os.getenv("DASHSCOPE_API_KEY")
         if not api_key:
@@ -34,6 +36,7 @@ class OpenAICompatibleLLM(BaseLLM):
         self.prompt_version = prompt_version
         self.request_timeout_seconds = float(request_timeout_seconds)
         self.max_api_attempts = int(max_api_attempts)
+        self.campaign_ledger = campaign_ledger
         # One explicit retry layer only; SDK retries would otherwise multiply the
         # configured attempt count and make latency/call accounting ambiguous.
         self.client = OpenAI(
@@ -64,7 +67,20 @@ class OpenAICompatibleLLM(BaseLLM):
             return Generation(**payload, cached=True)
         last_error: Exception | None = None
         for attempt in range(self.max_api_attempts):
+            reservation_id = None
             try:
+                if self.campaign_ledger is not None:
+                    # UTF-8 bytes plus the requested completion bound is a
+                    # conservative provider-token reservation independent of a
+                    # local tokenizer implementation.
+                    prompt_upper_bound = len(json.dumps(
+                        messages, ensure_ascii=False, separators=(",", ":"),
+                    ).encode("utf-8"))
+                    reservation_id = self.campaign_ledger.reserve(
+                        cache_key=key,
+                        cache_path=cache_path,
+                        reserved_tokens=prompt_upper_bound + int(max_tokens),
+                    )
                 request = {
                     "model": self.model_name,
                     "messages": messages,
@@ -85,6 +101,15 @@ class OpenAICompatibleLLM(BaseLLM):
                     finish_reason=str(choice.finish_reason or ""),
                     metadata={"schema_name": schema_name, "provider_attempts": attempt + 1},
                 )
+                settlement = None
+                if self.campaign_ledger is not None and reservation_id is not None:
+                    settlement = self.campaign_ledger.settle(
+                        reservation_id,
+                        prompt_tokens=generation.prompt_tokens,
+                        completion_tokens=generation.completion_tokens,
+                        outcome="success",
+                    )
+                    reservation_id = None
                 if not generation.text:
                     raise InfrastructureError("API returned an empty response")
                 write_json(cache_path, {
@@ -94,9 +119,20 @@ class OpenAICompatibleLLM(BaseLLM):
                     "finish_reason": generation.finish_reason,
                     "metadata": generation.metadata,
                 })
+                if settlement is not None and settlement["over_cap"]:
+                    raise CampaignBudgetExceeded(
+                        "campaign provider token cap crossed by settled response",
+                        settlement["snapshot"],
+                    )
                 return generation
+            except CampaignBudgetExceeded:
+                raise
             except Exception as exc:
                 last_error = exc
+                if self.campaign_ledger is not None and reservation_id is not None:
+                    self.campaign_ledger.settle(
+                        reservation_id, outcome=f"error:{type(exc).__name__}",
+                    )
                 if _is_provider_refusal(exc):
                     # Policy refusals are deterministic for an identical prompt;
                     # retrying only spends calls and still should not fail a whole
@@ -128,6 +164,10 @@ class OpenAICompatibleLLM(BaseLLM):
                 f"invalid JSON for {schema_name}: {safe_error(exc)}",
                 generation,
             ) from exc
+        if isinstance(value, list):
+            root_key = _declared_array_root_key(schema_name)
+            if root_key:
+                value = {root_key: value}
         if not isinstance(value, dict):
             (self.cache_dir / f"{key}.json").unlink(missing_ok=True)
             raise StructuredOutputError(f"JSON for {schema_name} must be an object", generation)
@@ -160,6 +200,20 @@ class OpenAICompatibleLLM(BaseLLM):
                     if recovered is not None:
                         return recovered
                 raise original
+
+
+def _declared_array_root_key(schema_name: str) -> str:
+    """Wrap a bare provider array only when the schema declares its root key."""
+    prefixes = {
+        "dynamic_v2_event_graph_editor": "operations",
+        "dynamic_v2_typed_claim_extraction": "claims",
+        "dynamic_v2_goal_conditioned_answer_projection": "claims",
+        "dynamic_v2_independent_verification": "scores",
+    }
+    return next((
+        root_key for prefix, root_key in prefixes.items()
+        if str(schema_name).startswith(prefix)
+    ), "")
 
 
 def _complete_object_array_prefix(text: str) -> dict[str, list[dict[str, Any]]] | None:

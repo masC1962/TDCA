@@ -107,6 +107,7 @@ def dynamic_v2_metrics(
         revision_labels = [_revision_label(row, claims, example) for row in revisions]
         known_labels = [value for value in revision_labels if value in {"correct", "wrong"}]
         accepted_answers = [value for value in answers.values() if value.get("status") == "accepted"]
+        terminal_beliefs = graph.get("terminal_beliefs", {})
         invalid_edges = set(graph.get("invalidated_hyperedges", []))
         unsupported = [
             value for value in accepted_answers
@@ -114,7 +115,32 @@ def dynamic_v2_metrics(
             or value.get("derivation_edge") not in hyperedges
             or value.get("derivation_edge") in invalid_edges
             or any(claim_id not in active for claim_id in value.get("supporting_claims", []))
+            or value.get("node_id") not in terminal_beliefs
+            or not terminal_beliefs.get(value.get("node_id"), {}).get("accepted")
+            or terminal_beliefs.get(value.get("node_id"), {}).get("rejection_reasons")
+            or not terminal_beliefs.get(value.get("node_id"), {}).get("sufficient_chain")
+            or set(terminal_beliefs.get(value.get("node_id"), {}).get("supporting_claims", []))
+            != set(value.get("supporting_claims", []))
+            or set(terminal_beliefs.get(value.get("node_id"), {}).get("supporting_evidence", []))
+            != set(value.get("supporting_evidence", []))
         ]
+        complete_terminal_readout = all(
+            value.get("node_id") in terminal_beliefs
+            and terminal_beliefs[value.get("node_id")].get("accepted")
+            and terminal_beliefs[value.get("node_id")].get("sufficient_chain")
+            and not terminal_beliefs[value.get("node_id")].get("rejection_reasons")
+            for value in accepted_answers
+        )
+        terminal_gap_trace = bool(allocations) and all(
+            "terminal_gap" in (allocation.get("evc_components_raw") or {})
+            and "terminal_proximity" in (allocation.get("evc_components_raw") or {})
+            and "terminal_gap" in (allocation.get("pre_state_summary") or {})
+            for allocation in allocations
+        ) and len(outcomes) == len(allocations) and all(
+            "terminal_gap_reduction" in (outcome.get("actual_utility_components_raw") or {})
+            and "terminal_gap" in (outcome.get("post_state_summary") or {})
+            for outcome in outcomes
+        )
         terminations = graph.get("termination_history", [])
         row = {
             "qid": qid,
@@ -160,6 +186,9 @@ def dynamic_v2_metrics(
                 revision_labels.count("correct") / len(known_labels) if known_labels else 0.0
             ),
             "unsupported_answer_count": len(unsupported),
+            "terminal_belief_count": len(terminal_beliefs),
+            "complete_terminal_belief_readout": complete_terminal_readout,
+            "complete_terminal_gap_trace": terminal_gap_trace,
             "termination_outcome": terminations[-1].get("outcome") if terminations else "MISSING",
             "controller_state_hash_present": bool(graph.get("controller_state_hash")),
         }
@@ -202,6 +231,7 @@ def _aggregate(rows: list[dict[str, Any]]) -> dict[str, Any]:
         "nary_join_attempt_count", "nary_join_accepted_count", "nary_join_downstream_used_count",
         "natural_revision_count", "natural_revision_correct", "natural_revision_wrong",
         "natural_revision_unknown", "unsupported_answer_count",
+        "terminal_belief_count",
     )
     result = {"count": len(rows)}
     result.update({f"mean_{key}": mean(float(row[key]) for row in rows) for key in numeric})
@@ -210,6 +240,7 @@ def _aggregate(rows: list[dict[str, Any]]) -> dict[str, Any]:
         "non_uniform_allocation", "complete_evc_trace", "controller_state_hash_present",
         "complete_outcome_feedback_trace", "feedback_influenced_allocation",
         "query_graph_present",
+        "complete_terminal_belief_readout", "complete_terminal_gap_trace",
     ):
         result[f"{key}_rate"] = mean(float(bool(row[key])) for row in rows)
     correct = sum(int(row["natural_revision_correct"]) for row in rows)

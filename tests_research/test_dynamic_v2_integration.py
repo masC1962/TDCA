@@ -44,6 +44,41 @@ def test_v2_template_overlap_recognizes_inflected_full_question_restatement():
     ) >= 0.55
 
 
+def test_v2_normalizer_does_not_collapse_outer_relation_with_lexical_overlap():
+    operation = GraphOperation(
+        "op_plan", OperationType.EXPAND, "subgoal_root", [], "branch_root",
+        {"subgoals": [
+            {
+                "node_id": "subgoal_1",
+                "question_template": "What is the country of citizenship of Rainer Ernst?",
+                "instantiated_question": "What is the country of citizenship of Rainer Ernst?",
+                "dependencies": [], "variable_bindings": {},
+                "answer_type": "country", "terminal": False,
+            },
+            {
+                "node_id": "subgoal_2",
+                "question_template": "What is the country of literature of $country_1?",
+                "instantiated_question": "What is the country of literature of $country_1?",
+                "dependencies": ["subgoal_1"],
+                "variable_bindings": {"$country_1": "subgoal_1"},
+                "answer_type": "country", "terminal": False,
+            },
+            {
+                "node_id": "subgoal_root",
+                "question_template": "Border troops of $country_2 are from what country?",
+                "instantiated_question": "Border troops of $country_2 are from what country?",
+                "dependencies": ["subgoal_2"],
+                "variable_bindings": {"$country_2": "subgoal_2"},
+                "answer_type": "country", "terminal": True,
+            },
+        ]}, "test_plan", "offline_test",
+    )
+    normalized = DynamicHypergraphV2Reasoner._normalize_initial_plan(operation)
+    assert [row["node_id"] for row in normalized.payload["subgoals"]] == [
+        "subgoal_1", "subgoal_2", "subgoal_root",
+    ]
+
+
 def test_v2_end_to_end_answer_has_diffusion_allocation_and_typed_claims():
     passages = [
         Passage("p1", "Alpha", "Alpha is led by Ada Lovelace."),
@@ -103,11 +138,21 @@ def test_v2_end_to_end_answer_has_diffusion_allocation_and_typed_claims():
     assert final["diffusion_history"]
     assert final["allocation_history"]
     assert all(row["actual_cost"] for row in final["allocation_history"])
+    assert all(
+        {"terminal_gap", "terminal_proximity"}.issubset(row["evc_components_raw"])
+        for row in final["allocation_history"]
+    )
+    assert all(
+        "terminal_gap_reduction" in row["actual_utility_components_raw"]
+        for row in final["allocation_history"]
+    )
     reconciled = [row for row in reasoning if row.get("event") == "allocation_reconciled"]
     assert len(reconciled) == len(final["allocation_history"])
     assert all(row["allocation"]["predicted_evc"] is not None for row in reconciled)
     assert all(row["actual_cost"] for row in reconciled)
     assert final["termination_history"][-1]["outcome"] == "ANSWER"
+    assert final["terminal_beliefs"]
+    assert any(row.get("event") == "terminal_belief_readout" for row in reasoning)
     answer = next(value for value in final["nodes"].values() if value["kind"] == "answer")
     assert answer["supporting_claims"] and answer["supporting_evidence"]
 

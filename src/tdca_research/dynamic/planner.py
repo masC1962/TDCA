@@ -16,6 +16,9 @@ subgoals plus the root objective. Output {subgoals, root_dependencies, root_ques
 root_variable_bindings, root_answer_type}. Each subgoal has local_id, question_template, answer_type,
 dependencies, variable_bindings. Rewrite the root as the next executable question, replacing resolved bridge
 entities with generic variables such as $bridge_1. Every binding maps a variable to a dependency local_id.
+The root objective must request exactly the same final answer as the user's complete question; never promote
+an early bridge lookup into the root. Preserve a final standalone wh-clause after sentence punctuation (for
+example, a trailing "Who ...?") as the root answer focus. Subgoals resolve bridge variables only.
 Use no hidden labels or outside knowledge."""
 
 
@@ -35,7 +38,7 @@ class DynamicPlanner:
             estimated_prompt_tokens=estimate_message_tokens(messages),
         )
         data, generation = self.llm.generate_json(
-            messages, "dynamic_initial_plan_v2", self.config.initial_plan_max_tokens,
+            messages, "dynamic_initial_plan_v3_root_objective_invariant", self.config.initial_plan_max_tokens,
             self.config.temperature,
         )
         self.budget.record_generation(generation)
@@ -111,17 +114,59 @@ class DynamicPlanner:
             # output. The original question remains a conservative fallback.
             root_template = question
             root_bindings = {}
+        original_focus_type = _root_answer_type(
+            question, str(data.get("root_answer_type", "entity")),
+        )
+        proposed_focus_type = _root_answer_type(
+            root_template, str(data.get("root_answer_type", "entity")),
+        )
+        if not _same_answer_focus(original_focus_type, proposed_focus_type):
+            # A provider may accidentally return the first bridge question as
+            # the root. Preserve the dependency agenda but restore the user's
+            # actual objective. This is a structural wh/type invariant, not a
+            # semantic rewrite or a label-derived correction.
+            root_template = question
+            root_bindings = {}
         root = {
             "node_id": "subgoal_root",
             "question_template": root_template,
             "instantiated_question": root_template,
             "dependencies": list(dict.fromkeys(root_dependencies)),
             "variable_bindings": root_bindings,
-            "answer_type": _root_answer_type(question, str(data.get("root_answer_type", "entity"))),
+            "answer_type": original_focus_type,
             "terminal": True,
             "confidence": 0.1,
             "uncertainty": 0.9,
         }
+        # A coarse provider plan can accidentally use an inner bridge lookup as
+        # the terminal root while keeping the same broad answer type (for
+        # example, country -> country).  Recover the omitted outer objective
+        # only when the recursively expanded bridge phrase is a literal,
+        # order-preserving span of the user's question.  This is a structural
+        # closure rule: it uses no corpus facts, labels, or semantic similarity.
+        residual = _residual_root_closure(question, normalized_rows, root)
+        if residual is not None and len(normalized_rows) < 2:
+            promoted_id = f"subgoal_{len(normalized_rows) + 1}"
+            promoted = {
+                **root,
+                "node_id": promoted_id,
+                "terminal": False,
+                "confidence": 0.25,
+                "uncertainty": 0.75,
+            }
+            bridge = "$nested_bridge"
+            normalized_rows.append(promoted)
+            root = {
+                "node_id": "subgoal_root",
+                "question_template": residual.replace("$nested_bridge", bridge),
+                "instantiated_question": residual.replace("$nested_bridge", bridge),
+                "dependencies": [promoted_id],
+                "variable_bindings": {bridge: promoted_id},
+                "answer_type": original_focus_type,
+                "terminal": True,
+                "confidence": 0.1,
+                "uncertainty": 0.9,
+            }
         # Some providers repeat the final executable question as both the last
         # provisional subgoal and the root objective.  Keeping both creates a
         # fake extra hop and can leave an unresolved terminal node after the
@@ -181,7 +226,7 @@ def _template_signature(value: str) -> str:
 
 
 def _root_answer_type(question: str, proposed: str) -> str:
-    normalized = question.strip().lower()
+    normalized = _answer_focus_text(question).strip().lower()
     if normalized.startswith("who"):
         return "person"
     if normalized.startswith("when"):
@@ -193,3 +238,101 @@ def _root_answer_type(question: str, proposed: str) -> str:
     if normalized.startswith("which country") or normalized.startswith("what country"):
         return "country"
     return proposed or "entity"
+
+
+def _answer_focus_text(question: str) -> str:
+    """Use a standalone trailing wh-clause as the final user objective."""
+    segments = [
+        value.strip() for value in re.split(r"(?<=[.!?])\s+", str(question))
+        if value.strip()
+    ]
+    if len(segments) > 1 and re.match(
+        r"^(?:who|when|where|how\s+(?:many|much)|what|which)\b",
+        segments[-1], re.IGNORECASE,
+    ):
+        return segments[-1]
+    return str(question)
+
+
+def _same_answer_focus(left: str, right: str) -> bool:
+    aliases = {
+        "city": "location", "country": "location", "state": "location",
+        "human": "person", "people": "person", "year": "date", "time": "date",
+        "count": "number", "quantity": "number",
+    }
+    canonical_left = aliases.get(str(left).strip().lower(), str(left).strip().lower())
+    canonical_right = aliases.get(str(right).strip().lower(), str(right).strip().lower())
+    return canonical_left == canonical_right or "entity" in {canonical_left, canonical_right}
+
+
+def _residual_root_closure(
+    question: str, rows: list[dict[str, Any]], root: dict[str, Any],
+) -> str | None:
+    """Restore an outer relation dropped from a nested coarse plan.
+
+    The root's objective is recursively expanded through its literal variable
+    bindings, then located in the original question while ignoring articles.
+    A proper embedded span proves that the provider stopped at an inner lookup;
+    replacing only that span yields the still-unanswered outer objective.
+    """
+    dependencies = list(root.get("dependencies", []))
+    bindings = dict(root.get("variable_bindings", {}))
+    if not dependencies or not bindings:
+        return None
+    by_id = {str(row.get("node_id")): row for row in rows}
+    phrase = _objective_phrase(str(root.get("question_template", "")))
+    if not phrase:
+        return None
+    for variable, source_id in bindings.items():
+        source = by_id.get(str(source_id))
+        if source is None:
+            return None
+        source_phrase = _objective_phrase(str(source.get("question_template", "")))
+        if not source_phrase or str(variable) not in phrase:
+            return None
+        phrase = phrase.replace(str(variable), source_phrase)
+    span = _ordered_content_span(question, phrase)
+    if span is None:
+        return None
+    start, end = span
+    residual = f"{question[:start]}$nested_bridge{question[end:]}"
+    content = [
+        token.casefold() for token in re.findall(r"[A-Za-z0-9]+", residual)
+        if token.casefold() not in {"the", "a", "an"}
+    ]
+    if len(content) < 5 or not _same_answer_focus(
+        _root_answer_type(question, "entity"),
+        _root_answer_type(residual, "entity"),
+    ):
+        return None
+    return residual
+
+
+def _objective_phrase(template: str) -> str:
+    value = str(template).strip().rstrip("?.! ")
+    value = re.sub(
+        r"^(?:what|which|who)\s+(?:(?:is|are|was|were|does|do|did)\s+)?(?:the\s+)?",
+        "", value, flags=re.IGNORECASE,
+    )
+    return value.strip()
+
+
+def _ordered_content_span(text: str, phrase: str) -> tuple[int, int] | None:
+    """Return a literal token-order span, treating articles as transparent."""
+    stop = {"the", "a", "an"}
+    text_tokens = [
+        (match.group(0).casefold(), match.start(), match.end())
+        for match in re.finditer(r"[A-Za-z0-9]+", text)
+        if match.group(0).casefold() not in stop
+    ]
+    phrase_tokens = [
+        match.group(0).casefold() for match in re.finditer(r"[A-Za-z0-9]+", phrase)
+        if match.group(0).casefold() not in stop
+    ]
+    if not phrase_tokens or len(phrase_tokens) >= len(text_tokens):
+        return None
+    width = len(phrase_tokens)
+    for index in range(len(text_tokens) - width + 1):
+        if [row[0] for row in text_tokens[index:index + width]] == phrase_tokens:
+            return text_tokens[index][1], text_tokens[index + width - 1][2]
+    return None

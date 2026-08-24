@@ -19,8 +19,8 @@ class DynamicV2ResearchConfig(DynamicResearchConfig):
     """
 
     method: str = "dynamic_hypergraph_tdca_v2"
-    prompt_version: str = "dynamic-hypergraph-v2.1"
-    architecture_version: str = "relation-light-memory-proof-hypergraph-v2.1"
+    prompt_version: str = "dynamic-hypergraph-v2.2.3-immutable-root"
+    architecture_version: str = "terminal-belief-gap-aware-proof-hypergraph-v2.2"
 
     max_extracted_claims_per_round: int = 8
     max_join_arity: int = 4
@@ -58,7 +58,19 @@ class DynamicV2ResearchConfig(DynamicResearchConfig):
     evc_weight_growth_risk: float = 0.50
     evc_weight_observed_value: float = 1.00
     evc_weight_failure_cooldown: float = 1.00
+    evc_weight_terminal_gap: float = 1.25
+    evc_weight_terminal_proximity: float = 0.75
     meta_stop_evc_threshold: float = 0.08
+
+    # Terminal acceptance is a conjunctive readout over independent belief
+    # channels.  These are initial development values, never learned weights.
+    terminal_min_absolute_support: float = 0.70
+    terminal_min_relative_margin: float = 0.20
+    terminal_max_entropy: float = 0.50
+    terminal_max_evidence_gap: float = 0.50
+    terminal_max_contradiction: float = 0.70
+    terminal_min_type_consistency: float = 0.80
+    terminal_min_chain_coverage: float = 1.00
 
     allocator_mode: str = "adaptive_evc"
     outcome_feedback_prior_strength: float = 2.0
@@ -72,6 +84,7 @@ class DynamicV2ResearchConfig(DynamicResearchConfig):
     actual_utility_weight_novelty: float = 0.5
     actual_utility_weight_chain_progress: float = 1.0
     actual_utility_weight_contradiction_resolution: float = 0.75
+    actual_utility_weight_terminal_gap: float = 1.25
     actual_utility_weight_cost: float = 1.0
 
     allocation_min_token_fraction: float = 0.35
@@ -117,6 +130,12 @@ class DynamicV2ResearchConfig(DynamicResearchConfig):
             if name.startswith("diffusion_") and name not in {"diffusion_steps", "diffusion_min_delta"}
             or name.endswith("_threshold")
             or name.endswith("_fraction")
+            or name in {
+                "terminal_min_absolute_support", "terminal_min_relative_margin",
+                "terminal_max_entropy", "terminal_max_evidence_gap",
+                "terminal_max_contradiction", "terminal_min_type_consistency",
+                "terminal_min_chain_coverage",
+            }
         }
         for name, value in unit.items():
             if not 0.0 <= float(value) <= 1.0:

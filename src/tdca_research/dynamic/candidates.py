@@ -391,6 +391,22 @@ def _dependency_consistency(
         for value in dependency_ids
     )
     identity_cues = ("same", "also known", "which entity", "what is the name")
-    if repeated and not any(cue in question.lower() for cue in identity_cues):
+    explicit_alias = any(
+        _explicit_parenthetical_alias(graph.node(ref, EvidenceNode).source_span, candidate.value)
+        for ref in candidate.evidence_refs
+    )
+    if repeated and not explicit_alias and not any(cue in question.lower() for cue in identity_cues):
         return min(model_score, 0.1)
     return model_score
+
+
+def _explicit_parenthetical_alias(text: str, alias: str) -> bool:
+    """Recognize only a literal ``Long Form (Alias)`` evidence construction."""
+    value = str(alias).strip()
+    if not value or len(value.split()) > 8:
+        return False
+    escaped = r"\s+".join(re.escape(token) for token in value.split())
+    long_form = r"[A-Z][A-Za-z'\-]*(?:\s+[A-Z][A-Za-z'\-]*){1,7}"
+    return re.search(
+        rf"\b{long_form}\s*\(\s*{escaped}\s*\)", str(text), re.IGNORECASE,
+    ) is not None

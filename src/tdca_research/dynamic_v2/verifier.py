@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import re
 from collections import defaultdict
 from statistics import mean
 from typing import Any
@@ -212,17 +213,25 @@ class MultiSampleIndependentVerifier:
         for candidate in comparison_candidates:
             position = _projection_vote(
                 projection_votes[candidate.node_id],
-                "value" if candidate.provenance.metadata.get("answers_subgoal", False) else "none",
+                _preserved_projection(candidate),
             )
             structural_position = _structural_projection(
                 graph, subgoal_id, candidate, expected_type,
             )
-            if structural_position != "none":
+            if structural_position != "none" and projection_votes[candidate.node_id]:
                 # Query-graph bindings are a harder constraint than an LLM's
-                # answer-position label.  When exactly one tuple endpoint is a
-                # bound input, the other endpoint is the only possible output
-                # projection.  This changes orientation, never support scores.
-                position = structural_position
+                # answer-position label.  A missing model projection can be
+                # recovered deterministically, but two explicit, conflicting
+                # endpoint decisions are not silently collapsed into one.  The
+                # latter is projection uncertainty and must stay off the answer
+                # frontier while preserving the independently scored claim.
+                # Comparison-only rows have no fresh vote, so their previously
+                # verified projection is preserved without reinterpretation.
+                position = (
+                    structural_position
+                    if position in {"none", structural_position}
+                    else "none"
+                )
             semantics = graph.claim_semantics[candidate.node_id]
             projection_by_id[candidate.node_id] = _type_corrected_projection(
                 position, semantics.subject_type, semantics.value_type, expected_type,
@@ -293,6 +302,18 @@ def _projection_vote(rows: list[str], fallback: str) -> str:
     return max(counts, key=lambda value: (counts[value], value == fallback, value == "none"))
 
 
+def _preserved_projection(candidate: ClaimNode) -> str:
+    """Preserve an independent projection decision across comparison-only passes."""
+    verified = str(
+        candidate.provenance.metadata.get("verified_answer_position", "")
+    ).strip().lower()
+    if verified in {"subject", "value", "none"}:
+        return verified
+    # Extraction canonicalizes a subject answer into the stored value endpoint,
+    # so the pre-verification fallback is value rather than the raw source label.
+    return "value" if candidate.provenance.metadata.get("answers_subgoal", False) else "none"
+
+
 def _type_corrected_projection(
     position: str, subject_type: str, value_type: str, expected_type: str,
 ) -> str:
@@ -309,15 +330,21 @@ def _type_corrected_projection(
 def _projection_type_compatible(proposed: str, expected: str) -> bool:
     aliases = {
         "human": "person", "actor": "person", "actress": "person", "individual": "person",
-        "city": "location", "country": "location", "nation": "location", "state": "location",
-        "district": "location", "administrative_district": "location", "region": "location",
+        "city": "location", "county": "location", "country": "location", "nation": "location",
+        "province": "location", "state": "location", "district": "location",
+        "administrative_district": "location", "region": "location",
         "geographic_entity": "location", "body_of_water": "location", "place": "location",
         "year": "date", "time": "date",
         "count": "number", "quantity": "number", "percentage": "number",
         "company": "organization", "institution": "organization", "division": "organization",
+        "phrase": "textual", "text": "textual", "string": "textual",
+        "acronym_expansion": "textual", "definition": "textual", "meaning": "textual",
     }
     def options(value: str) -> set[str]:
         normalized = str(value).strip().lower().replace("-", "_").replace(" ", "_")
+        collection = re.fullmatch(r"(?:list|set|collection)\[(.+)\]", normalized)
+        if collection:
+            normalized = collection.group(1)
         return {
             aliases.get(item, item) for item in normalized.split("_or_") if item
         }

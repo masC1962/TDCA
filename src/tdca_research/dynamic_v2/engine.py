@@ -36,9 +36,8 @@ from .extraction import TypedClaimExtractor
 from .graph import DynamicReasoningHypergraphV2, TerminationKind
 from .join import JoinCandidate, MultiHopJoinEngine
 from .memory import RelationLightCorpusMemory
-from .query_graph import types_compatible
 from .revision import BeliefRevisionDetector
-from .termination import MetaDecision, MetaStopPolicy
+from .termination import MetaDecision, MetaStopPolicy, TerminalBeliefReadout
 from .verifier import MultiSampleIndependentVerifier
 
 
@@ -71,6 +70,7 @@ class DynamicHypergraphV2Reasoner:
         reasoning_trace: list[dict] = []
         all_hits: list[RetrievalHit] = []
         failed_extractions: set[tuple[str, str]] = set()
+        goal_projection_attempts: set[tuple[str, str, int]] = set()
         attempted_joins: set[str] = set()
         editor_events: set[tuple[str, str, str]] = set()
         decision = MetaDecision(TerminationKind.ABSTAIN, "not_started", 0.0)
@@ -90,6 +90,7 @@ class DynamicHypergraphV2Reasoner:
             editor = EventTriggeredGraphEditorV2(self.llm, budget, self.config)
             revision_detector = BeliefRevisionDetector(self.config)
             terminal = GraphGroundedTerminalReasoner(self.llm, budget, self.config)
+            terminal_readout = TerminalBeliefReadout(self.config)
             allocator = AdaptiveComputationAllocator(self.config)
             stop_policy = MetaStopPolicy(self.config)
 
@@ -97,6 +98,7 @@ class DynamicHypergraphV2Reasoner:
                 operations = self._ready_operations(
                     graph, terminal, revision_detector, join_engine,
                     failed_extractions, attempted_joins, editor_events,
+                    terminal_readout, reasoning_trace, goal_projection_attempts,
                 )
                 packets = allocator.allocate(graph, operations, budget)
                 decision = stop_policy.decide(graph, packets, budget)
@@ -111,6 +113,15 @@ class DynamicHypergraphV2Reasoner:
                 if decision.outcome != TerminationKind.CONTINUE:
                     break
                 packet = _execution_packet(packets[0])
+                if (
+                    packet.operation.operation_type == OperationType.BRANCH
+                    and packet.operation.payload.get("extraction_focus_mode") == "direct_answer"
+                ):
+                    goal_projection_attempts.add((
+                        packet.operation.target_id,
+                        packet.operation.branch_id,
+                        int(packet.operation.payload.get("extraction_evidence_count", 0)),
+                    ))
                 usage_before = (
                     budget.usage.llm_calls,
                     budget.usage.total_tokens,
@@ -159,7 +170,10 @@ class DynamicHypergraphV2Reasoner:
                             )
                             progressed = True
                 if packet.operation.operation_type == OperationType.MERGE:
-                    outcome_metadata = dict(join_engine.last_diagnostics)
+                    outcome_metadata.update(join_engine.last_diagnostics)
+                outcome_metadata["terminal_state_after"] = _terminal_frontier_context(
+                    graph, terminal, terminal_readout, packet.operation.branch_id,
+                )
                 actual_cost = {
                     "llm_calls": float(budget.usage.llm_calls - usage_before[0]),
                     "tokens": float(budget.usage.total_tokens - usage_before[1]),
@@ -281,6 +295,9 @@ class DynamicHypergraphV2Reasoner:
         failed_extractions,
         attempted_joins,
         editor_events,
+        terminal_readout,
+        reasoning_trace,
+        goal_projection_attempts,
     ):
         operations: list[GraphOperation] = []
         for trigger in revision_detector.detect(graph):
@@ -290,12 +307,33 @@ class DynamicHypergraphV2Reasoner:
                 graph, trigger, branch_id,
                 f"op_v2_{graph.step + 1:04d}_revise_{_safe(trigger.claim_id)}",
             ))
-        direct, _ = terminal.direct_operations(
+        direct, unresolved_terminal_branches = terminal.direct_operations(
             graph, graph.active_branches(), f"op_v2_{graph.step + 1:04d}_answer",
+        )
+        direct, terminal_diagnostics = terminal_readout.evaluate(
+            graph, direct,
+            [branch.branch_id for branch in unresolved_terminal_branches],
+        )
+        if terminal_diagnostics or unresolved_terminal_branches:
+            reasoning_trace.append({
+                "event": "terminal_belief_readout",
+                "step": graph.step,
+                "scoring_version": "terminal-belief-readout-v2.2",
+                "candidates": terminal_diagnostics,
+                "accepted_answer_node_ids": [
+                    operation.payload["answer"]["node_id"] for operation in direct
+                ],
+                "unresolved_branch_ids": [
+                    branch.branch_id for branch in unresolved_terminal_branches
+                ],
+            })
+        terminal_contexts = _terminal_contexts(
+            terminal_diagnostics,
+            [branch.branch_id for branch in unresolved_terminal_branches],
         )
         operations.extend(direct)
         if direct:
-            return _unique_operations(operations)
+            return _unique_operations(_attach_terminal_context(operations, terminal_contexts))
         for branch in sorted(graph.active_branches(), key=lambda value: value.branch_id):
             for subgoal in sorted(graph.subgoals(), key=lambda value: value.node_id):
                 if subgoal.node_id in branch.completed_subgoals:
@@ -344,24 +382,33 @@ class DynamicHypergraphV2Reasoner:
                 direct_claims = [
                     claim for claim in claims
                     if claim.status in {CandidateStatus.SCORED, CandidateStatus.RETAINED, CandidateStatus.REVISED}
-                    and (
-                        bool(claim.provenance.metadata.get("answers_subgoal", False))
-                        or graph.claim_semantics[claim.node_id].extraction_mode == "typed_relational_join"
-                    )
+                    and _claim_answers_subgoal(graph, claim)
                 ]
                 raw_direct_ids = {
                     claim.node_id for claim in direct_claims
                     if graph.claim_semantics[claim.node_id].join_depth == 0
                 }
-                target_local_raw_ids = {
-                    claim.node_id for claim in claims
-                    if graph.claim_semantics[claim.node_id].join_depth == 0
-                    and claim.status in {
-                        CandidateStatus.SCORED,
-                        CandidateStatus.RETAINED,
-                        CandidateStatus.REVISED,
-                    }
-                }
+                projection_key = (subgoal.node_id, branch.branch_id, len(evidence))
+                if (
+                    claims and not direct_claims
+                    and projection_key not in goal_projection_attempts
+                ):
+                    operations.append(self._placeholder(
+                        graph, OperationType.BRANCH, subgoal, branch,
+                        {
+                            "mode": "extract_typed", "question": question,
+                            "dependency_claim_ids": dependencies,
+                            "extraction_evidence_count": len(evidence),
+                            "extraction_focus_mode": "direct_answer",
+                        },
+                        sources=[node.node_id for node in evidence] + dependencies,
+                    ))
+                    continue
+                # A proof chain must contain a raw claim independently judged to
+                # answer this slot.  Merely being a true target-local relation is
+                # insufficient: otherwise a high-support bridge fact can be
+                # projected through a JOIN and committed as the final answer.
+                target_local_raw_ids = set(raw_direct_ids)
                 if dependencies and target_local_raw_ids:
                     dependency_ids = set(dependencies)
                     sufficient_chains = [
@@ -389,7 +436,9 @@ class DynamicHypergraphV2Reasoner:
                     if _join_attempt_key(graph, row) not in attempted_joins
                     and _nary_relevant(graph, row, set(dependencies))
                 ]
-                if len(attempted_joins) >= self.config.max_join_attempts_per_question:
+                if _charged_join_attempt_count(
+                    graph,
+                ) >= self.config.max_join_attempts_per_question:
                     joins = []
                 if dependencies:
                     dependency_ids = set(dependencies)
@@ -409,6 +458,7 @@ class DynamicHypergraphV2Reasoner:
                     chain_joins = [
                         row for row in joins
                         if _premise_closure(graph, row.premise_ids) & dependency_ids
+                        and _premise_closure(graph, row.premise_ids) & direct_ids
                     ]
                     joins = sorted(chain_joins, key=lambda row: (
                         -int(row.join_kind in {"numeric_argmax", "numeric_argmin"}),
@@ -527,7 +577,8 @@ class DynamicHypergraphV2Reasoner:
                             graph, OperationType.EXPAND, subgoal, branch,
                             {"event": event_name}, sources=[claim.node_id for claim in claims],
                         ))
-        return _unique_operations(operations)
+        operations = _suppress_terminal_expansion_when_commit_ready(operations)
+        return _unique_operations(_attach_terminal_context(operations, terminal_contexts))
 
     def _execute(
         self,
@@ -636,6 +687,7 @@ class DynamicHypergraphV2Reasoner:
                 str(operation.payload["question"]),
                 list(operation.payload.get("dependency_claim_ids", [])),
                 operation.operation_id, request["max_tokens"], request["candidate_cap"],
+                str(operation.payload.get("extraction_focus_mode", "coverage")),
             )
             if actual is None:
                 reasoning_trace.append({
@@ -730,8 +782,10 @@ class DynamicHypergraphV2Reasoner:
         """Collapse a near-duplicate final subgoal/root pair into an alias.
 
         This prevents applying the same relation twice when a planner emits both a
-        final decomposition step and a lightly rephrased root.  It is lexical and
-        structural, independent of relation names and question IDs.
+        final decomposition step and a lightly rephrased root.  A root that
+        literally consumes its dependency variable is never collapsed: that
+        binding proves an additional outer relation even under high lexical
+        overlap.  Unconsumed/malformed aliases retain the bounded lexical guard.
         """
         if operation.operation_type != OperationType.EXPAND:
             return operation
@@ -746,13 +800,20 @@ class DynamicHypergraphV2Reasoner:
         if len(dependencies) != 1 or dependencies[0] not in by_id:
             return operation
         source = by_id[dependencies[0]]
-        if not types_compatible(
+        if not _strict_output_type_compatible(
             str(root.get("answer_type", "entity")),
             str(source.get("answer_type", "entity")),
         ):
             return operation
+        root_template = str(root.get("question_template", ""))
+        consumes_dependency = any(
+            str(source_id) == dependencies[0] and str(variable) in root_template
+            for variable, source_id in (root.get("variable_bindings", {}) or {}).items()
+        )
+        if consumes_dependency:
+            return operation
         similarity = _template_similarity(
-            str(root.get("question_template", "")), str(source.get("question_template", "")),
+            root_template, str(source.get("question_template", "")),
         )
         if similarity < 0.55:
             return operation
@@ -835,10 +896,14 @@ class DynamicHypergraphV2Reasoner:
 
     @staticmethod
     def _prediction(example, graph, hits, budget, decision, error=None, infrastructure=False):
-        answer = next((
-            node for node in sorted(graph.answers(), key=lambda value: (-value.confidence, value.node_id))
-            if node.status == AnswerStatus.ACCEPTED
-        ), None)
+        answer = (
+            graph.nodes.get(decision.answer_node_id)
+            if decision.answer_node_id is not None else None
+        )
+        if answer is not None and (
+            not hasattr(answer, "status") or answer.status != AnswerStatus.ACCEPTED
+        ):
+            answer = None
         if infrastructure:
             status = RunStatus.INFRASTRUCTURE_FAILURE
         elif decision.outcome == TerminationKind.ANSWER and answer is not None:
@@ -888,6 +953,174 @@ def _unique_operations(values: list[GraphOperation]) -> list[GraphOperation]:
     return list(rows.values())
 
 
+def _charged_join_attempt_count(graph: DynamicReasoningHypergraphV2) -> int:
+    """Count only JOINs that consumed model compute or produced a conclusion.
+
+    Deterministic precondition rejections are still version-keyed and audited,
+    but do not consume the semantic JOIN budget.  Graph-operation and policy
+    caps remain the hard bound on these zero-call checks.
+    """
+    return sum(
+        bool(row.accepted)
+        or float((row.creation_cost or {}).get("llm_calls", 0.0)) > 0.0
+        for row in graph.join_attempt_history
+    )
+
+
+def _suppress_terminal_expansion_when_commit_ready(
+    operations: list[GraphOperation],
+) -> list[GraphOperation]:
+    """Do not mutate a shared terminal schema while a proof is commit-ready."""
+    ready_targets = {
+        operation.target_id for operation in operations
+        if operation.operation_type == OperationType.COMMIT
+        and operation.payload.get("candidate_id")
+    }
+    if not ready_targets:
+        return operations
+    return [
+        operation for operation in operations
+        if not (
+            operation.operation_type == OperationType.EXPAND
+            and operation.target_id in ready_targets
+        )
+    ]
+
+
+def _terminal_contexts(
+    diagnostics: list[dict], unresolved_branch_ids: list[str],
+) -> dict[str, dict[str, Any]]:
+    contexts: dict[str, dict[str, Any]] = {}
+    for row in sorted(diagnostics, key=lambda value: (
+        float(value.get("terminal_gap", 1.0)),
+        -float(value.get("absolute_support", 0.0)),
+        str(value.get("candidate_answer", "")),
+    )):
+        branch_id = str(row.get("branch_id", ""))
+        contexts.setdefault(branch_id, {
+            "candidate_answer": str(row.get("candidate_answer", "")),
+            "terminal_gap": float(row.get("terminal_gap", 1.0)),
+            "absolute_support": float(row.get("absolute_support", 0.0)),
+            "relative_weight": float(row.get("relative_weight", 0.0)),
+            "entropy": float(row.get("entropy", 1.0)),
+            "competition_entropy": float(row.get("competition_entropy", 1.0)),
+            "evidence_gap": float(row.get("evidence_gap", 1.0)),
+            "relative_margin": float(row.get("relative_margin", 0.0)),
+            "contradiction_pressure": float(row.get("contradiction_pressure", 0.0)),
+            "answer_type_consistency": float(row.get("answer_type_consistency", 0.0)),
+            "chain_coverage": float(row.get("chain_coverage", 0.0)),
+            "sufficient_chain": bool(row.get("sufficient_chain", False)),
+            "accepted": bool(row.get("accepted", False)),
+            "rejection_reasons": [str(value) for value in row.get("rejection_reasons", [])],
+            "scoring_version": str(row.get("scoring_version", "terminal-belief-readout-v2.2")),
+        })
+    for branch_id in sorted(set(unresolved_branch_ids)):
+        contexts.setdefault(branch_id, {
+            "candidate_answer": "",
+            "terminal_gap": 1.0,
+            "absolute_support": 0.0,
+            "relative_weight": 0.0,
+            "entropy": 1.0,
+            "competition_entropy": 1.0,
+            "evidence_gap": 1.0,
+            "relative_margin": 0.0,
+            "contradiction_pressure": 0.0,
+            "answer_type_consistency": 0.0,
+            "chain_coverage": 0.0,
+            "sufficient_chain": False,
+            "accepted": False,
+            "rejection_reasons": ["missing_terminal_candidate"],
+            "scoring_version": "terminal-belief-readout-v2.2",
+        })
+    return contexts
+
+
+def _attach_terminal_context(
+    operations: list[GraphOperation], contexts: dict[str, dict[str, Any]],
+) -> list[GraphOperation]:
+    attached = []
+    for operation in operations:
+        value = deepcopy(operation)
+        value.payload = dict(value.payload)
+        value.payload["_terminal_context"] = dict(contexts.get(
+            value.branch_id,
+            {
+                "terminal_gap": 1.0,
+                "absolute_support": 0.0,
+                "relative_weight": 0.0,
+                "entropy": 1.0,
+                "evidence_gap": 1.0,
+                "chain_coverage": 0.0,
+                "rejection_reasons": ["missing_terminal_candidate"],
+                "scoring_version": "terminal-belief-readout-v2.2",
+            },
+        ))
+        attached.append(value)
+    return attached
+
+
+def _terminal_frontier_context(
+    graph: DynamicReasoningHypergraphV2,
+    terminal,
+    terminal_readout,
+    branch_id: str,
+) -> dict[str, Any]:
+    direct, unresolved = terminal.direct_operations(
+        graph, graph.active_branches(), f"op_v2_{graph.step + 1:04d}_outcome_readout",
+    )
+    _, diagnostics = terminal_readout.evaluate(
+        graph, direct, [branch.branch_id for branch in unresolved],
+    )
+    contexts = _terminal_contexts(
+        diagnostics, [branch.branch_id for branch in unresolved],
+    )
+    if branch_id in contexts:
+        return contexts[branch_id]
+    if graph.terminal_beliefs:
+        profile = max(
+            graph.terminal_beliefs.values(),
+            key=lambda value: (value.accepted, value.relative_weight, value.absolute_support),
+        )
+        return {
+            "candidate_answer": profile.candidate_answer,
+            "terminal_gap": profile.terminal_gap,
+            "absolute_support": profile.absolute_support,
+            "relative_weight": profile.relative_weight,
+            "entropy": profile.entropy,
+            "competition_entropy": profile.competition_entropy,
+            "evidence_gap": profile.evidence_gap,
+            "relative_margin": profile.relative_margin,
+            "contradiction_pressure": profile.contradiction_pressure,
+            "answer_type_consistency": profile.answer_type_consistency,
+            "chain_coverage": profile.chain_coverage,
+            "sufficient_chain": profile.sufficient_chain,
+            "accepted": profile.accepted,
+            "rejection_reasons": list(profile.rejection_reasons),
+            "scoring_version": profile.scoring_version,
+        }
+    if contexts:
+        return min(contexts.values(), key=lambda value: (
+            float(value.get("terminal_gap", 1.0)),
+            -float(value.get("absolute_support", 0.0)),
+        ))
+    return {
+        "terminal_gap": 1.0,
+        "absolute_support": 0.0,
+        "relative_weight": 0.0,
+        "entropy": 1.0,
+        "competition_entropy": 1.0,
+        "evidence_gap": 1.0,
+        "relative_margin": 0.0,
+        "contradiction_pressure": 0.0,
+        "answer_type_consistency": 0.0,
+        "chain_coverage": 0.0,
+        "sufficient_chain": False,
+        "accepted": False,
+        "rejection_reasons": ["missing_terminal_candidate"],
+        "scoring_version": "terminal-belief-readout-v2.2",
+    }
+
+
 def _committable(
     chosen: ClaimNode,
     candidates: list[ClaimNode],
@@ -897,8 +1130,14 @@ def _committable(
     """Apply the frozen support/margin/entropy gate before binding a slot."""
     if chosen.score.absolute_support < config.commit_support_threshold:
         return False
+    if chosen.score.evidence_gap > config.terminal_max_evidence_gap:
+        return False
+    if chosen.score.raw.contradiction_risk >= config.terminal_max_contradiction:
+        return False
+    if chosen.score.raw.type_match < config.terminal_min_type_consistency:
+        return False
     if graph.claim_semantics[chosen.node_id].join_depth > 0:
-        return chosen.score.raw.contradiction_risk < config.contradiction_threshold
+        return True
     if chosen.score.set_entropy > config.commit_entropy_threshold:
         return False
     by_answer = {}
@@ -908,6 +1147,79 @@ def _committable(
     weights = sorted(by_answer.values(), reverse=True)
     margin = weights[0] - weights[1] if len(weights) > 1 else 1.0
     return margin >= config.commit_margin_threshold
+
+
+def _claim_answers_subgoal(
+    graph: DynamicReasoningHypergraphV2,
+    claim: ClaimNode,
+    seen: set[str] | None = None,
+) -> bool:
+    """Return whether a claim independently projects the requested slot.
+
+    Verification owns the raw claim projection.  A JOIN inherits that property
+    only through its explicitly recorded projection premise, or through an
+    unambiguous query-graph input/output endpoint projection.  This deliberately
+    excludes true but question-irrelevant bridge facts from the commit frontier.
+    """
+    seen = set(seen or ())
+    if claim.node_id in seen:
+        return False
+    seen.add(claim.node_id)
+    semantics = graph.claim_semantics[claim.node_id]
+    if semantics.join_depth == 0:
+        return bool(claim.provenance.metadata.get("answers_subgoal", False))
+
+    projection_id = str(semantics.qualifiers.get("projection_premise_id", ""))
+    projection = graph.nodes.get(projection_id)
+    if isinstance(projection, ClaimNode) and _claim_answers_subgoal(
+        graph, projection, seen,
+    ):
+        return True
+
+    subgoal = graph.node(claim.target_subgoal, SubgoalNode)
+    anchors = {
+        normalize_text(str(value))
+        for row in graph.query_graph.get("constraints", [])
+        if str(row.get("subgoal_id")) == claim.target_subgoal
+        for value in row.get("known_entities", [])
+        if normalize_text(str(value))
+    }
+    branch = graph.branches.get(claim.branch_id)
+    if branch is not None:
+        for dependency_id in subgoal.dependencies:
+            assigned_id = branch.assignments.get(dependency_id)
+            assigned = graph.nodes.get(str(assigned_id))
+            if isinstance(assigned, ClaimNode):
+                for value in (assigned.subject, assigned.value):
+                    if normalize_text(value):
+                        anchors.add(normalize_text(value))
+    subject_bound = normalize_text(claim.subject) in anchors
+    value_bound = normalize_text(claim.value) in anchors
+    if subject_bound == value_bound:
+        return False
+    output_type = semantics.value_type if subject_bound else semantics.subject_type
+    return _strict_output_type_compatible(output_type, subgoal.answer_type)
+
+
+def _strict_output_type_compatible(proposed: str, expected: str) -> bool:
+    """Slot-output compatibility without the permissive shared-entity fallback."""
+    aliases = {
+        "human": "person", "people": "person", "actor": "person", "actress": "person",
+        "city": "location", "country": "location", "nation": "location",
+        "state": "location", "province": "location", "region": "location",
+        "body_of_water": "location", "place": "location",
+        "company": "organization", "institution": "organization",
+        "year": "date", "time": "date", "count": "number", "quantity": "number",
+        "phrase": "textual", "text": "textual", "string": "textual",
+        "acronym_expansion": "textual", "definition": "textual", "meaning": "textual",
+    }
+
+    def canonical(value: str) -> set[str]:
+        normalized = str(value or "entity").strip().lower().replace("-", "_").replace(" ", "_")
+        return {aliases.get(item, item) for item in normalized.split("_or_") if item}
+
+    left, right = canonical(proposed), canonical(expected)
+    return bool(right & {"entity", "thing", "answer"}) or bool(left & right)
 
 
 def _premise_closure(
@@ -989,6 +1301,16 @@ def _missing_binding_query(
     ))[:5]
     answer_type = str(getattr(subgoal, "answer_type", "entity") or "entity")
     candidates = []
+    if (
+        bool(getattr(subgoal, "terminal", False))
+        and normalize_text(question) != normalize_text(graph.question)
+        and normalize_text(graph.question) not in existing
+    ):
+        # The coarse planner may produce a useful executable inner query while
+        # omitting an outer relation.  Give the immutable user objective one
+        # independent retrieval turn instead of only concatenating it to the
+        # inner query, which can dilute lexical retrieval for that outer edge.
+        candidates.append(graph.question)
     if dependency_values:
         candidates.append(
             f"{question} Resolve the missing {answer_type} binding from "

@@ -19,11 +19,21 @@ from .graph import DynamicReasoningHypergraphV2
 
 
 EDITOR_SYSTEM = """You are an event-triggered reasoning-graph editor, not an answer generator.
-Return JSON only as {operations:[...]}. You may propose at most one EXPAND operation that adds one missing
-subgoal needed to connect the current typed claims to the target subgoal. Use only supplied node IDs and
-state. The subgoal must contain question_template, answer_type, dependencies, and variable_bindings.
-Dependencies and binding values must be existing subgoal IDs. Never invent evidence, produce an answer,
-special-case the question, duplicate an existing subgoal, or modify graph state. Return [] when no generic,
+Return JSON only as {operations:[...]}, with at most one operation. Normally use EXPAND to add one missing
+subgoal needed to connect current typed claims to the target. If and only if the terminal target question
+has accidentally stopped at an intermediate relation and visibly omits a remaining relation from the Root
+question, use REPAIR_ROOT with root_question_template and bridge_variable. The repaired template must ask
+the original final objective, replace the already-computed intermediate with that one $bridge variable,
+and contain no answer. REPAIR_ROOT atomically demotes the current target to an intermediate subgoal.
+For REPAIR_ROOT, bridge_variable MUST begin with '$' and the exact same literal MUST occur exactly once in
+root_question_template. Replace the full phrase computed by the old terminal target with this variable;
+never return the unchanged Root question as the template.
+Decide this by the outermost requested relation: if the Root question's final requested relation differs
+from the terminal target's requested relation and the target already has a grounded claim, you MUST use
+REPAIR_ROOT. Upstream entity details do not count as a different outermost relation.
+For EXPAND, provide subgoal with question_template, answer_type, dependencies, and variable_bindings;
+dependencies and binding values must be existing subgoal IDs. Never invent evidence, produce an answer,
+special-case the question, duplicate a subgoal, or modify graph state. Return [] when no generic,
 evidence-grounded structural edit is justified."""
 
 
@@ -49,13 +59,14 @@ class EventTriggeredGraphEditorV2:
             {"role": "system", "content": EDITOR_SYSTEM},
             {"role": "user", "content": (
                 f"Event: {event}\nTarget subgoal: {target_id}\nRoot question: {graph.question}\n"
+                f"Structural objective audit: {_objective_audit(graph, target_id)}\n"
                 f"Graph state:\n{_summary(graph, branch)}"
             )},
         ]
         max_tokens = max(128, min(int(token_budget), self.config.graph_editor_max_tokens))
         self.budget.require(max_tokens, estimated_prompt_tokens=estimate_message_tokens(messages))
         data, generation = self.llm.generate_json(
-            messages, "dynamic_v2_event_graph_editor_v1", max_tokens, self.config.temperature,
+            messages, "dynamic_v2_event_graph_editor_v5_literal_bridge_contract", max_tokens, self.config.temperature,
         )
         self.budget.record_generation(generation)
         rows = data.get("operations", [])
@@ -63,7 +74,12 @@ class EventTriggeredGraphEditorV2:
             self.last_diagnostics = {"accepted": False, "reason": "no_structural_edit"}
             return None
         row = rows[0]
-        if str(row.get("operation", row.get("type", ""))).upper() != "EXPAND":
+        operation_kind = str(row.get("operation", row.get("type", ""))).upper()
+        if operation_kind == "REPAIR_ROOT":
+            return self._root_repair(
+                graph, row, event, branch, operation_id, target_id, generation,
+            )
+        if operation_kind != "EXPAND":
             self.last_diagnostics = {"accepted": False, "reason": "non_expand_edit"}
             return None
         local = row.get("subgoal", row)
@@ -132,6 +148,100 @@ class EventTriggeredGraphEditorV2:
                 "tokens": float(generation.prompt_tokens + generation.completion_tokens),
             },
         )
+
+    def _root_repair(
+        self, graph, row, event, branch, operation_id, target_id, generation,
+    ) -> GraphOperation | None:
+        target = graph.node(target_id, SubgoalNode)
+        if not target.terminal:
+            self.last_diagnostics = {"accepted": False, "reason": "root_repair_requires_terminal"}
+            return None
+        question = str(row.get("root_question_template", "")).strip()
+        variables = set(re.findall(r"\$[A-Za-z][A-Za-z0-9_]*", question))
+        if len(variables) != 1:
+            self.last_diagnostics = {"accepted": False, "reason": "unsafe_root_rewrite_binding"}
+            return None
+        # The template is the authoritative executable object. Derive its sole
+        # binding instead of trusting a redundant model field that may omit the
+        # leading '$' while expressing the same variable.
+        variable = next(iter(variables))
+        old_tokens = set(normalize_text(target.question_template).split())
+        root_tokens = set(normalize_text(graph.question).split())
+        rewrite_tokens = set(normalize_text(question.replace(variable, "")).split())
+        residual = root_tokens - old_tokens - _ROOT_REPAIR_STOPWORDS
+        if (
+            normalize_text(question) == normalize_text(target.question_template)
+            or not residual
+            or not (residual & rewrite_tokens)
+        ):
+            self.last_diagnostics = {"accepted": False, "reason": "root_rewrite_has_no_residual_objective"}
+            return None
+        node_id = f"subgoal_dynamic_v2_{graph.step + 1}"
+        execution = deepcopy(graph.execution_graph)
+        try:
+            execution.add_node(node_id, list(target.dependencies))
+            execution.replace_dependencies(target_id, [node_id])
+        except GraphInvariantError:
+            self.last_diagnostics = {"accepted": False, "reason": "unsafe_execution_cycle"}
+            return None
+        self.last_diagnostics = {
+            "accepted": True, "event": event, "node_id": node_id,
+            "mode": "repair_underdecomposed_root",
+        }
+        return GraphOperation(
+            operation_id, OperationType.EXPAND, node_id, list(target.dependencies), branch.branch_id,
+            {
+                "subgoals": [{
+                    "node_id": node_id,
+                    "question_template": target.question_template,
+                    "instantiated_question": target.instantiated_question,
+                    "dependencies": list(target.dependencies),
+                    "variable_bindings": dict(target.variable_bindings),
+                    "answer_type": target.answer_type,
+                    "terminal": False,
+                    "confidence": target.confidence,
+                    "uncertainty": target.uncertainty,
+                }],
+                "attach_target": target_id,
+                "attach_node": node_id,
+                "target_rewrite": {
+                    "question_template": question,
+                    "variable_bindings": {variable: node_id},
+                    "dependencies": [node_id],
+                    "answer_type": target.answer_type,
+                },
+                "event": event,
+            },
+            f"event_triggered:{event}", "event_triggered_graph_editor_v2",
+            {
+                "llm_calls": 1.0,
+                "tokens": float(generation.prompt_tokens + generation.completion_tokens),
+            },
+        )
+
+
+_ROOT_REPAIR_STOPWORDS = {
+    "a", "an", "are", "did", "do", "does", "for", "from", "in", "is", "of", "on",
+    "the", "to", "was", "were", "what", "when", "where", "which", "who", "whose",
+}
+
+
+def _objective_audit(graph: DynamicReasoningHypergraphV2, target_id: str) -> str:
+    target = graph.node(target_id, SubgoalNode)
+    root_tokens = set(normalize_text(graph.question).split())
+    target_tokens = set(normalize_text(target.question_template).split())
+    residual = sorted(root_tokens - target_tokens - _ROOT_REPAIR_STOPWORDS)
+    grounded = sum(
+        1 for claim in graph.claims(target_id)
+        if claim.score.absolute_support >= 0.5
+    )
+    return (
+        f"target_terminal={target.terminal}; target_question={target.question_template!r}; "
+        f"target_grounded_claim_count={grounded}; root_terms_absent_from_target={residual}. "
+        "Compare the outermost requested relation of Root question and target_question first. "
+        "Use REPAIR_ROOT when those relations differ and grounded target state already computes the "
+        "intermediate; otherwise do not treat upstream entity terms as a missing final relation."
+    )
 
 
 def _summary(graph: DynamicReasoningHypergraphV2, branch: BranchState) -> str:

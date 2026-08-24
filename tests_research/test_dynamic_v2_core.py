@@ -14,6 +14,7 @@ from tdca_research.dynamic.graph import (
     VerificationSignals,
 )
 from tdca_research.dynamic.scoring import fuse_candidate_scores
+from tdca_research.dynamic.candidates import _explicit_parenthetical_alias
 from tdca_research.dynamic_v2.allocator import (
     AdaptiveComputationAllocator,
     ComputationPacket,
@@ -27,18 +28,31 @@ from tdca_research.dynamic_v2.controller import V2GraphController
 from tdca_research.dynamic_v2.editor import EventTriggeredGraphEditorV2
 from tdca_research.dynamic_v2.engine import (
     DynamicHypergraphV2Reasoner,
+    _charged_join_attempt_count,
+    _claim_answers_subgoal,
     _execution_packet,
     _join_attempt_key,
+    _missing_binding_query,
     _nary_relevant,
+    _suppress_terminal_expansion_when_commit_ready,
 )
-from tdca_research.dynamic_v2.extraction import TypedClaimExtractor, _canonicalize_typed_value
+from tdca_research.dynamic_v2.extraction import (
+    TypedClaimExtractor,
+    _budget_aware_context,
+    _canonicalize_typed_value,
+    _fit_completion_to_remaining_budget,
+)
 from tdca_research.dynamic_v2.graph import DynamicReasoningHypergraphV2, TerminationKind
 from tdca_research.dynamic_v2.join import MultiHopJoinEngine
 from tdca_research.dynamic_v2.memory import RelationLightCorpusMemory
 from tdca_research.dynamic_v2.query_graph import compile_query_graph, types_compatible
 from tdca_research.dynamic_v2.revision import BeliefRevisionDetector
-from tdca_research.dynamic_v2.termination import MetaStopPolicy
-from tdca_research.dynamic_v2.verifier import MultiSampleIndependentVerifier
+from tdca_research.dynamic_v2.termination import MetaStopPolicy, TerminalBeliefReadout
+from tdca_research.dynamic_v2.verifier import (
+    MultiSampleIndependentVerifier,
+    _projection_type_compatible,
+    _type_corrected_projection,
+)
 from tdca_research.llm import DeterministicMockLLM
 from tdca_research.models import Passage, Usage
 from tdca_research.retrieval import BM25Retriever
@@ -61,6 +75,30 @@ def operation(number, kind, target="s_root", payload=None, sources=None):
         payload or {}, "test", "offline_test",
         {"llm_calls": 0.0, "tokens": 0.0},
     )
+
+
+def test_initial_alias_collapse_rejects_incompatible_output_types():
+    proposed = GraphOperation(
+        "op_plan", OperationType.EXPAND, "subgoal_root", [], "branch_root",
+        {"subgoals": [
+            {
+                "node_id": "subgoal_1", "question_template": "What country is palitaw from?",
+                "instantiated_question": "What country is palitaw from?", "dependencies": [],
+                "variable_bindings": {}, "answer_type": "country", "terminal": False,
+            },
+            {
+                "node_id": "subgoal_root", "question_template": "What country is palitaw from?",
+                "instantiated_question": "What country is palitaw from?",
+                "dependencies": ["subgoal_1"], "variable_bindings": {},
+                "answer_type": "person", "terminal": True,
+            },
+        ]},
+        "test", "offline_test",
+    )
+    normalized = DynamicHypergraphV2Reasoner._normalize_initial_plan(proposed)
+    assert [row["node_id"] for row in normalized.payload["subgoals"]] == [
+        "subgoal_1", "subgoal_root",
+    ]
 
 
 def empty_graph(cfg=None):
@@ -161,6 +199,25 @@ def joined_graph():
     return cfg, controller, controller.apply(graph, join)
 
 
+def terminal_operation(number, claim_id="c2", answer="Gamma Country"):
+    return operation(number, OperationType.COMMIT, target="s_root", sources=[claim_id], payload={
+        "mode": "answer",
+        "answer": {
+            "node_id": f"answer_{number}",
+            "candidate_answer": answer,
+            "answer_type": "country",
+            "supporting_claims": [claim_id],
+            "supporting_evidence": ["e2"],
+            "derivation_edge": f"hyperedge_answer_{number}",
+            "confidence": 1.0,
+            "answer_type_consistency": 1.0,
+            "contradiction_risk": 0.0,
+            "inference_type": "test_terminal",
+            "status": "accepted",
+        },
+    })
+
+
 def test_v2_graph_roundtrip_and_controller_seal_detects_external_mutation():
     _, _, graph = joined_graph()
     restored = DynamicReasoningHypergraphV2.from_dict(graph.to_dict())
@@ -168,6 +225,167 @@ def test_v2_graph_roundtrip_and_controller_seal_detects_external_mutation():
     restored.nodes["c1"].value = "tampered"
     with pytest.raises(GraphInvariantError, match="outside the V2 controller"):
         restored.validate()
+
+
+def test_terminal_readout_preserves_channels_and_controller_stores_passing_profile():
+    cfg, controller, graph = chain_graph()
+    proposals, diagnostics = TerminalBeliefReadout(cfg).evaluate(
+        graph, [terminal_operation(30)],
+    )
+    assert len(proposals) == 1
+    assert diagnostics[0]["accepted"]
+    assert diagnostics[0]["absolute_support"] >= cfg.terminal_min_absolute_support
+    assert diagnostics[0]["raw_claim_channels"]["c2"] == {
+        "absolute_support": graph.node("c2").score.absolute_support,
+        "relative_weight": graph.node("c2").score.relative_weight,
+        "entropy": graph.node("c2").score.set_entropy,
+        "evidence_gap": graph.node("c2").score.evidence_gap,
+        "grounding": graph.node("c2").score.raw.grounding,
+        "entailment": graph.node("c2").score.raw.entailment,
+        "type_match": graph.node("c2").score.raw.type_match,
+        "dependency_consistency": graph.node("c2").score.raw.dependency_consistency,
+        "retrieval_support": graph.node("c2").score.raw.retrieval_support,
+        "contradiction_risk": graph.node("c2").score.raw.contradiction_risk,
+        "raw_model_confidence": graph.node("c2").score.raw.raw_model_confidence,
+    }
+    updated = controller.apply(graph, proposals[0])
+    assert updated.terminal_beliefs["answer_30"].accepted
+    restored = DynamicReasoningHypergraphV2.from_dict(updated.to_dict())
+    restored.validate()
+    assert restored.terminal_beliefs == updated.terminal_beliefs
+    legacy_payload = updated.to_dict()
+    legacy_payload.pop("terminal_beliefs")
+    legacy_payload.pop("terminal_readout_version")
+    legacy_payload.pop("controller_state_hash")
+    legacy = DynamicReasoningHypergraphV2.from_dict(legacy_payload)
+    legacy.seal_controller_state()
+    legacy.validate()
+    assert legacy.terminal_readout_version == ""
+
+
+def test_terminal_readout_rejects_high_support_with_large_evidence_gap():
+    cfg, controller, graph = chain_graph()
+    claim = graph.node("c2")
+    graph = controller.apply(graph, operation(31, OperationType.VERIFY, payload={
+        "scores": {"c2": {
+            **claim.score.raw.__dict__,
+            "absolute_support": 0.95,
+            "relative_weight": 1.0,
+            "set_entropy": 0.0,
+            "evidence_gap": 0.90,
+            "status": "scored",
+        }},
+    }))
+    proposals, diagnostics = TerminalBeliefReadout(cfg).evaluate(
+        graph, [terminal_operation(32)],
+    )
+    assert proposals == []
+    assert diagnostics[0]["absolute_support"] == 0.95
+    assert diagnostics[0]["evidence_gap"] == 0.90
+    assert "evidence_gap_above_maximum" in diagnostics[0]["rejection_reasons"]
+
+
+def test_terminal_readout_waits_for_unresolved_competing_branch():
+    cfg, _, graph = chain_graph()
+    proposals, diagnostics = TerminalBeliefReadout(cfg).evaluate(
+        graph, [terminal_operation(34)], unresolved_branch_ids=["branch_other"],
+    )
+    assert proposals == []
+    assert diagnostics[0]["terminal_gap"] == 1.0
+    assert "unresolved_competing_branches" in diagnostics[0]["rejection_reasons"]
+
+
+def test_terminal_readout_ignores_empty_known_search_branch():
+    cfg, _, graph = chain_graph()
+    graph.branches["branch_empty"] = BranchState(
+        "branch_empty", "branch_root", {}, [], 0.25, BranchStatus.ACTIVE, graph.step,
+    )
+    graph.seal_controller_state()
+    proposals, diagnostics = TerminalBeliefReadout(cfg).evaluate(
+        graph, [terminal_operation(35)], unresolved_branch_ids=["branch_empty"],
+    )
+    assert len(proposals) == 1
+    assert diagnostics[0]["accepted"]
+    assert "unresolved_competing_branches" not in diagnostics[0]["rejection_reasons"]
+
+
+def test_terminal_gap_changes_adaptive_evc_ranking_for_matched_operations():
+    cfg, _, graph = chain_graph()
+    allocator = AdaptiveComputationAllocator(cfg)
+    closed = operation(35, OperationType.VERIFY, sources=["c2"], payload={
+        "_terminal_context": {
+            "terminal_gap": 0.0, "rejection_reasons": [],
+        },
+    })
+    open_gap = operation(36, OperationType.VERIFY, sources=["c2"], payload={
+        "_terminal_context": {
+            "terminal_gap": 1.0,
+            "rejection_reasons": ["absolute_support_below_minimum"],
+        },
+    })
+    packets = allocator.allocate(
+        graph, [closed, open_gap], Budget(16, 6000, 200, Usage()),
+    )
+    best_by_operation = {
+        operation_id: max(
+            (row for row in packets if row.operation.operation_id == operation_id),
+            key=lambda row: row.predicted_evc,
+        )
+        for operation_id in (closed.operation_id, open_gap.operation_id)
+    }
+    assert best_by_operation[open_gap.operation_id].raw.terminal_gap > 0
+    assert (
+        best_by_operation[open_gap.operation_id].predicted_evc
+        > best_by_operation[closed.operation_id].predicted_evc
+    )
+
+
+def test_measured_terminal_gap_reduction_enters_utility_and_feedback():
+    cfg, controller, graph = chain_graph()
+    allocator = AdaptiveComputationAllocator(cfg)
+    candidate = operation(37, OperationType.VERIFY, sources=["c2"], payload={
+        "_terminal_context": {
+            "terminal_gap": 1.0,
+            "absolute_support": 0.60,
+            "relative_weight": 1.0,
+            "entropy": 0.0,
+            "evidence_gap": 0.25,
+            "chain_coverage": 1.0,
+            "rejection_reasons": ["absolute_support_below_minimum"],
+        },
+    })
+    packet = allocator.allocate(
+        graph, [candidate], Budget(16, 6000, 200, Usage()),
+    )[0]
+    updated = controller.reconcile_allocation(
+        graph, packet,
+        {"llm_calls": 0.0, "tokens": 0.0, "retrieval_calls": 0.0},
+        True,
+        outcome_metadata={"terminal_state_after": {
+            "terminal_gap": 0.0,
+            "absolute_support": 0.90,
+            "relative_weight": 1.0,
+            "entropy": 0.0,
+            "evidence_gap": 0.10,
+            "chain_coverage": 1.0,
+        }},
+    )
+    outcome = updated.operation_outcome_history[-1]
+    assert outcome.state_delta["terminal_gap"] == -1.0
+    assert outcome.actual_utility_components_raw["terminal_gap_reduction"] == 1.0
+    assert outcome.actual_utility_components_normalized["terminal_gap_reduction"] == 1.0
+    assert outcome.actual_utility > 0.0
+    later = allocator.allocate(
+        updated, [candidate], Budget(16, 6000, 200, Usage()),
+    )[0]
+    assert later.feedback_prior["observations"] == 1.0
+    assert later.feedback_prior["posterior_value"] > 0.5
+
+
+def test_v22_controller_rejects_answer_without_terminal_readout():
+    _, controller, graph = chain_graph()
+    with pytest.raises(GraphInvariantError, match="requires terminal belief"):
+        controller.apply(graph, terminal_operation(33))
 
 
 def test_relation_light_memory_activates_three_layer_state_through_controller():
@@ -322,7 +540,14 @@ def test_join_sees_assigned_parent_claim_from_child_branch_lineage():
         DeterministicMockLLM(), Budget(16, 6000, 200, Usage()), cfg,
     )
     candidates = engine.discover(graph, child.branch_id, "s_root")
-    assert any(set(row.premise_ids) == {"c1", "c3"} for row in candidates)
+    candidate = next(row for row in candidates if set(row.premise_ids) == {"c1", "c3"})
+    join = engine.deterministic_operation(graph, candidate, {
+        "subject": "Beta City", "relation": "located in", "value": "Delta Region",
+        "subject_type": "location", "value_type": "location",
+        "derivation_confidence": 0.8, "type_match": 1.0,
+        "dependency_consistency": 1.0, "qualifiers": {},
+    }, "op_v2_child_join")
+    assert join.branch_id == child.branch_id
 
 
 def test_join_allows_auditable_variable_binding_projection_despite_surface_alias_mismatch():
@@ -337,6 +562,7 @@ def test_join_allows_auditable_variable_binding_projection_despite_surface_alias
             "answer_type": "date", "evidence_refs": ["e2"],
             "source_spans": ["Beta City was chartered in 1600"],
             "dependency_claim_ids": ["c1"], "extraction_confidence": 0.9,
+            "answers_subgoal": True, "answer_position": "value",
         }],
     }))
     graph = controller.apply(graph, operation(6, OperationType.VERIFY, payload={
@@ -356,11 +582,14 @@ def test_join_allows_auditable_variable_binding_projection_despite_surface_alias
                 "set_entropy": 0.0, "evidence_gap": 0.1, "status": "scored",
             },
             "c3": {
-            "grounding": 1.0, "entailment": 0.9, "type_match": 1.0,
-            "dependency_consistency": 1.0, "retrieval_support": 1.0,
-            "contradiction_risk": 0.0, "raw_model_confidence": 0.9,
-            "absolute_support": 0.9, "relative_weight": 1.0,
-            "set_entropy": 0.0, "evidence_gap": 0.1, "status": "scored",
+            # Entailment alone is just below the generic JOIN admission threshold,
+            # while the independent projection channels and fused support pass.
+            "grounding": 1.0, "entailment": 0.52, "type_match": 1.0,
+            "dependency_consistency": 0.75, "retrieval_support": 1.0,
+            "contradiction_risk": 0.0, "raw_model_confidence": 0.52,
+            "absolute_support": 0.75, "relative_weight": 1.0,
+            "set_entropy": 0.0, "evidence_gap": 0.25, "status": "scored",
+            "answer_position": "value",
             },
         },
     }))
@@ -392,6 +621,41 @@ def test_join_allows_auditable_variable_binding_projection_despite_surface_alias
     assert not _nary_relevant(graph, sibling_augmented, {"c1"})
     assert engine.propose(graph, candidate, "op_v2_projection", 500) is not None
     assert budget.usage.llm_calls == 0
+
+
+def test_non_answer_bridge_fact_cannot_become_slot_projection():
+    cfg, controller, graph = chain_graph()
+    graph = controller.apply(graph, operation(5, OperationType.BRANCH, payload={
+        "mode": "candidates",
+        "candidates": [{
+            "node_id": "c3", "subject": "Beta City", "relation": "located in",
+            "value": "Gamma Country", "subject_type": "location",
+            "value_type": "country", "answer_type": "country",
+            "evidence_refs": ["e2"], "source_spans": ["Beta City"],
+            "dependency_claim_ids": ["c1"], "extraction_confidence": 0.95,
+            "answers_subgoal": False, "answer_position": "none",
+        }],
+    }))
+    graph = controller.apply(graph, operation(6, OperationType.VERIFY, payload={
+        "scores": {"c3": {
+            "grounding": 1.0, "entailment": 0.99, "type_match": 1.0,
+            "dependency_consistency": 1.0, "retrieval_support": 1.0,
+            "contradiction_risk": 0.0, "raw_model_confidence": 0.99,
+            "absolute_support": 0.99, "relative_weight": 1.0,
+            "set_entropy": 0.0, "evidence_gap": 0.0, "status": "scored",
+            "answer_position": "none",
+        }},
+    }))
+    engine = MultiHopJoinEngine(
+        DeterministicMockLLM(), Budget(16, 6000, 200, Usage()), cfg,
+    )
+    candidates = [
+        row for row in engine.discover(graph, "branch_root", "s_root")
+        if set(row.premise_ids) == {"c1", "c3"}
+    ]
+    assert candidates
+    assert all(not row.projection_premise_id for row in candidates)
+    assert not _claim_answers_subgoal(graph, graph.node("c3"))
 
 
 def test_active_revision_invalidates_join_descendants_without_deleting_history():
@@ -517,6 +781,90 @@ def test_allocator_preserves_schema_safe_budget_while_reducing_output_cardinalit
     assert request["max_tokens"] <= cfg.typed_extraction_max_tokens
 
 
+def test_extraction_completion_shrinks_to_exact_remaining_prompt_budget():
+    budget = Budget(
+        max_llm_calls=16,
+        max_total_tokens=1000,
+        final_reserve_tokens=100,
+        usage=Usage(prompt_tokens=300, completion_tokens=50),
+    )
+    fitted = _fit_completion_to_remaining_budget(
+        budget, requested_completion=900, estimated_prompt_tokens=250,
+    )
+    assert fitted == 300
+    assert budget.can_call(fitted, estimated_prompt_tokens=250)
+    assert not budget.can_call(fitted + 1, estimated_prompt_tokens=250)
+
+
+def test_extraction_context_compacts_before_schema_safe_budget_exhaustion():
+    budget = Budget(
+        max_llm_calls=16,
+        max_total_tokens=1000,
+        final_reserve_tokens=100,
+        usage=Usage(prompt_tokens=300, completion_tokens=50),
+    )
+    system_prompt = "s" * 120
+    user_prefix = "u" * 90
+    context = _budget_aware_context(
+        ["e" * 700, "f" * 700, "g" * 700], 2000,
+        budget, system_prompt, user_prefix,
+    )
+    messages = [
+        {"role": "system", "content": system_prompt},
+        {"role": "user", "content": user_prefix + context},
+    ]
+    from tdca_research.utils import estimate_message_tokens
+    assert 0 < len(context) < 2000
+    assert budget.can_call(
+        128, estimated_prompt_tokens=estimate_message_tokens(messages),
+    )
+
+
+def test_missing_binding_query_retrieves_original_objective_as_independent_turn():
+    _, _, graph = chain_graph()
+    subgoal = graph.node("s_root")
+    subgoal.question_template = "Which country contains Beta City?"
+    subgoal.instantiated_question = subgoal.question_template
+    query = _missing_binding_query(
+        graph, subgoal, graph.branches["branch_root"],
+        subgoal.instantiated_question, [], [], [],
+    )
+    assert query == graph.question
+
+
+def test_zero_call_join_rejection_does_not_consume_semantic_join_budget():
+    _, controller, graph = chain_graph()
+    merge = operation(
+        72, OperationType.MERGE, payload={
+            "premise_ids": ["c1", "c2"], "join_signature": "sig",
+            "join_kind": "relational_path", "variable_bindings": {},
+            "constraints": [], "deterministic_validation": {},
+        }, sources=["c1", "c2"],
+    )
+    packet = AdaptiveComputationAllocator(config()).allocate(
+        graph, [merge], Budget(16, 6000, 200, Usage()),
+    )[0]
+    graph = controller.reconcile_allocation(
+        graph, packet,
+        {"llm_calls": 0.0, "tokens": 0.0, "retrieval_calls": 0.0},
+        completed=False, failure_reason="unsupported_or_unverified_premise",
+    )
+    assert len(graph.join_attempt_history) == 1
+    assert _charged_join_attempt_count(graph) == 0
+
+
+def test_commit_ready_branch_blocks_shared_terminal_schema_expansion():
+    commit = operation(
+        73, OperationType.COMMIT, payload={"candidate_id": "c2"}, sources=["c2"],
+    )
+    expand = operation(74, OperationType.EXPAND, payload={"event": "high_uncertainty_no_join"})
+    verify = operation(75, OperationType.VERIFY, sources=["c1"])
+    filtered = _suppress_terminal_expansion_when_commit_ready([expand, verify, commit])
+    assert [row.operation_type for row in filtered] == [
+        OperationType.VERIFY, OperationType.COMMIT,
+    ]
+
+
 def test_event_triggered_editor_proposes_only_controller_applied_structural_edit():
     cfg, controller, graph = chain_graph()
     editor = EventTriggeredGraphEditorV2(
@@ -582,6 +930,75 @@ def test_event_triggered_editor_rejects_attachment_cycle_before_controller_apply
     assert editor.last_diagnostics["reason"] == "unsafe_execution_cycle"
     assert graph.state_hash() == before
     graph.validate()
+
+
+def test_event_editor_atomically_demotes_underdecomposed_root_and_migrates_state():
+    cfg = config()
+    template = empty_graph(cfg)
+    graph = DynamicReasoningHypergraphV2(
+        "Border troops of the literature country of Rainer Ernst are from what country?",
+        template.limits,
+    )
+    graph.branches["branch_root"] = BranchState(
+        "branch_root", None, {}, [], 1.0, BranchStatus.ACTIVE, 0,
+    )
+    graph.seal_controller_state()
+    controller = V2GraphController(cfg)
+    graph = controller.apply(graph, operation(90, OperationType.EXPAND, payload={"subgoals": [
+        {
+            "node_id": "s_country", "question_template": "What country was Rainer Ernst from?",
+            "instantiated_question": "What country was Rainer Ernst from?", "dependencies": [],
+            "variable_bindings": {}, "answer_type": "country", "terminal": False,
+        },
+        {
+            "node_id": "s_root", "question_template": "What is the literature country of $country?",
+            "instantiated_question": "What is the literature country of $country?",
+            "dependencies": ["s_country"], "variable_bindings": {"$country": "s_country"},
+            "answer_type": "country", "terminal": True,
+        },
+    ]}))
+    graph = controller.apply(graph, operation(91, OperationType.RETRIEVE, target="s_root", payload={
+        "query": "East German literature", "evidence": [{
+            "node_id": "e_literature", "document_id": "p_literature",
+            "passage_id": "p_literature", "title": "Literature of East Germany",
+            "source_span": "East German literature was produced in East Germany.",
+            "retrieval_rank": 1, "retrieval_score": 1.0,
+            "retrieval_query": "East German literature", "retriever_identity": "fixture",
+        }],
+    }))
+    graph = controller.apply(graph, operation(92, OperationType.BRANCH, target="s_root", payload={
+        "mode": "candidates", "candidates": [{
+            "node_id": "c_literature", "subject": "East German literature",
+            "relation": "country", "value": "East Germany", "subject_type": "textual",
+            "value_type": "country", "answer_type": "country", "evidence_refs": ["e_literature"],
+            "source_spans": ["East German literature was produced in East Germany."],
+            "dependency_claim_ids": [], "extraction_confidence": 0.9,
+            "answers_subgoal": True, "answer_position": "value",
+        }]},
+    ))
+    editor = EventTriggeredGraphEditorV2(
+        DeterministicMockLLM(json_responses=[{"operations": [{
+            "operation": "REPAIR_ROOT",
+            "root_question_template": "Border troops of $literature_country are from what country?",
+        }]}]),
+        Budget(16, 6000, 200, Usage()), cfg,
+    )
+    proposal = editor.propose(
+        graph, "high_uncertainty_no_join", graph.branches["branch_root"],
+        "op_v2_repair_root", "s_root", 500,
+    )
+    assert proposal is not None
+    bridge_id = proposal.payload["attach_node"]
+    updated = controller.apply(graph, proposal)
+    root = updated.node("s_root")
+    bridge = updated.node(bridge_id)
+    assert root.question_template == "Border troops of $literature_country are from what country?"
+    assert root.dependencies == [bridge_id]
+    assert root.variable_bindings == {"$literature_country": bridge_id}
+    assert bridge.question_template == "What is the literature country of $country?"
+    assert updated.node("c_literature").target_subgoal == bridge_id
+    assert updated.node("e_literature").target_subgoal == bridge_id
+    updated.validate()
 
 
 def test_failed_selected_allocation_keeps_predicted_evc_and_measured_cost():
@@ -661,6 +1078,53 @@ def test_subject_answer_projection_canonicalizes_claim_value_for_slot_binding():
     assert claim.provenance.metadata["source_triple"]["value"] == "Beta City"
 
 
+def test_goal_conditioned_projection_keeps_only_complete_output_candidates():
+    cfg = config()
+    controller = V2GraphController(cfg)
+    graph = empty_graph(cfg)
+    graph = controller.apply(graph, operation(70, OperationType.EXPAND, payload={"subgoals": [{
+        "node_id": "s_answer", "question_template": "When did Republicans take control?",
+        "instantiated_question": "When did Republicans take control?", "dependencies": [],
+        "variable_bindings": {}, "answer_type": "date", "terminal": True,
+    }]}))
+    graph = controller.apply(graph, operation(71, OperationType.RETRIEVE, target="s_answer", payload={
+        "query": "Republicans take control", "evidence": [{
+            "node_id": "e_date", "document_id": "p_date", "passage_id": "p_date",
+            "title": "Congress", "source_span": "Republicans took control in January 2015.",
+            "retrieval_rank": 1, "retrieval_score": 1.0,
+            "retrieval_query": "Republicans take control", "retriever_identity": "hybrid",
+        }],
+    }))
+    extractor = TypedClaimExtractor(
+        DeterministicMockLLM(json_responses=[{"claims": [
+            {
+                "subject": "Republicans", "relation": "controlled", "value": "Congress",
+                "subject_type": "party", "value_type": "organization",
+                "evidence_ids": ["e_date"], "quote": "Republicans took control",
+                "extraction_confidence": 0.95, "answer_position": "none",
+            },
+            {
+                "subject": "Republicans", "relation": "took control in",
+                "value": "January 2015", "subject_type": "party", "value_type": "date",
+                "evidence_ids": ["e_date"],
+                "quote": "Republicans took control in January 2015",
+                "extraction_confidence": 0.95, "answer_position": "value",
+            },
+        ]}]),
+        Budget(16, 6000, 200, Usage()), cfg,
+    )
+    proposal = extractor.propose(
+        graph, "s_answer", "branch_root", "When did Republicans take control?",
+        [], "op_v2_goal_projection", 500, 4, "direct_answer",
+    )
+    assert proposal is not None
+    assert proposal.proposed_by == "goal_conditioned_typed_projector_v22"
+    assert [row["value"] for row in proposal.payload["candidates"]] == ["January 2015"]
+    updated = controller.apply(graph, proposal)
+    claim = updated.node("claim_v2_3_s_answer_2")
+    assert claim.provenance.metadata["extraction_focus_mode"] == "direct_answer"
+
+
 def test_typed_value_canonicalization_keeps_atomic_infobox_and_scalar_endpoints():
     location, location_audit = _canonicalize_typed_value(
         "Thaba Putsoa - location Maloti Mountains, Lesotho", "location",
@@ -674,6 +1138,23 @@ def test_typed_value_canonicalization_keeps_atomic_infobox_and_scalar_endpoints(
     assert distance_audit["kind"] == "typed_scalar"
     assert _canonicalize_typed_value("8.11 million", "number")[0] == "8.11 million"
     assert _canonicalize_typed_value("323-272 BC", "date")[0] == "323-272 BC"
+    assert _projection_type_compatible("phrase", "acronym_expansion")
+    assert _projection_type_compatible("destroyer_class", "list[destroyer_class]")
+    assert not _projection_type_compatible("country", "meaning")
+
+
+def test_dependency_identity_exception_requires_literal_parenthetical_alias():
+    assert _explicit_parenthetical_alias(
+        "the literature of the German Democratic Republic (East Germany) was studied",
+        "East Germany",
+    )
+    assert not _explicit_parenthetical_alias(
+        "East German literature was produced in East Germany.", "East Germany",
+    )
+    assert not _explicit_parenthetical_alias(
+        "The population was 16 million (East Germany estimate).", "East Germany",
+    )
+    assert _type_corrected_projection("value", "work", "band", "person") == "none"
 
 
 def test_query_binding_projects_unbound_endpoint_despite_model_none_vote():
@@ -721,6 +1202,88 @@ def test_query_binding_projects_unbound_endpoint_despite_model_none_vote():
     graph = controller.apply(graph, proposal)
     assert graph.node("c_dev").provenance.metadata["verified_answer_position"] == "value"
     assert graph.node("c_dev").provenance.metadata["answers_subgoal"] is True
+
+
+def test_query_binding_rejects_conflicting_model_endpoint_without_changing_support():
+    cfg = config()
+    controller = V2GraphController(cfg)
+    graph = empty_graph(cfg)
+    graph = controller.apply(graph, operation(84, OperationType.EXPAND, payload={"subgoals": [{
+        "node_id": "s_location", "question_template": "Where is Voshmgir District located?",
+        "instantiated_question": "Where is Voshmgir District located?", "dependencies": [],
+        "variable_bindings": {}, "answer_type": "location", "terminal": True,
+    }]}))
+    graph = controller.apply(graph, operation(85, OperationType.RETRIEVE, target="s_location", payload={
+        "query": "Voshmgir District location", "evidence": [{
+            "node_id": "e_location", "document_id": "p_location", "passage_id": "p_location",
+            "title": "Voshmgir District",
+            "source_span": "Voshmgir District is in Aqqala County, Golestan Province, Iran.",
+            "retrieval_rank": 1, "retrieval_score": 1.0,
+            "retrieval_query": "Voshmgir District location", "retriever_identity": "fixture",
+        }],
+    }))
+    graph = controller.apply(graph, operation(86, OperationType.BRANCH, target="s_location", payload={
+        "mode": "candidates", "candidates": [{
+            "node_id": "c_location", "subject": "Voshmgir District", "relation": "located in",
+            "value": "Aqqala County", "subject_type": "district", "value_type": "county",
+            "answer_type": "location", "evidence_refs": ["e_location"],
+            "source_spans": ["Voshmgir District is in Aqqala County, Golestan Province, Iran."],
+            "dependency_claim_ids": [], "extraction_confidence": 0.9,
+            "answers_subgoal": True, "answer_position": "value",
+        }]},
+    ))
+    verifier = MultiSampleIndependentVerifier(
+        DeterministicMockLLM(json_responses=[{"scores": [{
+            "candidate_id": "c_location", "grounding": 1.0, "entailment": 0.9,
+            "type_match": 1.0, "dependency_consistency": 1.0,
+            "contradiction_risk": 0.0, "raw_model_confidence": 0.9,
+            "answer_position": "subject", "contradiction_candidate_ids": [],
+        }]}]),
+        Budget(16, 6000, 200, Usage()), cfg,
+    )
+    proposal = verifier.propose(
+        graph, "s_location", "branch_root", "Where is Voshmgir District located?",
+        "op_v2_verify_projection_conflict", 1, 700,
+    )
+    assert proposal is not None
+    before_support = graph.node("c_location").score.absolute_support
+    graph = controller.apply(graph, proposal)
+    claim = graph.node("c_location")
+    assert claim.provenance.metadata["verified_answer_position"] == "none"
+    assert claim.provenance.metadata["answers_subgoal"] is False
+    assert claim.score.absolute_support >= before_support
+
+    # A later pass scores only the new proposed claim.  The old claim is a
+    # comparison row and must retain the independent projection decision rather
+    # than falling back to its extraction-time label.
+    graph = controller.apply(graph, operation(87, OperationType.BRANCH, target="s_location", payload={
+        "mode": "candidates", "candidates": [{
+            "node_id": "c_country", "subject": "Voshmgir District", "relation": "located in",
+            "value": "Iran", "subject_type": "district", "value_type": "country",
+            "answer_type": "location", "evidence_refs": ["e_location"],
+            "source_spans": ["Voshmgir District is in Aqqala County, Golestan Province, Iran."],
+            "dependency_claim_ids": [], "extraction_confidence": 0.9,
+            "answers_subgoal": True, "answer_position": "value",
+        }]},
+    ))
+    verifier = MultiSampleIndependentVerifier(
+        DeterministicMockLLM(json_responses=[{"scores": [{
+            "candidate_id": "c_country", "grounding": 1.0, "entailment": 0.9,
+            "type_match": 1.0, "dependency_consistency": 1.0,
+            "contradiction_risk": 0.0, "raw_model_confidence": 0.9,
+            "answer_position": "value", "contradiction_candidate_ids": [],
+        }]}]),
+        Budget(16, 6000, 200, Usage()), cfg,
+    )
+    proposal = verifier.propose(
+        graph, "s_location", "branch_root", "Where is Voshmgir District located?",
+        "op_v2_verify_projection_persistence", 1, 700,
+    )
+    assert proposal is not None
+    graph = controller.apply(graph, proposal)
+    assert graph.node("c_location").provenance.metadata["verified_answer_position"] == "none"
+    assert graph.node("c_location").provenance.metadata["answers_subgoal"] is False
+    assert graph.node("c_country").provenance.metadata["answers_subgoal"] is True
 
 
 def test_verifier_can_recover_a_missed_subject_projection_through_controller():

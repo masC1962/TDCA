@@ -55,6 +55,11 @@ class ResearchConfig:
     prompt_version: str = "wmgs-v4-dependency-grounded"
     request_timeout_seconds: float = 120.0
     max_api_attempts: int = 3
+    campaign_id: str = ""
+    campaign_ledger_path: str = ""
+    campaign_provider_call_cap: int = 0
+    campaign_provider_token_cap: int = 0
+    isolate_api_cache_by_experiment_arm: bool = False
     oracle_evidence: bool = False
     oracle_decomposition: bool = False
     persistent_episodic_memory: bool = False
@@ -103,6 +108,15 @@ class ResearchConfig:
             raise ValueError("finalization must be direct or structured")
         if self.top_k <= 0 or self.max_steps <= 0 or self.max_llm_calls <= 0:
             raise ValueError("budgets and top_k must be positive")
+        campaign_values = (
+            bool(self.campaign_id), bool(self.campaign_ledger_path),
+            self.campaign_provider_call_cap > 0, self.campaign_provider_token_cap > 0,
+        )
+        if any(campaign_values) and not all(campaign_values):
+            raise ValueError(
+                "campaign_id, campaign_ledger_path, and both positive provider caps "
+                "must be configured together"
+            )
         if not 0 <= self.diffusion_alpha <= 1 or not 0 < self.diffusion_decay <= 1:
             raise ValueError("invalid diffusion parameters")
         if self.final_reserve_tokens >= self.max_total_tokens:

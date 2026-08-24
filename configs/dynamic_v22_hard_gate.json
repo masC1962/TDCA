@@ -1,0 +1,51 @@
+{
+  "schema_version": "dynamic-hypergraph-v2.2-hard-gate-v1",
+  "status": "closed",
+  "seed": 20260820,
+  "infrastructure": {
+    "zero_leakage": true,
+    "zero_invariant_violation": true,
+    "controller_only_mutation": true,
+    "zero_unaccounted_provider_calls": true,
+    "complete_serialization": true
+  },
+  "reasoning_capability": {
+    "minimum_official_f1": 0.424444,
+    "minimum_candidate_presence": 0.52,
+    "minimum_full_chain_completion": 0.58,
+    "minimum_auditable_three_or_four_hop_join_cases": 3,
+    "minimum_downstream_used_nary_join_cases": 3
+  },
+  "dynamic_behavior": {
+    "adversarial_revision_must_pass": true,
+    "frozen_revision_suite": "VitaminC evaluation-60 seed 20260820",
+    "minimum_should_revise_cases": 30,
+    "minimum_should_not_revise_cases": 30,
+    "minimum_natural_revision_precision": 0.80,
+    "minimum_natural_revision_recall": 0.60,
+    "maximum_natural_revision_false_positive_rate": 0.10,
+    "non_uniform_allocation_required": true,
+    "actual_outcome_must_influence_later_allocation": true
+  },
+  "computation_allocation": {
+    "complete_evc_trace": true,
+    "terminal_gap_trace_required": true,
+    "predicted_evc_recorded": true,
+    "actual_cost_recorded": true,
+    "actual_utility_and_state_delta_recorded": true,
+    "matched_allocator_modes": ["adaptive_evc", "uniform", "fixed_order"],
+    "matched_budget_curve_required": true,
+    "pareto_improvement_against_both_controls": true,
+    "pareto_quality_tolerance": 0.0,
+    "pareto_cost_tolerance": 0.0,
+    "provider_call_campaign_cap": 2500,
+    "provider_reported_token_campaign_cap": 2500000
+  },
+  "termination": {
+    "unsupported_answer_count": 0,
+    "required_outcomes": ["ANSWER", "ABSTAIN", "BUDGET_EXHAUSTED"],
+    "terminal_belief_readout_required": true,
+    "sufficient_support_chain_required": true
+  },
+  "heldout_policy": "Freeze after every gate passes, then run MuSiQue heldout200 exactly once under its separately accounted campaign; otherwise do not run it."
+}

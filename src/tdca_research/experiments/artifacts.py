@@ -87,6 +87,25 @@ class ArtifactWriter:
         self.write_rows("predictions.jsonl", [prediction.to_dict() for prediction in predictions])
         self.write_rows("failures.jsonl", [prediction.to_dict() for prediction in predictions if prediction.status.value == "infrastructure_failure"])
 
+    def mark_interrupted(
+        self,
+        *,
+        reason: str,
+        completed: int,
+        total: int,
+        next_qid: str,
+        details: dict[str, Any] | None = None,
+    ) -> None:
+        write_json(self.run_dir / "partial_progress.json", {
+            "status": "interrupted",
+            "reason": str(reason),
+            "completed": int(completed),
+            "total": int(total),
+            "next_qid": str(next_qid),
+            "details": details or {},
+            "updated_at_utc": datetime.now(timezone.utc).isoformat(),
+        })
+
     def write_metrics(
         self, metrics: dict[str, Any], by_hop: dict[str, Any], predictions: list[Prediction],
         by_type: dict[str, Any] | None = None,

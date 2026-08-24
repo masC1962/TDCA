@@ -1,0 +1,66 @@
+{
+  "schema_version": "dynamic-hypergraph-v2.2-preregistration-v1",
+  "registered_at": "2026-08-24",
+  "starting_commit": "886ddd43bbe7bcf17d1ba709aa90e6eeb2d7d472",
+  "seed": 20260820,
+  "training": false,
+  "provider": "qwen-plus",
+  "development_campaign": {
+    "campaign_id": "dynamic-hypergraph-v22-development-20260824",
+    "ledger": "analysis_outputs/dynamic_v22_campaign/campaign_budget.json",
+    "maximum_actual_provider_attempts": 2500,
+    "maximum_provider_reported_tokens": 2500000,
+    "call_definition": "one attempted HTTP request, including retries",
+    "token_definition": "provider-reported prompt plus completion tokens for uncached responses",
+    "cache_policy": "isolated by campaign, method, allocator mode and prompt version",
+    "preflight_policy": "reserve one call and a conservative token upper bound before HTTP",
+    "safe_failure": "either cap denies the next request while a gate remains closed; preserve artifacts and do not run heldout"
+  },
+  "per_question_development_safety_caps": {
+    "logical_llm_calls": 16,
+    "logical_tokens": 16000,
+    "retrieval_calls": 8,
+    "interpretation": "development safety caps, not the formal matched-compute claim"
+  },
+  "execution_order": [
+    "offline_tests",
+    "qwen_smoke20_adaptive",
+    "qwen_development50_adaptive",
+    "matched_development50_uniform",
+    "matched_development50_fixed_order",
+    "matched_budget_curve",
+    "reporting_only_hipporag_hipporag2_ircot",
+    "machine_hard_gate",
+    "freeze_configuration",
+    "single_heldout200_if_and_only_if_gate_passes"
+  ],
+  "frozen_revision_evaluation": {
+    "suite": "VitaminC evaluation-60 seed 20260820",
+    "retuning_forbidden": true,
+    "prior_pass_must_be_revalidated_without_changing_labels_or_decision_rule": true
+  },
+  "matched_compute": {
+    "allocator_modes": ["adaptive_evc", "uniform", "fixed_order"],
+    "all_non_allocator_config_fields_identical": true,
+    "primary_quality": "official_f1",
+    "secondary_quality": ["exact_match", "candidate_presence", "full_chain_completion"],
+    "cost_axes": ["provider_reported_tokens", "logical_llm_calls", "retrieval_calls"],
+    "budget_curve_required": true
+  },
+  "heldout": {
+    "split": "heldout200",
+    "separate_campaign_ledger": "analysis_outputs/dynamic_v22_campaign/heldout_campaign_budget.json",
+    "run_count": 1,
+    "post_heldout_tuning": false,
+    "fail_closed": true
+  },
+  "forbidden": [
+    "training_or_finetuning",
+    "oracle_fields_during_inference",
+    "question_id_entity_answer_or_gold_specific_rules",
+    "cross_question_adaptive_state",
+    "post_frozen_revision_retuning",
+    "post_heldout_tuning",
+    "manual_gate_override"
+  ]
+}

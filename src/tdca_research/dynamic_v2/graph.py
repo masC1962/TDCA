@@ -225,6 +225,37 @@ class TerminationRecord:
 
 
 @dataclass
+class TerminalBeliefState:
+    """Auditable multi-channel readout for one terminal answer candidate.
+
+    Acceptance is conjunctive over the channels below.  `terminal_gap` is a
+    scheduling signal, not a replacement probability or an acceptance score.
+    """
+
+    answer_node_id: str
+    candidate_answer: str
+    branch_id: str
+    absolute_support: float
+    relative_weight: float
+    entropy: float
+    competition_entropy: float
+    evidence_gap: float
+    relative_margin: float
+    contradiction_pressure: float
+    answer_type_consistency: float
+    chain_coverage: float
+    terminal_gap: float
+    proof_depth: int
+    supporting_claims: list[str]
+    supporting_evidence: list[str]
+    raw_claim_channels: dict[str, dict[str, float]]
+    sufficient_chain: bool
+    accepted: bool
+    rejection_reasons: list[str] = field(default_factory=list)
+    scoring_version: str = "terminal-belief-readout-v2.2"
+
+
+@dataclass
 class DynamicReasoningHypergraphV2(DynamicReasoningHypergraph):
     """V2 graph with sealed controller-owned mutable state.
 
@@ -243,6 +274,8 @@ class DynamicReasoningHypergraphV2(DynamicReasoningHypergraph):
     supersession_history: list[SupersessionRecord] = field(default_factory=list)
     invalidated_hyperedges: list[str] = field(default_factory=list)
     termination_history: list[TerminationRecord] = field(default_factory=list)
+    terminal_beliefs: dict[str, TerminalBeliefState] = field(default_factory=dict)
+    terminal_readout_version: str = "terminal-belief-readout-v2.2"
     corpus_memory_fingerprint: str = ""
     query_graph: dict[str, Any] = field(default_factory=dict)
     activated_passages: dict[str, ActivatedPassageState] = field(default_factory=dict)
@@ -269,6 +302,10 @@ class DynamicReasoningHypergraphV2(DynamicReasoningHypergraph):
             "supersession_history": _primitive(self.supersession_history),
             "invalidated_hyperedges": sorted(set(self.invalidated_hyperedges)),
             "termination_history": _primitive(self.termination_history),
+            "terminal_beliefs": {
+                key: _primitive(value) for key, value in sorted(self.terminal_beliefs.items())
+            },
+            "terminal_readout_version": self.terminal_readout_version,
             "corpus_memory_fingerprint": self.corpus_memory_fingerprint,
             "query_graph": _primitive(self.query_graph),
             "activated_passages": {
@@ -333,6 +370,30 @@ class DynamicReasoningHypergraphV2(DynamicReasoningHypergraph):
                 claim = self.node(claim_id, ClaimNode)
                 if claim.status in {CandidateStatus.INVALID, CandidateStatus.ARCHIVED}:
                     raise GraphInvariantError("accepted answer depends on invalidated claim")
+            if self.terminal_readout_version:
+                terminal = self.terminal_beliefs.get(answer.node_id)
+                if terminal is None or not terminal.accepted or terminal.rejection_reasons:
+                    raise GraphInvariantError("accepted v2.2 answer lacks passing terminal belief readout")
+                if terminal.answer_node_id != answer.node_id:
+                    raise GraphInvariantError("terminal belief answer id mismatch")
+                if set(terminal.supporting_claims) != set(answer.supporting_claims):
+                    raise GraphInvariantError("terminal belief claim support mismatch")
+                if set(terminal.supporting_evidence) != set(answer.supporting_evidence):
+                    raise GraphInvariantError("terminal belief evidence support mismatch")
+        for answer_id, terminal in self.terminal_beliefs.items():
+            if answer_id not in self.nodes or not isinstance(self.nodes[answer_id], AnswerNode):
+                raise GraphInvariantError("terminal belief references missing answer")
+            for name in (
+                "absolute_support", "relative_weight", "entropy", "competition_entropy",
+                "evidence_gap", "relative_margin", "contradiction_pressure",
+                "answer_type_consistency", "chain_coverage", "terminal_gap",
+            ):
+                if not 0.0 <= float(getattr(terminal, name)) <= 1.0:
+                    raise GraphInvariantError(f"terminal belief {answer_id}.{name} outside [0,1]")
+            if terminal.proof_depth < 0:
+                raise GraphInvariantError("terminal belief proof depth must be non-negative")
+            if set(terminal.raw_claim_channels) != set(terminal.supporting_claims):
+                raise GraphInvariantError("terminal belief lacks independent raw claim channels")
         allocation_ids = [row.allocation_id for row in self.allocation_history]
         if len(allocation_ids) != len(set(allocation_ids)):
             raise GraphInvariantError("allocation ids must be unique")
@@ -458,6 +519,13 @@ class DynamicReasoningHypergraphV2(DynamicReasoningHypergraph):
                 **{**row, "outcome": TerminationKind(row["outcome"])}
             ) for row in value.get("termination_history", [])
         ]
+        graph.terminal_beliefs = {
+            str(key): TerminalBeliefState(**row)
+            for key, row in value.get("terminal_beliefs", {}).items()
+        }
+        # An empty version keeps frozen v2/v2.1 artifacts readable.  Fresh v2.2
+        # graphs use the dataclass default and require the new terminal invariant.
+        graph.terminal_readout_version = str(value.get("terminal_readout_version", ""))
         graph.corpus_memory_fingerprint = str(value.get("corpus_memory_fingerprint", ""))
         graph.query_graph = dict(value.get("query_graph", {}))
         graph.activated_passages = {
