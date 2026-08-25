@@ -1,0 +1,16 @@
+\section{Introduction}
+
+Retrieval-augmented generation (RAG) gives language models access to non-parametric knowledge, yet multi-hop questions still require a sequence of dependent decisions: decompose the query, retrieve evidence for unresolved dependencies, combine premises, test alternatives, repair contradictions, and decide whether to answer. Iterative retrieval methods interleave search and reasoning \citep{trivedi2023ircot}; graph-based memory systems improve associative retrieval \citep{gutierrez2024hipporag,gutierrez2025hipporag2}; and test-time scaling shows that additional inference can be valuable when it is allocated according to problem difficulty \citep{snell2025scaling}. These advances leave a shared gap: computation is usually scheduled from the original query, a fixed workflow, or a scalar confidence signal, rather than from the evolving structure of the reasoning state.
+
+This distinction matters. After one retrieval, a system may have high-confidence evidence for several facts but a single missing bridge blocks the answer. Spending equal effort on all branches wastes resources. Conversely, a locally uncertain claim can be unimportant if no answer depends on it. A useful controller must therefore reason about both epistemic state (what is supported or contradicted) and computational state (what would be unlocked by the next operation). It must also keep costs heterogeneous: one language-model call, one thousand generated tokens, and one retrieval are not interchangeable merely because they occur in the same step.
+
+We propose \textbf{\method{}}, a training-free controller over a dynamic reasoning hypergraph. The hypergraph explicitly stores subgoals, evidence, claims, and answer candidates, together with typed, multi-premise dependencies. Each node retains absolute support, relative weight, entropy, evidence gap, contradiction, downstream impact, and related signals. A directional diffusion process transports uncertainty and importance along semantically compatible edges. The controller then ranks operation--fidelity packets using normalized expected value of computation (EVC) minus separately priced call, token, and retrieval costs. Executed operations update the graph; their realized utility updates within-question action estimates without training model parameters.
+
+Our intended contributions are:
+\begin{itemize}[leftmargin=*,nosep]
+  \item a dynamic reasoning hypergraph in which graph state is the sufficient interface between retrieval, reasoning, verification, revision, and termination;
+  \item a typed belief-diffusion mechanism that preserves distinct uncertainty and evidence signals while exposing computational bottlenecks;
+  \item an explicit two-to-four-premise join engine and event-triggered graph editor for auditable composition and self-correction;
+  \item a multi-resource, operation--fidelity EVC policy, evaluated through matched-compute curves, counterfactual allocation diagnostics, and safe termination metrics.
+\end{itemize}
+The central hypothesis is not merely that graphs organize reasoning, but that \emph{the evolving graph state can decide where test-time computation should be spent}.

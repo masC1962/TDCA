@@ -1,0 +1,100 @@
+\section{Experiments}
+\label{sec:experiments}
+
+We design the evaluation around four questions: (RQ1) Does graph-state allocation improve multi-hop answer quality? (RQ2) Does it produce a better quality--compute Pareto frontier? (RQ3) Are joins, diffusion, revision, and feedback causally useful? (RQ4) Does the system terminate reliably and expose auditable behavior?
+
+\subsection{Setup}
+
+\paragraph{Datasets.}
+We use MuSiQue \citep{trivedi2022musique}, HotpotQA \citep{yang2018hotpotqa}, and 2WikiMultiHopQA \citep{ho2020twowiki}, preserving official development/test boundaries. The primary development loop uses at most 50 examples per condition; frozen evaluation expands only after predefined gates pass. We report results overall and by annotated hop count where available.
+
+\paragraph{Baselines.}
+Comparisons include direct prompting, fixed top-$k$ RAG, IRCoT, Adaptive-RAG, HippoRAG, HippoRAG~2, and the previous TDCA v1 controller. For causal comparison we also run uniform allocation, fixed schedules, and component ablations. All systems use the same reader model, corpus snapshot, retriever access, answer normalization, and dataset IDs whenever method assumptions permit. Training-based baselines use their released checkpoints; \method{} itself remains training-free.
+
+\paragraph{Budgets and metrics.}
+We report exact match (EM), token F1, candidate presence, full-chain completion, answer-in-context, and ordered evidence coverage. Reliability metrics include unsupported-answer rate, selective accuracy, revision precision/recall on natural and adversarial cases, and the confusion matrix over \textsc{Answer}/\textsc{Abstain}/\textsc{BudgetExhausted}. Compute is reported as model calls, generated tokens, retrievals, latency, and estimated monetary cost. Primary comparisons use matched per-example budget envelopes; budget sweeps estimate the Pareto frontier. The development safety cap is 2.5M aggregate tokens and 2,500 calls per condition, not the formal evaluation budget. Seed is 20260820.
+
+\subsection{Main results and compute frontier}
+
+\begin{table}[t]
+\caption{Frozen multi-hop QA results under matched compute. Values are intentionally blank until the final protocol is executed. Best results should be bolded only after significance testing.}
+\label{tab:main}
+\centering
+\resizebox{\linewidth}{!}{%
+\begin{tabular}{llrrrrrr}
+\toprule
+Dataset & Method & EM & F1 & Cand. & Chain & Calls & Tokens \\
+\midrule
+\multirow{4}{*}{MuSiQue}
+ & IRCoT & \tbd{ } & \tbd{ } & \tbd{ } & \tbd{ } & \tbd{ } & \tbd{ } \\
+ & HippoRAG~2 & \tbd{ } & \tbd{ } & \tbd{ } & \tbd{ } & \tbd{ } & \tbd{ } \\
+ & TDCA v1 & \tbd{ } & \tbd{ } & \tbd{ } & \tbd{ } & \tbd{ } & \tbd{ } \\
+ & \method{} & \tbd{ } & \tbd{ } & \tbd{ } & \tbd{ } & \tbd{ } & \tbd{ } \\
+\midrule
+\multirow{2}{*}{HotpotQA}
+ & strongest baseline & \tbd{ } & \tbd{ } & \tbd{ } & \tbd{ } & \tbd{ } & \tbd{ } \\
+ & \method{} & \tbd{ } & \tbd{ } & \tbd{ } & \tbd{ } & \tbd{ } & \tbd{ } \\
+\midrule
+\multirow{2}{*}{2Wiki}
+ & strongest baseline & \tbd{ } & \tbd{ } & \tbd{ } & \tbd{ } & \tbd{ } & \tbd{ } \\
+ & \method{} & \tbd{ } & \tbd{ } & \tbd{ } & \tbd{ } & \tbd{ } & \tbd{ } \\
+\bottomrule
+\end{tabular}}
+\end{table}
+
+\begin{figure}[t]
+\centering
+\placeholderbox{3.2cm}{Quality--compute budget curves for \method{}, uniform allocation, fixed allocation, TDCA v1, IRCoT, and HippoRAG~2. Plot EM/F1 against calls, tokens, retrievals, latency, and monetary cost; mark Pareto-optimal points.}
+\caption{Matched-compute frontier placeholder.}
+\label{fig:pareto}
+\end{figure}
+
+Table~\ref{tab:main} will test RQ1 under matched compute, while Figure~\ref{fig:pareto} will test the stronger claim that at least one \method{} operating point Pareto-dominates a baseline. We will report paired bootstrap confidence intervals and paired randomization tests over identical question IDs. \tbd{Insert final comparison, confidence intervals, and effect-size interpretation.}
+
+
+\subsection{Mechanism and reliability evaluation}
+
+\begin{table}[t]
+\caption{Planned causal ablations. Each row is evaluated with the same question IDs and budget envelope.}
+\label{tab:ablation}
+\centering
+\resizebox{\linewidth}{!}{%
+\begin{tabular}{lrrrrrr}
+\toprule
+Variant & F1 & Chain & Rev. prec. & EVC corr. & Calls & Tokens \\
+\midrule
+Full \method{} & \tbd{ } & \tbd{ } & \tbd{ } & \tbd{ } & \tbd{ } & \tbd{ } \\
+$-$ typed diffusion & \tbd{ } & \tbd{ } & \tbd{ } & \tbd{ } & \tbd{ } & \tbd{ } \\
+$-$ explicit joins & \tbd{ } & \tbd{ } & \tbd{ } & \tbd{ } & \tbd{ } & \tbd{ } \\
+$-$ event-triggered revision & \tbd{ } & \tbd{ } & \tbd{ } & \tbd{ } & \tbd{ } & \tbd{ } \\
+$-$ actual-utility feedback & \tbd{ } & \tbd{ } & \tbd{ } & \tbd{ } & \tbd{ } & \tbd{ } \\
+Uniform allocation & \tbd{ } & \tbd{ } & \tbd{ } & \tbd{ } & \tbd{ } & \tbd{ } \\
+Fixed schedule & \tbd{ } & \tbd{ } & \tbd{ } & \tbd{ } & \tbd{ } & \tbd{ } \\
+\bottomrule
+\end{tabular}}
+\end{table}
+
+Allocation is non-uniform only if graph regions and packet families receive measurably different resources beyond deterministic tie artifacts. We measure operation entropy, cross-family selection, per-subgoal token/retrieval shares, and counterfactual choice changes after controlled graph perturbations. EVC calibration is evaluated using rank correlation between predicted EVC and realized utility, sign accuracy, and regret relative to the best observed feasible packet. Revision is tested both on naturally arising conflicts and on adversarially injected contradictions. Full definitions are in Appendix~\ref{app:metrics}.
+
+\subsection{Current development diagnostics}
+
+The following results are included to document implementation maturity, not to support final comparative claims. On one 50-example development slice, TDCA v2.2 improved over v1 in F1, candidate presence, and full-chain completion, while using similar aggregate tokens. It produced 12 auditable three-/four-hop joins and no unsupported answers. A later 20-example mechanism smoke test improved EVC rank correlation and real operation choice, but did not pass the predeclared full-chain and call-growth gates (Table~\ref{tab:dev}). These failures motivate the next optimization target: making retrieval evidence answer-relevant rather than merely increasing retrieval activity.
+
+\begin{table}[t]
+\caption{Development-only diagnostics. Slices and versions are not directly comparable across blocks; no significance claim is made. Cand. is candidate presence and Chain is full-chain completion.}
+\label{tab:dev}
+\centering
+\resizebox{\linewidth}{!}{%
+\begin{tabular}{llrrrrrr}
+\toprule
+Slice & Version & EM & F1 & Cand. & Chain & Calls & Tokens \\
+\midrule
+dev-50 & TDCA v1 & -- & .424 & .42 & .48 & 349 & 328,702 \\
+dev-50 & TDCA v2.2 & .520 & .538 & .54 & .58 & 336 & 330,308 \\
+\midrule
+smoke-20 & stable v2.2 & .300 & .355 & .50 & .65 & 159 & 179,035 \\
+smoke-20 & v2.3.2 & .400 & .484 & .70 & .60 & 160 & 177,655 \\
+smoke-20 & v2.3.3 & .400 & .434 & .70 & .55 & 188 & 207,940 \\
+\bottomrule
+\end{tabular}}
+\end{table}
