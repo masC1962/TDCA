@@ -6,6 +6,9 @@ from typing import Any
 
 from ..models import QAExample
 from ..utils import normalize_text
+from ..dynamic.graph import CandidateStatus, ClaimNode
+from .graph import DynamicReasoningHypergraphV2
+from .proof import audit_graph_proof
 
 
 def dynamic_v2_metrics(
@@ -142,6 +145,24 @@ def dynamic_v2_metrics(
             for outcome in outcomes
         )
         terminations = graph.get("termination_history", [])
+        proof_metrics = _best_graph_proof(graph)
+        extraction_rows = [
+            trace for trace in traces
+            if trace.get("event") == "typed_extraction_diagnostic"
+        ]
+        extraction_fingerprints = [
+            (
+                str(trace.get("target_id", "")),
+                str(trace.get("branch_id", "")),
+                str(trace.get("extraction_state_fingerprint", "")),
+                str(trace.get("focus_mode", "coverage")),
+            )
+            for trace in extraction_rows
+            if trace.get("extraction_state_fingerprint")
+        ]
+        retrieval_gates = [
+            trace for trace in traces if trace.get("event") == "region_retrieval_gate"
+        ]
         row = {
             "qid": qid,
             "hop_count": None if example is None else example.hop_count,
@@ -191,6 +212,22 @@ def dynamic_v2_metrics(
             "complete_terminal_gap_trace": terminal_gap_trace,
             "termination_outcome": terminations[-1].get("outcome") if terminations else "MISSING",
             "controller_state_hash_present": bool(graph.get("controller_state_hash")),
+            "join_preallocation_filtered_count": sum(
+                len(trace.get("filtered", [])) for trace in traces
+                if trace.get("event") == "join_preallocation_filtered"
+            ),
+            "selected_infeasible_join_count": sum(
+                bool((trace.get("diagnostics") or {}).get("preallocation_feasible") is False)
+                for trace in traces if trace.get("event") == "join_rejected"
+            ),
+            "repeated_same_fingerprint_extraction_count": (
+                len(extraction_fingerprints) - len(set(extraction_fingerprints))
+            ),
+            "region_retrieval_gate_count": len(retrieval_gates),
+            "region_retrieval_allowed_count": sum(
+                bool(trace.get("allowed")) for trace in retrieval_gates
+            ),
+            **proof_metrics,
         }
         per_example.append(row)
     return _aggregate(per_example), _group_by_hop(per_example), graph_rows, per_example
@@ -232,6 +269,10 @@ def _aggregate(rows: list[dict[str, Any]]) -> dict[str, Any]:
         "natural_revision_count", "natural_revision_correct", "natural_revision_wrong",
         "natural_revision_unknown", "unsupported_answer_count",
         "terminal_belief_count",
+        "join_preallocation_filtered_count", "selected_infeasible_join_count",
+        "repeated_same_fingerprint_extraction_count", "region_retrieval_gate_count",
+        "region_retrieval_allowed_count", "dependency_coverage",
+        "evidence_leaf_coverage", "distinct_evidence_leaf_ratio", "proof_depth",
     )
     result = {"count": len(rows)}
     result.update({f"mean_{key}": mean(float(row[key]) for row in rows) for key in numeric})
@@ -241,6 +282,7 @@ def _aggregate(rows: list[dict[str, Any]]) -> dict[str, Any]:
         "complete_outcome_feedback_trace", "feedback_influenced_allocation",
         "query_graph_present",
         "complete_terminal_belief_readout", "complete_terminal_gap_trace",
+        "graph_proof_completion", "proof_connected",
     ):
         result[f"{key}_rate"] = mean(float(bool(row[key])) for row in rows)
     correct = sum(int(row["natural_revision_correct"]) for row in rows)
@@ -249,6 +291,70 @@ def _aggregate(rows: list[dict[str, Any]]) -> dict[str, Any]:
     result["termination_outcomes"] = dict(sorted(Counter(row["termination_outcome"] for row in rows).items()))
     result["unsupported_answer_count"] = sum(int(row["unsupported_answer_count"]) for row in rows)
     return result
+
+
+def _best_graph_proof(
+    graph_payload: dict[str, Any], *, allow_historical_unseal: bool = False,
+) -> dict[str, Any]:
+    """Recompute a gold-free proof score from the final serialized graph."""
+    try:
+        payload = graph_payload
+        if allow_historical_unseal:
+            payload = {**graph_payload, "controller_state_hash": ""}
+        graph = DynamicReasoningHypergraphV2.from_dict(payload)
+    except (KeyError, TypeError, ValueError) as exc:
+        return {
+            "graph_proof_completion": False,
+            "dependency_coverage": 0.0,
+            "evidence_leaf_coverage": 0.0,
+            "distinct_evidence_leaf_ratio": 0.0,
+            "proof_connected": False,
+            "proof_depth": 0,
+            "graph_proof_reason_codes": [
+                f"unreadable_graph_snapshot:{type(exc).__name__}:{exc}"
+            ],
+        }
+    roots = [
+        row.node_id for row in graph.subgoals() if row.terminal
+    ]
+    if "subgoal_root" in graph.execution_graph.dependencies:
+        roots = ["subgoal_root"]
+    candidates = []
+    for root_id in roots:
+        for branch in graph.branches.values():
+            for claim in graph.claims(root_id, branch.branch_id):
+                if claim.status in {CandidateStatus.INVALID, CandidateStatus.ARCHIVED}:
+                    continue
+                candidates.append(audit_graph_proof(
+                    graph, root_id, branch.branch_id, [claim.node_id],
+                ))
+    if not candidates:
+        return {
+            "graph_proof_completion": False,
+            "dependency_coverage": 0.0,
+            "evidence_leaf_coverage": 0.0,
+            "distinct_evidence_leaf_ratio": 0.0,
+            "proof_connected": False,
+            "proof_depth": 0,
+            "graph_proof_reason_codes": ["no_root_claim_candidate"],
+        }
+    best = max(candidates, key=lambda value: (
+        int(value.graph_proof_completion),
+        value.dependency_coverage,
+        value.evidence_leaf_coverage,
+        int(value.proof_connected),
+        value.proof_depth,
+        value.claim_ids,
+    ))
+    return {
+        "graph_proof_completion": best.graph_proof_completion,
+        "dependency_coverage": best.dependency_coverage,
+        "evidence_leaf_coverage": best.evidence_leaf_coverage,
+        "distinct_evidence_leaf_ratio": best.distinct_evidence_leaf_ratio,
+        "proof_connected": best.proof_connected,
+        "proof_depth": best.proof_depth,
+        "graph_proof_reason_codes": list(best.reason_codes),
+    }
 
 
 def _group_by_hop(rows: list[dict[str, Any]]) -> dict[str, Any]:

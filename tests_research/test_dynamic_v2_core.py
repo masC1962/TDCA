@@ -1,3 +1,4 @@
+import json
 from pathlib import Path
 
 import pytest
@@ -32,10 +33,13 @@ from tdca_research.dynamic_v2.engine import (
     _charged_join_attempt_count,
     _claim_answers_subgoal,
     _execution_packet,
+    _extraction_state_fingerprint,
     _join_attempt_key,
     _join_can_answer_subgoal,
     _missing_binding_query,
     _novel_retrieval_hits_for_region,
+    _query_token_overlap,
+    _retrieval_retry_gate,
     _nary_relevant,
     _suppress_terminal_expansion_when_commit_ready,
 )
@@ -46,12 +50,17 @@ from tdca_research.dynamic_v2.extraction import (
     _fit_completion_to_remaining_budget,
     _enumerated_sibling_values,
 )
-from tdca_research.dynamic_v2.graph import DynamicReasoningHypergraphV2, TerminationKind
+from tdca_research.dynamic_v2.graph import (
+    DynamicReasoningHypergraphV2,
+    RetrievalAttemptRecord,
+    TerminationKind,
+)
 from tdca_research.dynamic_v2.join import MultiHopJoinEngine
 from tdca_research.dynamic_v2.memory import RelationLightCorpusMemory
 from tdca_research.dynamic_v2.query_graph import compile_query_graph, types_compatible
 from tdca_research.dynamic_v2.revision import BeliefRevisionDetector
 from tdca_research.dynamic_v2.termination import MetaStopPolicy, TerminalBeliefReadout
+from tdca_research.dynamic_v2.proof import audit_graph_proof
 from tdca_research.dynamic_v2.verifier import (
     MultiSampleIndependentVerifier,
     _projection_type_compatible,
@@ -1843,3 +1852,130 @@ def test_explicit_numeric_comparison_materializes_deterministic_argmax_join():
     )
     assert conclusion.value == "University of South Carolina"
     assert len(conclusion.dependency_claim_ids) == 2
+
+
+def test_v24_join_feasibility_is_pure_and_precedes_provider_budget():
+    cfg, _, graph = chain_graph()
+    budget = Budget(16, 6000, 0, Usage())
+    engine = MultiHopJoinEngine(DeterministicMockLLM(), budget, cfg)
+    candidate = engine.discover(graph, "branch_root", "s_root")[0]
+    assert engine.check_feasible(graph, candidate).feasible
+    failing_id = candidate.premise_ids[0]
+    graph.node(failing_id).score.absolute_support = 0.0
+    graph.seal_controller_state()
+    verdict = engine.check_feasible(graph, candidate)
+    assert not verdict.feasible
+    assert verdict.reason_codes == ("unsupported_or_unverified_premise",)
+    assert failing_id in verdict.premise_ids
+    before = (budget.usage.llm_calls, budget.usage.total_tokens)
+    assert engine.propose(graph, candidate, "op_infeasible") is None
+    assert (budget.usage.llm_calls, budget.usage.total_tokens) == before
+    assert engine.last_diagnostics["preallocation_feasible"] is False
+
+
+def test_v24_extraction_fingerprint_changes_only_with_material_graph_state():
+    _, controller, graph = chain_graph()
+    evidence = graph.evidence("s_root", "branch_root")
+    first = _extraction_state_fingerprint(
+        graph, "s_root", "branch_root", evidence, [],
+    )
+    assert first == _extraction_state_fingerprint(
+        graph, "s_root", "branch_root", list(reversed(evidence)), [],
+    )
+    graph = controller.apply(graph, operation(
+        390, OperationType.RETRIEVE, payload={
+            "query": "independent new evidence",
+            "evidence": [{
+                "node_id": "e3", "document_id": "p3", "passage_id": "p3",
+                "title": "Gamma", "source_span": "Gamma is independently documented.",
+                "retrieval_rank": 1, "retrieval_score": 1.0,
+                "retrieval_query": "independent new evidence",
+                "retriever_identity": "hybrid",
+            }],
+        },
+    ))
+    second = _extraction_state_fingerprint(
+        graph, "s_root", "branch_root",
+        graph.evidence("s_root", "branch_root"), [],
+    )
+    assert first != second
+
+
+def test_v24_region_retrieval_gate_requires_material_query_novelty():
+    _, _, graph = chain_graph()
+    subgoal = graph.node("s_root")
+    branch = graph.branches["branch_root"]
+    attempt = RetrievalAttemptRecord(
+        "a0", "o0", 1, "s_root", "branch_root",
+        "Alpha founded city country", "alpha founded city country",
+        10, 0, 0, [],
+    )
+    rejected = _retrieval_retry_gate(
+        graph, subgoal, branch, "Alpha founded city country details", [], [],
+        [attempt], set(), 0.80,
+    )
+    assert not rejected["allowed"]
+    assert rejected["reason_code"] == "query_not_materially_novel"
+    allowed = _retrieval_retry_gate(
+        graph, subgoal, branch, "unrelated bridge relation evidence", [], [],
+        [attempt], set(), 0.80,
+    )
+    assert allowed["allowed"]
+    assert allowed["reason_code"] == "zero_yield_novel_query_recovery"
+    assert _query_token_overlap("alpha beta", "alpha beta gamma") == 1.0
+
+
+def test_v24_graph_proof_audit_separates_structure_from_plan_completion():
+    _, _, graph = chain_graph()
+    audit = audit_graph_proof(graph, "s_root", "branch_root", ["c2"])
+    assert audit.graph_proof_completion
+    assert audit.dependency_coverage == 1.0
+    assert audit.evidence_leaf_coverage == 1.0
+    assert audit.proof_connected
+    assert audit.evidence_ids == ("e2",)
+
+    _, _, joined = joined_graph()
+    joined_claim = max(
+        joined.claims("s_root", "branch_root"),
+        key=lambda row: joined.claim_semantics[row.node_id].join_depth,
+    )
+    joined_audit = audit_graph_proof(
+        joined, "s_root", "branch_root", [joined_claim.node_id],
+    )
+    assert joined_audit.graph_proof_completion
+    assert joined_audit.proof_depth >= 1
+    edge = next(
+        row for row in joined.hyperedges.values()
+        if row.target_node == joined_claim.node_id
+    )
+    joined.invalidated_hyperedges.append(edge.edge_id)
+    broken = audit_graph_proof(
+        joined, "s_root", "branch_root", [joined_claim.node_id],
+    )
+    assert not broken.graph_proof_completion
+    assert not broken.proof_connected
+    assert "joined_claim_lacks_valid_hyperedge" in broken.reason_codes
+
+
+def test_v24_configs_freeze_campaign_caps_without_changing_v23_defaults():
+    v24 = DynamicV2ResearchConfig.from_yaml(
+        Path("configs/dynamic_hypergraph_v24_qwen_smoke20.yaml")
+    )
+    v24.validate()
+    assert v24.join_preallocation_feasibility_filter
+    assert v24.region_level_retrieval_stopping
+    assert v24.bounded_extraction_recovery
+    assert v24.campaign_provider_call_cap == 2000
+    assert v24.campaign_provider_token_cap == 2_000_000
+    v23 = DynamicV2ResearchConfig.from_yaml(
+        Path("configs/dynamic_hypergraph_v23_qwen_smoke20.yaml")
+    )
+    assert not v23.join_preallocation_feasibility_filter
+    assert not v23.region_level_retrieval_stopping
+    assert not v23.bounded_extraction_recovery
+    prereg = json.loads(Path(
+        "configs/dynamic_v24_preregistration.json"
+    ).read_text(encoding="utf-8"))
+    assert prereg["campaign"]["provider_attempt_cap"] == 2000
+    assert prereg["campaign"]["provider_reported_token_cap"] == 2_000_000
+    assert prereg["safe_stop"]["heldout200_authorized"] is False

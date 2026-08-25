@@ -76,6 +76,13 @@ class DynamicV2ResearchConfig(DynamicResearchConfig):
     focused_empty_extraction_recovery: bool = False
     goal_conditioned_join_frontier: bool = False
 
+    # v2.4 structural efficiency features are independently opt-in.  Keeping
+    # these disabled by default preserves frozen v2.2/v2.3 experiment arms.
+    join_preallocation_feasibility_filter: bool = False
+    region_level_retrieval_stopping: bool = False
+    bounded_extraction_recovery: bool = False
+    retrieval_query_max_token_overlap: float = 0.80
+
     # Terminal acceptance is a conjunctive readout over independent belief
     # channels.  These are initial development values, never learned weights.
     terminal_min_absolute_support: float = 0.70
@@ -164,6 +171,8 @@ class DynamicV2ResearchConfig(DynamicResearchConfig):
             raise ValueError("join_min_premise_support must be in [0,1]")
         if not 0.0 <= self.activation_entity_boost <= 1.0:
             raise ValueError("activation_entity_boost must be in [0,1]")
+        if not 0.0 <= self.retrieval_query_max_token_overlap <= 1.0:
+            raise ValueError("retrieval_query_max_token_overlap must be in [0,1]")
         weights = [
             value for name, value in asdict(self).items()
             if name.startswith("heat_weight_")

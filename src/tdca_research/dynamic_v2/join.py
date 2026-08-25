@@ -49,6 +49,15 @@ class JoinCandidate:
     deterministic_validation: dict[str, Any] = field(default_factory=dict)
 
 
+@dataclass(frozen=True)
+class JoinFeasibilityResult:
+    """Pure, zero-cost verdict for failures knowable before allocation."""
+
+    feasible: bool
+    reason_codes: tuple[str, ...] = ()
+    premise_ids: tuple[str, ...] = ()
+
+
 class MultiHopJoinEngine:
     def __init__(self, llm: BaseLLM, budget: Budget, config: DynamicV2ResearchConfig) -> None:
         self.llm = llm
@@ -202,6 +211,53 @@ class MultiHopJoinEngine:
         )
         return _dominance_prune(candidates)[: self.config.max_join_frontier_candidates]
 
+    def check_feasible(
+        self,
+        graph: DynamicReasoningHypergraphV2,
+        candidate: JoinCandidate,
+    ) -> JoinFeasibilityResult:
+        """Reject only inevitable premise failures, without calls or mutation.
+
+        Model-contingent entailment of the *derived* claim remains in
+        :meth:`propose`; this predicate merely hoists its existing premise gate
+        ahead of computation allocation.
+        """
+        premises = [graph.node(node_id, ClaimNode) for node_id in candidate.premise_ids]
+        projection = next((
+            row for row in premises if row.node_id == candidate.projection_premise_id
+        ), None)
+        unsupported = []
+        for row in premises:
+            projection_exception = bool(
+                row is projection
+                and row.score.absolute_support >= self.config.commit_support_threshold
+                and row.score.raw.dependency_consistency >= self.config.commit_support_threshold
+                and row.score.raw.type_match >= self.config.terminal_min_type_consistency
+                and row.score.evidence_gap <= self.config.terminal_max_evidence_gap
+                and row.score.raw.contradiction_risk < self.config.terminal_max_contradiction
+            )
+            if (
+                row.status in {
+                    CandidateStatus.PROPOSED,
+                    CandidateStatus.INVALID,
+                    CandidateStatus.ARCHIVED,
+                }
+                or row.score.absolute_support < self.config.join_min_premise_support
+                or row.score.raw.grounding < self.config.join_min_premise_support
+                or (
+                    row.score.raw.entailment < self.config.join_min_premise_support
+                    and not projection_exception
+                )
+            ):
+                unsupported.append(row.node_id)
+        if unsupported:
+            return JoinFeasibilityResult(
+                False,
+                ("unsupported_or_unverified_premise",),
+                tuple(unsupported),
+            )
+        return JoinFeasibilityResult(True)
+
     def propose(
         self,
         graph: DynamicReasoningHypergraphV2,
@@ -209,35 +265,20 @@ class MultiHopJoinEngine:
         operation_id: str,
         token_budget: int | None = None,
     ) -> GraphOperation | None:
+        feasibility = self.check_feasible(graph, candidate)
+        if not feasibility.feasible:
+            self.last_diagnostics = {
+                "accepted": False,
+                "reason_codes": list(feasibility.reason_codes),
+                "premise_ids": list(feasibility.premise_ids),
+                "deterministic_validation": candidate.deterministic_validation,
+                "preallocation_feasible": False,
+            }
+            return None
         premises = [graph.node(node_id, ClaimNode) for node_id in candidate.premise_ids]
         projection = next((
             row for row in premises if row.node_id == candidate.projection_premise_id
         ), None)
-        unsupported = [
-            row.node_id for row in premises
-            if row.status in {CandidateStatus.PROPOSED, CandidateStatus.INVALID, CandidateStatus.ARCHIVED}
-            or row.score.absolute_support < self.config.join_min_premise_support
-            or row.score.raw.grounding < self.config.join_min_premise_support
-            or (
-                row.score.raw.entailment < self.config.join_min_premise_support
-                and not (
-                    row is projection
-                    and row.score.absolute_support >= self.config.commit_support_threshold
-                    and row.score.raw.dependency_consistency >= self.config.commit_support_threshold
-                    and row.score.raw.type_match >= self.config.terminal_min_type_consistency
-                    and row.score.evidence_gap <= self.config.terminal_max_evidence_gap
-                    and row.score.raw.contradiction_risk < self.config.terminal_max_contradiction
-                )
-            )
-        ]
-        if unsupported:
-            self.last_diagnostics = {
-                "accepted": False,
-                "reason_codes": ["unsupported_or_unverified_premise"],
-                "premise_ids": unsupported,
-                "deterministic_validation": candidate.deterministic_validation,
-            }
-            return None
         numeric_comparison = _deterministic_numeric_comparison_claim(
             graph, candidate, premises,
         )
@@ -257,6 +298,7 @@ class MultiHopJoinEngine:
                 "deterministic_numeric_comparison_join_v21",
                 {"llm_calls": 0.0, "tokens": 0.0},
             )
+
         if projection is not None:
             other_support = min(
                 row.score.absolute_support for row in premises if row.node_id != projection.node_id

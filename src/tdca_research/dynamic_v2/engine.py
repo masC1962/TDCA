@@ -69,7 +69,8 @@ class DynamicHypergraphV2Reasoner:
         retrieval_trace: list[dict] = []
         reasoning_trace: list[dict] = []
         all_hits: list[RetrievalHit] = []
-        failed_extractions: set[tuple[str, str]] = set()
+        failed_extractions: set[tuple[str, str, int]] = set()
+        attempted_extractions: set[tuple[str, str, str, str]] = set()
         goal_projection_attempts: set[tuple[str, str, int]] = set()
         attempted_joins: set[str] = set()
         editor_events: set[tuple[str, str, str]] = set()
@@ -100,7 +101,7 @@ class DynamicHypergraphV2Reasoner:
             for _ in range(self.config.max_policy_iterations):
                 operations = self._ready_operations(
                     graph, terminal, revision_detector, join_engine,
-                    failed_extractions, attempted_joins, editor_events,
+                    failed_extractions, attempted_extractions, attempted_joins, editor_events,
                     terminal_readout, reasoning_trace, goal_projection_attempts,
                 )
                 packets = allocator.allocate(graph, operations, budget)
@@ -116,6 +117,17 @@ class DynamicHypergraphV2Reasoner:
                 if decision.outcome != TerminationKind.CONTINUE:
                     break
                 packet = _execution_packet(packets[0])
+                if (
+                    self.config.bounded_extraction_recovery
+                    and packet.operation.operation_type == OperationType.BRANCH
+                    and packet.operation.payload.get("mode") == "extract_typed"
+                ):
+                    attempted_extractions.add((
+                        packet.operation.target_id,
+                        packet.operation.branch_id,
+                        str(packet.operation.payload.get("extraction_state_fingerprint", "")),
+                        str(packet.operation.payload.get("extraction_focus_mode", "coverage")),
+                    ))
                 if (
                     packet.operation.operation_type == OperationType.BRANCH
                     and packet.operation.payload.get("extraction_focus_mode") == "direct_answer"
@@ -296,6 +308,7 @@ class DynamicHypergraphV2Reasoner:
         revision_detector,
         join_engine,
         failed_extractions,
+        attempted_extractions,
         attempted_joins,
         editor_events,
         terminal_readout,
@@ -350,13 +363,70 @@ class DynamicHypergraphV2Reasoner:
                     if claim.status not in {CandidateStatus.INVALID, CandidateStatus.ARCHIVED}
                 ]
                 if not evidence:
-                    query = question
-                    if subgoal.node_id == "subgoal_root" and normalize_text(query) != normalize_text(graph.question):
-                        query = f"{query} Original objective: {graph.question}"
-                    operations.append(self._placeholder(
-                        graph, OperationType.RETRIEVE, subgoal, branch,
-                        {"query": query, "dependency_claim_ids": dependencies},
-                    ))
+                    region_attempts = [
+                        row for row in graph.retrieval_attempt_history
+                        if row.target_subgoal == subgoal.node_id
+                        and row.branch_id == branch.branch_id
+                    ]
+                    if not self.config.region_level_retrieval_stopping:
+                        query = question
+                        if (
+                            subgoal.node_id == "subgoal_root"
+                            and normalize_text(query) != normalize_text(graph.question)
+                        ):
+                            query = f"{query} Original objective: {graph.question}"
+                        operations.append(self._placeholder(
+                            graph, OperationType.RETRIEVE, subgoal, branch,
+                            {"query": query, "dependency_claim_ids": dependencies},
+                        ))
+                        continue
+                    query = ""
+                    gate = {"allowed": False, "reason_code": "retrieval_round_cap"}
+                    if not region_attempts:
+                        query = question
+                        if (
+                            subgoal.node_id == "subgoal_root"
+                            and normalize_text(query) != normalize_text(graph.question)
+                        ):
+                            query = f"{query} Original objective: {graph.question}"
+                        gate = {"allowed": True, "reason_code": "initial_region_retrieval"}
+                    elif len(region_attempts) < self.config.max_retrieval_rounds_per_subgoal:
+                        query = _missing_binding_query(
+                            graph, subgoal, branch, question, dependencies, [], [],
+                            attempted_queries={row.normalized_query for row in region_attempts},
+                        )
+                        if query:
+                            gate = _retrieval_retry_gate(
+                                graph, subgoal, branch, query, dependencies, [],
+                                region_attempts, attempted_extractions,
+                                self.config.retrieval_query_max_token_overlap,
+                            )
+                    if region_attempts:
+                        reasoning_trace.append({
+                            "event": "region_retrieval_gate",
+                            "step": graph.step,
+                            "target_id": subgoal.node_id,
+                            "branch_id": branch.branch_id,
+                            "retrieval_round": len(region_attempts) + 1,
+                            **gate,
+                        })
+                    if query and gate["allowed"]:
+                        operations.append(self._placeholder(
+                            graph, OperationType.RETRIEVE, subgoal, branch,
+                            {
+                                "query": query,
+                                "dependency_claim_ids": dependencies,
+                                "retrieval_gate_reason": gate["reason_code"],
+                            },
+                        ))
+                    elif self.config.enable_adaptive_planning:
+                        event_name = "zero_yield_retrieval_stopped"
+                        event = (branch.branch_id, subgoal.node_id, event_name)
+                        if event not in editor_events:
+                            operations.append(self._placeholder(
+                                graph, OperationType.EXPAND, subgoal, branch,
+                                {"event": event_name},
+                            ))
                     continue
                 proposed = [claim for claim in claims if claim.status == CandidateStatus.PROPOSED]
                 if proposed:
@@ -372,13 +442,34 @@ class DynamicHypergraphV2Reasoner:
                 has_new_evidence_batch = len(evidence) > last_extracted_evidence_count
                 extraction_key = (subgoal.node_id, branch.branch_id, len(evidence))
                 projection_key = (subgoal.node_id, branch.branch_id, len(evidence))
-                if not claims and extraction_key not in failed_extractions:
+                extraction_fingerprint = _extraction_state_fingerprint(
+                    graph, subgoal.node_id, branch.branch_id, evidence, dependencies,
+                )
+                coverage_attempt_key = (
+                    subgoal.node_id, branch.branch_id, extraction_fingerprint, "coverage",
+                )
+                direct_attempt_key = (
+                    subgoal.node_id, branch.branch_id, extraction_fingerprint, "direct_answer",
+                )
+                coverage_available = (
+                    coverage_attempt_key not in attempted_extractions
+                    if self.config.bounded_extraction_recovery
+                    else extraction_key not in failed_extractions
+                )
+                direct_available = (
+                    coverage_attempt_key in attempted_extractions
+                    and direct_attempt_key not in attempted_extractions
+                    if self.config.bounded_extraction_recovery
+                    else projection_key not in goal_projection_attempts
+                )
+                if not claims and coverage_available:
                     operations.append(self._placeholder(
                         graph, OperationType.BRANCH, subgoal, branch,
                         {
                             "mode": "extract_typed", "question": question,
                             "dependency_claim_ids": dependencies,
                             "extraction_evidence_count": len(evidence),
+                            "extraction_state_fingerprint": extraction_fingerprint,
                         },
                         sources=[node.node_id for node in evidence] + dependencies,
                     ))
@@ -386,8 +477,12 @@ class DynamicHypergraphV2Reasoner:
                 if (
                     self.config.focused_empty_extraction_recovery
                     and not claims
-                    and extraction_key in failed_extractions
-                    and projection_key not in goal_projection_attempts
+                    and (
+                        coverage_attempt_key in attempted_extractions
+                        if self.config.bounded_extraction_recovery
+                        else extraction_key in failed_extractions
+                    )
+                    and direct_available
                 ):
                     operations.append(self._placeholder(
                         graph, OperationType.BRANCH, subgoal, branch,
@@ -396,6 +491,7 @@ class DynamicHypergraphV2Reasoner:
                             "dependency_claim_ids": dependencies,
                             "extraction_evidence_count": len(evidence),
                             "extraction_focus_mode": "direct_answer",
+                            "extraction_state_fingerprint": extraction_fingerprint,
                         },
                         sources=[node.node_id for node in evidence] + dependencies,
                     ))
@@ -411,7 +507,7 @@ class DynamicHypergraphV2Reasoner:
                 }
                 if (
                     claims and not direct_claims
-                    and projection_key not in goal_projection_attempts
+                    and direct_available
                 ):
                     operations.append(self._placeholder(
                         graph, OperationType.BRANCH, subgoal, branch,
@@ -420,6 +516,7 @@ class DynamicHypergraphV2Reasoner:
                             "dependency_claim_ids": dependencies,
                             "extraction_evidence_count": len(evidence),
                             "extraction_focus_mode": "direct_answer",
+                            "extraction_state_fingerprint": extraction_fingerprint,
                         },
                         sources=[node.node_id for node in evidence] + dependencies,
                     ))
@@ -462,8 +559,41 @@ class DynamicHypergraphV2Reasoner:
                             {"candidate_id": chosen.node_id}, sources=[chosen.node_id],
                         ))
                         continue
+                discovered_joins = join_engine.discover(
+                    graph, branch.branch_id, subgoal.node_id,
+                )
+                if self.config.join_preallocation_feasibility_filter:
+                    feasible_joins = []
+                    filtered_joins = []
+                    for candidate in discovered_joins:
+                        attempt_key = _join_attempt_key(graph, candidate)
+                        if attempt_key in attempted_joins:
+                            continue
+                        feasibility = join_engine.check_feasible(graph, candidate)
+                        if feasibility.feasible:
+                            feasible_joins.append(candidate)
+                            continue
+                        attempted_joins.add(attempt_key)
+                        filtered_joins.append({
+                            "join_signature": candidate.signature,
+                            "join_attempt_key": attempt_key,
+                            "premise_ids": list(candidate.premise_ids),
+                            "reason_codes": list(feasibility.reason_codes),
+                            "failed_premise_ids": list(feasibility.premise_ids),
+                        })
+                    if filtered_joins:
+                        reasoning_trace.append({
+                            "event": "join_preallocation_filtered",
+                            "step": graph.step,
+                            "target_id": subgoal.node_id,
+                            "branch_id": branch.branch_id,
+                            "filtered": filtered_joins,
+                            "provider_calls": 0,
+                            "provider_tokens": 0,
+                        })
+                    discovered_joins = feasible_joins
                 joins = [
-                    row for row in join_engine.discover(graph, branch.branch_id, subgoal.node_id)
+                    row for row in discovered_joins
                     if _join_attempt_key(graph, row) not in attempted_joins
                     and _nary_relevant(graph, row, set(dependencies))
                 ]
@@ -581,13 +711,14 @@ class DynamicHypergraphV2Reasoner:
                             sources=candidate_ids,
                         ))
                         continue
-                if has_new_evidence_batch and extraction_key not in failed_extractions:
+                if has_new_evidence_batch and coverage_available:
                     operations.append(self._placeholder(
                         graph, OperationType.BRANCH, subgoal, branch,
                         {
                             "mode": "extract_typed", "question": question,
                             "dependency_claim_ids": dependencies,
                             "extraction_evidence_count": len(evidence),
+                            "extraction_state_fingerprint": extraction_fingerprint,
                         },
                         sources=[node.node_id for node in evidence] + dependencies,
                     ))
@@ -614,12 +745,37 @@ class DynamicHypergraphV2Reasoner:
                             if self.config.retrieval_attempt_aware_scheduling else set()
                         ),
                     )
+                    retrieval_gate = {
+                        "allowed": True,
+                        "reason_code": "legacy_or_initial_retrieval",
+                    }
+                    if (
+                        query
+                        and retrieval_rounds > 0
+                        and self.config.region_level_retrieval_stopping
+                    ):
+                        retrieval_gate = _retrieval_retry_gate(
+                            graph, subgoal, branch, query, dependencies, claims,
+                            region_attempts, attempted_extractions,
+                            self.config.retrieval_query_max_token_overlap,
+                        )
+                        reasoning_trace.append({
+                            "event": "region_retrieval_gate",
+                            "step": graph.step,
+                            "target_id": subgoal.node_id,
+                            "branch_id": branch.branch_id,
+                            "retrieval_round": retrieval_rounds + 1,
+                            **retrieval_gate,
+                        })
+                        if not retrieval_gate["allowed"]:
+                            query = ""
                     if query:
                         operations.append(self._placeholder(
                             graph, OperationType.RETRIEVE, subgoal, branch,
                             {
                                 "query": query,
                                 "dependency_claim_ids": dependencies,
+                                "retrieval_gate_reason": retrieval_gate["reason_code"],
                             },
                             sources=[claim.node_id for claim in claims],
                         ))
@@ -761,6 +917,9 @@ class DynamicHypergraphV2Reasoner:
                 "extraction_evidence_count": int(
                     operation.payload.get("extraction_evidence_count", 0)
                 ),
+                "extraction_state_fingerprint": str(
+                    operation.payload.get("extraction_state_fingerprint", "")
+                ),
                 "accepted": actual is not None,
                 "diagnostics": dict(extractor.last_diagnostics),
             })
@@ -775,6 +934,9 @@ class DynamicHypergraphV2Reasoner:
                     ),
                     "extraction_evidence_count": int(
                         operation.payload.get("extraction_evidence_count", 0)
+                    ),
+                    "extraction_state_fingerprint": str(
+                        operation.payload.get("extraction_state_fingerprint", "")
                     ),
                     "diagnostics": extractor.last_diagnostics,
                 })
@@ -1441,6 +1603,135 @@ def _nary_relevant(
         }
         return len(relations) == len(candidate.premise_ids)
     return False
+
+
+def _extraction_state_fingerprint(
+    graph: DynamicReasoningHypergraphV2,
+    target_subgoal: str,
+    branch_id: str,
+    evidence: list[EvidenceNode],
+    dependency_ids: list[str],
+) -> str:
+    """Fingerprint all state that can materially change extraction output."""
+    regional_claim_ids = {
+        claim.node_id for claim in graph.claims(target_subgoal, branch_id)
+    }
+    return stable_hash({
+        "target_subgoal": target_subgoal,
+        "branch_id": branch_id,
+        "evidence": sorted((
+            node.node_id,
+            node.passage_id,
+            stable_hash(node.source_span),
+        ) for node in evidence),
+        "dependencies": sorted((
+            node_id,
+            graph.belief_states.get(node_id).version
+            if graph.belief_states.get(node_id) is not None else 0,
+        ) for node_id in dependency_ids),
+        "relevant_supersessions": sorted(
+            row.supersession_id for row in graph.supersession_history
+            if row.target_claim_id in regional_claim_ids
+            or row.target_claim_id in set(dependency_ids)
+        ),
+    })
+
+
+def _query_token_overlap(left: str, right: str) -> float:
+    import re
+
+    left_tokens = set(re.findall(r"[a-z0-9]+", normalize_text(left)))
+    right_tokens = set(re.findall(r"[a-z0-9]+", normalize_text(right)))
+    if not left_tokens or not right_tokens:
+        return 0.0
+    return len(left_tokens & right_tokens) / min(len(left_tokens), len(right_tokens))
+
+
+def _retrieval_retry_gate(
+    graph: DynamicReasoningHypergraphV2,
+    subgoal: SubgoalNode,
+    branch: BranchState,
+    query: str,
+    dependency_ids: list[str],
+    claims: list[ClaimNode],
+    region_attempts: list[Any],
+    attempted_extractions: set[tuple[str, str, str, str]],
+    max_query_overlap: float,
+) -> dict[str, Any]:
+    """Gold-free hard gate for a second retrieval in one graph region."""
+    if not region_attempts:
+        return {"allowed": True, "reason_code": "initial_region_retrieval"}
+    overlaps = [
+        _query_token_overlap(query, row.query) for row in region_attempts
+    ]
+    maximum_overlap = max(overlaps, default=0.0)
+    common = {
+        "query_token_overlap": maximum_overlap,
+        "previous_attempt_id": region_attempts[-1].attempt_id,
+        "previous_new_evidence_count": region_attempts[-1].new_evidence_count,
+    }
+    if maximum_overlap > max_query_overlap:
+        return {
+            "allowed": False,
+            "reason_code": "query_not_materially_novel",
+            **common,
+        }
+    last = region_attempts[-1]
+    if last.new_evidence_count == 0:
+        return {
+            "allowed": True,
+            "reason_code": "zero_yield_novel_query_recovery",
+            **common,
+        }
+    last_passages = set(last.passage_ids)
+    yielded_claims = [
+        claim for claim in claims
+        if any(
+            isinstance(graph.nodes.get(evidence_id), EvidenceNode)
+            and graph.nodes[evidence_id].passage_id in last_passages
+            for evidence_id in claim.evidence_refs
+        )
+    ]
+    if not yielded_claims:
+        evidence = graph.evidence(subgoal.node_id, branch.branch_id)
+        fingerprint = _extraction_state_fingerprint(
+            graph, subgoal.node_id, branch.branch_id, evidence, dependency_ids,
+        )
+        coverage_done = (
+            subgoal.node_id, branch.branch_id, fingerprint, "coverage",
+        ) in attempted_extractions
+        direct_done = (
+            subgoal.node_id, branch.branch_id, fingerprint, "direct_answer",
+        ) in attempted_extractions
+        if coverage_done and direct_done:
+            return {
+                "allowed": True,
+                "reason_code": "bounded_empty_extraction_recovery",
+                "coverage_attempted": True,
+                "direct_answer_attempted": True,
+                **common,
+            }
+        return {
+            "allowed": False,
+            "reason_code": "extraction_recovery_not_exhausted",
+            "coverage_attempted": coverage_done,
+            "direct_answer_attempted": direct_done,
+            **common,
+        }
+    if any(_claim_answers_subgoal(graph, claim) for claim in yielded_claims):
+        return {
+            "allowed": False,
+            "reason_code": "target_local_answer_claim_already_grounded",
+            "yielded_claim_count": len(yielded_claims),
+            **common,
+        }
+    return {
+        "allowed": True,
+        "reason_code": "missing_binding_after_grounded_frontier",
+        "yielded_claim_count": len(yielded_claims),
+        "dependency_count": len(dependency_ids),
+        **common,
+    }
 
 
 def _missing_binding_query(

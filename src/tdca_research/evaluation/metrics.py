@@ -227,6 +227,12 @@ def evaluate_predictions(examples: list[QAExample], predictions: list[Prediction
             "exact_match": em,
             "f1": f1,
             "answer_in_context": answer_in_context,
+            "execution_plan_completion": float(
+                bool(prediction.plan)
+                and all(slot.status.value == "complete" for slot in prediction.plan.slots)
+            ),
+            # Backward-compatible alias.  This is a plan-slot completion metric,
+            # not a graph-grounded proof-completion metric.
             "full_chain_complete": float(bool(prediction.plan) and all(slot.status.value == "complete" for slot in prediction.plan.slots)),
             "verified_claim_count": sum(claim.status.value == "verified" for claim in prediction.claims),
             "llm_calls": prediction.usage.llm_calls,
@@ -262,6 +268,9 @@ def evaluate_predictions(examples: list[QAExample], predictions: list[Prediction
         "ordered_evidence_path_recall": sum(row["ordered_evidence_path_recall"] for row in rows) / max(1, len(rows)),
         "answer_in_context_rate": sum(row["answer_in_context"] for row in rows) / max(1, len(rows)),
         "full_chain_completion_rate": sum(row["full_chain_complete"] for row in rows) / max(1, len(rows)),
+        "execution_plan_completion_rate": sum(
+            row["execution_plan_completion"] for row in rows
+        ) / max(1, len(rows)),
         "ece": ece,
         "calibration_bins": calibration,
         "risk_coverage_curve": risk_coverage_curve(rows),
@@ -285,7 +294,7 @@ def grouped_metrics(rows: list[dict[str, Any]], field: str) -> dict[str, dict[st
     numeric_keys = (
         "exact_match", "f1", "support_precision", "support_recall", "support_f1",
         "all_gold_recalled", "ordered_evidence_path_recall", "answer_in_context",
-        "full_chain_complete", "verified_claim_precision", "grounded_claim_precision",
+        "full_chain_complete", "execution_plan_completion", "verified_claim_precision", "grounded_claim_precision",
         "full_chain_correct", "terminal_slot_accuracy", "grounded_answer", "llm_calls",
         "provider_calls", "retrieval_calls", "total_tokens", "provider_prompt_tokens",
         "provider_completion_tokens", "wall_seconds",

@@ -11,6 +11,7 @@ from ..utils import normalize_text
 from .allocator import ComputationPacket
 from .config import DynamicV2ResearchConfig
 from .graph import DynamicReasoningHypergraphV2, TerminalBeliefState, TerminationKind
+from .proof import audit_graph_proof, claim_closure
 
 
 class TerminalBeliefReadout:
@@ -147,7 +148,7 @@ class TerminalBeliefReadout:
         operation = deepcopy(source)
         answer = operation.payload["answer"]
         initial_claims = [str(value) for value in answer.get("supporting_claims", [])]
-        claim_ids = _claim_closure(graph, initial_claims)
+        claim_ids = claim_closure(graph, initial_claims)
         claims = [graph.node(node_id, ClaimNode) for node_id in claim_ids]
         evidence_ids = list(dict.fromkeys(
             evidence_id for claim in claims for evidence_id in claim.evidence_refs
@@ -181,9 +182,11 @@ class TerminalBeliefReadout:
             )
             for claim in claims
         ), default=1.0)
-        chain_coverage, proof_connected = _chain_coverage(
-            graph, operation.target_id, operation.branch_id, set(claim_ids), claims,
+        proof_audit = audit_graph_proof(
+            graph, operation.target_id, operation.branch_id, initial_claims,
         )
+        chain_coverage = proof_audit.dependency_coverage
+        proof_connected = proof_audit.proof_connected
         statuses_valid = all(
             claim.status not in {CandidateStatus.INVALID, CandidateStatus.ARCHIVED}
             for claim in claims
@@ -356,70 +359,6 @@ class MetaStopPolicy:
         if packet.operation.operation_type.value == "RETRIEVE" and graph.retrieval_calls >= graph.limits.max_retrieval_calls:
             return False
         return len(graph.operation_history) < graph.limits.max_graph_operations
-
-
-def _claim_closure(
-    graph: DynamicReasoningHypergraphV2, initial_claim_ids: list[str],
-) -> list[str]:
-    closure: set[str] = set()
-    queue = list(dict.fromkeys(initial_claim_ids))
-    while queue:
-        claim_id = queue.pop(0)
-        if claim_id in closure:
-            continue
-        claim = graph.node(claim_id, ClaimNode)
-        closure.add(claim_id)
-        queue.extend(
-            dependency for dependency in claim.dependency_claim_ids
-            if dependency not in closure
-        )
-    return sorted(closure)
-
-
-def _chain_coverage(
-    graph: DynamicReasoningHypergraphV2,
-    root_id: str,
-    branch_id: str,
-    claim_ids: set[str],
-    claims: list[ClaimNode],
-) -> tuple[float, bool]:
-    branch = graph.branches.get(branch_id)
-    if branch is None:
-        return 0.0, False
-    dependencies = graph.execution_graph.dependencies
-    required: set[str] = set()
-    queue = [root_id]
-    while queue:
-        subgoal_id = queue.pop(0)
-        if subgoal_id in required:
-            continue
-        required.add(subgoal_id)
-        queue.extend(dependencies.get(subgoal_id, []))
-    if not required:
-        required = {root_id}
-    covered = 0
-    for subgoal_id in required:
-        if subgoal_id == root_id:
-            covered += int(bool(claims))
-            continue
-        assignment = branch.assignments.get(subgoal_id)
-        covered += int(assignment is not None and assignment in claim_ids)
-    proof_connected = True
-    invalid_edges = set(graph.invalidated_hyperedges)
-    for claim in claims:
-        if any(dependency not in claim_ids for dependency in claim.dependency_claim_ids):
-            proof_connected = False
-        semantics = graph.claim_semantics.get(claim.node_id)
-        if semantics is not None and semantics.join_depth > 0:
-            valid_edges = [
-                edge for edge in graph.hyperedges.values()
-                if edge.target_node == claim.node_id
-                and edge.edge_id not in invalid_edges
-                and set(edge.source_node_set).issubset(claim_ids)
-            ]
-            if not valid_edges:
-                proof_connected = False
-    return covered / max(1, len(required)), proof_connected
 
 
 def _normalized_entropy(weights: list[float]) -> float:
