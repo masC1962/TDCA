@@ -205,6 +205,10 @@ class DynamicHypergraphV2Reasoner:
                     outcome_metadata=outcome_metadata,
                 )
                 outcome = graph.operation_outcome_history[-1]
+                credit = next((
+                    row for row in reversed(graph.credit_assignment_history)
+                    if row.allocation_id == packet.allocation_id
+                ), None)
                 reasoning_trace.append({
                     "event": "allocation_reconciled",
                     "allocation": packet.trace(),
@@ -217,6 +221,30 @@ class DynamicHypergraphV2Reasoner:
                         outcome.actual_utility_components_normalized
                     ),
                     "actual_utility": outcome.actual_utility,
+                    "actual_immediate_utility": outcome.actual_immediate_utility,
+                    "actual_normalized_cost": outcome.actual_normalized_cost,
+                    "delayed_realized_proof_return": (
+                        outcome.delayed_realized_proof_return
+                    ),
+                    "combined_realized_utility": outcome.combined_realized_utility,
+                    "credit_assignment": None if credit is None else {
+                        "credit_id": credit.credit_id,
+                        "source_step": credit.source_step,
+                        "observed_at_step": credit.observed_at_step,
+                        "seed_node_ids": list(credit.seed_node_ids),
+                        "causal_descendant_ids": list(credit.causal_descendant_ids),
+                        "causal_distance_by_node": dict(credit.causal_distance_by_node),
+                        "delayed_components_raw": dict(credit.delayed_components_raw),
+                        "delayed_components_normalized": dict(
+                            credit.delayed_components_normalized
+                        ),
+                        "delayed_realized_proof_return": (
+                            credit.delayed_realized_proof_return
+                        ),
+                        "causal_event_ids": list(credit.causal_event_ids),
+                        "terminal": credit.terminal,
+                        "attribution_version": credit.attribution_version,
+                    },
                     "statistics_before": outcome.statistics_before,
                     "statistics_after": outcome.statistics_after,
                     "failure_reason": (

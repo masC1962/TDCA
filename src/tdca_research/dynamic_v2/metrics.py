@@ -58,6 +58,7 @@ def dynamic_v2_metrics(
         allocations = graph.get("allocation_history", [])
         join_attempts = graph.get("join_attempt_history", [])
         outcomes = graph.get("operation_outcome_history", [])
+        credits = graph.get("credit_assignment_history", [])
         budget_shapes = {
             tuple(sorted((row.get("requested_budget") or {}).items())) for row in allocations
         }
@@ -83,6 +84,22 @@ def dynamic_v2_metrics(
             and row.get("actual_utility_components_raw")
             and row.get("actual_utility_components_normalized")
             and row.get("actual_utility") is not None
+            for row in allocations
+        )
+        terminal_credit_allocations = {
+            str(value.get("allocation_id", ""))
+            for value in credits if value.get("terminal")
+        }
+        complete_delayed_credit = bool(allocations) and all(
+            row.get("predicted_immediate_utility") is not None
+            and row.get("predicted_delayed_proof_return") is not None
+            and row.get("predicted_normalized_cost") is not None
+            and row.get("actual_immediate_utility") is not None
+            and row.get("actual_normalized_cost") is not None
+            and row.get("delayed_realized_proof_return") is not None
+            and row.get("combined_realized_utility") is not None
+            and bool(row.get("credit_finalized"))
+            and str(row.get("allocation_id", "")) in terminal_credit_allocations
             for row in allocations
         )
         accepted_nary = [
@@ -185,10 +202,12 @@ def dynamic_v2_metrics(
             "cross_layer_edge_count": len(graph.get("cross_layer_edges", [])),
             "memory_activation_message_count": len(memory_messages),
             "allocation_count": len(allocations),
+            "credit_assignment_count": len(credits),
             "selected_fidelity_level_count": len(fidelity_levels),
             "non_uniform_allocation": len(budget_shapes) > 1,
             "complete_evc_trace": complete_evc,
             "complete_outcome_feedback_trace": complete_outcome_feedback,
+            "complete_delayed_credit_trace": complete_delayed_credit,
             "feedback_influenced_allocation": any(
                 float((row.get("feedback_prior") or {}).get("observations", 0.0)) > 0.0
                 for row in allocations
@@ -263,6 +282,7 @@ def _aggregate(rows: list[dict[str, Any]]) -> dict[str, Any]:
     numeric = (
         "claim_count", "typed_claim_rate", "join_count", "auditable_join_count",
         "diffusion_count", "typed_message_count", "allocation_count",
+        "credit_assignment_count",
         "activated_passage_count", "activated_entity_count", "cross_layer_edge_count",
         "memory_activation_message_count", "selected_fidelity_level_count",
         "nary_join_attempt_count", "nary_join_accepted_count", "nary_join_downstream_used_count",
@@ -280,6 +300,7 @@ def _aggregate(rows: list[dict[str, Any]]) -> dict[str, Any]:
         "auditable_three_or_four_hop_join_case", "candidate_presence", "candidate_survival",
         "non_uniform_allocation", "complete_evc_trace", "controller_state_hash_present",
         "complete_outcome_feedback_trace", "feedback_influenced_allocation",
+        "complete_delayed_credit_trace",
         "query_graph_present",
         "complete_terminal_belief_readout", "complete_terminal_gap_trace",
         "graph_proof_completion", "proof_connected",

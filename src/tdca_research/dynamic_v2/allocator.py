@@ -58,6 +58,9 @@ class ComputationPacket:
     feedback_prior: dict[str, float] = field(default_factory=dict)
     fidelity_level: str = "medium"
     fidelity_fraction: float = 0.65
+    predicted_immediate_utility: float = 0.0
+    predicted_delayed_proof_return: float = 0.0
+    predicted_normalized_cost: float = 0.0
 
     def trace(self) -> dict:
         return {
@@ -76,6 +79,9 @@ class ComputationPacket:
             "feedback_prior": dict(self.feedback_prior),
             "fidelity_level": self.fidelity_level,
             "fidelity_fraction": self.fidelity_fraction,
+            "predicted_immediate_utility": self.predicted_immediate_utility,
+            "predicted_delayed_proof_return": self.predicted_delayed_proof_return,
+            "predicted_normalized_cost": self.predicted_normalized_cost,
         }
 
 
@@ -114,7 +120,10 @@ class AdaptiveComputationAllocator:
             for name, fraction in levels:
                 expanded.append((
                     index, operation, name, fraction,
-                    self._fidelity_signals(base, fraction),
+                    self._fidelity_signals(
+                        base, fraction,
+                        bounded_opportunity=self.config.horizon_aware_evc,
+                    ),
                 ))
         names = tuple(EVCSignals.__dataclass_fields__)
         if self.config.multi_resource_evc:
@@ -124,6 +133,7 @@ class AdaptiveComputationAllocator:
                     normalized_expanded.append(
                         self._fidelity_signals(
                             normalized_base_rows[index], fraction, clamp=True,
+                            bounded_opportunity=self.config.horizon_aware_evc,
                         )
                     )
         else:
@@ -141,11 +151,24 @@ class AdaptiveComputationAllocator:
         for packet_index, (index, operation, fidelity_name, fidelity_fraction, raw_row) in enumerate(expanded):
             normalized = normalized_expanded[packet_index]
             if mode == "adaptive_evc":
-                evc = self._adaptive_evc(normalized)
+                if self.config.horizon_aware_evc:
+                    immediate, delayed, normalized_cost = self._horizon_scores(
+                        normalized, operation_family(operation),
+                    )
+                    evc = max(0.0, (
+                        self.config.evc_immediate_horizon_weight * immediate
+                        + self.config.evc_delayed_horizon_weight * delayed
+                        - normalized_cost
+                    ))
+                else:
+                    evc = self._adaptive_evc(normalized)
+                    immediate, delayed, normalized_cost = evc, 0.0, normalized.expected_cost
             elif mode == "uniform":
                 evc = 0.5
+                immediate, delayed, normalized_cost = 0.5, 0.5, normalized.expected_cost
             else:
                 evc = max(0.1, 1.0 - 0.1 * _fixed_priority(operation.operation_type))
+                immediate, delayed, normalized_cost = evc, 0.0, normalized.expected_cost
             region = tuple(dict.fromkeys([operation.target_id, *operation.source_ids]))
             family = operation_family(operation)
             rkey = operation_region_key(operation)
@@ -177,6 +200,9 @@ class AdaptiveComputationAllocator:
                 feedback_prior=prior,
                 fidelity_level=fidelity_name,
                 fidelity_fraction=fidelity_fraction,
+                predicted_immediate_utility=_unit(immediate),
+                predicted_delayed_proof_return=_unit(delayed),
+                predicted_normalized_cost=_unit(normalized_cost),
             )))
         self.allocation_serial += len(expanded)
         if mode == "adaptive_evc":
@@ -221,6 +247,7 @@ class AdaptiveComputationAllocator:
     @staticmethod
     def _fidelity_signals(
         base: EVCSignals, fraction: float, *, clamp: bool = False,
+        bounded_opportunity: bool = False,
     ) -> EVCSignals:
         # Score *marginal* progress rather than total progress. Diminishing gains
         # make a cheap pass preferable until graph heat/impact justifies deeper
@@ -245,11 +272,20 @@ class AdaptiveComputationAllocator:
             expected_token_cost=base.expected_token_cost * fraction,
             expected_retrieval_cost=base.expected_retrieval_cost,
             retrieval_saturation=base.retrieval_saturation,
-            proof_gap_reducibility=base.proof_gap_reducibility * efficiency,
-            feasibility_unlock=base.feasibility_unlock * efficiency,
+            proof_gap_reducibility=base.proof_gap_reducibility * (
+                gain if bounded_opportunity else efficiency
+            ),
+            feasibility_unlock=base.feasibility_unlock * (
+                gain if bounded_opportunity else efficiency
+            ),
         )
-        if not clamp:
+        if not clamp and not bounded_opportunity:
             return row
+        if not clamp:
+            values = dict(row.__dict__)
+            values["proof_gap_reducibility"] = _unit(values["proof_gap_reducibility"])
+            values["feasibility_unlock"] = _unit(values["feasibility_unlock"])
+            return EVCSignals(**values)
         return EVCSignals(**{
             name: _unit(float(getattr(row, name)))
             for name in EVCSignals.__dataclass_fields__
@@ -343,6 +379,114 @@ class AdaptiveComputationAllocator:
                 + self.config.evc_weight_retrieval_saturation * normalized.retrieval_saturation
             )
         return max(0.0, value)
+
+    def _horizon_scores(
+        self, normalized: EVCSignals, family: str = "",
+    ) -> tuple[float, float, float]:
+        """Return independent immediate, delayed and cost channels in [0,1]."""
+
+        immediate = _weighted_mean({
+            "graph_heat": (normalized.graph_heat, self.config.evc_weight_heat),
+            "uncertainty_reduction": (
+                normalized.uncertainty_reduction,
+                self.config.evc_weight_uncertainty_reduction,
+            ),
+            "evidence_novelty": (
+                normalized.evidence_novelty, self.config.evc_weight_novelty,
+            ),
+            "recovery_value": (
+                normalized.recovery_value, self.config.evc_weight_recovery,
+            ),
+            "observed_value": (
+                normalized.observed_value, self.config.evc_weight_observed_value,
+            ),
+            "terminal_proximity": (
+                normalized.terminal_proximity,
+                self.config.evc_weight_terminal_proximity,
+            ),
+        })
+        structural_delayed = _weighted_mean({
+            "answer_impact": (
+                normalized.answer_impact, self.config.evc_weight_answer_impact,
+            ),
+            "dependency_unlock": (
+                normalized.dependency_unlock, self.config.evc_weight_unlock,
+            ),
+            "terminal_gap": (
+                normalized.terminal_gap, self.config.evc_weight_terminal_gap,
+            ),
+            "proof_gap_reducibility": (
+                normalized.proof_gap_reducibility,
+                self.config.evc_weight_proof_gap_reducibility,
+            ),
+            "feasibility_unlock": (
+                normalized.feasibility_unlock,
+                self.config.evc_weight_feasibility_unlock,
+            ),
+        })
+        # A terminal ANSWER commit realizes value now and has no future proof
+        # horizon.  Other operation families have different deterministic
+        # capacities to seed causal descendants; this prior is structural, is
+        # never updated across questions, and is blended with graph-state signals.
+        family_delayed_capacity = {
+            "commit:answer": self.config.delayed_capacity_commit_answer,
+            "commit:default": self.config.delayed_capacity_commit_claim,
+            "retrieve:default": self.config.delayed_capacity_retrieve,
+            "verify:default": self.config.delayed_capacity_verify,
+            "merge:validate_join": self.config.delayed_capacity_merge,
+            "merge:derive_join": self.config.delayed_capacity_merge,
+            "branch:extract_typed": self.config.delayed_capacity_extract,
+            "branch:assignments": self.config.delayed_capacity_branch,
+            "expand:default": self.config.delayed_capacity_expand,
+            "revise:default": self.config.delayed_capacity_revise,
+            "prune:default": self.config.delayed_capacity_prune,
+        }.get(family, self.config.delayed_capacity_extract)
+        structural_weight = float(self.config.delayed_structural_signal_weight)
+        delayed = (
+            0.0 if family == "commit:answer"
+            else (
+                (1.0 - structural_weight) * family_delayed_capacity
+                + structural_weight * structural_delayed
+            )
+        )
+        if self.config.multi_resource_evc:
+            cost = _weighted_mean({
+                "call": (
+                    normalized.expected_call_cost, self.config.evc_weight_call_cost,
+                ),
+                "token": (
+                    normalized.expected_token_cost, self.config.evc_weight_token_cost,
+                ),
+                "retrieval": (
+                    normalized.expected_retrieval_cost,
+                    self.config.evc_weight_retrieval_cost,
+                ),
+                "growth": (
+                    normalized.graph_growth_risk,
+                    self.config.evc_weight_growth_risk,
+                ),
+                "saturation": (
+                    normalized.retrieval_saturation,
+                    self.config.evc_weight_retrieval_saturation,
+                ),
+                "cooldown": (
+                    normalized.failure_cooldown,
+                    self.config.evc_weight_failure_cooldown,
+                ),
+            })
+        else:
+            cost = _weighted_mean({
+                "expected": (normalized.expected_cost, self.config.evc_weight_cost),
+                "growth": (
+                    normalized.graph_growth_risk,
+                    self.config.evc_weight_growth_risk,
+                ),
+                "cooldown": (
+                    normalized.failure_cooldown,
+                    self.config.evc_weight_failure_cooldown,
+                ),
+            })
+        return _unit(immediate), _unit(delayed), _unit(cost)
 
     @staticmethod
     def attach(operation: GraphOperation, packet: ComputationPacket) -> GraphOperation:
@@ -840,6 +984,16 @@ def _shadow_price(remaining: int | float, capacity: int | float) -> float:
     """Normalized deterministic scarcity price for a resource budget."""
     ratio = max(0.0, min(1.0, float(remaining) / max(1.0, float(capacity))))
     return 0.5 + 0.5 * (1.0 - ratio)
+
+
+def _weighted_mean(values: dict[str, tuple[float, float]]) -> float:
+    weight = sum(max(0.0, float(row[1])) for row in values.values())
+    if weight <= 1e-12:
+        return 0.0
+    return sum(
+        _unit(value) * max(0.0, float(component_weight))
+        for value, component_weight in values.values()
+    ) / weight
 
 
 def _unit(value: float) -> float:

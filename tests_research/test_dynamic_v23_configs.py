@@ -61,3 +61,33 @@ def test_v241_config_and_shadow_split_are_frozen_and_disjoint():
         for hop in (2, 3, 4)
     }
     assert hop_counts == {2: 6, 3: 9, 4: 5}
+
+
+def test_v242_configs_and_preregistration_freeze_two_horizon_credit_protocol():
+    root = Path(__file__).resolve().parents[1]
+    smoke = DynamicV2ResearchConfig.from_yaml(
+        root / "configs/dynamic_hypergraph_v242_qwen_smoke20.yaml"
+    )
+    shadow = DynamicV2ResearchConfig.from_yaml(
+        root / "configs/dynamic_hypergraph_v242_qwen_shadow20.yaml"
+    )
+    for config in (smoke, shadow):
+        config.validate()
+        assert config.horizon_aware_evc
+        assert config.delayed_credit_assignment
+        assert config.evc_immediate_horizon_weight == 0.40
+        assert config.evc_delayed_horizon_weight == 0.60
+        assert config.delayed_credit_gamma == 0.85
+        assert config.delayed_capacity_commit_answer == 0.0
+        assert config.campaign_provider_call_cap == 2000
+        assert config.campaign_provider_token_cap == 2_000_000
+    assert smoke.split_manifest_path != shadow.split_manifest_path
+    prereg = json.loads((
+        root / "configs/dynamic_v242_preregistration.json"
+    ).read_text(encoding="utf-8"))
+    assert not prereg["training"]
+    assert not prereg["gold_aware_inference"]
+    assert prereg["adaptive_smoke_a20_hard_gates"][
+        "delayed_evc_correlation_min"
+    ] == 0.15
+    assert prereg["safe_stop"]["no_post_failure_threshold_relaxation"]

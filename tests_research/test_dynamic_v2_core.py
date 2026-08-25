@@ -785,6 +785,106 @@ def test_allocator_records_complete_evc_and_produces_non_uniform_budget_packets(
     assert record.completed
 
 
+def test_v242_horizon_evc_bounds_proof_opportunity_instead_of_rewarding_low_fidelity():
+    base = EVCSignals(proof_gap_reducibility=1.0, feasibility_unlock=1.0)
+    low = AdaptiveComputationAllocator._fidelity_signals(
+        base, 0.35, bounded_opportunity=True,
+    )
+    high = AdaptiveComputationAllocator._fidelity_signals(
+        base, 1.0, bounded_opportunity=True,
+    )
+    assert 0.0 <= low.proof_gap_reducibility < high.proof_gap_reducibility <= 1.0
+    assert 0.0 <= low.feasibility_unlock < high.feasibility_unlock <= 1.0
+
+
+def test_v242_controller_assigns_delayed_credit_only_through_provenance_descendants():
+    cfg = config(
+        horizon_aware_evc=True,
+        delayed_credit_assignment=True,
+        choice_conditioned_evc=True,
+        multi_resource_evc=True,
+    )
+    controller = V2GraphController(cfg)
+    _, _, graph = chain_graph()
+    allocator = AdaptiveComputationAllocator(cfg)
+    budget = Budget(16, 6000, 200, Usage())
+
+    retrieve = operation(200, OperationType.RETRIEVE, payload={
+        "query": "Delta River country",
+        "proof_gap_reducibility": 1.0,
+        "feasibility_unlock": 1.0,
+        "evidence": [{
+            "node_id": "e3", "document_id": "p3", "passage_id": "p3",
+            "title": "Delta River", "source_span": "Delta River is in Gamma Country.",
+            "retrieval_rank": 1, "retrieval_score": 1.0,
+            "retrieval_query": "Delta River country", "retriever_identity": "fixture",
+        }],
+    })
+    retrieve_packet = allocator.allocate(graph, [retrieve], budget)[0]
+    assert 0.0 <= retrieve_packet.predicted_immediate_utility <= 1.0
+    assert 0.0 <= retrieve_packet.predicted_delayed_proof_return <= 1.0
+    assert 0.0 <= retrieve_packet.predicted_normalized_cost <= 1.0
+    graph = controller.apply(graph, allocator.attach(retrieve, retrieve_packet))
+    graph = controller.reconcile_allocation(
+        graph, retrieve_packet,
+        {"llm_calls": 0.0, "tokens": 0.0, "retrieval_calls": 1.0}, True,
+    )
+    assert graph.allocation_history[-1].delayed_realized_proof_return == 0.0
+
+    extract = operation(
+        201, OperationType.BRANCH,
+        payload={"mode": "candidates", "candidates": [{
+            "node_id": "c3", "subject": "Delta River", "relation": "located in",
+            "value": "Gamma Country", "subject_type": "location",
+            "value_type": "country", "answer_type": "country",
+            "evidence_refs": ["e3"], "source_spans": ["Delta River is in Gamma Country"],
+            "dependency_claim_ids": [], "extraction_confidence": 0.9,
+            "answers_subgoal": True, "answer_position": "value",
+        }]},
+        sources=["e3"],
+    )
+    extract_packet = allocator.allocate(graph, [extract], budget)[0]
+    graph = controller.apply(graph, allocator.attach(extract, extract_packet))
+    graph = controller.reconcile_allocation(
+        graph, extract_packet,
+        {"llm_calls": 1.0, "tokens": 300.0, "retrieval_calls": 0.0}, True,
+    )
+
+    verify = operation(202, OperationType.VERIFY, payload={"scores": {"c3": {
+        "grounding": 1.0, "entailment": 0.9, "type_match": 1.0,
+        "dependency_consistency": 1.0, "retrieval_support": 1.0,
+        "contradiction_risk": 0.0, "raw_model_confidence": 0.9,
+        "absolute_support": 0.9, "relative_weight": 1.0,
+        "set_entropy": 0.0, "evidence_gap": 0.1, "status": "scored",
+        "answer_position": "value",
+    }}}, sources=["c3"])
+    verify_packet = allocator.allocate(graph, [verify], budget)[0]
+    graph = controller.apply(graph, allocator.attach(verify, verify_packet))
+    graph = controller.reconcile_allocation(
+        graph, verify_packet,
+        {"llm_calls": 1.0, "tokens": 200.0, "retrieval_calls": 0.0}, True,
+    )
+    retrieval_allocation = next(
+        row for row in graph.allocation_history
+        if row.allocation_id == retrieve_packet.allocation_id
+    )
+    assert retrieval_allocation.delayed_realized_proof_return > 0.0
+    latest = next(
+        row for row in reversed(graph.credit_assignment_history)
+        if row.allocation_id == retrieve_packet.allocation_id
+    )
+    assert latest.causal_event_ids == ["c3", "e3"]
+    assert latest.causal_distance_by_node["c3"] == 1
+    assert all(
+        row.operation_id == retrieve_packet.operation.operation_id
+        for row in graph.credit_assignment_history
+        if row.allocation_id == retrieve_packet.allocation_id
+    )
+    graph.validate()
+    restored = DynamicReasoningHypergraphV2.from_dict(graph.to_dict())
+    assert restored.credit_assignment_history == graph.credit_assignment_history
+
+
 def test_assignment_branch_consumes_adaptive_branch_width_packet():
     cfg, controller, graph = chain_graph()
     branch_operation = operation(

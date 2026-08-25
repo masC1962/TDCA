@@ -133,6 +133,14 @@ class AllocationRecord:
     failure_reason: str = ""
     fidelity_level: str = "medium"
     fidelity_fraction: float = 0.65
+    predicted_immediate_utility: float = 0.0
+    predicted_delayed_proof_return: float = 0.0
+    predicted_normalized_cost: float = 0.0
+    actual_immediate_utility: float = 0.0
+    actual_normalized_cost: float = 0.0
+    delayed_realized_proof_return: float = 0.0
+    combined_realized_utility: float = 0.0
+    credit_finalized: bool = False
 
 
 @dataclass
@@ -204,6 +212,35 @@ class OperationOutcomeRecord:
     failure_reason: str
     statistics_before: dict[str, float]
     statistics_after: dict[str, float]
+    actual_immediate_utility: float = 0.0
+    actual_normalized_cost: float = 0.0
+    delayed_realized_proof_return: float = 0.0
+    combined_realized_utility: float = 0.0
+
+
+@dataclass(frozen=True)
+class CreditAssignmentRecord:
+    """Append-only, controller-owned causal credit observation.
+
+    Every row is immutable.  Later graph mutations append a new observation for
+    the source allocation instead of rewriting historical attribution.
+    """
+
+    credit_id: str
+    allocation_id: str
+    operation_id: str
+    source_step: int
+    observed_at_step: int
+    gamma: float
+    seed_node_ids: list[str]
+    causal_descendant_ids: list[str]
+    causal_distance_by_node: dict[str, int]
+    delayed_components_raw: dict[str, float]
+    delayed_components_normalized: dict[str, float]
+    delayed_realized_proof_return: float
+    causal_event_ids: list[str]
+    terminal: bool = False
+    attribution_version: str = "provenance-delayed-credit-v2.4.2"
 
 
 @dataclass
@@ -293,6 +330,7 @@ class DynamicReasoningHypergraphV2(DynamicReasoningHypergraph):
     retrieval_attempt_history: list[RetrievalAttemptRecord] = field(default_factory=list)
     join_attempt_history: list[JoinAttemptRecord] = field(default_factory=list)
     operation_outcome_history: list[OperationOutcomeRecord] = field(default_factory=list)
+    credit_assignment_history: list[CreditAssignmentRecord] = field(default_factory=list)
     operation_feedback: dict[str, OperationFeedbackStats] = field(default_factory=dict)
     supersession_history: list[SupersessionRecord] = field(default_factory=list)
     invalidated_hyperedges: list[str] = field(default_factory=list)
@@ -320,6 +358,7 @@ class DynamicReasoningHypergraphV2(DynamicReasoningHypergraph):
             "retrieval_attempt_history": _primitive(self.retrieval_attempt_history),
             "join_attempt_history": _primitive(self.join_attempt_history),
             "operation_outcome_history": _primitive(self.operation_outcome_history),
+            "credit_assignment_history": _primitive(self.credit_assignment_history),
             "operation_feedback": {
                 key: _primitive(value) for key, value in sorted(self.operation_feedback.items())
             },
@@ -424,6 +463,19 @@ class DynamicReasoningHypergraphV2(DynamicReasoningHypergraph):
         for row in self.allocation_history:
             if row.predicted_evc < 0 or not row.evc_components_raw or not row.requested_budget:
                 raise GraphInvariantError(f"allocation {row.allocation_id} lacks complete EVC trace")
+            for name in (
+                "predicted_immediate_utility", "predicted_delayed_proof_return",
+                "predicted_normalized_cost", "actual_immediate_utility",
+                "actual_normalized_cost", "delayed_realized_proof_return",
+            ):
+                if not 0.0 <= float(getattr(row, name)) <= 1.0:
+                    raise GraphInvariantError(
+                        f"allocation {row.allocation_id}.{name} outside [0,1]"
+                    )
+            if not -1.0 <= float(row.combined_realized_utility) <= 1.0:
+                raise GraphInvariantError(
+                    f"allocation {row.allocation_id} combined utility outside [-1,1]"
+                )
             if row.completed and not row.actual_cost:
                 raise GraphInvariantError(f"completed allocation {row.allocation_id} lacks actual cost")
             if row.feedback_applied:
@@ -487,6 +539,38 @@ class DynamicReasoningHypergraphV2(DynamicReasoningHypergraph):
                 raise GraphInvariantError(f"outcome {row.outcome_id} lacks allocation ledger row")
             if not -1.0 <= float(row.actual_utility) <= 1.0:
                 raise GraphInvariantError(f"outcome {row.outcome_id} utility outside [-1,1]")
+            for name in (
+                "actual_immediate_utility", "actual_normalized_cost",
+                "delayed_realized_proof_return",
+            ):
+                if not 0.0 <= float(getattr(row, name)) <= 1.0:
+                    raise GraphInvariantError(f"outcome {row.outcome_id}.{name} outside [0,1]")
+            if not -1.0 <= float(row.combined_realized_utility) <= 1.0:
+                raise GraphInvariantError(
+                    f"outcome {row.outcome_id} combined utility outside [-1,1]"
+                )
+        credit_ids = [row.credit_id for row in self.credit_assignment_history]
+        if len(credit_ids) != len(set(credit_ids)):
+            raise GraphInvariantError("credit assignment ids must be unique")
+        observed_steps: dict[str, int] = {}
+        for row in self.credit_assignment_history:
+            if row.allocation_id not in set(allocation_ids):
+                raise GraphInvariantError(
+                    f"credit {row.credit_id} lacks allocation ledger row"
+                )
+            if row.observed_at_step < row.source_step:
+                raise GraphInvariantError(f"credit {row.credit_id} precedes its source")
+            if row.observed_at_step < observed_steps.get(row.allocation_id, -1):
+                raise GraphInvariantError("credit observations must be append-only by step")
+            observed_steps[row.allocation_id] = row.observed_at_step
+            if not 0.0 <= float(row.gamma) <= 1.0:
+                raise GraphInvariantError(f"credit {row.credit_id} gamma outside [0,1]")
+            if not 0.0 <= float(row.delayed_realized_proof_return) <= 1.0:
+                raise GraphInvariantError(f"credit {row.credit_id} return outside [0,1]")
+            if set(row.causal_distance_by_node) != set(row.causal_descendant_ids):
+                raise GraphInvariantError(f"credit {row.credit_id} causal distance mismatch")
+            if any(int(value) < 0 for value in row.causal_distance_by_node.values()):
+                raise GraphInvariantError(f"credit {row.credit_id} has negative distance")
         for key, stats in self.operation_feedback.items():
             if stats.observations < 0 or stats.successes < 0 or stats.no_ops < 0:
                 raise GraphInvariantError(f"negative feedback counter for {key}")
@@ -559,6 +643,10 @@ class DynamicReasoningHypergraphV2(DynamicReasoningHypergraph):
         ]
         graph.operation_outcome_history = [
             OperationOutcomeRecord(**row) for row in value.get("operation_outcome_history", [])
+        ]
+        graph.credit_assignment_history = [
+            CreditAssignmentRecord(**row)
+            for row in value.get("credit_assignment_history", [])
         ]
         graph.operation_feedback = {
             str(key): OperationFeedbackStats(**row)

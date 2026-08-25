@@ -93,6 +93,31 @@ class DynamicV2ResearchConfig(DynamicResearchConfig):
     evc_weight_proof_gap_reducibility: float = 1.25
     evc_weight_feasibility_unlock: float = 1.00
 
+    # v2.4.2 separates the value realized by the selected mutation from value
+    # realized by its later causal descendants.  The feature remains opt-in so
+    # frozen v2.4.1 and earlier configurations retain their original policy.
+    horizon_aware_evc: bool = False
+    delayed_credit_assignment: bool = False
+    evc_immediate_horizon_weight: float = 0.40
+    evc_delayed_horizon_weight: float = 0.60
+    delayed_credit_gamma: float = 0.85
+    delayed_credit_weight_proof_completeness: float = 0.35
+    delayed_credit_weight_candidate_availability: float = 0.20
+    delayed_credit_weight_accepted_evidence: float = 0.20
+    delayed_credit_weight_successful_join: float = 0.15
+    delayed_credit_weight_supported_terminal_answer: float = 0.10
+    delayed_structural_signal_weight: float = 0.25
+    delayed_capacity_commit_answer: float = 0.00
+    delayed_capacity_commit_claim: float = 0.75
+    delayed_capacity_retrieve: float = 0.75
+    delayed_capacity_verify: float = 0.65
+    delayed_capacity_merge: float = 0.70
+    delayed_capacity_extract: float = 0.50
+    delayed_capacity_branch: float = 0.55
+    delayed_capacity_expand: float = 0.45
+    delayed_capacity_revise: float = 0.45
+    delayed_capacity_prune: float = 0.10
+
     # Terminal acceptance is a conjunctive readout over independent belief
     # channels.  These are initial development values, never learned weights.
     terminal_min_absolute_support: float = 0.70
@@ -161,11 +186,15 @@ class DynamicV2ResearchConfig(DynamicResearchConfig):
             if name.startswith("diffusion_") and name not in {"diffusion_steps", "diffusion_min_delta"}
             or name.endswith("_threshold")
             or name.endswith("_fraction")
+            or name.startswith("delayed_capacity_")
             or name in {
                 "terminal_min_absolute_support", "terminal_min_relative_margin",
                 "terminal_max_entropy", "terminal_max_evidence_gap",
                 "terminal_max_contradiction", "terminal_min_type_consistency",
                 "terminal_min_chain_coverage",
+                "evc_immediate_horizon_weight", "evc_delayed_horizon_weight",
+                "delayed_credit_gamma",
+                "delayed_structural_signal_weight",
             }
         }
         for name, value in unit.items():
@@ -183,6 +212,22 @@ class DynamicV2ResearchConfig(DynamicResearchConfig):
             raise ValueError("activation_entity_boost must be in [0,1]")
         if not 0.0 <= self.retrieval_query_max_token_overlap <= 1.0:
             raise ValueError("retrieval_query_max_token_overlap must be in [0,1]")
+        horizon_weight = (
+            float(self.evc_immediate_horizon_weight)
+            + float(self.evc_delayed_horizon_weight)
+        )
+        if abs(horizon_weight - 1.0) > 1e-9:
+            raise ValueError("immediate and delayed EVC horizon weights must sum to 1")
+        delayed_weights = [
+            float(value) for name, value in asdict(self).items()
+            if name.startswith("delayed_credit_weight_")
+        ]
+        if (
+            not delayed_weights
+            or any(value < 0.0 for value in delayed_weights)
+            or sum(delayed_weights) <= 0.0
+        ):
+            raise ValueError("delayed credit component weights must have positive mass")
         weights = [
             value for name, value in asdict(self).items()
             if name.startswith("heat_weight_")

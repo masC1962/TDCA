@@ -108,6 +108,8 @@ def test_v2_end_to_end_answer_has_diffusion_allocation_and_typed_claims():
         llm_backend="mock", max_total_tokens=8000, final_reserve_tokens=200,
         top_k=2, max_candidates_per_subgoal=8, max_graph_nodes=96,
         meta_stop_evc_threshold=0.01,
+        horizon_aware_evc=True, delayed_credit_assignment=True,
+        multi_resource_evc=True, choice_conditioned_evc=True,
     )
     prediction, retrieval, reasoning = DynamicHypergraphV2Reasoner(
         DeterministicMockLLM(json_responses=responses), BM25Retriever(passages), config,
@@ -138,6 +140,14 @@ def test_v2_end_to_end_answer_has_diffusion_allocation_and_typed_claims():
     assert final["diffusion_history"]
     assert final["allocation_history"]
     assert all(row["actual_cost"] for row in final["allocation_history"])
+    assert final["credit_assignment_history"]
+    assert all(row["credit_finalized"] for row in final["allocation_history"])
+    assert all(
+        row["predicted_immediate_utility"] is not None
+        and row["predicted_delayed_proof_return"] is not None
+        and row["predicted_normalized_cost"] is not None
+        for row in final["allocation_history"]
+    )
     assert all(
         {"terminal_gap", "terminal_proximity"}.issubset(row["evc_components_raw"])
         for row in final["allocation_history"]

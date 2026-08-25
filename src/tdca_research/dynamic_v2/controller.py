@@ -26,6 +26,7 @@ from ..dynamic.graph import (
 from ..utils import normalize_text, stable_hash
 from .belief import GraphBeliefUpdater
 from .config import DynamicV2ResearchConfig
+from .credit import refresh_delayed_credit
 from .diffusion import TypedDirectionalDiffusion
 from .graph import (
     ActivatedEntityState,
@@ -128,6 +129,7 @@ class V2GraphController(GraphController):
                 "graph_operations": max(0, updated.limits.max_graph_operations - len(updated.operation_history)),
             },
         ))
+        refresh_delayed_credit(updated, self.config, terminal=True)
         updated.seal_controller_state()
         updated.validate()
         return updated
@@ -190,6 +192,15 @@ class V2GraphController(GraphController):
                 failure_reason=str(failure_reason),
                 fidelity_level=str(trace.get("fidelity_level", "medium")),
                 fidelity_fraction=float(trace.get("fidelity_fraction", 0.65)),
+                predicted_immediate_utility=float(
+                    trace.get("predicted_immediate_utility", trace["predicted_evc"])
+                ),
+                predicted_delayed_proof_return=float(
+                    trace.get("predicted_delayed_proof_return", 0.0)
+                ),
+                predicted_normalized_cost=float(
+                    trace.get("predicted_normalized_cost", 0.0)
+                ),
             ))
         else:
             existing.actual_cost = measured
@@ -204,6 +215,7 @@ class V2GraphController(GraphController):
             updated, packet, measured, bool(completed), str(failure_reason),
             outcome_metadata or {},
         )
+        refresh_delayed_credit(updated, self.config)
         updated.seal_controller_state()
         updated.validate()
         return updated
@@ -420,6 +432,7 @@ class V2GraphController(GraphController):
         benefit = sum(
             float(weights[key]) * normalized[key] for key in weights
         )
+        immediate_utility = _unit_positive(benefit / max(1e-12, benefit_weight))
         cost_weight = float(self.config.actual_utility_weight_cost)
         denominator = max(1e-12, benefit_weight + cost_weight)
         utility = max(-1.0, min(1.0, (
@@ -440,6 +453,12 @@ class V2GraphController(GraphController):
         allocation.actual_utility_components_raw = raw
         allocation.actual_utility_components_normalized = normalized
         allocation.actual_utility = utility
+        allocation.actual_immediate_utility = immediate_utility
+        allocation.actual_normalized_cost = normalized["cost"]
+        allocation.combined_realized_utility = max(-1.0, min(1.0, (
+            self.config.evc_immediate_horizon_weight * immediate_utility
+            - normalized["cost"]
+        )))
         allocation.feedback_applied = True
         graph.operation_outcome_history.append(OperationOutcomeRecord(
             outcome_id=f"outcome_{packet.allocation_id}",
@@ -459,6 +478,9 @@ class V2GraphController(GraphController):
             failure_reason=failure_reason,
             statistics_before=before,
             statistics_after=after,
+            actual_immediate_utility=immediate_utility,
+            actual_normalized_cost=normalized["cost"],
+            combined_realized_utility=allocation.combined_realized_utility,
         ))
 
     def _update_feedback(self, graph, key, utility, normalized_cost, progressed) -> None:
@@ -943,6 +965,15 @@ class V2GraphController(GraphController):
             completed=True,
             fidelity_level=str(row.get("fidelity_level", "medium")),
             fidelity_fraction=float(row.get("fidelity_fraction", 0.65)),
+            predicted_immediate_utility=float(
+                row.get("predicted_immediate_utility", row.get("predicted_evc", 0.0))
+            ),
+            predicted_delayed_proof_return=float(
+                row.get("predicted_delayed_proof_return", 0.0)
+            ),
+            predicted_normalized_cost=float(
+                row.get("predicted_normalized_cost", 0.0)
+            ),
         ))
 
 
