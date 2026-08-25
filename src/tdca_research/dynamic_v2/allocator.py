@@ -17,6 +17,7 @@ from ..dynamic.graph import (
 from ..utils import stable_hash
 from .config import DynamicV2ResearchConfig
 from .graph import DynamicReasoningHypergraphV2, OperationFeedbackStats
+from .obligations import graph_local_operation_value, operation_obligation_targets
 
 
 @dataclass(frozen=True)
@@ -39,6 +40,13 @@ class EVCSignals:
     retrieval_saturation: float = 0.0
     proof_gap_reducibility: float = 0.0
     feasibility_unlock: float = 0.0
+    obligation_closure: float = 0.0
+    terminal_reachability: float = 0.0
+    missing_premise_reduction: float = 0.0
+    candidate_reachability: float = 0.0
+    evidence_path: float = 0.0
+    dead_end_risk: float = 0.0
+    absolute_graph_risk: float = 0.0
 
 
 @dataclass(frozen=True)
@@ -61,6 +69,8 @@ class ComputationPacket:
     predicted_immediate_utility: float = 0.0
     predicted_delayed_proof_return: float = 0.0
     predicted_normalized_cost: float = 0.0
+    predicted_gross_opportunity: float = 0.0
+    target_obligation_ids: tuple[str, ...] = ()
 
     def trace(self) -> dict:
         return {
@@ -82,6 +92,8 @@ class ComputationPacket:
             "predicted_immediate_utility": self.predicted_immediate_utility,
             "predicted_delayed_proof_return": self.predicted_delayed_proof_return,
             "predicted_normalized_cost": self.predicted_normalized_cost,
+            "predicted_gross_opportunity": self.predicted_gross_opportunity,
+            "target_obligation_ids": list(self.target_obligation_ids),
         }
 
 
@@ -114,6 +126,27 @@ class AdaptiveComputationAllocator:
             if self.config.choice_conditioned_evc
             else self._normalize_base_signals(base_rows)
         )
+        if self.config.absolute_resource_cost:
+            # Cost is an absolute resource fraction.  It must not change when a
+            # dominated or irrelevant action is inserted into the ready set.
+            absolute_names = {
+                "expected_cost", "expected_call_cost", "expected_token_cost",
+                "expected_retrieval_cost", "absolute_graph_risk",
+                "obligation_closure", "terminal_reachability",
+                "missing_premise_reduction", "candidate_reachability",
+                "evidence_path", "dead_end_risk",
+            }
+            normalized_base_rows = [
+                EVCSignals(**{
+                    name: (
+                        float(getattr(base_rows[index], name))
+                        if name in absolute_names
+                        else float(getattr(row, name))
+                    )
+                    for name in EVCSignals.__dataclass_fields__
+                })
+                for index, row in enumerate(normalized_base_rows)
+            ]
         for index, operation in enumerate(operations):
             base = base_rows[index]
             levels = self._fidelity_options(operation)
@@ -123,6 +156,7 @@ class AdaptiveComputationAllocator:
                     self._fidelity_signals(
                         base, fraction,
                         bounded_opportunity=self.config.horizon_aware_evc,
+                        absolute_cost=self.config.absolute_resource_cost,
                     ),
                 ))
         names = tuple(EVCSignals.__dataclass_fields__)
@@ -134,6 +168,7 @@ class AdaptiveComputationAllocator:
                         self._fidelity_signals(
                             normalized_base_rows[index], fraction, clamp=True,
                             bounded_opportunity=self.config.horizon_aware_evc,
+                            absolute_cost=self.config.absolute_resource_cost,
                         )
                     )
         else:
@@ -160,15 +195,22 @@ class AdaptiveComputationAllocator:
                         + self.config.evc_delayed_horizon_weight * delayed
                         - normalized_cost
                     ))
+                    gross = _unit(
+                        self.config.evc_immediate_horizon_weight * immediate
+                        + self.config.evc_delayed_horizon_weight * delayed
+                    )
                 else:
                     evc = self._adaptive_evc(normalized)
                     immediate, delayed, normalized_cost = evc, 0.0, normalized.expected_cost
+                    gross = _unit(evc + normalized_cost)
             elif mode == "uniform":
                 evc = 0.5
                 immediate, delayed, normalized_cost = 0.5, 0.5, normalized.expected_cost
+                gross = 0.5
             else:
                 evc = max(0.1, 1.0 - 0.1 * _fixed_priority(operation.operation_type))
                 immediate, delayed, normalized_cost = evc, 0.0, normalized.expected_cost
+                gross = _unit(evc + normalized_cost)
             region = tuple(dict.fromkeys([operation.target_id, *operation.source_ids]))
             family = operation_family(operation)
             rkey = operation_region_key(operation)
@@ -203,6 +245,8 @@ class AdaptiveComputationAllocator:
                 predicted_immediate_utility=_unit(immediate),
                 predicted_delayed_proof_return=_unit(delayed),
                 predicted_normalized_cost=_unit(normalized_cost),
+                predicted_gross_opportunity=_unit(gross),
+                target_obligation_ids=tuple(operation_obligation_targets(graph, operation)),
             )))
         self.allocation_serial += len(expanded)
         if mode == "adaptive_evc":
@@ -248,6 +292,7 @@ class AdaptiveComputationAllocator:
     def _fidelity_signals(
         base: EVCSignals, fraction: float, *, clamp: bool = False,
         bounded_opportunity: bool = False,
+        absolute_cost: bool = False,
     ) -> EVCSignals:
         # Score *marginal* progress rather than total progress. Diminishing gains
         # make a cheap pass preferable until graph heat/impact justifies deeper
@@ -268,7 +313,9 @@ class AdaptiveComputationAllocator:
             failure_cooldown=base.failure_cooldown,
             terminal_gap=base.terminal_gap * gain,
             terminal_proximity=base.terminal_proximity * gain,
-            expected_call_cost=base.expected_call_cost * (0.5 + 0.5 * fraction),
+            expected_call_cost=base.expected_call_cost * (
+                1.0 if absolute_cost else (0.5 + 0.5 * fraction)
+            ),
             expected_token_cost=base.expected_token_cost * fraction,
             expected_retrieval_cost=base.expected_retrieval_cost,
             retrieval_saturation=base.retrieval_saturation,
@@ -278,6 +325,13 @@ class AdaptiveComputationAllocator:
             feasibility_unlock=base.feasibility_unlock * (
                 gain if bounded_opportunity else efficiency
             ),
+            obligation_closure=base.obligation_closure * gain,
+            terminal_reachability=base.terminal_reachability,
+            missing_premise_reduction=base.missing_premise_reduction * gain,
+            candidate_reachability=base.candidate_reachability * gain,
+            evidence_path=base.evidence_path * gain,
+            dead_end_risk=base.dead_end_risk,
+            absolute_graph_risk=base.absolute_graph_risk * fraction,
         )
         if not clamp and not bounded_opportunity:
             return row
@@ -442,14 +496,45 @@ class AdaptiveComputationAllocator:
             "prune:default": self.config.delayed_capacity_prune,
         }.get(family, self.config.delayed_capacity_extract)
         structural_weight = float(self.config.delayed_structural_signal_weight)
-        delayed = (
-            0.0 if family == "commit:answer"
-            else (
-                (1.0 - structural_weight) * family_delayed_capacity
-                + structural_weight * structural_delayed
+        if self.config.graph_local_delayed_value:
+            delayed = 0.0 if family == "commit:answer" else _weighted_mean({
+                "obligation_closure": (
+                    normalized.obligation_closure,
+                    self.config.graph_local_weight_obligation_closure,
+                ),
+                "terminal_reachability": (
+                    normalized.terminal_reachability,
+                    self.config.graph_local_weight_terminal_reachability,
+                ),
+                "missing_premise_reduction": (
+                    normalized.missing_premise_reduction,
+                    self.config.graph_local_weight_missing_premise_reduction,
+                ),
+                "candidate_reachability": (
+                    normalized.candidate_reachability,
+                    self.config.graph_local_weight_candidate_reachability,
+                ),
+                "evidence_path": (
+                    normalized.evidence_path,
+                    self.config.graph_local_weight_evidence_path,
+                ),
+            }) * (1.0 - 0.5 * normalized.dead_end_risk)
+        else:
+            delayed = (
+                0.0 if family == "commit:answer"
+                else (
+                    (1.0 - structural_weight) * family_delayed_capacity
+                    + structural_weight * structural_delayed
+                )
             )
-        )
-        if self.config.multi_resource_evc:
+        if self.config.absolute_resource_cost:
+            cost = (
+                self.config.absolute_cost_weight_call * normalized.expected_call_cost
+                + self.config.absolute_cost_weight_token * normalized.expected_token_cost
+                + self.config.absolute_cost_weight_retrieval * normalized.expected_retrieval_cost
+                + self.config.absolute_cost_weight_graph_risk * normalized.absolute_graph_risk
+            )
+        elif self.config.multi_resource_evc:
             cost = _weighted_mean({
                 "call": (
                     normalized.expected_call_cost, self.config.evc_weight_call_cost,
@@ -546,7 +631,24 @@ class AdaptiveComputationAllocator:
             operation_coarse_region_key(operation),
             use_hierarchical=self.config.hierarchical_within_question_feedback,
         )
-        empirical_cost = float(prior.get("mean_cost", 0.0))
+        if self.config.graph_local_delayed_value:
+            # v2.4.3 records the hierarchical prior for diagnostics but lets
+            # only exact, same-region causal outcomes affect the policy.
+            exact = graph.operation_feedback.get(feedback_key(family, rkey))
+            decision_success = exact.posterior_success if exact is not None else 0.5
+            decision_value = exact.posterior_value if exact is not None else 0.5
+            empirical_cost = (
+                exact.cumulative_cost / max(1, exact.observations)
+                if exact is not None else 0.0
+            )
+            decision_cooldown = float(
+                exact is not None and graph.step < exact.cooldown_until_step
+            )
+        else:
+            decision_success = float(prior["posterior_success"])
+            decision_value = float(prior["posterior_value"])
+            empirical_cost = float(prior.get("mean_cost", 0.0))
+            decision_cooldown = float(prior["cooldown_active"])
         terminal_context = operation.payload.get("_terminal_context", {})
         if not isinstance(terminal_context, dict):
             terminal_context = {}
@@ -600,17 +702,51 @@ class AdaptiveComputationAllocator:
             _unit(float(operation.payload.get("feasibility_unlock", 0.0)))
             if self.config.choice_conditioned_evc else 0.0
         )
+        local = (
+            graph_local_operation_value(graph, operation)
+            if self.config.graph_local_delayed_value else {}
+        )
+        if self.config.absolute_resource_cost:
+            max_token_demand = 0.0 if call_demand <= 0.0 else float({
+                OperationType.EXPAND: self.config.graph_editor_max_tokens,
+                OperationType.BRANCH: self.config.typed_extraction_max_tokens,
+                OperationType.VERIFY: self.config.soft_verifier_max_tokens,
+                OperationType.MERGE: self.config.join_validation_max_tokens,
+            }.get(operation.operation_type, 0.0))
+            call_pressure = _absolute_resource_fraction(
+                call_demand, self.config.max_llm_calls,
+                (
+                    self.config.max_llm_calls
+                    if budget is None
+                    else budget.max_llm_calls - budget.usage.llm_calls
+                ),
+                self.config.absolute_cost_scarcity_max_multiplier,
+            )
+            token_pressure = _absolute_resource_fraction(
+                max_token_demand, self.config.max_total_tokens,
+                (
+                    self.config.max_total_tokens
+                    if budget is None
+                    else budget.max_total_tokens - budget.usage.total_tokens
+                ),
+                self.config.absolute_cost_scarcity_max_multiplier,
+            )
+            retrieval_pressure = _absolute_resource_fraction(
+                retrieval_demand, graph.limits.max_retrieval_calls,
+                graph.limits.max_retrieval_calls - graph.retrieval_calls,
+                self.config.absolute_cost_scarcity_max_multiplier,
+            )
         return EVCSignals(
             graph_heat=heat,
             uncertainty_reduction=uncertainty * _operation_reduction(operation.operation_type),
             answer_impact=impact,
             dependency_unlock=unlock,
-            evidence_novelty=novelty * max(0.2, float(prior["posterior_success"])),
+            evidence_novelty=novelty * max(0.2, decision_success),
             recovery_value=recovery,
-            observed_value=float(prior["posterior_value"]),
+            observed_value=decision_value,
             expected_cost=max(base_cost, empirical_cost),
             graph_growth_risk=growth,
-            failure_cooldown=float(prior["cooldown_active"]),
+            failure_cooldown=decision_cooldown,
             terminal_gap=terminal_gap * terminal_affinity,
             terminal_proximity=terminal_proximity,
             expected_call_cost=call_demand * call_pressure,
@@ -619,6 +755,13 @@ class AdaptiveComputationAllocator:
             retrieval_saturation=retrieval_saturation,
             proof_gap_reducibility=proof_gap_reducibility,
             feasibility_unlock=feasibility_unlock,
+            obligation_closure=float(local.get("obligation_closure", 0.0)),
+            terminal_reachability=float(local.get("terminal_reachability", 0.0)),
+            missing_premise_reduction=float(local.get("missing_premise_reduction", 0.0)),
+            candidate_reachability=float(local.get("candidate_reachability", 0.0)),
+            evidence_path=float(local.get("evidence_path", 0.0)),
+            dead_end_risk=float(local.get("dead_end_risk", 0.0)),
+            absolute_graph_risk=_unit(growth),
         )
 
     def _budget_packet(
@@ -633,6 +776,14 @@ class AdaptiveComputationAllocator:
             operation.operation_type == OperationType.BRANCH
             and str(operation.payload.get("mode", "")) == "assignments"
         )
+        if self.config.graph_local_delayed_value:
+            prior_observations = float(prior.get("exact_observations", 0.0))
+            prior_value = float(prior.get("exact_posterior_value", 0.5))
+            prior_cooldown = float(prior.get("exact_cooldown_active", 0.0))
+        else:
+            prior_observations = float(prior.get("observations", 0.0))
+            prior_value = float(prior.get("posterior_value", 0.5))
+            prior_cooldown = float(prior.get("cooldown_active", 0.0))
         max_tokens = 0 if assignment_branch else {
             OperationType.EXPAND: self.config.graph_editor_max_tokens,
             OperationType.BRANCH: self.config.typed_extraction_max_tokens,
@@ -657,12 +808,12 @@ class AdaptiveComputationAllocator:
             # With no outcomes, preserve the pre-feedback allocation exactly.
             # Once evidence exists, use a conservative posterior adjustment; a
             # neutral prior must never dilute a genuinely hot graph region.
-            if float(prior.get("observations", 0.0)) <= 0.0:
+            if prior_observations <= 0.0:
                 packet_heat = max(0.0, min(1.0, heat))
             else:
-                posterior = float(prior["posterior_value"])
+                posterior = prior_value
                 packet_heat = max(0.0, min(1.0, heat + 0.25 * (posterior - 0.5)))
-            if float(prior["cooldown_active"]) >= 1.0:
+            if prior_cooldown >= 1.0:
                 packet_heat = min(packet_heat, self.config.allocation_min_token_fraction)
             if packet_heat >= self.config.allocation_high_heat_threshold:
                 fraction = 1.0
@@ -807,6 +958,12 @@ def feedback_prior(
         "cooldown_until_step": float(cooldown_until),
         "cooldown_active": float(graph.step < cooldown_until),
         "mean_cost": max(0.0, min(1.0, mean_cost)),
+        "exact_posterior_value": float(stats.posterior_value),
+        "exact_posterior_success": float(stats.posterior_success),
+        "exact_cooldown_active": float(graph.step < stats.cooldown_until_step),
+        "exact_mean_cost": (
+            float(stats.cumulative_cost) / max(1.0, float(stats.observations))
+        ),
     }
 
 
@@ -984,6 +1141,21 @@ def _shadow_price(remaining: int | float, capacity: int | float) -> float:
     """Normalized deterministic scarcity price for a resource budget."""
     ratio = max(0.0, min(1.0, float(remaining) / max(1.0, float(capacity))))
     return 0.5 + 0.5 * (1.0 - ratio)
+
+
+def _absolute_resource_fraction(
+    demand: int | float,
+    capacity: int | float,
+    remaining: int | float,
+    scarcity_max_multiplier: float,
+) -> float:
+    """Choice-invariant resource price, monotone in resource scarcity."""
+    capacity = max(1.0, float(capacity))
+    remaining_ratio = _unit(float(remaining) / capacity)
+    multiplier = 1.0 + (
+        max(1.0, float(scarcity_max_multiplier)) - 1.0
+    ) * (1.0 - remaining_ratio)
+    return _unit(float(demand) / capacity * multiplier)
 
 
 def _weighted_mean(values: dict[str, tuple[float, float]]) -> float:

@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from copy import deepcopy
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from dataclasses import asdict
 import math
 
@@ -12,6 +12,7 @@ from .allocator import ComputationPacket
 from .config import DynamicV2ResearchConfig
 from .graph import DynamicReasoningHypergraphV2, TerminalBeliefState, TerminationKind
 from .proof import audit_graph_proof, claim_closure
+from .obligations import dead_end_certificate
 
 
 class TerminalBeliefReadout:
@@ -275,6 +276,8 @@ class MetaDecision:
     reason: str
     best_predicted_evc: float
     answer_node_id: str | None = None
+    selected_allocation_id: str | None = None
+    dead_end_certificate: dict = field(default_factory=dict)
 
 
 class MetaStopPolicy:
@@ -293,6 +296,8 @@ class MetaStopPolicy:
                 TerminationKind.ANSWER, "accepted_graph_grounded_answer",
                 max((row.predicted_evc for row in packets), default=0.0), answer.node_id,
             )
+        if self.config.certified_meta_stop:
+            return self._certified_decide(graph, packets, budget)
         if not packets:
             return MetaDecision(TerminationKind.ABSTAIN, "no_executable_computation", 0.0)
         best = packets[0]
@@ -309,6 +314,69 @@ class MetaStopPolicy:
                 best.predicted_evc,
             )
         return MetaDecision(TerminationKind.CONTINUE, "positive_expected_value", best.predicted_evc)
+
+    def _certified_decide(
+        self,
+        graph: DynamicReasoningHypergraphV2,
+        packets: list[ComputationPacket],
+        budget: Budget,
+    ) -> MetaDecision:
+        remaining = {
+            "llm_calls": max(0, budget.max_llm_calls - budget.usage.llm_calls),
+            "tokens": max(0, budget.max_total_tokens - budget.usage.total_tokens),
+            "retrieval_calls": max(
+                0, graph.limits.max_retrieval_calls - graph.retrieval_calls,
+            ),
+            "graph_operations": max(
+                0, graph.limits.max_graph_operations - len(graph.operation_history),
+            ),
+        }
+        certificate = dead_end_certificate(graph, packets, remaining)
+        if not packets:
+            exhausted = any(
+                remaining[name] <= 0
+                for name in ("llm_calls", "tokens", "retrieval_calls", "graph_operations")
+            ) and bool(certificate["open_obligations"])
+            return MetaDecision(
+                TerminationKind.BUDGET_EXHAUSTED if exhausted else TerminationKind.ABSTAIN,
+                (
+                    "proof_obligations_blocked_by_budget"
+                    if exhausted else "no_executable_computation_with_certificate"
+                ),
+                0.0,
+                dead_end_certificate=certificate,
+            )
+        affordable = [row for row in packets if self._affordable(row, graph, budget)]
+        if not affordable:
+            best_gross = max(row.predicted_gross_opportunity for row in packets)
+            certificate["decision_layer"] = "feasibility_before_net_evc"
+            return MetaDecision(
+                TerminationKind.BUDGET_EXHAUSTED,
+                "positive_gross_proof_opportunity_is_unaffordable",
+                max(row.predicted_evc for row in packets),
+                dead_end_certificate=certificate,
+            )
+        best = max(affordable, key=lambda row: (
+            row.predicted_evc,
+            row.predicted_gross_opportunity,
+            -row.predicted_normalized_cost,
+            row.allocation_id,
+        ))
+        if best.predicted_evc <= self.config.meta_stop_evc_threshold:
+            certificate["decision_layer"] = "net_evc_after_feasibility"
+            return MetaDecision(
+                TerminationKind.ABSTAIN,
+                "affordable_proof_opportunity_below_net_value_threshold",
+                best.predicted_evc,
+                selected_allocation_id=best.allocation_id,
+                dead_end_certificate=certificate,
+            )
+        return MetaDecision(
+            TerminationKind.CONTINUE,
+            "affordable_positive_graph_local_expected_value",
+            best.predicted_evc,
+            selected_allocation_id=best.allocation_id,
+        )
 
     def _supported_answer(self, graph: DynamicReasoningHypergraphV2):
         valid = []

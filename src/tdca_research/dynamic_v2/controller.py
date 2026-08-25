@@ -44,6 +44,7 @@ from .graph import (
     TerminationRecord,
 )
 from .query_graph import canonical_type, compile_query_graph, type_lineage
+from .obligations import refresh_proof_obligations
 from .allocator import (
     feedback_key,
     operation_family,
@@ -92,6 +93,11 @@ class V2GraphController(GraphController):
             updated, seeds,
             f"diffusion_{updated.step:04d}_{operation.operation_id}",
         )
+        if self.config.proof_obligation_tracking:
+            refresh_proof_obligations(
+                updated, operation.operation_id,
+                max_retrieval_rounds=self.config.max_retrieval_rounds_per_subgoal,
+            )
         after = updated.state_hash()
         updated.operation_history.append(AppliedOperation(
             operation_id=operation.operation_id,
@@ -128,6 +134,7 @@ class V2GraphController(GraphController):
                 "retrieval_calls": max(0, updated.limits.max_retrieval_calls - updated.retrieval_calls),
                 "graph_operations": max(0, updated.limits.max_graph_operations - len(updated.operation_history)),
             },
+            dead_end_certificate=dict(getattr(decision, "dead_end_certificate", {}) or {}),
         ))
         refresh_delayed_credit(updated, self.config, terminal=True)
         updated.seal_controller_state()
@@ -201,6 +208,12 @@ class V2GraphController(GraphController):
                 predicted_normalized_cost=float(
                     trace.get("predicted_normalized_cost", 0.0)
                 ),
+                predicted_gross_opportunity=float(
+                    trace.get("predicted_gross_opportunity", 0.0)
+                ),
+                target_obligation_ids=[
+                    str(value) for value in trace.get("target_obligation_ids", [])
+                ],
             ))
         else:
             existing.actual_cost = measured
@@ -215,6 +228,11 @@ class V2GraphController(GraphController):
             updated, packet, measured, bool(completed), str(failure_reason),
             outcome_metadata or {},
         )
+        if self.config.proof_obligation_tracking:
+            refresh_proof_obligations(
+                updated, f"reconcile_{packet.operation.operation_id}",
+                max_retrieval_rounds=self.config.max_retrieval_rounds_per_subgoal,
+            )
         refresh_delayed_credit(updated, self.config)
         updated.seal_controller_state()
         updated.validate()
@@ -412,7 +430,7 @@ class V2GraphController(GraphController):
             "terminal_gap_reduction": (
                 pre.get("terminal_gap", 1.0) - post.get("terminal_gap", 1.0)
             ),
-            "cost": self._normalized_actual_cost(packet, measured),
+            "cost": self._normalized_actual_cost(packet, measured, pre, post),
         }
         normalized = {
             key: _unit_positive(value) for key, value in raw.items()
@@ -522,8 +540,39 @@ class V2GraphController(GraphController):
             "cooldown_until_step": float(stats.cooldown_until_step),
         }
 
-    @staticmethod
-    def _normalized_actual_cost(packet, measured) -> float:
+    def _normalized_actual_cost(self, packet, measured, pre=None, post=None) -> float:
+        if self.config.absolute_resource_cost:
+            remaining = packet.remaining_global_budget
+            call_cost = _absolute_actual_resource_fraction(
+                measured.get("llm_calls", 0.0), self.config.max_llm_calls,
+                remaining.get("llm_calls", self.config.max_llm_calls),
+                self.config.absolute_cost_scarcity_max_multiplier,
+            )
+            token_cost = _absolute_actual_resource_fraction(
+                measured.get("tokens", 0.0), self.config.max_total_tokens,
+                remaining.get("tokens", self.config.max_total_tokens),
+                self.config.absolute_cost_scarcity_max_multiplier,
+            )
+            retrieval_cost = _absolute_actual_resource_fraction(
+                measured.get("retrieval_calls", 0.0),
+                self.config.max_retrieval_calls,
+                remaining.get("retrieval_calls", 0),
+                self.config.absolute_cost_scarcity_max_multiplier,
+            )
+            graph_growth = max(
+                0.0,
+                float((post or {}).get("node_count", 0.0))
+                - float((pre or {}).get("node_count", 0.0)),
+            )
+            graph_risk = _unit_positive(
+                graph_growth / max(1, self.config.max_graph_nodes)
+            )
+            return _unit_positive(
+                self.config.absolute_cost_weight_call * call_cost
+                + self.config.absolute_cost_weight_token * token_cost
+                + self.config.absolute_cost_weight_retrieval * retrieval_cost
+                + self.config.absolute_cost_weight_graph_risk * graph_risk
+            )
         request = packet.requested_budget
         parts = []
         if float(measured.get("llm_calls", 0.0)) > 0.0:
@@ -971,10 +1020,16 @@ class V2GraphController(GraphController):
             predicted_delayed_proof_return=float(
                 row.get("predicted_delayed_proof_return", 0.0)
             ),
-            predicted_normalized_cost=float(
-                row.get("predicted_normalized_cost", 0.0)
-            ),
-        ))
+                predicted_normalized_cost=float(
+                    row.get("predicted_normalized_cost", 0.0)
+                ),
+                predicted_gross_opportunity=float(
+                    row.get("predicted_gross_opportunity", 0.0)
+                ),
+                target_obligation_ids=[
+                    str(value) for value in row.get("target_obligation_ids", [])
+                ],
+            ))
 
 
 def _downstream_cascade(
@@ -1094,3 +1149,14 @@ def _unit(value: Any) -> float:
 def _unit_positive(value: Any) -> float:
     """Normalize a signed improvement without erasing its raw audit value."""
     return _unit(max(0.0, float(value)))
+
+
+def _absolute_actual_resource_fraction(
+    demand: Any, capacity: Any, remaining: Any, scarcity_max_multiplier: Any,
+) -> float:
+    capacity = max(1.0, float(capacity))
+    remaining_ratio = _unit(float(remaining) / capacity)
+    multiplier = 1.0 + (
+        max(1.0, float(scarcity_max_multiplier)) - 1.0
+    ) * (1.0 - remaining_ratio)
+    return _unit(float(demand) / capacity * multiplier)

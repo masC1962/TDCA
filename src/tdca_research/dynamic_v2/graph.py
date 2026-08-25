@@ -141,6 +141,8 @@ class AllocationRecord:
     delayed_realized_proof_return: float = 0.0
     combined_realized_utility: float = 0.0
     credit_finalized: bool = False
+    predicted_gross_opportunity: float = 0.0
+    target_obligation_ids: list[str] = field(default_factory=list)
 
 
 @dataclass
@@ -244,6 +246,38 @@ class CreditAssignmentRecord:
 
 
 @dataclass
+class ProofObligationState:
+    """Controller-owned statement of a graph-local proof deficit.
+
+    This is not a probability.  It records what remains to be established,
+    whether the deficit is still executable, and the graph events supporting
+    that diagnosis.
+    """
+
+    obligation_id: str
+    target_subgoal: str
+    branch_id: str
+    obligation_type: str
+    status: str
+    severity: float
+    terminal_reachable: bool
+    required_node_ids: list[str] = field(default_factory=list)
+    satisfied_by_node_ids: list[str] = field(default_factory=list)
+    reason_codes: list[str] = field(default_factory=list)
+    provenance_event_ids: list[str] = field(default_factory=list)
+    created_at_step: int = 0
+    updated_at_step: int = 0
+
+
+@dataclass(frozen=True)
+class ProofObligationSnapshot:
+    snapshot_id: str
+    step: int
+    trigger_operation_id: str
+    obligations: list[dict[str, Any]]
+
+
+@dataclass
 class OperationFeedbackStats:
     """Conservative, deterministic posterior maintained only inside one graph."""
 
@@ -281,6 +315,7 @@ class TerminationRecord:
     answer_node_id: str | None
     reason: str
     remaining_budget: dict[str, int]
+    dead_end_certificate: dict[str, Any] = field(default_factory=dict)
 
 
 @dataclass
@@ -331,6 +366,8 @@ class DynamicReasoningHypergraphV2(DynamicReasoningHypergraph):
     join_attempt_history: list[JoinAttemptRecord] = field(default_factory=list)
     operation_outcome_history: list[OperationOutcomeRecord] = field(default_factory=list)
     credit_assignment_history: list[CreditAssignmentRecord] = field(default_factory=list)
+    proof_obligations: dict[str, ProofObligationState] = field(default_factory=dict)
+    proof_obligation_history: list[ProofObligationSnapshot] = field(default_factory=list)
     operation_feedback: dict[str, OperationFeedbackStats] = field(default_factory=dict)
     supersession_history: list[SupersessionRecord] = field(default_factory=list)
     invalidated_hyperedges: list[str] = field(default_factory=list)
@@ -342,6 +379,7 @@ class DynamicReasoningHypergraphV2(DynamicReasoningHypergraph):
     activated_passages: dict[str, ActivatedPassageState] = field(default_factory=dict)
     activated_entities: dict[str, ActivatedEntityState] = field(default_factory=dict)
     cross_layer_edges: list[CrossLayerEdge] = field(default_factory=list)
+    proof_obligation_version: str = ""
     controller_state_hash: str = ""
 
     def state_payload(self) -> dict[str, Any]:
@@ -354,7 +392,9 @@ class DynamicReasoningHypergraphV2(DynamicReasoningHypergraph):
                 key: _primitive(value) for key, value in sorted(self.belief_states.items())
             },
             "diffusion_history": _primitive(self.diffusion_history),
-            "allocation_history": _primitive(self.allocation_history),
+            "allocation_history": _v243_compatible_allocations(
+                self.allocation_history, bool(self.proof_obligation_version)
+            ),
             "retrieval_attempt_history": _primitive(self.retrieval_attempt_history),
             "join_attempt_history": _primitive(self.join_attempt_history),
             "operation_outcome_history": _primitive(self.operation_outcome_history),
@@ -364,7 +404,9 @@ class DynamicReasoningHypergraphV2(DynamicReasoningHypergraph):
             },
             "supersession_history": _primitive(self.supersession_history),
             "invalidated_hyperedges": sorted(set(self.invalidated_hyperedges)),
-            "termination_history": _primitive(self.termination_history),
+            "termination_history": _v243_compatible_terminations(
+                self.termination_history, bool(self.proof_obligation_version)
+            ),
             "terminal_beliefs": {
                 key: _primitive(value) for key, value in sorted(self.terminal_beliefs.items())
             },
@@ -379,6 +421,15 @@ class DynamicReasoningHypergraphV2(DynamicReasoningHypergraph):
             },
             "cross_layer_edges": _primitive(self.cross_layer_edges),
         })
+        if self.proof_obligation_version:
+            payload.update({
+                "proof_obligation_version": self.proof_obligation_version,
+                "proof_obligations": {
+                    key: _primitive(value)
+                    for key, value in sorted(self.proof_obligations.items())
+                },
+                "proof_obligation_history": _primitive(self.proof_obligation_history),
+            })
         return payload
 
     def to_dict(self) -> dict[str, Any]:
@@ -467,11 +518,18 @@ class DynamicReasoningHypergraphV2(DynamicReasoningHypergraph):
                 "predicted_immediate_utility", "predicted_delayed_proof_return",
                 "predicted_normalized_cost", "actual_immediate_utility",
                 "actual_normalized_cost", "delayed_realized_proof_return",
+                "predicted_gross_opportunity",
             ):
                 if not 0.0 <= float(getattr(row, name)) <= 1.0:
                     raise GraphInvariantError(
                         f"allocation {row.allocation_id}.{name} outside [0,1]"
                     )
+            if self.proof_obligation_version and any(
+                value not in self.proof_obligations for value in row.target_obligation_ids
+            ):
+                raise GraphInvariantError(
+                    f"allocation {row.allocation_id} targets unknown proof obligation"
+                )
             if not -1.0 <= float(row.combined_realized_utility) <= 1.0:
                 raise GraphInvariantError(
                     f"allocation {row.allocation_id} combined utility outside [-1,1]"
@@ -571,6 +629,21 @@ class DynamicReasoningHypergraphV2(DynamicReasoningHypergraph):
                 raise GraphInvariantError(f"credit {row.credit_id} causal distance mismatch")
             if any(int(value) < 0 for value in row.causal_distance_by_node.values()):
                 raise GraphInvariantError(f"credit {row.credit_id} has negative distance")
+        for obligation_id, row in self.proof_obligations.items():
+            if obligation_id != row.obligation_id:
+                raise GraphInvariantError("proof obligation key/id mismatch")
+            if row.target_subgoal not in self.nodes:
+                raise GraphInvariantError(
+                    f"proof obligation {obligation_id} references missing subgoal"
+                )
+            if row.status not in {"OPEN", "CLOSED", "BLOCKED"}:
+                raise GraphInvariantError(f"proof obligation {obligation_id} has invalid status")
+            if not 0.0 <= float(row.severity) <= 1.0:
+                raise GraphInvariantError(f"proof obligation {obligation_id} severity outside [0,1]")
+            if any(node_id not in self.nodes for node_id in row.required_node_ids):
+                raise GraphInvariantError(f"proof obligation {obligation_id} has missing requirement")
+            if any(node_id not in self.nodes for node_id in row.satisfied_by_node_ids):
+                raise GraphInvariantError(f"proof obligation {obligation_id} has missing satisfaction")
         for key, stats in self.operation_feedback.items():
             if stats.observations < 0 or stats.successes < 0 or stats.no_ops < 0:
                 raise GraphInvariantError(f"negative feedback counter for {key}")
@@ -648,6 +721,14 @@ class DynamicReasoningHypergraphV2(DynamicReasoningHypergraph):
             CreditAssignmentRecord(**row)
             for row in value.get("credit_assignment_history", [])
         ]
+        graph.proof_obligations = {
+            str(key): ProofObligationState(**row)
+            for key, row in value.get("proof_obligations", {}).items()
+        }
+        graph.proof_obligation_history = [
+            ProofObligationSnapshot(**row)
+            for row in value.get("proof_obligation_history", [])
+        ]
         graph.operation_feedback = {
             str(key): OperationFeedbackStats(**row)
             for key, row in value.get("operation_feedback", {}).items()
@@ -679,6 +760,30 @@ class DynamicReasoningHypergraphV2(DynamicReasoningHypergraph):
         graph.cross_layer_edges = [
             CrossLayerEdge(**row) for row in value.get("cross_layer_edges", [])
         ]
+        graph.proof_obligation_version = str(value.get("proof_obligation_version", ""))
         graph.controller_state_hash = str(value.get("controller_state_hash", ""))
         graph.validate()
         return graph
+
+
+def _v243_compatible_allocations(
+    rows: list[AllocationRecord], enabled: bool,
+) -> list[dict[str, Any]]:
+    payload = [_primitive(row) for row in rows]
+    if enabled:
+        return payload
+    for row in payload:
+        row.pop("predicted_gross_opportunity", None)
+        row.pop("target_obligation_ids", None)
+    return payload
+
+
+def _v243_compatible_terminations(
+    rows: list[TerminationRecord], enabled: bool,
+) -> list[dict[str, Any]]:
+    payload = [_primitive(row) for row in rows]
+    if enabled:
+        return payload
+    for row in payload:
+        row.pop("dead_end_certificate", None)
+    return payload

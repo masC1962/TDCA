@@ -110,6 +110,8 @@ def test_v2_end_to_end_answer_has_diffusion_allocation_and_typed_claims():
         meta_stop_evc_threshold=0.01,
         horizon_aware_evc=True, delayed_credit_assignment=True,
         multi_resource_evc=True, choice_conditioned_evc=True,
+        absolute_resource_cost=True, proof_obligation_tracking=True,
+        graph_local_delayed_value=True, certified_meta_stop=True,
     )
     prediction, retrieval, reasoning = DynamicHypergraphV2Reasoner(
         DeterministicMockLLM(json_responses=responses), BM25Retriever(passages), config,
@@ -141,11 +143,18 @@ def test_v2_end_to_end_answer_has_diffusion_allocation_and_typed_claims():
     assert final["allocation_history"]
     assert all(row["actual_cost"] for row in final["allocation_history"])
     assert final["credit_assignment_history"]
+    assert final["proof_obligations"]
+    assert final["proof_obligation_history"]
     assert all(row["credit_finalized"] for row in final["allocation_history"])
     assert all(
         row["predicted_immediate_utility"] is not None
         and row["predicted_delayed_proof_return"] is not None
         and row["predicted_normalized_cost"] is not None
+        for row in final["allocation_history"]
+    )
+    assert all(
+        row["predicted_gross_opportunity"] is not None
+        and row["target_obligation_ids"] is not None
         for row in final["allocation_history"]
     )
     assert all(

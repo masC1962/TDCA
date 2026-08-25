@@ -118,6 +118,24 @@ class DynamicV2ResearchConfig(DynamicResearchConfig):
     delayed_capacity_revise: float = 0.45
     delayed_capacity_prune: float = 0.10
 
+    # v2.4.3 replaces choice-relative resource prices and operation-family
+    # delayed priors with graph-local, auditable quantities.  The feature is
+    # opt-in so every frozen v2.4.2 artifact keeps its original semantics.
+    absolute_resource_cost: bool = False
+    proof_obligation_tracking: bool = False
+    graph_local_delayed_value: bool = False
+    certified_meta_stop: bool = False
+    absolute_cost_weight_call: float = 0.35
+    absolute_cost_weight_token: float = 0.35
+    absolute_cost_weight_retrieval: float = 0.20
+    absolute_cost_weight_graph_risk: float = 0.10
+    absolute_cost_scarcity_max_multiplier: float = 2.0
+    graph_local_weight_obligation_closure: float = 0.30
+    graph_local_weight_terminal_reachability: float = 0.25
+    graph_local_weight_missing_premise_reduction: float = 0.20
+    graph_local_weight_candidate_reachability: float = 0.15
+    graph_local_weight_evidence_path: float = 0.10
+
     # Terminal acceptance is a conjunctive readout over independent belief
     # channels.  These are initial development values, never learned weights.
     terminal_min_absolute_support: float = 0.70
@@ -195,6 +213,13 @@ class DynamicV2ResearchConfig(DynamicResearchConfig):
                 "evc_immediate_horizon_weight", "evc_delayed_horizon_weight",
                 "delayed_credit_gamma",
                 "delayed_structural_signal_weight",
+                "absolute_cost_weight_call", "absolute_cost_weight_token",
+                "absolute_cost_weight_retrieval", "absolute_cost_weight_graph_risk",
+                "graph_local_weight_obligation_closure",
+                "graph_local_weight_terminal_reachability",
+                "graph_local_weight_missing_premise_reduction",
+                "graph_local_weight_candidate_reachability",
+                "graph_local_weight_evidence_path",
             }
         }
         for name, value in unit.items():
@@ -202,6 +227,16 @@ class DynamicV2ResearchConfig(DynamicResearchConfig):
                 raise ValueError(f"{name} must be in [0,1]")
         if self.diffusion_min_delta < 0:
             raise ValueError("diffusion_min_delta must be non-negative")
+        if not 1.0 <= float(self.absolute_cost_scarcity_max_multiplier) <= 4.0:
+            raise ValueError("absolute_cost_scarcity_max_multiplier must be in [1,4]")
+        absolute_cost_mass = sum((
+            self.absolute_cost_weight_call,
+            self.absolute_cost_weight_token,
+            self.absolute_cost_weight_retrieval,
+            self.absolute_cost_weight_graph_risk,
+        ))
+        if abs(float(absolute_cost_mass) - 1.0) > 1e-9:
+            raise ValueError("absolute resource cost weights must sum to 1")
         if self.allocator_mode not in {"adaptive_evc", "uniform", "fixed_order"}:
             raise ValueError("allocator_mode must be adaptive_evc, uniform, or fixed_order")
         if self.outcome_feedback_prior_strength <= 0:

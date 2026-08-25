@@ -117,11 +117,17 @@ class DynamicHypergraphV2Reasoner:
                     "outcome": decision.outcome.value,
                     "reason": decision.reason,
                     "best_predicted_evc": decision.best_predicted_evc,
+                    "selected_allocation_id": decision.selected_allocation_id,
+                    "dead_end_certificate": decision.dead_end_certificate,
                     "allocation_candidates": [row.trace() for row in packets],
                 })
                 if decision.outcome != TerminationKind.CONTINUE:
                     break
-                packet = _execution_packet(packets[0])
+                selected_packet = next((
+                    row for row in packets
+                    if row.allocation_id == decision.selected_allocation_id
+                ), packets[0])
+                packet = _execution_packet(selected_packet)
                 if (
                     self.config.bounded_extraction_recovery
                     and packet.operation.operation_type == OperationType.BRANCH
@@ -309,6 +315,7 @@ class DynamicHypergraphV2Reasoner:
             "outcome": decision.outcome.value,
             "reason": decision.reason,
             "best_predicted_evc": decision.best_predicted_evc,
+            "dead_end_certificate": decision.dead_end_certificate,
             "graph_snapshot": graph.to_dict(),
         })
         usage.wall_seconds = time.perf_counter() - started

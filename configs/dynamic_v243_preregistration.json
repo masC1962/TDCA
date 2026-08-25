@@ -1,0 +1,115 @@
+{
+  "schema_version": "dynamic-hypergraph-v2.4.3-preregistration-v1",
+  "frozen_at": "2026-08-25",
+  "seed": 20260820,
+  "training": false,
+  "provider": "dashscope-openai-compatible",
+  "model": "qwen-plus",
+  "gold_aware_inference": false,
+  "source_commit_policy": "Every inference artifact must pin the pushed source-freeze commit containing this preregistration and all v2.4.3 source files.",
+  "campaign": {
+    "campaign_id": "dynamic-hypergraph-v243-iclr2027-20260825",
+    "ledger_path": "analysis_outputs/dynamic_v243_campaign/campaign_budget.json",
+    "provider_attempt_cap": 1871,
+    "provider_reported_token_cap": 1858349,
+    "parent_campaign_consumed_attempts": 129,
+    "parent_campaign_consumed_provider_tokens": 141651,
+    "combined_hard_cap_attempts": 2000,
+    "combined_hard_cap_provider_tokens": 2000000,
+    "hard_stop_on_either_cap": true
+  },
+  "per_question_dev_safety_caps": {
+    "llm_calls": 16,
+    "total_tokens": 16000,
+    "retrieval_calls": 8
+  },
+  "frozen_v242_reference": {
+    "source_commit": "23c1387ab3befa69910c4e62ef623fec0d7bbd15",
+    "smoke_a_run": "research_outputs/musique_distractor_smoke_dynamic_hypergraph_tdca_v2_1787652976991954408",
+    "semantic_changes_allowed": false,
+    "observed_f1": 0.5642857142857143,
+    "observed_candidate_presence_rate": 0.75,
+    "observed_execution_plan_completion_rate": 0.65,
+    "observed_graph_proof_completion_rate": 0.75
+  },
+  "frozen_v241_quality_reference": {
+    "source_commit": "f073e03174310f294aed263a188393d6a59acd59",
+    "observed_f1": 0.5842857142857143,
+    "observed_candidate_presence_rate": 0.75,
+    "observed_execution_plan_completion_rate": 0.75,
+    "observed_graph_proof_completion_rate": 0.80
+  },
+  "v243_features": {
+    "absolute_resource_cost": true,
+    "absolute_cost_weights": {
+      "call": 0.35,
+      "token": 0.35,
+      "retrieval": 0.20,
+      "graph_risk": 0.10
+    },
+    "scarcity_multiplier_range": [1.0, 2.0],
+    "ready_set_cost_normalization": false,
+    "coarse_family_delayed_prior_used_for_ranking": false,
+    "controller_owned_proof_obligations": true,
+    "graph_local_delayed_value": true,
+    "certified_meta_stop": true,
+    "credit_target_and_gamma_changed": false,
+    "gold_used_by_controller": false
+  },
+  "stage_order": [
+    "zero_api_tests",
+    "frozen_v242_cost_counterfactual_replay",
+    "push_source_commit",
+    "v243_adaptive_smoke_a20",
+    "v243_adaptive_shadow_b20_if_smoke_passes",
+    "stop_and_report_before_v244_on_any_failure",
+    "v244_implementation_only_if_v243_smoke_and_shadow_pass"
+  ],
+  "adaptive_smoke_a20_hard_gates": {
+    "infrastructure_failure_count_max": 0,
+    "graph_invariant_violation_count_max": 0,
+    "controller_only_mutation_violation_count_max": 0,
+    "unsupported_answer_count_max": 0,
+    "selected_infeasible_join_count_max": 0,
+    "repeated_same_fingerprint_extraction_count_max": 0,
+    "no_diff_editor_allocation_count_max": 0,
+    "candidate_presence_rate_min": 0.75,
+    "legacy_execution_plan_completion_rate_min": 0.75,
+    "graph_proof_completion_rate_min": 0.80,
+    "f1_min": 0.58,
+    "logical_llm_calls_max": 163,
+    "logical_total_tokens_max": 185000,
+    "budget_exhaustion_rate_max": 0.10,
+    "immediate_evc_correlation_min": 0.10,
+    "delayed_evc_correlation_min": 0.15,
+    "choice_conditioned_delayed_correlation_exclusive_min": 0.0,
+    "choice_conditioned_count_min": 20,
+    "successful_proof_gap_mean_delayed_return_exclusive_min": 0.0,
+    "successful_proof_gap_must_exceed_failed": true,
+    "complete_evc_trace_rate_min": 1.0,
+    "complete_delayed_credit_trace_rate_min": 1.0,
+    "complete_proof_obligation_trace_rate_min": 1.0,
+    "no_executable_without_certificate_count_max": 0,
+    "viable_proof_opportunity_cost_clipping_stop_count_max": 0,
+    "absolute_cost_ready_set_invariance_rate_min": 1.0,
+    "all_abstains_have_exhaustion_evidence": true,
+    "non_uniform_allocation_required": true
+  },
+  "paired_shadow_b20_hard_gates": {
+    "both_artifacts_complete": true,
+    "both_zero_safety_violations": true,
+    "v243_candidate_presence_non_regression": true,
+    "v243_execution_plan_completion_non_regression": true,
+    "v243_graph_proof_completion_non_regression": true,
+    "v243_f1_non_regression": true,
+    "v243_complete_proof_obligation_trace_rate_min": 1.0,
+    "v243_delayed_evc_correlation_min": 0.15
+  },
+  "safe_stop": {
+    "stop_on_any_smoke_a_hard_gate_failure": true,
+    "stop_on_any_shadow_b_hard_gate_failure": true,
+    "no_post_failure_threshold_relaxation": true,
+    "report_failures_before_v244": true,
+    "heldout200_authorized": false
+  }
+}
