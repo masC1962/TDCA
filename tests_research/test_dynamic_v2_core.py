@@ -16,6 +16,7 @@ from tdca_research.dynamic.graph import (
 )
 from tdca_research.dynamic.scoring import fuse_candidate_scores
 from tdca_research.dynamic.candidates import _explicit_parenthetical_alias
+from tdca_research.dynamic.terminal import GraphGroundedTerminalReasoner
 from tdca_research.dynamic_v2.allocator import (
     AdaptiveComputationAllocator,
     ComputationPacket,
@@ -27,7 +28,10 @@ from tdca_research.dynamic_v2.allocator import (
 )
 from tdca_research.dynamic_v2.config import DynamicV2ResearchConfig
 from tdca_research.dynamic_v2.controller import V2GraphController
-from tdca_research.dynamic_v2.editor import EventTriggeredGraphEditorV2
+from tdca_research.dynamic_v2.editor import (
+    EventTriggeredGraphEditorV2,
+    editor_preallocation_preflight,
+)
 from tdca_research.dynamic_v2.engine import (
     DynamicHypergraphV2Reasoner,
     _charged_join_attempt_count,
@@ -61,6 +65,11 @@ from tdca_research.dynamic_v2.query_graph import compile_query_graph, types_comp
 from tdca_research.dynamic_v2.revision import BeliefRevisionDetector
 from tdca_research.dynamic_v2.termination import MetaStopPolicy, TerminalBeliefReadout
 from tdca_research.dynamic_v2.proof import audit_graph_proof
+from tdca_research.dynamic_v2.recovery import (
+    diagnose_proof_gap,
+    proof_gap_recovery_query,
+    proof_usable_target_claim,
+)
 from tdca_research.dynamic_v2.verifier import (
     MultiSampleIndependentVerifier,
     _projection_type_compatible,
@@ -1979,3 +1988,159 @@ def test_v24_configs_freeze_campaign_caps_without_changing_v23_defaults():
     assert prereg["campaign"]["provider_attempt_cap"] == 2000
     assert prereg["campaign"]["provider_reported_token_cap"] == 2_000_000
     assert prereg["safe_stop"]["heldout200_authorized"] is False
+
+
+def test_v241_proof_usable_gate_rejects_weak_semantic_projection():
+    cfg, controller, graph = chain_graph()
+    claim = graph.node("c2")
+    strong = proof_usable_target_claim(
+        graph, claim, graph.node("s_root"), cfg, projects_target=True,
+    )
+    assert strong.usable
+    graph = controller.apply(graph, operation(401, OperationType.VERIFY, payload={
+        "scores": {"c2": {
+            **claim.score.raw.__dict__,
+            "absolute_support": 0.95,
+            "relative_weight": 1.0,
+            "set_entropy": 0.0,
+            "evidence_gap": 0.90,
+            "status": "scored",
+        }},
+    }))
+    weak = proof_usable_target_claim(
+        graph, graph.node("c2"), graph.node("s_root"), cfg,
+        projects_target=True,
+    )
+    assert not weak.usable
+    assert "evidence_gap_above_proof_ceiling" in weak.reason_codes
+
+
+def test_v241_proof_gap_recovery_is_gold_free_deterministic_and_novel():
+    cfg, _, graph = chain_graph()
+    subgoal = graph.node("s_root")
+    claim = graph.node("c2")
+    verdict = proof_usable_target_claim(
+        graph, claim, subgoal, cfg, projects_target=False,
+    )
+    diagnosis = diagnose_proof_gap(
+        graph, subgoal, graph.claims("s_root", "branch_root"), [],
+        {"c2": verdict}, [],
+    )
+    first = proof_gap_recovery_query(
+        graph, subgoal, subgoal.instantiated_question, [],
+        graph.claims("s_root", "branch_root"), diagnosis,
+    )
+    second = proof_gap_recovery_query(
+        graph, subgoal, subgoal.instantiated_question, [],
+        graph.claims("s_root", "branch_root"), diagnosis,
+        attempted_queries={normalize_text(first)},
+    )
+    assert first and second and normalize_text(first) != normalize_text(second)
+    assert "Gamma Country" in first
+    assert "answer" not in diagnosis.to_payload()
+    assert "oracle" not in diagnosis.to_payload()
+
+
+def test_v241_editor_preflight_suppresses_model_dependent_no_diff_allocation():
+    _, _, graph = chain_graph()
+    verdict = editor_preallocation_preflight(
+        graph, "high_uncertainty_no_join", "s_root",
+    )
+    assert not verdict["allowed"]
+    assert verdict["candidate_diff_count"] == 0
+    assert verdict["reason_code"] == "model_dependent_diff_not_preflightable"
+
+
+def test_v241_choice_conditioned_evc_prioritizes_reducible_proof_gap():
+    _, _, graph = chain_graph()
+    cfg = config(
+        multi_resource_evc=True,
+        choice_conditioned_evc=True,
+    )
+    allocator = AdaptiveComputationAllocator(cfg)
+    ordinary = operation(410, OperationType.RETRIEVE, payload={
+        "query": "ordinary relation evidence",
+    })
+    recovery = operation(411, OperationType.RETRIEVE, payload={
+        "query": "independent proof gap evidence",
+        "proof_gap_reason": "missing_dependency_closure",
+        "proof_gap_reducibility": 0.9,
+        "feasibility_unlock": 1.0,
+    })
+    packets = allocator.allocate(
+        graph, [ordinary, recovery], Budget(16, 6000, 200, Usage()),
+    )
+    best = {}
+    for packet in packets:
+        best[packet.operation.operation_id] = max(
+            best.get(packet.operation.operation_id, float("-inf")),
+            packet.predicted_evc,
+        )
+    assert best[recovery.operation_id] > best[ordinary.operation_id]
+    base_signals = allocator._signals(
+        graph, recovery, Budget(16, 6000, 200, Usage()),
+    )
+    assert base_signals.proof_gap_reducibility == 0.9
+    assert base_signals.feasibility_unlock == 1.0
+
+
+def test_v241_ready_set_emits_concrete_recovery_and_never_generic_expand():
+    cfg, controller, graph = chain_graph()
+    cfg = cfg.merged(
+        multi_resource_evc=True,
+        retrieval_attempt_aware_scheduling=True,
+        join_preallocation_feasibility_filter=True,
+        region_level_retrieval_stopping=True,
+        bounded_extraction_recovery=True,
+        proof_gap_conditioned_recovery=True,
+        proof_usable_target_gate=True,
+        feasibility_reasoned_recovery=True,
+        no_diff_editor_preallocation_gate=True,
+        choice_conditioned_evc=True,
+    )
+    claim = graph.node("c2")
+    graph = controller.apply(graph, operation(420, OperationType.VERIFY, payload={
+        "scores": {"c2": {
+            **claim.score.raw.__dict__,
+            "grounding": 0.4,
+            "absolute_support": 0.4,
+            "relative_weight": 0.4,
+            "set_entropy": 0.8,
+            "evidence_gap": 0.9,
+            "status": "scored",
+        }},
+    }))
+    graph.node("c2").provenance.metadata["answers_subgoal"] = True
+    for regional_claim in graph.claims("s_root", "branch_root"):
+        regional_claim.provenance.metadata["extraction_evidence_count"] = 2
+    graph.seal_controller_state()
+    evidence = graph.evidence("s_root", "branch_root")
+    fingerprint = _extraction_state_fingerprint(
+        graph, "s_root", "branch_root", evidence, [],
+    )
+    attempted_extractions = {
+        ("s_root", "branch_root", fingerprint, "coverage"),
+        ("s_root", "branch_root", fingerprint, "direct_answer"),
+    }
+    llm = DeterministicMockLLM()
+    budget = Budget(16, 6000, 0, Usage())
+    reasoner = DynamicHypergraphV2Reasoner(
+        llm, BM25Retriever([Passage("p3", "Independent", "Independent evidence.")]), cfg,
+    )
+    trace = []
+    operations = reasoner._ready_operations(
+        graph,
+        GraphGroundedTerminalReasoner(llm, budget, cfg),
+        BeliefRevisionDetector(cfg),
+        MultiHopJoinEngine(llm, budget, cfg),
+        set(), attempted_extractions, set(), set(),
+        TerminalBeliefReadout(cfg), trace, set(),
+    )
+    assert any(
+        row.operation_type == OperationType.RETRIEVE
+        and row.payload.get("proof_gap_reason")
+        and row.payload.get("proof_gap_reducibility", 0.0) > 0.0
+        for row in operations
+    )
+    assert not any(row.operation_type == OperationType.EXPAND for row in operations)
+    assert any(row.get("event") == "proof_gap_diagnosed" for row in trace)

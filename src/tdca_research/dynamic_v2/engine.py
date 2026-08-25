@@ -31,11 +31,16 @@ from ..utils import normalize_text, stable_hash
 from .allocator import AdaptiveComputationAllocator, ComputationPacket
 from .config import DynamicV2ResearchConfig
 from .controller import V2GraphController
-from .editor import EventTriggeredGraphEditorV2
+from .editor import EventTriggeredGraphEditorV2, editor_preallocation_preflight
 from .extraction import TypedClaimExtractor
 from .graph import DynamicReasoningHypergraphV2, TerminationKind
 from .join import JoinCandidate, MultiHopJoinEngine
 from .memory import RelationLightCorpusMemory
+from .recovery import (
+    diagnose_proof_gap,
+    proof_gap_recovery_query,
+    proof_usable_target_claim,
+)
 from .revision import BeliefRevisionDetector
 from .termination import MetaDecision, MetaStopPolicy, TerminalBeliefReadout
 from .verifier import MultiSampleIndependentVerifier
@@ -400,6 +405,7 @@ class DynamicHypergraphV2Reasoner:
                                 graph, subgoal, branch, query, dependencies, [],
                                 region_attempts, attempted_extractions,
                                 self.config.retrieval_query_max_token_overlap,
+                                self.config,
                             )
                     if region_attempts:
                         reasoning_trace.append({
@@ -423,10 +429,22 @@ class DynamicHypergraphV2Reasoner:
                         event_name = "zero_yield_retrieval_stopped"
                         event = (branch.branch_id, subgoal.node_id, event_name)
                         if event not in editor_events:
-                            operations.append(self._placeholder(
-                                graph, OperationType.EXPAND, subgoal, branch,
-                                {"event": event_name},
-                            ))
+                            if self.config.no_diff_editor_preallocation_gate:
+                                reasoning_trace.append({
+                                    "event": "graph_editor_preallocation_filtered",
+                                    "step": graph.step,
+                                    "target_id": subgoal.node_id,
+                                    "branch_id": branch.branch_id,
+                                    **editor_preallocation_preflight(
+                                        graph, event_name, subgoal.node_id,
+                                    ),
+                                })
+                                editor_events.add(event)
+                            else:
+                                operations.append(self._placeholder(
+                                    graph, OperationType.EXPAND, subgoal, branch,
+                                    {"event": event_name},
+                                ))
                     continue
                 proposed = [claim for claim in claims if claim.status == CandidateStatus.PROPOSED]
                 if proposed:
@@ -496,11 +514,44 @@ class DynamicHypergraphV2Reasoner:
                         sources=[node.node_id for node in evidence] + dependencies,
                     ))
                     continue
-                direct_claims = [
+                semantic_direct_claims = [
                     claim for claim in claims
                     if claim.status in {CandidateStatus.SCORED, CandidateStatus.RETAINED, CandidateStatus.REVISED}
                     and _claim_answers_subgoal(graph, claim)
                 ]
+                proof_verdicts = {
+                    claim.node_id: proof_usable_target_claim(
+                        graph, claim, subgoal, self.config, projects_target=True,
+                    )
+                    for claim in semantic_direct_claims
+                } if self.config.proof_usable_target_gate else {}
+                direct_claims = (
+                    [
+                        claim for claim in semantic_direct_claims
+                        if proof_verdicts[claim.node_id].usable
+                    ]
+                    if self.config.proof_usable_target_gate
+                    else semantic_direct_claims
+                )
+                proof_gap = None
+                if self.config.proof_gap_conditioned_recovery and not direct_claims:
+                    proof_gap = diagnose_proof_gap(
+                        graph, subgoal, claims, semantic_direct_claims,
+                        proof_verdicts, dependencies,
+                    )
+                    if not self.config.feasibility_reasoned_recovery:
+                        proof_gap = replace(proof_gap, feasibility_unlock=0.0)
+                    reasoning_trace.append({
+                        "event": "proof_gap_diagnosed",
+                        "step": graph.step,
+                        "target_id": subgoal.node_id,
+                        "branch_id": branch.branch_id,
+                        **proof_gap.to_payload(),
+                        "claim_verdicts": {
+                            claim_id: verdict.to_dict()
+                            for claim_id, verdict in sorted(proof_verdicts.items())
+                        },
+                    })
                 raw_direct_ids = {
                     claim.node_id for claim in direct_claims
                     if graph.claim_semantics[claim.node_id].join_depth == 0
@@ -517,6 +568,7 @@ class DynamicHypergraphV2Reasoner:
                             "extraction_evidence_count": len(evidence),
                             "extraction_focus_mode": "direct_answer",
                             "extraction_state_fingerprint": extraction_fingerprint,
+                            **(proof_gap.to_payload() if proof_gap is not None else {}),
                         },
                         sources=[node.node_id for node in evidence] + dependencies,
                     ))
@@ -591,6 +643,43 @@ class DynamicHypergraphV2Reasoner:
                             "provider_calls": 0,
                             "provider_tokens": 0,
                         })
+                        if (
+                            proof_gap is not None
+                            and self.config.feasibility_reasoned_recovery
+                        ):
+                            failed_ids = tuple(sorted({
+                                str(claim_id)
+                                for row in filtered_joins
+                                for claim_id in row["failed_premise_ids"]
+                            }))
+                            feasibility_reasons = tuple(sorted({
+                                str(reason)
+                                for row in filtered_joins
+                                for reason in row["reason_codes"]
+                            }))
+                            proof_gap = replace(
+                                proof_gap,
+                                reason_code=(
+                                    f"join_{feasibility_reasons[0]}"
+                                    if feasibility_reasons else "join_precondition_gap"
+                                ),
+                                reason_codes=tuple(sorted(set(
+                                    proof_gap.reason_codes + feasibility_reasons
+                                ))),
+                                target_claim_ids=failed_ids or proof_gap.target_claim_ids,
+                                proof_gap_reducibility=max(
+                                    proof_gap.proof_gap_reducibility, 0.90,
+                                ),
+                                feasibility_unlock=1.0,
+                            )
+                            reasoning_trace.append({
+                                "event": "proof_gap_feasibility_update",
+                                "step": graph.step,
+                                "target_id": subgoal.node_id,
+                                "branch_id": branch.branch_id,
+                                **proof_gap.to_payload(),
+                                "filtered_join_count": len(filtered_joins),
+                            })
                     discovered_joins = feasible_joins
                 joins = [
                     row for row in discovered_joins
@@ -738,13 +827,20 @@ class DynamicHypergraphV2Reasoner:
                     else len({node.retrieval_query for node in evidence})
                 )
                 if retrieval_rounds < self.config.max_retrieval_rounds_per_subgoal:
-                    query = _missing_binding_query(
-                        graph, subgoal, branch, question, dependencies, claims, evidence,
-                        attempted_queries=(
-                            {row.normalized_query for row in region_attempts}
-                            if self.config.retrieval_attempt_aware_scheduling else set()
-                        ),
+                    attempted_queries = (
+                        {row.normalized_query for row in region_attempts}
+                        if self.config.retrieval_attempt_aware_scheduling else set()
                     )
+                    if self.config.proof_gap_conditioned_recovery and proof_gap is not None:
+                        query = proof_gap_recovery_query(
+                            graph, subgoal, question, dependencies, claims,
+                            proof_gap, attempted_queries,
+                        )
+                    else:
+                        query = _missing_binding_query(
+                            graph, subgoal, branch, question, dependencies, claims, evidence,
+                            attempted_queries=attempted_queries,
+                        )
                     retrieval_gate = {
                         "allowed": True,
                         "reason_code": "legacy_or_initial_retrieval",
@@ -758,6 +854,7 @@ class DynamicHypergraphV2Reasoner:
                             graph, subgoal, branch, query, dependencies, claims,
                             region_attempts, attempted_extractions,
                             self.config.retrieval_query_max_token_overlap,
+                            self.config,
                         )
                         reasoning_trace.append({
                             "event": "region_retrieval_gate",
@@ -776,6 +873,7 @@ class DynamicHypergraphV2Reasoner:
                                 "query": query,
                                 "dependency_claim_ids": dependencies,
                                 "retrieval_gate_reason": retrieval_gate["reason_code"],
+                                **(proof_gap.to_payload() if proof_gap is not None else {}),
                             },
                             sources=[claim.node_id for claim in claims],
                         ))
@@ -784,10 +882,22 @@ class DynamicHypergraphV2Reasoner:
                     event_name = "high_uncertainty_no_join" if claims else "missing_terminal_path"
                     event = (branch.branch_id, subgoal.node_id, event_name)
                     if event not in editor_events:
-                        operations.append(self._placeholder(
-                            graph, OperationType.EXPAND, subgoal, branch,
-                            {"event": event_name}, sources=[claim.node_id for claim in claims],
-                        ))
+                        if self.config.no_diff_editor_preallocation_gate:
+                            reasoning_trace.append({
+                                "event": "graph_editor_preallocation_filtered",
+                                "step": graph.step,
+                                "target_id": subgoal.node_id,
+                                "branch_id": branch.branch_id,
+                                **editor_preallocation_preflight(
+                                    graph, event_name, subgoal.node_id,
+                                ),
+                            })
+                            editor_events.add(event)
+                        else:
+                            operations.append(self._placeholder(
+                                graph, OperationType.EXPAND, subgoal, branch,
+                                {"event": event_name}, sources=[claim.node_id for claim in claims],
+                            ))
         operations = _suppress_terminal_expansion_when_commit_ready(operations)
         return _unique_operations(_attach_terminal_context(operations, terminal_contexts))
 
@@ -1657,6 +1767,7 @@ def _retrieval_retry_gate(
     region_attempts: list[Any],
     attempted_extractions: set[tuple[str, str, str, str]],
     max_query_overlap: float,
+    config: DynamicV2ResearchConfig | None = None,
 ) -> dict[str, Any]:
     """Gold-free hard gate for a second retrieval in one graph region."""
     if not region_attempts:
@@ -1718,7 +1829,18 @@ def _retrieval_retry_gate(
             "direct_answer_attempted": direct_done,
             **common,
         }
-    if any(_claim_answers_subgoal(graph, claim) for claim in yielded_claims):
+    target_usable = []
+    for claim in yielded_claims:
+        projects = _claim_answers_subgoal(graph, claim)
+        if not projects:
+            continue
+        if config is not None and config.proof_usable_target_gate:
+            target_usable.append(proof_usable_target_claim(
+                graph, claim, subgoal, config, projects_target=True,
+            ).usable)
+        else:
+            target_usable.append(True)
+    if any(target_usable):
         return {
             "allowed": False,
             "reason_code": "target_local_answer_claim_already_grounded",

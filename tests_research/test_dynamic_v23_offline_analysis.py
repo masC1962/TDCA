@@ -72,6 +72,37 @@ def test_allocation_calibration_reads_selected_outcomes():
     assert report["by_operation_family"]["verify:default"]["progress_rate"] == 2 / 3
 
 
+def test_allocation_calibration_reports_real_choice_conditioned_correlation():
+    rows = []
+    for index, (evc, utility) in enumerate(((1.0, -0.2), (2.0, 0.1), (3.0, 0.8))):
+        base_id = f"op{index}"
+        rows.extend([
+            {
+                "qid": f"q{index}", "event": "meta_decision", "outcome": "CONTINUE",
+                "allocation_candidates": [
+                    _packet(base_id, "retrieve:default", f"r{index}", "high", evc),
+                    _packet(f"alternative{index}", "branch:extract_typed", f"x{index}", "high", evc - 0.1),
+                ],
+            },
+            {
+                "qid": f"q{index}", "event": "allocation_reconciled",
+                "allocation": _packet(
+                    f"{base_id}_allocation_000001", "retrieve:default",
+                    f"r{index}", "high", evc,
+                ),
+                "actual_utility": utility,
+                "progressed": utility > 0,
+                "actual_utility_components_raw": {},
+            },
+        ])
+    report = allocation_calibration(rows)
+    conditioned = report["choice_conditioned"]
+    assert conditioned["count"] == 3
+    assert conditioned["trace_match_rate"] == 1.0
+    assert conditioned["minimum_choice_size"] == 2
+    assert conditioned["spearman_predicted_evc_actual_utility"] == 1.0
+
+
 def test_terminal_bottlenecks_are_posthoc_and_mutually_prioritized():
     predictions = [
         {"qid": "q1", "status": "abstain", "stop_reason": "none"},

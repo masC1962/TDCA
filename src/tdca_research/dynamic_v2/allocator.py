@@ -37,6 +37,8 @@ class EVCSignals:
     expected_token_cost: float = 0.0
     expected_retrieval_cost: float = 0.0
     retrieval_saturation: float = 0.0
+    proof_gap_reducibility: float = 0.0
+    feasibility_unlock: float = 0.0
 
 
 @dataclass(frozen=True)
@@ -101,7 +103,11 @@ class AdaptiveComputationAllocator:
         }
         expanded: list[tuple[int, GraphOperation, str, float, EVCSignals]] = []
         base_rows = [self._signals(graph, operation, budget) for operation in operations]
-        normalized_base_rows = self._normalize_base_signals(base_rows)
+        normalized_base_rows = (
+            self._normalize_choice_conditioned_signals(base_rows, operations)
+            if self.config.choice_conditioned_evc
+            else self._normalize_base_signals(base_rows)
+        )
         for index, operation in enumerate(operations):
             base = base_rows[index]
             levels = self._fidelity_options(operation)
@@ -239,6 +245,8 @@ class AdaptiveComputationAllocator:
             expected_token_cost=base.expected_token_cost * fraction,
             expected_retrieval_cost=base.expected_retrieval_cost,
             retrieval_saturation=base.retrieval_saturation,
+            proof_gap_reducibility=base.proof_gap_reducibility * efficiency,
+            feasibility_unlock=base.feasibility_unlock * efficiency,
         )
         if not clamp:
             return row
@@ -268,6 +276,44 @@ class AdaptiveComputationAllocator:
             for index in range(len(rows))
         ]
 
+    @staticmethod
+    def _normalize_choice_conditioned_signals(
+        rows: list[EVCSignals], operations: list[GraphOperation],
+    ) -> list[EVCSignals]:
+        """Blend global and within-family scales for a real ready-set choice.
+
+        A family-local comparison prevents an expensive operation family from
+        winning merely because its raw signal range differs.  The global half
+        retains cross-family magnitude and singleton absolute semantics.
+        """
+        if not rows:
+            return []
+        names = tuple(EVCSignals.__dataclass_fields__)
+        global_columns = {
+            name: _minmax([float(getattr(row, name)) for row in rows])
+            for name in names
+        }
+        families = [operation_family(operation) for operation in operations]
+        family_indices = {
+            family: [index for index, value in enumerate(families) if value == family]
+            for family in sorted(set(families))
+        }
+        family_columns: dict[str, dict[str, dict[int, float]]] = {}
+        for family, indices in family_indices.items():
+            family_columns[family] = {}
+            for name in names:
+                values = [float(getattr(rows[index], name)) for index in indices]
+                normalized = _minmax(values)
+                family_columns[family][name] = dict(zip(indices, normalized))
+        return [
+            EVCSignals(**{
+                name: 0.5 * global_columns[name][index]
+                + 0.5 * family_columns[families[index]][name][index]
+                for name in names
+            })
+            for index in range(len(rows))
+        ]
+
     def _adaptive_evc(self, normalized: EVCSignals) -> float:
         value = (
             self.config.evc_weight_heat * normalized.graph_heat
@@ -282,6 +328,10 @@ class AdaptiveComputationAllocator:
             - self.config.evc_weight_failure_cooldown * normalized.failure_cooldown
             + self.config.evc_weight_terminal_gap * normalized.terminal_gap
             + self.config.evc_weight_terminal_proximity * normalized.terminal_proximity
+            + self.config.evc_weight_proof_gap_reducibility
+            * normalized.proof_gap_reducibility
+            + self.config.evc_weight_feasibility_unlock
+            * normalized.feasibility_unlock
         )
         if self.config.multi_resource_evc:
             # Explicit resources replace the old scalar expected-cost proxy.
@@ -398,6 +448,14 @@ class AdaptiveComputationAllocator:
                 1.0, last.new_evidence_count / max(1, last.allocated_top_k),
             )
             retrieval_saturation = _unit(max(round_fraction, zero_yield, yield_fraction))
+        proof_gap_reducibility = (
+            _unit(float(operation.payload.get("proof_gap_reducibility", 0.0)))
+            if self.config.choice_conditioned_evc else 0.0
+        )
+        feasibility_unlock = (
+            _unit(float(operation.payload.get("feasibility_unlock", 0.0)))
+            if self.config.choice_conditioned_evc else 0.0
+        )
         return EVCSignals(
             graph_heat=heat,
             uncertainty_reduction=uncertainty * _operation_reduction(operation.operation_type),
@@ -415,6 +473,8 @@ class AdaptiveComputationAllocator:
             expected_token_cost=token_demand * token_pressure,
             expected_retrieval_cost=retrieval_demand * retrieval_pressure,
             retrieval_saturation=retrieval_saturation,
+            proof_gap_reducibility=proof_gap_reducibility,
+            feasibility_unlock=feasibility_unlock,
         )
 
     def _budget_packet(
@@ -518,6 +578,7 @@ def operation_region_key(operation: GraphOperation) -> str:
         for key in (
             "query", "event", "extraction_evidence_count", "join_signature",
             "candidate_id", "candidate_ids", "dependency_claim_ids", "premise_ids",
+            "proof_gap_reason", "recovery_target_claim_ids",
         )
         if key in operation.payload
     }

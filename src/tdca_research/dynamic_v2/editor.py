@@ -149,6 +149,7 @@ class EventTriggeredGraphEditorV2:
             },
         )
 
+
     def _root_repair(
         self, graph, row, event, branch, operation_id, target_id, generation,
     ) -> GraphOperation | None:
@@ -218,6 +219,27 @@ class EventTriggeredGraphEditorV2:
                 "tokens": float(generation.prompt_tokens + generation.completion_tokens),
             },
         )
+
+
+def editor_preallocation_preflight(
+    graph: DynamicReasoningHypergraphV2, event: str, target_id: str,
+) -> dict:
+    """Reject editor allocation unless an executable diff is known in advance.
+
+    The current editor asks a model to invent both the missing node and its
+    bindings, so even a plausible structural event cannot guarantee a non-empty
+    diff before spending a call.  v2.4.1 therefore routes recoverable belief
+    gaps to concrete RETRIEVE/BRANCH/MERGE actions and records this explicit
+    rejection.  Legacy versions remain free to call ``propose`` directly.
+    """
+    target = graph.node(target_id, SubgoalNode)
+    return {
+        "allowed": False,
+        "reason_code": "model_dependent_diff_not_preflightable",
+        "event": str(event),
+        "target_terminal": bool(target.terminal),
+        "candidate_diff_count": 0,
+    }
 
 
 _ROOT_REPAIR_STOPWORDS = {

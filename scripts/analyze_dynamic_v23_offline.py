@@ -138,14 +138,43 @@ def _calibration_bins(rows: list[dict[str, Any]], count: int = 4) -> list[dict[s
 
 def allocation_calibration(reasoning_rows: list[dict[str, Any]]) -> dict[str, Any]:
     selected: list[dict[str, Any]] = []
+    pending_choices: dict[str, list[dict[str, Any]]] = defaultdict(list)
     for event in reasoning_rows:
+        if event.get("event") == "meta_decision" and str(event.get("outcome", "")) == "CONTINUE":
+            candidates = list(event.get("allocation_candidates") or [])
+            if candidates:
+                operation_keys = {
+                    (
+                        str(row.get("operation_id", "")),
+                        str(row.get("operation_family", "")),
+                        str(row.get("region_key", "")),
+                    )
+                    for row in candidates
+                }
+                pending_choices[str(event.get("qid", ""))].append({
+                    "selected_operation_id": str(candidates[0].get("operation_id", "")),
+                    "real_operation_choice": len(operation_keys) > 1,
+                    "choice_size": len(operation_keys),
+                })
+            continue
         if event.get("event") != "allocation_reconciled":
             continue
         packet = event.get("allocation") or {}
         raw_utility = event.get("actual_utility_components_raw") or {}
+        qid = str(event.get("qid", ""))
+        choice = pending_choices[qid].pop(0) if pending_choices[qid] else {}
+        selected_operation = str(choice.get("selected_operation_id", ""))
+        executed_operation = str(packet.get("operation_id", ""))
+        choice_matched = bool(
+            selected_operation
+            and (
+                executed_operation == selected_operation
+                or executed_operation.startswith(f"{selected_operation}_allocation_")
+            )
+        )
         selected.append({
-            "qid": str(event.get("qid", "")),
-            "operation_id": str(packet.get("operation_id", "")),
+            "qid": qid,
+            "operation_id": executed_operation,
             "operation_family": str(packet.get("operation_family", "unknown")),
             "region_key": str(packet.get("region_key", "")),
             "fidelity_level": str(packet.get("fidelity_level", "unknown")),
@@ -159,6 +188,11 @@ def allocation_calibration(reasoning_rows: list[dict[str, Any]]) -> dict[str, An
                 str(key): _float(value)
                 for key, value in (event.get("actual_cost") or {}).items()
             },
+            "real_operation_choice": bool(
+                choice_matched and choice.get("real_operation_choice", False)
+            ),
+            "choice_size": int(choice.get("choice_size", 0)) if choice_matched else 0,
+            "choice_trace_matched": choice_matched,
         })
 
     def summarize(part: list[dict[str, Any]]) -> dict[str, Any]:
@@ -191,6 +225,7 @@ def allocation_calibration(reasoning_rows: list[dict[str, Any]]) -> dict[str, An
         fidelity: summarize([row for row in selected if row["fidelity_level"] == fidelity])
         for fidelity in sorted({row["fidelity_level"] for row in selected})
     }
+    choice_conditioned = [row for row in selected if row["real_operation_choice"]]
     if selected:
         high_threshold = sorted(row["predicted_evc"] for row in selected)[
             3 * (len(selected) - 1) // 4
@@ -207,6 +242,15 @@ def allocation_calibration(reasoning_rows: list[dict[str, Any]]) -> dict[str, An
         "calibration_bins_low_to_high": _calibration_bins(selected),
         "by_operation_family": by_family,
         "by_fidelity": by_fidelity,
+        "choice_conditioned": {
+            **summarize(choice_conditioned),
+            "trace_match_rate": _rate(
+                sum(row["choice_trace_matched"] for row in selected), len(selected)
+            ),
+            "minimum_choice_size": min(
+                (row["choice_size"] for row in choice_conditioned), default=0,
+            ),
+        },
         "high_evc_nonpositive_or_noop_count": len(high_value_failures),
         "high_evc_nonpositive_or_noop_cases": high_value_failures[:50],
     }

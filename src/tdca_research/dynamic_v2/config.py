@@ -83,6 +83,16 @@ class DynamicV2ResearchConfig(DynamicResearchConfig):
     bounded_extraction_recovery: bool = False
     retrieval_query_max_token_overlap: float = 0.80
 
+    # v2.4.1 proof-gap recovery features are opt-in.  Frozen v2.4 configs do
+    # not observe these fields and therefore retain byte-for-byte policy intent.
+    proof_gap_conditioned_recovery: bool = False
+    proof_usable_target_gate: bool = False
+    feasibility_reasoned_recovery: bool = False
+    no_diff_editor_preallocation_gate: bool = False
+    choice_conditioned_evc: bool = False
+    evc_weight_proof_gap_reducibility: float = 1.25
+    evc_weight_feasibility_unlock: float = 1.00
+
     # Terminal acceptance is a conjunctive readout over independent belief
     # channels.  These are initial development values, never learned weights.
     terminal_min_absolute_support: float = 0.70
