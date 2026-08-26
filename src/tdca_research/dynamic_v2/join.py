@@ -50,6 +50,14 @@ class JoinCandidate:
 
 
 @dataclass(frozen=True)
+class DeterministicJoinDerivation:
+    claim: dict[str, Any]
+    reason_codes: tuple[str, ...]
+    operation_reason: str
+    validation_rule: str
+
+
+@dataclass(frozen=True)
 class JoinFeasibilityResult:
     """Pure, zero-cost verdict for failures knowable before allocation."""
 
@@ -275,93 +283,21 @@ class MultiHopJoinEngine:
                 "preallocation_feasible": False,
             }
             return None
+        deterministic = deterministic_join_derivation(
+            graph, candidate, self.config,
+        )
+        if deterministic is not None:
+            self.last_diagnostics = {
+                "accepted": True,
+                "reason_codes": list(deterministic.reason_codes),
+            }
+            return self._operation(
+                graph, candidate, deterministic.claim, operation_id,
+                deterministic.operation_reason,
+                deterministic.validation_rule,
+                {"llm_calls": 0.0, "tokens": 0.0},
+            )
         premises = [graph.node(node_id, ClaimNode) for node_id in candidate.premise_ids]
-        projection = next((
-            row for row in premises if row.node_id == candidate.projection_premise_id
-        ), None)
-        numeric_comparison = _deterministic_numeric_comparison_claim(
-            graph, candidate, premises,
-        )
-        if numeric_comparison is not None:
-            self.last_diagnostics = {
-                "accepted": True,
-                "reason_codes": [
-                    "explicit_query_comparison",
-                    "independently_verified_numeric_premises",
-                    "deterministic_arg_projection",
-                    "no_additional_generation",
-                ],
-            }
-            return self._operation(
-                graph, candidate, numeric_comparison, operation_id,
-                "query_constrained_numeric_comparison",
-                "deterministic_numeric_comparison_join_v21",
-                {"llm_calls": 0.0, "tokens": 0.0},
-            )
-
-        if projection is not None:
-            other_support = min(
-                row.score.absolute_support for row in premises if row.node_id != projection.node_id
-            )
-            if (
-                projection.score.absolute_support >= self.config.commit_support_threshold
-                and other_support >= self.config.commit_support_threshold
-                and projection.score.raw.dependency_consistency
-                >= self.config.commit_support_threshold
-                and projection.score.raw.type_match >= self.config.commit_support_threshold
-            ):
-                self.last_diagnostics = {
-                    "accepted": True,
-                    "reason_codes": [
-                        "exact_dependency_binding",
-                        "independent_verifier_projection",
-                        "no_additional_generation",
-                    ],
-                }
-                semantics = graph.claim_semantics[projection.node_id]
-                derived = {
-                    "subject": projection.subject,
-                    "relation": projection.relation,
-                    "value": projection.value,
-                    "subject_type": semantics.subject_type,
-                    "value_type": semantics.value_type,
-                    "derivation_confidence": min(
-                        row.score.absolute_support for row in premises
-                    ),
-                    "type_match": projection.score.raw.type_match,
-                    "dependency_consistency": projection.score.raw.dependency_consistency,
-                    "qualifiers": {
-                        "projection_premise_id": projection.node_id,
-                        "validation": "independent_raw_scoring",
-                        "join_kind": candidate.join_kind,
-                    },
-                }
-                return self._operation(
-                    graph, candidate, derived, operation_id,
-                    "independently_verified_variable_binding_projection",
-                    "deterministic_projection_join_v2",
-                    {"llm_calls": 0.0, "tokens": 0.0},
-                )
-        symbolic = (
-            _deterministic_path_claim(graph, candidate, premises, self.config)
-            if self.config.deterministic_goal_path_join else None
-        )
-        if symbolic is not None:
-            self.last_diagnostics = {
-                "accepted": True,
-                "reason_codes": [
-                    "canonical_entity_unification",
-                    "independently_verified_path_premises",
-                    "goal_aligned_symbolic_composition",
-                    "no_additional_generation",
-                ],
-            }
-            return self._operation(
-                graph, candidate, symbolic, operation_id,
-                "goal_aligned_canonical_path_composition",
-                "deterministic_path_join_v21",
-                {"llm_calls": 0.0, "tokens": 0.0},
-            )
         blocks = []
         for claim in premises:
             evidence = [graph.node(node_id, EvidenceNode) for node_id in claim.evidence_refs]
@@ -560,6 +496,121 @@ class MultiHopJoinEngine:
             "validated_typed_multi_hop_join", "multi_hop_join_engine_v2",
             {"llm_calls": 0.0, "tokens": 0.0},
         )
+
+    def predicted_provider_calls(
+        self,
+        graph: DynamicReasoningHypergraphV2,
+        candidate: JoinCandidate,
+    ) -> int:
+        """Return the exact provider demand of the current JOIN state."""
+        if not self.check_feasible(graph, candidate).feasible:
+            return 1
+        return int(
+            deterministic_join_derivation(graph, candidate, self.config) is None
+        )
+
+
+def deterministic_join_derivation(
+    graph: DynamicReasoningHypergraphV2,
+    candidate: JoinCandidate,
+    config: DynamicV2ResearchConfig,
+) -> DeterministicJoinDerivation | None:
+    """Materialize the provider-free derivation promised at allocation time."""
+    premises = [graph.node(node_id, ClaimNode) for node_id in candidate.premise_ids]
+    numeric = _deterministic_numeric_comparison_claim(graph, candidate, premises)
+    if numeric is not None:
+        return DeterministicJoinDerivation(
+            numeric,
+            (
+                "explicit_query_comparison",
+                "independently_verified_numeric_premises",
+                "deterministic_arg_projection",
+                "no_additional_generation",
+            ),
+            "query_constrained_numeric_comparison",
+            "deterministic_numeric_comparison_join_v21",
+        )
+    projection = next((
+        row for row in premises if row.node_id == candidate.projection_premise_id
+    ), None)
+    if projection is not None:
+        other_support = min(
+            row.score.absolute_support
+            for row in premises if row.node_id != projection.node_id
+        )
+        if (
+            projection.score.absolute_support >= config.commit_support_threshold
+            and other_support >= config.commit_support_threshold
+            and projection.score.raw.dependency_consistency
+            >= config.commit_support_threshold
+            and projection.score.raw.type_match >= config.commit_support_threshold
+        ):
+            semantics = graph.claim_semantics[projection.node_id]
+            return DeterministicJoinDerivation(
+                {
+                    "subject": projection.subject,
+                    "relation": projection.relation,
+                    "value": projection.value,
+                    "subject_type": semantics.subject_type,
+                    "value_type": semantics.value_type,
+                    "derivation_confidence": min(
+                        row.score.absolute_support for row in premises
+                    ),
+                    "type_match": projection.score.raw.type_match,
+                    "dependency_consistency": (
+                        projection.score.raw.dependency_consistency
+                    ),
+                    "qualifiers": {
+                        "projection_premise_id": projection.node_id,
+                        "validation": "independent_raw_scoring",
+                        "join_kind": candidate.join_kind,
+                    },
+                },
+                (
+                    "exact_dependency_binding",
+                    "independent_verifier_projection",
+                    "no_additional_generation",
+                ),
+                "independently_verified_variable_binding_projection",
+                "deterministic_projection_join_v2",
+            )
+    symbolic = (
+        _deterministic_path_claim(graph, candidate, premises, config)
+        if config.deterministic_goal_path_join else None
+    )
+    if symbolic is not None:
+        return DeterministicJoinDerivation(
+            symbolic,
+            (
+                "canonical_entity_unification",
+                "independently_verified_path_premises",
+                "goal_aligned_symbolic_composition",
+                "no_additional_generation",
+            ),
+            "goal_aligned_canonical_path_composition",
+            "deterministic_path_join_v21",
+        )
+    return None
+
+
+def join_candidate_from_operation(operation: GraphOperation) -> JoinCandidate:
+    """Reconstruct the sealed JOIN candidate from its controller operation."""
+    payload = operation.payload
+    return JoinCandidate(
+        tuple(str(value) for value in payload["premise_ids"]),
+        str(payload["binding"]), operation.target_id,
+        str(payload["join_signature"]), int(payload["join_depth"]),
+        str(payload.get("orientation", "value_subject")),
+        tuple(str(value) for value in payload.get("open_endpoints", [])),
+        str(payload.get("projection_premise_id", "")),
+        {
+            str(key): [str(item) for item in value]
+            for key, value in payload.get("variable_bindings", {}).items()
+        },
+        tuple(dict(value) for value in payload.get("constraints", [])),
+        str(payload.get("join_kind", "relational_path")),
+        dict(payload.get("deterministic_validation", {})),
+    )
 
 
 def _scalar_text(value: Any) -> str:

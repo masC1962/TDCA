@@ -852,7 +852,9 @@ class AdaptiveComputationAllocator:
                 self.config.max_independent_verifications
                 if self.config.exact_fidelity_resource_accounting else 1
             ),
-            OperationType.MERGE: 1.0,
+            OperationType.MERGE: float(
+                _provider_backed_operation(operation, self.config)
+            ),
         }.get(operation.operation_type, 0.0)
         token_demand = base_cost if call_demand else 0.0
         retrieval_demand = 1.0 if operation.operation_type == OperationType.RETRIEVE else 0.0
@@ -1003,13 +1005,7 @@ class AdaptiveComputationAllocator:
         if not self.config.exact_fidelity_resource_accounting:
             return None, None
         fraction = max(0.1, min(1.0, float(fraction)))
-        provider_backed = operation.operation_type in {
-            OperationType.EXPAND, OperationType.BRANCH,
-            OperationType.VERIFY, OperationType.MERGE,
-        } and not (
-            operation.operation_type == OperationType.BRANCH
-            and str(operation.payload.get("mode", "")) == "assignments"
-        )
+        provider_backed = _provider_backed_operation(operation, self.config)
         if not provider_backed:
             return 1.0, fraction
         max_tokens = {
@@ -1101,7 +1097,12 @@ class AdaptiveComputationAllocator:
             prior_observations = float(prior.get("observations", 0.0))
             prior_value = float(prior.get("posterior_value", 0.5))
             prior_cooldown = float(prior.get("cooldown_active", 0.0))
-        max_tokens = 0 if assignment_branch else {
+        deterministic_merge = bool(
+            self.config.certified_deterministic_join_allocation
+            and operation.operation_type == OperationType.MERGE
+            and int(operation.payload.get("predicted_provider_calls", 1)) == 0
+        )
+        max_tokens = 0 if assignment_branch or deterministic_merge else {
             OperationType.EXPAND: self.config.graph_editor_max_tokens,
             OperationType.BRANCH: self.config.typed_extraction_max_tokens,
             OperationType.VERIFY: self.config.soft_verifier_max_tokens,
@@ -1178,10 +1179,7 @@ class AdaptiveComputationAllocator:
             ) else 0,
         }
         if self.config.exact_fidelity_resource_accounting:
-            provider_backed = operation.operation_type in {
-                OperationType.EXPAND, OperationType.BRANCH,
-                OperationType.VERIFY, OperationType.MERGE,
-            } and not assignment_branch
+            provider_backed = _provider_backed_operation(operation, self.config)
             packet["llm_calls"] = (
                 verifications if operation.operation_type == OperationType.VERIFY
                 else int(provider_backed)
@@ -1191,6 +1189,27 @@ class AdaptiveComputationAllocator:
                 if operation.operation_type == OperationType.VERIFY else tokens
             )
         return packet
+
+
+def _provider_backed_operation(
+    operation: GraphOperation,
+    config: DynamicV2ResearchConfig,
+) -> bool:
+    if (
+        config.certified_deterministic_join_allocation
+        and operation.operation_type == OperationType.MERGE
+        and int(operation.payload.get("predicted_provider_calls", 1)) == 0
+    ):
+        return False
+    return operation.operation_type in {
+        OperationType.EXPAND,
+        OperationType.BRANCH,
+        OperationType.VERIFY,
+        OperationType.MERGE,
+    } and not (
+        operation.operation_type == OperationType.BRANCH
+        and str(operation.payload.get("mode", "")) == "assignments"
+    )
 
 
 def operation_family(operation: GraphOperation) -> str:

@@ -49,6 +49,8 @@ def refresh_proof_obligations(
     """
 
     graph.proof_obligation_version = (
+        "proof-obligation-state-v2.4.3.10"
+        if config is not None and config.certified_deterministic_join_allocation else
         "proof-obligation-state-v2.4.3.9"
         if config is not None and (
             config.numeric_output_type_normalization
@@ -510,6 +512,9 @@ def dead_end_certificate(
     ]
     return {
         "certificate_version": (
+            "proof-obligation-dead-end-v2.4.3.10"
+            if graph.proof_obligation_version == "proof-obligation-state-v2.4.3.10"
+            else
             "proof-obligation-dead-end-v2.4.3.9"
             if graph.proof_obligation_version == "proof-obligation-state-v2.4.3.9"
             else

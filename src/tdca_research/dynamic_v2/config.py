@@ -190,6 +190,10 @@ class DynamicV2ResearchConfig(DynamicResearchConfig):
     # used by the deterministic feasibility gate actually changes.
     semantic_join_attempt_state_key: bool = False
 
+    # v2.4.3.10 proves whether a concrete JOIN can be materialized from sealed
+    # independent scores without a provider request, then charges it exactly.
+    certified_deterministic_join_allocation: bool = False
+
     # Terminal acceptance is a conjunctive readout over independent belief
     # channels.  These are initial development values, never learned weights.
     terminal_min_absolute_support: float = 0.70

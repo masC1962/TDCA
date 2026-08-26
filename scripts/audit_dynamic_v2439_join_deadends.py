@@ -69,6 +69,9 @@ def audit(run: Path, config: DynamicV2ResearchConfig) -> dict[str, Any]:
                 ):
                     continue
                 key = _join_attempt_key(graph, candidate)
+                predicted_provider_calls = engine.predicted_provider_calls(
+                    graph, candidate,
+                )
                 rows.append({
                     "qid": qid,
                     "target_subgoal": subgoal.node_id,
@@ -80,6 +83,8 @@ def audit(run: Path, config: DynamicV2ResearchConfig) -> dict[str, Any]:
                         value: graph.belief_states[value].version
                         for value in candidate.premise_ids
                     },
+                    "predicted_provider_calls": predicted_provider_calls,
+                    "certified_provider_free": predicted_provider_calls == 0,
                     "previously_filtered_same_key": key in filtered,
                     "previous_filter": filtered.get(key),
                     "previously_rejected_same_signature": (
@@ -100,6 +105,9 @@ def audit(run: Path, config: DynamicV2ResearchConfig) -> dict[str, Any]:
         "same_signature_previously_rejected_count": sum(
             row["previously_rejected_same_signature"] for row in rows
         ),
+        "certified_provider_free_join_count": sum(
+            row["certified_provider_free"] for row in rows
+        ),
         "rows": rows,
     }
 
@@ -119,6 +127,9 @@ def main() -> None:
         ],
         "same_signature_previously_rejected_count": report[
             "same_signature_previously_rejected_count"
+        ],
+        "certified_provider_free_join_count": report[
+            "certified_provider_free_join_count"
         ],
     }, ensure_ascii=False))
 

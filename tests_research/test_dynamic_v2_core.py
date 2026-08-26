@@ -64,6 +64,7 @@ from tdca_research.dynamic_v2.memory import RelationLightCorpusMemory
 from tdca_research.dynamic_v2.query_graph import compile_query_graph, types_compatible
 from tdca_research.dynamic_v2.revision import BeliefRevisionDetector
 from tdca_research.dynamic_v2.termination import MetaStopPolicy, TerminalBeliefReadout
+from tdca_research.dynamic_v2.transitions import certified_transition_value
 from tdca_research.dynamic_v2.proof import audit_graph_proof
 from tdca_research.dynamic_v2.recovery import (
     diagnose_proof_gap,
@@ -533,6 +534,70 @@ def test_goal_conditioned_join_filter_keeps_only_output_projecting_path():
     assert _join_can_answer_subgoal(
         graph, candidate, graph.node("s_root"), graph.branches["branch_root"],
     )
+
+
+def test_v24310_certified_deterministic_join_survives_exhausted_llm_budget():
+    cfg, controller, graph = chain_graph()
+    cfg.certified_deterministic_join_allocation = True
+    cfg.certified_transition_option_value = True
+    cfg.certified_meta_stop = True
+    cfg.exact_fidelity_resource_accounting = True
+    cfg.absolute_resource_cost = True
+    engine = MultiHopJoinEngine(
+        DeterministicMockLLM(), Budget(16, 6000, 0, Usage()), cfg,
+    )
+    candidate = next(
+        row for row in engine.discover(graph, "branch_root", "s_root")
+        if set(row.premise_ids) == {"c1", "c2"}
+    )
+    assert engine.predicted_provider_calls(graph, candidate) == 0
+    placeholder = operation(
+        89, OperationType.MERGE, target="s_root",
+        sources=list(candidate.premise_ids),
+        payload={
+            "mode": "validate_join",
+            "premise_ids": list(candidate.premise_ids),
+            "binding": candidate.binding,
+            "join_signature": candidate.signature,
+            "join_depth": candidate.join_depth,
+            "orientation": candidate.orientation,
+            "open_endpoints": list(candidate.open_endpoints),
+            "projection_premise_id": candidate.projection_premise_id,
+            "variable_bindings": candidate.variable_bindings,
+            "constraints": [dict(value) for value in candidate.constraints],
+            "join_kind": candidate.join_kind,
+            "deterministic_validation": candidate.deterministic_validation,
+            "predicted_provider_calls": 0,
+        },
+    )
+    exhausted_usage = Usage(llm_calls=16, prompt_tokens=5000, completion_tokens=1000)
+    exhausted = Budget(16, 6000, 0, exhausted_usage)
+    allocator = AdaptiveComputationAllocator(cfg)
+    packets = allocator.allocate(graph, [placeholder], exhausted)
+    assert packets
+    assert all(row.requested_budget["llm_calls"] == 0 for row in packets)
+    assert all(row.requested_budget["token_upper_bound"] == 0 for row in packets)
+    assert all(row.requested_budget["max_tokens"] == 0 for row in packets)
+    certificate = certified_transition_value(graph, placeholder, cfg)
+    assert certificate["kind"] == "deterministic_join_materialization"
+    assert certificate["mandatory"] and certificate["deterministic"]
+    decision = MetaStopPolicy(cfg).decide(graph, packets, exhausted)
+    assert decision.outcome == TerminationKind.CONTINUE
+    packet = next(
+        row for row in packets if row.allocation_id == decision.selected_allocation_id
+    )
+    actual = engine.propose(graph, candidate, "op_v2_89", token_budget=0)
+    assert actual is not None
+    updated = controller.apply(graph, allocator.attach(actual, packet))
+    updated = controller.reconcile_allocation(
+        updated, packet,
+        {"llm_calls": 0.0, "tokens": 0.0, "retrieval_calls": 0.0},
+        True,
+    )
+    record = updated.allocation_history[-1]
+    assert record.predicted_provider_calls == 0
+    assert record.transition_realized
+    assert record.actual_transition_value > 0.0
 
 
 def test_failed_join_key_changes_only_after_controller_belief_update():

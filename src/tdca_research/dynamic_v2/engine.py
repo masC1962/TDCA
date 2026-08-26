@@ -34,7 +34,7 @@ from .controller import V2GraphController
 from .editor import EventTriggeredGraphEditorV2, editor_preallocation_preflight
 from .extraction import TypedClaimExtractor
 from .graph import DynamicReasoningHypergraphV2, TerminationKind
-from .join import JoinCandidate, MultiHopJoinEngine
+from .join import JoinCandidate, MultiHopJoinEngine, join_candidate_from_operation
 from .memory import RelationLightCorpusMemory
 from .recovery import (
     claim_projects_target as _claim_answers_subgoal,
@@ -841,6 +841,11 @@ class DynamicHypergraphV2Reasoner:
                             "constraints": [dict(value) for value in join.constraints],
                             "join_kind": join.join_kind,
                             "deterministic_validation": join.deterministic_validation,
+                            "predicted_provider_calls": (
+                                join_engine.predicted_provider_calls(graph, join)
+                                if self.config.certified_deterministic_join_allocation
+                                else 1
+                            ),
                         },
                         sources=list(join.premise_ids),
                     ))
@@ -1169,21 +1174,7 @@ class DynamicHypergraphV2Reasoner:
             graph = self._apply(controller, graph, AdaptiveComputationAllocator.attach(actual, packet), reasoning_trace, packet)
             return graph, True
         if operation.operation_type == OperationType.MERGE:
-            candidate = JoinCandidate(
-                tuple(str(value) for value in operation.payload["premise_ids"]),
-                str(operation.payload["binding"]), operation.target_id,
-                str(operation.payload["join_signature"]), int(operation.payload["join_depth"]),
-                str(operation.payload.get("orientation", "value_subject")),
-                tuple(str(value) for value in operation.payload.get("open_endpoints", [])),
-                str(operation.payload.get("projection_premise_id", "")),
-                {
-                    str(key): [str(item) for item in value]
-                    for key, value in operation.payload.get("variable_bindings", {}).items()
-                },
-                tuple(dict(value) for value in operation.payload.get("constraints", [])),
-                str(operation.payload.get("join_kind", "relational_path")),
-                dict(operation.payload.get("deterministic_validation", {})),
-            )
+            candidate = join_candidate_from_operation(operation)
             attempted_joins.add(str(
                 operation.payload.get("join_attempt_key") or candidate.signature
             ))

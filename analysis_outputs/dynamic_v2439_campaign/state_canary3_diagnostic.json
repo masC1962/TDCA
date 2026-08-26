@@ -1,0 +1,1400 @@
+{
+  "schema_version": "dynamic-v2.4.3.4-smoke-diagnostic-v1",
+  "inference_calls_made": 0,
+  "immediate_calibration_by_family": {
+    "branch:extract_typed": {
+      "count": 11,
+      "pearson": 0.7075256154142795,
+      "mean_predicted": 0.7038637033844326,
+      "mean_actual": 0.06510507543870815
+    },
+    "commit:default": {
+      "count": 6,
+      "pearson": 0.45054579465867123,
+      "mean_predicted": 0.15069489807902342,
+      "mean_actual": 0.04445186935662081
+    },
+    "merge:validate_join": {
+      "count": 3,
+      "pearson": 0.0,
+      "mean_predicted": 0.6647888199999998,
+      "mean_actual": 0.07371698948219707
+    },
+    "retrieve:default": {
+      "count": 11,
+      "pearson": 0.9777038303678568,
+      "mean_predicted": 0.7239445965290512,
+      "mean_actual": 0.2876570807040023
+    },
+    "verify:default": {
+      "count": 11,
+      "pearson": 0.12755404062255696,
+      "mean_predicted": 0.4601117950136723,
+      "mean_actual": 0.05582260373953433
+    }
+  },
+  "actual_immediate_component_correlations": {
+    "absolute_graph_risk": 0.12312297070732683,
+    "answer_impact": 0.14909466787608341,
+    "candidate_reachability": -0.40274951929195646,
+    "closure_mass": 0.42575794535997197,
+    "dead_end_risk": 0.0,
+    "dependency_unlock": -0.1679701126974222,
+    "evidence_novelty": 0.8403230155113909,
+    "evidence_path": -0.6999789128370386,
+    "expected_call_cost": -0.5423665319600403,
+    "expected_cost": -0.23897760038243598,
+    "expected_obligation_delta": 0.467415633414468,
+    "expected_retrieval_cost": 0.8327240788162624,
+    "expected_token_cost": -0.5139239648295177,
+    "failure_cooldown": 0.0,
+    "feasibility_unlock": -0.07219810517804105,
+    "graph_growth_risk": 0.12312297070732683,
+    "graph_heat": 0.045272926887154556,
+    "missing_premise_reduction": -0.1320735012709479,
+    "normalized_one_step_progress_equal": 0.5298194293162087,
+    "obligation_closure": 0.37756685676316504,
+    "obligation_importance": 0.3499195339712272,
+    "obligation_terminal_return": 0.07326834772805332,
+    "observed_value": -0.34497466289955186,
+    "one_step_progress_equal": 0.5298194293162087,
+    "one_step_progress_max": 0.3719494325933155,
+    "operation_closure_probability": 0.28025597362552623,
+    "operation_redundancy": -0.07224389629080115,
+    "proof_gap_reducibility": -0.07219810517804111,
+    "recovery_value": 0.0,
+    "retrieval_saturation": -0.07219810517804105,
+    "successor_option_value": -0.24594349713882216,
+    "successor_reachability_gain": -0.26310259883970566,
+    "terminal_gap": 0.38742072824155016,
+    "terminal_proximity": 0.0,
+    "terminal_reachability": -0.04318378135402898,
+    "transition_certainty": -0.26310259883970566,
+    "transition_redundancy": 0.2631025988397057,
+    "uncertainty_reduction": 0.0654861725352582
+  },
+  "abstain_count": 3,
+  "abstains": [
+    {
+      "qid": "2hop__62951_64006",
+      "hop_count": 2,
+      "candidate_presence": true,
+      "graph_proof_completion": true,
+      "execution_plan_completion": 0.0,
+      "termination": {
+        "step": 14,
+        "outcome": "BUDGET_EXHAUSTED",
+        "best_predicted_evc": 0.41781828208155614,
+        "answer_node_id": null,
+        "reason": "selected_computation_exhausted_safety_cap",
+        "remaining_budget": {
+          "llm_calls": 6,
+          "tokens": 932,
+          "retrieval_calls": 4,
+          "graph_operations": 50
+        },
+        "dead_end_certificate": {}
+      },
+      "open_obligation_type_counts": {
+        "missing_verification": 1,
+        "missing_join_premise": 1,
+        "insufficient_target_proof": 1
+      },
+      "open_obligations": [
+        {
+          "target_subgoal": "subgoal_root",
+          "branch_id": "branch_root",
+          "obligation_type": "missing_verification",
+          "status": "OPEN",
+          "severity": 0.75,
+          "reason_codes": [
+            "unscored_claim"
+          ],
+          "required_node_ids": [
+            "claim_v2_12_subgoal_root_1",
+            "claim_v2_12_subgoal_root_2",
+            "claim_v2_12_subgoal_root_3",
+            "claim_v2_12_subgoal_root_4"
+          ]
+        },
+        {
+          "target_subgoal": "subgoal_root",
+          "branch_id": "branch_root",
+          "obligation_type": "missing_join_premise",
+          "status": "OPEN",
+          "severity": 0.85,
+          "reason_codes": [
+            "dependency_not_composed"
+          ],
+          "required_node_ids": [
+            "claim_v2_12_subgoal_root_1",
+            "claim_v2_12_subgoal_root_2",
+            "claim_v2_12_subgoal_root_3",
+            "claim_v2_12_subgoal_root_4",
+            "subgoal_2"
+          ]
+        },
+        {
+          "target_subgoal": "subgoal_root",
+          "branch_id": "branch_root",
+          "obligation_type": "insufficient_target_proof",
+          "status": "OPEN",
+          "severity": 0.95,
+          "reason_codes": [
+            "no_target_projection"
+          ],
+          "required_node_ids": [
+            "claim_v2_12_subgoal_root_1",
+            "claim_v2_12_subgoal_root_2",
+            "claim_v2_12_subgoal_root_3",
+            "claim_v2_12_subgoal_root_4"
+          ]
+        }
+      ],
+      "subgoals": [
+        {
+          "node_id": "subgoal_1",
+          "status": "resolved",
+          "dependencies": [],
+          "terminal": false,
+          "claim_status_counts": {
+            "scored": 2,
+            "committed": 1
+          },
+          "retrieval_attempts": 1
+        },
+        {
+          "node_id": "subgoal_2",
+          "status": "resolved",
+          "dependencies": [
+            "subgoal_1"
+          ],
+          "terminal": false,
+          "claim_status_counts": {
+            "scored": 3,
+            "committed": 1
+          },
+          "retrieval_attempts": 1
+        },
+        {
+          "node_id": "subgoal_root",
+          "status": "active",
+          "dependencies": [
+            "subgoal_2"
+          ],
+          "terminal": true,
+          "claim_status_counts": {
+            "proposed": 4
+          },
+          "retrieval_attempts": 2
+        }
+      ],
+      "active_branches": [
+        {
+          "branch_id": "branch_root",
+          "parent_branch_id": null,
+          "assignments": {
+            "subgoal_1": "claim_v2_3_subgoal_1_2",
+            "subgoal_2": "join_claim_9_b887e610e233"
+          },
+          "completed_subgoals": [
+            "subgoal_1",
+            "subgoal_2"
+          ],
+          "score": 1.0,
+          "status": "active",
+          "created_at_step": 0,
+          "revision_count": 0,
+          "last_revision_step": -1,
+          "history": []
+        }
+      ],
+      "recent_trace": [
+        {
+          "event": "allocation_reconciled",
+          "step": null,
+          "operation_family": "verify:default",
+          "failure_reason": "",
+          "outcome": null,
+          "reason": null
+        },
+        {
+          "event": "terminal_belief_readout",
+          "step": 13,
+          "operation_family": null,
+          "failure_reason": null,
+          "outcome": null,
+          "reason": null
+        },
+        {
+          "event": "proof_gap_diagnosed",
+          "step": 13,
+          "operation_family": null,
+          "failure_reason": null,
+          "outcome": null,
+          "reason": null
+        },
+        {
+          "event": "region_retrieval_gate",
+          "step": 13,
+          "operation_family": null,
+          "failure_reason": null,
+          "outcome": null,
+          "reason": null
+        },
+        {
+          "event": "meta_decision",
+          "step": 13,
+          "operation_family": null,
+          "failure_reason": null,
+          "outcome": "CONTINUE",
+          "reason": "affordable_positive_graph_local_expected_value"
+        },
+        {
+          "event": "graph_operation",
+          "step": 14,
+          "operation_family": "retrieve:default",
+          "failure_reason": null,
+          "outcome": null,
+          "reason": null
+        },
+        {
+          "event": "allocation_reconciled",
+          "step": null,
+          "operation_family": "retrieve:default",
+          "failure_reason": "",
+          "outcome": null,
+          "reason": null
+        },
+        {
+          "event": "terminal_belief_readout",
+          "step": 14,
+          "operation_family": null,
+          "failure_reason": null,
+          "outcome": null,
+          "reason": null
+        },
+        {
+          "event": "proof_recovery_extraction_priority",
+          "step": 14,
+          "operation_family": null,
+          "failure_reason": null,
+          "outcome": null,
+          "reason": null
+        },
+        {
+          "event": "meta_decision",
+          "step": 14,
+          "operation_family": null,
+          "failure_reason": null,
+          "outcome": "CONTINUE",
+          "reason": "affordable_positive_graph_local_expected_value"
+        },
+        {
+          "event": "typed_extraction_diagnostic",
+          "step": null,
+          "operation_family": null,
+          "failure_reason": null,
+          "outcome": null,
+          "reason": null
+        },
+        {
+          "event": "typed_extraction_rejected",
+          "step": null,
+          "operation_family": null,
+          "failure_reason": null,
+          "outcome": null,
+          "reason": null
+        },
+        {
+          "event": "allocation_reconciled",
+          "step": null,
+          "operation_family": "branch:extract_typed",
+          "failure_reason": "operation_produced_no_commit",
+          "outcome": null,
+          "reason": null
+        },
+        {
+          "event": "terminal_belief_readout",
+          "step": 14,
+          "operation_family": null,
+          "failure_reason": null,
+          "outcome": null,
+          "reason": null
+        },
+        {
+          "event": "meta_decision",
+          "step": 14,
+          "operation_family": null,
+          "failure_reason": null,
+          "outcome": "CONTINUE",
+          "reason": "affordable_positive_graph_local_expected_value"
+        },
+        {
+          "event": "selected_allocation_budget_exhausted",
+          "step": null,
+          "operation_family": "verify:default",
+          "failure_reason": null,
+          "outcome": null,
+          "reason": null
+        },
+        {
+          "event": "allocation_reconciled",
+          "step": null,
+          "operation_family": "verify:default",
+          "failure_reason": "BudgetExceeded",
+          "outcome": null,
+          "reason": null
+        },
+        {
+          "event": "termination",
+          "step": null,
+          "operation_family": null,
+          "failure_reason": null,
+          "outcome": "BUDGET_EXHAUSTED",
+          "reason": "selected_computation_exhausted_safety_cap"
+        }
+      ]
+    },
+    {
+      "qid": "3hop1__105767_443779_52195",
+      "hop_count": 3,
+      "candidate_presence": true,
+      "graph_proof_completion": true,
+      "execution_plan_completion": 0.0,
+      "termination": {
+        "step": 12,
+        "outcome": "BUDGET_EXHAUSTED",
+        "best_predicted_evc": 0.32657621849914975,
+        "answer_node_id": null,
+        "reason": "selected_computation_exhausted_safety_cap",
+        "remaining_budget": {
+          "llm_calls": 8,
+          "tokens": 2419,
+          "retrieval_calls": 5,
+          "graph_operations": 52
+        },
+        "dead_end_certificate": {}
+      },
+      "open_obligation_type_counts": {
+        "missing_verification": 1,
+        "missing_join_premise": 1,
+        "insufficient_target_proof": 1
+      },
+      "open_obligations": [
+        {
+          "target_subgoal": "subgoal_root",
+          "branch_id": "branch_root",
+          "obligation_type": "missing_verification",
+          "status": "OPEN",
+          "severity": 0.75,
+          "reason_codes": [
+            "unscored_claim"
+          ],
+          "required_node_ids": [
+            "claim_v2_12_subgoal_root_1",
+            "claim_v2_12_subgoal_root_2",
+            "claim_v2_12_subgoal_root_3",
+            "claim_v2_12_subgoal_root_4",
+            "claim_v2_12_subgoal_root_5",
+            "claim_v2_12_subgoal_root_6"
+          ]
+        },
+        {
+          "target_subgoal": "subgoal_root",
+          "branch_id": "branch_root",
+          "obligation_type": "missing_join_premise",
+          "status": "OPEN",
+          "severity": 0.85,
+          "reason_codes": [
+            "dependency_not_composed"
+          ],
+          "required_node_ids": [
+            "claim_v2_12_subgoal_root_1",
+            "claim_v2_12_subgoal_root_2",
+            "claim_v2_12_subgoal_root_3",
+            "claim_v2_12_subgoal_root_4",
+            "claim_v2_12_subgoal_root_5",
+            "claim_v2_12_subgoal_root_6",
+            "subgoal_2"
+          ]
+        },
+        {
+          "target_subgoal": "subgoal_root",
+          "branch_id": "branch_root",
+          "obligation_type": "insufficient_target_proof",
+          "status": "OPEN",
+          "severity": 0.85,
+          "reason_codes": [
+            "absolute_support_below_proof_floor",
+            "claim_not_independently_verified",
+            "evidence_gap_above_proof_ceiling",
+            "grounding_below_proof_floor",
+            "type_match_below_proof_floor"
+          ],
+          "required_node_ids": [
+            "claim_v2_12_subgoal_root_1"
+          ]
+        }
+      ],
+      "subgoals": [
+        {
+          "node_id": "subgoal_1",
+          "status": "resolved",
+          "dependencies": [],
+          "terminal": false,
+          "claim_status_counts": {
+            "committed": 1
+          },
+          "retrieval_attempts": 1
+        },
+        {
+          "node_id": "subgoal_2",
+          "status": "resolved",
+          "dependencies": [
+            "subgoal_1"
+          ],
+          "terminal": false,
+          "claim_status_counts": {
+            "scored": 6,
+            "committed": 1
+          },
+          "retrieval_attempts": 1
+        },
+        {
+          "node_id": "subgoal_root",
+          "status": "active",
+          "dependencies": [
+            "subgoal_2"
+          ],
+          "terminal": true,
+          "claim_status_counts": {
+            "proposed": 6
+          },
+          "retrieval_attempts": 1
+        }
+      ],
+      "active_branches": [
+        {
+          "branch_id": "branch_root",
+          "parent_branch_id": null,
+          "assignments": {
+            "subgoal_1": "claim_v2_3_subgoal_1_1",
+            "subgoal_2": "join_claim_9_d71c172891f9"
+          },
+          "completed_subgoals": [
+            "subgoal_1",
+            "subgoal_2"
+          ],
+          "score": 1.0,
+          "status": "active",
+          "created_at_step": 0,
+          "revision_count": 0,
+          "last_revision_step": -1,
+          "history": []
+        }
+      ],
+      "recent_trace": [
+        {
+          "event": "terminal_belief_readout",
+          "step": 9,
+          "operation_family": null,
+          "failure_reason": null,
+          "outcome": null,
+          "reason": null
+        },
+        {
+          "event": "meta_decision",
+          "step": 9,
+          "operation_family": null,
+          "failure_reason": null,
+          "outcome": "CONTINUE",
+          "reason": "certified_state_transition"
+        },
+        {
+          "event": "graph_operation",
+          "step": 10,
+          "operation_family": "commit:default",
+          "failure_reason": null,
+          "outcome": null,
+          "reason": null
+        },
+        {
+          "event": "allocation_reconciled",
+          "step": null,
+          "operation_family": "commit:default",
+          "failure_reason": "",
+          "outcome": null,
+          "reason": null
+        },
+        {
+          "event": "terminal_belief_readout",
+          "step": 10,
+          "operation_family": null,
+          "failure_reason": null,
+          "outcome": null,
+          "reason": null
+        },
+        {
+          "event": "meta_decision",
+          "step": 10,
+          "operation_family": null,
+          "failure_reason": null,
+          "outcome": "CONTINUE",
+          "reason": "affordable_positive_graph_local_expected_value"
+        },
+        {
+          "event": "graph_operation",
+          "step": 11,
+          "operation_family": "retrieve:default",
+          "failure_reason": null,
+          "outcome": null,
+          "reason": null
+        },
+        {
+          "event": "allocation_reconciled",
+          "step": null,
+          "operation_family": "retrieve:default",
+          "failure_reason": "",
+          "outcome": null,
+          "reason": null
+        },
+        {
+          "event": "terminal_belief_readout",
+          "step": 11,
+          "operation_family": null,
+          "failure_reason": null,
+          "outcome": null,
+          "reason": null
+        },
+        {
+          "event": "meta_decision",
+          "step": 11,
+          "operation_family": null,
+          "failure_reason": null,
+          "outcome": "CONTINUE",
+          "reason": "affordable_positive_graph_local_expected_value"
+        },
+        {
+          "event": "typed_extraction_diagnostic",
+          "step": null,
+          "operation_family": null,
+          "failure_reason": null,
+          "outcome": null,
+          "reason": null
+        },
+        {
+          "event": "graph_operation",
+          "step": 12,
+          "operation_family": "branch:extract_typed",
+          "failure_reason": null,
+          "outcome": null,
+          "reason": null
+        },
+        {
+          "event": "allocation_reconciled",
+          "step": null,
+          "operation_family": "branch:extract_typed",
+          "failure_reason": "",
+          "outcome": null,
+          "reason": null
+        },
+        {
+          "event": "terminal_belief_readout",
+          "step": 12,
+          "operation_family": null,
+          "failure_reason": null,
+          "outcome": null,
+          "reason": null
+        },
+        {
+          "event": "meta_decision",
+          "step": 12,
+          "operation_family": null,
+          "failure_reason": null,
+          "outcome": "CONTINUE",
+          "reason": "affordable_positive_graph_local_expected_value"
+        },
+        {
+          "event": "selected_allocation_budget_exhausted",
+          "step": null,
+          "operation_family": "verify:default",
+          "failure_reason": null,
+          "outcome": null,
+          "reason": null
+        },
+        {
+          "event": "allocation_reconciled",
+          "step": null,
+          "operation_family": "verify:default",
+          "failure_reason": "BudgetExceeded",
+          "outcome": null,
+          "reason": null
+        },
+        {
+          "event": "termination",
+          "step": null,
+          "operation_family": null,
+          "failure_reason": null,
+          "outcome": "BUDGET_EXHAUSTED",
+          "reason": "selected_computation_exhausted_safety_cap"
+        }
+      ]
+    },
+    {
+      "qid": "4hop1__152146_5274_458768_33637",
+      "hop_count": 4,
+      "candidate_presence": false,
+      "graph_proof_completion": true,
+      "execution_plan_completion": 0.0,
+      "termination": {
+        "step": 15,
+        "outcome": "BUDGET_EXHAUSTED",
+        "best_predicted_evc": 0.28934406554421765,
+        "answer_node_id": null,
+        "reason": "selected_computation_exhausted_safety_cap",
+        "remaining_budget": {
+          "llm_calls": 5,
+          "tokens": 1205,
+          "retrieval_calls": 4,
+          "graph_operations": 49
+        },
+        "dead_end_certificate": {}
+      },
+      "open_obligation_type_counts": {
+        "missing_verification": 1,
+        "missing_join_premise": 1,
+        "insufficient_target_proof": 1
+      },
+      "open_obligations": [
+        {
+          "target_subgoal": "subgoal_root",
+          "branch_id": "branch_root",
+          "obligation_type": "missing_verification",
+          "status": "OPEN",
+          "severity": 0.75,
+          "reason_codes": [
+            "unscored_claim"
+          ],
+          "required_node_ids": [
+            "claim_v2_12_subgoal_root_1",
+            "claim_v2_12_subgoal_root_2",
+            "claim_v2_12_subgoal_root_3",
+            "claim_v2_12_subgoal_root_4",
+            "claim_v2_12_subgoal_root_5",
+            "claim_v2_12_subgoal_root_6",
+            "claim_v2_12_subgoal_root_7",
+            "claim_v2_12_subgoal_root_8",
+            "claim_v2_15_subgoal_root_3",
+            "claim_v2_15_subgoal_root_4"
+          ]
+        },
+        {
+          "target_subgoal": "subgoal_root",
+          "branch_id": "branch_root",
+          "obligation_type": "missing_join_premise",
+          "status": "OPEN",
+          "severity": 0.85,
+          "reason_codes": [
+            "dependency_not_composed"
+          ],
+          "required_node_ids": [
+            "claim_v2_12_subgoal_root_1",
+            "claim_v2_12_subgoal_root_2",
+            "claim_v2_12_subgoal_root_3",
+            "claim_v2_12_subgoal_root_4",
+            "claim_v2_12_subgoal_root_5",
+            "claim_v2_12_subgoal_root_6",
+            "claim_v2_12_subgoal_root_7",
+            "claim_v2_12_subgoal_root_8",
+            "claim_v2_15_subgoal_root_3",
+            "claim_v2_15_subgoal_root_4",
+            "subgoal_2"
+          ]
+        },
+        {
+          "target_subgoal": "subgoal_root",
+          "branch_id": "branch_root",
+          "obligation_type": "insufficient_target_proof",
+          "status": "OPEN",
+          "severity": 0.85,
+          "reason_codes": [
+            "absolute_support_below_proof_floor",
+            "claim_not_independently_verified",
+            "evidence_gap_above_proof_ceiling",
+            "grounding_below_proof_floor",
+            "type_match_below_proof_floor"
+          ],
+          "required_node_ids": [
+            "claim_v2_15_subgoal_root_3"
+          ]
+        }
+      ],
+      "subgoals": [
+        {
+          "node_id": "subgoal_1",
+          "status": "resolved",
+          "dependencies": [],
+          "terminal": false,
+          "claim_status_counts": {
+            "committed": 1
+          },
+          "retrieval_attempts": 1
+        },
+        {
+          "node_id": "subgoal_2",
+          "status": "resolved",
+          "dependencies": [
+            "subgoal_1"
+          ],
+          "terminal": false,
+          "claim_status_counts": {
+            "scored": 1,
+            "committed": 1
+          },
+          "retrieval_attempts": 1
+        },
+        {
+          "node_id": "subgoal_root",
+          "status": "active",
+          "dependencies": [
+            "subgoal_2"
+          ],
+          "terminal": true,
+          "claim_status_counts": {
+            "proposed": 10
+          },
+          "retrieval_attempts": 2
+        }
+      ],
+      "active_branches": [
+        {
+          "branch_id": "branch_root",
+          "parent_branch_id": null,
+          "assignments": {
+            "subgoal_1": "claim_v2_3_subgoal_1_1",
+            "subgoal_2": "join_claim_9_8591e870f7ee"
+          },
+          "completed_subgoals": [
+            "subgoal_1",
+            "subgoal_2"
+          ],
+          "score": 1.0,
+          "status": "active",
+          "created_at_step": 0,
+          "revision_count": 0,
+          "last_revision_step": -1,
+          "history": []
+        }
+      ],
+      "recent_trace": [
+        {
+          "event": "allocation_reconciled",
+          "step": null,
+          "operation_family": "verify:default",
+          "failure_reason": "",
+          "outcome": null,
+          "reason": null
+        },
+        {
+          "event": "terminal_belief_readout",
+          "step": 13,
+          "operation_family": null,
+          "failure_reason": null,
+          "outcome": null,
+          "reason": null
+        },
+        {
+          "event": "proof_gap_diagnosed",
+          "step": 13,
+          "operation_family": null,
+          "failure_reason": null,
+          "outcome": null,
+          "reason": null
+        },
+        {
+          "event": "region_retrieval_gate",
+          "step": 13,
+          "operation_family": null,
+          "failure_reason": null,
+          "outcome": null,
+          "reason": null
+        },
+        {
+          "event": "meta_decision",
+          "step": 13,
+          "operation_family": null,
+          "failure_reason": null,
+          "outcome": "CONTINUE",
+          "reason": "affordable_positive_graph_local_expected_value"
+        },
+        {
+          "event": "graph_operation",
+          "step": 14,
+          "operation_family": "retrieve:default",
+          "failure_reason": null,
+          "outcome": null,
+          "reason": null
+        },
+        {
+          "event": "allocation_reconciled",
+          "step": null,
+          "operation_family": "retrieve:default",
+          "failure_reason": "",
+          "outcome": null,
+          "reason": null
+        },
+        {
+          "event": "terminal_belief_readout",
+          "step": 14,
+          "operation_family": null,
+          "failure_reason": null,
+          "outcome": null,
+          "reason": null
+        },
+        {
+          "event": "proof_recovery_extraction_priority",
+          "step": 14,
+          "operation_family": null,
+          "failure_reason": null,
+          "outcome": null,
+          "reason": null
+        },
+        {
+          "event": "meta_decision",
+          "step": 14,
+          "operation_family": null,
+          "failure_reason": null,
+          "outcome": "CONTINUE",
+          "reason": "affordable_positive_graph_local_expected_value"
+        },
+        {
+          "event": "typed_extraction_diagnostic",
+          "step": null,
+          "operation_family": null,
+          "failure_reason": null,
+          "outcome": null,
+          "reason": null
+        },
+        {
+          "event": "graph_operation",
+          "step": 15,
+          "operation_family": "branch:extract_typed",
+          "failure_reason": null,
+          "outcome": null,
+          "reason": null
+        },
+        {
+          "event": "allocation_reconciled",
+          "step": null,
+          "operation_family": "branch:extract_typed",
+          "failure_reason": "",
+          "outcome": null,
+          "reason": null
+        },
+        {
+          "event": "terminal_belief_readout",
+          "step": 15,
+          "operation_family": null,
+          "failure_reason": null,
+          "outcome": null,
+          "reason": null
+        },
+        {
+          "event": "meta_decision",
+          "step": 15,
+          "operation_family": null,
+          "failure_reason": null,
+          "outcome": "CONTINUE",
+          "reason": "affordable_positive_graph_local_expected_value"
+        },
+        {
+          "event": "selected_allocation_budget_exhausted",
+          "step": null,
+          "operation_family": "verify:default",
+          "failure_reason": null,
+          "outcome": null,
+          "reason": null
+        },
+        {
+          "event": "allocation_reconciled",
+          "step": null,
+          "operation_family": "verify:default",
+          "failure_reason": "BudgetExceeded",
+          "outcome": null,
+          "reason": null
+        },
+        {
+          "event": "termination",
+          "step": null,
+          "operation_family": null,
+          "failure_reason": null,
+          "outcome": "BUDGET_EXHAUSTED",
+          "reason": "selected_computation_exhausted_safety_cap"
+        }
+      ]
+    }
+  ],
+  "incorrect_answer_count": 0,
+  "incorrect_answers": [],
+  "certified_terminal_materialization_count": 0,
+  "certified_terminal_materializations": [],
+  "failed_certified_transition_count": 0,
+  "failed_certified_transitions": [],
+  "blocked_after_accepted_terminal_readout_count": 0,
+  "blocked_after_accepted_terminal_readout": [],
+  "per_example_outcomes": [
+    {
+      "qid": "2hop__62951_64006",
+      "question": "As a result of the Black Death, how much was the population reduced in the place that the US helped with the Marshall Plan?",
+      "status": "budget_exhausted",
+      "answer": null,
+      "f1": 0.0,
+      "candidate_presence": true,
+      "execution_plan_completion": false,
+      "graph_proof_completion": true
+    },
+    {
+      "qid": "3hop1__105767_443779_52195",
+      "question": "Who is the president of the newly declared independent country that is part of the commission of truth and friendship with the country that eats Kemplang?",
+      "status": "budget_exhausted",
+      "answer": null,
+      "f1": 0.0,
+      "candidate_presence": true,
+      "execution_plan_completion": false,
+      "graph_proof_completion": true
+    },
+    {
+      "qid": "4hop1__152146_5274_458768_33637",
+      "question": "How many ethnic minorities were looked at differently in the city where the headquarters of the only group larger than Långa nätter's record label is located?",
+      "status": "budget_exhausted",
+      "answer": null,
+      "f1": 0.0,
+      "candidate_presence": false,
+      "execution_plan_completion": false,
+      "graph_proof_completion": true
+    }
+  ],
+  "recovery_retrievals": {
+    "2hop__62951_64006": [
+      {
+        "attempt_id": "retrieval_attempt_op_v2_0014_retrieve_subgoal_root_branch_root_allocation_000027",
+        "operation_id": "op_v2_0014_retrieve_subgoal_root_branch_root_allocation_000027",
+        "step": 14,
+        "target_subgoal": "subgoal_root",
+        "branch_id": "branch_root",
+        "query": "some areas half As result black death much population reduced place us numerical",
+        "normalized_query": "some areas half as result black death much population reduced place us numerical",
+        "allocated_top_k": 10,
+        "hit_count": 10,
+        "new_evidence_count": 4,
+        "passage_ids": [
+          "8",
+          "0",
+          "7",
+          "13"
+        ],
+        "recovery_policy": "proof_gap_recovery_v1",
+        "recovery_target_obligation_ids": [
+          "obligation_ef27c7b4a8c97ad6"
+        ]
+      }
+    ],
+    "3hop1__105767_443779_52195": [],
+    "4hop1__152146_5274_458768_33637": [
+      {
+        "attempt_id": "retrieval_attempt_op_v2_0014_retrieve_subgoal_root_branch_root_allocation_000027",
+        "operation_id": "op_v2_0014_retrieve_subgoal_root_branch_root_allocation_000027",
+        "step": 14,
+        "target_subgoal": "subgoal_root",
+        "branch_id": "branch_root",
+        "query": "Sony Music Entertainment Inc. Universal Music Group The Right Stuff Records many ethnic minorities looked differently city headquarters located number",
+        "normalized_query": "sony music entertainment inc universal music group right stuff records many ethnic minorities looked differently city headquarters located number",
+        "allocated_top_k": 10,
+        "hit_count": 10,
+        "new_evidence_count": 4,
+        "passage_ids": [
+          "0",
+          "11",
+          "17",
+          "18"
+        ],
+        "recovery_policy": "proof_gap_recovery_v1",
+        "recovery_target_obligation_ids": [
+          "obligation_ef27c7b4a8c97ad6"
+        ]
+      }
+    ]
+  },
+  "proof_gap_allocations": {
+    "2hop__62951_64006": [
+      {
+        "allocation_id": "allocation_000027",
+        "operation_id": "op_v2_0014_retrieve_subgoal_root_branch_root_allocation_000027",
+        "operation_family": "",
+        "outcome": {
+          "outcome_id": "outcome_allocation_000027",
+          "allocation_id": "allocation_000027",
+          "operation_id": "op_v2_0014_retrieve_subgoal_root_branch_root_allocation_000027",
+          "step": 14,
+          "operation_family": "retrieve:default",
+          "region_key": "e520c7d50136bfe4",
+          "pre_state_summary": {
+            "node_count": 15.0,
+            "claim_count": 4.0,
+            "active_claim_count": 4.0,
+            "evidence_count": 10.0,
+            "join_count": 0.0,
+            "grounded_claim_count": 4.0,
+            "proof_leaf_count": 2.0,
+            "accepted_answer_count": 0.0,
+            "completed_subgoal_count": 2.0,
+            "uncertainty": 0.3300172029200646,
+            "absolute_support": 0.4949026455026455,
+            "evidence_gap": 0.07023809523809524,
+            "entropy": 0.3300172029200646,
+            "dependency_unlock": 0.0,
+            "contradiction_pressure": 0.0,
+            "answer_chain_progress": 0.6666666666666666,
+            "terminal_gap": 1.0,
+            "terminal_absolute_support": 0.0,
+            "terminal_relative_weight": 0.0,
+            "terminal_entropy": 1.0,
+            "terminal_evidence_gap": 1.0,
+            "terminal_chain_coverage": 0.0
+          },
+          "post_state_summary": {
+            "node_count": 19.0,
+            "claim_count": 4.0,
+            "active_claim_count": 4.0,
+            "evidence_count": 14.0,
+            "join_count": 0.0,
+            "grounded_claim_count": 4.0,
+            "proof_leaf_count": 2.0,
+            "accepted_answer_count": 0.0,
+            "completed_subgoal_count": 2.0,
+            "uncertainty": 0.26053989704215624,
+            "absolute_support": 0.42813951545530493,
+            "evidence_gap": 0.055451127819548876,
+            "entropy": 0.26053989704215624,
+            "dependency_unlock": 0.0,
+            "contradiction_pressure": 0.0,
+            "answer_chain_progress": 0.6666666666666666,
+            "terminal_gap": 1.0,
+            "terminal_absolute_support": 0.0,
+            "terminal_relative_weight": 0.0,
+            "terminal_entropy": 1.0,
+            "terminal_evidence_gap": 1.0,
+            "terminal_chain_coverage": 0.0
+          },
+          "state_delta": {
+            "absolute_support": -0.06676313004734058,
+            "accepted_answer_count": 0.0,
+            "active_claim_count": 0.0,
+            "answer_chain_progress": 0.0,
+            "claim_count": 0.0,
+            "completed_subgoal_count": 0.0,
+            "contradiction_pressure": 0.0,
+            "dependency_unlock": 0.0,
+            "entropy": -0.06947730587790835,
+            "evidence_count": 4.0,
+            "evidence_gap": -0.014786967418546362,
+            "grounded_claim_count": 0.0,
+            "join_count": 0.0,
+            "node_count": 4.0,
+            "proof_leaf_count": 0.0,
+            "terminal_absolute_support": 0.0,
+            "terminal_chain_coverage": 0.0,
+            "terminal_entropy": 0.0,
+            "terminal_evidence_gap": 0.0,
+            "terminal_gap": 0.0,
+            "terminal_relative_weight": 0.0,
+            "uncertainty": -0.06947730587790835
+          },
+          "actual_utility_components_raw": {
+            "uncertainty_reduction": 0.06947730587790835,
+            "support_gain": -0.06676313004734058,
+            "evidence_gap_reduction": 0.014786967418546362,
+            "entropy_reduction": 0.06947730587790835,
+            "dependency_unlock_gain": 0.0,
+            "evidence_novelty": 4.0,
+            "answer_chain_progress": 0.0,
+            "contradiction_resolution": 0.0,
+            "terminal_gap_reduction": 0.0,
+            "cost": 0.037500000000000006
+          },
+          "actual_utility_components_normalized": {
+            "uncertainty_reduction": 0.06947730587790835,
+            "support_gain": 0.0,
+            "evidence_gap_reduction": 0.014786967418546362,
+            "entropy_reduction": 0.06947730587790835,
+            "dependency_unlock_gain": 0.0,
+            "evidence_novelty": 1.0,
+            "answer_chain_progress": 0.0,
+            "contradiction_resolution": 0.0,
+            "terminal_gap_reduction": 0.0,
+            "cost": 0.037500000000000006
+          },
+          "actual_utility": 0.06645747728404673,
+          "actual_cost": {
+            "llm_calls": 0.0,
+            "tokens": 0.0,
+            "retrieval_calls": 1.0
+          },
+          "progressed": true,
+          "failure_reason": "",
+          "statistics_before": {
+            "observations": 0.0,
+            "successes": 0.0,
+            "no_ops": 0.0,
+            "posterior_value": 0.5,
+            "posterior_success": 0.5,
+            "consecutive_failures": 0.0,
+            "cooldown_until_step": 0.0
+          },
+          "statistics_after": {
+            "observations": 1.0,
+            "successes": 1.0,
+            "no_ops": 0.0,
+            "posterior_value": 0.5110762462140078,
+            "posterior_success": 0.6666666666666666,
+            "consecutive_failures": 0.0,
+            "cooldown_until_step": 0.0
+          },
+          "actual_immediate_utility": 0.07987134532069792,
+          "actual_normalized_cost": 0.037500000000000006,
+          "delayed_realized_proof_return": 0.0,
+          "combined_realized_utility": -0.005551461871720835
+        },
+        "target_obligation_ids": [
+          "obligation_ef27c7b4a8c97ad6"
+        ],
+        "predicted_evc": 0.24817202658119658,
+        "predicted_delayed_proof_return": 0.12997462606837606,
+        "delayed_realized_proof_return": 0.0,
+        "actual_closed_target_ids": [],
+        "retrieval": {
+          "attempt_id": "retrieval_attempt_op_v2_0014_retrieve_subgoal_root_branch_root_allocation_000027",
+          "operation_id": "op_v2_0014_retrieve_subgoal_root_branch_root_allocation_000027",
+          "step": 14,
+          "target_subgoal": "subgoal_root",
+          "branch_id": "branch_root",
+          "query": "some areas half As result black death much population reduced place us numerical",
+          "normalized_query": "some areas half as result black death much population reduced place us numerical",
+          "allocated_top_k": 10,
+          "hit_count": 10,
+          "new_evidence_count": 4,
+          "passage_ids": [
+            "8",
+            "0",
+            "7",
+            "13"
+          ],
+          "recovery_policy": "proof_gap_recovery_v1",
+          "recovery_target_obligation_ids": [
+            "obligation_ef27c7b4a8c97ad6"
+          ]
+        },
+        "next_allocations": [
+          {
+            "allocation_id": "allocation_000028",
+            "operation_id": "op_v2_0015_branch_subgoal_root_branch_root_allocation_000028",
+            "predicted_evc": 0.224148933809232,
+            "actual_utility": -0.012249358125
+          },
+          {
+            "allocation_id": "allocation_000030",
+            "operation_id": "op_v2_0015_verify_subgoal_root_branch_root_allocation_000030",
+            "predicted_evc": 0.41781828208155614,
+            "actual_utility": 0.0
+          }
+        ]
+      }
+    ],
+    "3hop1__105767_443779_52195": [],
+    "4hop1__152146_5274_458768_33637": [
+      {
+        "allocation_id": "allocation_000027",
+        "operation_id": "op_v2_0014_retrieve_subgoal_root_branch_root_allocation_000027",
+        "operation_family": "",
+        "outcome": {
+          "outcome_id": "outcome_allocation_000027",
+          "allocation_id": "allocation_000027",
+          "operation_id": "op_v2_0014_retrieve_subgoal_root_branch_root_allocation_000027",
+          "step": 14,
+          "operation_family": "retrieve:default",
+          "region_key": "d5c521ce651949a1",
+          "pre_state_summary": {
+            "node_count": 19.0,
+            "claim_count": 8.0,
+            "active_claim_count": 8.0,
+            "evidence_count": 10.0,
+            "join_count": 0.0,
+            "grounded_claim_count": 8.0,
+            "proof_leaf_count": 2.0,
+            "accepted_answer_count": 0.0,
+            "completed_subgoal_count": 2.0,
+            "uncertainty": 0.47101880200726787,
+            "absolute_support": 0.5596562238930659,
+            "evidence_gap": 0.11973684210526316,
+            "entropy": 0.47101880200726787,
+            "dependency_unlock": 0.0,
+            "contradiction_pressure": 0.0,
+            "answer_chain_progress": 0.6666666666666666,
+            "terminal_gap": 1.0,
+            "terminal_absolute_support": 0.0,
+            "terminal_relative_weight": 0.0,
+            "terminal_entropy": 1.0,
+            "terminal_evidence_gap": 1.0,
+            "terminal_chain_coverage": 0.0
+          },
+          "post_state_summary": {
+            "node_count": 23.0,
+            "claim_count": 8.0,
+            "active_claim_count": 8.0,
+            "evidence_count": 14.0,
+            "join_count": 0.0,
+            "grounded_claim_count": 8.0,
+            "proof_leaf_count": 2.0,
+            "accepted_answer_count": 0.0,
+            "completed_subgoal_count": 2.0,
+            "uncertainty": 0.38910248861469954,
+            "absolute_support": 0.48701414768806056,
+            "evidence_gap": 0.09891304347826087,
+            "entropy": 0.38910248861469954,
+            "dependency_unlock": 0.0,
+            "contradiction_pressure": 0.0,
+            "answer_chain_progress": 0.6666666666666666,
+            "terminal_gap": 1.0,
+            "terminal_absolute_support": 0.0,
+            "terminal_relative_weight": 0.0,
+            "terminal_entropy": 1.0,
+            "terminal_evidence_gap": 1.0,
+            "terminal_chain_coverage": 0.0
+          },
+          "state_delta": {
+            "absolute_support": -0.07264207620500535,
+            "accepted_answer_count": 0.0,
+            "active_claim_count": 0.0,
+            "answer_chain_progress": 0.0,
+            "claim_count": 0.0,
+            "completed_subgoal_count": 0.0,
+            "contradiction_pressure": 0.0,
+            "dependency_unlock": 0.0,
+            "entropy": -0.08191631339256833,
+            "evidence_count": 4.0,
+            "evidence_gap": -0.020823798627002288,
+            "grounded_claim_count": 0.0,
+            "join_count": 0.0,
+            "node_count": 4.0,
+            "proof_leaf_count": 0.0,
+            "terminal_absolute_support": 0.0,
+            "terminal_chain_coverage": 0.0,
+            "terminal_entropy": 0.0,
+            "terminal_evidence_gap": 0.0,
+            "terminal_gap": 0.0,
+            "terminal_relative_weight": 0.0,
+            "uncertainty": -0.08191631339256833
+          },
+          "actual_utility_components_raw": {
+            "uncertainty_reduction": 0.08191631339256833,
+            "support_gain": -0.07264207620500535,
+            "evidence_gap_reduction": 0.020823798627002288,
+            "entropy_reduction": 0.08191631339256833,
+            "dependency_unlock_gain": 0.0,
+            "evidence_novelty": 4.0,
+            "answer_chain_progress": 0.0,
+            "contradiction_resolution": 0.0,
+            "terminal_gap_reduction": 0.0,
+            "cost": 0.037500000000000006
+          },
+          "actual_utility_components_normalized": {
+            "uncertainty_reduction": 0.08191631339256833,
+            "support_gain": 0.0,
+            "evidence_gap_reduction": 0.020823798627002288,
+            "entropy_reduction": 0.08191631339256833,
+            "dependency_unlock_gain": 0.0,
+            "evidence_novelty": 1.0,
+            "answer_chain_progress": 0.0,
+            "contradiction_resolution": 0.0,
+            "terminal_gap_reduction": 0.0,
+            "cost": 0.037500000000000006
+          },
+          "actual_utility": 0.06927980213895484,
+          "actual_cost": {
+            "llm_calls": 0.0,
+            "tokens": 0.0,
+            "retrieval_calls": 1.0
+          },
+          "progressed": true,
+          "failure_reason": "",
+          "statistics_before": {
+            "observations": 0.0,
+            "successes": 0.0,
+            "no_ops": 0.0,
+            "posterior_value": 0.5,
+            "posterior_success": 0.5,
+            "consecutive_failures": 0.0,
+            "cooldown_until_step": 0.0
+          },
+          "statistics_after": {
+            "observations": 1.0,
+            "successes": 1.0,
+            "no_ops": 0.0,
+            "posterior_value": 0.5115466336898259,
+            "posterior_success": 0.6666666666666666,
+            "consecutive_failures": 0.0,
+            "cooldown_until_step": 0.0
+          },
+          "actual_immediate_utility": 0.08305784112462643,
+          "actual_normalized_cost": 0.037500000000000006,
+          "delayed_realized_proof_return": 0.0,
+          "combined_realized_utility": -0.004276863550149432
+        },
+        "target_obligation_ids": [
+          "obligation_ef27c7b4a8c97ad6"
+        ],
+        "predicted_evc": 0.2694071880246913,
+        "predicted_delayed_proof_return": 0.16250964506172838,
+        "delayed_realized_proof_return": 0.0,
+        "actual_closed_target_ids": [],
+        "retrieval": {
+          "attempt_id": "retrieval_attempt_op_v2_0014_retrieve_subgoal_root_branch_root_allocation_000027",
+          "operation_id": "op_v2_0014_retrieve_subgoal_root_branch_root_allocation_000027",
+          "step": 14,
+          "target_subgoal": "subgoal_root",
+          "branch_id": "branch_root",
+          "query": "Sony Music Entertainment Inc. Universal Music Group The Right Stuff Records many ethnic minorities looked differently city headquarters located number",
+          "normalized_query": "sony music entertainment inc universal music group right stuff records many ethnic minorities looked differently city headquarters located number",
+          "allocated_top_k": 10,
+          "hit_count": 10,
+          "new_evidence_count": 4,
+          "passage_ids": [
+            "0",
+            "11",
+            "17",
+            "18"
+          ],
+          "recovery_policy": "proof_gap_recovery_v1",
+          "recovery_target_obligation_ids": [
+            "obligation_ef27c7b4a8c97ad6"
+          ]
+        },
+        "next_allocations": [
+          {
+            "allocation_id": "allocation_000028",
+            "operation_id": "op_v2_0015_branch_subgoal_root_branch_root_allocation_000028",
+            "predicted_evc": 0.22731985177798203,
+            "actual_utility": 0.04586849728777712
+          },
+          {
+            "allocation_id": "allocation_000031",
+            "operation_id": "op_v2_0016_verify_subgoal_root_branch_root_allocation_000031",
+            "predicted_evc": 0.28934406554421765,
+            "actual_utility": -0.013106972500000001
+          }
+        ]
+      }
+    ]
+  }
+}

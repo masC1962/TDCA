@@ -16,6 +16,7 @@ from ..dynamic.graph import (
 )
 from ..utils import normalize_text, stable_hash
 from .graph import DynamicReasoningHypergraphV2
+from .join import deterministic_join_derivation, join_candidate_from_operation
 from .obligations import terminal_dependency_distance
 from .proof import audit_graph_proof, claim_closure
 
@@ -169,6 +170,45 @@ def certified_transition_value(
                 "virtual_terminal_readout_exposed": int(virtual_terminal),
             },
         })
+    elif (
+        operation.operation_type == OperationType.MERGE
+        and str(operation.payload.get("mode", "")) == "validate_join"
+        and bool(getattr(config, "certified_deterministic_join_allocation", False))
+    ):
+        candidate = join_candidate_from_operation(operation)
+        derivation = deterministic_join_derivation(graph, candidate, config)
+        existing = sum(
+            row.accepted and row.signature == candidate.signature
+            for row in graph.join_attempt_history
+        )
+        valid = bool(
+            derivation is not None
+            and operation.source_ids == list(candidate.premise_ids)
+            and int(operation.payload.get("predicted_provider_calls", 1)) == 0
+        )
+        if not valid:
+            return _seal(certificate)
+        certificate.update({
+            "kind": "deterministic_join_materialization",
+            "mandatory": True,
+            "deterministic": True,
+            "provider_calls": 0,
+            "source_claim_ids": list(candidate.premise_ids),
+            "successor_subgoal_ids": successor_ids,
+            "join_signature": candidate.signature,
+            "preconditions": {
+                "provider_free_derivation_proved": True,
+                "premise_ids_match_operation_sources": True,
+                "accepted_same_signature_before": existing,
+                "validation_rule": derivation.validation_rule,
+            },
+            "promised_effect": {
+                "accepted_join_attempts_added": 1,
+                "join_claims_added": 1,
+                "hyperedges_added": 1,
+                "virtual_terminal_readout_exposed": int(virtual_terminal),
+            },
+        })
     else:
         return _seal(certificate)
 
@@ -240,6 +280,36 @@ def realized_transition_value(
             ),
             "child_branches_created": len(children),
             "expected_child_branches": len(source_ids),
+        }
+    elif kind == "deterministic_join_materialization":
+        signature = str(certificate.get("join_signature", ""))
+        before = int((certificate.get("preconditions") or {}).get(
+            "accepted_same_signature_before", 0,
+        ))
+        accepted = [
+            row for row in graph.join_attempt_history
+            if row.accepted and row.signature == signature
+        ]
+        conclusions = [
+            graph.nodes.get(row.conclusion_node_id) for row in accepted
+            if row.conclusion_node_id
+        ]
+        realized = bool(
+            len(accepted) > before
+            and any(
+                isinstance(row, ClaimNode)
+                and row.target_subgoal == target_id
+                for row in conclusions
+            )
+        )
+        observations = {
+            "accepted_same_signature_before": before,
+            "accepted_same_signature_after": len(accepted),
+            "target_join_claim_materialized": any(
+                isinstance(row, ClaimNode)
+                and row.target_subgoal == target_id
+                for row in conclusions
+            ),
         }
     elif kind == "accepted_terminal_materialization":
         answer_id = str(certificate.get("answer_node_id", ""))

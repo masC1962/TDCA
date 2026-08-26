@@ -1,0 +1,1489 @@
+{
+  "schema_version": "dynamic-v2.4.3.4-smoke-diagnostic-v1",
+  "inference_calls_made": 0,
+  "immediate_calibration_by_family": {
+    "branch:extract_typed": {
+      "count": 10,
+      "pearson": 0.3119419232406225,
+      "mean_predicted": 0.716064733461438,
+      "mean_actual": 0.07212197735877272
+    },
+    "commit:default": {
+      "count": 6,
+      "pearson": 0.447213595499958,
+      "mean_predicted": 0.15069489807902342,
+      "mean_actual": 0.043034495629547975
+    },
+    "merge:validate_join": {
+      "count": 5,
+      "pearson": 0.9368551152901424,
+      "mean_predicted": 0.6240199721619972,
+      "mean_actual": 0.05163685567085947
+    },
+    "retrieve:default": {
+      "count": 11,
+      "pearson": 0.8836672836023097,
+      "mean_predicted": 0.7305439770867651,
+      "mean_actual": 0.2856635179371906
+    },
+    "verify:default": {
+      "count": 10,
+      "pearson": 0.08453303739286785,
+      "mean_predicted": 0.459250921244824,
+      "mean_actual": 0.07318635604704507
+    }
+  },
+  "actual_immediate_component_correlations": {
+    "absolute_graph_risk": 0.11984420033437725,
+    "answer_impact": 0.14672232540783448,
+    "candidate_reachability": -0.38078113495357696,
+    "closure_mass": 0.35907927017598884,
+    "dead_end_risk": 0.0,
+    "dependency_unlock": -0.3277939434268754,
+    "evidence_novelty": 0.8522398137723759,
+    "evidence_path": -0.6779365011908952,
+    "expected_call_cost": -0.48987154784087045,
+    "expected_cost": -0.2061855017112354,
+    "expected_obligation_delta": 0.39637706436535464,
+    "expected_retrieval_cost": 0.8252413945668771,
+    "expected_token_cost": -0.4454968197016573,
+    "failure_cooldown": 0.0,
+    "feasibility_unlock": -0.10200510741528829,
+    "graph_growth_risk": 0.11984420033437725,
+    "graph_heat": 0.09041093129880408,
+    "missing_premise_reduction": -0.199152583943091,
+    "normalized_one_step_progress_equal": 0.5165935209773627,
+    "obligation_closure": 0.4106385390213439,
+    "obligation_importance": 0.39531744572263194,
+    "obligation_terminal_return": 0.11389791544595992,
+    "observed_value": -0.3240103985714211,
+    "one_step_progress_equal": 0.49791285979860334,
+    "one_step_progress_max": 0.37207671889923116,
+    "operation_closure_probability": 0.28072008778768015,
+    "operation_redundancy": -0.10175771695646005,
+    "proof_gap_reducibility": -0.1010111154260454,
+    "recovery_value": 0.0,
+    "retrieval_saturation": -0.10200510741528829,
+    "successor_option_value": -0.2691767828867207,
+    "successor_reachability_gain": -0.28612073121831205,
+    "terminal_gap": 0.3515329899149003,
+    "terminal_proximity": 0.0,
+    "terminal_reachability": -0.0046258852042369855,
+    "transition_certainty": -0.28612073121831205,
+    "transition_redundancy": 0.28612073121831205,
+    "uncertainty_reduction": 0.15150910759065572
+  },
+  "abstain_count": 3,
+  "abstains": [
+    {
+      "qid": "2hop__62951_64006",
+      "hop_count": 2,
+      "candidate_presence": false,
+      "graph_proof_completion": true,
+      "execution_plan_completion": 0.0,
+      "termination": {
+        "step": 15,
+        "outcome": "ABSTAIN",
+        "best_predicted_evc": 0.0,
+        "answer_node_id": null,
+        "reason": "no_executable_computation_with_certificate",
+        "remaining_budget": {
+          "llm_calls": 5,
+          "tokens": 1113,
+          "retrieval_calls": 4,
+          "graph_operations": 49
+        },
+        "dead_end_certificate": {
+          "certificate_version": "proof-obligation-dead-end-v2.4.3.9",
+          "step": 15,
+          "open_obligations": [
+            {
+              "obligation_id": "obligation_021362059f16a5b0",
+              "target_subgoal": "subgoal_root",
+              "branch_id": "branch_root",
+              "obligation_type": "missing_verification",
+              "status": "OPEN",
+              "severity": 0.75,
+              "terminal_reachable": true,
+              "required_node_ids": [
+                "claim_v2_12_subgoal_root_1",
+                "claim_v2_12_subgoal_root_2",
+                "join_claim_14_3ed4df0d5e3e"
+              ],
+              "satisfied_by_node_ids": [],
+              "reason_codes": [
+                "unscored_claim"
+              ],
+              "provenance_event_ids": [
+                "retrieval_attempt_op_v2_0011_retrieve_subgoal_root_branch_root_allocation_000020",
+                "retrieval_attempt_op_v2_0015_retrieve_subgoal_root_branch_root_allocation_000036"
+              ],
+              "created_at_step": 12,
+              "updated_at_step": 15
+            },
+            {
+              "obligation_id": "obligation_0e454c6c301ef029",
+              "target_subgoal": "subgoal_2",
+              "branch_id": "branch_root",
+              "obligation_type": "contradiction",
+              "status": "OPEN",
+              "severity": 0.038317575,
+              "terminal_reachable": true,
+              "required_node_ids": [
+                "claim_v2_7_subgoal_2_1",
+                "claim_v2_7_subgoal_2_2",
+                "claim_v2_7_subgoal_2_3",
+                "claim_v2_7_subgoal_2_4",
+                "claim_v2_7_subgoal_2_5",
+                "join_claim_9_69e6369ecd14"
+              ],
+              "satisfied_by_node_ids": [],
+              "reason_codes": [
+                "active_contradiction"
+              ],
+              "provenance_event_ids": [
+                "retrieval_attempt_op_v2_0006_retrieve_subgoal_2_branch_root_allocation_000011"
+              ],
+              "created_at_step": 8,
+              "updated_at_step": 15
+            },
+            {
+              "obligation_id": "obligation_ef27c7b4a8c97ad6",
+              "target_subgoal": "subgoal_root",
+              "branch_id": "branch_root",
+              "obligation_type": "insufficient_target_proof",
+              "status": "OPEN",
+              "severity": 0.8,
+              "terminal_reachable": true,
+              "required_node_ids": [
+                "claim_v2_12_subgoal_root_1"
+              ],
+              "satisfied_by_node_ids": [],
+              "reason_codes": [
+                "absolute_support_below_proof_floor",
+                "claim_not_independently_verified"
+              ],
+              "provenance_event_ids": [
+                "retrieval_attempt_op_v2_0011_retrieve_subgoal_root_branch_root_allocation_000020",
+                "retrieval_attempt_op_v2_0015_retrieve_subgoal_root_branch_root_allocation_000036"
+              ],
+              "created_at_step": 11,
+              "updated_at_step": 15
+            }
+          ],
+          "blocked_obligations": [],
+          "remaining_budget": {
+            "llm_calls": 5,
+            "tokens": 1113,
+            "retrieval_calls": 4,
+            "graph_operations": 49
+          },
+          "candidate_operations": [],
+          "feasible_unselected_join_count": 0,
+          "exhaustion_evidence": [
+            "absolute_support_below_proof_floor",
+            "active_contradiction",
+            "claim_not_independently_verified",
+            "unscored_claim"
+          ]
+        }
+      },
+      "open_obligation_type_counts": {
+        "missing_verification": 1,
+        "contradiction": 1,
+        "insufficient_target_proof": 1
+      },
+      "open_obligations": [
+        {
+          "target_subgoal": "subgoal_root",
+          "branch_id": "branch_root",
+          "obligation_type": "missing_verification",
+          "status": "OPEN",
+          "severity": 0.75,
+          "reason_codes": [
+            "unscored_claim"
+          ],
+          "required_node_ids": [
+            "claim_v2_12_subgoal_root_1",
+            "claim_v2_12_subgoal_root_2",
+            "join_claim_14_3ed4df0d5e3e"
+          ]
+        },
+        {
+          "target_subgoal": "subgoal_2",
+          "branch_id": "branch_root",
+          "obligation_type": "contradiction",
+          "status": "OPEN",
+          "severity": 0.038317575,
+          "reason_codes": [
+            "active_contradiction"
+          ],
+          "required_node_ids": [
+            "claim_v2_7_subgoal_2_1",
+            "claim_v2_7_subgoal_2_2",
+            "claim_v2_7_subgoal_2_3",
+            "claim_v2_7_subgoal_2_4",
+            "claim_v2_7_subgoal_2_5",
+            "join_claim_9_69e6369ecd14"
+          ]
+        },
+        {
+          "target_subgoal": "subgoal_root",
+          "branch_id": "branch_root",
+          "obligation_type": "insufficient_target_proof",
+          "status": "OPEN",
+          "severity": 0.8,
+          "reason_codes": [
+            "absolute_support_below_proof_floor",
+            "claim_not_independently_verified"
+          ],
+          "required_node_ids": [
+            "claim_v2_12_subgoal_root_1"
+          ]
+        }
+      ],
+      "subgoals": [
+        {
+          "node_id": "subgoal_1",
+          "status": "resolved",
+          "dependencies": [],
+          "terminal": false,
+          "claim_status_counts": {
+            "committed": 1,
+            "scored": 2
+          },
+          "retrieval_attempts": 1
+        },
+        {
+          "node_id": "subgoal_2",
+          "status": "resolved",
+          "dependencies": [
+            "subgoal_1"
+          ],
+          "terminal": false,
+          "claim_status_counts": {
+            "scored": 5,
+            "committed": 1
+          },
+          "retrieval_attempts": 1
+        },
+        {
+          "node_id": "subgoal_root",
+          "status": "active",
+          "dependencies": [
+            "subgoal_2"
+          ],
+          "terminal": true,
+          "claim_status_counts": {
+            "proposed": 3
+          },
+          "retrieval_attempts": 2
+        }
+      ],
+      "active_branches": [
+        {
+          "branch_id": "branch_root",
+          "parent_branch_id": null,
+          "assignments": {
+            "subgoal_1": "claim_v2_3_subgoal_1_1",
+            "subgoal_2": "join_claim_9_69e6369ecd14"
+          },
+          "completed_subgoals": [
+            "subgoal_1",
+            "subgoal_2"
+          ],
+          "score": 1.0,
+          "status": "active",
+          "created_at_step": 0,
+          "revision_count": 0,
+          "last_revision_step": -1,
+          "history": []
+        }
+      ],
+      "recent_trace": [
+        {
+          "event": "graph_operation",
+          "step": 14,
+          "operation_family": "merge:validate_join",
+          "failure_reason": null,
+          "outcome": null,
+          "reason": null
+        },
+        {
+          "event": "allocation_reconciled",
+          "step": null,
+          "operation_family": "merge:validate_join",
+          "failure_reason": "",
+          "outcome": null,
+          "reason": null
+        },
+        {
+          "event": "terminal_belief_readout",
+          "step": 14,
+          "operation_family": null,
+          "failure_reason": null,
+          "outcome": null,
+          "reason": null
+        },
+        {
+          "event": "proof_gap_diagnosed",
+          "step": 14,
+          "operation_family": null,
+          "failure_reason": null,
+          "outcome": null,
+          "reason": null
+        },
+        {
+          "event": "region_retrieval_gate",
+          "step": 14,
+          "operation_family": null,
+          "failure_reason": null,
+          "outcome": null,
+          "reason": null
+        },
+        {
+          "event": "meta_decision",
+          "step": 14,
+          "operation_family": null,
+          "failure_reason": null,
+          "outcome": "CONTINUE",
+          "reason": "affordable_positive_graph_local_expected_value"
+        },
+        {
+          "event": "join_rejected",
+          "step": null,
+          "operation_family": null,
+          "failure_reason": null,
+          "outcome": null,
+          "reason": null
+        },
+        {
+          "event": "allocation_reconciled",
+          "step": null,
+          "operation_family": "merge:validate_join",
+          "failure_reason": "operation_produced_no_commit",
+          "outcome": null,
+          "reason": null
+        },
+        {
+          "event": "terminal_belief_readout",
+          "step": 14,
+          "operation_family": null,
+          "failure_reason": null,
+          "outcome": null,
+          "reason": null
+        },
+        {
+          "event": "proof_gap_diagnosed",
+          "step": 14,
+          "operation_family": null,
+          "failure_reason": null,
+          "outcome": null,
+          "reason": null
+        },
+        {
+          "event": "region_retrieval_gate",
+          "step": 14,
+          "operation_family": null,
+          "failure_reason": null,
+          "outcome": null,
+          "reason": null
+        },
+        {
+          "event": "meta_decision",
+          "step": 14,
+          "operation_family": null,
+          "failure_reason": null,
+          "outcome": "CONTINUE",
+          "reason": "affordable_positive_graph_local_expected_value"
+        },
+        {
+          "event": "graph_operation",
+          "step": 15,
+          "operation_family": "retrieve:default",
+          "failure_reason": null,
+          "outcome": null,
+          "reason": null
+        },
+        {
+          "event": "allocation_reconciled",
+          "step": null,
+          "operation_family": "retrieve:default",
+          "failure_reason": "",
+          "outcome": null,
+          "reason": null
+        },
+        {
+          "event": "terminal_belief_readout",
+          "step": 15,
+          "operation_family": null,
+          "failure_reason": null,
+          "outcome": null,
+          "reason": null
+        },
+        {
+          "event": "proof_recovery_extraction_priority",
+          "step": 15,
+          "operation_family": null,
+          "failure_reason": null,
+          "outcome": null,
+          "reason": null
+        },
+        {
+          "event": "meta_decision",
+          "step": 15,
+          "operation_family": null,
+          "failure_reason": null,
+          "outcome": "ABSTAIN",
+          "reason": "no_executable_computation_with_certificate"
+        },
+        {
+          "event": "termination",
+          "step": null,
+          "operation_family": null,
+          "failure_reason": null,
+          "outcome": "ABSTAIN",
+          "reason": "no_executable_computation_with_certificate"
+        }
+      ]
+    },
+    {
+      "qid": "3hop1__105767_443779_52195",
+      "hop_count": 3,
+      "candidate_presence": true,
+      "graph_proof_completion": true,
+      "execution_plan_completion": 0.0,
+      "termination": {
+        "step": 13,
+        "outcome": "ABSTAIN",
+        "best_predicted_evc": 0.0,
+        "answer_node_id": null,
+        "reason": "no_executable_computation_with_certificate",
+        "remaining_budget": {
+          "llm_calls": 7,
+          "tokens": 660,
+          "retrieval_calls": 5,
+          "graph_operations": 51
+        },
+        "dead_end_certificate": {
+          "certificate_version": "proof-obligation-dead-end-v2.4.3.9",
+          "step": 13,
+          "open_obligations": [
+            {
+              "obligation_id": "obligation_199c70ae416d7d54",
+              "target_subgoal": "subgoal_root",
+              "branch_id": "branch_root",
+              "obligation_type": "missing_join_premise",
+              "status": "OPEN",
+              "severity": 0.85,
+              "terminal_reachable": true,
+              "required_node_ids": [
+                "claim_v2_12_subgoal_root_1",
+                "claim_v2_12_subgoal_root_2",
+                "claim_v2_12_subgoal_root_3",
+                "claim_v2_12_subgoal_root_4",
+                "claim_v2_12_subgoal_root_5",
+                "claim_v2_12_subgoal_root_6",
+                "subgoal_2"
+              ],
+              "satisfied_by_node_ids": [],
+              "reason_codes": [
+                "dependency_not_composed"
+              ],
+              "provenance_event_ids": [
+                "retrieval_attempt_op_v2_0011_retrieve_subgoal_root_branch_root_allocation_000020"
+              ],
+              "created_at_step": 12,
+              "updated_at_step": 13
+            }
+          ],
+          "blocked_obligations": [],
+          "remaining_budget": {
+            "llm_calls": 7,
+            "tokens": 660,
+            "retrieval_calls": 5,
+            "graph_operations": 51
+          },
+          "candidate_operations": [],
+          "feasible_unselected_join_count": 0,
+          "exhaustion_evidence": [
+            "dependency_not_composed"
+          ]
+        }
+      },
+      "open_obligation_type_counts": {
+        "missing_join_premise": 1
+      },
+      "open_obligations": [
+        {
+          "target_subgoal": "subgoal_root",
+          "branch_id": "branch_root",
+          "obligation_type": "missing_join_premise",
+          "status": "OPEN",
+          "severity": 0.85,
+          "reason_codes": [
+            "dependency_not_composed"
+          ],
+          "required_node_ids": [
+            "claim_v2_12_subgoal_root_1",
+            "claim_v2_12_subgoal_root_2",
+            "claim_v2_12_subgoal_root_3",
+            "claim_v2_12_subgoal_root_4",
+            "claim_v2_12_subgoal_root_5",
+            "claim_v2_12_subgoal_root_6",
+            "subgoal_2"
+          ]
+        }
+      ],
+      "subgoals": [
+        {
+          "node_id": "subgoal_1",
+          "status": "resolved",
+          "dependencies": [],
+          "terminal": false,
+          "claim_status_counts": {
+            "committed": 1
+          },
+          "retrieval_attempts": 1
+        },
+        {
+          "node_id": "subgoal_2",
+          "status": "resolved",
+          "dependencies": [
+            "subgoal_1"
+          ],
+          "terminal": false,
+          "claim_status_counts": {
+            "scored": 5,
+            "committed": 1
+          },
+          "retrieval_attempts": 1
+        },
+        {
+          "node_id": "subgoal_root",
+          "status": "partial",
+          "dependencies": [
+            "subgoal_2"
+          ],
+          "terminal": true,
+          "claim_status_counts": {
+            "scored": 6
+          },
+          "retrieval_attempts": 1
+        }
+      ],
+      "active_branches": [
+        {
+          "branch_id": "branch_root",
+          "parent_branch_id": null,
+          "assignments": {
+            "subgoal_1": "claim_v2_3_subgoal_1_1",
+            "subgoal_2": "join_claim_9_d71c172891f9"
+          },
+          "completed_subgoals": [
+            "subgoal_1",
+            "subgoal_2"
+          ],
+          "score": 1.0,
+          "status": "active",
+          "created_at_step": 0,
+          "revision_count": 0,
+          "last_revision_step": -1,
+          "history": []
+        }
+      ],
+      "recent_trace": [
+        {
+          "event": "meta_decision",
+          "step": 10,
+          "operation_family": null,
+          "failure_reason": null,
+          "outcome": "CONTINUE",
+          "reason": "affordable_positive_graph_local_expected_value"
+        },
+        {
+          "event": "graph_operation",
+          "step": 11,
+          "operation_family": "retrieve:default",
+          "failure_reason": null,
+          "outcome": null,
+          "reason": null
+        },
+        {
+          "event": "allocation_reconciled",
+          "step": null,
+          "operation_family": "retrieve:default",
+          "failure_reason": "",
+          "outcome": null,
+          "reason": null
+        },
+        {
+          "event": "terminal_belief_readout",
+          "step": 11,
+          "operation_family": null,
+          "failure_reason": null,
+          "outcome": null,
+          "reason": null
+        },
+        {
+          "event": "meta_decision",
+          "step": 11,
+          "operation_family": null,
+          "failure_reason": null,
+          "outcome": "CONTINUE",
+          "reason": "affordable_positive_graph_local_expected_value"
+        },
+        {
+          "event": "typed_extraction_diagnostic",
+          "step": null,
+          "operation_family": null,
+          "failure_reason": null,
+          "outcome": null,
+          "reason": null
+        },
+        {
+          "event": "graph_operation",
+          "step": 12,
+          "operation_family": "branch:extract_typed",
+          "failure_reason": null,
+          "outcome": null,
+          "reason": null
+        },
+        {
+          "event": "allocation_reconciled",
+          "step": null,
+          "operation_family": "branch:extract_typed",
+          "failure_reason": "",
+          "outcome": null,
+          "reason": null
+        },
+        {
+          "event": "terminal_belief_readout",
+          "step": 12,
+          "operation_family": null,
+          "failure_reason": null,
+          "outcome": null,
+          "reason": null
+        },
+        {
+          "event": "meta_decision",
+          "step": 12,
+          "operation_family": null,
+          "failure_reason": null,
+          "outcome": "CONTINUE",
+          "reason": "affordable_positive_graph_local_expected_value"
+        },
+        {
+          "event": "graph_operation",
+          "step": 13,
+          "operation_family": "verify:default",
+          "failure_reason": null,
+          "outcome": null,
+          "reason": null
+        },
+        {
+          "event": "allocation_reconciled",
+          "step": null,
+          "operation_family": "verify:default",
+          "failure_reason": "",
+          "outcome": null,
+          "reason": null
+        },
+        {
+          "event": "terminal_belief_readout",
+          "step": 13,
+          "operation_family": null,
+          "failure_reason": null,
+          "outcome": null,
+          "reason": null
+        },
+        {
+          "event": "join_preallocation_filtered",
+          "step": 13,
+          "operation_family": null,
+          "failure_reason": null,
+          "outcome": null,
+          "reason": null
+        },
+        {
+          "event": "region_retrieval_gate",
+          "step": 13,
+          "operation_family": null,
+          "failure_reason": null,
+          "outcome": null,
+          "reason": null
+        },
+        {
+          "event": "high_uncertainty_no_join",
+          "step": 13,
+          "operation_family": null,
+          "failure_reason": null,
+          "outcome": null,
+          "reason": null
+        },
+        {
+          "event": "meta_decision",
+          "step": 13,
+          "operation_family": null,
+          "failure_reason": null,
+          "outcome": "ABSTAIN",
+          "reason": "no_executable_computation_with_certificate"
+        },
+        {
+          "event": "termination",
+          "step": null,
+          "operation_family": null,
+          "failure_reason": null,
+          "outcome": "ABSTAIN",
+          "reason": "no_executable_computation_with_certificate"
+        }
+      ]
+    },
+    {
+      "qid": "4hop1__152146_5274_458768_33637",
+      "hop_count": 4,
+      "candidate_presence": true,
+      "graph_proof_completion": true,
+      "execution_plan_completion": 0.0,
+      "termination": {
+        "step": 16,
+        "outcome": "ABSTAIN",
+        "best_predicted_evc": 0.0,
+        "answer_node_id": null,
+        "reason": "no_executable_computation_with_certificate",
+        "remaining_budget": {
+          "llm_calls": 4,
+          "tokens": 790,
+          "retrieval_calls": 4,
+          "graph_operations": 48
+        },
+        "dead_end_certificate": {
+          "certificate_version": "proof-obligation-dead-end-v2.4.3.9",
+          "step": 16,
+          "open_obligations": [
+            {
+              "obligation_id": "obligation_199c70ae416d7d54",
+              "target_subgoal": "subgoal_root",
+              "branch_id": "branch_root",
+              "obligation_type": "missing_join_premise",
+              "status": "OPEN",
+              "severity": 0.85,
+              "terminal_reachable": true,
+              "required_node_ids": [
+                "claim_v2_12_subgoal_root_1",
+                "claim_v2_12_subgoal_root_2",
+                "claim_v2_12_subgoal_root_3",
+                "claim_v2_12_subgoal_root_4",
+                "claim_v2_15_subgoal_root_1",
+                "claim_v2_15_subgoal_root_2",
+                "claim_v2_15_subgoal_root_3",
+                "claim_v2_15_subgoal_root_4",
+                "claim_v2_15_subgoal_root_5",
+                "claim_v2_15_subgoal_root_6",
+                "claim_v2_15_subgoal_root_7",
+                "subgoal_2"
+              ],
+              "satisfied_by_node_ids": [],
+              "reason_codes": [
+                "dependency_not_composed"
+              ],
+              "provenance_event_ids": [
+                "retrieval_attempt_op_v2_0011_retrieve_subgoal_root_branch_root_allocation_000020",
+                "retrieval_attempt_op_v2_0014_retrieve_subgoal_root_branch_root_allocation_000027"
+              ],
+              "created_at_step": 12,
+              "updated_at_step": 16
+            }
+          ],
+          "blocked_obligations": [],
+          "remaining_budget": {
+            "llm_calls": 4,
+            "tokens": 790,
+            "retrieval_calls": 4,
+            "graph_operations": 48
+          },
+          "candidate_operations": [],
+          "feasible_unselected_join_count": 0,
+          "exhaustion_evidence": [
+            "dependency_not_composed"
+          ]
+        }
+      },
+      "open_obligation_type_counts": {
+        "missing_join_premise": 1
+      },
+      "open_obligations": [
+        {
+          "target_subgoal": "subgoal_root",
+          "branch_id": "branch_root",
+          "obligation_type": "missing_join_premise",
+          "status": "OPEN",
+          "severity": 0.85,
+          "reason_codes": [
+            "dependency_not_composed"
+          ],
+          "required_node_ids": [
+            "claim_v2_12_subgoal_root_1",
+            "claim_v2_12_subgoal_root_2",
+            "claim_v2_12_subgoal_root_3",
+            "claim_v2_12_subgoal_root_4",
+            "claim_v2_15_subgoal_root_1",
+            "claim_v2_15_subgoal_root_2",
+            "claim_v2_15_subgoal_root_3",
+            "claim_v2_15_subgoal_root_4",
+            "claim_v2_15_subgoal_root_5",
+            "claim_v2_15_subgoal_root_6",
+            "claim_v2_15_subgoal_root_7",
+            "subgoal_2"
+          ]
+        }
+      ],
+      "subgoals": [
+        {
+          "node_id": "subgoal_1",
+          "status": "resolved",
+          "dependencies": [],
+          "terminal": false,
+          "claim_status_counts": {
+            "committed": 1
+          },
+          "retrieval_attempts": 1
+        },
+        {
+          "node_id": "subgoal_2",
+          "status": "resolved",
+          "dependencies": [
+            "subgoal_1"
+          ],
+          "terminal": false,
+          "claim_status_counts": {
+            "scored": 1,
+            "committed": 1
+          },
+          "retrieval_attempts": 1
+        },
+        {
+          "node_id": "subgoal_root",
+          "status": "partial",
+          "dependencies": [
+            "subgoal_2"
+          ],
+          "terminal": true,
+          "claim_status_counts": {
+            "scored": 11
+          },
+          "retrieval_attempts": 2
+        }
+      ],
+      "active_branches": [
+        {
+          "branch_id": "branch_root",
+          "parent_branch_id": null,
+          "assignments": {
+            "subgoal_1": "claim_v2_3_subgoal_1_1",
+            "subgoal_2": "join_claim_9_2e622b08f156"
+          },
+          "completed_subgoals": [
+            "subgoal_1",
+            "subgoal_2"
+          ],
+          "score": 1.0,
+          "status": "active",
+          "created_at_step": 0,
+          "revision_count": 0,
+          "last_revision_step": -1,
+          "history": []
+        }
+      ],
+      "recent_trace": [
+        {
+          "event": "region_retrieval_gate",
+          "step": 13,
+          "operation_family": null,
+          "failure_reason": null,
+          "outcome": null,
+          "reason": null
+        },
+        {
+          "event": "meta_decision",
+          "step": 13,
+          "operation_family": null,
+          "failure_reason": null,
+          "outcome": "CONTINUE",
+          "reason": "affordable_positive_graph_local_expected_value"
+        },
+        {
+          "event": "graph_operation",
+          "step": 14,
+          "operation_family": "retrieve:default",
+          "failure_reason": null,
+          "outcome": null,
+          "reason": null
+        },
+        {
+          "event": "allocation_reconciled",
+          "step": null,
+          "operation_family": "retrieve:default",
+          "failure_reason": "",
+          "outcome": null,
+          "reason": null
+        },
+        {
+          "event": "terminal_belief_readout",
+          "step": 14,
+          "operation_family": null,
+          "failure_reason": null,
+          "outcome": null,
+          "reason": null
+        },
+        {
+          "event": "proof_recovery_extraction_priority",
+          "step": 14,
+          "operation_family": null,
+          "failure_reason": null,
+          "outcome": null,
+          "reason": null
+        },
+        {
+          "event": "meta_decision",
+          "step": 14,
+          "operation_family": null,
+          "failure_reason": null,
+          "outcome": "CONTINUE",
+          "reason": "affordable_positive_graph_local_expected_value"
+        },
+        {
+          "event": "typed_extraction_diagnostic",
+          "step": null,
+          "operation_family": null,
+          "failure_reason": null,
+          "outcome": null,
+          "reason": null
+        },
+        {
+          "event": "graph_operation",
+          "step": 15,
+          "operation_family": "branch:extract_typed",
+          "failure_reason": null,
+          "outcome": null,
+          "reason": null
+        },
+        {
+          "event": "allocation_reconciled",
+          "step": null,
+          "operation_family": "branch:extract_typed",
+          "failure_reason": "",
+          "outcome": null,
+          "reason": null
+        },
+        {
+          "event": "terminal_belief_readout",
+          "step": 15,
+          "operation_family": null,
+          "failure_reason": null,
+          "outcome": null,
+          "reason": null
+        },
+        {
+          "event": "meta_decision",
+          "step": 15,
+          "operation_family": null,
+          "failure_reason": null,
+          "outcome": "CONTINUE",
+          "reason": "affordable_positive_graph_local_expected_value"
+        },
+        {
+          "event": "graph_operation",
+          "step": 16,
+          "operation_family": "verify:default",
+          "failure_reason": null,
+          "outcome": null,
+          "reason": null
+        },
+        {
+          "event": "allocation_reconciled",
+          "step": null,
+          "operation_family": "verify:default",
+          "failure_reason": "",
+          "outcome": null,
+          "reason": null
+        },
+        {
+          "event": "terminal_belief_readout",
+          "step": 16,
+          "operation_family": null,
+          "failure_reason": null,
+          "outcome": null,
+          "reason": null
+        },
+        {
+          "event": "high_uncertainty_no_join",
+          "step": 16,
+          "operation_family": null,
+          "failure_reason": null,
+          "outcome": null,
+          "reason": null
+        },
+        {
+          "event": "meta_decision",
+          "step": 16,
+          "operation_family": null,
+          "failure_reason": null,
+          "outcome": "ABSTAIN",
+          "reason": "no_executable_computation_with_certificate"
+        },
+        {
+          "event": "termination",
+          "step": null,
+          "operation_family": null,
+          "failure_reason": null,
+          "outcome": "ABSTAIN",
+          "reason": "no_executable_computation_with_certificate"
+        }
+      ]
+    }
+  ],
+  "incorrect_answer_count": 0,
+  "incorrect_answers": [],
+  "certified_terminal_materialization_count": 0,
+  "certified_terminal_materializations": [],
+  "failed_certified_transition_count": 0,
+  "failed_certified_transitions": [],
+  "blocked_after_accepted_terminal_readout_count": 0,
+  "blocked_after_accepted_terminal_readout": [],
+  "per_example_outcomes": [
+    {
+      "qid": "2hop__62951_64006",
+      "question": "As a result of the Black Death, how much was the population reduced in the place that the US helped with the Marshall Plan?",
+      "status": "abstain",
+      "answer": null,
+      "f1": 0.0,
+      "candidate_presence": false,
+      "execution_plan_completion": false,
+      "graph_proof_completion": true
+    },
+    {
+      "qid": "3hop1__105767_443779_52195",
+      "question": "Who is the president of the newly declared independent country that is part of the commission of truth and friendship with the country that eats Kemplang?",
+      "status": "abstain",
+      "answer": null,
+      "f1": 0.0,
+      "candidate_presence": true,
+      "execution_plan_completion": false,
+      "graph_proof_completion": true
+    },
+    {
+      "qid": "4hop1__152146_5274_458768_33637",
+      "question": "How many ethnic minorities were looked at differently in the city where the headquarters of the only group larger than Långa nätter's record label is located?",
+      "status": "abstain",
+      "answer": null,
+      "f1": 0.0,
+      "candidate_presence": true,
+      "execution_plan_completion": false,
+      "graph_proof_completion": true
+    }
+  ],
+  "recovery_retrievals": {
+    "2hop__62951_64006": [
+      {
+        "attempt_id": "retrieval_attempt_op_v2_0015_retrieve_subgoal_root_branch_root_allocation_000036",
+        "operation_id": "op_v2_0015_retrieve_subgoal_root_branch_root_allocation_000036",
+        "step": 15,
+        "target_subgoal": "subgoal_root",
+        "branch_id": "branch_root",
+        "query": "Western Europe 0.3 As result black death much population reduced place us numerical",
+        "normalized_query": "western europe 03 as result black death much population reduced place us numerical",
+        "allocated_top_k": 10,
+        "hit_count": 10,
+        "new_evidence_count": 3,
+        "passage_ids": [
+          "8",
+          "7",
+          "0"
+        ],
+        "recovery_policy": "proof_gap_recovery_v1",
+        "recovery_target_obligation_ids": [
+          "obligation_ef27c7b4a8c97ad6"
+        ]
+      }
+    ],
+    "3hop1__105767_443779_52195": [],
+    "4hop1__152146_5274_458768_33637": [
+      {
+        "attempt_id": "retrieval_attempt_op_v2_0014_retrieve_subgoal_root_branch_root_allocation_000027",
+        "operation_id": "op_v2_0014_retrieve_subgoal_root_branch_root_allocation_000027",
+        "step": 14,
+        "target_subgoal": "subgoal_root",
+        "branch_id": "branch_root",
+        "query": "Sony Music Entertainment Universal Music Group Japanese many ethnic minorities looked differently city headquarters located number",
+        "normalized_query": "sony music entertainment universal music group japanese many ethnic minorities looked differently city headquarters located number",
+        "allocated_top_k": 10,
+        "hit_count": 10,
+        "new_evidence_count": 2,
+        "passage_ids": [
+          "0",
+          "17"
+        ],
+        "recovery_policy": "proof_gap_recovery_v1",
+        "recovery_target_obligation_ids": [
+          "obligation_ef27c7b4a8c97ad6"
+        ]
+      }
+    ]
+  },
+  "proof_gap_allocations": {
+    "2hop__62951_64006": [
+      {
+        "allocation_id": "allocation_000036",
+        "operation_id": "op_v2_0015_retrieve_subgoal_root_branch_root_allocation_000036",
+        "operation_family": "",
+        "outcome": {
+          "outcome_id": "outcome_allocation_000036",
+          "allocation_id": "allocation_000036",
+          "operation_id": "op_v2_0015_retrieve_subgoal_root_branch_root_allocation_000036",
+          "step": 15,
+          "operation_family": "retrieve:default",
+          "region_key": "664e18ec23f4272e",
+          "pre_state_summary": {
+            "node_count": 14.0,
+            "claim_count": 3.0,
+            "active_claim_count": 3.0,
+            "evidence_count": 10.0,
+            "join_count": 1.0,
+            "grounded_claim_count": 2.0,
+            "proof_leaf_count": 3.0,
+            "accepted_answer_count": 0.0,
+            "completed_subgoal_count": 2.0,
+            "uncertainty": 0.05357142857142857,
+            "absolute_support": 0.4429263038548753,
+            "evidence_gap": 0.05357142857142857,
+            "entropy": 0.0,
+            "dependency_unlock": 0.023809523809523808,
+            "contradiction_pressure": 0.0,
+            "answer_chain_progress": 0.6666666666666666,
+            "terminal_gap": 1.0,
+            "terminal_absolute_support": 0.0,
+            "terminal_relative_weight": 0.0,
+            "terminal_entropy": 1.0,
+            "terminal_evidence_gap": 1.0,
+            "terminal_chain_coverage": 0.0
+          },
+          "post_state_summary": {
+            "node_count": 17.0,
+            "claim_count": 3.0,
+            "active_claim_count": 3.0,
+            "evidence_count": 13.0,
+            "join_count": 1.0,
+            "grounded_claim_count": 2.0,
+            "proof_leaf_count": 3.0,
+            "accepted_answer_count": 0.0,
+            "completed_subgoal_count": 2.0,
+            "uncertainty": 0.04411764705882353,
+            "absolute_support": 0.38453408029878616,
+            "evidence_gap": 0.04411764705882353,
+            "entropy": 0.0,
+            "dependency_unlock": 0.0196078431372549,
+            "contradiction_pressure": 0.0,
+            "answer_chain_progress": 0.6666666666666666,
+            "terminal_gap": 1.0,
+            "terminal_absolute_support": 0.0,
+            "terminal_relative_weight": 0.0,
+            "terminal_entropy": 1.0,
+            "terminal_evidence_gap": 1.0,
+            "terminal_chain_coverage": 0.0
+          },
+          "state_delta": {
+            "absolute_support": -0.05839222355608914,
+            "accepted_answer_count": 0.0,
+            "active_claim_count": 0.0,
+            "answer_chain_progress": 0.0,
+            "claim_count": 0.0,
+            "completed_subgoal_count": 0.0,
+            "contradiction_pressure": 0.0,
+            "dependency_unlock": -0.0042016806722689065,
+            "entropy": 0.0,
+            "evidence_count": 3.0,
+            "evidence_gap": -0.009453781512605036,
+            "grounded_claim_count": 0.0,
+            "join_count": 0.0,
+            "node_count": 3.0,
+            "proof_leaf_count": 0.0,
+            "terminal_absolute_support": 0.0,
+            "terminal_chain_coverage": 0.0,
+            "terminal_entropy": 0.0,
+            "terminal_evidence_gap": 0.0,
+            "terminal_gap": 0.0,
+            "terminal_relative_weight": 0.0,
+            "uncertainty": -0.009453781512605036
+          },
+          "actual_utility_components_raw": {
+            "uncertainty_reduction": 0.009453781512605036,
+            "support_gain": -0.05839222355608914,
+            "evidence_gap_reduction": 0.009453781512605036,
+            "entropy_reduction": 0.0,
+            "dependency_unlock_gain": -0.0042016806722689065,
+            "evidence_novelty": 3.0,
+            "answer_chain_progress": 0.0,
+            "contradiction_resolution": 0.0,
+            "terminal_gap_reduction": 0.0,
+            "cost": 0.03671875
+          },
+          "actual_utility_components_normalized": {
+            "uncertainty_reduction": 0.009453781512605036,
+            "support_gain": 0.0,
+            "evidence_gap_reduction": 0.009453781512605036,
+            "entropy_reduction": 0.0,
+            "dependency_unlock_gain": 0.0,
+            "evidence_novelty": 1.0,
+            "answer_chain_progress": 0.0,
+            "contradiction_resolution": 0.0,
+            "terminal_gap_reduction": 0.0,
+            "cost": 0.03671875
+          },
+          "actual_utility": 0.05510729291716686,
+          "actual_cost": {
+            "llm_calls": 0.0,
+            "tokens": 0.0,
+            "retrieval_calls": 1.0
+          },
+          "progressed": true,
+          "failure_reason": "",
+          "statistics_before": {
+            "observations": 0.0,
+            "successes": 0.0,
+            "no_ops": 0.0,
+            "posterior_value": 0.5,
+            "posterior_success": 0.5,
+            "consecutive_failures": 0.0,
+            "cooldown_until_step": 0.0
+          },
+          "statistics_after": {
+            "observations": 1.0,
+            "successes": 1.0,
+            "no_ops": 0.0,
+            "posterior_value": 0.5091845488195278,
+            "posterior_success": 0.6666666666666666,
+            "consecutive_failures": 0.0,
+            "cooldown_until_step": 0.0
+          },
+          "actual_immediate_utility": 0.06695581458389807,
+          "actual_normalized_cost": 0.03671875,
+          "delayed_realized_proof_return": 0.0,
+          "combined_realized_utility": -0.00993642416644077
+        },
+        "target_obligation_ids": [
+          "obligation_ef27c7b4a8c97ad6"
+        ],
+        "predicted_evc": 0.3633432338461539,
+        "predicted_delayed_proof_return": 0.2692307692307693,
+        "delayed_realized_proof_return": 0.0,
+        "actual_closed_target_ids": [],
+        "retrieval": {
+          "attempt_id": "retrieval_attempt_op_v2_0015_retrieve_subgoal_root_branch_root_allocation_000036",
+          "operation_id": "op_v2_0015_retrieve_subgoal_root_branch_root_allocation_000036",
+          "step": 15,
+          "target_subgoal": "subgoal_root",
+          "branch_id": "branch_root",
+          "query": "Western Europe 0.3 As result black death much population reduced place us numerical",
+          "normalized_query": "western europe 03 as result black death much population reduced place us numerical",
+          "allocated_top_k": 10,
+          "hit_count": 10,
+          "new_evidence_count": 3,
+          "passage_ids": [
+            "8",
+            "7",
+            "0"
+          ],
+          "recovery_policy": "proof_gap_recovery_v1",
+          "recovery_target_obligation_ids": [
+            "obligation_ef27c7b4a8c97ad6"
+          ]
+        },
+        "next_allocations": []
+      }
+    ],
+    "3hop1__105767_443779_52195": [],
+    "4hop1__152146_5274_458768_33637": [
+      {
+        "allocation_id": "allocation_000027",
+        "operation_id": "op_v2_0014_retrieve_subgoal_root_branch_root_allocation_000027",
+        "operation_family": "",
+        "outcome": {
+          "outcome_id": "outcome_allocation_000027",
+          "allocation_id": "allocation_000027",
+          "operation_id": "op_v2_0014_retrieve_subgoal_root_branch_root_allocation_000027",
+          "step": 14,
+          "operation_family": "retrieve:default",
+          "region_key": "d9142c3f60a5e22b",
+          "pre_state_summary": {
+            "node_count": 15.0,
+            "claim_count": 4.0,
+            "active_claim_count": 4.0,
+            "evidence_count": 10.0,
+            "join_count": 0.0,
+            "grounded_claim_count": 4.0,
+            "proof_leaf_count": 2.0,
+            "accepted_answer_count": 0.0,
+            "completed_subgoal_count": 2.0,
+            "uncertainty": 0.30732918986920976,
+            "absolute_support": 0.430131216931217,
+            "evidence_gap": 0.16666666666666666,
+            "entropy": 0.30732918986920976,
+            "dependency_unlock": 0.0,
+            "contradiction_pressure": 0.0,
+            "answer_chain_progress": 0.6666666666666666,
+            "terminal_gap": 1.0,
+            "terminal_absolute_support": 0.0,
+            "terminal_relative_weight": 0.0,
+            "terminal_entropy": 1.0,
+            "terminal_evidence_gap": 1.0,
+            "terminal_chain_coverage": 0.0
+          },
+          "post_state_summary": {
+            "node_count": 17.0,
+            "claim_count": 4.0,
+            "active_claim_count": 4.0,
+            "evidence_count": 12.0,
+            "join_count": 0.0,
+            "grounded_claim_count": 4.0,
+            "proof_leaf_count": 2.0,
+            "accepted_answer_count": 0.0,
+            "completed_subgoal_count": 2.0,
+            "uncertainty": 0.2711728145904792,
+            "absolute_support": 0.4015863678804856,
+            "evidence_gap": 0.14705882352941177,
+            "entropy": 0.2711728145904792,
+            "dependency_unlock": 0.0,
+            "contradiction_pressure": 0.0,
+            "answer_chain_progress": 0.6666666666666666,
+            "terminal_gap": 1.0,
+            "terminal_absolute_support": 0.0,
+            "terminal_relative_weight": 0.0,
+            "terminal_entropy": 1.0,
+            "terminal_evidence_gap": 1.0,
+            "terminal_chain_coverage": 0.0
+          },
+          "state_delta": {
+            "absolute_support": -0.028544849050731402,
+            "accepted_answer_count": 0.0,
+            "active_claim_count": 0.0,
+            "answer_chain_progress": 0.0,
+            "claim_count": 0.0,
+            "completed_subgoal_count": 0.0,
+            "contradiction_pressure": 0.0,
+            "dependency_unlock": 0.0,
+            "entropy": -0.03615637527873056,
+            "evidence_count": 2.0,
+            "evidence_gap": -0.019607843137254888,
+            "grounded_claim_count": 0.0,
+            "join_count": 0.0,
+            "node_count": 2.0,
+            "proof_leaf_count": 0.0,
+            "terminal_absolute_support": 0.0,
+            "terminal_chain_coverage": 0.0,
+            "terminal_entropy": 0.0,
+            "terminal_evidence_gap": 0.0,
+            "terminal_gap": 0.0,
+            "terminal_relative_weight": 0.0,
+            "uncertainty": -0.03615637527873056
+          },
+          "actual_utility_components_raw": {
+            "uncertainty_reduction": 0.03615637527873056,
+            "support_gain": -0.028544849050731402,
+            "evidence_gap_reduction": 0.019607843137254888,
+            "entropy_reduction": 0.03615637527873056,
+            "dependency_unlock_gain": 0.0,
+            "evidence_novelty": 2.0,
+            "answer_chain_progress": 0.0,
+            "contradiction_resolution": 0.0,
+            "terminal_gap_reduction": 0.0,
+            "cost": 0.035937500000000004
+          },
+          "actual_utility_components_normalized": {
+            "uncertainty_reduction": 0.03615637527873056,
+            "support_gain": 0.0,
+            "evidence_gap_reduction": 0.019607843137254888,
+            "entropy_reduction": 0.03615637527873056,
+            "dependency_unlock_gain": 0.0,
+            "evidence_novelty": 1.0,
+            "answer_chain_progress": 0.0,
+            "contradiction_resolution": 0.0,
+            "terminal_gap_reduction": 0.0,
+            "cost": 0.035937500000000004
+          },
+          "actual_utility": 0.061474846406325806,
+          "actual_cost": {
+            "llm_calls": 0.0,
+            "tokens": 0.0,
+            "retrieval_calls": 1.0
+          },
+          "progressed": true,
+          "failure_reason": "",
+          "statistics_before": {
+            "observations": 0.0,
+            "successes": 0.0,
+            "no_ops": 0.0,
+            "posterior_value": 0.5,
+            "posterior_success": 0.5,
+            "consecutive_failures": 0.0,
+            "cooldown_until_step": 0.0
+          },
+          "statistics_after": {
+            "observations": 1.0,
+            "successes": 1.0,
+            "no_ops": 0.0,
+            "posterior_value": 0.5102458077343877,
+            "posterior_success": 0.6666666666666666,
+            "consecutive_failures": 0.0,
+            "cooldown_until_step": 0.0
+          },
+          "actual_immediate_utility": 0.07404418142649687,
+          "actual_normalized_cost": 0.035937500000000004,
+          "delayed_realized_proof_return": 0.14699333333333334,
+          "combined_realized_utility": 0.08187617257059873
+        },
+        "target_obligation_ids": [
+          "obligation_ef27c7b4a8c97ad6"
+        ],
+        "predicted_evc": 0.23744268185185186,
+        "predicted_delayed_proof_return": 0.11353587962962963,
+        "delayed_realized_proof_return": 0.14699333333333334,
+        "actual_closed_target_ids": [],
+        "retrieval": {
+          "attempt_id": "retrieval_attempt_op_v2_0014_retrieve_subgoal_root_branch_root_allocation_000027",
+          "operation_id": "op_v2_0014_retrieve_subgoal_root_branch_root_allocation_000027",
+          "step": 14,
+          "target_subgoal": "subgoal_root",
+          "branch_id": "branch_root",
+          "query": "Sony Music Entertainment Universal Music Group Japanese many ethnic minorities looked differently city headquarters located number",
+          "normalized_query": "sony music entertainment universal music group japanese many ethnic minorities looked differently city headquarters located number",
+          "allocated_top_k": 10,
+          "hit_count": 10,
+          "new_evidence_count": 2,
+          "passage_ids": [
+            "0",
+            "17"
+          ],
+          "recovery_policy": "proof_gap_recovery_v1",
+          "recovery_target_obligation_ids": [
+            "obligation_ef27c7b4a8c97ad6"
+          ]
+        },
+        "next_allocations": [
+          {
+            "allocation_id": "allocation_000028",
+            "operation_id": "op_v2_0015_branch_subgoal_root_branch_root_allocation_000028",
+            "predicted_evc": 0.22968604318423202,
+            "actual_utility": 0.0476089127994466
+          },
+          {
+            "allocation_id": "allocation_000031",
+            "operation_id": "op_v2_0016_verify_subgoal_root_branch_root_allocation_000031",
+            "predicted_evc": 0.2899953451128633,
+            "actual_utility": 0.037366009808999144
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -272,3 +272,23 @@ def test_v2439_frozen_config_adds_only_schema_and_retry_state_fixes():
         "bind_join_retry_to_exact_feasibility_state"
     ]
     assert prereg["training"] is False
+
+
+def test_v24310_counterfactual_config_certifies_provider_free_joins():
+    root = Path(__file__).resolve().parents[1]
+    config = DynamicV2ResearchConfig.from_yaml(
+        root / "configs/dynamic_hypergraph_v24310_counterfactual_qwen_smoke20.yaml"
+    )
+    config.validate()
+    assert config.numeric_output_type_normalization
+    assert config.semantic_join_attempt_state_key
+    assert config.certified_deterministic_join_allocation
+    assert config.campaign_provider_call_cap == 714
+    assert config.campaign_provider_token_cap == 509_631
+    prereg = json.loads((
+        root / "configs/dynamic_v24310_counterfactual_preregistration.json"
+    ).read_text(encoding="utf-8"))
+    assert prereg["only_semantic_delta"][
+        "exact_zero_call_and_zero_token_packet_for_deterministic_join"
+    ]
+    assert prereg["training"] is False
