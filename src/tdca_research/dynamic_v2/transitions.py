@@ -1,19 +1,23 @@
 from __future__ import annotations
 
+import math
 from typing import Any
 
 from ..dynamic.graph import (
+    AnswerStatus,
     BranchStatus,
     CandidateStatus,
     ClaimNode,
+    EvidenceNode,
     GraphOperation,
     OperationType,
     SubgoalNode,
     SubgoalStatus,
 )
-from ..utils import stable_hash
+from ..utils import normalize_text, stable_hash
 from .graph import DynamicReasoningHypergraphV2
 from .obligations import terminal_dependency_distance
+from .proof import audit_graph_proof, claim_closure
 
 
 _VIABLE_CLAIM_STATES = {
@@ -27,6 +31,7 @@ _VIABLE_CLAIM_STATES = {
 def certified_transition_value(
     graph: DynamicReasoningHypergraphV2,
     operation: GraphOperation,
+    config: Any | None = None,
 ) -> dict[str, Any]:
     """Return a gold-free certificate for a guaranteed provider-free transition.
 
@@ -72,6 +77,15 @@ def certified_transition_value(
     )
 
     if (
+        operation.operation_type == OperationType.COMMIT
+        and str(operation.payload.get("mode", "")) == "answer"
+        and bool(getattr(config, "certified_terminal_materialization", False))
+    ):
+        terminal = _terminal_materialization_certificate(graph, operation, config)
+        if terminal is None:
+            return _seal(certificate)
+        certificate.update(terminal)
+    elif (
         operation.operation_type == OperationType.COMMIT
         and str(operation.payload.get("mode", "")) != "answer"
     ):
@@ -227,11 +241,274 @@ def realized_transition_value(
             "child_branches_created": len(children),
             "expected_child_branches": len(source_ids),
         }
+    elif kind == "accepted_terminal_materialization":
+        answer_id = str(certificate.get("answer_node_id", ""))
+        answer = graph.nodes.get(answer_id)
+        terminal = graph.terminal_beliefs.get(answer_id)
+        branch = graph.branches.get(branch_id)
+        realized = bool(
+            answer is not None
+            and getattr(answer, "status", None) == AnswerStatus.ACCEPTED
+            and set(getattr(answer, "supporting_claims", [])) == set(source_ids)
+            and terminal is not None
+            and terminal.accepted
+            and terminal.sufficient_chain
+            and not terminal.rejection_reasons
+            and branch is not None
+            and branch.status == BranchStatus.COMPLETED
+        )
+        observations = {
+            "answer_materialized": answer is not None,
+            "answer_accepted": bool(
+                answer is not None
+                and getattr(answer, "status", None) == AnswerStatus.ACCEPTED
+            ),
+            "terminal_belief_materialized": terminal is not None,
+            "terminal_belief_accepted": bool(
+                terminal is not None and terminal.accepted
+                and terminal.sufficient_chain and not terminal.rejection_reasons
+            ),
+            "branch_completed": bool(
+                branch is not None and branch.status == BranchStatus.COMPLETED
+            ),
+        }
     else:
         realized = False
         observations = {"unsupported_certificate_kind": kind}
     predicted = float(certificate.get("predicted_transition_value", 0.0))
     return realized, predicted if realized else 0.0, observations
+
+
+def _terminal_materialization_certificate(
+    graph: DynamicReasoningHypergraphV2,
+    operation: GraphOperation,
+    config: Any,
+) -> dict[str, Any] | None:
+    """Recompute every terminal channel before certifying answer COMMIT.
+
+    Absolute channels and proof coverage come from the sealed graph.  Relative
+    channels are reconstructed from the complete, gold-free competition
+    snapshot emitted by :class:`TerminalBeliefReadout`.  Consequently neither
+    an operation family label nor a hand-written ``accepted`` flag is enough.
+    """
+
+    answer = operation.payload.get("answer")
+    if not isinstance(answer, dict):
+        return None
+    profile = answer.get("terminal_belief")
+    competition = answer.get("terminal_competition")
+    if not isinstance(profile, dict) or not isinstance(competition, dict):
+        return None
+
+    answer_id = str(answer.get("node_id", ""))
+    edge_id = str(answer.get("derivation_edge", ""))
+    candidate_answer = str(answer.get("candidate_answer", "")).strip()
+    claim_ids = [str(value) for value in answer.get("supporting_claims", [])]
+    evidence_ids = [str(value) for value in answer.get("supporting_evidence", [])]
+    initial_claim_ids = [str(value) for value in operation.source_ids]
+    if any((
+        not answer_id,
+        answer_id in graph.nodes,
+        not edge_id,
+        edge_id in graph.hyperedges,
+        not normalize_text(candidate_answer),
+        str(answer.get("status", "")) != AnswerStatus.ACCEPTED.value,
+        not claim_ids,
+        len(claim_ids) != len(set(claim_ids)),
+        not evidence_ids,
+        len(evidence_ids) != len(set(evidence_ids)),
+        not initial_claim_ids,
+    )):
+        return None
+
+    claims = [graph.nodes.get(node_id) for node_id in claim_ids]
+    viable = {
+        CandidateStatus.COMMITTED,
+        CandidateStatus.SCORED,
+        CandidateStatus.RETAINED,
+        CandidateStatus.REVISED,
+    }
+    if not all(
+        isinstance(claim, ClaimNode)
+        and claim.status in viable
+        and claim.branch_id == operation.branch_id
+        for claim in claims
+    ):
+        return None
+    if not all(isinstance(graph.nodes.get(node_id), EvidenceNode) for node_id in evidence_ids):
+        return None
+    closure = claim_closure(graph, initial_claim_ids)
+    graph_evidence = list(dict.fromkeys(
+        evidence_id
+        for claim in claims
+        for evidence_id in claim.evidence_refs
+        if isinstance(graph.nodes.get(evidence_id), EvidenceNode)
+    ))
+    if set(closure) != set(claim_ids) or set(graph_evidence) != set(evidence_ids):
+        return None
+    if any(not claim.evidence_refs for claim in claims):
+        return None
+
+    proof = audit_graph_proof(
+        graph, operation.target_id, operation.branch_id, initial_claim_ids,
+    )
+    absolute_support = min(float(claim.score.absolute_support) for claim in claims)
+    evidence_gap = max(float(claim.score.evidence_gap) for claim in claims)
+    contradiction = max(max(
+        float(claim.score.raw.contradiction_risk),
+        float(getattr(graph.belief_states.get(claim.node_id), "contradiction_pressure", 0.0)),
+    ) for claim in claims)
+    type_consistency = float(answer.get("answer_type_consistency", 0.0))
+
+    rows = competition.get("candidate_values")
+    if not isinstance(rows, list) or not rows:
+        return None
+    by_value: dict[str, float] = {}
+    for row in rows:
+        if not isinstance(row, dict):
+            return None
+        key = normalize_text(str(row.get("normalized_answer", "")))
+        try:
+            support = float(row.get("absolute_support"))
+        except (TypeError, ValueError):
+            return None
+        if not key or key in by_value or not math.isfinite(support) or not 0.0 <= support <= 1.0:
+            return None
+        by_value[key] = support
+    selected_key = normalize_text(candidate_answer)
+    if selected_key not in by_value or not _close(by_value[selected_key], absolute_support):
+        return None
+    total = sum(by_value.values())
+    weights = (
+        {key: 1.0 / len(by_value) for key in by_value}
+        if total <= 0.0 else {key: value / total for key, value in by_value.items()}
+    )
+    ranked = sorted(weights, key=lambda key: (-weights[key], key))
+    if selected_key != ranked[0]:
+        return None
+    relative_weight = weights[selected_key]
+    relative_margin = (
+        relative_weight - weights[ranked[1]] if len(ranked) > 1 else 1.0
+    )
+    entropy = _normalized_entropy(list(weights.values()))
+
+    unresolved = competition.get("unresolved_branch_ids", [])
+    if not isinstance(unresolved, list) or any(
+        _credible_unresolved_branch(
+            graph, str(branch_id), operation.target_id, config,
+        )
+        for branch_id in sorted(set(str(value) for value in unresolved))
+        if str(branch_id) != operation.branch_id
+    ):
+        return None
+
+    profile_checks = {
+        "answer_node_id": str(profile.get("answer_node_id", "")) == answer_id,
+        "candidate_answer": normalize_text(str(profile.get("candidate_answer", ""))) == selected_key,
+        "branch_id": str(profile.get("branch_id", "")) == operation.branch_id,
+        "supporting_claims": set(str(value) for value in profile.get("supporting_claims", [])) == set(claim_ids),
+        "supporting_evidence": set(str(value) for value in profile.get("supporting_evidence", [])) == set(evidence_ids),
+        "absolute_support": _close(profile.get("absolute_support"), absolute_support),
+        "relative_weight": _close(profile.get("relative_weight"), relative_weight),
+        "entropy": _close(profile.get("entropy"), entropy),
+        "competition_entropy": _close(profile.get("competition_entropy"), entropy),
+        "evidence_gap": _close(profile.get("evidence_gap"), evidence_gap),
+        "relative_margin": _close(profile.get("relative_margin"), relative_margin),
+        "contradiction_pressure": _close(profile.get("contradiction_pressure"), contradiction),
+        "answer_type_consistency": _close(profile.get("answer_type_consistency"), type_consistency),
+        "chain_coverage": _close(profile.get("chain_coverage"), proof.dependency_coverage),
+        "sufficient_chain": bool(profile.get("sufficient_chain", False)),
+        "accepted": bool(profile.get("accepted", False)),
+        "rejection_reasons": not profile.get("rejection_reasons", []),
+    }
+    configured_gate = all((
+        proof.proof_connected,
+        proof.dependency_coverage >= config.terminal_min_chain_coverage,
+        absolute_support >= config.terminal_min_absolute_support,
+        relative_margin >= config.terminal_min_relative_margin,
+        entropy <= config.terminal_max_entropy,
+        evidence_gap <= config.terminal_max_evidence_gap,
+        contradiction < config.terminal_max_contradiction,
+        type_consistency >= config.terminal_min_type_consistency,
+    ))
+    if not all(profile_checks.values()) or not configured_gate:
+        return None
+
+    return {
+        "certificate_version": "certified-transition-option-v2.4.3.4",
+        "kind": "accepted_terminal_materialization",
+        "mandatory": True,
+        "deterministic": True,
+        "answer_node_id": answer_id,
+        "derivation_edge_id": edge_id,
+        "source_claim_ids": claim_ids,
+        "successor_subgoal_ids": [],
+        "preconditions": {
+            "branch_active": True,
+            "answer_and_edge_ids_new": True,
+            "all_source_claims_viable": True,
+            "all_evidence_exists": True,
+            "proof_connected": True,
+            "terminal_channels_recomputed": profile_checks,
+            "configured_terminal_gate_passed": True,
+            "competition_candidate_count": len(by_value),
+        },
+        "promised_effect": {
+            "answer_nodes_added": 1,
+            "derivation_hyperedges_added": 1,
+            "terminal_beliefs_added": 1,
+            "branches_completed": 1,
+        },
+    }
+
+
+def _credible_unresolved_branch(
+    graph: DynamicReasoningHypergraphV2,
+    branch_id: str,
+    target_subgoal: str,
+    config: Any,
+) -> bool:
+    branch = graph.branches.get(branch_id)
+    if branch is None:
+        return True
+    for claim in graph.claims():
+        if claim.target_subgoal != target_subgoal or claim.branch_id != branch_id:
+            continue
+        if claim.status not in {
+            CandidateStatus.SCORED, CandidateStatus.RETAINED,
+            CandidateStatus.REVISED, CandidateStatus.COMMITTED,
+        }:
+            continue
+        semantics = graph.claim_semantics.get(claim.node_id)
+        is_projection = bool(
+            claim.provenance.metadata.get("answers_subgoal", False)
+            or (semantics is not None and semantics.qualifiers.get("projection_premise_id"))
+        )
+        if is_projection and all((
+            claim.score.absolute_support >= config.terminal_min_absolute_support,
+            claim.score.evidence_gap <= config.terminal_max_evidence_gap,
+            claim.score.raw.grounding >= config.join_min_premise_support,
+            claim.score.raw.type_match >= config.terminal_min_type_consistency,
+            claim.score.raw.contradiction_risk < config.terminal_max_contradiction,
+            bool(claim.evidence_refs),
+        )):
+            return True
+    return False
+
+
+def _normalized_entropy(weights: list[float]) -> float:
+    if len(weights) <= 1:
+        return 0.0
+    value = -sum(weight * math.log(max(weight, 1e-12)) for weight in weights)
+    return max(0.0, min(1.0, value / math.log(len(weights))))
+
+
+def _close(left: Any, right: float, tolerance: float = 1e-8) -> bool:
+    try:
+        value = float(left)
+    except (TypeError, ValueError):
+        return False
+    return math.isfinite(value) and abs(value - float(right)) <= tolerance
 
 
 def _successor_reachability_gain(

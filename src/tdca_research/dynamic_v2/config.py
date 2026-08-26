@@ -154,6 +154,12 @@ class DynamicV2ResearchConfig(DynamicResearchConfig):
     preserve_subgoal_question_on_retrieval: bool = False
     one_step_progress_immediate_value: bool = False
 
+    # v2.4.3.4 treats an independently accepted terminal readout as a
+    # provider-free state transition.  The transition certificate recomputes
+    # graph-local support and answer-set competition before it can bypass the
+    # generic net-EVC threshold.
+    certified_terminal_materialization: bool = False
+
     # Terminal acceptance is a conjunctive readout over independent belief
     # channels.  These are initial development values, never learned weights.
     terminal_min_absolute_support: float = 0.70

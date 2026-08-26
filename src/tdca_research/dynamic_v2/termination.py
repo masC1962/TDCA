@@ -59,6 +59,13 @@ class TerminalBeliefReadout:
             weights[ranked[0]] - weights[ranked[1]] if len(ranked) > 1 else 1.0
         )
         competition_entropy = _normalized_entropy(list(weights.values()))
+        competition_rows = [
+            {
+                "normalized_answer": key,
+                "absolute_support": float(by_value[key]),
+            }
+            for key in sorted(by_value)
+        ]
 
         accepted: list[GraphOperation] = []
         diagnostics: list[dict] = []
@@ -85,6 +92,14 @@ class TerminalBeliefReadout:
             answer["supporting_claims"] = list(profile.supporting_claims)
             answer["supporting_evidence"] = list(profile.supporting_evidence)
             answer["terminal_belief"] = asdict(profile)
+            if self.config.certified_terminal_materialization:
+                # Preserve the complete answer-slot competition so the stop
+                # policy can independently reconstruct the relative channels.
+                # Gold answers are never part of this state.
+                answer["terminal_competition"] = {
+                    "candidate_values": deepcopy(competition_rows),
+                    "unresolved_branch_ids": list(unresolved_branch_ids),
+                }
             diagnostics.append(asdict(profile))
             if profile.accepted:
                 accepted.append(operation)
@@ -360,7 +375,7 @@ class MetaStopPolicy:
         if self.config.certified_transition_option_value:
             certified = []
             for row in affordable:
-                transition = certified_transition_value(graph, row.operation)
+                transition = certified_transition_value(graph, row.operation, self.config)
                 if (
                     bool(transition.get("mandatory", False))
                     and bool(transition.get("deterministic", False))

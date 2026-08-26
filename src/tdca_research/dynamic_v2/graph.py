@@ -580,8 +580,10 @@ class DynamicReasoningHypergraphV2(DynamicReasoningHypergraph):
                             f"allocation {row.allocation_id}.{name} outside [0,1]"
                         )
                 if row.transition_certificate and (
-                    row.transition_certificate.get("certificate_version")
-                    != "certified-transition-option-v2.4.3.2"
+                    row.transition_certificate.get("certificate_version") not in {
+                        "certified-transition-option-v2.4.3.2",
+                        "certified-transition-option-v2.4.3.4",
+                    }
                 ):
                     raise GraphInvariantError(
                         f"allocation {row.allocation_id} has invalid transition certificate"

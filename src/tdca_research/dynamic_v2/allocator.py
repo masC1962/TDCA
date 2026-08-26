@@ -226,7 +226,7 @@ class AdaptiveComputationAllocator:
                     ),
                 ))
         transition_estimates = [
-            certified_transition_value(graph, operation)
+            certified_transition_value(graph, operation, self.config)
             if self.config.certified_transition_option_value else {}
             for operation in operations
         ]
@@ -887,7 +887,7 @@ class AdaptiveComputationAllocator:
             if self.config.operation_conditioned_obligation_closure else {}
         )
         transition = (
-            certified_transition_value(graph, operation)
+            certified_transition_value(graph, operation, self.config)
             if self.config.certified_transition_option_value else {}
         )
         if self.config.absolute_resource_cost:
