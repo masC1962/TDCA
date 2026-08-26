@@ -173,6 +173,10 @@ class DynamicV2ResearchConfig(DynamicResearchConfig):
     proof_quality_obligation_alignment: bool = False
     anchored_proof_recovery_query: bool = False
 
+    # v2.4.3.7 makes newly retrieved recovery evidence consumable before stale
+    # proposed claims in the same region are re-verified.
+    proof_recovery_extraction_priority: bool = False
+
     # Terminal acceptance is a conjunctive readout over independent belief
     # channels.  These are initial development values, never learned weights.
     terminal_min_absolute_support: float = 0.70

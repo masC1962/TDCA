@@ -179,6 +179,8 @@ class RetrievalAttemptRecord:
     hit_count: int
     new_evidence_count: int
     passage_ids: list[str] = field(default_factory=list)
+    recovery_policy: str = ""
+    recovery_target_obligation_ids: list[str] = field(default_factory=list)
 
 
 @dataclass
@@ -409,7 +411,9 @@ class DynamicReasoningHypergraphV2(DynamicReasoningHypergraph):
             "allocation_history": _v243_compatible_allocations(
                 self.allocation_history, self.proof_obligation_version
             ),
-            "retrieval_attempt_history": _primitive(self.retrieval_attempt_history),
+            "retrieval_attempt_history": _v2437_compatible_retrieval_attempts(
+                self.retrieval_attempt_history, self.proof_obligation_version,
+            ),
             "join_attempt_history": _primitive(self.join_attempt_history),
             "operation_outcome_history": _primitive(self.operation_outcome_history),
             "credit_assignment_history": _primitive(self.credit_assignment_history),
@@ -548,6 +552,7 @@ class DynamicReasoningHypergraphV2(DynamicReasoningHypergraph):
                 "proof-obligation-state-v2.4.3.1",
                 "proof-obligation-state-v2.4.3.2",
                 "proof-obligation-state-v2.4.3.6",
+                "proof-obligation-state-v2.4.3.7",
             }:
                 if not -1.0 <= float(row.predicted_marginal_evc) <= 1.0:
                     raise GraphInvariantError(
@@ -577,6 +582,7 @@ class DynamicReasoningHypergraphV2(DynamicReasoningHypergraph):
             if self.proof_obligation_version in {
                 "proof-obligation-state-v2.4.3.2",
                 "proof-obligation-state-v2.4.3.6",
+                "proof-obligation-state-v2.4.3.7",
             }:
                 for name in ("predicted_transition_value", "actual_transition_value"):
                     if not 0.0 <= float(getattr(row, name)) <= 1.0:
@@ -850,18 +856,31 @@ def _v243_compatible_allocations(
             "proof-obligation-state-v2.4.3.1",
             "proof-obligation-state-v2.4.3.2",
             "proof-obligation-state-v2.4.3.6",
+            "proof-obligation-state-v2.4.3.7",
         }:
             for name in v2431_fields:
                 row.pop(name, None)
         if version not in {
             "proof-obligation-state-v2.4.3.2",
             "proof-obligation-state-v2.4.3.6",
+            "proof-obligation-state-v2.4.3.7",
         }:
             for name in v2432_fields:
                 row.pop(name, None)
         if not version:
             row.pop("predicted_gross_opportunity", None)
             row.pop("target_obligation_ids", None)
+    return payload
+
+
+def _v2437_compatible_retrieval_attempts(
+    rows: list[RetrievalAttemptRecord], version: str,
+) -> list[dict[str, Any]]:
+    payload = [_primitive(row) for row in rows]
+    if version != "proof-obligation-state-v2.4.3.7":
+        for row in payload:
+            row.pop("recovery_policy", None)
+            row.pop("recovery_target_obligation_ids", None)
     return payload
 
 

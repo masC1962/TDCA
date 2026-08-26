@@ -1,0 +1,560 @@
+{
+  "schema_version": "dynamic-hypergraph-v2.4.2-safe-stop-diagnostic-v1",
+  "inference_calls_made": 0,
+  "gold_used_only_for_posthoc_paired_quality_labels": true,
+  "baseline": "research_outputs/musique_distractor_smoke_dynamic_hypergraph_tdca_v2_1787736117754451385",
+  "candidate": "research_outputs/musique_distractor_smoke_dynamic_hypergraph_tdca_v2_1787745200792538494",
+  "quality": {
+    "baseline": {
+      "exact_match": 0.35,
+      "f1": 0.395,
+      "execution_plan_completion_rate": 0.55
+    },
+    "candidate": {
+      "exact_match": 0.25,
+      "f1": 0.25,
+      "execution_plan_completion_rate": 0.25
+    }
+  },
+  "gate": {
+    "schema_version": "dynamic-hypergraph-v2.4.3.5-adaptive-smoke-a-gate-v1",
+    "inference_calls_made_by_gate": 0,
+    "run": "research_outputs/musique_distractor_smoke_dynamic_hypergraph_tdca_v2_1787736117754451385",
+    "preregistration": "configs/dynamic_v2435_preregistration.json",
+    "evidence": {
+      "artifact_verified": true,
+      "zero_gold_or_oracle_inference": true,
+      "infrastructure_failure_count": 0,
+      "graph_invariant_violation_count": 0,
+      "controller_only_mutation_violation_count": 0,
+      "unsupported_answer_count": 0,
+      "selected_infeasible_join_count": 0.0,
+      "repeated_same_fingerprint_extraction_count": 0.0,
+      "no_diff_editor_allocation_count": 0,
+      "candidate_presence_rate": 0.55,
+      "legacy_execution_plan_completion_rate": 0.55,
+      "graph_proof_completion_rate": 0.85,
+      "f1": 0.395,
+      "logical_llm_calls": 129,
+      "logical_total_tokens": 158468,
+      "provider_attempts": 123,
+      "provider_reported_tokens": 151417,
+      "budget_exhaustion_rate": 0.0,
+      "immediate_evc_correlation": 0.5987826521948537,
+      "delayed_evc_correlation": 0.16776752726769786,
+      "choice_conditioned_delayed_correlation": -0.07924789970967433,
+      "choice_conditioned_count": 42,
+      "proof_gap_recovery": {
+        "count": 8,
+        "successful_count": 0,
+        "failed_count": 8,
+        "mean_successful_delayed_return": 0.0,
+        "mean_failed_delayed_return": 0.0
+      },
+      "complete_evc_trace_rate": 1.0,
+      "complete_delayed_credit_trace_rate": 1.0,
+      "non_uniform_allocation_rate": 1.0,
+      "termination_outcomes": {
+        "ABSTAIN": 9,
+        "ANSWER": 11
+      },
+      "complete_proof_obligation_trace_rate": 1.0,
+      "no_executable_without_certificate_count": 0,
+      "abstain_has_exhaustion_evidence_rate": 1.0,
+      "viable_proof_opportunity_cost_clipping_stop_count": 0,
+      "viable_proof_opportunity_cost_clipping_stops": [],
+      "absolute_cost_ready_set_invariance_rate": 1.0,
+      "absolute_cost_invariance_evidence": "deterministic formula plus test_dynamic_v243_policy dominated-candidate test",
+      "predicted_verification_calls_match_requested_samples_rate": 1.0,
+      "unjustified_high_fidelity_count": 0,
+      "high_fidelity_allocation_count": 124,
+      "operation_target_audit_rate": 1.0,
+      "actual_obligation_closure_trace_rate": 1.0,
+      "complete_transition_trace_rate": 1.0,
+      "certified_transition_allocation_count": 50,
+      "certified_transition_realization_rate": 1.0,
+      "certified_transition_decision_count": 50,
+      "invalid_transition_bypass_count": 0,
+      "mean_predicted_transition_value": 0.89,
+      "mean_actual_transition_value": 0.89
+    },
+    "checks": {
+      "artifact_complete": true,
+      "zero_leakage": true,
+      "zero_infrastructure_failure": true,
+      "zero_graph_invariant_violation": true,
+      "controller_only_mutation": true,
+      "zero_unsupported_answer": true,
+      "zero_selected_infeasible_join": true,
+      "zero_repeated_extraction_fingerprint": true,
+      "zero_no_diff_editor_allocation": true,
+      "candidate_presence": false,
+      "legacy_execution_plan_completion": false,
+      "graph_proof_completion": true,
+      "f1_non_regression": false,
+      "bounded_logical_calls": true,
+      "bounded_logical_tokens": true,
+      "bounded_budget_exhaustion": true,
+      "positive_immediate_calibration": true,
+      "positive_delayed_calibration": true,
+      "positive_choice_conditioned_delayed_calibration": false,
+      "choice_conditioned_sample_size": true,
+      "successful_proof_gap_has_positive_delayed_return": false,
+      "successful_proof_gap_exceeds_failed": false,
+      "complete_evc_trace": true,
+      "complete_delayed_credit_trace": true,
+      "non_uniform_allocation": true,
+      "terminal_outcomes_typed": true,
+      "complete_proof_obligation_trace": true,
+      "zero_no_executable_without_certificate": true,
+      "zero_viable_cost_clipping_stop": true,
+      "absolute_cost_ready_set_invariance": true,
+      "all_abstains_have_exhaustion_evidence": true,
+      "exact_requested_provider_call_accounting": true,
+      "zero_unjustified_high_fidelity": true,
+      "complete_operation_target_audit": true,
+      "complete_actual_obligation_closure_trace": true,
+      "complete_transition_trace": true,
+      "certified_transitions_realized": true,
+      "zero_invalid_transition_bypass": true
+    },
+    "passed": false,
+    "decision": "ITERATE",
+    "failed_checks": [
+      "candidate_presence",
+      "legacy_execution_plan_completion",
+      "f1_non_regression",
+      "positive_choice_conditioned_delayed_calibration",
+      "successful_proof_gap_has_positive_delayed_return",
+      "successful_proof_gap_exceeds_failed"
+    ]
+  },
+  "transitions": {
+    "chain_absent_both": 6,
+    "chain_gained": 2
+  },
+  "paired_changes": {
+    "2hop__424908_500483": {
+      "transition": "chain_gained",
+      "diagnostic_cause": "paired_outcome_change",
+      "baseline": {
+        "exact_match": false,
+        "f1": 0.0,
+        "status": "abstain",
+        "trace": {
+          "termination": {
+            "step": 19,
+            "outcome": "ABSTAIN",
+            "best_predicted_evc": 0.01163827632812503,
+            "answer_node_id": null,
+            "reason": "affordable_proof_opportunity_below_net_value_threshold",
+            "remaining_budget": {
+              "llm_calls": 5,
+              "tokens": 3999,
+              "retrieval_calls": 3,
+              "graph_operations": 45
+            },
+            "dead_end_certificate": {
+              "certificate_version": "proof-obligation-dead-end-v2.4.3.2",
+              "step": 19,
+              "open_obligations": [
+                {
+                  "obligation_id": "obligation_129ab9cf6efd1677",
+                  "target_subgoal": "subgoal_root",
+                  "branch_id": "branch_root.b5.1",
+                  "obligation_type": "missing_binding",
+                  "status": "OPEN",
+                  "severity": 1.0,
+                  "terminal_reachable": true,
+                  "required_node_ids": [
+                    "subgoal_2"
+                  ],
+                  "satisfied_by_node_ids": [],
+                  "reason_codes": [
+                    "unresolved_dependency"
+                  ],
+                  "provenance_event_ids": [],
+                  "created_at_step": 5,
+                  "updated_at_step": 19
+                },
+                {
+                  "obligation_id": "obligation_6d377811b7cd0d53",
+                  "target_subgoal": "subgoal_2",
+                  "branch_id": "branch_root.b5.1",
+                  "obligation_type": "missing_join_premise",
+                  "status": "OPEN",
+                  "severity": 0.85,
+                  "terminal_reachable": true,
+                  "required_node_ids": [
+                    "claim_v2_9_subgoal_2_1",
+                    "subgoal_1"
+                  ],
+                  "satisfied_by_node_ids": [],
+                  "reason_codes": [
+                    "dependency_not_composed"
+                  ],
+                  "provenance_event_ids": [
+                    "retrieval_attempt_op_v2_0007_retrieve_subgoal_2_branch_root_b5_1_allocation_000019",
+                    "retrieval_attempt_op_v2_0018_retrieve_subgoal_2_branch_root_b5_1_allocation_000068"
+                  ],
+                  "created_at_step": 9,
+                  "updated_at_step": 19
+                },
+                {
+                  "obligation_id": "obligation_89ccc4e57adcfcdf",
+                  "target_subgoal": "subgoal_1",
+                  "branch_id": "branch_root.b5.2",
+                  "obligation_type": "missing_evidence",
+                  "status": "OPEN",
+                  "severity": 1.0,
+                  "terminal_reachable": true,
+                  "required_node_ids": [],
+                  "satisfied_by_node_ids": [],
+                  "reason_codes": [
+                    "no_grounding_evidence"
+                  ],
+                  "provenance_event_ids": [],
+                  "created_at_step": 5,
+                  "updated_at_step": 19
+                },
+                {
+                  "obligation_id": "obligation_dd318e0645c6e662",
+                  "target_subgoal": "subgoal_1",
+                  "branch_id": "branch_root.b5.1",
+                  "obligation_type": "missing_evidence",
+                  "status": "OPEN",
+                  "severity": 1.0,
+                  "terminal_reachable": true,
+                  "required_node_ids": [],
+                  "satisfied_by_node_ids": [],
+                  "reason_codes": [
+                    "no_grounding_evidence"
+                  ],
+                  "provenance_event_ids": [],
+                  "created_at_step": 5,
+                  "updated_at_step": 19
+                },
+                {
+                  "obligation_id": "obligation_e6738e6a848068d3",
+                  "target_subgoal": "subgoal_root",
+                  "branch_id": "branch_root.b5.1",
+                  "obligation_type": "missing_evidence",
+                  "status": "OPEN",
+                  "severity": 1.0,
+                  "terminal_reachable": true,
+                  "required_node_ids": [],
+                  "satisfied_by_node_ids": [],
+                  "reason_codes": [
+                    "no_grounding_evidence"
+                  ],
+                  "provenance_event_ids": [],
+                  "created_at_step": 5,
+                  "updated_at_step": 19
+                }
+              ],
+              "blocked_obligations": [],
+              "remaining_budget": {
+                "llm_calls": 5,
+                "tokens": 3999,
+                "retrieval_calls": 3,
+                "graph_operations": 45
+              },
+              "candidate_operations": [
+                {
+                  "allocation_id": "allocation_000076",
+                  "operation_id": "op_v2_0020_merge_subgoal_root_branch_root_b5_2",
+                  "operation_type": "MERGE",
+                  "target_obligation_ids": [],
+                  "gross_opportunity": 0.10843604000000001,
+                  "absolute_cost": 0.09679776367187498,
+                  "net_evc": 0.01163827632812503
+                }
+              ],
+              "feasible_unselected_join_count": 0,
+              "exhaustion_evidence": [
+                "dependency_not_composed",
+                "no_grounding_evidence",
+                "unresolved_dependency"
+              ],
+              "decision_layer": "net_evc_after_feasibility"
+            }
+          },
+          "final_meta_reason": "affordable_proof_opportunity_below_net_value_threshold",
+          "final_candidate_count": 1,
+          "final_positive_evc_count": 1,
+          "final_top_candidates": [
+            {
+              "operation_family": "merge:validate_join",
+              "operation_id": "op_v2_0020_merge_subgoal_root_branch_root_b5_2",
+              "fidelity_level": "high",
+              "predicted_immediate_utility": 0.2710901,
+              "predicted_delayed_proof_return": 0.0,
+              "predicted_normalized_cost": 0.09679776367187498,
+              "gross_horizon_value": 0.10843604000000001,
+              "predicted_evc": 0.01163827632812503,
+              "proof_gap_reducibility": 0.0,
+              "feasibility_unlock": 0.0
+            }
+          ],
+          "substantial_budget_remaining": false,
+          "allocation_family_counts": {
+            "branch:assignments": 1,
+            "branch:extract_typed": 4,
+            "commit:default": 1,
+            "merge:validate_join": 2,
+            "retrieve:default": 5,
+            "verify:default": 5
+          },
+          "allocation_count": 18,
+          "zero_row_extraction_count": 4,
+          "accepted_join_count": 2,
+          "answer_used_join_count": 0
+        }
+      },
+      "candidate": {
+        "exact_match": true,
+        "f1": 1.0,
+        "status": "answer",
+        "trace": {
+          "termination": {
+            "step": 18,
+            "outcome": "ANSWER",
+            "best_predicted_evc": 0.29663538864526867,
+            "answer_node_id": "answer_v2_0018_answer_1",
+            "reason": "accepted_graph_grounded_answer",
+            "remaining_budget": {
+              "llm_calls": 6,
+              "tokens": 4301,
+              "retrieval_calls": 4,
+              "graph_operations": 46
+            },
+            "dead_end_certificate": {}
+          },
+          "final_meta_reason": "accepted_graph_grounded_answer",
+          "final_candidate_count": 2,
+          "final_positive_evc_count": 2,
+          "final_top_candidates": [
+            {
+              "operation_family": "verify:default",
+              "operation_id": "op_v2_0019_verify_subgoal_2_branch_root_b5_1",
+              "fidelity_level": "medium",
+              "predicted_immediate_utility": 0.4404631358690345,
+              "predicted_delayed_proof_return": 0.30233466556119565,
+              "predicted_normalized_cost": 0.0609506650390625,
+              "gross_horizon_value": 0.35758605368433116,
+              "predicted_evc": 0.29663538864526867,
+              "proof_gap_reducibility": 0.0,
+              "feasibility_unlock": 0.0
+            },
+            {
+              "operation_family": "verify:default",
+              "operation_id": "op_v2_0019_verify_subgoal_2_branch_root_b5_1",
+              "fidelity_level": "low",
+              "predicted_immediate_utility": 0.35441727408575313,
+              "predicted_delayed_proof_return": 0.22185299186623558,
+              "predicted_normalized_cost": 0.050551279296875,
+              "gross_horizon_value": 0.2748787047540426,
+              "predicted_evc": 0.22432742545716758,
+              "proof_gap_reducibility": 0.0,
+              "feasibility_unlock": 0.0
+            }
+          ],
+          "substantial_budget_remaining": true,
+          "allocation_family_counts": {
+            "branch:assignments": 1,
+            "branch:extract_typed": 4,
+            "commit:answer": 1,
+            "commit:default": 2,
+            "merge:validate_join": 2,
+            "retrieve:default": 4,
+            "verify:default": 3
+          },
+          "allocation_count": 17,
+          "zero_row_extraction_count": 4,
+          "accepted_join_count": 2,
+          "answer_used_join_count": 2
+        }
+      }
+    },
+    "4hop1__107309_457883_650651_7262": {
+      "transition": "chain_gained",
+      "diagnostic_cause": "paired_outcome_change",
+      "baseline": {
+        "exact_match": false,
+        "f1": 0.0,
+        "status": "abstain",
+        "trace": {
+          "termination": {
+            "step": 7,
+            "outcome": "ABSTAIN",
+            "best_predicted_evc": 0.0,
+            "answer_node_id": null,
+            "reason": "no_executable_computation_with_certificate",
+            "remaining_budget": {
+              "llm_calls": 11,
+              "tokens": 10001,
+              "retrieval_calls": 5,
+              "graph_operations": 57
+            },
+            "dead_end_certificate": {
+              "certificate_version": "proof-obligation-dead-end-v2.4.3.2",
+              "step": 7,
+              "open_obligations": [
+                {
+                  "obligation_id": "obligation_b031359b555c7172",
+                  "target_subgoal": "subgoal_root",
+                  "branch_id": "branch_root",
+                  "obligation_type": "missing_evidence",
+                  "status": "OPEN",
+                  "severity": 1.0,
+                  "terminal_reachable": true,
+                  "required_node_ids": [],
+                  "satisfied_by_node_ids": [],
+                  "reason_codes": [
+                    "no_grounding_evidence"
+                  ],
+                  "provenance_event_ids": [],
+                  "created_at_step": 1,
+                  "updated_at_step": 7
+                },
+                {
+                  "obligation_id": "obligation_bdac6de66537124f",
+                  "target_subgoal": "subgoal_root",
+                  "branch_id": "branch_root",
+                  "obligation_type": "missing_binding",
+                  "status": "OPEN",
+                  "severity": 1.0,
+                  "terminal_reachable": true,
+                  "required_node_ids": [
+                    "subgoal_2"
+                  ],
+                  "satisfied_by_node_ids": [],
+                  "reason_codes": [
+                    "unresolved_dependency"
+                  ],
+                  "provenance_event_ids": [],
+                  "created_at_step": 1,
+                  "updated_at_step": 7
+                }
+              ],
+              "blocked_obligations": [
+                {
+                  "obligation_id": "obligation_2b3ee837fee1577c",
+                  "target_subgoal": "subgoal_2",
+                  "branch_id": "branch_root",
+                  "obligation_type": "extraction_exhausted",
+                  "status": "BLOCKED",
+                  "severity": 0.9,
+                  "terminal_reachable": true,
+                  "required_node_ids": [
+                    "evidence_v2_2_10_5",
+                    "evidence_v2_2_1_0",
+                    "evidence_v2_2_2_2",
+                    "evidence_v2_2_3_13",
+                    "evidence_v2_2_4_8",
+                    "evidence_v2_2_5_11",
+                    "evidence_v2_2_6_3",
+                    "evidence_v2_2_7_15",
+                    "evidence_v2_2_8_9",
+                    "evidence_v2_2_9_14",
+                    "evidence_v2_7_1_17",
+                    "evidence_v2_7_2_18",
+                    "evidence_v2_7_3_6"
+                  ],
+                  "satisfied_by_node_ids": [],
+                  "reason_codes": [
+                    "typed_extraction_failed"
+                  ],
+                  "provenance_event_ids": [
+                    "outcome_allocation_000012",
+                    "outcome_allocation_000021",
+                    "retrieval_attempt_op_v2_0002_retrieve_subgoal_2_branch_root_allocation_000006",
+                    "retrieval_attempt_op_v2_0007_retrieve_subgoal_2_branch_root_allocation_000022"
+                  ],
+                  "created_at_step": 6,
+                  "updated_at_step": 7
+                }
+              ],
+              "remaining_budget": {
+                "llm_calls": 11,
+                "tokens": 10001,
+                "retrieval_calls": 5,
+                "graph_operations": 57
+              },
+              "candidate_operations": [],
+              "feasible_unselected_join_count": 0,
+              "exhaustion_evidence": [
+                "typed_extraction_failed"
+              ]
+            }
+          },
+          "final_meta_reason": "no_executable_computation_with_certificate",
+          "final_candidate_count": 0,
+          "final_positive_evc_count": 0,
+          "final_top_candidates": [],
+          "substantial_budget_remaining": true,
+          "allocation_family_counts": {
+            "branch:extract_typed": 3,
+            "commit:default": 1,
+            "retrieve:default": 3,
+            "verify:default": 1
+          },
+          "allocation_count": 8,
+          "zero_row_extraction_count": 3,
+          "accepted_join_count": 0,
+          "answer_used_join_count": 0
+        }
+      },
+      "candidate": {
+        "exact_match": true,
+        "f1": 1.0,
+        "status": "answer",
+        "trace": {
+          "termination": {
+            "step": 11,
+            "outcome": "ANSWER",
+            "best_predicted_evc": 0.0,
+            "answer_node_id": "answer_v2_0011_answer_1",
+            "reason": "accepted_graph_grounded_answer",
+            "remaining_budget": {
+              "llm_calls": 9,
+              "tokens": 6215,
+              "retrieval_calls": 6,
+              "graph_operations": 53
+            },
+            "dead_end_certificate": {}
+          },
+          "final_meta_reason": "accepted_graph_grounded_answer",
+          "final_candidate_count": 0,
+          "final_positive_evc_count": 0,
+          "final_top_candidates": [],
+          "substantial_budget_remaining": true,
+          "allocation_family_counts": {
+            "branch:extract_typed": 2,
+            "commit:answer": 1,
+            "commit:default": 2,
+            "merge:validate_join": 1,
+            "retrieve:default": 2,
+            "verify:default": 2
+          },
+          "allocation_count": 10,
+          "zero_row_extraction_count": 2,
+          "accepted_join_count": 1,
+          "answer_used_join_count": 1
+        }
+      }
+    }
+  },
+  "primary_diagnosis": [
+    "The delayed-credit target and both calibration gates passed.",
+    "Net EVC cost subtraction clipped viable recovery actions to zero in two chain regressions despite substantial remaining budget.",
+    "Two additional chain regressions exhausted the ready set after a different JOIN/extraction trajectory; family capacity priors are too coarse for within-family frontier ranking.",
+    "The candidate gained two chains, so the mechanism is active but not quality-safe under the frozen v2.4.2 policy."
+  ],
+  "next_change_boundary": [
+    "Do not change credit attribution or the passed calibration thresholds.",
+    "Replace coarse family-only delayed capacity with graph-local causal reachability and proof-frontier features.",
+    "Calibrate normalized cost semantics so meta-stop cannot discard a high proof-gap opportunity solely through min-max cost scaling.",
+    "Repeat zero-API replay and a new preregistered development smoke before opening shadow-B."
+  ]
+}

@@ -374,6 +374,9 @@ class V2GraphController(GraphController):
             raise GraphInvariantError("retrieval attempt evidence must be a list")
         hit_count = int(operation.payload.get("hit_count", len(evidence_rows)))
         allocated_top_k = int(operation.payload.get("allocated_top_k", hit_count))
+        allocation = operation.payload.get("_allocation", {})
+        if not isinstance(allocation, dict):
+            raise GraphInvariantError("retrieval allocation trace must be a mapping")
         graph.retrieval_attempt_history.append(RetrievalAttemptRecord(
             attempt_id=f"retrieval_attempt_{operation.operation_id}",
             operation_id=operation.operation_id,
@@ -386,6 +389,10 @@ class V2GraphController(GraphController):
             hit_count=hit_count,
             new_evidence_count=len(evidence_rows),
             passage_ids=[str(row.get("passage_id", row.get("document_id", ""))) for row in evidence_rows],
+            recovery_policy=str(operation.payload.get("recovery_policy", "")),
+            recovery_target_obligation_ids=[
+                str(value) for value in allocation.get("target_obligation_ids", [])
+            ],
         ))
         activation = operation.payload.get("memory_activation", {})
         if not isinstance(activation, dict):

@@ -6,6 +6,7 @@ from pathlib import Path
 from tdca_research.budget import Budget
 from tdca_research.dynamic.graph import OperationType
 from tdca_research.dynamic_v2.allocator import AdaptiveComputationAllocator
+from tdca_research.dynamic_v2.engine import _pending_recovery_extraction
 from tdca_research.dynamic_v2.config import DynamicV2ResearchConfig
 from tdca_research.dynamic_v2.obligations import (
     operation_conditioned_closure_value,
@@ -80,7 +81,7 @@ def test_v2436_projects_unusable_target_claim_into_controller_obligation():
 
 
 def test_v2436_recovery_retrieval_targets_the_projected_proof_gap():
-    cfg = _config()
+    cfg = _config(proof_recovery_extraction_priority=True)
     controller, graph = _target_graph(cfg)
     claim = graph.node("c1")
     subgoal = graph.node("s_root")
@@ -111,11 +112,38 @@ def test_v2436_recovery_retrieval_targets_the_projected_proof_gap():
     packet = AdaptiveComputationAllocator(cfg).allocate(
         graph, [recovery], Budget(16, 16000, 0, Usage()),
     )[0]
+    actual = _operation(90, OperationType.RETRIEVE, payload={
+        **recovery.payload,
+        "allocated_top_k": 5,
+        "hit_count": 1,
+        "evidence": [{
+            "node_id": "e90", "document_id": "p90", "passage_id": "p90",
+            "title": "Alpha corroboration",
+            "source_span": "Alpha City is located in Beta Country.",
+            "retrieval_rank": 1, "retrieval_score": 0.9,
+            "retrieval_query": query, "retriever_identity": "fixture",
+        }],
+    })
     graph = controller.apply(
-        graph, AdaptiveComputationAllocator.attach(recovery, packet),
+        graph, AdaptiveComputationAllocator.attach(actual, packet),
     )
+    attempt = graph.retrieval_attempt_history[-1]
+    assert attempt.recovery_policy == "proof_gap_recovery_v1"
+    assert attempt.recovery_target_obligation_ids == targets
+    pending = _pending_recovery_extraction(
+        graph, "s_root", "branch_root", graph.evidence("s_root", "branch_root"),
+        graph.claims("s_root", "branch_root"), [], set(),
+    )
+    assert pending is not None
+    assert pending[0].attempt_id == attempt.attempt_id
+    assert _pending_recovery_extraction(
+        graph, "s_root", "branch_root", graph.evidence("s_root", "branch_root"),
+        graph.claims("s_root", "branch_root"), [],
+        {("s_root", "branch_root", pending[1], "coverage")},
+    ) is None
     restored = type(graph).from_dict(graph.to_dict())
     restored.validate()
+    assert restored.proof_obligation_version == "proof-obligation-state-v2.4.3.7"
     assert restored.allocation_history[-1].target_obligation_ids == targets
     assert restored.allocation_history[-1].obligation_estimate
     assert restored.allocation_history[-1].transition_certificate == (
@@ -175,3 +203,18 @@ def test_v2436_frozen_config_reverts_failed_v2435_trials_and_keeps_gates():
     assert gates["legacy_execution_plan_completion_rate_min"] == 0.75
     assert gates["f1_min"] == 0.58
     assert prereg["training"] is False
+
+
+def test_v2437_frozen_config_enables_only_recovery_evidence_priority():
+    root = Path(__file__).resolve().parents[1]
+    config = DynamicV2ResearchConfig.from_yaml(
+        root / "configs/dynamic_hypergraph_v2437_qwen_smoke20.yaml"
+    )
+    config.validate()
+    assert config.proof_quality_obligation_alignment
+    assert config.anchored_proof_recovery_query
+    assert config.proof_recovery_extraction_priority
+    assert not config.feedback_conditioned_delayed_value
+    assert not config.compact_objective_recovery_query
+    assert config.campaign_provider_call_cap == 1000
+    assert config.campaign_provider_token_cap == 853_282

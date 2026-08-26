@@ -405,12 +405,49 @@ class DynamicHypergraphV2Reasoner:
                     claim for claim in graph.claims(subgoal.node_id, branch.branch_id)
                     if claim.status not in {CandidateStatus.INVALID, CandidateStatus.ARCHIVED}
                 ]
+                region_attempts = [
+                    row for row in graph.retrieval_attempt_history
+                    if row.target_subgoal == subgoal.node_id
+                    and row.branch_id == branch.branch_id
+                ]
+                pending_recovery = (
+                    _pending_recovery_extraction(
+                        graph, subgoal.node_id, branch.branch_id, evidence,
+                        claims, dependencies, attempted_extractions,
+                    )
+                    if self.config.proof_recovery_extraction_priority
+                    else None
+                )
+                if pending_recovery is not None:
+                    recovery_attempt, recovery_fingerprint = pending_recovery
+                    reasoning_trace.append({
+                        "event": "proof_recovery_extraction_priority",
+                        "step": graph.step,
+                        "target_id": subgoal.node_id,
+                        "branch_id": branch.branch_id,
+                        "retrieval_attempt_id": recovery_attempt.attempt_id,
+                        "target_obligation_ids": list(
+                            recovery_attempt.recovery_target_obligation_ids
+                        ),
+                        "new_evidence_count": recovery_attempt.new_evidence_count,
+                    })
+                    operations.append(self._placeholder(
+                        graph, OperationType.BRANCH, subgoal, branch,
+                        {
+                            "mode": "extract_typed",
+                            "question": question,
+                            "dependency_claim_ids": dependencies,
+                            "extraction_evidence_count": len(evidence),
+                            "extraction_state_fingerprint": recovery_fingerprint,
+                            "recovery_policy": recovery_attempt.recovery_policy,
+                            "recovery_target_obligation_ids": list(
+                                recovery_attempt.recovery_target_obligation_ids
+                            ),
+                        },
+                        sources=[node.node_id for node in evidence] + dependencies,
+                    ))
+                    continue
                 if not evidence:
-                    region_attempts = [
-                        row for row in graph.retrieval_attempt_history
-                        if row.target_subgoal == subgoal.node_id
-                        and row.branch_id == branch.branch_id
-                    ]
                     if not self.config.region_level_retrieval_stopping:
                         query = question
                         if (
@@ -1741,6 +1778,44 @@ def _extraction_state_fingerprint(
             or row.target_claim_id in set(dependency_ids)
         ),
     })
+
+
+def _pending_recovery_extraction(
+    graph: DynamicReasoningHypergraphV2,
+    target_subgoal: str,
+    branch_id: str,
+    evidence: list[EvidenceNode],
+    claims: list[ClaimNode],
+    dependency_ids: list[str],
+    attempted_extractions: set[tuple[str, str, str, str]],
+) -> tuple[Any, str] | None:
+    """Return fresh, unconsumed recovery evidence in one graph region."""
+    attempts = [
+        row for row in graph.retrieval_attempt_history
+        if row.target_subgoal == target_subgoal and row.branch_id == branch_id
+    ]
+    if not evidence or not attempts:
+        return None
+    latest = attempts[-1]
+    if (
+        latest.recovery_policy != "proof_gap_recovery_v1"
+        or latest.new_evidence_count <= 0
+        or not latest.recovery_target_obligation_ids
+    ):
+        return None
+    last_extracted_evidence_count = max((
+        int(claim.provenance.metadata.get("extraction_evidence_count", 0))
+        for claim in claims
+    ), default=0)
+    if len(evidence) <= last_extracted_evidence_count:
+        return None
+    fingerprint = _extraction_state_fingerprint(
+        graph, target_subgoal, branch_id, evidence, dependency_ids,
+    )
+    key = (target_subgoal, branch_id, fingerprint, "coverage")
+    if key in attempted_extractions:
+        return None
+    return latest, fingerprint
 
 
 def _query_token_overlap(left: str, right: str) -> float:
