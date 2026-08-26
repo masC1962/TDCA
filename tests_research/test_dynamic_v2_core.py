@@ -558,6 +558,32 @@ def test_failed_join_key_changes_only_after_controller_belief_update():
     assert _join_attempt_key(graph, refreshed) != before
 
 
+def test_v2439_semantic_join_key_changes_when_feasibility_state_changes():
+    cfg, controller, graph = chain_graph()
+    engine = MultiHopJoinEngine(
+        DeterministicMockLLM(), Budget(16, 6000, 200, Usage()), cfg,
+    )
+    candidate = engine.discover(graph, "branch_root", "s_root")[0]
+    before = _join_attempt_key(graph, candidate, semantic_state=True)
+    claim = graph.node("c2")
+    graph = controller.apply(graph, operation(92, OperationType.VERIFY, payload={
+        "scores": {"c2": {
+            **claim.score.raw.__dict__, "grounding": 0.1,
+            "absolute_support": 0.2,
+            "relative_weight": claim.score.relative_weight,
+            "set_entropy": claim.score.set_entropy,
+            "evidence_gap": 0.8, "status": "scored",
+        }},
+    }))
+    refreshed = next(
+        row for row in engine.discover(graph, "branch_root", "s_root")
+        if row.signature == candidate.signature
+    )
+    assert _join_attempt_key(
+        graph, refreshed, semantic_state=True,
+    ) != before
+
+
 def test_join_discovers_shared_object_path_without_relation_specific_rules():
     cfg, controller, graph = chain_graph()
     graph = controller.apply(graph, operation(5, OperationType.BRANCH, payload={
@@ -1306,6 +1332,19 @@ def test_typed_value_canonicalization_keeps_atomic_infobox_and_scalar_endpoints(
     assert _projection_type_compatible("phrase", "acronym_expansion")
     assert _projection_type_compatible("destroyer_class", "list[destroyer_class]")
     assert not _projection_type_compatible("country", "meaning")
+
+
+def test_v2439_numeric_output_aliases_are_opt_in_and_type_safe():
+    assert not _projection_type_compatible("fraction", "numerical")
+    assert _projection_type_compatible(
+        "fraction", "numerical", numeric_aliases=True,
+    )
+    assert _projection_type_compatible(
+        "percentage", "number", numeric_aliases=True,
+    )
+    assert not _projection_type_compatible(
+        "country", "numerical", numeric_aliases=True,
+    )
 
 
 def test_dependency_identity_exception_requires_literal_parenthetical_alias():

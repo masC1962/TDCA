@@ -182,6 +182,14 @@ class DynamicV2ResearchConfig(DynamicResearchConfig):
     # not trusted to preserve or assert this policy label.
     controller_derived_recovery_provenance: bool = False
 
+    # v2.4.3.9 closes a schema-level alias gap for quantitative outputs while
+    # preserving all frozen v2.4.3.8 projection decisions by default.
+    numeric_output_type_normalization: bool = False
+
+    # v2.4.3.9 retries a previously infeasible JOIN only after a premise field
+    # used by the deterministic feasibility gate actually changes.
+    semantic_join_attempt_state_key: bool = False
+
     # Terminal acceptance is a conjunctive readout over independent belief
     # channels.  These are initial development values, never learned weights.
     terminal_min_absolute_support: float = 0.70

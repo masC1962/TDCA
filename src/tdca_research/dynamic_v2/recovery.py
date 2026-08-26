@@ -61,7 +61,9 @@ _VERIFIED_STATUSES = {
 }
 
 
-def strict_output_type_compatible(proposed: str, expected: str) -> bool:
+def strict_output_type_compatible(
+    proposed: str, expected: str, *, numeric_aliases: bool = False,
+) -> bool:
     """Return whether an inferred open endpoint can fill the requested slot."""
     aliases = {
         "human": "person", "people": "person", "actor": "person",
@@ -74,6 +76,12 @@ def strict_output_type_compatible(proposed: str, expected: str) -> bool:
         "string": "textual", "acronym_expansion": "textual",
         "definition": "textual", "meaning": "textual",
     }
+    if numeric_aliases:
+        aliases.update({
+            "numerical": "number", "numeric": "number",
+            "fraction": "number", "percentage": "number",
+            "percent": "number", "decimal": "number", "ratio": "number",
+        })
 
     def canonical(value: str) -> set[str]:
         normalized = (
@@ -90,6 +98,8 @@ def claim_projects_target(
     graph: DynamicReasoningHypergraphV2,
     claim: ClaimNode,
     seen: set[str] | None = None,
+    *,
+    numeric_aliases: bool = False,
 ) -> bool:
     """Determine target projection from sealed graph semantics only."""
     seen = set(seen or ())
@@ -103,7 +113,7 @@ def claim_projects_target(
     projection_id = str(semantics.qualifiers.get("projection_premise_id", ""))
     projection = graph.nodes.get(projection_id)
     if isinstance(projection, ClaimNode) and claim_projects_target(
-        graph, projection, seen,
+        graph, projection, seen, numeric_aliases=numeric_aliases,
     ):
         return True
 
@@ -130,7 +140,9 @@ def claim_projects_target(
     if subject_bound == value_bound:
         return False
     output_type = semantics.value_type if subject_bound else semantics.subject_type
-    return strict_output_type_compatible(output_type, subgoal.answer_type)
+    return strict_output_type_compatible(
+        output_type, subgoal.answer_type, numeric_aliases=numeric_aliases,
+    )
 
 
 def proof_usable_target_claim(

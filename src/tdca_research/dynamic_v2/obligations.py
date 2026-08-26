@@ -49,6 +49,11 @@ def refresh_proof_obligations(
     """
 
     graph.proof_obligation_version = (
+        "proof-obligation-state-v2.4.3.9"
+        if config is not None and (
+            config.numeric_output_type_normalization
+            or config.semantic_join_attempt_state_key
+        ) else
         "proof-obligation-state-v2.4.3.8"
         if config is not None and config.controller_derived_recovery_provenance else
         "proof-obligation-state-v2.4.3.7"
@@ -505,6 +510,9 @@ def dead_end_certificate(
     ]
     return {
         "certificate_version": (
+            "proof-obligation-dead-end-v2.4.3.9"
+            if graph.proof_obligation_version == "proof-obligation-state-v2.4.3.9"
+            else
             "proof-obligation-dead-end-v2.4.3.8"
             if graph.proof_obligation_version == "proof-obligation-state-v2.4.3.8"
             else
@@ -658,7 +666,13 @@ def _project_subgoal_branch(
         and subgoal.status != SubgoalStatus.RESOLVED
         and evidence
     ):
-        target_claims = [row for row in claims if claim_projects_target(graph, row)]
+        target_claims = [
+            row for row in claims
+            if claim_projects_target(
+                graph, row,
+                numeric_aliases=config.numeric_output_type_normalization,
+            )
+        ]
         verdicts = {
             row.node_id: proof_usable_target_claim(
                 graph, row, subgoal, config, projects_target=True,

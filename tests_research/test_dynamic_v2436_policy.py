@@ -247,3 +247,28 @@ def test_v2438_frozen_config_adds_only_controller_provenance_derivation():
         "derive_recovery_policy_from_controller_owned_target_obligations"
     ]
     assert prereg["training"] is False
+
+
+def test_v2439_frozen_config_adds_only_schema_and_retry_state_fixes():
+    root = Path(__file__).resolve().parents[1]
+    config = DynamicV2ResearchConfig.from_yaml(
+        root / "configs/dynamic_hypergraph_v2439_qwen_smoke20.yaml"
+    )
+    config.validate()
+    assert config.controller_derived_recovery_provenance
+    assert config.numeric_output_type_normalization
+    assert config.semantic_join_attempt_state_key
+    assert not config.feedback_conditioned_delayed_value
+    assert not config.compact_objective_recovery_query
+    assert config.campaign_provider_call_cap == 748
+    assert config.campaign_provider_token_cap == 559_668
+    prereg = json.loads((
+        root / "configs/dynamic_v2439_preregistration.json"
+    ).read_text(encoding="utf-8"))
+    assert prereg["only_semantic_delta"][
+        "normalize_quantitative_output_type_aliases"
+    ]
+    assert prereg["only_semantic_delta"][
+        "bind_join_retry_to_exact_feasibility_state"
+    ]
+    assert prereg["training"] is False

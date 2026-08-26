@@ -89,6 +89,7 @@ class DynamicHypergraphV2Reasoner:
                 initial = self._normalize_initial_plan(
                     planner.initial_expand(example.question),
                     self.config.terminal_dependency_closure,
+                    self.config.numeric_output_type_normalization,
                 )
                 graph = self._apply(controller, graph, initial, reasoning_trace, None)
             except (GraphInvariantError, ProviderRefusalError, StructuredOutputError) as exc:
@@ -592,7 +593,10 @@ class DynamicHypergraphV2Reasoner:
                 semantic_direct_claims = [
                     claim for claim in claims
                     if claim.status in {CandidateStatus.SCORED, CandidateStatus.RETAINED, CandidateStatus.REVISED}
-                    and _claim_answers_subgoal(graph, claim)
+                    and _claim_answers_subgoal(
+                        graph, claim,
+                        numeric_aliases=self.config.numeric_output_type_normalization,
+                    )
                 ]
                 proof_verdicts = {
                     claim.node_id: proof_usable_target_claim(
@@ -693,7 +697,10 @@ class DynamicHypergraphV2Reasoner:
                     feasible_joins = []
                     filtered_joins = []
                     for candidate in discovered_joins:
-                        attempt_key = _join_attempt_key(graph, candidate)
+                        attempt_key = _join_attempt_key(
+                            graph, candidate,
+                            semantic_state=self.config.semantic_join_attempt_state_key,
+                        )
                         if attempt_key in attempted_joins:
                             continue
                         feasibility = join_engine.check_feasible(graph, candidate)
@@ -758,13 +765,21 @@ class DynamicHypergraphV2Reasoner:
                     discovered_joins = feasible_joins
                 joins = [
                     row for row in discovered_joins
-                    if _join_attempt_key(graph, row) not in attempted_joins
+                    if _join_attempt_key(
+                        graph, row,
+                        semantic_state=self.config.semantic_join_attempt_state_key,
+                    ) not in attempted_joins
                     and _nary_relevant(graph, row, set(dependencies))
                 ]
                 if self.config.goal_conditioned_join_frontier:
                     joins = [
                         row for row in joins
-                        if _join_can_answer_subgoal(graph, row, subgoal, branch)
+                        if _join_can_answer_subgoal(
+                            graph, row, subgoal, branch,
+                            numeric_aliases=(
+                                self.config.numeric_output_type_normalization
+                            ),
+                        )
                     ]
                 if _charged_join_attempt_count(
                     graph,
@@ -812,7 +827,12 @@ class DynamicHypergraphV2Reasoner:
                         {
                             "mode": "validate_join", "premise_ids": list(join.premise_ids),
                             "binding": join.binding, "join_signature": join.signature,
-                            "join_attempt_key": _join_attempt_key(graph, join),
+                            "join_attempt_key": _join_attempt_key(
+                                graph, join,
+                                semantic_state=(
+                                    self.config.semantic_join_attempt_state_key
+                                ),
+                            ),
                             "join_depth": join.join_depth,
                             "orientation": join.orientation,
                             "open_endpoints": list(join.open_endpoints),
@@ -1222,6 +1242,7 @@ class DynamicHypergraphV2Reasoner:
     def _normalize_initial_plan(
         operation: GraphOperation,
         terminal_dependency_closure: bool = False,
+        numeric_output_type_normalization: bool = False,
     ) -> GraphOperation:
         """Collapse a near-duplicate final subgoal/root pair into an alias.
 
@@ -1247,6 +1268,7 @@ class DynamicHypergraphV2Reasoner:
         if not _strict_output_type_compatible(
             str(root.get("answer_type", "entity")),
             str(source.get("answer_type", "entity")),
+            numeric_aliases=numeric_output_type_normalization,
         ):
             return _close_terminal_dependency_gap(operation) if terminal_dependency_closure else operation
         root_template = str(root.get("question_template", ""))
@@ -1666,6 +1688,8 @@ def _join_can_answer_subgoal(
     candidate: JoinCandidate,
     subgoal: SubgoalNode,
     branch: BranchState,
+    *,
+    numeric_aliases: bool = False,
 ) -> bool:
     """Hard-filter JOINs that cannot project the requested slot output."""
     if candidate.projection_premise_id:
@@ -1698,7 +1722,10 @@ def _join_can_answer_subgoal(
         if normalize_text(claim.value) == output:
             output_types.add(semantics.value_type)
     return any(
-        _strict_output_type_compatible(value, subgoal.answer_type)
+        _strict_output_type_compatible(
+            value, subgoal.answer_type,
+            numeric_aliases=numeric_aliases,
+        )
         for value in output_types
     )
 
@@ -1902,7 +1929,13 @@ def _retrieval_retry_gate(
         }
     target_usable = []
     for claim in yielded_claims:
-        projects = _claim_answers_subgoal(graph, claim)
+        projects = _claim_answers_subgoal(
+            graph, claim,
+            numeric_aliases=(
+                config.numeric_output_type_normalization
+                if config is not None else False
+            ),
+        )
         if not projects:
             continue
         if config is not None and config.proof_usable_target_gate:
@@ -2050,8 +2083,43 @@ def _light_stem(token: str) -> str:
 
 def _join_attempt_key(
     graph: DynamicReasoningHypergraphV2, candidate: JoinCandidate,
+    *, semantic_state: bool = False,
 ) -> str:
     """Bind a failed JOIN to the premise belief state that was evaluated."""
+    if semantic_state:
+        return stable_hash({
+            "signature": candidate.signature,
+            "premise_feasibility_state": {
+                node_id: {
+                    "status": graph.node(node_id, ClaimNode).status.value,
+                    "absolute_support": graph.node(
+                        node_id, ClaimNode,
+                    ).score.absolute_support,
+                    "grounding": graph.node(
+                        node_id, ClaimNode,
+                    ).score.raw.grounding,
+                    "entailment": graph.node(
+                        node_id, ClaimNode,
+                    ).score.raw.entailment,
+                    "type_match": graph.node(
+                        node_id, ClaimNode,
+                    ).score.raw.type_match,
+                    "dependency_consistency": graph.node(
+                        node_id, ClaimNode,
+                    ).score.raw.dependency_consistency,
+                    "evidence_gap": graph.node(
+                        node_id, ClaimNode,
+                    ).score.evidence_gap,
+                    "contradiction_risk": graph.node(
+                        node_id, ClaimNode,
+                    ).score.raw.contradiction_risk,
+                    "evidence_refs": sorted(graph.node(
+                        node_id, ClaimNode,
+                    ).evidence_refs),
+                }
+                for node_id in candidate.premise_ids
+            },
+        })
     return stable_hash({
         "signature": candidate.signature,
         "premise_versions": {

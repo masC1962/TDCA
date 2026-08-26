@@ -1,9 +1,0 @@
-\section{Limitations, Risks, and Scope}
-
-First, \method{} depends on the quality of its local support and utility estimators; structured state does not eliminate LLM miscalibration. Second, typed diffusion introduces interpretable but hand-designed inductive bias, and its transfer across domains must be tested. Third, explicit joins improve auditability but may miss valid implicit reasoning or amplify a faulty premise. Fourth, commercial API nondeterminism complicates exact reproduction despite frozen IDs, prompts, and seeds. Fifth, the present evaluation focuses on English multi-hop QA; long-horizon agents and multilingual settings remain outside scope. Finally, adaptive computation can increase tail latency. We therefore report full cost distributions, not only averages, and enforce hard resource ceilings and safe non-answer outcomes.
-
-The system processes benchmark corpora and does not train on user data. Its audit log can reveal retrieved text and model-generated hypotheses; deployments should apply access control and retention policies. We do not claim that a faithful trace is equivalent to a faithful account of the model's internal computation.
-
-\section{Conclusion}
-
-We presented \method{}, a training-free framework in which a dynamic reasoning hypergraph does more than store an execution trace: its belief and dependency state controls where test-time computation is allocated. Typed diffusion exposes bottlenecks, explicit joins make multi-hop composition auditable, event-triggered edits enable revision, and a multi-resource EVC policy selects operation--fidelity packets under budget. The decisive empirical test is whether these mechanisms improve answer quality and reliability on a matched-compute Pareto frontier. \tbd{Replace with the frozen evaluation conclusion, including negative findings where applicable.}

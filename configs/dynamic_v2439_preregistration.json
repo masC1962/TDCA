@@ -1,0 +1,126 @@
+{
+  "schema_version": "dynamic-hypergraph-v2.4.3.9-preregistration-v1",
+  "frozen_at": "2026-08-26",
+  "seed": 20260820,
+  "training": false,
+  "provider": "dashscope-openai-compatible",
+  "model": "qwen-plus",
+  "gold_aware_inference": false,
+  "source_commit_policy": "Every provider-backed artifact must pin the pushed v2.4.3.9 source-freeze commit.",
+  "parent_usage": {
+    "provider_attempts": 1252,
+    "provider_reported_tokens": 1440332
+  },
+  "combined_hard_cap": {
+    "provider_attempts": 2000,
+    "provider_reported_tokens": 2000000
+  },
+  "stage_caps": {
+    "targeted_state_canary3": {
+      "provider_attempts": 80,
+      "provider_reported_tokens": 90000,
+      "diagnostic_only": true
+    },
+    "smoke_a20": {
+      "provider_attempts": 300,
+      "provider_reported_tokens": 300000
+    },
+    "shadow_b20": {
+      "provider_attempts": 300,
+      "provider_reported_tokens": 300000,
+      "authorized_only_after_smoke_pass": true
+    }
+  },
+  "per_question_dev_safety_caps": {
+    "llm_calls": 16,
+    "total_tokens": 16000,
+    "retrieval_calls": 8
+  },
+  "frozen_references": {
+    "v2438_source_commit": "111b6e511603c33b9787bbfacc05f28f8b42fe9a",
+    "v2438_audit_commit": "a1a55294",
+    "v2438_canary_run": "research_outputs/musique_distractor_smoke_dynamic_hypergraph_tdca_v2_1787747346189219194",
+    "v2438_smoke_a_run": "research_outputs/musique_distractor_smoke_dynamic_hypergraph_tdca_v2_1787748087015307095",
+    "v2438_smoke_a_gate": "analysis_outputs/dynamic_v2438_campaign/smoke_a_gate.json"
+  },
+  "only_semantic_delta": {
+    "normalize_quantitative_output_type_aliases": true,
+    "bind_join_retry_to_exact_feasibility_state": true,
+    "threshold_changed": false,
+    "terminal_gate_changed": false,
+    "join_gate_changed": false,
+    "join_cap_changed": false,
+    "training": false,
+    "signed_diffusion": false,
+    "per_question_or_answer_patch": false
+  },
+  "stage_order": [
+    "zero_api_tests",
+    "push_source_freeze_commit",
+    "targeted_state_canary3",
+    "smoke_a20_if_canary_proves_intended_state_transitions_without_regression",
+    "hard_gate",
+    "shadow_b20_only_if_smoke_passes",
+    "automatic_diagnosis_and_next_cycle_if_failed"
+  ],
+  "canary_opening_condition": {
+    "complete_examples": 3,
+    "infrastructure_failure_count_max": 0,
+    "graph_invariant_violation_count_max": 0,
+    "unsupported_answer_count_max": 0,
+    "numeric_case_must_gain_supported_projection_or_chain": true,
+    "dead_end_cases_with_semantic_join_retry_min": 1,
+    "dead_end_cases_with_chain_or_terminal_gain_min": 1,
+    "candidate_or_chain_regression_count_max": 0
+  },
+  "adaptive_smoke_a20_hard_gates": {
+    "infrastructure_failure_count_max": 0,
+    "graph_invariant_violation_count_max": 0,
+    "controller_only_mutation_violation_count_max": 0,
+    "unsupported_answer_count_max": 0,
+    "selected_infeasible_join_count_max": 0,
+    "repeated_same_fingerprint_extraction_count_max": 0,
+    "no_diff_editor_allocation_count_max": 0,
+    "candidate_presence_rate_min": 0.75,
+    "legacy_execution_plan_completion_rate_min": 0.75,
+    "graph_proof_completion_rate_min": 0.8,
+    "f1_min": 0.58,
+    "logical_llm_calls_max": 163,
+    "logical_total_tokens_max": 185000,
+    "budget_exhaustion_rate_max": 0.1,
+    "immediate_evc_correlation_min": 0.1,
+    "delayed_evc_correlation_min": 0.15,
+    "choice_conditioned_delayed_correlation_exclusive_min": 0,
+    "choice_conditioned_count_min": 20,
+    "successful_proof_gap_mean_delayed_return_exclusive_min": 0,
+    "successful_proof_gap_must_exceed_failed": true,
+    "complete_evc_trace_rate_min": 1,
+    "complete_delayed_credit_trace_rate_min": 1,
+    "complete_proof_obligation_trace_rate_min": 1,
+    "no_executable_without_certificate_count_max": 0,
+    "viable_proof_opportunity_cost_clipping_stop_count_max": 0,
+    "absolute_cost_ready_set_invariance_rate_min": 1,
+    "predicted_verification_calls_match_requested_samples_rate_min": 1,
+    "unjustified_high_fidelity_count_max": 0,
+    "operation_target_audit_rate_min": 1,
+    "all_abstains_have_exhaustion_evidence": true,
+    "non_uniform_allocation_required": true,
+    "complete_transition_trace_rate_min": 1,
+    "certified_transition_realization_rate_min": 1,
+    "invalid_transition_bypass_count_max": 0
+  },
+  "safe_stop": {
+    "cycle_boundary_on_gate_failure": true,
+    "automatic_gold_free_diagnosis": true,
+    "automatic_next_iteration": true,
+    "global_hard_stop_provider_attempts": 748,
+    "global_hard_stop_provider_reported_tokens": 559668,
+    "no_post_failure_threshold_relaxation": true,
+    "no_single_question_patch": true,
+    "heldout200_authorized": false
+  },
+  "remaining_hard_cap": {
+    "provider_attempts": 748,
+    "provider_reported_tokens": 559668
+  }
+}

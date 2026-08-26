@@ -217,6 +217,7 @@ class MultiSampleIndependentVerifier:
             )
             structural_position = _structural_projection(
                 graph, subgoal_id, candidate, expected_type,
+                numeric_aliases=self.config.numeric_output_type_normalization,
             )
             if structural_position != "none" and projection_votes[candidate.node_id]:
                 # Query-graph bindings are a harder constraint than an LLM's
@@ -235,6 +236,7 @@ class MultiSampleIndependentVerifier:
             semantics = graph.claim_semantics[candidate.node_id]
             projection_by_id[candidate.node_id] = _type_corrected_projection(
                 position, semantics.subject_type, semantics.value_type, expected_type,
+                numeric_aliases=self.config.numeric_output_type_normalization,
             )
         answer_ids = {node_id for node_id, value in projection_by_id.items() if value != "none"}
         profiles = _semantic_group_profiles(
@@ -316,18 +318,25 @@ def _preserved_projection(candidate: ClaimNode) -> str:
 
 def _type_corrected_projection(
     position: str, subject_type: str, value_type: str, expected_type: str,
+    *, numeric_aliases: bool = False,
 ) -> str:
     if position == "none":
         return position
     selected = subject_type if position == "subject" else value_type
-    if _projection_type_compatible(selected, expected_type):
+    if _projection_type_compatible(
+        selected, expected_type, numeric_aliases=numeric_aliases,
+    ):
         return position
     alternative_position = "value" if position == "subject" else "subject"
     alternative = value_type if position == "subject" else subject_type
-    return alternative_position if _projection_type_compatible(alternative, expected_type) else "none"
+    return alternative_position if _projection_type_compatible(
+        alternative, expected_type, numeric_aliases=numeric_aliases,
+    ) else "none"
 
 
-def _projection_type_compatible(proposed: str, expected: str) -> bool:
+def _projection_type_compatible(
+    proposed: str, expected: str, *, numeric_aliases: bool = False,
+) -> bool:
     aliases = {
         "human": "person", "actor": "person", "actress": "person", "individual": "person",
         "city": "location", "county": "location", "country": "location", "nation": "location",
@@ -340,6 +349,12 @@ def _projection_type_compatible(proposed: str, expected: str) -> bool:
         "phrase": "textual", "text": "textual", "string": "textual",
         "acronym_expansion": "textual", "definition": "textual", "meaning": "textual",
     }
+    if numeric_aliases:
+        aliases.update({
+            "numerical": "number", "numeric": "number",
+            "fraction": "number", "percentage": "number",
+            "percent": "number", "decimal": "number", "ratio": "number",
+        })
     def options(value: str) -> set[str]:
         normalized = str(value).strip().lower().replace("-", "_").replace(" ", "_")
         collection = re.fullmatch(r"(?:list|set|collection)\[(.+)\]", normalized)
@@ -359,6 +374,8 @@ def _structural_projection(
     subgoal_id: str,
     candidate: ClaimNode,
     expected_type: str,
+    *,
+    numeric_aliases: bool = False,
 ) -> str:
     """Project the unbound endpoint of a query-constrained tuple.
 
@@ -388,9 +405,13 @@ def _structural_projection(
     if subject_bound == value_bound:
         return "none"
     semantics = graph.claim_semantics[candidate.node_id]
-    if subject_bound and _projection_type_compatible(semantics.value_type, expected_type):
+    if subject_bound and _projection_type_compatible(
+        semantics.value_type, expected_type, numeric_aliases=numeric_aliases,
+    ):
         return "value"
-    if value_bound and _projection_type_compatible(semantics.subject_type, expected_type):
+    if value_bound and _projection_type_compatible(
+        semantics.subject_type, expected_type, numeric_aliases=numeric_aliases,
+    ):
         return "subject"
     return "none"
 
