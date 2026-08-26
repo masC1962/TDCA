@@ -31,7 +31,11 @@ def evaluate(run: Path, preregistration: Path, config_path: Path) -> dict[str, A
         allocation for example in graph_rows
         for allocation in example["graph"].get("allocation_history", [])
     ]
-    by_id = {row["allocation_id"]: row for row in allocations}
+    by_qid_and_id = {
+        (str(example["qid"]), str(allocation["allocation_id"])): allocation
+        for example in graph_rows
+        for allocation in example["graph"].get("allocation_history", [])
+    }
     transition_trace = [
         isinstance(row.get("transition_certificate"), dict)
         and row["transition_certificate"].get("certificate_version")
@@ -52,7 +56,10 @@ def evaluate(run: Path, preregistration: Path, config_path: Path) -> dict[str, A
     ]
     invalid_bypass = []
     for event in selected_transition_events:
-        row = by_id.get(str(event.get("selected_allocation_id", "")))
+        row = by_qid_and_id.get((
+            str(event.get("qid", "")),
+            str(event.get("selected_allocation_id", "")),
+        ))
         certificate = (row or {}).get("transition_certificate") or {}
         if (
             row is None

@@ -1,0 +1,3253 @@
+{
+  "schema_version": "dynamic-v2.4.3.2-safe-stop-diagnostic-v1",
+  "inference_calls_made": 0,
+  "immediate_calibration_by_family": {
+    "branch:assignments": {
+      "count": 4,
+      "pearson": -0.2436368476691562,
+      "mean_predicted": 0.413755069713846,
+      "mean_actual": 3.240944833484264e-05
+    },
+    "branch:extract_typed": {
+      "count": 55,
+      "pearson": -0.12887089468972063,
+      "mean_predicted": 0.327311189378591,
+      "mean_actual": 0.06263602380025121
+    },
+    "commit:answer": {
+      "count": 12,
+      "pearson": 0.5364135451311276,
+      "mean_predicted": 0.33075202973575896,
+      "mean_actual": 0.012439189503381055
+    },
+    "commit:default": {
+      "count": 36,
+      "pearson": 0.060234058182581825,
+      "mean_predicted": 0.2019494505173396,
+      "mean_actual": 0.10486777008320974
+    },
+    "merge:validate_join": {
+      "count": 20,
+      "pearson": -0.5966637043527194,
+      "mean_predicted": 0.27893631131454244,
+      "mean_actual": 0.05915281545644108
+    },
+    "retrieve:default": {
+      "count": 60,
+      "pearson": -0.8129884745670538,
+      "mean_predicted": 0.36434761271206234,
+      "mean_actual": 0.2977082728355808
+    },
+    "verify:default": {
+      "count": 52,
+      "pearson": -0.21825823465432204,
+      "mean_predicted": 0.4060555241089309,
+      "mean_actual": 0.05825513985891021
+    }
+  },
+  "actual_immediate_component_correlations": {
+    "absolute_graph_risk": 0.106805222550391,
+    "answer_impact": 0.3764904808692253,
+    "candidate_reachability": -0.2781459325491308,
+    "closure_mass": 0.3435829565491581,
+    "dead_end_risk": -0.03696824642780275,
+    "dependency_unlock": -0.41414646544329925,
+    "evidence_novelty": 0.6098751409268237,
+    "evidence_path": -0.6497014602439415,
+    "expected_call_cost": -0.5615200526053042,
+    "expected_cost": -0.13197958980178606,
+    "expected_obligation_delta": 0.38001105665523444,
+    "expected_retrieval_cost": 0.8129112745330194,
+    "expected_token_cost": -0.5407248226241358,
+    "failure_cooldown": 0.0,
+    "feasibility_unlock": -0.09613482936160621,
+    "graph_growth_risk": 0.106805222550391,
+    "graph_heat": 0.14281211640748467,
+    "missing_premise_reduction": -0.19138501247789833,
+    "normalized_one_step_progress_equal": 0.4665365366572434,
+    "obligation_closure": 0.43853989965923384,
+    "obligation_importance": 0.3898091522097446,
+    "obligation_terminal_return": 0.18323087380655673,
+    "observed_value": -0.4040661370140104,
+    "one_step_progress_equal": 0.47491972319850523,
+    "one_step_progress_max": 0.3802041219163233,
+    "operation_closure_probability": 0.20790981032531555,
+    "operation_redundancy": -0.14251155998264137,
+    "proof_gap_reducibility": -0.09586099825862683,
+    "recovery_value": 0.0,
+    "retrieval_saturation": -0.09610260810060943,
+    "successor_option_value": -0.09055471966579699,
+    "successor_reachability_gain": -0.09360629695256907,
+    "terminal_gap": 0.3511698739840204,
+    "terminal_proximity": -0.21329143375580115,
+    "terminal_reachability": 0.04362461612176402,
+    "transition_certainty": -0.10819980191794573,
+    "transition_redundancy": 0.10819980191794573,
+    "uncertainty_reduction": -0.018849181237597816
+  },
+  "abstain_count": 8,
+  "abstains": [
+    {
+      "qid": "2hop__424908_500483",
+      "hop_count": 2,
+      "candidate_presence": true,
+      "graph_proof_completion": true,
+      "execution_plan_completion": 0.0,
+      "termination": {
+        "step": 20,
+        "outcome": "ABSTAIN",
+        "best_predicted_evc": 0.0,
+        "answer_node_id": null,
+        "reason": "no_executable_computation_with_certificate",
+        "remaining_budget": {
+          "llm_calls": 3,
+          "tokens": 1405,
+          "retrieval_calls": 2,
+          "graph_operations": 44
+        },
+        "dead_end_certificate": {
+          "certificate_version": "proof-obligation-dead-end-v2.4.3.2",
+          "step": 20,
+          "open_obligations": [
+            {
+              "obligation_id": "obligation_129ab9cf6efd1677",
+              "target_subgoal": "subgoal_root",
+              "branch_id": "branch_root.b5.1",
+              "obligation_type": "missing_binding",
+              "status": "OPEN",
+              "severity": 1.0,
+              "terminal_reachable": true,
+              "required_node_ids": [
+                "subgoal_2"
+              ],
+              "satisfied_by_node_ids": [],
+              "reason_codes": [
+                "unresolved_dependency"
+              ],
+              "provenance_event_ids": [],
+              "created_at_step": 5,
+              "updated_at_step": 20
+            },
+            {
+              "obligation_id": "obligation_443c232f9618cfa6",
+              "target_subgoal": "subgoal_root",
+              "branch_id": "branch_root.b5.2",
+              "obligation_type": "missing_join_premise",
+              "status": "OPEN",
+              "severity": 0.85,
+              "terminal_reachable": true,
+              "required_node_ids": [
+                "claim_v2_17_subgoal_root_1",
+                "claim_v2_17_subgoal_root_2",
+                "claim_v2_17_subgoal_root_3",
+                "claim_v2_17_subgoal_root_4",
+                "claim_v2_17_subgoal_root_5",
+                "claim_v2_17_subgoal_root_6",
+                "subgoal_1",
+                "subgoal_2"
+              ],
+              "satisfied_by_node_ids": [],
+              "reason_codes": [
+                "dependency_not_composed"
+              ],
+              "provenance_event_ids": [
+                "retrieval_attempt_op_v2_0016_retrieve_subgoal_root_branch_root_b5_2_allocation_000065"
+              ],
+              "created_at_step": 17,
+              "updated_at_step": 20
+            },
+            {
+              "obligation_id": "obligation_6d377811b7cd0d53",
+              "target_subgoal": "subgoal_2",
+              "branch_id": "branch_root.b5.1",
+              "obligation_type": "missing_join_premise",
+              "status": "OPEN",
+              "severity": 0.85,
+              "terminal_reachable": true,
+              "required_node_ids": [
+                "claim_v2_9_subgoal_2_1",
+                "subgoal_1"
+              ],
+              "satisfied_by_node_ids": [],
+              "reason_codes": [
+                "dependency_not_composed"
+              ],
+              "provenance_event_ids": [
+                "retrieval_attempt_op_v2_0007_retrieve_subgoal_2_branch_root_b5_1_allocation_000019",
+                "retrieval_attempt_op_v2_0019_retrieve_subgoal_2_branch_root_b5_1_allocation_000084"
+              ],
+              "created_at_step": 9,
+              "updated_at_step": 20
+            },
+            {
+              "obligation_id": "obligation_89ccc4e57adcfcdf",
+              "target_subgoal": "subgoal_1",
+              "branch_id": "branch_root.b5.2",
+              "obligation_type": "missing_evidence",
+              "status": "OPEN",
+              "severity": 1.0,
+              "terminal_reachable": true,
+              "required_node_ids": [],
+              "satisfied_by_node_ids": [],
+              "reason_codes": [
+                "no_grounding_evidence"
+              ],
+              "provenance_event_ids": [],
+              "created_at_step": 5,
+              "updated_at_step": 20
+            },
+            {
+              "obligation_id": "obligation_dd318e0645c6e662",
+              "target_subgoal": "subgoal_1",
+              "branch_id": "branch_root.b5.1",
+              "obligation_type": "missing_evidence",
+              "status": "OPEN",
+              "severity": 1.0,
+              "terminal_reachable": true,
+              "required_node_ids": [],
+              "satisfied_by_node_ids": [],
+              "reason_codes": [
+                "no_grounding_evidence"
+              ],
+              "provenance_event_ids": [],
+              "created_at_step": 5,
+              "updated_at_step": 20
+            },
+            {
+              "obligation_id": "obligation_e6738e6a848068d3",
+              "target_subgoal": "subgoal_root",
+              "branch_id": "branch_root.b5.1",
+              "obligation_type": "missing_evidence",
+              "status": "OPEN",
+              "severity": 1.0,
+              "terminal_reachable": true,
+              "required_node_ids": [],
+              "satisfied_by_node_ids": [],
+              "reason_codes": [
+                "no_grounding_evidence"
+              ],
+              "provenance_event_ids": [],
+              "created_at_step": 5,
+              "updated_at_step": 20
+            }
+          ],
+          "blocked_obligations": [],
+          "remaining_budget": {
+            "llm_calls": 3,
+            "tokens": 1405,
+            "retrieval_calls": 2,
+            "graph_operations": 44
+          },
+          "candidate_operations": [],
+          "feasible_unselected_join_count": 0,
+          "exhaustion_evidence": [
+            "dependency_not_composed",
+            "no_grounding_evidence",
+            "unresolved_dependency"
+          ]
+        }
+      },
+      "open_obligation_type_counts": {
+        "missing_binding": 1,
+        "missing_join_premise": 2,
+        "missing_evidence": 3
+      },
+      "open_obligations": [
+        {
+          "target_subgoal": "subgoal_root",
+          "branch_id": "branch_root.b5.1",
+          "obligation_type": "missing_binding",
+          "status": "OPEN",
+          "severity": 1.0,
+          "reason_codes": [
+            "unresolved_dependency"
+          ],
+          "required_node_ids": [
+            "subgoal_2"
+          ]
+        },
+        {
+          "target_subgoal": "subgoal_root",
+          "branch_id": "branch_root.b5.2",
+          "obligation_type": "missing_join_premise",
+          "status": "OPEN",
+          "severity": 0.85,
+          "reason_codes": [
+            "dependency_not_composed"
+          ],
+          "required_node_ids": [
+            "claim_v2_17_subgoal_root_1",
+            "claim_v2_17_subgoal_root_2",
+            "claim_v2_17_subgoal_root_3",
+            "claim_v2_17_subgoal_root_4",
+            "claim_v2_17_subgoal_root_5",
+            "claim_v2_17_subgoal_root_6",
+            "subgoal_1",
+            "subgoal_2"
+          ]
+        },
+        {
+          "target_subgoal": "subgoal_2",
+          "branch_id": "branch_root.b5.1",
+          "obligation_type": "missing_join_premise",
+          "status": "OPEN",
+          "severity": 0.85,
+          "reason_codes": [
+            "dependency_not_composed"
+          ],
+          "required_node_ids": [
+            "claim_v2_9_subgoal_2_1",
+            "subgoal_1"
+          ]
+        },
+        {
+          "target_subgoal": "subgoal_1",
+          "branch_id": "branch_root.b5.2",
+          "obligation_type": "missing_evidence",
+          "status": "OPEN",
+          "severity": 1.0,
+          "reason_codes": [
+            "no_grounding_evidence"
+          ],
+          "required_node_ids": []
+        },
+        {
+          "target_subgoal": "subgoal_1",
+          "branch_id": "branch_root.b5.1",
+          "obligation_type": "missing_evidence",
+          "status": "OPEN",
+          "severity": 1.0,
+          "reason_codes": [
+            "no_grounding_evidence"
+          ],
+          "required_node_ids": []
+        },
+        {
+          "target_subgoal": "subgoal_root",
+          "branch_id": "branch_root.b5.1",
+          "obligation_type": "missing_evidence",
+          "status": "OPEN",
+          "severity": 1.0,
+          "reason_codes": [
+            "no_grounding_evidence"
+          ],
+          "required_node_ids": []
+        }
+      ],
+      "subgoals": [
+        {
+          "node_id": "subgoal_1",
+          "status": "partial",
+          "dependencies": [],
+          "terminal": false,
+          "claim_status_counts": {
+            "scored": 3
+          },
+          "retrieval_attempts": 1
+        },
+        {
+          "node_id": "subgoal_2",
+          "status": "partial",
+          "dependencies": [
+            "subgoal_1"
+          ],
+          "terminal": false,
+          "claim_status_counts": {
+            "scored": 2,
+            "committed": 1
+          },
+          "retrieval_attempts": 4
+        },
+        {
+          "node_id": "subgoal_root",
+          "status": "partial",
+          "dependencies": [
+            "subgoal_1",
+            "subgoal_2"
+          ],
+          "terminal": true,
+          "claim_status_counts": {
+            "scored": 6
+          },
+          "retrieval_attempts": 1
+        }
+      ],
+      "active_branches": [
+        {
+          "branch_id": "branch_root.b5.1",
+          "parent_branch_id": "branch_root",
+          "assignments": {
+            "subgoal_1": "claim_v2_3_subgoal_1_1"
+          },
+          "completed_subgoals": [
+            "subgoal_1"
+          ],
+          "score": 0.5,
+          "status": "active",
+          "created_at_step": 5,
+          "revision_count": 0,
+          "last_revision_step": -1,
+          "history": []
+        },
+        {
+          "branch_id": "branch_root.b5.2",
+          "parent_branch_id": "branch_root",
+          "assignments": {
+            "subgoal_1": "claim_v2_3_subgoal_1_2",
+            "subgoal_2": "join_claim_14_0c728160acae"
+          },
+          "completed_subgoals": [
+            "subgoal_1",
+            "subgoal_2"
+          ],
+          "score": 0.5,
+          "status": "active",
+          "created_at_step": 5,
+          "revision_count": 0,
+          "last_revision_step": -1,
+          "history": []
+        }
+      ],
+      "recent_trace": [
+        {
+          "event": "allocation_reconciled",
+          "step": null,
+          "operation_family": "merge:validate_join",
+          "failure_reason": "operation_produced_no_commit",
+          "outcome": null,
+          "reason": null
+        },
+        {
+          "event": "terminal_belief_readout",
+          "step": 18,
+          "operation_family": null,
+          "failure_reason": null,
+          "outcome": null,
+          "reason": null
+        },
+        {
+          "event": "proof_gap_diagnosed",
+          "step": 18,
+          "operation_family": null,
+          "failure_reason": null,
+          "outcome": null,
+          "reason": null
+        },
+        {
+          "event": "region_retrieval_gate",
+          "step": 18,
+          "operation_family": null,
+          "failure_reason": null,
+          "outcome": null,
+          "reason": null
+        },
+        {
+          "event": "region_retrieval_gate",
+          "step": 18,
+          "operation_family": null,
+          "failure_reason": null,
+          "outcome": null,
+          "reason": null
+        },
+        {
+          "event": "meta_decision",
+          "step": 18,
+          "operation_family": null,
+          "failure_reason": null,
+          "outcome": "CONTINUE",
+          "reason": "affordable_positive_graph_local_expected_value"
+        },
+        {
+          "event": "graph_operation",
+          "step": 19,
+          "operation_family": "retrieve:default",
+          "failure_reason": null,
+          "outcome": null,
+          "reason": null
+        },
+        {
+          "event": "allocation_reconciled",
+          "step": null,
+          "operation_family": "retrieve:default",
+          "failure_reason": "",
+          "outcome": null,
+          "reason": null
+        },
+        {
+          "event": "terminal_belief_readout",
+          "step": 19,
+          "operation_family": null,
+          "failure_reason": null,
+          "outcome": null,
+          "reason": null
+        },
+        {
+          "event": "region_retrieval_gate",
+          "step": 19,
+          "operation_family": null,
+          "failure_reason": null,
+          "outcome": null,
+          "reason": null
+        },
+        {
+          "event": "meta_decision",
+          "step": 19,
+          "operation_family": null,
+          "failure_reason": null,
+          "outcome": "CONTINUE",
+          "reason": "affordable_positive_graph_local_expected_value"
+        },
+        {
+          "event": "graph_operation",
+          "step": 20,
+          "operation_family": "verify:default",
+          "failure_reason": null,
+          "outcome": null,
+          "reason": null
+        },
+        {
+          "event": "allocation_reconciled",
+          "step": null,
+          "operation_family": "verify:default",
+          "failure_reason": "",
+          "outcome": null,
+          "reason": null
+        },
+        {
+          "event": "terminal_belief_readout",
+          "step": 20,
+          "operation_family": null,
+          "failure_reason": null,
+          "outcome": null,
+          "reason": null
+        },
+        {
+          "event": "proof_gap_diagnosed",
+          "step": 20,
+          "operation_family": null,
+          "failure_reason": null,
+          "outcome": null,
+          "reason": null
+        },
+        {
+          "event": "region_retrieval_gate",
+          "step": 20,
+          "operation_family": null,
+          "failure_reason": null,
+          "outcome": null,
+          "reason": null
+        },
+        {
+          "event": "meta_decision",
+          "step": 20,
+          "operation_family": null,
+          "failure_reason": null,
+          "outcome": "ABSTAIN",
+          "reason": "no_executable_computation_with_certificate"
+        },
+        {
+          "event": "termination",
+          "step": null,
+          "operation_family": null,
+          "failure_reason": null,
+          "outcome": "ABSTAIN",
+          "reason": "no_executable_computation_with_certificate"
+        }
+      ]
+    },
+    {
+      "qid": "3hop1__498954_160713_77246",
+      "hop_count": 3,
+      "candidate_presence": true,
+      "graph_proof_completion": true,
+      "execution_plan_completion": 0.0,
+      "termination": {
+        "step": 14,
+        "outcome": "ABSTAIN",
+        "best_predicted_evc": 0.0,
+        "answer_node_id": null,
+        "reason": "no_executable_computation_with_certificate",
+        "remaining_budget": {
+          "llm_calls": 8,
+          "tokens": 4969,
+          "retrieval_calls": 4,
+          "graph_operations": 50
+        },
+        "dead_end_certificate": {
+          "certificate_version": "proof-obligation-dead-end-v2.4.3.2",
+          "step": 14,
+          "open_obligations": [
+            {
+              "obligation_id": "obligation_199c70ae416d7d54",
+              "target_subgoal": "subgoal_root",
+              "branch_id": "branch_root",
+              "obligation_type": "missing_join_premise",
+              "status": "OPEN",
+              "severity": 0.85,
+              "terminal_reachable": true,
+              "required_node_ids": [
+                "claim_v2_11_subgoal_root_2",
+                "claim_v2_11_subgoal_root_3",
+                "claim_v2_11_subgoal_root_4",
+                "claim_v2_11_subgoal_root_5",
+                "subgoal_1",
+                "subgoal_2"
+              ],
+              "satisfied_by_node_ids": [],
+              "reason_codes": [
+                "dependency_not_composed"
+              ],
+              "provenance_event_ids": [
+                "retrieval_attempt_op_v2_0010_retrieve_subgoal_root_branch_root_allocation_000026",
+                "retrieval_attempt_op_v2_0013_retrieve_subgoal_root_branch_root_allocation_000031"
+              ],
+              "created_at_step": 11,
+              "updated_at_step": 14
+            },
+            {
+              "obligation_id": "obligation_e074bc7fa40fdbea",
+              "target_subgoal": "subgoal_root",
+              "branch_id": "branch_root",
+              "obligation_type": "contradiction",
+              "status": "OPEN",
+              "severity": 0.7150476330474582,
+              "terminal_reachable": true,
+              "required_node_ids": [
+                "claim_v2_11_subgoal_root_3",
+                "claim_v2_11_subgoal_root_4"
+              ],
+              "satisfied_by_node_ids": [],
+              "reason_codes": [
+                "active_contradiction"
+              ],
+              "provenance_event_ids": [
+                "retrieval_attempt_op_v2_0010_retrieve_subgoal_root_branch_root_allocation_000026",
+                "retrieval_attempt_op_v2_0013_retrieve_subgoal_root_branch_root_allocation_000031"
+              ],
+              "created_at_step": 12,
+              "updated_at_step": 14
+            }
+          ],
+          "blocked_obligations": [],
+          "remaining_budget": {
+            "llm_calls": 8,
+            "tokens": 4969,
+            "retrieval_calls": 4,
+            "graph_operations": 50
+          },
+          "candidate_operations": [],
+          "feasible_unselected_join_count": 0,
+          "exhaustion_evidence": [
+            "active_contradiction",
+            "dependency_not_composed"
+          ]
+        }
+      },
+      "open_obligation_type_counts": {
+        "missing_join_premise": 1,
+        "contradiction": 1
+      },
+      "open_obligations": [
+        {
+          "target_subgoal": "subgoal_root",
+          "branch_id": "branch_root",
+          "obligation_type": "missing_join_premise",
+          "status": "OPEN",
+          "severity": 0.85,
+          "reason_codes": [
+            "dependency_not_composed"
+          ],
+          "required_node_ids": [
+            "claim_v2_11_subgoal_root_2",
+            "claim_v2_11_subgoal_root_3",
+            "claim_v2_11_subgoal_root_4",
+            "claim_v2_11_subgoal_root_5",
+            "subgoal_1",
+            "subgoal_2"
+          ]
+        },
+        {
+          "target_subgoal": "subgoal_root",
+          "branch_id": "branch_root",
+          "obligation_type": "contradiction",
+          "status": "OPEN",
+          "severity": 0.7150476330474582,
+          "reason_codes": [
+            "active_contradiction"
+          ],
+          "required_node_ids": [
+            "claim_v2_11_subgoal_root_3",
+            "claim_v2_11_subgoal_root_4"
+          ]
+        }
+      ],
+      "subgoals": [
+        {
+          "node_id": "subgoal_1",
+          "status": "resolved",
+          "dependencies": [],
+          "terminal": false,
+          "claim_status_counts": {
+            "committed": 1
+          },
+          "retrieval_attempts": 1
+        },
+        {
+          "node_id": "subgoal_2",
+          "status": "resolved",
+          "dependencies": [],
+          "terminal": false,
+          "claim_status_counts": {
+            "committed": 1
+          },
+          "retrieval_attempts": 1
+        },
+        {
+          "node_id": "subgoal_root",
+          "status": "partial",
+          "dependencies": [
+            "subgoal_1",
+            "subgoal_2"
+          ],
+          "terminal": true,
+          "claim_status_counts": {
+            "scored": 4
+          },
+          "retrieval_attempts": 2
+        }
+      ],
+      "active_branches": [
+        {
+          "branch_id": "branch_root",
+          "parent_branch_id": null,
+          "assignments": {
+            "subgoal_2": "claim_v2_4_subgoal_2_1",
+            "subgoal_1": "claim_v2_7_subgoal_1_1"
+          },
+          "completed_subgoals": [
+            "subgoal_2",
+            "subgoal_1"
+          ],
+          "score": 1.0,
+          "status": "active",
+          "created_at_step": 0,
+          "revision_count": 0,
+          "last_revision_step": -1,
+          "history": []
+        }
+      ],
+      "recent_trace": [
+        {
+          "event": "proof_gap_diagnosed",
+          "step": 12,
+          "operation_family": null,
+          "failure_reason": null,
+          "outcome": null,
+          "reason": null
+        },
+        {
+          "event": "join_preallocation_filtered",
+          "step": 12,
+          "operation_family": null,
+          "failure_reason": null,
+          "outcome": null,
+          "reason": null
+        },
+        {
+          "event": "proof_gap_feasibility_update",
+          "step": 12,
+          "operation_family": null,
+          "failure_reason": null,
+          "outcome": null,
+          "reason": null
+        },
+        {
+          "event": "region_retrieval_gate",
+          "step": 12,
+          "operation_family": null,
+          "failure_reason": null,
+          "outcome": null,
+          "reason": null
+        },
+        {
+          "event": "meta_decision",
+          "step": 12,
+          "operation_family": null,
+          "failure_reason": null,
+          "outcome": "CONTINUE",
+          "reason": "affordable_positive_graph_local_expected_value"
+        },
+        {
+          "event": "graph_operation",
+          "step": 13,
+          "operation_family": "retrieve:default",
+          "failure_reason": null,
+          "outcome": null,
+          "reason": null
+        },
+        {
+          "event": "allocation_reconciled",
+          "step": null,
+          "operation_family": "retrieve:default",
+          "failure_reason": "operation_produced_no_commit",
+          "outcome": null,
+          "reason": null
+        },
+        {
+          "event": "terminal_belief_readout",
+          "step": 13,
+          "operation_family": null,
+          "failure_reason": null,
+          "outcome": null,
+          "reason": null
+        },
+        {
+          "event": "meta_decision",
+          "step": 13,
+          "operation_family": null,
+          "failure_reason": null,
+          "outcome": "CONTINUE",
+          "reason": "affordable_positive_graph_local_expected_value"
+        },
+        {
+          "event": "graph_operation",
+          "step": 14,
+          "operation_family": "verify:default",
+          "failure_reason": null,
+          "outcome": null,
+          "reason": null
+        },
+        {
+          "event": "allocation_reconciled",
+          "step": null,
+          "operation_family": "verify:default",
+          "failure_reason": "",
+          "outcome": null,
+          "reason": null
+        },
+        {
+          "event": "terminal_belief_readout",
+          "step": 14,
+          "operation_family": null,
+          "failure_reason": null,
+          "outcome": null,
+          "reason": null
+        },
+        {
+          "event": "proof_gap_diagnosed",
+          "step": 14,
+          "operation_family": null,
+          "failure_reason": null,
+          "outcome": null,
+          "reason": null
+        },
+        {
+          "event": "join_preallocation_filtered",
+          "step": 14,
+          "operation_family": null,
+          "failure_reason": null,
+          "outcome": null,
+          "reason": null
+        },
+        {
+          "event": "proof_gap_feasibility_update",
+          "step": 14,
+          "operation_family": null,
+          "failure_reason": null,
+          "outcome": null,
+          "reason": null
+        },
+        {
+          "event": "high_uncertainty_no_join",
+          "step": 14,
+          "operation_family": null,
+          "failure_reason": null,
+          "outcome": null,
+          "reason": null
+        },
+        {
+          "event": "meta_decision",
+          "step": 14,
+          "operation_family": null,
+          "failure_reason": null,
+          "outcome": "ABSTAIN",
+          "reason": "no_executable_computation_with_certificate"
+        },
+        {
+          "event": "termination",
+          "step": null,
+          "operation_family": null,
+          "failure_reason": null,
+          "outcome": "ABSTAIN",
+          "reason": "no_executable_computation_with_certificate"
+        }
+      ]
+    },
+    {
+      "qid": "3hop1__801799_547811_41132",
+      "hop_count": 3,
+      "candidate_presence": false,
+      "graph_proof_completion": false,
+      "execution_plan_completion": 0.0,
+      "termination": {
+        "step": 10,
+        "outcome": "ABSTAIN",
+        "best_predicted_evc": 0.0,
+        "answer_node_id": null,
+        "reason": "no_executable_computation_with_certificate",
+        "remaining_budget": {
+          "llm_calls": 10,
+          "tokens": 10334,
+          "retrieval_calls": 5,
+          "graph_operations": 54
+        },
+        "dead_end_certificate": {
+          "certificate_version": "proof-obligation-dead-end-v2.4.3.2",
+          "step": 10,
+          "open_obligations": [
+            {
+              "obligation_id": "obligation_5f57db4faa0f86f0",
+              "target_subgoal": "subgoal_2",
+              "branch_id": "branch_root",
+              "obligation_type": "missing_join_premise",
+              "status": "OPEN",
+              "severity": 0.85,
+              "terminal_reachable": true,
+              "required_node_ids": [
+                "claim_v2_7_subgoal_2_1",
+                "subgoal_1"
+              ],
+              "satisfied_by_node_ids": [],
+              "reason_codes": [
+                "dependency_not_composed"
+              ],
+              "provenance_event_ids": [
+                "retrieval_attempt_op_v2_0006_retrieve_subgoal_2_branch_root_allocation_000011",
+                "retrieval_attempt_op_v2_0009_retrieve_subgoal_2_branch_root_allocation_000016"
+              ],
+              "created_at_step": 7,
+              "updated_at_step": 10
+            },
+            {
+              "obligation_id": "obligation_b031359b555c7172",
+              "target_subgoal": "subgoal_root",
+              "branch_id": "branch_root",
+              "obligation_type": "missing_evidence",
+              "status": "OPEN",
+              "severity": 1.0,
+              "terminal_reachable": true,
+              "required_node_ids": [],
+              "satisfied_by_node_ids": [],
+              "reason_codes": [
+                "no_grounding_evidence"
+              ],
+              "provenance_event_ids": [],
+              "created_at_step": 1,
+              "updated_at_step": 10
+            },
+            {
+              "obligation_id": "obligation_bdac6de66537124f",
+              "target_subgoal": "subgoal_root",
+              "branch_id": "branch_root",
+              "obligation_type": "missing_binding",
+              "status": "OPEN",
+              "severity": 1.0,
+              "terminal_reachable": true,
+              "required_node_ids": [
+                "subgoal_2"
+              ],
+              "satisfied_by_node_ids": [],
+              "reason_codes": [
+                "unresolved_dependency"
+              ],
+              "provenance_event_ids": [],
+              "created_at_step": 1,
+              "updated_at_step": 10
+            }
+          ],
+          "blocked_obligations": [],
+          "remaining_budget": {
+            "llm_calls": 10,
+            "tokens": 10334,
+            "retrieval_calls": 5,
+            "graph_operations": 54
+          },
+          "candidate_operations": [],
+          "feasible_unselected_join_count": 0,
+          "exhaustion_evidence": [
+            "dependency_not_composed",
+            "no_grounding_evidence",
+            "unresolved_dependency"
+          ]
+        }
+      },
+      "open_obligation_type_counts": {
+        "missing_join_premise": 1,
+        "missing_evidence": 1,
+        "missing_binding": 1
+      },
+      "open_obligations": [
+        {
+          "target_subgoal": "subgoal_2",
+          "branch_id": "branch_root",
+          "obligation_type": "missing_join_premise",
+          "status": "OPEN",
+          "severity": 0.85,
+          "reason_codes": [
+            "dependency_not_composed"
+          ],
+          "required_node_ids": [
+            "claim_v2_7_subgoal_2_1",
+            "subgoal_1"
+          ]
+        },
+        {
+          "target_subgoal": "subgoal_root",
+          "branch_id": "branch_root",
+          "obligation_type": "missing_evidence",
+          "status": "OPEN",
+          "severity": 1.0,
+          "reason_codes": [
+            "no_grounding_evidence"
+          ],
+          "required_node_ids": []
+        },
+        {
+          "target_subgoal": "subgoal_root",
+          "branch_id": "branch_root",
+          "obligation_type": "missing_binding",
+          "status": "OPEN",
+          "severity": 1.0,
+          "reason_codes": [
+            "unresolved_dependency"
+          ],
+          "required_node_ids": [
+            "subgoal_2"
+          ]
+        }
+      ],
+      "subgoals": [
+        {
+          "node_id": "subgoal_1",
+          "status": "resolved",
+          "dependencies": [],
+          "terminal": false,
+          "claim_status_counts": {
+            "committed": 1
+          },
+          "retrieval_attempts": 1
+        },
+        {
+          "node_id": "subgoal_2",
+          "status": "partial",
+          "dependencies": [
+            "subgoal_1"
+          ],
+          "terminal": false,
+          "claim_status_counts": {
+            "scored": 1
+          },
+          "retrieval_attempts": 2
+        },
+        {
+          "node_id": "subgoal_root",
+          "status": "unresolved",
+          "dependencies": [
+            "subgoal_2"
+          ],
+          "terminal": true,
+          "claim_status_counts": {},
+          "retrieval_attempts": 0
+        }
+      ],
+      "active_branches": [
+        {
+          "branch_id": "branch_root",
+          "parent_branch_id": null,
+          "assignments": {
+            "subgoal_1": "claim_v2_3_subgoal_1_1"
+          },
+          "completed_subgoals": [
+            "subgoal_1"
+          ],
+          "score": 1.0,
+          "status": "active",
+          "created_at_step": 0,
+          "revision_count": 0,
+          "last_revision_step": -1,
+          "history": []
+        }
+      ],
+      "recent_trace": [
+        {
+          "event": "terminal_belief_readout",
+          "step": 8,
+          "operation_family": null,
+          "failure_reason": null,
+          "outcome": null,
+          "reason": null
+        },
+        {
+          "event": "proof_gap_diagnosed",
+          "step": 8,
+          "operation_family": null,
+          "failure_reason": null,
+          "outcome": null,
+          "reason": null
+        },
+        {
+          "event": "join_preallocation_filtered",
+          "step": 8,
+          "operation_family": null,
+          "failure_reason": null,
+          "outcome": null,
+          "reason": null
+        },
+        {
+          "event": "proof_gap_feasibility_update",
+          "step": 8,
+          "operation_family": null,
+          "failure_reason": null,
+          "outcome": null,
+          "reason": null
+        },
+        {
+          "event": "region_retrieval_gate",
+          "step": 8,
+          "operation_family": null,
+          "failure_reason": null,
+          "outcome": null,
+          "reason": null
+        },
+        {
+          "event": "meta_decision",
+          "step": 8,
+          "operation_family": null,
+          "failure_reason": null,
+          "outcome": "CONTINUE",
+          "reason": "affordable_positive_graph_local_expected_value"
+        },
+        {
+          "event": "graph_operation",
+          "step": 9,
+          "operation_family": "retrieve:default",
+          "failure_reason": null,
+          "outcome": null,
+          "reason": null
+        },
+        {
+          "event": "allocation_reconciled",
+          "step": null,
+          "operation_family": "retrieve:default",
+          "failure_reason": "",
+          "outcome": null,
+          "reason": null
+        },
+        {
+          "event": "terminal_belief_readout",
+          "step": 9,
+          "operation_family": null,
+          "failure_reason": null,
+          "outcome": null,
+          "reason": null
+        },
+        {
+          "event": "meta_decision",
+          "step": 9,
+          "operation_family": null,
+          "failure_reason": null,
+          "outcome": "CONTINUE",
+          "reason": "affordable_positive_graph_local_expected_value"
+        },
+        {
+          "event": "graph_operation",
+          "step": 10,
+          "operation_family": "verify:default",
+          "failure_reason": null,
+          "outcome": null,
+          "reason": null
+        },
+        {
+          "event": "allocation_reconciled",
+          "step": null,
+          "operation_family": "verify:default",
+          "failure_reason": "",
+          "outcome": null,
+          "reason": null
+        },
+        {
+          "event": "terminal_belief_readout",
+          "step": 10,
+          "operation_family": null,
+          "failure_reason": null,
+          "outcome": null,
+          "reason": null
+        },
+        {
+          "event": "proof_gap_diagnosed",
+          "step": 10,
+          "operation_family": null,
+          "failure_reason": null,
+          "outcome": null,
+          "reason": null
+        },
+        {
+          "event": "join_preallocation_filtered",
+          "step": 10,
+          "operation_family": null,
+          "failure_reason": null,
+          "outcome": null,
+          "reason": null
+        },
+        {
+          "event": "proof_gap_feasibility_update",
+          "step": 10,
+          "operation_family": null,
+          "failure_reason": null,
+          "outcome": null,
+          "reason": null
+        },
+        {
+          "event": "meta_decision",
+          "step": 10,
+          "operation_family": null,
+          "failure_reason": null,
+          "outcome": "ABSTAIN",
+          "reason": "no_executable_computation_with_certificate"
+        },
+        {
+          "event": "termination",
+          "step": null,
+          "operation_family": null,
+          "failure_reason": null,
+          "outcome": "ABSTAIN",
+          "reason": "no_executable_computation_with_certificate"
+        }
+      ]
+    },
+    {
+      "qid": "3hop2__326964_7845_7713",
+      "hop_count": 3,
+      "candidate_presence": false,
+      "graph_proof_completion": true,
+      "execution_plan_completion": 0.0,
+      "termination": {
+        "step": 14,
+        "outcome": "ABSTAIN",
+        "best_predicted_evc": 0.0,
+        "answer_node_id": null,
+        "reason": "no_executable_computation_with_certificate",
+        "remaining_budget": {
+          "llm_calls": 8,
+          "tokens": 4867,
+          "retrieval_calls": 4,
+          "graph_operations": 50
+        },
+        "dead_end_certificate": {
+          "certificate_version": "proof-obligation-dead-end-v2.4.3.2",
+          "step": 14,
+          "open_obligations": [
+            {
+              "obligation_id": "obligation_199c70ae416d7d54",
+              "target_subgoal": "subgoal_root",
+              "branch_id": "branch_root",
+              "obligation_type": "missing_join_premise",
+              "status": "OPEN",
+              "severity": 0.85,
+              "terminal_reachable": true,
+              "required_node_ids": [
+                "claim_v2_11_subgoal_root_1",
+                "claim_v2_11_subgoal_root_2",
+                "claim_v2_11_subgoal_root_3",
+                "claim_v2_11_subgoal_root_4",
+                "claim_v2_11_subgoal_root_5",
+                "subgoal_1",
+                "subgoal_2"
+              ],
+              "satisfied_by_node_ids": [],
+              "reason_codes": [
+                "dependency_not_composed"
+              ],
+              "provenance_event_ids": [
+                "retrieval_attempt_op_v2_0010_retrieve_subgoal_root_branch_root_allocation_000033",
+                "retrieval_attempt_op_v2_0013_retrieve_subgoal_root_branch_root_allocation_000038"
+              ],
+              "created_at_step": 11,
+              "updated_at_step": 14
+            },
+            {
+              "obligation_id": "obligation_e074bc7fa40fdbea",
+              "target_subgoal": "subgoal_root",
+              "branch_id": "branch_root",
+              "obligation_type": "contradiction",
+              "status": "OPEN",
+              "severity": 0.657742370319375,
+              "terminal_reachable": true,
+              "required_node_ids": [
+                "claim_v2_11_subgoal_root_1",
+                "claim_v2_11_subgoal_root_3",
+                "claim_v2_11_subgoal_root_4",
+                "claim_v2_11_subgoal_root_5"
+              ],
+              "satisfied_by_node_ids": [],
+              "reason_codes": [
+                "active_contradiction"
+              ],
+              "provenance_event_ids": [
+                "retrieval_attempt_op_v2_0010_retrieve_subgoal_root_branch_root_allocation_000033",
+                "retrieval_attempt_op_v2_0013_retrieve_subgoal_root_branch_root_allocation_000038"
+              ],
+              "created_at_step": 12,
+              "updated_at_step": 14
+            }
+          ],
+          "blocked_obligations": [],
+          "remaining_budget": {
+            "llm_calls": 8,
+            "tokens": 4867,
+            "retrieval_calls": 4,
+            "graph_operations": 50
+          },
+          "candidate_operations": [],
+          "feasible_unselected_join_count": 0,
+          "exhaustion_evidence": [
+            "active_contradiction",
+            "dependency_not_composed"
+          ]
+        }
+      },
+      "open_obligation_type_counts": {
+        "missing_join_premise": 1,
+        "contradiction": 1
+      },
+      "open_obligations": [
+        {
+          "target_subgoal": "subgoal_root",
+          "branch_id": "branch_root",
+          "obligation_type": "missing_join_premise",
+          "status": "OPEN",
+          "severity": 0.85,
+          "reason_codes": [
+            "dependency_not_composed"
+          ],
+          "required_node_ids": [
+            "claim_v2_11_subgoal_root_1",
+            "claim_v2_11_subgoal_root_2",
+            "claim_v2_11_subgoal_root_3",
+            "claim_v2_11_subgoal_root_4",
+            "claim_v2_11_subgoal_root_5",
+            "subgoal_1",
+            "subgoal_2"
+          ]
+        },
+        {
+          "target_subgoal": "subgoal_root",
+          "branch_id": "branch_root",
+          "obligation_type": "contradiction",
+          "status": "OPEN",
+          "severity": 0.657742370319375,
+          "reason_codes": [
+            "active_contradiction"
+          ],
+          "required_node_ids": [
+            "claim_v2_11_subgoal_root_1",
+            "claim_v2_11_subgoal_root_3",
+            "claim_v2_11_subgoal_root_4",
+            "claim_v2_11_subgoal_root_5"
+          ]
+        }
+      ],
+      "subgoals": [
+        {
+          "node_id": "subgoal_1",
+          "status": "resolved",
+          "dependencies": [],
+          "terminal": false,
+          "claim_status_counts": {
+            "committed": 1
+          },
+          "retrieval_attempts": 1
+        },
+        {
+          "node_id": "subgoal_2",
+          "status": "resolved",
+          "dependencies": [],
+          "terminal": false,
+          "claim_status_counts": {
+            "committed": 1,
+            "scored": 4
+          },
+          "retrieval_attempts": 1
+        },
+        {
+          "node_id": "subgoal_root",
+          "status": "partial",
+          "dependencies": [
+            "subgoal_1",
+            "subgoal_2"
+          ],
+          "terminal": true,
+          "claim_status_counts": {
+            "scored": 5
+          },
+          "retrieval_attempts": 2
+        }
+      ],
+      "active_branches": [
+        {
+          "branch_id": "branch_root",
+          "parent_branch_id": null,
+          "assignments": {
+            "subgoal_1": "claim_v2_5_subgoal_1_1",
+            "subgoal_2": "claim_v2_4_subgoal_2_1"
+          },
+          "completed_subgoals": [
+            "subgoal_1",
+            "subgoal_2"
+          ],
+          "score": 1.0,
+          "status": "active",
+          "created_at_step": 0,
+          "revision_count": 0,
+          "last_revision_step": -1,
+          "history": []
+        }
+      ],
+      "recent_trace": [
+        {
+          "event": "terminal_belief_readout",
+          "step": 12,
+          "operation_family": null,
+          "failure_reason": null,
+          "outcome": null,
+          "reason": null
+        },
+        {
+          "event": "proof_gap_diagnosed",
+          "step": 12,
+          "operation_family": null,
+          "failure_reason": null,
+          "outcome": null,
+          "reason": null
+        },
+        {
+          "event": "join_preallocation_filtered",
+          "step": 12,
+          "operation_family": null,
+          "failure_reason": null,
+          "outcome": null,
+          "reason": null
+        },
+        {
+          "event": "proof_gap_feasibility_update",
+          "step": 12,
+          "operation_family": null,
+          "failure_reason": null,
+          "outcome": null,
+          "reason": null
+        },
+        {
+          "event": "region_retrieval_gate",
+          "step": 12,
+          "operation_family": null,
+          "failure_reason": null,
+          "outcome": null,
+          "reason": null
+        },
+        {
+          "event": "meta_decision",
+          "step": 12,
+          "operation_family": null,
+          "failure_reason": null,
+          "outcome": "CONTINUE",
+          "reason": "affordable_positive_graph_local_expected_value"
+        },
+        {
+          "event": "graph_operation",
+          "step": 13,
+          "operation_family": "retrieve:default",
+          "failure_reason": null,
+          "outcome": null,
+          "reason": null
+        },
+        {
+          "event": "allocation_reconciled",
+          "step": null,
+          "operation_family": "retrieve:default",
+          "failure_reason": "",
+          "outcome": null,
+          "reason": null
+        },
+        {
+          "event": "terminal_belief_readout",
+          "step": 13,
+          "operation_family": null,
+          "failure_reason": null,
+          "outcome": null,
+          "reason": null
+        },
+        {
+          "event": "meta_decision",
+          "step": 13,
+          "operation_family": null,
+          "failure_reason": null,
+          "outcome": "CONTINUE",
+          "reason": "affordable_positive_graph_local_expected_value"
+        },
+        {
+          "event": "graph_operation",
+          "step": 14,
+          "operation_family": "verify:default",
+          "failure_reason": null,
+          "outcome": null,
+          "reason": null
+        },
+        {
+          "event": "allocation_reconciled",
+          "step": null,
+          "operation_family": "verify:default",
+          "failure_reason": "",
+          "outcome": null,
+          "reason": null
+        },
+        {
+          "event": "terminal_belief_readout",
+          "step": 14,
+          "operation_family": null,
+          "failure_reason": null,
+          "outcome": null,
+          "reason": null
+        },
+        {
+          "event": "proof_gap_diagnosed",
+          "step": 14,
+          "operation_family": null,
+          "failure_reason": null,
+          "outcome": null,
+          "reason": null
+        },
+        {
+          "event": "join_preallocation_filtered",
+          "step": 14,
+          "operation_family": null,
+          "failure_reason": null,
+          "outcome": null,
+          "reason": null
+        },
+        {
+          "event": "proof_gap_feasibility_update",
+          "step": 14,
+          "operation_family": null,
+          "failure_reason": null,
+          "outcome": null,
+          "reason": null
+        },
+        {
+          "event": "meta_decision",
+          "step": 14,
+          "operation_family": null,
+          "failure_reason": null,
+          "outcome": "ABSTAIN",
+          "reason": "no_executable_computation_with_certificate"
+        },
+        {
+          "event": "termination",
+          "step": null,
+          "operation_family": null,
+          "failure_reason": null,
+          "outcome": "ABSTAIN",
+          "reason": "no_executable_computation_with_certificate"
+        }
+      ]
+    },
+    {
+      "qid": "3hop2__90327_87184_76291",
+      "hop_count": 3,
+      "candidate_presence": false,
+      "graph_proof_completion": true,
+      "execution_plan_completion": 0.0,
+      "termination": {
+        "step": 14,
+        "outcome": "ABSTAIN",
+        "best_predicted_evc": 0.0,
+        "answer_node_id": null,
+        "reason": "no_executable_computation_with_certificate",
+        "remaining_budget": {
+          "llm_calls": 8,
+          "tokens": 7912,
+          "retrieval_calls": 4,
+          "graph_operations": 50
+        },
+        "dead_end_certificate": {
+          "certificate_version": "proof-obligation-dead-end-v2.4.3.2",
+          "step": 14,
+          "open_obligations": [
+            {
+              "obligation_id": "obligation_09c6697170cbb6e2",
+              "target_subgoal": "subgoal_1",
+              "branch_id": "branch_root",
+              "obligation_type": "contradiction",
+              "status": "OPEN",
+              "severity": 0.012772525000000003,
+              "terminal_reachable": true,
+              "required_node_ids": [
+                "claim_v2_7_subgoal_1_1"
+              ],
+              "satisfied_by_node_ids": [],
+              "reason_codes": [
+                "active_contradiction"
+              ],
+              "provenance_event_ids": [
+                "retrieval_attempt_op_v2_0003_retrieve_subgoal_1_branch_root_allocation_000009"
+              ],
+              "created_at_step": 8,
+              "updated_at_step": 14
+            },
+            {
+              "obligation_id": "obligation_199c70ae416d7d54",
+              "target_subgoal": "subgoal_root",
+              "branch_id": "branch_root",
+              "obligation_type": "missing_join_premise",
+              "status": "OPEN",
+              "severity": 0.85,
+              "terminal_reachable": true,
+              "required_node_ids": [
+                "claim_v2_11_subgoal_root_1",
+                "claim_v2_11_subgoal_root_4",
+                "subgoal_1",
+                "subgoal_2"
+              ],
+              "satisfied_by_node_ids": [],
+              "reason_codes": [
+                "dependency_not_composed"
+              ],
+              "provenance_event_ids": [
+                "retrieval_attempt_op_v2_0010_retrieve_subgoal_root_branch_root_allocation_000026",
+                "retrieval_attempt_op_v2_0013_retrieve_subgoal_root_branch_root_allocation_000031"
+              ],
+              "created_at_step": 11,
+              "updated_at_step": 14
+            }
+          ],
+          "blocked_obligations": [],
+          "remaining_budget": {
+            "llm_calls": 8,
+            "tokens": 7912,
+            "retrieval_calls": 4,
+            "graph_operations": 50
+          },
+          "candidate_operations": [],
+          "feasible_unselected_join_count": 0,
+          "exhaustion_evidence": [
+            "active_contradiction",
+            "dependency_not_composed"
+          ]
+        }
+      },
+      "open_obligation_type_counts": {
+        "contradiction": 1,
+        "missing_join_premise": 1
+      },
+      "open_obligations": [
+        {
+          "target_subgoal": "subgoal_1",
+          "branch_id": "branch_root",
+          "obligation_type": "contradiction",
+          "status": "OPEN",
+          "severity": 0.012772525000000003,
+          "reason_codes": [
+            "active_contradiction"
+          ],
+          "required_node_ids": [
+            "claim_v2_7_subgoal_1_1"
+          ]
+        },
+        {
+          "target_subgoal": "subgoal_root",
+          "branch_id": "branch_root",
+          "obligation_type": "missing_join_premise",
+          "status": "OPEN",
+          "severity": 0.85,
+          "reason_codes": [
+            "dependency_not_composed"
+          ],
+          "required_node_ids": [
+            "claim_v2_11_subgoal_root_1",
+            "claim_v2_11_subgoal_root_4",
+            "subgoal_1",
+            "subgoal_2"
+          ]
+        }
+      ],
+      "subgoals": [
+        {
+          "node_id": "subgoal_1",
+          "status": "resolved",
+          "dependencies": [],
+          "terminal": false,
+          "claim_status_counts": {
+            "committed": 1
+          },
+          "retrieval_attempts": 1
+        },
+        {
+          "node_id": "subgoal_2",
+          "status": "resolved",
+          "dependencies": [],
+          "terminal": false,
+          "claim_status_counts": {
+            "committed": 1
+          },
+          "retrieval_attempts": 1
+        },
+        {
+          "node_id": "subgoal_root",
+          "status": "partial",
+          "dependencies": [
+            "subgoal_1",
+            "subgoal_2"
+          ],
+          "terminal": true,
+          "claim_status_counts": {
+            "scored": 2
+          },
+          "retrieval_attempts": 2
+        }
+      ],
+      "active_branches": [
+        {
+          "branch_id": "branch_root",
+          "parent_branch_id": null,
+          "assignments": {
+            "subgoal_2": "claim_v2_4_subgoal_2_1",
+            "subgoal_1": "claim_v2_7_subgoal_1_1"
+          },
+          "completed_subgoals": [
+            "subgoal_2",
+            "subgoal_1"
+          ],
+          "score": 1.0,
+          "status": "active",
+          "created_at_step": 0,
+          "revision_count": 0,
+          "last_revision_step": -1,
+          "history": []
+        }
+      ],
+      "recent_trace": [
+        {
+          "event": "terminal_belief_readout",
+          "step": 11,
+          "operation_family": null,
+          "failure_reason": null,
+          "outcome": null,
+          "reason": null
+        },
+        {
+          "event": "meta_decision",
+          "step": 11,
+          "operation_family": null,
+          "failure_reason": null,
+          "outcome": "CONTINUE",
+          "reason": "affordable_positive_graph_local_expected_value"
+        },
+        {
+          "event": "graph_operation",
+          "step": 12,
+          "operation_family": "verify:default",
+          "failure_reason": null,
+          "outcome": null,
+          "reason": null
+        },
+        {
+          "event": "allocation_reconciled",
+          "step": null,
+          "operation_family": "verify:default",
+          "failure_reason": "",
+          "outcome": null,
+          "reason": null
+        },
+        {
+          "event": "terminal_belief_readout",
+          "step": 12,
+          "operation_family": null,
+          "failure_reason": null,
+          "outcome": null,
+          "reason": null
+        },
+        {
+          "event": "proof_gap_diagnosed",
+          "step": 12,
+          "operation_family": null,
+          "failure_reason": null,
+          "outcome": null,
+          "reason": null
+        },
+        {
+          "event": "region_retrieval_gate",
+          "step": 12,
+          "operation_family": null,
+          "failure_reason": null,
+          "outcome": null,
+          "reason": null
+        },
+        {
+          "event": "meta_decision",
+          "step": 12,
+          "operation_family": null,
+          "failure_reason": null,
+          "outcome": "CONTINUE",
+          "reason": "affordable_positive_graph_local_expected_value"
+        },
+        {
+          "event": "graph_operation",
+          "step": 13,
+          "operation_family": "retrieve:default",
+          "failure_reason": null,
+          "outcome": null,
+          "reason": null
+        },
+        {
+          "event": "allocation_reconciled",
+          "step": null,
+          "operation_family": "retrieve:default",
+          "failure_reason": "",
+          "outcome": null,
+          "reason": null
+        },
+        {
+          "event": "terminal_belief_readout",
+          "step": 13,
+          "operation_family": null,
+          "failure_reason": null,
+          "outcome": null,
+          "reason": null
+        },
+        {
+          "event": "meta_decision",
+          "step": 13,
+          "operation_family": null,
+          "failure_reason": null,
+          "outcome": "CONTINUE",
+          "reason": "affordable_positive_graph_local_expected_value"
+        },
+        {
+          "event": "graph_operation",
+          "step": 14,
+          "operation_family": "verify:default",
+          "failure_reason": null,
+          "outcome": null,
+          "reason": null
+        },
+        {
+          "event": "allocation_reconciled",
+          "step": null,
+          "operation_family": "verify:default",
+          "failure_reason": "",
+          "outcome": null,
+          "reason": null
+        },
+        {
+          "event": "terminal_belief_readout",
+          "step": 14,
+          "operation_family": null,
+          "failure_reason": null,
+          "outcome": null,
+          "reason": null
+        },
+        {
+          "event": "proof_gap_diagnosed",
+          "step": 14,
+          "operation_family": null,
+          "failure_reason": null,
+          "outcome": null,
+          "reason": null
+        },
+        {
+          "event": "meta_decision",
+          "step": 14,
+          "operation_family": null,
+          "failure_reason": null,
+          "outcome": "ABSTAIN",
+          "reason": "no_executable_computation_with_certificate"
+        },
+        {
+          "event": "termination",
+          "step": null,
+          "operation_family": null,
+          "failure_reason": null,
+          "outcome": "ABSTAIN",
+          "reason": "no_executable_computation_with_certificate"
+        }
+      ]
+    },
+    {
+      "qid": "4hop1__107309_457883_650651_7262",
+      "hop_count": 4,
+      "candidate_presence": false,
+      "graph_proof_completion": false,
+      "execution_plan_completion": 0.0,
+      "termination": {
+        "step": 7,
+        "outcome": "ABSTAIN",
+        "best_predicted_evc": 0.0,
+        "answer_node_id": null,
+        "reason": "no_executable_computation_with_certificate",
+        "remaining_budget": {
+          "llm_calls": 11,
+          "tokens": 9973,
+          "retrieval_calls": 5,
+          "graph_operations": 57
+        },
+        "dead_end_certificate": {
+          "certificate_version": "proof-obligation-dead-end-v2.4.3.2",
+          "step": 7,
+          "open_obligations": [
+            {
+              "obligation_id": "obligation_b031359b555c7172",
+              "target_subgoal": "subgoal_root",
+              "branch_id": "branch_root",
+              "obligation_type": "missing_evidence",
+              "status": "OPEN",
+              "severity": 1.0,
+              "terminal_reachable": true,
+              "required_node_ids": [],
+              "satisfied_by_node_ids": [],
+              "reason_codes": [
+                "no_grounding_evidence"
+              ],
+              "provenance_event_ids": [],
+              "created_at_step": 1,
+              "updated_at_step": 7
+            },
+            {
+              "obligation_id": "obligation_bdac6de66537124f",
+              "target_subgoal": "subgoal_root",
+              "branch_id": "branch_root",
+              "obligation_type": "missing_binding",
+              "status": "OPEN",
+              "severity": 1.0,
+              "terminal_reachable": true,
+              "required_node_ids": [
+                "subgoal_2"
+              ],
+              "satisfied_by_node_ids": [],
+              "reason_codes": [
+                "unresolved_dependency"
+              ],
+              "provenance_event_ids": [],
+              "created_at_step": 1,
+              "updated_at_step": 7
+            }
+          ],
+          "blocked_obligations": [
+            {
+              "obligation_id": "obligation_2b3ee837fee1577c",
+              "target_subgoal": "subgoal_2",
+              "branch_id": "branch_root",
+              "obligation_type": "extraction_exhausted",
+              "status": "BLOCKED",
+              "severity": 0.9,
+              "terminal_reachable": true,
+              "required_node_ids": [
+                "evidence_v2_2_10_5",
+                "evidence_v2_2_1_0",
+                "evidence_v2_2_2_2",
+                "evidence_v2_2_3_13",
+                "evidence_v2_2_4_8",
+                "evidence_v2_2_5_11",
+                "evidence_v2_2_6_3",
+                "evidence_v2_2_7_15",
+                "evidence_v2_2_8_9",
+                "evidence_v2_2_9_14",
+                "evidence_v2_7_1_17",
+                "evidence_v2_7_2_18",
+                "evidence_v2_7_3_6"
+              ],
+              "satisfied_by_node_ids": [],
+              "reason_codes": [
+                "typed_extraction_failed"
+              ],
+              "provenance_event_ids": [
+                "outcome_allocation_000012",
+                "outcome_allocation_000021",
+                "retrieval_attempt_op_v2_0002_retrieve_subgoal_2_branch_root_allocation_000006",
+                "retrieval_attempt_op_v2_0007_retrieve_subgoal_2_branch_root_allocation_000022"
+              ],
+              "created_at_step": 6,
+              "updated_at_step": 7
+            }
+          ],
+          "remaining_budget": {
+            "llm_calls": 11,
+            "tokens": 9973,
+            "retrieval_calls": 5,
+            "graph_operations": 57
+          },
+          "candidate_operations": [],
+          "feasible_unselected_join_count": 0,
+          "exhaustion_evidence": [
+            "typed_extraction_failed"
+          ]
+        }
+      },
+      "open_obligation_type_counts": {
+        "extraction_exhausted": 1,
+        "missing_evidence": 1,
+        "missing_binding": 1
+      },
+      "open_obligations": [
+        {
+          "target_subgoal": "subgoal_2",
+          "branch_id": "branch_root",
+          "obligation_type": "extraction_exhausted",
+          "status": "BLOCKED",
+          "severity": 0.9,
+          "reason_codes": [
+            "typed_extraction_failed"
+          ],
+          "required_node_ids": [
+            "evidence_v2_2_10_5",
+            "evidence_v2_2_1_0",
+            "evidence_v2_2_2_2",
+            "evidence_v2_2_3_13",
+            "evidence_v2_2_4_8",
+            "evidence_v2_2_5_11",
+            "evidence_v2_2_6_3",
+            "evidence_v2_2_7_15",
+            "evidence_v2_2_8_9",
+            "evidence_v2_2_9_14",
+            "evidence_v2_7_1_17",
+            "evidence_v2_7_2_18",
+            "evidence_v2_7_3_6"
+          ]
+        },
+        {
+          "target_subgoal": "subgoal_root",
+          "branch_id": "branch_root",
+          "obligation_type": "missing_evidence",
+          "status": "OPEN",
+          "severity": 1.0,
+          "reason_codes": [
+            "no_grounding_evidence"
+          ],
+          "required_node_ids": []
+        },
+        {
+          "target_subgoal": "subgoal_root",
+          "branch_id": "branch_root",
+          "obligation_type": "missing_binding",
+          "status": "OPEN",
+          "severity": 1.0,
+          "reason_codes": [
+            "unresolved_dependency"
+          ],
+          "required_node_ids": [
+            "subgoal_2"
+          ]
+        }
+      ],
+      "subgoals": [
+        {
+          "node_id": "subgoal_1",
+          "status": "resolved",
+          "dependencies": [],
+          "terminal": false,
+          "claim_status_counts": {
+            "committed": 1,
+            "scored": 1
+          },
+          "retrieval_attempts": 1
+        },
+        {
+          "node_id": "subgoal_2",
+          "status": "active",
+          "dependencies": [],
+          "terminal": false,
+          "claim_status_counts": {},
+          "retrieval_attempts": 2
+        },
+        {
+          "node_id": "subgoal_root",
+          "status": "unresolved",
+          "dependencies": [
+            "subgoal_1",
+            "subgoal_2"
+          ],
+          "terminal": true,
+          "claim_status_counts": {},
+          "retrieval_attempts": 0
+        }
+      ],
+      "active_branches": [
+        {
+          "branch_id": "branch_root",
+          "parent_branch_id": null,
+          "assignments": {
+            "subgoal_1": "claim_v2_4_subgoal_1_1"
+          },
+          "completed_subgoals": [
+            "subgoal_1"
+          ],
+          "score": 1.0,
+          "status": "active",
+          "created_at_step": 0,
+          "revision_count": 0,
+          "last_revision_step": -1,
+          "history": []
+        }
+      ],
+      "recent_trace": [
+        {
+          "event": "terminal_belief_readout",
+          "step": 5,
+          "operation_family": null,
+          "failure_reason": null,
+          "outcome": null,
+          "reason": null
+        },
+        {
+          "event": "meta_decision",
+          "step": 5,
+          "operation_family": null,
+          "failure_reason": null,
+          "outcome": "CONTINUE",
+          "reason": "certified_state_transition"
+        },
+        {
+          "event": "graph_operation",
+          "step": 6,
+          "operation_family": "commit:default",
+          "failure_reason": null,
+          "outcome": null,
+          "reason": null
+        },
+        {
+          "event": "allocation_reconciled",
+          "step": null,
+          "operation_family": "commit:default",
+          "failure_reason": "",
+          "outcome": null,
+          "reason": null
+        },
+        {
+          "event": "terminal_belief_readout",
+          "step": 6,
+          "operation_family": null,
+          "failure_reason": null,
+          "outcome": null,
+          "reason": null
+        },
+        {
+          "event": "meta_decision",
+          "step": 6,
+          "operation_family": null,
+          "failure_reason": null,
+          "outcome": "CONTINUE",
+          "reason": "affordable_positive_graph_local_expected_value"
+        },
+        {
+          "event": "typed_extraction_diagnostic",
+          "step": null,
+          "operation_family": null,
+          "failure_reason": null,
+          "outcome": null,
+          "reason": null
+        },
+        {
+          "event": "typed_extraction_rejected",
+          "step": null,
+          "operation_family": null,
+          "failure_reason": null,
+          "outcome": null,
+          "reason": null
+        },
+        {
+          "event": "allocation_reconciled",
+          "step": null,
+          "operation_family": "branch:extract_typed",
+          "failure_reason": "operation_produced_no_commit",
+          "outcome": null,
+          "reason": null
+        },
+        {
+          "event": "terminal_belief_readout",
+          "step": 6,
+          "operation_family": null,
+          "failure_reason": null,
+          "outcome": null,
+          "reason": null
+        },
+        {
+          "event": "proof_gap_diagnosed",
+          "step": 6,
+          "operation_family": null,
+          "failure_reason": null,
+          "outcome": null,
+          "reason": null
+        },
+        {
+          "event": "region_retrieval_gate",
+          "step": 6,
+          "operation_family": null,
+          "failure_reason": null,
+          "outcome": null,
+          "reason": null
+        },
+        {
+          "event": "meta_decision",
+          "step": 6,
+          "operation_family": null,
+          "failure_reason": null,
+          "outcome": "CONTINUE",
+          "reason": "affordable_positive_graph_local_expected_value"
+        },
+        {
+          "event": "graph_operation",
+          "step": 7,
+          "operation_family": "retrieve:default",
+          "failure_reason": null,
+          "outcome": null,
+          "reason": null
+        },
+        {
+          "event": "allocation_reconciled",
+          "step": null,
+          "operation_family": "retrieve:default",
+          "failure_reason": "",
+          "outcome": null,
+          "reason": null
+        },
+        {
+          "event": "terminal_belief_readout",
+          "step": 7,
+          "operation_family": null,
+          "failure_reason": null,
+          "outcome": null,
+          "reason": null
+        },
+        {
+          "event": "meta_decision",
+          "step": 7,
+          "operation_family": null,
+          "failure_reason": null,
+          "outcome": "ABSTAIN",
+          "reason": "no_executable_computation_with_certificate"
+        },
+        {
+          "event": "termination",
+          "step": null,
+          "operation_family": null,
+          "failure_reason": null,
+          "outcome": "ABSTAIN",
+          "reason": "no_executable_computation_with_certificate"
+        }
+      ]
+    },
+    {
+      "qid": "4hop1__51465_53706_795904_580996",
+      "hop_count": 4,
+      "candidate_presence": false,
+      "graph_proof_completion": false,
+      "execution_plan_completion": 0.0,
+      "termination": {
+        "step": 3,
+        "outcome": "ABSTAIN",
+        "best_predicted_evc": 0.0,
+        "answer_node_id": null,
+        "reason": "no_executable_computation_with_certificate",
+        "remaining_budget": {
+          "llm_calls": 13,
+          "tokens": 12562,
+          "retrieval_calls": 6,
+          "graph_operations": 61
+        },
+        "dead_end_certificate": {
+          "certificate_version": "proof-obligation-dead-end-v2.4.3.2",
+          "step": 3,
+          "open_obligations": [
+            {
+              "obligation_id": "obligation_42f542bcba086f68",
+              "target_subgoal": "subgoal_2",
+              "branch_id": "branch_root",
+              "obligation_type": "missing_binding",
+              "status": "OPEN",
+              "severity": 1.0,
+              "terminal_reachable": true,
+              "required_node_ids": [
+                "subgoal_1"
+              ],
+              "satisfied_by_node_ids": [],
+              "reason_codes": [
+                "unresolved_dependency"
+              ],
+              "provenance_event_ids": [],
+              "created_at_step": 1,
+              "updated_at_step": 3
+            },
+            {
+              "obligation_id": "obligation_76d1be5565050ea4",
+              "target_subgoal": "subgoal_2",
+              "branch_id": "branch_root",
+              "obligation_type": "missing_evidence",
+              "status": "OPEN",
+              "severity": 1.0,
+              "terminal_reachable": true,
+              "required_node_ids": [],
+              "satisfied_by_node_ids": [],
+              "reason_codes": [
+                "no_grounding_evidence"
+              ],
+              "provenance_event_ids": [],
+              "created_at_step": 1,
+              "updated_at_step": 3
+            },
+            {
+              "obligation_id": "obligation_b031359b555c7172",
+              "target_subgoal": "subgoal_root",
+              "branch_id": "branch_root",
+              "obligation_type": "missing_evidence",
+              "status": "OPEN",
+              "severity": 1.0,
+              "terminal_reachable": true,
+              "required_node_ids": [],
+              "satisfied_by_node_ids": [],
+              "reason_codes": [
+                "no_grounding_evidence"
+              ],
+              "provenance_event_ids": [],
+              "created_at_step": 1,
+              "updated_at_step": 3
+            },
+            {
+              "obligation_id": "obligation_bdac6de66537124f",
+              "target_subgoal": "subgoal_root",
+              "branch_id": "branch_root",
+              "obligation_type": "missing_binding",
+              "status": "OPEN",
+              "severity": 1.0,
+              "terminal_reachable": true,
+              "required_node_ids": [
+                "subgoal_2"
+              ],
+              "satisfied_by_node_ids": [],
+              "reason_codes": [
+                "unresolved_dependency"
+              ],
+              "provenance_event_ids": [],
+              "created_at_step": 1,
+              "updated_at_step": 3
+            }
+          ],
+          "blocked_obligations": [
+            {
+              "obligation_id": "obligation_48b62e7619760236",
+              "target_subgoal": "subgoal_1",
+              "branch_id": "branch_root",
+              "obligation_type": "extraction_exhausted",
+              "status": "BLOCKED",
+              "severity": 0.9,
+              "terminal_reachable": true,
+              "required_node_ids": [
+                "evidence_v2_2_10_4",
+                "evidence_v2_2_1_11",
+                "evidence_v2_2_2_9",
+                "evidence_v2_2_3_3",
+                "evidence_v2_2_4_14",
+                "evidence_v2_2_5_15",
+                "evidence_v2_2_6_17",
+                "evidence_v2_2_7_16",
+                "evidence_v2_2_8_13",
+                "evidence_v2_2_9_19",
+                "evidence_v2_3_1_10",
+                "evidence_v2_3_2_1",
+                "evidence_v2_3_3_12",
+                "evidence_v2_3_4_2",
+                "evidence_v2_3_5_0"
+              ],
+              "satisfied_by_node_ids": [],
+              "reason_codes": [
+                "typed_extraction_failed"
+              ],
+              "provenance_event_ids": [
+                "outcome_allocation_000004",
+                "outcome_allocation_000005",
+                "retrieval_attempt_op_v2_0002_retrieve_subgoal_1_branch_root_allocation_000003",
+                "retrieval_attempt_op_v2_0003_retrieve_subgoal_1_branch_root_allocation_000006"
+              ],
+              "created_at_step": 2,
+              "updated_at_step": 3
+            }
+          ],
+          "remaining_budget": {
+            "llm_calls": 13,
+            "tokens": 12562,
+            "retrieval_calls": 6,
+            "graph_operations": 61
+          },
+          "candidate_operations": [],
+          "feasible_unselected_join_count": 0,
+          "exhaustion_evidence": [
+            "typed_extraction_failed"
+          ]
+        }
+      },
+      "open_obligation_type_counts": {
+        "missing_binding": 2,
+        "extraction_exhausted": 1,
+        "missing_evidence": 2
+      },
+      "open_obligations": [
+        {
+          "target_subgoal": "subgoal_2",
+          "branch_id": "branch_root",
+          "obligation_type": "missing_binding",
+          "status": "OPEN",
+          "severity": 1.0,
+          "reason_codes": [
+            "unresolved_dependency"
+          ],
+          "required_node_ids": [
+            "subgoal_1"
+          ]
+        },
+        {
+          "target_subgoal": "subgoal_1",
+          "branch_id": "branch_root",
+          "obligation_type": "extraction_exhausted",
+          "status": "BLOCKED",
+          "severity": 0.9,
+          "reason_codes": [
+            "typed_extraction_failed"
+          ],
+          "required_node_ids": [
+            "evidence_v2_2_10_4",
+            "evidence_v2_2_1_11",
+            "evidence_v2_2_2_9",
+            "evidence_v2_2_3_3",
+            "evidence_v2_2_4_14",
+            "evidence_v2_2_5_15",
+            "evidence_v2_2_6_17",
+            "evidence_v2_2_7_16",
+            "evidence_v2_2_8_13",
+            "evidence_v2_2_9_19",
+            "evidence_v2_3_1_10",
+            "evidence_v2_3_2_1",
+            "evidence_v2_3_3_12",
+            "evidence_v2_3_4_2",
+            "evidence_v2_3_5_0"
+          ]
+        },
+        {
+          "target_subgoal": "subgoal_2",
+          "branch_id": "branch_root",
+          "obligation_type": "missing_evidence",
+          "status": "OPEN",
+          "severity": 1.0,
+          "reason_codes": [
+            "no_grounding_evidence"
+          ],
+          "required_node_ids": []
+        },
+        {
+          "target_subgoal": "subgoal_root",
+          "branch_id": "branch_root",
+          "obligation_type": "missing_evidence",
+          "status": "OPEN",
+          "severity": 1.0,
+          "reason_codes": [
+            "no_grounding_evidence"
+          ],
+          "required_node_ids": []
+        },
+        {
+          "target_subgoal": "subgoal_root",
+          "branch_id": "branch_root",
+          "obligation_type": "missing_binding",
+          "status": "OPEN",
+          "severity": 1.0,
+          "reason_codes": [
+            "unresolved_dependency"
+          ],
+          "required_node_ids": [
+            "subgoal_2"
+          ]
+        }
+      ],
+      "subgoals": [
+        {
+          "node_id": "subgoal_1",
+          "status": "active",
+          "dependencies": [],
+          "terminal": false,
+          "claim_status_counts": {},
+          "retrieval_attempts": 2
+        },
+        {
+          "node_id": "subgoal_2",
+          "status": "unresolved",
+          "dependencies": [
+            "subgoal_1"
+          ],
+          "terminal": false,
+          "claim_status_counts": {},
+          "retrieval_attempts": 0
+        },
+        {
+          "node_id": "subgoal_root",
+          "status": "unresolved",
+          "dependencies": [
+            "subgoal_2"
+          ],
+          "terminal": true,
+          "claim_status_counts": {},
+          "retrieval_attempts": 0
+        }
+      ],
+      "active_branches": [
+        {
+          "branch_id": "branch_root",
+          "parent_branch_id": null,
+          "assignments": {},
+          "completed_subgoals": [],
+          "score": 1.0,
+          "status": "active",
+          "created_at_step": 0,
+          "revision_count": 0,
+          "last_revision_step": -1,
+          "history": []
+        }
+      ],
+      "recent_trace": [
+        {
+          "event": "meta_decision",
+          "step": 2,
+          "operation_family": null,
+          "failure_reason": null,
+          "outcome": "CONTINUE",
+          "reason": "affordable_positive_graph_local_expected_value"
+        },
+        {
+          "event": "typed_extraction_diagnostic",
+          "step": null,
+          "operation_family": null,
+          "failure_reason": null,
+          "outcome": null,
+          "reason": null
+        },
+        {
+          "event": "typed_extraction_rejected",
+          "step": null,
+          "operation_family": null,
+          "failure_reason": null,
+          "outcome": null,
+          "reason": null
+        },
+        {
+          "event": "allocation_reconciled",
+          "step": null,
+          "operation_family": "branch:extract_typed",
+          "failure_reason": "operation_produced_no_commit",
+          "outcome": null,
+          "reason": null
+        },
+        {
+          "event": "terminal_belief_readout",
+          "step": 2,
+          "operation_family": null,
+          "failure_reason": null,
+          "outcome": null,
+          "reason": null
+        },
+        {
+          "event": "meta_decision",
+          "step": 2,
+          "operation_family": null,
+          "failure_reason": null,
+          "outcome": "CONTINUE",
+          "reason": "affordable_positive_graph_local_expected_value"
+        },
+        {
+          "event": "typed_extraction_diagnostic",
+          "step": null,
+          "operation_family": null,
+          "failure_reason": null,
+          "outcome": null,
+          "reason": null
+        },
+        {
+          "event": "typed_extraction_rejected",
+          "step": null,
+          "operation_family": null,
+          "failure_reason": null,
+          "outcome": null,
+          "reason": null
+        },
+        {
+          "event": "allocation_reconciled",
+          "step": null,
+          "operation_family": "branch:extract_typed",
+          "failure_reason": "operation_produced_no_commit",
+          "outcome": null,
+          "reason": null
+        },
+        {
+          "event": "terminal_belief_readout",
+          "step": 2,
+          "operation_family": null,
+          "failure_reason": null,
+          "outcome": null,
+          "reason": null
+        },
+        {
+          "event": "proof_gap_diagnosed",
+          "step": 2,
+          "operation_family": null,
+          "failure_reason": null,
+          "outcome": null,
+          "reason": null
+        },
+        {
+          "event": "region_retrieval_gate",
+          "step": 2,
+          "operation_family": null,
+          "failure_reason": null,
+          "outcome": null,
+          "reason": null
+        },
+        {
+          "event": "meta_decision",
+          "step": 2,
+          "operation_family": null,
+          "failure_reason": null,
+          "outcome": "CONTINUE",
+          "reason": "affordable_positive_graph_local_expected_value"
+        },
+        {
+          "event": "graph_operation",
+          "step": 3,
+          "operation_family": "retrieve:default",
+          "failure_reason": null,
+          "outcome": null,
+          "reason": null
+        },
+        {
+          "event": "allocation_reconciled",
+          "step": null,
+          "operation_family": "retrieve:default",
+          "failure_reason": "",
+          "outcome": null,
+          "reason": null
+        },
+        {
+          "event": "terminal_belief_readout",
+          "step": 3,
+          "operation_family": null,
+          "failure_reason": null,
+          "outcome": null,
+          "reason": null
+        },
+        {
+          "event": "meta_decision",
+          "step": 3,
+          "operation_family": null,
+          "failure_reason": null,
+          "outcome": "ABSTAIN",
+          "reason": "no_executable_computation_with_certificate"
+        },
+        {
+          "event": "termination",
+          "step": null,
+          "operation_family": null,
+          "failure_reason": null,
+          "outcome": "ABSTAIN",
+          "reason": "no_executable_computation_with_certificate"
+        }
+      ]
+    },
+    {
+      "qid": "4hop2__103790_39078_8987_8529",
+      "hop_count": 4,
+      "candidate_presence": false,
+      "graph_proof_completion": false,
+      "execution_plan_completion": 0.0,
+      "termination": {
+        "step": 7,
+        "outcome": "ABSTAIN",
+        "best_predicted_evc": 0.03840470494460091,
+        "answer_node_id": null,
+        "reason": "affordable_proof_opportunity_below_net_value_threshold",
+        "remaining_budget": {
+          "llm_calls": 11,
+          "tokens": 9987,
+          "retrieval_calls": 5,
+          "graph_operations": 57
+        },
+        "dead_end_certificate": {
+          "certificate_version": "proof-obligation-dead-end-v2.4.3.2",
+          "step": 7,
+          "open_obligations": [
+            {
+              "obligation_id": "obligation_129ab9cf6efd1677",
+              "target_subgoal": "subgoal_root",
+              "branch_id": "branch_root.b5.1",
+              "obligation_type": "missing_binding",
+              "status": "OPEN",
+              "severity": 1.0,
+              "terminal_reachable": true,
+              "required_node_ids": [
+                "subgoal_2"
+              ],
+              "satisfied_by_node_ids": [],
+              "reason_codes": [
+                "unresolved_dependency"
+              ],
+              "provenance_event_ids": [],
+              "created_at_step": 5,
+              "updated_at_step": 7
+            },
+            {
+              "obligation_id": "obligation_4eaf86a3026fd3a6",
+              "target_subgoal": "subgoal_root",
+              "branch_id": "branch_root.b5.2",
+              "obligation_type": "missing_binding",
+              "status": "OPEN",
+              "severity": 1.0,
+              "terminal_reachable": true,
+              "required_node_ids": [
+                "subgoal_2"
+              ],
+              "satisfied_by_node_ids": [],
+              "reason_codes": [
+                "unresolved_dependency"
+              ],
+              "provenance_event_ids": [],
+              "created_at_step": 5,
+              "updated_at_step": 7
+            },
+            {
+              "obligation_id": "obligation_89ccc4e57adcfcdf",
+              "target_subgoal": "subgoal_1",
+              "branch_id": "branch_root.b5.2",
+              "obligation_type": "missing_evidence",
+              "status": "OPEN",
+              "severity": 1.0,
+              "terminal_reachable": true,
+              "required_node_ids": [],
+              "satisfied_by_node_ids": [],
+              "reason_codes": [
+                "no_grounding_evidence"
+              ],
+              "provenance_event_ids": [],
+              "created_at_step": 5,
+              "updated_at_step": 7
+            },
+            {
+              "obligation_id": "obligation_ba3d4c5a6c62f3a0",
+              "target_subgoal": "subgoal_root",
+              "branch_id": "branch_root.b5.2",
+              "obligation_type": "missing_evidence",
+              "status": "OPEN",
+              "severity": 1.0,
+              "terminal_reachable": true,
+              "required_node_ids": [],
+              "satisfied_by_node_ids": [],
+              "reason_codes": [
+                "no_grounding_evidence"
+              ],
+              "provenance_event_ids": [],
+              "created_at_step": 5,
+              "updated_at_step": 7
+            },
+            {
+              "obligation_id": "obligation_dd318e0645c6e662",
+              "target_subgoal": "subgoal_1",
+              "branch_id": "branch_root.b5.1",
+              "obligation_type": "missing_evidence",
+              "status": "OPEN",
+              "severity": 1.0,
+              "terminal_reachable": true,
+              "required_node_ids": [],
+              "satisfied_by_node_ids": [],
+              "reason_codes": [
+                "no_grounding_evidence"
+              ],
+              "provenance_event_ids": [],
+              "created_at_step": 5,
+              "updated_at_step": 7
+            },
+            {
+              "obligation_id": "obligation_e6738e6a848068d3",
+              "target_subgoal": "subgoal_root",
+              "branch_id": "branch_root.b5.1",
+              "obligation_type": "missing_evidence",
+              "status": "OPEN",
+              "severity": 1.0,
+              "terminal_reachable": true,
+              "required_node_ids": [],
+              "satisfied_by_node_ids": [],
+              "reason_codes": [
+                "no_grounding_evidence"
+              ],
+              "provenance_event_ids": [],
+              "created_at_step": 5,
+              "updated_at_step": 7
+            }
+          ],
+          "blocked_obligations": [
+            {
+              "obligation_id": "obligation_5c0b77f47a73db67",
+              "target_subgoal": "subgoal_2",
+              "branch_id": "branch_root.b5.2",
+              "obligation_type": "extraction_exhausted",
+              "status": "BLOCKED",
+              "severity": 0.9,
+              "terminal_reachable": true,
+              "required_node_ids": [
+                "evidence_v2_6_10_17",
+                "evidence_v2_6_1_5",
+                "evidence_v2_6_2_6",
+                "evidence_v2_6_3_10",
+                "evidence_v2_6_4_19",
+                "evidence_v2_6_5_11",
+                "evidence_v2_6_6_3",
+                "evidence_v2_6_7_14",
+                "evidence_v2_6_8_16",
+                "evidence_v2_6_9_8"
+              ],
+              "satisfied_by_node_ids": [],
+              "reason_codes": [
+                "typed_extraction_failed"
+              ],
+              "provenance_event_ids": [
+                "outcome_allocation_000022",
+                "outcome_allocation_000023",
+                "retrieval_attempt_op_v2_0006_retrieve_subgoal_2_branch_root_b5_2_allocation_000016"
+              ],
+              "created_at_step": 7,
+              "updated_at_step": 7
+            },
+            {
+              "obligation_id": "obligation_cd6eb193223013d3",
+              "target_subgoal": "subgoal_2",
+              "branch_id": "branch_root.b5.1",
+              "obligation_type": "extraction_exhausted",
+              "status": "BLOCKED",
+              "severity": 0.9,
+              "terminal_reachable": true,
+              "required_node_ids": [
+                "evidence_v2_7_10_8",
+                "evidence_v2_7_1_11",
+                "evidence_v2_7_2_10",
+                "evidence_v2_7_3_5",
+                "evidence_v2_7_4_6",
+                "evidence_v2_7_5_17",
+                "evidence_v2_7_6_14",
+                "evidence_v2_7_7_19",
+                "evidence_v2_7_8_16",
+                "evidence_v2_7_9_12"
+              ],
+              "satisfied_by_node_ids": [],
+              "reason_codes": [
+                "typed_extraction_failed"
+              ],
+              "provenance_event_ids": [
+                "outcome_allocation_000022",
+                "outcome_allocation_000023",
+                "retrieval_attempt_op_v2_0007_retrieve_subgoal_2_branch_root_b5_1_allocation_000019"
+              ],
+              "created_at_step": 7,
+              "updated_at_step": 7
+            }
+          ],
+          "remaining_budget": {
+            "llm_calls": 11,
+            "tokens": 9987,
+            "retrieval_calls": 5,
+            "graph_operations": 57
+          },
+          "candidate_operations": [
+            {
+              "allocation_id": "allocation_000026",
+              "operation_id": "op_v2_0008_branch_subgoal_2_branch_root_b5_2",
+              "operation_type": "BRANCH",
+              "target_obligation_ids": [],
+              "gross_opportunity": 0.17420195103835093,
+              "absolute_cost": 0.13579724609375002,
+              "net_evc": 0.03840470494460091
+            }
+          ],
+          "feasible_unselected_join_count": 0,
+          "exhaustion_evidence": [
+            "typed_extraction_failed"
+          ],
+          "decision_layer": "net_evc_after_feasibility"
+        }
+      },
+      "open_obligation_type_counts": {
+        "missing_binding": 2,
+        "extraction_exhausted": 2,
+        "missing_evidence": 4
+      },
+      "open_obligations": [
+        {
+          "target_subgoal": "subgoal_root",
+          "branch_id": "branch_root.b5.1",
+          "obligation_type": "missing_binding",
+          "status": "OPEN",
+          "severity": 1.0,
+          "reason_codes": [
+            "unresolved_dependency"
+          ],
+          "required_node_ids": [
+            "subgoal_2"
+          ]
+        },
+        {
+          "target_subgoal": "subgoal_root",
+          "branch_id": "branch_root.b5.2",
+          "obligation_type": "missing_binding",
+          "status": "OPEN",
+          "severity": 1.0,
+          "reason_codes": [
+            "unresolved_dependency"
+          ],
+          "required_node_ids": [
+            "subgoal_2"
+          ]
+        },
+        {
+          "target_subgoal": "subgoal_2",
+          "branch_id": "branch_root.b5.2",
+          "obligation_type": "extraction_exhausted",
+          "status": "BLOCKED",
+          "severity": 0.9,
+          "reason_codes": [
+            "typed_extraction_failed"
+          ],
+          "required_node_ids": [
+            "evidence_v2_6_10_17",
+            "evidence_v2_6_1_5",
+            "evidence_v2_6_2_6",
+            "evidence_v2_6_3_10",
+            "evidence_v2_6_4_19",
+            "evidence_v2_6_5_11",
+            "evidence_v2_6_6_3",
+            "evidence_v2_6_7_14",
+            "evidence_v2_6_8_16",
+            "evidence_v2_6_9_8"
+          ]
+        },
+        {
+          "target_subgoal": "subgoal_1",
+          "branch_id": "branch_root.b5.2",
+          "obligation_type": "missing_evidence",
+          "status": "OPEN",
+          "severity": 1.0,
+          "reason_codes": [
+            "no_grounding_evidence"
+          ],
+          "required_node_ids": []
+        },
+        {
+          "target_subgoal": "subgoal_root",
+          "branch_id": "branch_root.b5.2",
+          "obligation_type": "missing_evidence",
+          "status": "OPEN",
+          "severity": 1.0,
+          "reason_codes": [
+            "no_grounding_evidence"
+          ],
+          "required_node_ids": []
+        },
+        {
+          "target_subgoal": "subgoal_2",
+          "branch_id": "branch_root.b5.1",
+          "obligation_type": "extraction_exhausted",
+          "status": "BLOCKED",
+          "severity": 0.9,
+          "reason_codes": [
+            "typed_extraction_failed"
+          ],
+          "required_node_ids": [
+            "evidence_v2_7_10_8",
+            "evidence_v2_7_1_11",
+            "evidence_v2_7_2_10",
+            "evidence_v2_7_3_5",
+            "evidence_v2_7_4_6",
+            "evidence_v2_7_5_17",
+            "evidence_v2_7_6_14",
+            "evidence_v2_7_7_19",
+            "evidence_v2_7_8_16",
+            "evidence_v2_7_9_12"
+          ]
+        },
+        {
+          "target_subgoal": "subgoal_1",
+          "branch_id": "branch_root.b5.1",
+          "obligation_type": "missing_evidence",
+          "status": "OPEN",
+          "severity": 1.0,
+          "reason_codes": [
+            "no_grounding_evidence"
+          ],
+          "required_node_ids": []
+        },
+        {
+          "target_subgoal": "subgoal_root",
+          "branch_id": "branch_root.b5.1",
+          "obligation_type": "missing_evidence",
+          "status": "OPEN",
+          "severity": 1.0,
+          "reason_codes": [
+            "no_grounding_evidence"
+          ],
+          "required_node_ids": []
+        }
+      ],
+      "subgoals": [
+        {
+          "node_id": "subgoal_1",
+          "status": "partial",
+          "dependencies": [],
+          "terminal": false,
+          "claim_status_counts": {
+            "scored": 3
+          },
+          "retrieval_attempts": 1
+        },
+        {
+          "node_id": "subgoal_2",
+          "status": "active",
+          "dependencies": [
+            "subgoal_1"
+          ],
+          "terminal": false,
+          "claim_status_counts": {},
+          "retrieval_attempts": 2
+        },
+        {
+          "node_id": "subgoal_root",
+          "status": "unresolved",
+          "dependencies": [
+            "subgoal_1",
+            "subgoal_2"
+          ],
+          "terminal": true,
+          "claim_status_counts": {},
+          "retrieval_attempts": 0
+        }
+      ],
+      "active_branches": [
+        {
+          "branch_id": "branch_root.b5.1",
+          "parent_branch_id": "branch_root",
+          "assignments": {
+            "subgoal_1": "claim_v2_3_subgoal_1_1"
+          },
+          "completed_subgoals": [
+            "subgoal_1"
+          ],
+          "score": 0.5049998333399998,
+          "status": "active",
+          "created_at_step": 5,
+          "revision_count": 0,
+          "last_revision_step": -1,
+          "history": []
+        },
+        {
+          "branch_id": "branch_root.b5.2",
+          "parent_branch_id": "branch_root",
+          "assignments": {
+            "subgoal_1": "claim_v2_3_subgoal_1_3"
+          },
+          "completed_subgoals": [
+            "subgoal_1"
+          ],
+          "score": 0.49500016666000024,
+          "status": "active",
+          "created_at_step": 5,
+          "revision_count": 0,
+          "last_revision_step": -1,
+          "history": []
+        }
+      ],
+      "recent_trace": [
+        {
+          "event": "allocation_reconciled",
+          "step": null,
+          "operation_family": "retrieve:default",
+          "failure_reason": "",
+          "outcome": null,
+          "reason": null
+        },
+        {
+          "event": "terminal_belief_readout",
+          "step": 6,
+          "operation_family": null,
+          "failure_reason": null,
+          "outcome": null,
+          "reason": null
+        },
+        {
+          "event": "meta_decision",
+          "step": 6,
+          "operation_family": null,
+          "failure_reason": null,
+          "outcome": "CONTINUE",
+          "reason": "affordable_positive_graph_local_expected_value"
+        },
+        {
+          "event": "graph_operation",
+          "step": 7,
+          "operation_family": "retrieve:default",
+          "failure_reason": null,
+          "outcome": null,
+          "reason": null
+        },
+        {
+          "event": "allocation_reconciled",
+          "step": null,
+          "operation_family": "retrieve:default",
+          "failure_reason": "",
+          "outcome": null,
+          "reason": null
+        },
+        {
+          "event": "terminal_belief_readout",
+          "step": 7,
+          "operation_family": null,
+          "failure_reason": null,
+          "outcome": null,
+          "reason": null
+        },
+        {
+          "event": "meta_decision",
+          "step": 7,
+          "operation_family": null,
+          "failure_reason": null,
+          "outcome": "CONTINUE",
+          "reason": "affordable_positive_graph_local_expected_value"
+        },
+        {
+          "event": "typed_extraction_diagnostic",
+          "step": null,
+          "operation_family": null,
+          "failure_reason": null,
+          "outcome": null,
+          "reason": null
+        },
+        {
+          "event": "typed_extraction_rejected",
+          "step": null,
+          "operation_family": null,
+          "failure_reason": null,
+          "outcome": null,
+          "reason": null
+        },
+        {
+          "event": "allocation_reconciled",
+          "step": null,
+          "operation_family": "branch:extract_typed",
+          "failure_reason": "operation_produced_no_commit",
+          "outcome": null,
+          "reason": null
+        },
+        {
+          "event": "terminal_belief_readout",
+          "step": 7,
+          "operation_family": null,
+          "failure_reason": null,
+          "outcome": null,
+          "reason": null
+        },
+        {
+          "event": "meta_decision",
+          "step": 7,
+          "operation_family": null,
+          "failure_reason": null,
+          "outcome": "CONTINUE",
+          "reason": "affordable_positive_graph_local_expected_value"
+        },
+        {
+          "event": "typed_extraction_diagnostic",
+          "step": null,
+          "operation_family": null,
+          "failure_reason": null,
+          "outcome": null,
+          "reason": null
+        },
+        {
+          "event": "typed_extraction_rejected",
+          "step": null,
+          "operation_family": null,
+          "failure_reason": null,
+          "outcome": null,
+          "reason": null
+        },
+        {
+          "event": "allocation_reconciled",
+          "step": null,
+          "operation_family": "branch:extract_typed",
+          "failure_reason": "operation_produced_no_commit",
+          "outcome": null,
+          "reason": null
+        },
+        {
+          "event": "terminal_belief_readout",
+          "step": 7,
+          "operation_family": null,
+          "failure_reason": null,
+          "outcome": null,
+          "reason": null
+        },
+        {
+          "event": "meta_decision",
+          "step": 7,
+          "operation_family": null,
+          "failure_reason": null,
+          "outcome": "ABSTAIN",
+          "reason": "affordable_proof_opportunity_below_net_value_threshold"
+        },
+        {
+          "event": "termination",
+          "step": null,
+          "operation_family": null,
+          "failure_reason": null,
+          "outcome": "ABSTAIN",
+          "reason": "affordable_proof_opportunity_below_net_value_threshold"
+        }
+      ]
+    }
+  ],
+  "incorrect_answer_count": 3,
+  "incorrect_answers": [
+    {
+      "qid": "3hop1__132795_40769_64047",
+      "answer": "April 2012",
+      "confidence": 0.8481666666666667,
+      "exact_match": 0.0,
+      "f1": 0.5,
+      "candidate_presence": false,
+      "graph_proof_completion": true
+    },
+    {
+      "qid": "3hop1__145924_131905_41948",
+      "answer": "sea level",
+      "confidence": 0.9849999999999999,
+      "exact_match": 0.0,
+      "f1": 0.0,
+      "candidate_presence": false,
+      "graph_proof_completion": true
+    },
+    {
+      "qid": "4hop2__161602_474028_88460_21057",
+      "answer": "teak",
+      "confidence": 0.7925,
+      "exact_match": 0.0,
+      "f1": 0.4,
+      "candidate_presence": false,
+      "graph_proof_completion": true
+    }
+  ]
+}

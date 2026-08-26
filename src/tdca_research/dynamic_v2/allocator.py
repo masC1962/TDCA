@@ -585,26 +585,41 @@ class AdaptiveComputationAllocator:
     ) -> tuple[float, float, float]:
         """Return independent immediate, delayed and cost channels in [0,1]."""
 
-        immediate = _weighted_mean({
-            "graph_heat": (normalized.graph_heat, self.config.evc_weight_heat),
-            "uncertainty_reduction": (
-                normalized.uncertainty_reduction,
-                self.config.evc_weight_uncertainty_reduction,
-            ),
-            "evidence_novelty": (
-                normalized.evidence_novelty, self.config.evc_weight_novelty,
-            ),
-            "recovery_value": (
-                normalized.recovery_value, self.config.evc_weight_recovery,
-            ),
-            "observed_value": (
-                normalized.observed_value, self.config.evc_weight_observed_value,
-            ),
-            "terminal_proximity": (
-                normalized.terminal_proximity,
-                self.config.evc_weight_terminal_proximity,
-            ),
-        })
+        if self.config.one_step_progress_immediate_value:
+            # Each term is already normalized before this additive utility is
+            # formed.  Severity/heat and historical family priors are not
+            # immediate progress: they describe demand or past outcomes.  The
+            # closure mass remains operation-conditioned and is kept separate
+            # from terminal-distance/option value.
+            immediate = sum((
+                normalized.evidence_novelty,
+                normalized.obligation_closure,
+                normalized.operation_closure_probability
+                * normalized.expected_obligation_delta,
+                normalized.terminal_gap,
+                normalized.answer_impact,
+            )) / 5.0
+        else:
+            immediate = _weighted_mean({
+                "graph_heat": (normalized.graph_heat, self.config.evc_weight_heat),
+                "uncertainty_reduction": (
+                    normalized.uncertainty_reduction,
+                    self.config.evc_weight_uncertainty_reduction,
+                ),
+                "evidence_novelty": (
+                    normalized.evidence_novelty, self.config.evc_weight_novelty,
+                ),
+                "recovery_value": (
+                    normalized.recovery_value, self.config.evc_weight_recovery,
+                ),
+                "observed_value": (
+                    normalized.observed_value, self.config.evc_weight_observed_value,
+                ),
+                "terminal_proximity": (
+                    normalized.terminal_proximity,
+                    self.config.evc_weight_terminal_proximity,
+                ),
+            })
         structural_delayed = _weighted_mean({
             "answer_impact": (
                 normalized.answer_impact, self.config.evc_weight_answer_impact,

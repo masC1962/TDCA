@@ -354,7 +354,16 @@ class V2GraphController(GraphController):
         changes["updated_nodes"].extend([target_id, bridge_id])
 
     def _retrieve(self, graph, operation, changes) -> None:
+        preserved_question = ""
+        if self.config.preserve_subgoal_question_on_retrieval:
+            preserved_question = graph.node(
+                operation.target_id, SubgoalNode,
+            ).instantiated_question
         super()._retrieve(graph, operation, changes)
+        if self.config.preserve_subgoal_question_on_retrieval:
+            graph.node(
+                operation.target_id, SubgoalNode,
+            ).instantiated_question = preserved_question
         query = str(operation.payload.get("query", "")).strip()
         evidence_rows = operation.payload.get("evidence", [])
         if not query:

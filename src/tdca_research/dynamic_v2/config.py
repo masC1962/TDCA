@@ -149,6 +149,11 @@ class DynamicV2ResearchConfig(DynamicResearchConfig):
     # transitions.  It is opt-in to preserve every frozen v2.4.3.1 artifact.
     certified_transition_option_value: bool = False
 
+    # v2.4.3.3 keeps the reasoning objective distinct from retrieval syntax and
+    # predicts one-step value from normalized graph progress, not difficulty.
+    preserve_subgoal_question_on_retrieval: bool = False
+    one_step_progress_immediate_value: bool = False
+
     # Terminal acceptance is a conjunctive readout over independent belief
     # channels.  These are initial development values, never learned weights.
     terminal_min_absolute_support: float = 0.70
