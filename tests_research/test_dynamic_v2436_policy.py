@@ -80,8 +80,11 @@ def test_v2436_projects_unusable_target_claim_into_controller_obligation():
     assert restored.proof_obligations == graph.proof_obligations
 
 
-def test_v2436_recovery_retrieval_targets_the_projected_proof_gap():
-    cfg = _config(proof_recovery_extraction_priority=True)
+def test_v2438_controller_reconstructs_recovery_provenance_from_sealed_targets():
+    cfg = _config(
+        proof_recovery_extraction_priority=True,
+        controller_derived_recovery_provenance=True,
+    )
     controller, graph = _target_graph(cfg)
     claim = graph.node("c1")
     subgoal = graph.node("s_root")
@@ -113,7 +116,9 @@ def test_v2436_recovery_retrieval_targets_the_projected_proof_gap():
         graph, [recovery], Budget(16, 16000, 0, Usage()),
     )[0]
     actual = _operation(90, OperationType.RETRIEVE, payload={
-        **recovery.payload,
+        # Match the real executor: the concrete operation intentionally omits
+        # the placeholder-only recovery_policy field.
+        "query": query,
         "allocated_top_k": 5,
         "hit_count": 1,
         "evidence": [{
@@ -143,7 +148,7 @@ def test_v2436_recovery_retrieval_targets_the_projected_proof_gap():
     ) is None
     restored = type(graph).from_dict(graph.to_dict())
     restored.validate()
-    assert restored.proof_obligation_version == "proof-obligation-state-v2.4.3.7"
+    assert restored.proof_obligation_version == "proof-obligation-state-v2.4.3.8"
     assert restored.allocation_history[-1].target_obligation_ids == targets
     assert restored.allocation_history[-1].obligation_estimate
     assert restored.allocation_history[-1].transition_certificate == (
@@ -214,7 +219,31 @@ def test_v2437_frozen_config_enables_only_recovery_evidence_priority():
     assert config.proof_quality_obligation_alignment
     assert config.anchored_proof_recovery_query
     assert config.proof_recovery_extraction_priority
+    assert not config.controller_derived_recovery_provenance
     assert not config.feedback_conditioned_delayed_value
     assert not config.compact_objective_recovery_query
     assert config.campaign_provider_call_cap == 1000
     assert config.campaign_provider_token_cap == 853_282
+
+
+def test_v2438_frozen_config_adds_only_controller_provenance_derivation():
+    root = Path(__file__).resolve().parents[1]
+    config = DynamicV2ResearchConfig.from_yaml(
+        root / "configs/dynamic_hypergraph_v2438_qwen_smoke20.yaml"
+    )
+    config.validate()
+    assert config.proof_quality_obligation_alignment
+    assert config.anchored_proof_recovery_query
+    assert config.proof_recovery_extraction_priority
+    assert config.controller_derived_recovery_provenance
+    assert not config.feedback_conditioned_delayed_value
+    assert not config.compact_objective_recovery_query
+    assert config.campaign_provider_call_cap == 931
+    assert config.campaign_provider_token_cap == 769_164
+    prereg = json.loads((
+        root / "configs/dynamic_v2438_preregistration.json"
+    ).read_text(encoding="utf-8"))
+    assert prereg["only_semantic_delta"][
+        "derive_recovery_policy_from_controller_owned_target_obligations"
+    ]
+    assert prereg["training"] is False

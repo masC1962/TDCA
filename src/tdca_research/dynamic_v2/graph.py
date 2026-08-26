@@ -553,6 +553,7 @@ class DynamicReasoningHypergraphV2(DynamicReasoningHypergraph):
                 "proof-obligation-state-v2.4.3.2",
                 "proof-obligation-state-v2.4.3.6",
                 "proof-obligation-state-v2.4.3.7",
+                "proof-obligation-state-v2.4.3.8",
             }:
                 if not -1.0 <= float(row.predicted_marginal_evc) <= 1.0:
                     raise GraphInvariantError(
@@ -583,6 +584,7 @@ class DynamicReasoningHypergraphV2(DynamicReasoningHypergraph):
                 "proof-obligation-state-v2.4.3.2",
                 "proof-obligation-state-v2.4.3.6",
                 "proof-obligation-state-v2.4.3.7",
+                "proof-obligation-state-v2.4.3.8",
             }:
                 for name in ("predicted_transition_value", "actual_transition_value"):
                     if not 0.0 <= float(getattr(row, name)) <= 1.0:
@@ -857,6 +859,7 @@ def _v243_compatible_allocations(
             "proof-obligation-state-v2.4.3.2",
             "proof-obligation-state-v2.4.3.6",
             "proof-obligation-state-v2.4.3.7",
+            "proof-obligation-state-v2.4.3.8",
         }:
             for name in v2431_fields:
                 row.pop(name, None)
@@ -864,6 +867,7 @@ def _v243_compatible_allocations(
             "proof-obligation-state-v2.4.3.2",
             "proof-obligation-state-v2.4.3.6",
             "proof-obligation-state-v2.4.3.7",
+            "proof-obligation-state-v2.4.3.8",
         }:
             for name in v2432_fields:
                 row.pop(name, None)
@@ -877,7 +881,10 @@ def _v2437_compatible_retrieval_attempts(
     rows: list[RetrievalAttemptRecord], version: str,
 ) -> list[dict[str, Any]]:
     payload = [_primitive(row) for row in rows]
-    if version != "proof-obligation-state-v2.4.3.7":
+    if version not in {
+        "proof-obligation-state-v2.4.3.7",
+        "proof-obligation-state-v2.4.3.8",
+    }:
         for row in payload:
             row.pop("recovery_policy", None)
             row.pop("recovery_target_obligation_ids", None)

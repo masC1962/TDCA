@@ -49,6 +49,8 @@ def refresh_proof_obligations(
     """
 
     graph.proof_obligation_version = (
+        "proof-obligation-state-v2.4.3.8"
+        if config is not None and config.controller_derived_recovery_provenance else
         "proof-obligation-state-v2.4.3.7"
         if config is not None and config.proof_recovery_extraction_priority else
         "proof-obligation-state-v2.4.3.6"
@@ -503,6 +505,9 @@ def dead_end_certificate(
     ]
     return {
         "certificate_version": (
+            "proof-obligation-dead-end-v2.4.3.8"
+            if graph.proof_obligation_version == "proof-obligation-state-v2.4.3.8"
+            else
             "proof-obligation-dead-end-v2.4.3.7"
             if graph.proof_obligation_version == "proof-obligation-state-v2.4.3.7"
             else "proof-obligation-dead-end-v2.4.3.6"

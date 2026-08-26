@@ -377,6 +377,25 @@ class V2GraphController(GraphController):
         allocation = operation.payload.get("_allocation", {})
         if not isinstance(allocation, dict):
             raise GraphInvariantError("retrieval allocation trace must be a mapping")
+        recovery_target_ids = [
+            str(value) for value in allocation.get("target_obligation_ids", [])
+        ]
+        recovery_policy = str(operation.payload.get("recovery_policy", ""))
+        if self.config.controller_derived_recovery_provenance:
+            # The executor materializes a fresh operation after retrieval and
+            # may legitimately omit placeholder metadata.  Derive provenance
+            # only from sealed allocation targets and controller-owned
+            # obligations; a provider payload therefore cannot forge recovery.
+            recovery_policy = (
+                "proof_gap_recovery_v1"
+                if any(
+                    graph.proof_obligations.get(value) is not None
+                    and graph.proof_obligations[value].obligation_type
+                    == "insufficient_target_proof"
+                    for value in recovery_target_ids
+                )
+                else ""
+            )
         graph.retrieval_attempt_history.append(RetrievalAttemptRecord(
             attempt_id=f"retrieval_attempt_{operation.operation_id}",
             operation_id=operation.operation_id,
@@ -389,10 +408,8 @@ class V2GraphController(GraphController):
             hit_count=hit_count,
             new_evidence_count=len(evidence_rows),
             passage_ids=[str(row.get("passage_id", row.get("document_id", ""))) for row in evidence_rows],
-            recovery_policy=str(operation.payload.get("recovery_policy", "")),
-            recovery_target_obligation_ids=[
-                str(value) for value in allocation.get("target_obligation_ids", [])
-            ],
+            recovery_policy=recovery_policy,
+            recovery_target_obligation_ids=recovery_target_ids,
         ))
         activation = operation.payload.get("memory_activation", {})
         if not isinstance(activation, dict):
