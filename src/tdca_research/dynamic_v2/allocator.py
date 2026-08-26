@@ -669,6 +669,20 @@ class AdaptiveComputationAllocator:
                     * normalized.obligation_terminal_return
                     - normalized.operation_redundancy
                 )
+                if self.config.feedback_conditioned_delayed_value:
+                    # A future proof return requires both a closable local
+                    # obligation and evidence that this operation/region has
+                    # produced progress in the current question.  Every factor
+                    # is normalized and independently auditable; no weights are
+                    # fitted across questions.
+                    delayed = (
+                        normalized.operation_closure_probability
+                        * normalized.expected_obligation_delta
+                        * normalized.observed_value
+                        * (1.0 - normalized.failure_cooldown)
+                        * (1.0 - normalized.operation_redundancy)
+                        * (1.0 - normalized.dead_end_risk)
+                    )
             else:
                 delayed = 0.0 if family == "commit:answer" else _weighted_mean({
                     "obligation_closure": (

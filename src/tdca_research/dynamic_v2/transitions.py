@@ -331,7 +331,17 @@ def _terminal_materialization_certificate(
     if not all(
         isinstance(claim, ClaimNode)
         and claim.status in viable
-        and claim.branch_id == operation.branch_id
+        and (
+            claim.branch_id == operation.branch_id
+            or (
+                bool(getattr(
+                    config, "terminal_certificate_accepts_ancestor_claims", False,
+                ))
+                and _is_branch_ancestor(
+                    graph, claim.branch_id, operation.branch_id,
+                )
+            )
+        )
         for claim in claims
     ):
         return None
@@ -435,7 +445,11 @@ def _terminal_materialization_certificate(
         return None
 
     return {
-        "certificate_version": "certified-transition-option-v2.4.3.4",
+        "certificate_version": (
+            "certified-transition-option-v2.4.3.5"
+            if getattr(config, "terminal_certificate_accepts_ancestor_claims", False)
+            else "certified-transition-option-v2.4.3.4"
+        ),
         "kind": "accepted_terminal_materialization",
         "mandatory": True,
         "deterministic": True,
@@ -493,6 +507,24 @@ def _credible_unresolved_branch(
             bool(claim.evidence_refs),
         )):
             return True
+    return False
+
+
+def _is_branch_ancestor(
+    graph: DynamicReasoningHypergraphV2,
+    ancestor_id: str,
+    descendant_id: str,
+) -> bool:
+    """Return whether a claim-owning branch is on the child's sealed lineage."""
+
+    seen = set()
+    current = graph.branches.get(descendant_id)
+    while current is not None and current.branch_id not in seen:
+        seen.add(current.branch_id)
+        parent_id = current.parent_branch_id
+        if parent_id == ancestor_id:
+            return True
+        current = graph.branches.get(parent_id) if parent_id else None
     return False
 
 

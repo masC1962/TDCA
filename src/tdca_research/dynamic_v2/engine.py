@@ -43,6 +43,7 @@ from .recovery import (
 )
 from .revision import BeliefRevisionDetector
 from .termination import MetaDecision, MetaStopPolicy, TerminalBeliefReadout
+from .transitions import certified_transition_value
 from .verifier import MultiSampleIndependentVerifier
 
 
@@ -870,6 +871,9 @@ class DynamicHypergraphV2Reasoner:
                         query = proof_gap_recovery_query(
                             graph, subgoal, question, dependencies, claims,
                             proof_gap, attempted_queries,
+                            compact_objective=(
+                                self.config.compact_objective_recovery_query
+                            ),
                         )
                     else:
                         query = _missing_binding_query(
@@ -1039,9 +1043,13 @@ class DynamicHypergraphV2Reasoner:
                         "branches_created": float(len(candidate_ids)),
                     },
                 )
+                execution_packet = _bind_transition_to_execution(
+                    graph, packet, actual, self.config,
+                )
                 graph = self._apply(
-                    controller, graph, AdaptiveComputationAllocator.attach(actual, packet),
-                    reasoning_trace, packet,
+                    controller, graph,
+                    AdaptiveComputationAllocator.attach(actual, execution_packet),
+                    reasoning_trace, execution_packet,
                 )
                 return graph, True
             actual = extractor.propose(
@@ -1338,6 +1346,27 @@ def _execution_packet(packet: ComputationPacket) -> ComputationPacket:
     operation = deepcopy(packet.operation)
     operation.operation_id = f"{operation.operation_id}_{packet.allocation_id}"
     return replace(packet, operation=operation)
+
+
+def _bind_transition_to_execution(
+    graph: DynamicReasoningHypergraphV2,
+    packet: ComputationPacket,
+    operation: GraphOperation,
+    config: DynamicV2ResearchConfig,
+) -> ComputationPacket:
+    """Bind an allocation promise to the concrete post-fidelity operation."""
+
+    if not config.bind_transition_certificate_to_execution:
+        return packet
+    certificate = certified_transition_value(graph, operation, config)
+    return replace(
+        packet,
+        operation=operation,
+        transition_certificate=certificate,
+        predicted_transition_value=float(
+            certificate.get("predicted_transition_value", 0.0)
+        ),
+    )
 
 
 def _unique_operations(values: list[GraphOperation]) -> list[GraphOperation]:

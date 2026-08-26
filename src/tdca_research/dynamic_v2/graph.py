@@ -583,6 +583,7 @@ class DynamicReasoningHypergraphV2(DynamicReasoningHypergraph):
                     row.transition_certificate.get("certificate_version") not in {
                         "certified-transition-option-v2.4.3.2",
                         "certified-transition-option-v2.4.3.4",
+                        "certified-transition-option-v2.4.3.5",
                     }
                 ):
                     raise GraphInvariantError(

@@ -38,8 +38,11 @@ def evaluate(run: Path, preregistration: Path, config_path: Path) -> dict[str, A
     }
     transition_trace = [
         isinstance(row.get("transition_certificate"), dict)
-        and row["transition_certificate"].get("certificate_version")
-        == "certified-transition-option-v2.4.3.2"
+        and row["transition_certificate"].get("certificate_version") in {
+            "certified-transition-option-v2.4.3.2",
+            "certified-transition-option-v2.4.3.4",
+            "certified-transition-option-v2.4.3.5",
+        }
         and "predicted_transition_value" in row
         and "actual_transition_value" in row
         and "transition_realized" in row

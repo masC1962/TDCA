@@ -160,6 +160,13 @@ class DynamicV2ResearchConfig(DynamicResearchConfig):
     # generic net-EVC threshold.
     certified_terminal_materialization: bool = False
 
+    # v2.4.3.5 binds transition promises to the concrete fidelity-truncated
+    # operation and recognizes claim provenance inherited by child branches.
+    bind_transition_certificate_to_execution: bool = False
+    terminal_certificate_accepts_ancestor_claims: bool = False
+    feedback_conditioned_delayed_value: bool = False
+    compact_objective_recovery_query: bool = False
+
     # Terminal acceptance is a conjunctive readout over independent belief
     # channels.  These are initial development values, never learned weights.
     terminal_min_absolute_support: float = 0.70

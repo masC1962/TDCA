@@ -195,6 +195,7 @@ def proof_gap_recovery_query(
     claims: Iterable[ClaimNode],
     diagnosis: ProofGapDiagnosis,
     attempted_queries: Iterable[str] = (),
+    compact_objective: bool = False,
 ) -> str:
     """Create a deterministic novel query from unresolved graph state only."""
     existing = {normalize_text(value) for value in attempted_queries}
@@ -224,14 +225,38 @@ def proof_gap_recovery_query(
         if value and value not in anchors
     )
     anchor_text = " ; ".join(anchors[:5])
-    candidates = [
+    if compact_objective:
+        compact_anchors = anchors[:2]
+        anchor_tokens = {
+            token for value in compact_anchors
+            for token in re.findall(r"[a-z0-9]+", normalize_text(value))
+        }
+        stop = {
+            "a", "an", "and", "are", "as", "at", "be", "besides", "by",
+            "did", "do", "does", "for", "from", "had", "has", "have", "how",
+            "in", "is", "it", "of", "on", "or", "that", "the", "this", "to",
+            "was", "were", "what", "when", "where", "which", "who", "with",
+        }
+        focus = [
+            token for token in re.findall(r"[a-z0-9]+", normalize_text(question))
+            if token not in stop and token not in anchor_tokens
+        ]
+        focus = list(dict.fromkeys(focus))[:6]
+        compact = " ".join([*compact_anchors, *focus, subgoal.answer_type]).strip()
+        candidates = [
+            compact,
+            " ".join([*(compact_anchors[:1]), *focus, subgoal.answer_type]).strip(),
+        ]
+    else:
+        candidates = []
+    candidates.extend([
         f"Independent source for the missing {subgoal.answer_type} relation"
         + (f" connecting {anchor_text}" if anchor_text else "")
         + f". Gap: {diagnosis.reason_code.replace('_', ' ')}.",
         f"Find independent evidence for the unresolved {subgoal.answer_type} output"
         + (f" from {anchor_text}" if anchor_text else "") + ".",
         f"{question} Verify an independent missing relation.",
-    ]
+    ])
     for candidate in candidates:
         normalized = normalize_text(candidate)
         if normalized not in existing and all(
