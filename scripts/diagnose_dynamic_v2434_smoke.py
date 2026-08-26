@@ -30,6 +30,59 @@ def analyze(run: Path) -> dict:
         str(row["qid"]): row["graph"]
         for row in _jsonl(run / "dynamic_v2_graphs.jsonl")
     }
+    proof_gap_allocations = {}
+    for qid, payload in graph_payloads.items():
+        retrievals = list(payload.get("retrieval_attempt_history", []))
+        allocations = list(payload.get("allocation_history", []))
+        outcomes = {
+            str(row.get("allocation_id", "")): row
+            for row in payload.get("operation_outcome_history", [])
+        }
+        rows = []
+        for allocation_index, allocation in enumerate(allocations):
+            raw = allocation.get("evc_components_raw") or {}
+            if not (
+                float(raw.get("proof_gap_reducibility", 0.0)) > 0.0
+                or float(raw.get("feasibility_unlock", 0.0)) > 0.0
+            ):
+                continue
+            operation_id = str(allocation.get("operation_id", ""))
+            retrieval = next((
+                row for row in retrievals
+                if str(row.get("operation_id", "")) == operation_id
+                or str(row.get("operation_id", "")).startswith(
+                    f"{operation_id}_allocation_"
+                )
+            ), None)
+            rows.append({
+                "allocation_id": str(allocation.get("allocation_id", "")),
+                "operation_id": operation_id,
+                "operation_family": str(allocation.get("operation_family", "")),
+                "outcome": outcomes.get(
+                    str(allocation.get("allocation_id", "")), {}
+                ),
+                "target_obligation_ids": list(
+                    allocation.get("target_obligation_ids") or []
+                ),
+                "predicted_evc": float(allocation.get("predicted_evc", 0.0)),
+                "predicted_delayed_proof_return": float(
+                    allocation.get("predicted_delayed_proof_return", 0.0)
+                ),
+                "delayed_realized_proof_return": float(
+                    allocation.get("delayed_realized_proof_return", 0.0)
+                ),
+                "actual_closed_target_ids": list(
+                    allocation.get("actual_closed_target_ids") or []
+                ),
+                "retrieval": retrieval,
+                "next_allocations": [{
+                    "allocation_id": str(value.get("allocation_id", "")),
+                    "operation_id": str(value.get("operation_id", "")),
+                    "predicted_evc": float(value.get("predicted_evc", 0.0)),
+                    "actual_utility": float(value.get("actual_utility", 0.0)),
+                } for value in allocations[allocation_index + 1:allocation_index + 5]],
+            })
+        proof_gap_allocations[qid] = rows
     failed_transitions = []
     terminal_certificates = []
     for example in _jsonl(run / "dynamic_v2_graphs.jsonl"):
@@ -106,13 +159,13 @@ def analyze(run: Path) -> dict:
             ),
         } for qid in sorted(predictions)],
         "recovery_retrievals": {
-            qid: [row for row in graph_payloads[qid].get(
-                "retrieval_attempt_history", []
-            ) if str(row.get("query", "")).lower().startswith(
-                "independent source"
-            )]
+            qid: [
+                row["retrieval"] for row in proof_gap_allocations[qid]
+                if row["retrieval"] is not None
+            ]
             for qid in sorted(graph_payloads)
         },
+        "proof_gap_allocations": proof_gap_allocations,
     })
     return report
 
@@ -133,6 +186,10 @@ def main() -> None:
             "blocked_after_accepted_terminal_readout"
         ],
         "incorrect_answers": report["incorrect_answers"],
+        "proof_gap_allocations": {
+            qid: rows for qid, rows in report["proof_gap_allocations"].items()
+            if rows
+        },
     }, ensure_ascii=False))
 
 

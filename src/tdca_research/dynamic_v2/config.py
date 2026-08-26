@@ -167,6 +167,12 @@ class DynamicV2ResearchConfig(DynamicResearchConfig):
     feedback_conditioned_delayed_value: bool = False
     compact_objective_recovery_query: bool = False
 
+    # v2.4.3.6 projects proof-usability failures into the same controller-owned
+    # obligation ledger used by allocation and delayed credit.  It is opt-in so
+    # every frozen v2.4.3.5 trace retains its original state semantics.
+    proof_quality_obligation_alignment: bool = False
+    anchored_proof_recovery_query: bool = False
+
     # Terminal acceptance is a conjunctive readout over independent belief
     # channels.  These are initial development values, never learned weights.
     terminal_min_absolute_support: float = 0.70

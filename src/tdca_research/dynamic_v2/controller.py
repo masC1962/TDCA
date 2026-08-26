@@ -102,6 +102,7 @@ class V2GraphController(GraphController):
                     self.config.operation_conditioned_obligation_closure
                 ),
                 transition_aware=self.config.certified_transition_option_value,
+                config=self.config,
             )
         after = updated.state_hash()
         updated.operation_history.append(AppliedOperation(
@@ -282,6 +283,7 @@ class V2GraphController(GraphController):
                     self.config.operation_conditioned_obligation_closure
                 ),
                 transition_aware=self.config.certified_transition_option_value,
+                config=self.config,
             )
         refresh_delayed_credit(updated, self.config)
         updated.seal_controller_state()

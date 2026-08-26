@@ -37,9 +37,11 @@ from .graph import DynamicReasoningHypergraphV2, TerminationKind
 from .join import JoinCandidate, MultiHopJoinEngine
 from .memory import RelationLightCorpusMemory
 from .recovery import (
+    claim_projects_target as _claim_answers_subgoal,
     diagnose_proof_gap,
     proof_gap_recovery_query,
     proof_usable_target_claim,
+    strict_output_type_compatible as _strict_output_type_compatible,
 )
 from .revision import BeliefRevisionDetector
 from .termination import MetaDecision, MetaStopPolicy, TerminalBeliefReadout
@@ -874,6 +876,9 @@ class DynamicHypergraphV2Reasoner:
                             compact_objective=(
                                 self.config.compact_objective_recovery_query
                             ),
+                            anchored_objective=(
+                                self.config.anchored_proof_recovery_query
+                            ),
                         )
                     else:
                         query = _missing_binding_query(
@@ -1659,79 +1664,6 @@ def _join_can_answer_subgoal(
         _strict_output_type_compatible(value, subgoal.answer_type)
         for value in output_types
     )
-
-
-def _claim_answers_subgoal(
-    graph: DynamicReasoningHypergraphV2,
-    claim: ClaimNode,
-    seen: set[str] | None = None,
-) -> bool:
-    """Return whether a claim independently projects the requested slot.
-
-    Verification owns the raw claim projection.  A JOIN inherits that property
-    only through its explicitly recorded projection premise, or through an
-    unambiguous query-graph input/output endpoint projection.  This deliberately
-    excludes true but question-irrelevant bridge facts from the commit frontier.
-    """
-    seen = set(seen or ())
-    if claim.node_id in seen:
-        return False
-    seen.add(claim.node_id)
-    semantics = graph.claim_semantics[claim.node_id]
-    if semantics.join_depth == 0:
-        return bool(claim.provenance.metadata.get("answers_subgoal", False))
-
-    projection_id = str(semantics.qualifiers.get("projection_premise_id", ""))
-    projection = graph.nodes.get(projection_id)
-    if isinstance(projection, ClaimNode) and _claim_answers_subgoal(
-        graph, projection, seen,
-    ):
-        return True
-
-    subgoal = graph.node(claim.target_subgoal, SubgoalNode)
-    anchors = {
-        normalize_text(str(value))
-        for row in graph.query_graph.get("constraints", [])
-        if str(row.get("subgoal_id")) == claim.target_subgoal
-        for value in row.get("known_entities", [])
-        if normalize_text(str(value))
-    }
-    branch = graph.branches.get(claim.branch_id)
-    if branch is not None:
-        for dependency_id in subgoal.dependencies:
-            assigned_id = branch.assignments.get(dependency_id)
-            assigned = graph.nodes.get(str(assigned_id))
-            if isinstance(assigned, ClaimNode):
-                for value in (assigned.subject, assigned.value):
-                    if normalize_text(value):
-                        anchors.add(normalize_text(value))
-    subject_bound = normalize_text(claim.subject) in anchors
-    value_bound = normalize_text(claim.value) in anchors
-    if subject_bound == value_bound:
-        return False
-    output_type = semantics.value_type if subject_bound else semantics.subject_type
-    return _strict_output_type_compatible(output_type, subgoal.answer_type)
-
-
-def _strict_output_type_compatible(proposed: str, expected: str) -> bool:
-    """Slot-output compatibility without the permissive shared-entity fallback."""
-    aliases = {
-        "human": "person", "people": "person", "actor": "person", "actress": "person",
-        "city": "location", "country": "location", "nation": "location",
-        "state": "location", "province": "location", "region": "location",
-        "body_of_water": "location", "place": "location",
-        "company": "organization", "institution": "organization",
-        "year": "date", "time": "date", "count": "number", "quantity": "number",
-        "phrase": "textual", "text": "textual", "string": "textual",
-        "acronym_expansion": "textual", "definition": "textual", "meaning": "textual",
-    }
-
-    def canonical(value: str) -> set[str]:
-        normalized = str(value or "entity").strip().lower().replace("-", "_").replace(" ", "_")
-        return {aliases.get(item, item) for item in normalized.split("_or_") if item}
-
-    left, right = canonical(proposed), canonical(expected)
-    return bool(right & {"entity", "thing", "answer"}) or bool(left & right)
 
 
 def _premise_closure(

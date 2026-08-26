@@ -214,8 +214,11 @@ def analyze(run: Path, config: DynamicV2ResearchConfig) -> dict[str, Any]:
                 "delayed_realized_proof_return": delayed_actual,
                 "combined_realized_utility": combined,
                 "proof_gap_operation": (
-                    float(raw_evc.get("proof_gap_reducibility", 0.0)) > 0.0
-                    or float(raw_evc.get("feasibility_unlock", 0.0)) > 0.0
+                    bool(allocation.target_obligation_ids)
+                    and (
+                        float(raw_evc.get("proof_gap_reducibility", 0.0)) > 0.0
+                        or float(raw_evc.get("feasibility_unlock", 0.0)) > 0.0
+                    )
                 ),
                 "successful_recovery": successful_recovery,
                 **choice,

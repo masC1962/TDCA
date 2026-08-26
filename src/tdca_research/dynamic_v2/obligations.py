@@ -14,10 +14,16 @@ from ..dynamic.graph import (
     SubgoalStatus,
 )
 from ..utils import normalize_text, stable_hash
+from .config import DynamicV2ResearchConfig
 from .graph import (
     DynamicReasoningHypergraphV2,
     ProofObligationSnapshot,
     ProofObligationState,
+)
+from .recovery import (
+    claim_projects_target,
+    diagnose_proof_gap,
+    proof_usable_target_claim,
 )
 
 
@@ -33,6 +39,7 @@ def refresh_proof_obligations(
     max_retrieval_rounds: int,
     operation_conditioned: bool = False,
     transition_aware: bool = False,
+    config: DynamicV2ResearchConfig | None = None,
 ) -> None:
     """Project proof deficits from controller-owned graph state.
 
@@ -42,6 +49,8 @@ def refresh_proof_obligations(
     """
 
     graph.proof_obligation_version = (
+        "proof-obligation-state-v2.4.3.6"
+        if config is not None and config.proof_quality_obligation_alignment else
         "proof-obligation-state-v2.4.3.2"
         if transition_aware else
         "proof-obligation-state-v2.4.3.1"
@@ -67,6 +76,7 @@ def refresh_proof_obligations(
                 graph, current, previous, subgoal, branch_id,
                 max_retrieval_rounds=max_retrieval_rounds,
                 operation_conditioned=operation_conditioned,
+                config=config,
             )
 
     # Preserve closed rows so an allocation can prove that it discharged a
@@ -100,10 +110,20 @@ def operation_obligation_targets(
     strict: bool = False,
 ) -> list[str]:
     closes = {
-        OperationType.RETRIEVE: {"missing_evidence", "retrieval_exhausted"},
-        OperationType.BRANCH: {"missing_claim", "missing_binding", "extraction_exhausted"},
-        OperationType.VERIFY: {"missing_verification", "contradiction"},
-        OperationType.MERGE: {"missing_join_premise", "terminal_disconnected_join"},
+        OperationType.RETRIEVE: {
+            "missing_evidence", "retrieval_exhausted", "insufficient_target_proof",
+        },
+        OperationType.BRANCH: {
+            "missing_claim", "missing_binding", "extraction_exhausted",
+            "insufficient_target_proof",
+        },
+        OperationType.VERIFY: {
+            "missing_verification", "contradiction", "insufficient_target_proof",
+        },
+        OperationType.MERGE: {
+            "missing_join_premise", "terminal_disconnected_join",
+            "insufficient_target_proof",
+        },
         OperationType.EXPAND: {"missing_binding", "missing_claim"},
         OperationType.REVISE: {"contradiction", "terminal_disconnected_join"},
         OperationType.PRUNE: {"contradiction"},
@@ -236,10 +256,17 @@ def _operation_can_target_obligation(
     required = {str(value) for value in obligation.required_node_ids}
     mode = str(operation.payload.get("mode", ""))
     if operation.operation_type == OperationType.RETRIEVE:
-        return kind == "missing_evidence" and bool(
-            str(operation.payload.get("query", "")).strip()
+        has_query = bool(str(operation.payload.get("query", "")).strip())
+        if kind == "missing_evidence":
+            return has_query
+        return (
+            kind == "insufficient_target_proof"
+            and has_query
+            and operation.payload.get("recovery_policy") == "proof_gap_recovery_v1"
         )
     if operation.operation_type == OperationType.BRANCH:
+        if kind == "insufficient_target_proof":
+            return mode == "extract_typed" and bool(sources)
         return (
             kind == "missing_claim"
             and mode == "extract_typed"
@@ -248,6 +275,8 @@ def _operation_can_target_obligation(
             and all(isinstance(graph.nodes.get(value), EvidenceNode) for value in required)
         )
     if operation.operation_type == OperationType.VERIFY:
+        if kind == "insufficient_target_proof":
+            return bool(required & sources)
         return (
             kind == "missing_verification"
             and bool(required)
@@ -259,7 +288,7 @@ def _operation_can_target_obligation(
             str(value) for value in operation.payload.get("premise_ids", operation.source_ids)
         }
         return (
-            kind == "missing_join_premise"
+            kind in {"missing_join_premise", "insufficient_target_proof"}
             and mode == "validate_join"
             and len(premise_ids) >= 2
             and bool(str(operation.payload.get("join_signature", "")).strip())
@@ -472,7 +501,9 @@ def dead_end_certificate(
     ]
     return {
         "certificate_version": (
-            "proof-obligation-dead-end-v2.4.3.2"
+            "proof-obligation-dead-end-v2.4.3.6"
+            if graph.proof_obligation_version == "proof-obligation-state-v2.4.3.6"
+            else "proof-obligation-dead-end-v2.4.3.2"
             if graph.proof_obligation_version == "proof-obligation-state-v2.4.3.2"
             else "proof-obligation-dead-end-v2.4.3.1"
             if graph.proof_obligation_version == "proof-obligation-state-v2.4.3.1"
@@ -514,6 +545,7 @@ def _project_subgoal_branch(
     *,
     max_retrieval_rounds: int,
     operation_conditioned: bool = False,
+    config: DynamicV2ResearchConfig | None = None,
 ) -> None:
     claims = [
         row for row in graph.claims(subgoal.node_id)
@@ -610,6 +642,41 @@ def _project_subgoal_branch(
             [row.node_id for row in joined], [], ["no_terminal_dependency_path"],
             provenance,
         )
+    if (
+        config is not None
+        and config.proof_quality_obligation_alignment
+        and config.proof_usable_target_gate
+        and subgoal.status != SubgoalStatus.RESOLVED
+        and evidence
+    ):
+        target_claims = [row for row in claims if claim_projects_target(graph, row)]
+        verdicts = {
+            row.node_id: proof_usable_target_claim(
+                graph, row, subgoal, config, projects_target=True,
+            )
+            for row in target_claims
+        }
+        if not target_claims or not any(row.usable for row in verdicts.values()):
+            diagnosis = diagnose_proof_gap(
+                graph, subgoal, claims, target_claims, verdicts,
+                [
+                    graph.branches[branch_id].assignments[value]
+                    for value in dependencies
+                    if branch_id in graph.branches
+                    and value in graph.branches[branch_id].assignments
+                ],
+            )
+            required = (
+                list(diagnosis.target_claim_ids)
+                or [row.node_id for row in claims]
+                or [row.node_id for row in evidence]
+            )
+            _put(
+                current, previous, graph, subgoal.node_id, branch_id,
+                "insufficient_target_proof", OPEN,
+                diagnosis.proof_gap_reducibility, terminal_reachable,
+                required, [], list(diagnosis.reason_codes), provenance,
+            )
     contradictory = [
         row.node_id for row in claims
         if graph.belief_states.get(row.node_id) is not None

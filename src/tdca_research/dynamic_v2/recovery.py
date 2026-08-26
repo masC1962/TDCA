@@ -61,6 +61,78 @@ _VERIFIED_STATUSES = {
 }
 
 
+def strict_output_type_compatible(proposed: str, expected: str) -> bool:
+    """Return whether an inferred open endpoint can fill the requested slot."""
+    aliases = {
+        "human": "person", "people": "person", "actor": "person",
+        "actress": "person", "city": "location", "country": "location",
+        "nation": "location", "state": "location", "province": "location",
+        "region": "location", "body_of_water": "location", "place": "location",
+        "company": "organization", "institution": "organization",
+        "year": "date", "time": "date", "count": "number",
+        "quantity": "number", "phrase": "textual", "text": "textual",
+        "string": "textual", "acronym_expansion": "textual",
+        "definition": "textual", "meaning": "textual",
+    }
+
+    def canonical(value: str) -> set[str]:
+        normalized = (
+            str(value or "entity").strip().lower()
+            .replace("-", "_").replace(" ", "_")
+        )
+        return {aliases.get(item, item) for item in normalized.split("_or_") if item}
+
+    left, right = canonical(proposed), canonical(expected)
+    return bool(right & {"entity", "thing", "answer"}) or bool(left & right)
+
+
+def claim_projects_target(
+    graph: DynamicReasoningHypergraphV2,
+    claim: ClaimNode,
+    seen: set[str] | None = None,
+) -> bool:
+    """Determine target projection from sealed graph semantics only."""
+    seen = set(seen or ())
+    if claim.node_id in seen:
+        return False
+    seen.add(claim.node_id)
+    semantics = graph.claim_semantics[claim.node_id]
+    if semantics.join_depth == 0:
+        return bool(claim.provenance.metadata.get("answers_subgoal", False))
+
+    projection_id = str(semantics.qualifiers.get("projection_premise_id", ""))
+    projection = graph.nodes.get(projection_id)
+    if isinstance(projection, ClaimNode) and claim_projects_target(
+        graph, projection, seen,
+    ):
+        return True
+
+    subgoal = graph.node(claim.target_subgoal, SubgoalNode)
+    anchors = {
+        normalize_text(str(value))
+        for row in graph.query_graph.get("constraints", [])
+        if str(row.get("subgoal_id")) == claim.target_subgoal
+        for value in row.get("known_entities", [])
+        if normalize_text(str(value))
+    }
+    branch = graph.branches.get(claim.branch_id)
+    if branch is not None:
+        for dependency_id in subgoal.dependencies:
+            assigned_id = branch.assignments.get(dependency_id)
+            assigned = graph.nodes.get(str(assigned_id))
+            if isinstance(assigned, ClaimNode):
+                anchors.update(
+                    normalize_text(value)
+                    for value in (assigned.subject, assigned.value) if value
+                )
+    subject_bound = normalize_text(claim.subject) in anchors
+    value_bound = normalize_text(claim.value) in anchors
+    if subject_bound == value_bound:
+        return False
+    output_type = semantics.value_type if subject_bound else semantics.subject_type
+    return strict_output_type_compatible(output_type, subgoal.answer_type)
+
+
 def proof_usable_target_claim(
     graph: DynamicReasoningHypergraphV2,
     claim: ClaimNode,
@@ -196,6 +268,7 @@ def proof_gap_recovery_query(
     diagnosis: ProofGapDiagnosis,
     attempted_queries: Iterable[str] = (),
     compact_objective: bool = False,
+    anchored_objective: bool = False,
 ) -> str:
     """Create a deterministic novel query from unresolved graph state only."""
     existing = {normalize_text(value) for value in attempted_queries}
@@ -209,6 +282,14 @@ def proof_gap_recovery_query(
         for value in (claim.subject, claim.value)
         if value
     ))[:3]
+    if anchored_objective:
+        anchors.extend(
+            str(value)
+            for row in graph.query_graph.get("constraints", [])
+            if str(row.get("subgoal_id", "")) == subgoal.node_id
+            for value in row.get("known_entities", [])
+            if str(value).strip() and str(value) not in anchors
+        )
     frontier = sorted(
         claims,
         key=lambda claim: (
@@ -225,8 +306,8 @@ def proof_gap_recovery_query(
         if value and value not in anchors
     )
     anchor_text = " ; ".join(anchors[:5])
-    if compact_objective:
-        compact_anchors = anchors[:2]
+    if compact_objective or anchored_objective:
+        compact_anchors = anchors[:3] if anchored_objective else anchors[:2]
         anchor_tokens = {
             token for value in compact_anchors
             for token in re.findall(r"[a-z0-9]+", normalize_text(value))
@@ -241,7 +322,7 @@ def proof_gap_recovery_query(
             token for token in re.findall(r"[a-z0-9]+", normalize_text(question))
             if token not in stop and token not in anchor_tokens
         ]
-        focus = list(dict.fromkeys(focus))[:6]
+        focus = list(dict.fromkeys(focus))[:8 if anchored_objective else 6]
         compact = " ".join([*compact_anchors, *focus, subgoal.answer_type]).strip()
         candidates = [
             compact,
@@ -249,14 +330,17 @@ def proof_gap_recovery_query(
         ]
     else:
         candidates = []
-    candidates.extend([
+    if anchored_objective:
+        candidates = [value for value in candidates if value and compact_anchors]
+    else:
+        candidates.extend([
         f"Independent source for the missing {subgoal.answer_type} relation"
         + (f" connecting {anchor_text}" if anchor_text else "")
         + f". Gap: {diagnosis.reason_code.replace('_', ' ')}.",
         f"Find independent evidence for the unresolved {subgoal.answer_type} output"
         + (f" from {anchor_text}" if anchor_text else "") + ".",
         f"{question} Verify an independent missing relation.",
-    ])
+        ])
     for candidate in candidates:
         normalized = normalize_text(candidate)
         if normalized not in existing and all(

@@ -547,6 +547,7 @@ class DynamicReasoningHypergraphV2(DynamicReasoningHypergraph):
             if self.proof_obligation_version in {
                 "proof-obligation-state-v2.4.3.1",
                 "proof-obligation-state-v2.4.3.2",
+                "proof-obligation-state-v2.4.3.6",
             }:
                 if not -1.0 <= float(row.predicted_marginal_evc) <= 1.0:
                     raise GraphInvariantError(
@@ -573,7 +574,10 @@ class DynamicReasoningHypergraphV2(DynamicReasoningHypergraph):
                     raise GraphInvariantError(
                         f"allocation {row.allocation_id} obligation delta outside [0,1]"
                     )
-            if self.proof_obligation_version == "proof-obligation-state-v2.4.3.2":
+            if self.proof_obligation_version in {
+                "proof-obligation-state-v2.4.3.2",
+                "proof-obligation-state-v2.4.3.6",
+            }:
                 for name in ("predicted_transition_value", "actual_transition_value"):
                     if not 0.0 <= float(getattr(row, name)) <= 1.0:
                         raise GraphInvariantError(
@@ -845,10 +849,14 @@ def _v243_compatible_allocations(
         if version not in {
             "proof-obligation-state-v2.4.3.1",
             "proof-obligation-state-v2.4.3.2",
+            "proof-obligation-state-v2.4.3.6",
         }:
             for name in v2431_fields:
                 row.pop(name, None)
-        if version != "proof-obligation-state-v2.4.3.2":
+        if version not in {
+            "proof-obligation-state-v2.4.3.2",
+            "proof-obligation-state-v2.4.3.6",
+        }:
             for name in v2432_fields:
                 row.pop(name, None)
         if not version:
