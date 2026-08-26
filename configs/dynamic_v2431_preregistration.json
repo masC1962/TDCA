@@ -1,0 +1,122 @@
+{
+  "schema_version": "dynamic-hypergraph-v2.4.3.1-preregistration-v1",
+  "frozen_at": "2026-08-26",
+  "seed": 20260820,
+  "training": false,
+  "provider": "dashscope-openai-compatible",
+  "model": "qwen-plus",
+  "gold_aware_inference": false,
+  "source_commit_policy": "Every provider-backed artifact must pin the pushed v2.4.3.1 source-freeze commit.",
+  "parent_usage": {
+    "provider_attempts": 305,
+    "provider_reported_tokens": 322279
+  },
+  "combined_hard_cap": {
+    "provider_attempts": 2000,
+    "provider_reported_tokens": 2000000
+  },
+  "stage_caps": {
+    "smoke_a20": {
+      "provider_attempts": 250,
+      "provider_reported_tokens": 250000
+    },
+    "shadow_b20": {
+      "provider_attempts": 250,
+      "provider_reported_tokens": 250000,
+      "authorized_only_after_smoke_pass": true
+    }
+  },
+  "per_question_dev_safety_caps": {
+    "llm_calls": 16,
+    "total_tokens": 16000,
+    "retrieval_calls": 8
+  },
+  "frozen_references": {
+    "v243_source_commit": "1dd422030e6bfb19932095565d14948e903fee2e",
+    "v243_report_commit": "b983dfd09783b322ac620519edd9ae4a7dc49cff",
+    "v243_smoke_run": "research_outputs/musique_distractor_smoke_dynamic_hypergraph_tdca_v2_1787657052732927059"
+  },
+  "only_semantic_delta": {
+    "value_equation": "I(O) * P_close(O|o,G) * DeltaO(o) * R_terminal(O) - R_redundancy(o)",
+    "operation_conditioned_obligation_closure": true,
+    "strict_operation_obligation_contract": true,
+    "exact_fidelity_sample_accounting": true,
+    "high_fidelity_requires_positive_marginal_evc": true,
+    "critical_obligation_budget_reserve": true,
+    "obligation_importance_not_probability": true,
+    "controller_owned_actual_obligation_delta": true,
+    "redundancy_penalty_ceiling": 0.15,
+    "training": false,
+    "signed_diffusion": false,
+    "per_question_or_answer_patch": false
+  },
+  "frozen_mechanisms": [
+    "absolute ready-set-invariant cost",
+    "proof-obligation ledger",
+    "controller-only mutation",
+    "certified meta-stop",
+    "causal delayed credit",
+    "termination separation",
+    "JOIN feasibility gate"
+  ],
+  "stage_order": [
+    "zero_api_tests",
+    "gold_free_frozen_v243_replay",
+    "push_source_freeze_commit",
+    "smoke_a20",
+    "hard_gate",
+    "shadow_b20_only_if_smoke_passes",
+    "safe_stop_report"
+  ],
+  "adaptive_smoke_a20_hard_gates": {
+    "infrastructure_failure_count_max": 0,
+    "graph_invariant_violation_count_max": 0,
+    "controller_only_mutation_violation_count_max": 0,
+    "unsupported_answer_count_max": 0,
+    "selected_infeasible_join_count_max": 0,
+    "repeated_same_fingerprint_extraction_count_max": 0,
+    "no_diff_editor_allocation_count_max": 0,
+    "candidate_presence_rate_min": 0.75,
+    "legacy_execution_plan_completion_rate_min": 0.75,
+    "graph_proof_completion_rate_min": 0.8,
+    "f1_min": 0.58,
+    "logical_llm_calls_max": 163,
+    "logical_total_tokens_max": 185000,
+    "budget_exhaustion_rate_max": 0.1,
+    "immediate_evc_correlation_min": 0.1,
+    "delayed_evc_correlation_min": 0.15,
+    "choice_conditioned_delayed_correlation_exclusive_min": 0,
+    "choice_conditioned_count_min": 20,
+    "successful_proof_gap_mean_delayed_return_exclusive_min": 0,
+    "successful_proof_gap_must_exceed_failed": true,
+    "complete_evc_trace_rate_min": 1,
+    "complete_delayed_credit_trace_rate_min": 1,
+    "complete_proof_obligation_trace_rate_min": 1,
+    "no_executable_without_certificate_count_max": 0,
+    "viable_proof_opportunity_cost_clipping_stop_count_max": 0,
+    "absolute_cost_ready_set_invariance_rate_min": 1,
+    "predicted_verification_calls_match_requested_samples_rate_min": 1,
+    "unjustified_high_fidelity_count_max": 0,
+    "operation_target_audit_rate_min": 1,
+    "all_abstains_have_exhaustion_evidence": true,
+    "non_uniform_allocation_required": true
+  },
+  "paired_shadow_b20_hard_gates": {
+    "both_artifacts_complete": true,
+    "both_zero_safety_violations": true,
+    "v243_candidate_presence_non_regression": true,
+    "v243_execution_plan_completion_non_regression": true,
+    "v243_graph_proof_completion_non_regression": true,
+    "v243_f1_non_regression": true,
+    "v243_complete_proof_obligation_trace_rate_min": 1,
+    "v243_delayed_evc_correlation_min": 0.15
+  },
+  "safe_stop": {
+    "stop_on_any_offline_replay_failure": true,
+    "stop_on_any_smoke_a_hard_gate_failure": true,
+    "stop_on_any_shadow_b_hard_gate_failure": true,
+    "no_post_failure_threshold_relaxation": true,
+    "no_single_question_patch": true,
+    "heldout200_authorized": false
+  }
+}

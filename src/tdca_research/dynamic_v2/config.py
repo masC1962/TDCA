@@ -136,6 +136,15 @@ class DynamicV2ResearchConfig(DynamicResearchConfig):
     graph_local_weight_candidate_reachability: float = 0.15
     graph_local_weight_evidence_path: float = 0.10
 
+    # v2.4.3.1 separates proof-obligation importance from the probability that
+    # the concrete ready operation can close it.  Fidelity is costed with the
+    # exact requested sample count and high fidelity is admitted only when its
+    # marginal EVC is positive and preserves the critical-obligation reserve.
+    operation_conditioned_obligation_closure: bool = False
+    exact_fidelity_resource_accounting: bool = False
+    marginal_fidelity_evc_gate: bool = False
+    critical_obligation_budget_reserve: bool = False
+
     # Terminal acceptance is a conjunctive readout over independent belief
     # channels.  These are initial development values, never learned weights.
     terminal_min_absolute_support: float = 0.70
@@ -237,6 +246,20 @@ class DynamicV2ResearchConfig(DynamicResearchConfig):
         ))
         if abs(float(absolute_cost_mass) - 1.0) > 1e-9:
             raise ValueError("absolute resource cost weights must sum to 1")
+        if self.operation_conditioned_obligation_closure and not (
+            self.proof_obligation_tracking and self.graph_local_delayed_value
+        ):
+            raise ValueError(
+                "operation-conditioned closure requires proof obligations and graph-local value"
+            )
+        if self.exact_fidelity_resource_accounting and not self.absolute_resource_cost:
+            raise ValueError("exact fidelity accounting requires absolute resource cost")
+        if self.marginal_fidelity_evc_gate and not (
+            self.exact_fidelity_resource_accounting and self.horizon_aware_evc
+        ):
+            raise ValueError("marginal fidelity gate requires exact horizon accounting")
+        if self.critical_obligation_budget_reserve and not self.proof_obligation_tracking:
+            raise ValueError("critical obligation reserve requires proof obligation tracking")
         if self.allocator_mode not in {"adaptive_evc", "uniform", "fixed_order"}:
             raise ValueError("allocator_mode must be adaptive_evc, uniform, or fixed_order")
         if self.outcome_feedback_prior_strength <= 0:

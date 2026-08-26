@@ -97,6 +97,9 @@ class V2GraphController(GraphController):
             refresh_proof_obligations(
                 updated, operation.operation_id,
                 max_retrieval_rounds=self.config.max_retrieval_rounds_per_subgoal,
+                operation_conditioned=(
+                    self.config.operation_conditioned_obligation_closure
+                ),
             )
         after = updated.state_hash()
         updated.operation_history.append(AppliedOperation(
@@ -214,12 +217,41 @@ class V2GraphController(GraphController):
                 target_obligation_ids=[
                     str(value) for value in trace.get("target_obligation_ids", [])
                 ],
+                obligation_estimate=dict(trace.get("obligation_estimate", {})),
+                predicted_marginal_evc=float(
+                    trace.get("predicted_marginal_evc", 0.0)
+                ),
+                predicted_provider_calls=int(
+                    trace.get("predicted_provider_calls", 0)
+                ),
+                critical_obligation_reserve={
+                    str(key): int(value) for key, value in
+                    trace.get("critical_obligation_reserve", {}).items()
+                },
+                reserve_feasible=bool(trace.get("reserve_feasible", True)),
+                pre_target_obligation_statuses={
+                    str(value): str(graph.proof_obligations[value].status)
+                    for value in trace.get("target_obligation_ids", [])
+                    if value in graph.proof_obligations
+                },
             ))
         else:
             existing.actual_cost = measured
             existing.completed = bool(completed)
             existing.failure_reason = str(failure_reason)
         existing = existing or updated.allocation_history[-1]
+        target_ids = list(existing.target_obligation_ids)
+        existing.actual_closed_target_ids = sorted(
+            value for value in target_ids
+            if existing.pre_target_obligation_statuses.get(value) == "OPEN"
+            and value in updated.proof_obligations
+            and updated.proof_obligations[value].status == "CLOSED"
+        )
+        existing.actual_target_closure_rate = (
+            len(existing.actual_closed_target_ids) / len(target_ids)
+            if target_ids else 0.0
+        )
+        existing.actual_obligation_delta = existing.actual_target_closure_rate
         self._reconcile_outcome(
             updated, existing, packet, measured, bool(completed), str(failure_reason),
             outcome_metadata or {},
@@ -232,6 +264,9 @@ class V2GraphController(GraphController):
             refresh_proof_obligations(
                 updated, f"reconcile_{packet.operation.operation_id}",
                 max_retrieval_rounds=self.config.max_retrieval_rounds_per_subgoal,
+                operation_conditioned=(
+                    self.config.operation_conditioned_obligation_closure
+                ),
             )
         refresh_delayed_credit(updated, self.config)
         updated.seal_controller_state()
@@ -1029,6 +1064,23 @@ class V2GraphController(GraphController):
                 target_obligation_ids=[
                     str(value) for value in row.get("target_obligation_ids", [])
                 ],
+                obligation_estimate=dict(row.get("obligation_estimate", {})),
+                predicted_marginal_evc=float(
+                    row.get("predicted_marginal_evc", 0.0)
+                ),
+                predicted_provider_calls=int(
+                    row.get("predicted_provider_calls", 0)
+                ),
+                critical_obligation_reserve={
+                    str(key): int(value) for key, value in
+                    row.get("critical_obligation_reserve", {}).items()
+                },
+                reserve_feasible=bool(row.get("reserve_feasible", True)),
+                pre_target_obligation_statuses={
+                    str(value): str(graph.proof_obligations[value].status)
+                    for value in row.get("target_obligation_ids", [])
+                    if value in graph.proof_obligations
+                },
             ))
 
 

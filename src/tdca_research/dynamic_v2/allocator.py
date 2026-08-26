@@ -17,7 +17,11 @@ from ..dynamic.graph import (
 from ..utils import stable_hash
 from .config import DynamicV2ResearchConfig
 from .graph import DynamicReasoningHypergraphV2, OperationFeedbackStats
-from .obligations import graph_local_operation_value, operation_obligation_targets
+from .obligations import (
+    graph_local_operation_value,
+    operation_conditioned_closure_value,
+    operation_obligation_targets,
+)
 
 
 @dataclass(frozen=True)
@@ -47,6 +51,11 @@ class EVCSignals:
     evidence_path: float = 0.0
     dead_end_risk: float = 0.0
     absolute_graph_risk: float = 0.0
+    obligation_importance: float = 0.0
+    operation_closure_probability: float = 0.0
+    expected_obligation_delta: float = 0.0
+    obligation_terminal_return: float = 0.0
+    operation_redundancy: float = 0.0
 
 
 @dataclass(frozen=True)
@@ -71,17 +80,32 @@ class ComputationPacket:
     predicted_normalized_cost: float = 0.0
     predicted_gross_opportunity: float = 0.0
     target_obligation_ids: tuple[str, ...] = ()
+    obligation_estimate: dict = field(default_factory=dict)
+    predicted_marginal_evc: float = 0.0
+    predicted_provider_calls: int = 0
+    critical_obligation_reserve: dict[str, int] = field(default_factory=dict)
+    reserve_feasible: bool = True
 
     def trace(self) -> dict:
-        return {
+        raw = dict(self.raw.__dict__)
+        normalized = dict(self.normalized.__dict__)
+        if not self.obligation_estimate:
+            for name in (
+                "obligation_importance", "operation_closure_probability",
+                "expected_obligation_delta", "obligation_terminal_return",
+                "operation_redundancy",
+            ):
+                raw.pop(name, None)
+                normalized.pop(name, None)
+        payload = {
             "allocation_id": self.allocation_id,
             "operation_id": self.operation.operation_id,
             "operation_family": self.operation_family,
             "region_key": self.region_key,
             "target_region": list(self.target_region),
             "predicted_evc": self.predicted_evc,
-            "evc_components_raw": self.raw.__dict__,
-            "evc_components_normalized": self.normalized.__dict__,
+            "evc_components_raw": raw,
+            "evc_components_normalized": normalized,
             "requested_budget": dict(self.requested_budget),
             "remaining_global_budget": dict(self.remaining_global_budget),
             "allocator_mode": self.allocator_mode,
@@ -94,7 +118,20 @@ class ComputationPacket:
             "predicted_normalized_cost": self.predicted_normalized_cost,
             "predicted_gross_opportunity": self.predicted_gross_opportunity,
             "target_obligation_ids": list(self.target_obligation_ids),
+            "obligation_estimate": deepcopy(self.obligation_estimate),
+            "predicted_marginal_evc": self.predicted_marginal_evc,
+            "predicted_provider_calls": self.predicted_provider_calls,
+            "critical_obligation_reserve": dict(self.critical_obligation_reserve),
+            "reserve_feasible": self.reserve_feasible,
         }
+        if not self.obligation_estimate:
+            for name in (
+                "obligation_estimate", "predicted_marginal_evc",
+                "predicted_provider_calls", "critical_obligation_reserve",
+                "reserve_feasible",
+            ):
+                payload.pop(name, None)
+        return payload
 
 
 @dataclass
@@ -135,6 +172,9 @@ class AdaptiveComputationAllocator:
                 "obligation_closure", "terminal_reachability",
                 "missing_premise_reduction", "candidate_reachability",
                 "evidence_path", "dead_end_risk",
+                "obligation_importance", "operation_closure_probability",
+                "expected_obligation_delta", "obligation_terminal_return",
+                "operation_redundancy",
             }
             normalized_base_rows = [
                 EVCSignals(**{
@@ -151,12 +191,17 @@ class AdaptiveComputationAllocator:
             base = base_rows[index]
             levels = self._fidelity_options(operation)
             for name, fraction in levels:
+                call_scale, token_scale = self._fidelity_resource_scales(
+                    operation, fraction,
+                )
                 expanded.append((
                     index, operation, name, fraction,
                     self._fidelity_signals(
                         base, fraction,
                         bounded_opportunity=self.config.horizon_aware_evc,
                         absolute_cost=self.config.absolute_resource_cost,
+                        call_scale=call_scale,
+                        token_scale=token_scale,
                     ),
                 ))
         names = tuple(EVCSignals.__dataclass_fields__)
@@ -164,11 +209,16 @@ class AdaptiveComputationAllocator:
             normalized_expanded = []
             for index, operation in enumerate(operations):
                 for _, fraction in self._fidelity_options(operation):
+                    call_scale, token_scale = self._fidelity_resource_scales(
+                        operation, fraction,
+                    )
                     normalized_expanded.append(
                         self._fidelity_signals(
                             normalized_base_rows[index], fraction, clamp=True,
                             bounded_opportunity=self.config.horizon_aware_evc,
                             absolute_cost=self.config.absolute_resource_cost,
+                            call_scale=call_scale,
+                            token_scale=token_scale,
                         )
                     )
         else:
@@ -183,6 +233,7 @@ class AdaptiveComputationAllocator:
             ]
         packets: list[tuple[int, ComputationPacket]] = []
         serial_start = self.allocation_serial
+        previous_fidelity: dict[str, tuple[float, float]] = {}
         for packet_index, (index, operation, fidelity_name, fidelity_fraction, raw_row) in enumerate(expanded):
             normalized = normalized_expanded[packet_index]
             if mode == "adaptive_evc":
@@ -211,7 +262,14 @@ class AdaptiveComputationAllocator:
                 evc = max(0.1, 1.0 - 0.1 * _fixed_priority(operation.operation_type))
                 immediate, delayed, normalized_cost = evc, 0.0, normalized.expected_cost
                 gross = _unit(evc + normalized_cost)
-            region = tuple(dict.fromkeys([operation.target_id, *operation.source_ids]))
+            region = tuple(dict.fromkeys([
+                operation.target_id,
+                *(
+                    [operation.branch_id]
+                    if self.config.operation_conditioned_obligation_closure else []
+                ),
+                *operation.source_ids,
+            ]))
             family = operation_family(operation)
             rkey = operation_region_key(operation)
             prior = feedback_prior(
@@ -219,6 +277,41 @@ class AdaptiveComputationAllocator:
                 operation_coarse_region_key(operation),
                 use_hierarchical=self.config.hierarchical_within_question_feedback,
             )
+            requested = self._budget_packet(
+                operation, max(
+                    raw_row.graph_heat,
+                    0.75 * raw_row.terminal_gap,
+                    raw_row.terminal_proximity,
+                ), remaining, prior,
+                fidelity_fraction=fidelity_fraction,
+            )
+            estimate = (
+                operation_conditioned_closure_value(graph, operation)
+                if self.config.operation_conditioned_obligation_closure else {}
+            )
+            previous_gross, previous_cost = previous_fidelity.get(
+                operation.operation_id, (0.0, 0.0),
+            )
+            marginal_evc = float(gross - previous_gross - (
+                normalized_cost - previous_cost
+            ))
+            previous_fidelity[operation.operation_id] = (gross, normalized_cost)
+            reserve = self._critical_obligation_reserve(graph, operation)
+            reserve_feasible = (
+                remaining["llm_calls"] - requested.get("llm_calls", 0)
+                >= reserve["llm_calls"]
+                and remaining["tokens"]
+                - requested.get("max_tokens", 0) * max(
+                    1, requested.get("verification_samples", 1),
+                )
+                >= reserve["tokens"]
+            )
+            if (
+                fidelity_name == "high"
+                and self.config.marginal_fidelity_evc_gate
+                and (marginal_evc <= 0.0 or not reserve_feasible)
+            ):
+                continue
             packets.append((index, ComputationPacket(
                 allocation_id=f"allocation_{serial_start + packet_index + 1:06d}",
                 operation=operation,
@@ -226,14 +319,7 @@ class AdaptiveComputationAllocator:
                 predicted_evc=evc,
                 raw=raw_row,
                 normalized=normalized,
-                requested_budget=self._budget_packet(
-                    operation, max(
-                        raw_row.graph_heat,
-                        0.75 * raw_row.terminal_gap,
-                        raw_row.terminal_proximity,
-                    ), remaining, prior,
-                    fidelity_fraction=fidelity_fraction,
-                ),
+                requested_budget=requested,
                 remaining_global_budget=dict(remaining),
                 allocator_mode=mode,
                 operation_family=family,
@@ -246,7 +332,15 @@ class AdaptiveComputationAllocator:
                 predicted_delayed_proof_return=_unit(delayed),
                 predicted_normalized_cost=_unit(normalized_cost),
                 predicted_gross_opportunity=_unit(gross),
-                target_obligation_ids=tuple(operation_obligation_targets(graph, operation)),
+                target_obligation_ids=tuple(operation_obligation_targets(
+                    graph, operation,
+                    strict=self.config.operation_conditioned_obligation_closure,
+                )),
+                obligation_estimate=estimate,
+                predicted_marginal_evc=marginal_evc,
+                predicted_provider_calls=int(requested.get("llm_calls", 0)),
+                critical_obligation_reserve=reserve,
+                reserve_feasible=reserve_feasible,
             )))
         self.allocation_serial += len(expanded)
         if mode == "adaptive_evc":
@@ -293,6 +387,8 @@ class AdaptiveComputationAllocator:
         base: EVCSignals, fraction: float, *, clamp: bool = False,
         bounded_opportunity: bool = False,
         absolute_cost: bool = False,
+        call_scale: float | None = None,
+        token_scale: float | None = None,
     ) -> EVCSignals:
         # Score *marginal* progress rather than total progress. Diminishing gains
         # make a cheap pass preferable until graph heat/impact justifies deeper
@@ -314,9 +410,12 @@ class AdaptiveComputationAllocator:
             terminal_gap=base.terminal_gap * gain,
             terminal_proximity=base.terminal_proximity * gain,
             expected_call_cost=base.expected_call_cost * (
-                1.0 if absolute_cost else (0.5 + 0.5 * fraction)
+                call_scale if call_scale is not None
+                else 1.0 if absolute_cost else (0.5 + 0.5 * fraction)
             ),
-            expected_token_cost=base.expected_token_cost * fraction,
+            expected_token_cost=base.expected_token_cost * (
+                token_scale if token_scale is not None else fraction
+            ),
             expected_retrieval_cost=base.expected_retrieval_cost,
             retrieval_saturation=base.retrieval_saturation,
             proof_gap_reducibility=base.proof_gap_reducibility * (
@@ -332,6 +431,11 @@ class AdaptiveComputationAllocator:
             evidence_path=base.evidence_path * gain,
             dead_end_risk=base.dead_end_risk,
             absolute_graph_risk=base.absolute_graph_risk * fraction,
+            obligation_importance=base.obligation_importance,
+            operation_closure_probability=base.operation_closure_probability,
+            expected_obligation_delta=base.expected_obligation_delta * gain,
+            obligation_terminal_return=base.obligation_terminal_return,
+            operation_redundancy=base.operation_redundancy,
         )
         if not clamp and not bounded_opportunity:
             return row
@@ -497,28 +601,40 @@ class AdaptiveComputationAllocator:
         }.get(family, self.config.delayed_capacity_extract)
         structural_weight = float(self.config.delayed_structural_signal_weight)
         if self.config.graph_local_delayed_value:
-            delayed = 0.0 if family == "commit:answer" else _weighted_mean({
-                "obligation_closure": (
-                    normalized.obligation_closure,
-                    self.config.graph_local_weight_obligation_closure,
-                ),
-                "terminal_reachability": (
-                    normalized.terminal_reachability,
-                    self.config.graph_local_weight_terminal_reachability,
-                ),
-                "missing_premise_reduction": (
-                    normalized.missing_premise_reduction,
-                    self.config.graph_local_weight_missing_premise_reduction,
-                ),
-                "candidate_reachability": (
-                    normalized.candidate_reachability,
-                    self.config.graph_local_weight_candidate_reachability,
-                ),
-                "evidence_path": (
-                    normalized.evidence_path,
-                    self.config.graph_local_weight_evidence_path,
-                ),
-            }) * (1.0 - 0.5 * normalized.dead_end_risk)
+            if self.config.operation_conditioned_obligation_closure:
+                # v2.4.3.1: importance and tractability are independent raw
+                # channels.  Multiplication prevents a severe but infeasible
+                # obligation from receiving high delayed value.
+                delayed = (
+                    normalized.obligation_importance
+                    * normalized.operation_closure_probability
+                    * normalized.expected_obligation_delta
+                    * normalized.obligation_terminal_return
+                    - normalized.operation_redundancy
+                )
+            else:
+                delayed = 0.0 if family == "commit:answer" else _weighted_mean({
+                    "obligation_closure": (
+                        normalized.obligation_closure,
+                        self.config.graph_local_weight_obligation_closure,
+                    ),
+                    "terminal_reachability": (
+                        normalized.terminal_reachability,
+                        self.config.graph_local_weight_terminal_reachability,
+                    ),
+                    "missing_premise_reduction": (
+                        normalized.missing_premise_reduction,
+                        self.config.graph_local_weight_missing_premise_reduction,
+                    ),
+                    "candidate_reachability": (
+                        normalized.candidate_reachability,
+                        self.config.graph_local_weight_candidate_reachability,
+                    ),
+                    "evidence_path": (
+                        normalized.evidence_path,
+                        self.config.graph_local_weight_evidence_path,
+                    ),
+                }) * (1.0 - 0.5 * normalized.dead_end_risk)
         else:
             delayed = (
                 0.0 if family == "commit:answer"
@@ -661,7 +777,10 @@ class AdaptiveComputationAllocator:
         call_demand = {
             OperationType.EXPAND: 1.0,
             OperationType.BRANCH: 0.0 if assignment_branch else 1.0,
-            OperationType.VERIFY: 1.0,
+            OperationType.VERIFY: float(
+                self.config.max_independent_verifications
+                if self.config.exact_fidelity_resource_accounting else 1
+            ),
             OperationType.MERGE: 1.0,
         }.get(operation.operation_type, 0.0)
         token_demand = base_cost if call_demand else 0.0
@@ -706,6 +825,10 @@ class AdaptiveComputationAllocator:
             graph_local_operation_value(graph, operation)
             if self.config.graph_local_delayed_value else {}
         )
+        closure = (
+            operation_conditioned_closure_value(graph, operation)
+            if self.config.operation_conditioned_obligation_closure else {}
+        )
         if self.config.absolute_resource_cost:
             max_token_demand = 0.0 if call_demand <= 0.0 else float({
                 OperationType.EXPAND: self.config.graph_editor_max_tokens,
@@ -713,6 +836,11 @@ class AdaptiveComputationAllocator:
                 OperationType.VERIFY: self.config.soft_verifier_max_tokens,
                 OperationType.MERGE: self.config.join_validation_max_tokens,
             }.get(operation.operation_type, 0.0))
+            if (
+                self.config.exact_fidelity_resource_accounting
+                and operation.operation_type == OperationType.VERIFY
+            ):
+                max_token_demand *= call_demand
             call_pressure = _absolute_resource_fraction(
                 call_demand, self.config.max_llm_calls,
                 (
@@ -749,9 +877,18 @@ class AdaptiveComputationAllocator:
             failure_cooldown=decision_cooldown,
             terminal_gap=terminal_gap * terminal_affinity,
             terminal_proximity=terminal_proximity,
-            expected_call_cost=call_demand * call_pressure,
-            expected_token_cost=token_demand * token_pressure,
-            expected_retrieval_cost=retrieval_demand * retrieval_pressure,
+            expected_call_cost=(
+                call_pressure if self.config.exact_fidelity_resource_accounting
+                else call_demand * call_pressure
+            ),
+            expected_token_cost=(
+                token_pressure if self.config.exact_fidelity_resource_accounting
+                else token_demand * token_pressure
+            ),
+            expected_retrieval_cost=(
+                retrieval_pressure if self.config.exact_fidelity_resource_accounting
+                else retrieval_demand * retrieval_pressure
+            ),
             retrieval_saturation=retrieval_saturation,
             proof_gap_reducibility=proof_gap_reducibility,
             feasibility_unlock=feasibility_unlock,
@@ -762,7 +899,102 @@ class AdaptiveComputationAllocator:
             evidence_path=float(local.get("evidence_path", 0.0)),
             dead_end_risk=float(local.get("dead_end_risk", 0.0)),
             absolute_graph_risk=_unit(growth),
+            obligation_importance=float(closure.get("obligation_importance", 0.0)),
+            operation_closure_probability=float(
+                closure.get("operation_closure_probability", 0.0)
+            ),
+            expected_obligation_delta=float(
+                closure.get("expected_obligation_delta", 0.0)
+            ),
+            obligation_terminal_return=float(
+                closure.get("obligation_terminal_return", 0.0)
+            ),
+            operation_redundancy=float(closure.get("operation_redundancy", 0.0)),
         )
+
+    def _fidelity_resource_scales(
+        self, operation: GraphOperation, fraction: float,
+    ) -> tuple[float | None, float | None]:
+        if not self.config.exact_fidelity_resource_accounting:
+            return None, None
+        fraction = max(0.1, min(1.0, float(fraction)))
+        provider_backed = operation.operation_type in {
+            OperationType.EXPAND, OperationType.BRANCH,
+            OperationType.VERIFY, OperationType.MERGE,
+        } and not (
+            operation.operation_type == OperationType.BRANCH
+            and str(operation.payload.get("mode", "")) == "assignments"
+        )
+        if not provider_backed:
+            return 1.0, fraction
+        max_tokens = {
+            OperationType.EXPAND: self.config.graph_editor_max_tokens,
+            OperationType.BRANCH: self.config.typed_extraction_max_tokens,
+            OperationType.VERIFY: self.config.soft_verifier_max_tokens,
+            OperationType.MERGE: self.config.join_validation_max_tokens,
+        }[operation.operation_type]
+        if operation.operation_type == OperationType.VERIFY:
+            maximum = max(1, int(self.config.max_independent_verifications))
+            requested = max(1, int(round(maximum * fraction)))
+            schema_floor = 260 + 90 * max(1, len(operation.source_ids))
+            per_call = min(max_tokens, max(int(max_tokens * fraction), schema_floor))
+            token_scale = per_call * requested / max(1, max_tokens * maximum)
+            return requested / maximum, token_scale
+        schema_floor = {
+            OperationType.BRANCH: 260 + 90 * max(1, int(round(
+                self.config.max_extracted_claims_per_round * max(fraction, 0.25)
+            ))),
+            OperationType.MERGE: 400,
+            OperationType.EXPAND: 500,
+        }.get(operation.operation_type, 0)
+        per_call = min(max_tokens, max(int(max_tokens * fraction), schema_floor))
+        # Token fidelity changes a single request; the provider call count does
+        # not become fractional merely because its output cap is smaller.
+        return 1.0, per_call / max(1, max_tokens)
+
+    def _critical_obligation_reserve(
+        self, graph: DynamicReasoningHypergraphV2, operation: GraphOperation,
+    ) -> dict[str, int]:
+        if not self.config.critical_obligation_budget_reserve:
+            return {"llm_calls": 0, "tokens": 0, "region_count": 0}
+        targeted = set(operation_obligation_targets(
+            graph, operation,
+            strict=self.config.operation_conditioned_obligation_closure,
+        ))
+        requirements = {
+            "missing_evidence": (1, 530),
+            "missing_claim": (1, 260),
+            "missing_binding": (1, 530),
+            "missing_verification": (1, 260),
+            "missing_join_premise": (1, 400),
+            "terminal_disconnected_join": (1, 500),
+            "contradiction": (0, 0),
+        }
+        by_region: dict[tuple[str, str], tuple[int, int]] = {}
+        for obligation_id, row in graph.proof_obligations.items():
+            if (
+                obligation_id in targeted
+                or row.status != "OPEN"
+                or not row.terminal_reachable
+            ):
+                continue
+            need = requirements.get(row.obligation_type, (0, 0))
+            key = (row.target_subgoal, row.branch_id)
+            previous = by_region.get(key, (0, 0))
+            by_region[key] = (max(previous[0], need[0]), max(previous[1], need[1]))
+        # Preserve one causal continuation after the selected operation closes
+        # its immediate target (retrieve->extract, extract->verify, verify->join).
+        continuation = {
+            OperationType.RETRIEVE: (1, 530),
+            OperationType.BRANCH: (1, 260),
+            OperationType.VERIFY: (1, 400),
+            OperationType.MERGE: (0, 0),
+        }.get(operation.operation_type, (0, 0))
+        return {
+            "llm_calls": sum(value[0] for value in by_region.values()) + continuation[0],
+            "tokens": sum(value[1] for value in by_region.values()) + continuation[1],
+            "region_count": len(by_region),
+        }
 
     def _budget_packet(
         self,
@@ -849,7 +1081,7 @@ class AdaptiveComputationAllocator:
                 len(operation.payload.get("candidate_ids", [])),
                 max(2, branch_width),
             )
-        return {
+        packet = {
             "max_tokens": tokens,
             "retrieval_top_k": top_k,
             "candidate_cap": candidate_cap,
@@ -860,6 +1092,20 @@ class AdaptiveComputationAllocator:
                 or packet_heat >= self.config.allocation_mid_heat_threshold
             ) else 0,
         }
+        if self.config.exact_fidelity_resource_accounting:
+            provider_backed = operation.operation_type in {
+                OperationType.EXPAND, OperationType.BRANCH,
+                OperationType.VERIFY, OperationType.MERGE,
+            } and not assignment_branch
+            packet["llm_calls"] = (
+                verifications if operation.operation_type == OperationType.VERIFY
+                else int(provider_backed)
+            )
+            packet["token_upper_bound"] = (
+                tokens * verifications
+                if operation.operation_type == OperationType.VERIFY else tokens
+            )
+        return packet
 
 
 def operation_family(operation: GraphOperation) -> str:

@@ -143,6 +143,15 @@ class AllocationRecord:
     credit_finalized: bool = False
     predicted_gross_opportunity: float = 0.0
     target_obligation_ids: list[str] = field(default_factory=list)
+    obligation_estimate: dict[str, Any] = field(default_factory=dict)
+    predicted_marginal_evc: float = 0.0
+    predicted_provider_calls: int = 0
+    critical_obligation_reserve: dict[str, int] = field(default_factory=dict)
+    reserve_feasible: bool = True
+    pre_target_obligation_statuses: dict[str, str] = field(default_factory=dict)
+    actual_closed_target_ids: list[str] = field(default_factory=list)
+    actual_target_closure_rate: float = 0.0
+    actual_obligation_delta: float = 0.0
 
 
 @dataclass
@@ -393,7 +402,7 @@ class DynamicReasoningHypergraphV2(DynamicReasoningHypergraph):
             },
             "diffusion_history": _primitive(self.diffusion_history),
             "allocation_history": _v243_compatible_allocations(
-                self.allocation_history, bool(self.proof_obligation_version)
+                self.allocation_history, self.proof_obligation_version
             ),
             "retrieval_attempt_history": _primitive(self.retrieval_attempt_history),
             "join_attempt_history": _primitive(self.join_attempt_history),
@@ -530,6 +539,32 @@ class DynamicReasoningHypergraphV2(DynamicReasoningHypergraph):
                 raise GraphInvariantError(
                     f"allocation {row.allocation_id} targets unknown proof obligation"
                 )
+            if self.proof_obligation_version == "proof-obligation-state-v2.4.3.1":
+                if not -1.0 <= float(row.predicted_marginal_evc) <= 1.0:
+                    raise GraphInvariantError(
+                        f"allocation {row.allocation_id} marginal EVC outside [-1,1]"
+                    )
+                if row.predicted_provider_calls != int(
+                    row.requested_budget.get("llm_calls", 0)
+                ):
+                    raise GraphInvariantError(
+                        f"allocation {row.allocation_id} provider-call prediction mismatch"
+                    )
+                if any(
+                    value not in row.target_obligation_ids
+                    for value in row.actual_closed_target_ids
+                ):
+                    raise GraphInvariantError(
+                        f"allocation {row.allocation_id} closes an untargeted obligation"
+                    )
+                if not 0.0 <= float(row.actual_target_closure_rate) <= 1.0:
+                    raise GraphInvariantError(
+                        f"allocation {row.allocation_id} closure rate outside [0,1]"
+                    )
+                if not 0.0 <= float(row.actual_obligation_delta) <= 1.0:
+                    raise GraphInvariantError(
+                        f"allocation {row.allocation_id} obligation delta outside [0,1]"
+                    )
             if not -1.0 <= float(row.combined_realized_utility) <= 1.0:
                 raise GraphInvariantError(
                     f"allocation {row.allocation_id} combined utility outside [-1,1]"
@@ -767,14 +802,23 @@ class DynamicReasoningHypergraphV2(DynamicReasoningHypergraph):
 
 
 def _v243_compatible_allocations(
-    rows: list[AllocationRecord], enabled: bool,
+    rows: list[AllocationRecord], version: str,
 ) -> list[dict[str, Any]]:
     payload = [_primitive(row) for row in rows]
-    if enabled:
-        return payload
+    v2431_fields = {
+        "obligation_estimate", "predicted_marginal_evc",
+        "predicted_provider_calls", "critical_obligation_reserve",
+        "reserve_feasible", "pre_target_obligation_statuses",
+        "actual_closed_target_ids", "actual_target_closure_rate",
+        "actual_obligation_delta",
+    }
     for row in payload:
-        row.pop("predicted_gross_opportunity", None)
-        row.pop("target_obligation_ids", None)
+        if version != "proof-obligation-state-v2.4.3.1":
+            for name in v2431_fields:
+                row.pop(name, None)
+        if not version:
+            row.pop("predicted_gross_opportunity", None)
+            row.pop("target_obligation_ids", None)
     return payload
 
 
