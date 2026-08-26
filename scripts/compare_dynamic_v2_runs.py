@@ -46,10 +46,15 @@ def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--before", type=Path, required=True)
     parser.add_argument("--after", type=Path, required=True)
+    parser.add_argument(
+        "--common-only", action="store_true",
+        help="compare only qids present in both runs (for diagnostic subsets)",
+    )
     args = parser.parse_args()
     before, after = summarize(args.before), summarize(args.after)
     changes = []
-    for qid in sorted(set(before) | set(after)):
+    qids = set(before) & set(after) if args.common_only else set(before) | set(after)
+    for qid in sorted(qids):
         left, right = before.get(qid, {}), after.get(qid, {})
         if (
             left.get("candidate") != right.get("candidate")

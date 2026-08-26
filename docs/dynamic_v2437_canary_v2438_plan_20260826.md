@@ -36,8 +36,24 @@ v2.4.3.7 traces contained such targeted allocations. It must show a real
 `proof_recovery_extraction_priority` event and at least one positive causal
 proof return before Smoke-A20 is opened.
 
+## v2.4.3.8 targeted canary result
+
+- Run: `research_outputs/musique_distractor_smoke_dynamic_hypergraph_tdca_v2_1787747346189219194`.
+- Complete: 3/3; 31 provider attempts and 40,030 provider-reported tokens.
+- All three targeted retrievals had controller-derived provenance and all three
+  fired the matching freshness-priority extraction event.
+- One retrieval received positive structural delayed credit (`0.17`) through a
+  newly accepted evidence descendant, giving one auditable end-to-end recovery.
+- One previously absent three-hop chain was gained through fresh extraction and
+  an accepted n-ary JOIN; the emitted answer was correct. There were no
+  unsupported answers or infrastructure failures.
+
+The preregistered canary opening condition is satisfied. These three examples
+remain diagnostic-only; the unchanged policy must next pass the full frozen
+Smoke-A20 hard gate before Shadow-B can be authorized.
+
 ## Budget
 
-Usage before v2.4.3.8 is 1,069 provider attempts and 1,230,836 provider-reported
-tokens. Remaining global budget is 931 attempts and 769,164 tokens under the
-unchanged 2,000 / 2,000,000 hard cap.
+Usage after the v2.4.3.8 canary is 1,100 provider attempts and 1,270,866
+provider-reported tokens. Remaining global budget is 900 attempts and 729,134
+tokens under the unchanged 2,000 / 2,000,000 hard cap.
