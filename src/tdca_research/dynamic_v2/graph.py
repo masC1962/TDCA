@@ -152,6 +152,11 @@ class AllocationRecord:
     actual_closed_target_ids: list[str] = field(default_factory=list)
     actual_target_closure_rate: float = 0.0
     actual_obligation_delta: float = 0.0
+    transition_certificate: dict[str, Any] = field(default_factory=dict)
+    predicted_transition_value: float = 0.0
+    transition_realized: bool = False
+    actual_transition_value: float = 0.0
+    transition_observations: dict[str, Any] = field(default_factory=dict)
 
 
 @dataclass
@@ -539,7 +544,10 @@ class DynamicReasoningHypergraphV2(DynamicReasoningHypergraph):
                 raise GraphInvariantError(
                     f"allocation {row.allocation_id} targets unknown proof obligation"
                 )
-            if self.proof_obligation_version == "proof-obligation-state-v2.4.3.1":
+            if self.proof_obligation_version in {
+                "proof-obligation-state-v2.4.3.1",
+                "proof-obligation-state-v2.4.3.2",
+            }:
                 if not -1.0 <= float(row.predicted_marginal_evc) <= 1.0:
                     raise GraphInvariantError(
                         f"allocation {row.allocation_id} marginal EVC outside [-1,1]"
@@ -564,6 +572,19 @@ class DynamicReasoningHypergraphV2(DynamicReasoningHypergraph):
                 if not 0.0 <= float(row.actual_obligation_delta) <= 1.0:
                     raise GraphInvariantError(
                         f"allocation {row.allocation_id} obligation delta outside [0,1]"
+                    )
+            if self.proof_obligation_version == "proof-obligation-state-v2.4.3.2":
+                for name in ("predicted_transition_value", "actual_transition_value"):
+                    if not 0.0 <= float(getattr(row, name)) <= 1.0:
+                        raise GraphInvariantError(
+                            f"allocation {row.allocation_id}.{name} outside [0,1]"
+                        )
+                if row.transition_certificate and (
+                    row.transition_certificate.get("certificate_version")
+                    != "certified-transition-option-v2.4.3.2"
+                ):
+                    raise GraphInvariantError(
+                        f"allocation {row.allocation_id} has invalid transition certificate"
                     )
             if not -1.0 <= float(row.combined_realized_utility) <= 1.0:
                 raise GraphInvariantError(
@@ -812,9 +833,20 @@ def _v243_compatible_allocations(
         "actual_closed_target_ids", "actual_target_closure_rate",
         "actual_obligation_delta",
     }
+    v2432_fields = {
+        "transition_certificate", "predicted_transition_value",
+        "transition_realized", "actual_transition_value",
+        "transition_observations",
+    }
     for row in payload:
-        if version != "proof-obligation-state-v2.4.3.1":
+        if version not in {
+            "proof-obligation-state-v2.4.3.1",
+            "proof-obligation-state-v2.4.3.2",
+        }:
             for name in v2431_fields:
+                row.pop(name, None)
+        if version != "proof-obligation-state-v2.4.3.2":
+            for name in v2432_fields:
                 row.pop(name, None)
         if not version:
             row.pop("predicted_gross_opportunity", None)

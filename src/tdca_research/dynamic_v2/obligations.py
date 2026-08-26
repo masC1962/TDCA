@@ -32,6 +32,7 @@ def refresh_proof_obligations(
     *,
     max_retrieval_rounds: int,
     operation_conditioned: bool = False,
+    transition_aware: bool = False,
 ) -> None:
     """Project proof deficits from controller-owned graph state.
 
@@ -41,6 +42,8 @@ def refresh_proof_obligations(
     """
 
     graph.proof_obligation_version = (
+        "proof-obligation-state-v2.4.3.2"
+        if transition_aware else
         "proof-obligation-state-v2.4.3.1"
         if operation_conditioned else "proof-obligation-state-v2.4.3"
     )
@@ -469,7 +472,9 @@ def dead_end_certificate(
     ]
     return {
         "certificate_version": (
-            "proof-obligation-dead-end-v2.4.3.1"
+            "proof-obligation-dead-end-v2.4.3.2"
+            if graph.proof_obligation_version == "proof-obligation-state-v2.4.3.2"
+            else "proof-obligation-dead-end-v2.4.3.1"
             if graph.proof_obligation_version == "proof-obligation-state-v2.4.3.1"
             else "proof-obligation-dead-end-v2.4.3"
         ),

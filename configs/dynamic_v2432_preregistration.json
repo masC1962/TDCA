@@ -1,0 +1,131 @@
+{
+  "schema_version": "dynamic-hypergraph-v2.4.3.2-preregistration-v1",
+  "frozen_at": "2026-08-26",
+  "seed": 20260820,
+  "training": false,
+  "provider": "dashscope-openai-compatible",
+  "model": "qwen-plus",
+  "gold_aware_inference": false,
+  "source_commit_policy": "Every provider-backed artifact must pin the pushed v2.4.3.2 source-freeze commit.",
+  "parent_usage": {
+    "provider_attempts": 392,
+    "provider_reported_tokens": 416651
+  },
+  "combined_hard_cap": {
+    "provider_attempts": 2000,
+    "provider_reported_tokens": 2000000
+  },
+  "stage_caps": {
+    "smoke_a20": {
+      "provider_attempts": 350,
+      "provider_reported_tokens": 350000
+    },
+    "shadow_b20": {
+      "provider_attempts": 350,
+      "provider_reported_tokens": 350000,
+      "authorized_only_after_smoke_pass": true
+    }
+  },
+  "per_question_dev_safety_caps": {
+    "llm_calls": 16,
+    "total_tokens": 16000,
+    "retrieval_calls": 8
+  },
+  "frozen_references": {
+    "v2431_source_commit": "fd7b333574bfc73ec50611fb7d54a4747b063326",
+    "v2431_report_commit": "6ccc82a91089f9dc30fe97b6ec645fcb5cc6dc81",
+    "v2431_smoke_run": "research_outputs/musique_distractor_smoke_dynamic_hypergraph_tdca_v2_1787720103222432618"
+  },
+  "only_semantic_delta": {
+    "value_equation": "V = w_i * V_immediate + w_c * V_closure + V_transition - C_absolute",
+    "closure_value": "I(O) * P_close(O|o,G) * DeltaO(o) * R_terminal(O) - R_redundancy(o)",
+    "transition_value": "P_cert(o|G) * DeltaR_successor(o,G) * V_option(G') - R_transition(o)",
+    "certified_transition_option_value": true,
+    "lexicographic_zero_provider_transition": true,
+    "stop_policy_recomputes_certificate": true,
+    "controller_owned_realized_transition_audit": true,
+    "threshold_changed": false,
+    "training": false,
+    "signed_diffusion": false,
+    "per_question_or_answer_patch": false
+  },
+  "frozen_mechanisms": [
+    "absolute ready-set-invariant cost",
+    "proof-obligation ledger",
+    "controller-only mutation",
+    "certified meta-stop",
+    "causal delayed credit",
+    "termination separation",
+    "JOIN feasibility gate",
+    "operation-conditioned obligation closure"
+  ],
+  "stage_order": [
+    "zero_api_tests",
+    "gold_free_v2431_counterfactual_replay",
+    "push_source_freeze_commit",
+    "smoke_a20",
+    "hard_gate",
+    "shadow_b20_only_if_smoke_passes",
+    "automatic_diagnosis_and_next_cycle_if_failed"
+  ],
+  "adaptive_smoke_a20_hard_gates": {
+    "infrastructure_failure_count_max": 0,
+    "graph_invariant_violation_count_max": 0,
+    "controller_only_mutation_violation_count_max": 0,
+    "unsupported_answer_count_max": 0,
+    "selected_infeasible_join_count_max": 0,
+    "repeated_same_fingerprint_extraction_count_max": 0,
+    "no_diff_editor_allocation_count_max": 0,
+    "candidate_presence_rate_min": 0.75,
+    "legacy_execution_plan_completion_rate_min": 0.75,
+    "graph_proof_completion_rate_min": 0.8,
+    "f1_min": 0.58,
+    "logical_llm_calls_max": 163,
+    "logical_total_tokens_max": 185000,
+    "budget_exhaustion_rate_max": 0.1,
+    "immediate_evc_correlation_min": 0.1,
+    "delayed_evc_correlation_min": 0.15,
+    "choice_conditioned_delayed_correlation_exclusive_min": 0,
+    "choice_conditioned_count_min": 20,
+    "successful_proof_gap_mean_delayed_return_exclusive_min": 0,
+    "successful_proof_gap_must_exceed_failed": true,
+    "complete_evc_trace_rate_min": 1,
+    "complete_delayed_credit_trace_rate_min": 1,
+    "complete_proof_obligation_trace_rate_min": 1,
+    "no_executable_without_certificate_count_max": 0,
+    "viable_proof_opportunity_cost_clipping_stop_count_max": 0,
+    "absolute_cost_ready_set_invariance_rate_min": 1,
+    "predicted_verification_calls_match_requested_samples_rate_min": 1,
+    "unjustified_high_fidelity_count_max": 0,
+    "operation_target_audit_rate_min": 1,
+    "all_abstains_have_exhaustion_evidence": true,
+    "non_uniform_allocation_required": true,
+    "complete_transition_trace_rate_min": 1,
+    "certified_transition_realization_rate_min": 1,
+    "invalid_transition_bypass_count_max": 0
+  },
+  "paired_shadow_b20_hard_gates": {
+    "both_artifacts_complete": true,
+    "both_zero_safety_violations": true,
+    "v243_candidate_presence_non_regression": true,
+    "v243_execution_plan_completion_non_regression": true,
+    "v243_graph_proof_completion_non_regression": true,
+    "v243_f1_non_regression": true,
+    "v243_complete_proof_obligation_trace_rate_min": 1,
+    "v243_delayed_evc_correlation_min": 0.15
+  },
+  "safe_stop": {
+    "cycle_boundary_on_gate_failure": true,
+    "automatic_gold_free_diagnosis": true,
+    "automatic_next_iteration": true,
+    "global_hard_stop_provider_attempts": 1608,
+    "global_hard_stop_provider_reported_tokens": 1583349,
+    "no_post_failure_threshold_relaxation": true,
+    "no_single_question_patch": true,
+    "heldout200_authorized": false
+  },
+  "remaining_hard_cap": {
+    "provider_attempts": 1608,
+    "provider_reported_tokens": 1583349
+  }
+}

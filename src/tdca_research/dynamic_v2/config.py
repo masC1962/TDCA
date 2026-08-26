@@ -145,6 +145,10 @@ class DynamicV2ResearchConfig(DynamicResearchConfig):
     marginal_fidelity_evc_gate: bool = False
     critical_obligation_budget_reserve: bool = False
 
+    # v2.4.3.2 separates proof-deficit closure from certified execution-state
+    # transitions.  It is opt-in to preserve every frozen v2.4.3.1 artifact.
+    certified_transition_option_value: bool = False
+
     # Terminal acceptance is a conjunctive readout over independent belief
     # channels.  These are initial development values, never learned weights.
     terminal_min_absolute_support: float = 0.70

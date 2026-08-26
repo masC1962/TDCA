@@ -22,6 +22,7 @@ from .obligations import (
     operation_conditioned_closure_value,
     operation_obligation_targets,
 )
+from .transitions import certified_transition_value
 
 
 @dataclass(frozen=True)
@@ -56,6 +57,10 @@ class EVCSignals:
     expected_obligation_delta: float = 0.0
     obligation_terminal_return: float = 0.0
     operation_redundancy: float = 0.0
+    transition_certainty: float = 0.0
+    successor_reachability_gain: float = 0.0
+    successor_option_value: float = 0.0
+    transition_redundancy: float = 0.0
 
 
 @dataclass(frozen=True)
@@ -85,6 +90,8 @@ class ComputationPacket:
     predicted_provider_calls: int = 0
     critical_obligation_reserve: dict[str, int] = field(default_factory=dict)
     reserve_feasible: bool = True
+    transition_certificate: dict = field(default_factory=dict)
+    predicted_transition_value: float = 0.0
 
     def trace(self) -> dict:
         raw = dict(self.raw.__dict__)
@@ -94,6 +101,13 @@ class ComputationPacket:
                 "obligation_importance", "operation_closure_probability",
                 "expected_obligation_delta", "obligation_terminal_return",
                 "operation_redundancy",
+            ):
+                raw.pop(name, None)
+                normalized.pop(name, None)
+        if not self.transition_certificate:
+            for name in (
+                "transition_certainty", "successor_reachability_gain",
+                "successor_option_value", "transition_redundancy",
             ):
                 raw.pop(name, None)
                 normalized.pop(name, None)
@@ -123,6 +137,8 @@ class ComputationPacket:
             "predicted_provider_calls": self.predicted_provider_calls,
             "critical_obligation_reserve": dict(self.critical_obligation_reserve),
             "reserve_feasible": self.reserve_feasible,
+            "transition_certificate": deepcopy(self.transition_certificate),
+            "predicted_transition_value": self.predicted_transition_value,
         }
         if not self.obligation_estimate:
             for name in (
@@ -131,6 +147,9 @@ class ComputationPacket:
                 "reserve_feasible",
             ):
                 payload.pop(name, None)
+        if not self.transition_certificate:
+            payload.pop("transition_certificate", None)
+            payload.pop("predicted_transition_value", None)
         return payload
 
 
@@ -175,6 +194,8 @@ class AdaptiveComputationAllocator:
                 "obligation_importance", "operation_closure_probability",
                 "expected_obligation_delta", "obligation_terminal_return",
                 "operation_redundancy",
+                "transition_certainty", "successor_reachability_gain",
+                "successor_option_value", "transition_redundancy",
             }
             normalized_base_rows = [
                 EVCSignals(**{
@@ -204,6 +225,11 @@ class AdaptiveComputationAllocator:
                         token_scale=token_scale,
                     ),
                 ))
+        transition_estimates = [
+            certified_transition_value(graph, operation)
+            if self.config.certified_transition_option_value else {}
+            for operation in operations
+        ]
         names = tuple(EVCSignals.__dataclass_fields__)
         if self.config.multi_resource_evc:
             normalized_expanded = []
@@ -241,14 +267,21 @@ class AdaptiveComputationAllocator:
                     immediate, delayed, normalized_cost = self._horizon_scores(
                         normalized, operation_family(operation),
                     )
+                    transition_value = float(
+                        transition_estimates[index].get(
+                            "predicted_transition_value", 0.0,
+                        )
+                    )
                     evc = max(0.0, (
                         self.config.evc_immediate_horizon_weight * immediate
                         + self.config.evc_delayed_horizon_weight * delayed
+                        + transition_value
                         - normalized_cost
                     ))
                     gross = _unit(
                         self.config.evc_immediate_horizon_weight * immediate
                         + self.config.evc_delayed_horizon_weight * delayed
+                        + transition_value
                     )
                 else:
                     evc = self._adaptive_evc(normalized)
@@ -289,6 +322,7 @@ class AdaptiveComputationAllocator:
                 operation_conditioned_closure_value(graph, operation)
                 if self.config.operation_conditioned_obligation_closure else {}
             )
+            transition_estimate = transition_estimates[index]
             previous_gross, previous_cost = previous_fidelity.get(
                 operation.operation_id, (0.0, 0.0),
             )
@@ -341,6 +375,10 @@ class AdaptiveComputationAllocator:
                 predicted_provider_calls=int(requested.get("llm_calls", 0)),
                 critical_obligation_reserve=reserve,
                 reserve_feasible=reserve_feasible,
+                transition_certificate=transition_estimate,
+                predicted_transition_value=float(
+                    transition_estimate.get("predicted_transition_value", 0.0)
+                ),
             )))
         self.allocation_serial += len(expanded)
         if mode == "adaptive_evc":
@@ -436,6 +474,10 @@ class AdaptiveComputationAllocator:
             expected_obligation_delta=base.expected_obligation_delta * gain,
             obligation_terminal_return=base.obligation_terminal_return,
             operation_redundancy=base.operation_redundancy,
+            transition_certainty=base.transition_certainty,
+            successor_reachability_gain=base.successor_reachability_gain,
+            successor_option_value=base.successor_option_value,
+            transition_redundancy=base.transition_redundancy,
         )
         if not clamp and not bounded_opportunity:
             return row
@@ -829,6 +871,10 @@ class AdaptiveComputationAllocator:
             operation_conditioned_closure_value(graph, operation)
             if self.config.operation_conditioned_obligation_closure else {}
         )
+        transition = (
+            certified_transition_value(graph, operation)
+            if self.config.certified_transition_option_value else {}
+        )
         if self.config.absolute_resource_cost:
             max_token_demand = 0.0 if call_demand <= 0.0 else float({
                 OperationType.EXPAND: self.config.graph_editor_max_tokens,
@@ -910,6 +956,16 @@ class AdaptiveComputationAllocator:
                 closure.get("obligation_terminal_return", 0.0)
             ),
             operation_redundancy=float(closure.get("operation_redundancy", 0.0)),
+            transition_certainty=float(transition.get("transition_certainty", 0.0)),
+            successor_reachability_gain=float(
+                transition.get("successor_reachability_gain", 0.0)
+            ),
+            successor_option_value=float(
+                transition.get("successor_option_value", 0.0)
+            ),
+            transition_redundancy=float(
+                transition.get("transition_redundancy", 0.0)
+            ),
         )
 
     def _fidelity_resource_scales(

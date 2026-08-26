@@ -13,6 +13,7 @@ from .config import DynamicV2ResearchConfig
 from .graph import DynamicReasoningHypergraphV2, TerminalBeliefState, TerminationKind
 from .proof import audit_graph_proof, claim_closure
 from .obligations import dead_end_certificate
+from .transitions import certified_transition_value
 
 
 class TerminalBeliefReadout:
@@ -356,6 +357,32 @@ class MetaStopPolicy:
                 max(row.predicted_evc for row in packets),
                 dead_end_certificate=certificate,
             )
+        if self.config.certified_transition_option_value:
+            certified = []
+            for row in affordable:
+                transition = certified_transition_value(graph, row.operation)
+                if (
+                    bool(transition.get("mandatory", False))
+                    and bool(transition.get("deterministic", False))
+                    and int(transition.get("provider_calls", -1)) == 0
+                    and int(row.requested_budget.get("llm_calls", 0)) == 0
+                ):
+                    certified.append((row, transition))
+            if certified:
+                selected, transition = max(certified, key=lambda value: (
+                    float(value[1].get("predicted_transition_value", 0.0)),
+                    value[0].predicted_evc,
+                    value[0].allocation_id,
+                ))
+                certificate["decision_layer"] = "certified_transition_before_net_evc"
+                certificate["selected_transition_certificate"] = transition
+                return MetaDecision(
+                    TerminationKind.CONTINUE,
+                    "certified_state_transition",
+                    selected.predicted_evc,
+                    selected_allocation_id=selected.allocation_id,
+                    dead_end_certificate=certificate,
+                )
         best = max(affordable, key=lambda row: (
             row.predicted_evc,
             row.predicted_gross_opportunity,

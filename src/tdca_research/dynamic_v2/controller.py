@@ -45,6 +45,7 @@ from .graph import (
 )
 from .query_graph import canonical_type, compile_query_graph, type_lineage
 from .obligations import refresh_proof_obligations
+from .transitions import realized_transition_value
 from .allocator import (
     feedback_key,
     operation_family,
@@ -100,6 +101,7 @@ class V2GraphController(GraphController):
                 operation_conditioned=(
                     self.config.operation_conditioned_obligation_closure
                 ),
+                transition_aware=self.config.certified_transition_option_value,
             )
         after = updated.state_hash()
         updated.operation_history.append(AppliedOperation(
@@ -229,6 +231,12 @@ class V2GraphController(GraphController):
                     trace.get("critical_obligation_reserve", {}).items()
                 },
                 reserve_feasible=bool(trace.get("reserve_feasible", True)),
+                transition_certificate=dict(
+                    trace.get("transition_certificate", {})
+                ),
+                predicted_transition_value=float(
+                    trace.get("predicted_transition_value", 0.0)
+                ),
                 pre_target_obligation_statuses={
                     str(value): str(graph.proof_obligations[value].status)
                     for value in trace.get("target_obligation_ids", [])
@@ -252,6 +260,12 @@ class V2GraphController(GraphController):
             if target_ids else 0.0
         )
         existing.actual_obligation_delta = existing.actual_target_closure_rate
+        if existing.transition_certificate:
+            (
+                existing.transition_realized,
+                existing.actual_transition_value,
+                existing.transition_observations,
+            ) = realized_transition_value(updated, existing.transition_certificate)
         self._reconcile_outcome(
             updated, existing, packet, measured, bool(completed), str(failure_reason),
             outcome_metadata or {},
@@ -267,6 +281,7 @@ class V2GraphController(GraphController):
                 operation_conditioned=(
                     self.config.operation_conditioned_obligation_closure
                 ),
+                transition_aware=self.config.certified_transition_option_value,
             )
         refresh_delayed_credit(updated, self.config)
         updated.seal_controller_state()
@@ -1076,6 +1091,12 @@ class V2GraphController(GraphController):
                     row.get("critical_obligation_reserve", {}).items()
                 },
                 reserve_feasible=bool(row.get("reserve_feasible", True)),
+                transition_certificate=dict(
+                    row.get("transition_certificate", {})
+                ),
+                predicted_transition_value=float(
+                    row.get("predicted_transition_value", 0.0)
+                ),
                 pre_target_obligation_statuses={
                     str(value): str(graph.proof_obligations[value].status)
                     for value in row.get("target_obligation_ids", [])
