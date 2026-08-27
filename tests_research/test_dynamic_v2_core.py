@@ -51,6 +51,7 @@ from tdca_research.dynamic_v2.extraction import (
     TypedClaimExtractor,
     _budget_aware_context,
     _canonicalize_typed_value,
+    _consolidate_grounded_numeric_intervals,
     _fit_completion_to_remaining_budget,
     _enumerated_sibling_values,
 )
@@ -1410,6 +1411,66 @@ def test_v2439_numeric_output_aliases_are_opt_in_and_type_safe():
     assert not _projection_type_compatible(
         "country", "numerical", numeric_aliases=True,
     )
+
+
+def test_v24311_consolidates_only_evidence_exact_numeric_interval_endpoints():
+    common = {
+        "subject": "Western Europe",
+        "relation": "population_reduced_by_fraction",
+        "subject_type": "geopolitical_region",
+        "value_type": "fraction",
+        "answer_type": "fraction",
+        "evidence_refs": ["e1"],
+        "source_spans": [
+            "peaking in Europe between 1347 and 1350 with 30% to 65% of the population killed"
+        ],
+        "dependency_claim_ids": ["c_parent"],
+        "extraction_confidence": 0.85,
+        "answers_subgoal": True,
+        "answer_position": "value",
+        "qualifiers": {},
+    }
+    rows = [
+        {**common, "node_id": "c_low", "value": "0.3"},
+        {**common, "node_id": "c_high", "value": "0.65"},
+    ]
+    consolidated = _consolidate_grounded_numeric_intervals(rows)
+    assert len(consolidated) == 1
+    assert consolidated[0]["value"] == "30% to 65%"
+    assert consolidated[0]["value_type"] == "percentage"
+    audit = consolidated[0]["qualifiers"]["numeric_interval_consolidation"]
+    assert audit["endpoint_claim_ids"] == ["c_low", "c_high"]
+    assert audit["evidence_exact"] is True
+
+
+def test_v24311_does_not_merge_dates_or_unrelated_numeric_claims():
+    span = "between 1347 and 1350 with 30% to 65% of the population killed"
+    base = {
+        "subject_type": "entity", "value_type": "number", "answer_type": "number",
+        "evidence_refs": ["e1"], "source_spans": [span],
+        "dependency_claim_ids": [], "extraction_confidence": 0.9,
+        "answers_subgoal": True, "answer_position": "value", "qualifiers": {},
+    }
+    unrelated = [
+        {
+            **base, "node_id": "c1", "subject": "Europe", "relation": "plague_year",
+            "value": "1347", "value_type": "date",
+        },
+        {
+            **base, "node_id": "c2", "subject": "Europe", "relation": "plague_year",
+            "value": "1350", "value_type": "date",
+        },
+    ]
+    assert _consolidate_grounded_numeric_intervals(unrelated) == unrelated
+
+    different_spans = [
+        {**base, "node_id": "c3", "subject": "Europe", "relation": "loss", "value": "0.3"},
+        {
+            **base, "node_id": "c4", "subject": "Europe", "relation": "loss", "value": "0.65",
+            "source_spans": ["A separate estimate reports 65 percent."],
+        },
+    ]
+    assert _consolidate_grounded_numeric_intervals(different_spans) == different_spans
 
 
 def test_dependency_identity_exception_requires_literal_parenthetical_alias():

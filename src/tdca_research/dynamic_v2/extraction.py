@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from collections import defaultdict
 from copy import deepcopy
+from decimal import Decimal, InvalidOperation
 import re
 from typing import Any
 
@@ -236,6 +237,8 @@ class TypedClaimExtractor:
                 "extraction_mode": "typed_evidence_extraction",
                 "extraction_focus_mode": focus_mode,
             })
+        if self.config.grounded_numeric_interval_consolidation:
+            rows = _consolidate_grounded_numeric_intervals(rows)
         if self.config.deterministic_enumeration_expansion and len(rows) < cap:
             rows.extend(_expand_grounded_enumerations(
                 rows, available, existing, cap - len(rows),
@@ -410,6 +413,143 @@ def _canonicalize_typed_value(value: str, expected_type: str) -> tuple[str, dict
                 "original_value": text,
             }
     return text, {}
+
+
+_EXPLICIT_NUMERIC_RANGE = re.compile(
+    r"(?<![\w.])(?:"
+    r"between\s+(?P<between_left>[+-]?\d+(?:[.,]\d+)?)\s*"
+    r"(?P<between_left_unit>%|percent(?:age)?s?)?\s+and\s+"
+    r"(?P<between_right>[+-]?\d+(?:[.,]\d+)?)\s*"
+    r"(?P<between_right_unit>%|percent(?:age)?s?)?"
+    r"|(?P<left>[+-]?\d+(?:[.,]\d+)?)\s*"
+    r"(?P<left_unit>%|percent(?:age)?s?)?\s*"
+    r"(?:to|through|until|[-–—])\s*"
+    r"(?P<right>[+-]?\d+(?:[.,]\d+)?)\s*"
+    r"(?P<right_unit>%|percent(?:age)?s?)?"
+    r")(?![\w.])",
+    re.IGNORECASE,
+)
+_NUMERIC_VALUE_TYPES = {
+    "number", "numerical", "numeric", "count", "quantity", "fraction",
+    "percentage", "percent", "decimal", "ratio",
+}
+
+
+def _consolidate_grounded_numeric_intervals(
+    accepted_rows: list[dict[str, Any]],
+) -> list[dict[str, Any]]:
+    """Recover an explicitly stated interval split into scalar endpoints.
+
+    Consolidation is deliberately evidence-exact.  Endpoint rows must agree on
+    subject, relation, dependency claims, evidence references, source spans,
+    and answer projection.  Their numeric values must then match the two ends
+    of one literal range in that shared span.  No interval is inferred from
+    merely co-occurring numbers.
+    """
+    rows = list(accepted_rows)
+    consumed: set[int] = set()
+    replacements: dict[int, dict[str, Any]] = {}
+    groups: dict[tuple[Any, ...], list[int]] = defaultdict(list)
+    for index, row in enumerate(rows):
+        if canonical_type(row.get("value_type")) not in _NUMERIC_VALUE_TYPES:
+            continue
+        key = (
+            normalize_text(row.get("subject", "")),
+            normalize_text(row.get("relation", "")),
+            tuple(sorted(str(value) for value in row.get("dependency_claim_ids", []))),
+            tuple(sorted(str(value) for value in row.get("evidence_refs", []))),
+            tuple(normalize_text(value) for value in row.get("source_spans", [])),
+            str(row.get("answer_position", "none")),
+        )
+        groups[key].append(index)
+
+    for indices in groups.values():
+        if len(indices) < 2:
+            continue
+        shared_spans = rows[indices[0]].get("source_spans", [])
+        for span in shared_spans:
+            for match in _EXPLICIT_NUMERIC_RANGE.finditer(str(span)):
+                left_text = match.group("left") or match.group("between_left")
+                right_text = match.group("right") or match.group("between_right")
+                percent_range = bool(
+                    match.group("left_unit") or match.group("right_unit")
+                    or match.group("between_left_unit") or match.group("between_right_unit")
+                )
+                left = _range_endpoint_decimal(left_text, percent_range)
+                right = _range_endpoint_decimal(right_text, percent_range)
+                if left is None or right is None or left == right:
+                    continue
+                left_rows = [
+                    index for index in indices
+                    if index not in consumed and _row_numeric_decimal(rows[index]) == left
+                ]
+                right_rows = [
+                    index for index in indices
+                    if index not in consumed and _row_numeric_decimal(rows[index]) == right
+                ]
+                if len(left_rows) != 1 or len(right_rows) != 1:
+                    continue
+                left_index, right_index = left_rows[0], right_rows[0]
+                if left_index == right_index:
+                    continue
+                first_index = min(left_index, right_index)
+                endpoint_rows = [rows[left_index], rows[right_index]]
+                consolidated = deepcopy(rows[first_index])
+                surface = match.group(0).strip()
+                consolidated["value"] = surface
+                consolidated["value_type"] = "percentage" if percent_range else "number"
+                consolidated["answer_type"] = consolidated["value_type"]
+                consolidated["source_triple"] = {
+                    "subject": str(consolidated.get("subject", "")),
+                    "relation": str(consolidated.get("relation", "")),
+                    "value": surface,
+                }
+                consolidated["extraction_confidence"] = min(
+                    float(row.get("extraction_confidence", 0.0)) for row in endpoint_rows
+                )
+                consolidated["extraction_mode"] = "grounded_numeric_interval_consolidation"
+                consolidated["qualifiers"] = {
+                    **dict(consolidated.get("qualifiers", {})),
+                    "numeric_interval_consolidation": {
+                        "surface": surface,
+                        "endpoint_values": [
+                            str(rows[left_index].get("value", "")),
+                            str(rows[right_index].get("value", "")),
+                        ],
+                        "endpoint_claim_ids": [
+                            str(rows[left_index].get("node_id", "")),
+                            str(rows[right_index].get("node_id", "")),
+                        ],
+                        "evidence_exact": True,
+                    },
+                }
+                consumed.update({left_index, right_index})
+                replacements[first_index] = consolidated
+
+    return [
+        replacements[index] if index in replacements else row
+        for index, row in enumerate(rows)
+        if index not in consumed or index in replacements
+    ]
+
+
+def _row_numeric_decimal(row: dict[str, Any]) -> Decimal | None:
+    text = str(row.get("value", "")).strip().lower().replace(",", "")
+    is_percent = text.endswith("%") or bool(re.search(r"\bpercent(?:age)?s?$", text))
+    text = re.sub(r"(?:%|\s*percent(?:age)?s?)$", "", text).strip()
+    try:
+        value = Decimal(text)
+    except InvalidOperation:
+        return None
+    return value / Decimal(100) if is_percent else value
+
+
+def _range_endpoint_decimal(text: str, percent_range: bool) -> Decimal | None:
+    try:
+        value = Decimal(str(text).replace(",", ""))
+    except InvalidOperation:
+        return None
+    return value / Decimal(100) if percent_range else value
 
 
 def _expand_grounded_enumerations(

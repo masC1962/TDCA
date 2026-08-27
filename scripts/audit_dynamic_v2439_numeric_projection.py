@@ -43,6 +43,13 @@ def audit(run: Path) -> dict[str, Any]:
                 "claim_id": claim.node_id,
                 "subgoal_id": subgoal.node_id,
                 "branch_id": claim.branch_id,
+                "subject": claim.subject,
+                "relation": claim.relation,
+                "value": claim.value,
+                "dependency_claim_ids": list(claim.dependency_claim_ids),
+                "source_spans": list(
+                    claim.provenance.metadata.get("source_spans", [])
+                ),
                 "expected_type": subgoal.answer_type,
                 "subject_type": semantics.subject_type,
                 "value_type": semantics.value_type,

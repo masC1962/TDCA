@@ -194,6 +194,11 @@ class DynamicV2ResearchConfig(DynamicResearchConfig):
     # independent scores without a provider request, then charges it exactly.
     certified_deterministic_join_allocation: bool = False
 
+    # v2.4.3.11 repairs a representation loss at the extraction boundary.  Two
+    # scalar endpoints are consolidated only when the same exact evidence span
+    # explicitly states their interval and all relational provenance agrees.
+    grounded_numeric_interval_consolidation: bool = False
+
     # Terminal acceptance is a conjunctive readout over independent belief
     # channels.  These are initial development values, never learned weights.
     terminal_min_absolute_support: float = 0.70
