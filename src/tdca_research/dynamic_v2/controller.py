@@ -297,7 +297,11 @@ class V2GraphController(GraphController):
             self._rewrite_terminal_target(graph, operation, changes, rewrite)
         if not self.config.query_graph_compiler:
             return
-        query_graph = compile_query_graph(graph.question, graph.subgoals())
+        query_graph = compile_query_graph(
+            graph.question,
+            graph.subgoals(),
+            constraint_aware_entities=self.config.constraint_aware_query_entities,
+        )
         graph.query_graph = query_graph.to_payload()
         if self.config.query_conditioned_semantic_alignment:
             graph.query_alignment_version = (

@@ -512,6 +512,19 @@ def test_query_graph_and_hierarchical_types_are_training_free_and_generic():
     assert not types_compatible("date", "location")
 
 
+def test_query_graph_preserves_named_prepositional_constraint_when_enabled():
+    _, _, graph = chain_graph()
+    subgoal = graph.node("s_root")
+    subgoal.question_template = "Where does $bridge empty into the Gulf of Mexico?"
+    subgoal.instantiated_question = "Where does River X empty into the Gulf of Mexico?"
+    compiled = compile_query_graph(
+        graph.question, [subgoal], constraint_aware_entities=True,
+    )
+    assert "Gulf of Mexico" in compiled.constraints[0].known_entities
+    assert "Gulf" not in compiled.constraints[0].known_entities
+    assert "Mexico" not in compiled.constraints[0].known_entities
+
+
 def test_adaptive_allocator_exposes_operation_fidelity_alternatives():
     cfg, _, graph = chain_graph()
     allocator = AdaptiveComputationAllocator(cfg)
@@ -2294,6 +2307,26 @@ def test_v24_extraction_fingerprint_changes_only_with_material_graph_state():
         graph.evidence("s_root", "branch_root"), [],
     )
     assert first != second
+
+
+def test_v24327_semantic_extraction_fingerprint_ignores_diffusion_only_versions():
+    _, _, graph = chain_graph()
+    evidence = graph.evidence("s_root", "branch_root")
+    first = _extraction_state_fingerprint(
+        graph, "s_root", "branch_root", evidence, ["c1"],
+        semantic_dependencies=True,
+    )
+    legacy = _extraction_state_fingerprint(
+        graph, "s_root", "branch_root", evidence, ["c1"],
+    )
+    graph.belief_states["c1"].version += 1
+    assert first == _extraction_state_fingerprint(
+        graph, "s_root", "branch_root", evidence, ["c1"],
+        semantic_dependencies=True,
+    )
+    assert legacy != _extraction_state_fingerprint(
+        graph, "s_root", "branch_root", evidence, ["c1"],
+    )
 
 
 def test_v24_region_retrieval_gate_requires_material_query_novelty():

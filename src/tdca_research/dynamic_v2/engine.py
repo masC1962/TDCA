@@ -415,6 +415,7 @@ class DynamicHypergraphV2Reasoner:
                     _pending_recovery_extraction(
                         graph, subgoal.node_id, branch.branch_id, evidence,
                         claims, dependencies, attempted_extractions,
+                        semantic_dependencies=self.config.semantic_extraction_fingerprint,
                     )
                     if self.config.proof_recovery_extraction_priority
                     else None
@@ -538,6 +539,7 @@ class DynamicHypergraphV2Reasoner:
                 projection_key = (subgoal.node_id, branch.branch_id, len(evidence))
                 extraction_fingerprint = _extraction_state_fingerprint(
                     graph, subgoal.node_id, branch.branch_id, evidence, dependencies,
+                    semantic_dependencies=self.config.semantic_extraction_fingerprint,
                 )
                 coverage_attempt_key = (
                     subgoal.node_id, branch.branch_id, extraction_fingerprint, "coverage",
@@ -1854,6 +1856,8 @@ def _extraction_state_fingerprint(
     branch_id: str,
     evidence: list[EvidenceNode],
     dependency_ids: list[str],
+    *,
+    semantic_dependencies: bool = False,
 ) -> str:
     """Fingerprint all state that can materially change extraction output."""
     regional_claim_ids = {
@@ -1868,9 +1872,18 @@ def _extraction_state_fingerprint(
             stable_hash(node.source_span),
         ) for node in evidence),
         "dependencies": sorted((
-            node_id,
-            graph.belief_states.get(node_id).version
-            if graph.belief_states.get(node_id) is not None else 0,
+            (
+                node_id,
+                normalize_text(graph.node(node_id, ClaimNode).subject),
+                normalize_text(graph.node(node_id, ClaimNode).relation),
+                normalize_text(graph.node(node_id, ClaimNode).value),
+            )
+            if semantic_dependencies and isinstance(graph.nodes.get(node_id), ClaimNode)
+            else (
+                node_id,
+                graph.belief_states.get(node_id).version
+                if graph.belief_states.get(node_id) is not None else 0,
+            )
         ) for node_id in dependency_ids),
         "relevant_supersessions": sorted(
             row.supersession_id for row in graph.supersession_history
@@ -1888,6 +1901,8 @@ def _pending_recovery_extraction(
     claims: list[ClaimNode],
     dependency_ids: list[str],
     attempted_extractions: set[tuple[str, str, str, str]],
+    *,
+    semantic_dependencies: bool = False,
 ) -> tuple[Any, str] | None:
     """Return fresh, unconsumed recovery evidence in one graph region."""
     attempts = [
@@ -1911,6 +1926,7 @@ def _pending_recovery_extraction(
         return None
     fingerprint = _extraction_state_fingerprint(
         graph, target_subgoal, branch_id, evidence, dependency_ids,
+        semantic_dependencies=semantic_dependencies,
     )
     key = (target_subgoal, branch_id, fingerprint, "coverage")
     if key in attempted_extractions:
@@ -1978,6 +1994,9 @@ def _retrieval_retry_gate(
         evidence = graph.evidence(subgoal.node_id, branch.branch_id)
         fingerprint = _extraction_state_fingerprint(
             graph, subgoal.node_id, branch.branch_id, evidence, dependency_ids,
+            semantic_dependencies=bool(
+                config and config.semantic_extraction_fingerprint
+            ),
         )
         coverage_done = (
             subgoal.node_id, branch.branch_id, fingerprint, "coverage",

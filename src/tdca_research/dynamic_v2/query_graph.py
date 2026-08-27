@@ -60,7 +60,12 @@ class QueryGraph:
         }
 
 
-def compile_query_graph(question: str, subgoals: list[SubgoalNode]) -> QueryGraph:
+def compile_query_graph(
+    question: str,
+    subgoals: list[SubgoalNode],
+    *,
+    constraint_aware_entities: bool = False,
+) -> QueryGraph:
     """Compile planner output into an explicit, label-free constraint agenda."""
     variables = []
     constraints = []
@@ -71,7 +76,8 @@ def compile_query_graph(question: str, subgoals: list[SubgoalNode]) -> QueryGrap
             variable_id, subgoal.node_id, canonical_type(subgoal.answer_type),
         ))
         known = tuple(_question_entities(
-            subgoal.instantiated_question or subgoal.question_template
+            subgoal.instantiated_question or subgoal.question_template,
+            preserve_connectors=constraint_aware_entities,
         ))
         known_by_subgoal[subgoal.node_id] = known
         inputs = tuple(f"?answer:{value}" for value in subgoal.dependencies)
@@ -121,11 +127,18 @@ def types_compatible(left: object, right: object) -> bool:
     return bool(set(type_lineage(left_type)) & set(type_lineage(right_type)))
 
 
-def _question_entities(text: str) -> list[str]:
+def _question_entities(text: str, *, preserve_connectors: bool = False) -> list[str]:
     # Relation-light anchors only.  Wh-phrases are explicitly removed so they
     # cannot become fake entities in the activated graph.
     token = r"[A-Z][\w'’\-]*"
-    rows = re.findall(rf"\b{token}(?:\s+{token}){{0,5}}\b", text)
+    if preserve_connectors:
+        connector = r"(?:of|the|de|del|la|van|von|and)"
+        rows = re.findall(
+            rf"\b{token}(?:(?:\s+{token})|(?:\s+{connector}\s+{token})){{0,5}}\b",
+            text,
+        )
+    else:
+        rows = re.findall(rf"\b{token}(?:\s+{token}){{0,5}}\b", text)
     stop = {"what", "which", "who", "where", "when", "how", "the", "a", "an"}
     return [
         value for value in dict.fromkeys(rows)

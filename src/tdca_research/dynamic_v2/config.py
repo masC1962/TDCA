@@ -245,6 +245,12 @@ class DynamicV2ResearchConfig(DynamicResearchConfig):
     # This prevents a high-fidelity multi-sample packet from fitting on paper
     # while exhausting the real per-question token budget mid-operation.
     prompt_inclusive_verifier_resource_accounting: bool = False
+
+    # v2.4.3.27 keys extraction recovery to semantic prompt inputs instead of
+    # diffusion-only belief versions, and preserves named query constraints.
+    semantic_extraction_fingerprint: bool = False
+    constraint_aware_query_entities: bool = False
+    constraint_aware_direct_projection: bool = False
     terminal_min_relation_target_alignment: float = 0.70
     terminal_min_subject_binding_coverage: float = 0.70
     terminal_min_dependency_binding_coverage: float = 0.70

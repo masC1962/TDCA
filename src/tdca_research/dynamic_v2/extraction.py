@@ -45,6 +45,15 @@ knowledge, compose unsupported facts, or add prose. Return an empty list when no
 supports an output candidate."""
 
 
+CONSTRAINT_AWARE_DIRECT_ANSWER_EXTRACTION_SYSTEM = DIRECT_ANSWER_EXTRACTION_SYSTEM + """
+Interpret the wh-slot independently from entities already named in the subgoal. A named destination, source,
+comparison object, or other fixed endpoint is an input constraint and must not be returned as the output merely
+because it has the expected broad type. For a when question, project the explicit date or year as the output even
+when it is written as an adverbial event modifier. For a where question with a named destination, project a
+distinct explicitly stated intermediate place only when the evidence states that it fills the requested wh-slot.
+Keep the bound dependency entity as the opposite endpoint whenever the evidence permits an atomic binary claim."""
+
+
 class TypedClaimExtractor:
     def __init__(self, llm: BaseLLM, budget: Budget, config: DynamicV2ResearchConfig) -> None:
         self.llm = llm
@@ -95,7 +104,11 @@ class TypedClaimExtractor:
             self.last_diagnostics = {"raw": 0, "accepted": 0, "rejections": {"claim_cap": 1}}
             return None
         system_prompt = (
-            DIRECT_ANSWER_EXTRACTION_SYSTEM
+            (
+                CONSTRAINT_AWARE_DIRECT_ANSWER_EXTRACTION_SYSTEM
+                if self.config.constraint_aware_direct_projection
+                else DIRECT_ANSWER_EXTRACTION_SYSTEM
+            )
             if focus_mode == "direct_answer" else TYPED_EXTRACTION_SYSTEM
         )
         user_prefix = (
