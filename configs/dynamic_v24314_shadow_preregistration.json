@@ -1,0 +1,64 @@
+{
+  "schema_version": "dynamic-hypergraph-v2.4.3.14-independent-shadow-b-v1",
+  "frozen_at": "2026-08-27",
+  "training": false,
+  "seed": 20260820,
+  "source_algorithm_commit": "6a8f6dc1d76b91ac8c382adff4badfd6a2dd5b06",
+  "source_smoke_run": "research_outputs/musique_distractor_smoke_dynamic_hypergraph_tdca_v2_1787808301164120861",
+  "source_smoke_gate": "analysis_outputs/dynamic_v24314_smoke_campaign/smoke_a_gate.json",
+  "source_smoke_gate_decision": "GO_SHADOW_B",
+  "split_manifest": "configs/splits/musique_dynamic_v241_shadow_seed20260820.json",
+  "split_name": "smoke",
+  "complete_examples": 20,
+  "overlap_with_frozen_smoke_development_heldout": 0,
+  "hop_strata": {
+    "2": 6,
+    "3": 9,
+    "4": 5
+  },
+  "independent_api_cache_namespace": "dynamic-hypergraph-v24314-shadow-iclr2027-20260827",
+  "copy_parent_cache": false,
+  "gold_aware_inference": false,
+  "training_or_tuning_on_shadow": false,
+  "command_overrides": {
+    "split_manifest_path": "configs/splits/musique_dynamic_v241_shadow_seed20260820.json",
+    "campaign_id": "dynamic-hypergraph-v24314-shadow-iclr2027-20260827",
+    "campaign_ledger_path": "analysis_outputs/dynamic_v24314_shadow_campaign/campaign_budget.json",
+    "campaign_provider_call_cap": 517,
+    "campaign_provider_token_cap": 268955
+  },
+  "frozen_smoke_reference": {
+    "candidate_presence_rate": 0.65,
+    "full_chain_completion_rate": 0.60,
+    "graph_proof_completion_rate": 0.90,
+    "f1": 0.4892857142857142
+  },
+  "hard_checks": {
+    "infrastructure_failure_count_max": 0,
+    "unsupported_answer_count_max": 0,
+    "controller_invariant_violation_count_max": 0,
+    "candidate_presence_non_regression_to_smoke": true,
+    "full_chain_completion_non_regression_to_smoke": true,
+    "graph_proof_completion_non_regression_to_smoke": true,
+    "f1_non_regression_to_smoke": true,
+    "auditable_three_or_four_hop_join_case_count_min": 3,
+    "downstream_used_nary_join_case_count_min": 3,
+    "non_uniform_allocation_rate_min_exclusive": 0.0,
+    "complete_evc_trace_rate": 1.0,
+    "answer_abstain_budget_exhausted_separated": true
+  },
+  "interpretation": {
+    "gate_type": "single-arm out-of-split replication",
+    "paired_matched_compute_completed": false,
+    "paired_matched_compute_deferred_reason": "remaining global provider-token budget permits one independent Shadow-B20 arm only",
+    "no_claim_of_paired_superiority": true
+  },
+  "combined_usage_before_run": {
+    "provider_attempts": 1483,
+    "provider_reported_tokens": 1731045
+  },
+  "remaining_global_cap_before_run": {
+    "provider_attempts": 517,
+    "provider_reported_tokens": 268955
+  }
+}
