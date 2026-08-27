@@ -1,0 +1,103 @@
+{
+  "schema_version": "hara-v2.4.3.18-preregistration-v1",
+  "frozen_at": "2026-08-27",
+  "training": false,
+  "seed": 20260820,
+  "source_commit": "77ae9628",
+  "public_method_name": "HARA",
+  "legacy_package_compatibility": "tdca_research is retained as a frozen import/artifact compatibility layer",
+  "research_hypothesis": "Separating evidence truth from query-constraint coverage, while allowing only controller-proven dependency lineage to correct dependency consistency, recovers structurally valid answers without restoring generic-evidence false positives.",
+  "semantic_delta": {
+    "independent_evidence_channels": [
+      "grounding",
+      "entailment",
+      "type_match",
+      "dependency_consistency",
+      "retrieval_support",
+      "contradiction_risk",
+      "raw_model_confidence"
+    ],
+    "independent_query_alignment_channels": [
+      "relation_target_alignment",
+      "subject_binding_coverage",
+      "dependency_binding_coverage",
+      "qualifier_coverage",
+      "output_slot_coverage",
+      "full_subgoal_coverage"
+    ],
+    "fusion_policy": "Query-alignment channels are never fused into absolute_support, relative_weight, entropy, or evidence_gap.",
+    "structural_override": "Controller-proven complete dependency lineage may replace dependency_consistency; model-only alignment may not.",
+    "terminal_policy": "All six query-alignment channels are conjunctive gates at 0.70 and retain their individual gaps.",
+    "threshold_changed": false,
+    "per_question_or_answer_patch": false
+  },
+  "frozen_inputs": {
+    "development_canary_manifest": "configs/splits/musique_dynamic_v24317_dev_canary_seed20260820.json",
+    "opened_causal_diagnostic_manifest": "configs/splits/musique_dynamic_v24317_opened_shadow_diagnostic.json",
+    "smoke_a_manifest": "configs/splits/musique_dynamic_seed20260820.json",
+    "shadow_c_manifest": "configs/splits/musique_hara_v24318_shadow_c_seed20260820.json",
+    "shadow_c_manifest_sha256": "167697c8924e3b5616f507aec6f7ab1cfb46be9de2cfce2589fafb79f8d3bd3c",
+    "shadow_c_overlap_with_prior_opened_ids": 0,
+    "development_config": "configs/hara_v24318_qwen.yaml",
+    "paired_control_config": "configs/hara_v24317_control_qwen.yaml",
+    "model": "qwen-plus"
+  },
+  "execution_order": [
+    "opened causal diagnostic and non-heldout development canary",
+    "frozen Smoke-A regression",
+    "paired v2.4.3.17 control and v2.4.3.18 HARA on untouched Shadow-C without inspecting either arm between runs",
+    "matched-compute controls and budget curve only after Shadow-C passes"
+  ],
+  "development_checks": {
+    "correct_dependency_binding_coverage": 1.0,
+    "correct_candidate_absolute_support_min": 0.70,
+    "generic_false_candidate_absolute_support_max": 0.5025,
+    "generic_false_candidate_must_not_be_answered": true,
+    "complete_query_alignment_trace_rate": 1.0,
+    "unsupported_answer_count_max": 0,
+    "infrastructure_failure_count_max": 0
+  },
+  "smoke_a_non_regression_checks": {
+    "f1_min": 0.4892857142857143,
+    "candidate_presence_rate_min": 0.65,
+    "full_chain_completion_rate_min": 0.60,
+    "graph_proof_completion_rate_min": 0.90,
+    "auditable_three_or_four_hop_join_cases_min": 9,
+    "nary_join_downstream_used_min": 3
+  },
+  "shadow_c_paired_checks": {
+    "hara_f1_must_be_at_least_control": true,
+    "hara_candidate_presence_must_be_at_least_control": true,
+    "hara_full_chain_completion_must_be_at_least_control": true,
+    "hara_graph_proof_completion_must_be_at_least_control": true,
+    "complete_query_alignment_trace_rate": 1.0,
+    "unsupported_answer_count_max": 0,
+    "infrastructure_failure_count_max": 0,
+    "controller_or_invariant_violation_count_max": 0
+  },
+  "global_hard_gate": {
+    "zero_leakage": true,
+    "zero_invariant_violation": true,
+    "controller_only_mutation": true,
+    "candidate_presence_vs_v1_delta_min": 0.10,
+    "full_chain_completion_vs_v1_delta_min": 0.10,
+    "auditable_three_or_four_hop_join_cases_min": 3,
+    "adversarial_revision_works": true,
+    "natural_revision_precision_acceptable": true,
+    "non_uniform_allocation_exists": true,
+    "evc_trace_complete": true,
+    "predicted_evc_recorded": true,
+    "actual_cost_recorded": true,
+    "pareto_improvement_point_exists": true,
+    "unsupported_answer_count_max": 0,
+    "answer_abstain_budget_exhausted_separated": true
+  },
+  "campaign_budget": {
+    "campaign_id": "hara-v24318-iclr2027-20260827",
+    "ledger_path": "analysis_outputs/hara_v24318_campaign/campaign_budget.json",
+    "provider_attempt_cap": 2000,
+    "provider_reported_token_cap": 2000000,
+    "starts_from_zero_as_new_user_authorized_campaign": true
+  },
+  "stop_condition": "Stop only when the preregistered HARA gate passes and a safe-stop report is committed, or immediately before the next call that would exceed 2000 provider attempts or 2000000 provider-reported tokens. Failed intermediate experiments trigger diagnosis and the next generic no-training iteration; Shadow-C becomes opened after first inspection and any subsequent final evaluation must use another disjoint split."
+}
