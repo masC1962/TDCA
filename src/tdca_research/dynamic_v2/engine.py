@@ -690,6 +690,7 @@ class DynamicHypergraphV2Reasoner:
                             {"candidate_id": chosen.node_id}, sources=[chosen.node_id],
                         ))
                         continue
+                attempted_before_discovery = set(attempted_joins)
                 discovered_joins = join_engine.discover(
                     graph, branch.branch_id, subgoal.node_id,
                 )
@@ -811,6 +812,9 @@ class DynamicHypergraphV2Reasoner:
                         -float(row.deterministic_validation.get("goal_alignment", 0.0)),
                         -len(_premise_closure(graph, row.premise_ids) & dependency_ids),
                         -int(bool(_premise_closure(graph, row.premise_ids) & direct_ids)),
+                        _join_frontier_compactness(
+                            row, self.config.prefer_minimal_join_open_frontier,
+                        ),
                         -sum(
                             normalize_text(endpoint) in direct_endpoints
                             for endpoint in row.open_endpoints
@@ -819,6 +823,51 @@ class DynamicHypergraphV2Reasoner:
                         row.join_depth,
                         row.premise_ids,
                     ))
+                if self.config.audit_join_frontier_selection:
+                    def frontier_row(row: JoinCandidate) -> dict[str, Any]:
+                        attempt_key = _join_attempt_key(
+                            graph, row,
+                            semantic_state=self.config.semantic_join_attempt_state_key,
+                        )
+                        feasibility = join_engine.check_feasible(graph, row)
+                        return {
+                            "signature": row.signature,
+                            "premise_ids": list(row.premise_ids),
+                            "projection_premise_id": row.projection_premise_id,
+                            "goal_alignment": row.deterministic_validation.get(
+                                "goal_alignment", 0.0,
+                            ),
+                            "join_kind": row.join_kind,
+                            "open_endpoints": list(row.open_endpoints),
+                            "dependency_closure_hits": len(
+                                _premise_closure(graph, row.premise_ids)
+                                & set(dependencies)
+                            ),
+                            "target_local_raw_hits": len(
+                                _premise_closure(graph, row.premise_ids)
+                                & target_local_raw_ids
+                            ),
+                            "direct_endpoint_overlap": sum(
+                                normalize_text(endpoint) in direct_endpoints
+                                for endpoint in row.open_endpoints
+                            ) if dependencies else 0,
+                            "attempt_key": attempt_key,
+                            "attempted_before_discovery": (
+                                attempt_key in attempted_before_discovery
+                            ),
+                            "attempted_after_feasibility": attempt_key in attempted_joins,
+                            "preallocation_feasible": feasibility.feasible,
+                            "preallocation_reason_codes": list(feasibility.reason_codes),
+                        }
+                    reasoning_trace.append({
+                        "event": "join_frontier_selection_audit",
+                        "step": graph.step,
+                        "target_id": subgoal.node_id,
+                        "branch_id": branch.branch_id,
+                        "discovered": [frontier_row(row) for row in discovered_joins],
+                        "eligible_ranked": [frontier_row(row) for row in joins],
+                        "selected_signature": joins[0].signature if joins else "",
+                    })
                 joins = joins[: self.config.max_join_proposals_per_step]
                 if joins and (not direct_claims or dependencies):
                     join = joins[0]
@@ -1764,6 +1813,13 @@ def _nary_relevant(
         }
         return len(relations) == len(candidate.premise_ids)
     return False
+
+
+def _join_frontier_compactness(
+    candidate: JoinCandidate, enabled: bool,
+) -> int:
+    """Rank fewer unresolved endpoints first without rejecting a proof path."""
+    return len(candidate.open_endpoints) if enabled else 0
 
 
 def _extraction_state_fingerprint(

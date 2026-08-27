@@ -2,9 +2,14 @@
 from __future__ import annotations
 
 import argparse
+from copy import deepcopy
 import json
 from pathlib import Path
 from typing import Any
+
+from tdca_research.dynamic_v2.config import DynamicV2ResearchConfig
+from tdca_research.dynamic_v2.graph import DynamicReasoningHypergraphV2
+from tdca_research.dynamic_v2.join import MultiHopJoinEngine
 
 
 def _jsonl(path: Path) -> list[dict[str, Any]]:
@@ -15,6 +20,7 @@ def _jsonl(path: Path) -> list[dict[str, Any]]:
 
 
 def audit(run: Path) -> dict[str, Any]:
+    config = DynamicV2ResearchConfig.from_yaml(run / "resolved_config.yaml")
     metrics = {
         str(row["qid"]): row
         for row in _jsonl(run / "dynamic_v2_per_example_metrics.jsonl")
@@ -37,6 +43,60 @@ def audit(run: Path) -> dict[str, Any]:
         if not interval_ids:
             continue
         interval_ids_by_qid[qid] = set(interval_ids)
+        materialized = DynamicReasoningHypergraphV2.from_dict(graph)
+        rediscovered = MultiHopJoinEngine(None, None, config).discover(
+            materialized, "branch_root", "subgoal_2",
+        )
+        interval_frontier = [
+            {
+                "rank": rank,
+                "signature": candidate.signature,
+                "premise_ids": list(candidate.premise_ids),
+                "projection_premise_id": candidate.projection_premise_id,
+                "goal_alignment": candidate.deterministic_validation.get("goal_alignment"),
+            }
+            for rank, candidate in enumerate(rediscovered, start=1)
+            if set(candidate.premise_ids).intersection(interval_ids)
+        ]
+        pre_join_payload = deepcopy(graph)
+        removed_join_ids = {
+            node_id for node_id, value in semantics.items()
+            if int(value.get("join_depth", 0)) > 0
+        }
+        changed = True
+        while changed:
+            changed = False
+            for node_id, node in pre_join_payload.get("nodes", {}).items():
+                if node_id in removed_join_ids:
+                    continue
+                if removed_join_ids.intersection(node.get("dependency_claim_ids", [])):
+                    removed_join_ids.add(node_id)
+                    changed = True
+        for node_id in removed_join_ids:
+            pre_join_payload.get("nodes", {}).pop(node_id, None)
+            pre_join_payload.get("claim_semantics", {}).pop(node_id, None)
+            pre_join_payload.get("belief_states", {}).pop(node_id, None)
+        pre_join_payload["hyperedges"] = {
+            edge_id: edge for edge_id, edge in pre_join_payload.get("hyperedges", {}).items()
+            if not removed_join_ids.intersection(
+                set(edge.get("source_node_set", [])) | {str(edge.get("target_node", ""))}
+            )
+        }
+        for branch in pre_join_payload.get("branches", {}).values():
+            branch["assignments"] = {
+                key: value for key, value in branch.get("assignments", {}).items()
+                if value not in removed_join_ids
+            }
+        pre_join_payload["join_attempt_history"] = []
+        pre_join_payload["proof_obligations"] = {}
+        pre_join_payload["proof_obligation_history"] = []
+        pre_join_payload["proof_obligation_version"] = ""
+        pre_join_payload["cross_layer_edges"] = []
+        pre_join_payload["controller_state_hash"] = ""
+        pre_join_graph = DynamicReasoningHypergraphV2.from_dict(pre_join_payload)
+        pre_join_frontier = MultiHopJoinEngine(None, None, config).discover(
+            pre_join_graph, "branch_root", "subgoal_2",
+        )
         for claim_id in interval_ids:
             claim = nodes[claim_id]
             metadata = claim.get("provenance", {}).get("metadata", {})
@@ -86,6 +146,19 @@ def audit(run: Path) -> dict[str, Any]:
                 "full_chain_completion": metrics[qid].get("graph_proof_completion"),
                 "termination": metrics[qid].get("termination_outcome"),
                 "answer": predictions[qid].get("answer"),
+                "final_graph_rediscovered_interval_frontier": interval_frontier,
+                "join_free_graph_frontier": [
+                    {
+                        "rank": rank,
+                        "signature": candidate.signature,
+                        "premise_ids": list(candidate.premise_ids),
+                        "projection_premise_id": candidate.projection_premise_id,
+                        "goal_alignment": candidate.deterministic_validation.get(
+                            "goal_alignment"
+                        ),
+                    }
+                    for rank, candidate in enumerate(pre_join_frontier[:10], start=1)
+                ],
             })
     trace_hits: list[dict[str, Any]] = []
     for event in _jsonl(run / "reasoning_traces.jsonl"):
@@ -100,6 +173,11 @@ def audit(run: Path) -> dict[str, Any]:
         allocation = event.get("allocation") or {}
         candidates = event.get("allocation_candidates") or []
         filtered = event.get("filtered") or []
+        selected_signature = str(event.get("selected_signature", ""))
+        selected_rows = [
+            row for row in event.get("eligible_ranked", [])
+            if str(row.get("signature", "")) == selected_signature
+        ]
         trace_hits.append({
             "qid": qid,
             "event": event.get("event"),
@@ -115,6 +193,16 @@ def audit(run: Path) -> dict[str, Any]:
                 row for row in filtered
                 if any(value in row.get("premise_ids", []) for value in matched)
             ],
+            "discovered_interval_rows": [
+                row for row in event.get("discovered", [])
+                if any(value in row.get("premise_ids", []) for value in matched)
+            ],
+            "eligible_interval_rows": [
+                row for row in event.get("eligible_ranked", [])
+                if any(value in row.get("premise_ids", []) for value in matched)
+            ],
+            "selected_signature": selected_signature,
+            "selected_row": selected_rows[0] if selected_rows else {},
         })
     return {
         "schema_version": "dynamic-hypergraph-v2.4.3.11-interval-flow-audit-v1",

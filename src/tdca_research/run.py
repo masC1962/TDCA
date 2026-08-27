@@ -58,6 +58,10 @@ def main() -> None:
     parser.add_argument("--oracle_evidence", action="store_true")
     parser.add_argument("--oracle_decomposition", action="store_true")
     parser.add_argument("--resume_dir", help="Resume an interrupted run from its exact durable checkpoint")
+    parser.add_argument(
+        "--audit_join_frontier_selection", action="store_true",
+        help="Emit diagnostic-only JOIN discovery/selection traces",
+    )
     args = parser.parse_args()
     loaded = _load_config(args.config, args.method)
     dynamic_overrides = {}
@@ -66,6 +70,9 @@ def main() -> None:
             "allocator_mode": args.allocator_mode,
             "max_retrieval_calls": args.max_retrieval_calls,
             "max_graph_operations": args.max_graph_operations,
+            "audit_join_frontier_selection": (
+                True if args.audit_join_frontier_selection else None
+            ),
         }
     elif isinstance(loaded, DynamicResearchConfig):
         dynamic_overrides = {
