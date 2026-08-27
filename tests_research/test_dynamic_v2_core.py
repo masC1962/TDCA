@@ -1,4 +1,5 @@
 import json
+from copy import deepcopy
 from pathlib import Path
 
 import pytest
@@ -81,6 +82,7 @@ from tdca_research.dynamic_v2.recovery import (
 )
 from tdca_research.dynamic_v2.verifier import (
     MultiSampleIndependentVerifier,
+    _evidence_endpoint_grounding,
     _projection_type_compatible,
     _type_corrected_projection,
 )
@@ -1601,6 +1603,31 @@ def test_query_binding_projects_unbound_endpoint_despite_model_none_vote():
     graph = controller.apply(graph, proposal)
     assert graph.node("c_dev").provenance.metadata["verified_answer_position"] == "value"
     assert graph.node("c_dev").provenance.metadata["answers_subgoal"] is True
+
+
+def test_evidence_endpoint_grounding_requires_bound_and_answer_anchors():
+    _, _, graph = chain_graph()
+    grounded = deepcopy(graph.node("c2"))
+    grounded.dependency_claim_ids = ["c1"]
+    assert _evidence_endpoint_grounding(grounded, graph) == 1.0
+
+    generic = deepcopy(grounded)
+    generic.value = "municipalities"
+    generic.provenance.metadata["source_spans"] = [
+        "Each state is divided into municipalities with its own council."
+    ]
+    generic_graph = deepcopy(graph)
+    generic_graph.node("e2").title = "Municipalities of Brazil"
+    generic_graph.node("e2").source_span = generic.provenance.metadata["source_spans"][0]
+    assert _evidence_endpoint_grounding(generic, generic_graph) == 0.0
+
+    missing_answer = deepcopy(grounded)
+    missing_answer.value = "Delta Country"
+    assert _evidence_endpoint_grounding(missing_answer, graph) == 0.0
+
+    independent = deepcopy(generic)
+    independent.dependency_claim_ids = []
+    assert _evidence_endpoint_grounding(independent, graph) == 1.0
 
 
 def test_query_binding_rejects_conflicting_model_endpoint_without_changing_support():

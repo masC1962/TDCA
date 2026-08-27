@@ -144,6 +144,14 @@ class MultiSampleIndependentVerifier:
             }
             for candidate in candidates:
                 deterministic = _deterministic_raw(candidate, graph)
+                if self.config.evidence_endpoint_grounding:
+                    deterministic.grounding = min(
+                        deterministic.grounding,
+                        _evidence_endpoint_grounding(candidate, graph),
+                    )
+                    deterministic.reasons.append(
+                        "evidence_local_tuple_endpoint_grounding"
+                    )
                 row = returned.get(candidate.node_id)
                 if row is None:
                     raw = deterministic
@@ -295,6 +303,41 @@ def _average(rows: list[VerificationSignals]) -> VerificationSignals:
         **{name: mean(float(getattr(row, name)) for row in rows) for name in names},
         reasons=list(dict.fromkeys(reason for row in rows for reason in row.reasons))[:8],
     )
+
+
+def _evidence_endpoint_grounding(
+    candidate: ClaimNode,
+    graph: DynamicReasoningHypergraphV2,
+) -> float:
+    """Audit an extracted dependent tuple against only its cited evidence.
+
+    This is deliberately a raw grounding channel, not a fused relevance score.
+    Claims without dependencies retain the existing exact-span audit.  Derived
+    JOIN claims have no extraction span and are governed by proof-leaf closure.
+    """
+    spans = [
+        str(value).strip()
+        for value in candidate.provenance.metadata.get("source_spans", [])
+        if str(value).strip()
+    ]
+    if not spans or not candidate.dependency_claim_ids:
+        return 1.0
+    answer_text = normalize_text(" ".join(spans))
+    answer_endpoint = normalize_text(candidate.value)
+    if not answer_endpoint or answer_endpoint not in answer_text:
+        return 0.0
+    cited_evidence = [
+        graph.node(node_id, EvidenceNode)
+        for node_id in candidate.evidence_refs if node_id in graph.nodes
+    ]
+    binding_text = normalize_text(" ".join(
+        [*spans]
+        + [node.title for node in cited_evidence]
+        + [node.source_span for node in cited_evidence]
+    ))
+
+    subject_endpoint = normalize_text(candidate.subject)
+    return float(bool(subject_endpoint) and subject_endpoint in binding_text)
 
 
 def _projection_vote(rows: list[str], fallback: str) -> str:

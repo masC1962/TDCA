@@ -1,0 +1,692 @@
+{
+  "schema_version": "dynamic-v2-failure-taxonomy-v2",
+  "source_run": "research_outputs/musique_distractor_smoke_dynamic_hypergraph_tdca_v2_1787817590041791173",
+  "baseline_commit": "a6c53189",
+  "methodology": {
+    "kind": "deterministic_trace-derived_failure_attribution",
+    "causal_warning": "Labels are reproducible symptoms inferred from frozen metrics and traces; evc_misallocation and query-formulation labels are hypotheses, not sole-cause proofs.",
+    "label_order_for_main_cause": [
+      "infrastructure_failure",
+      "provider_refusal",
+      "structured_output_failure",
+      "retrieval_miss",
+      "query_formulation_or_missing_binding_miss",
+      "claim_extraction_miss",
+      "type_or_binding_mismatch",
+      "join_verification_rejection",
+      "join_expressivity_failure",
+      "candidate_commit_or_survival_failure",
+      "final_synthesis_failure",
+      "premature_stop",
+      "evc_misallocation",
+      "budget_exhaustion",
+      "correct_or_no_observed_failure"
+    ]
+  },
+  "count": 20,
+  "main_cause_counts": {
+    "final_synthesis_failure": 5,
+    "correct_or_no_observed_failure": 5,
+    "retrieval_miss": 3,
+    "type_or_binding_mismatch": 4,
+    "claim_extraction_miss": 3
+  },
+  "all_label_counts": {
+    "final_synthesis_failure": 7,
+    "premature_stop": 5,
+    "correct_or_no_observed_failure": 5,
+    "retrieval_miss": 3,
+    "claim_extraction_miss": 5,
+    "join_expressivity_failure": 7,
+    "type_or_binding_mismatch": 8,
+    "evc_misallocation": 3,
+    "budget_exhaustion": 3
+  },
+  "cases": [
+    {
+      "qid": "2hop__142130_67668",
+      "hop_count": 2,
+      "status": "abstain",
+      "f1": 0.0,
+      "main_cause": "final_synthesis_failure",
+      "secondary_causes": [
+        "premature_stop"
+      ],
+      "labels": [
+        {
+          "label": "final_synthesis_failure",
+          "inference_rule": "A gold-answer candidate survived but the terminal answer was absent or not fully correct.",
+          "evidence": {
+            "status": "abstain",
+            "f1": 0.0,
+            "stop_reason": "no_executable_computation_with_certificate"
+          }
+        },
+        {
+          "label": "premature_stop",
+          "inference_rule": "The run abstained despite retrieved answer text or a gold-answer candidate.",
+          "evidence": {
+            "answer_in_context": true,
+            "candidate_presence": true,
+            "termination_reason": "no_executable_computation_with_certificate"
+          }
+        }
+      ]
+    },
+    {
+      "qid": "2hop__15650_77173",
+      "hop_count": 2,
+      "status": "answer",
+      "f1": 0.4,
+      "main_cause": "final_synthesis_failure",
+      "secondary_causes": [],
+      "labels": [
+        {
+          "label": "final_synthesis_failure",
+          "inference_rule": "A gold-answer candidate survived but the terminal answer was absent or not fully correct.",
+          "evidence": {
+            "status": "answer",
+            "f1": 0.4,
+            "stop_reason": "accepted_graph_grounded_answer"
+          }
+        }
+      ]
+    },
+    {
+      "qid": "2hop__25797_25855",
+      "hop_count": 2,
+      "status": "abstain",
+      "f1": 0.0,
+      "main_cause": "final_synthesis_failure",
+      "secondary_causes": [
+        "premature_stop"
+      ],
+      "labels": [
+        {
+          "label": "final_synthesis_failure",
+          "inference_rule": "A gold-answer candidate survived but the terminal answer was absent or not fully correct.",
+          "evidence": {
+            "status": "abstain",
+            "f1": 0.0,
+            "stop_reason": "no_executable_computation_with_certificate"
+          }
+        },
+        {
+          "label": "premature_stop",
+          "inference_rule": "The run abstained despite retrieved answer text or a gold-answer candidate.",
+          "evidence": {
+            "answer_in_context": true,
+            "candidate_presence": true,
+            "termination_reason": "no_executable_computation_with_certificate"
+          }
+        }
+      ]
+    },
+    {
+      "qid": "2hop__711946_269414",
+      "hop_count": 2,
+      "status": "answer",
+      "f1": 0.0,
+      "main_cause": "final_synthesis_failure",
+      "secondary_causes": [],
+      "labels": [
+        {
+          "label": "final_synthesis_failure",
+          "inference_rule": "A gold-answer candidate survived but the terminal answer was absent or not fully correct.",
+          "evidence": {
+            "status": "answer",
+            "f1": 0.0,
+            "stop_reason": "accepted_graph_grounded_answer"
+          }
+        }
+      ]
+    },
+    {
+      "qid": "2hop__829358_754719",
+      "hop_count": 2,
+      "status": "answer",
+      "f1": 0.0,
+      "main_cause": "final_synthesis_failure",
+      "secondary_causes": [],
+      "labels": [
+        {
+          "label": "final_synthesis_failure",
+          "inference_rule": "A gold-answer candidate survived but the terminal answer was absent or not fully correct.",
+          "evidence": {
+            "status": "answer",
+            "f1": 0.0,
+            "stop_reason": "accepted_graph_grounded_answer"
+          }
+        }
+      ]
+    },
+    {
+      "qid": "2hop__88906_55840",
+      "hop_count": 2,
+      "status": "answer",
+      "f1": 1.0,
+      "main_cause": "correct_or_no_observed_failure",
+      "secondary_causes": [],
+      "labels": [
+        {
+          "label": "correct_or_no_observed_failure",
+          "inference_rule": "No listed failure rule fired and official F1 is 1.0.",
+          "evidence": {
+            "status": "answer",
+            "f1": 1.0
+          }
+        }
+      ]
+    },
+    {
+      "qid": "3hop1__228_237521_291682",
+      "hop_count": 3,
+      "status": "answer",
+      "f1": 1.0,
+      "main_cause": "correct_or_no_observed_failure",
+      "secondary_causes": [],
+      "labels": [
+        {
+          "label": "correct_or_no_observed_failure",
+          "inference_rule": "No listed failure rule fired and official F1 is 1.0.",
+          "evidence": {
+            "status": "answer",
+            "f1": 1.0
+          }
+        }
+      ]
+    },
+    {
+      "qid": "3hop1__465684_160545_34751",
+      "hop_count": 3,
+      "status": "abstain",
+      "f1": 0.0,
+      "main_cause": "retrieval_miss",
+      "secondary_causes": [
+        "claim_extraction_miss",
+        "join_expressivity_failure",
+        "premature_stop"
+      ],
+      "labels": [
+        {
+          "label": "retrieval_miss",
+          "inference_rule": "The official per-example metric reports all_gold_recalled=false.",
+          "evidence": {
+            "retrieval_calls": 1,
+            "retrieval_queries": [
+              "what is the birth city of bodindecha?"
+            ],
+            "ordered_evidence_path_recall": 0.6666666666666666
+          }
+        },
+        {
+          "label": "claim_extraction_miss",
+          "inference_rule": "The answer occurs in retrieved context but no gold-answer candidate was materialized.",
+          "evidence": {
+            "answer_in_context": true,
+            "candidate_presence": false,
+            "verified_claim_count": 0
+          }
+        },
+        {
+          "label": "join_expressivity_failure",
+          "inference_rule": "A 3/4-hop example lacks a full chain and materialized fewer than hop_count-1 JOIN states.",
+          "evidence": {
+            "hop_count": 3,
+            "join_count": 0,
+            "full_chain_complete": false
+          }
+        },
+        {
+          "label": "premature_stop",
+          "inference_rule": "The run abstained despite retrieved answer text or a gold-answer candidate.",
+          "evidence": {
+            "answer_in_context": true,
+            "candidate_presence": false,
+            "termination_reason": "no_executable_computation_with_certificate"
+          }
+        }
+      ]
+    },
+    {
+      "qid": "3hop1__504362_443779_52195",
+      "hop_count": 3,
+      "status": "answer",
+      "f1": 1.0,
+      "main_cause": "correct_or_no_observed_failure",
+      "secondary_causes": [],
+      "labels": [
+        {
+          "label": "correct_or_no_observed_failure",
+          "inference_rule": "No listed failure rule fired and official F1 is 1.0.",
+          "evidence": {
+            "status": "answer",
+            "f1": 1.0
+          }
+        }
+      ]
+    },
+    {
+      "qid": "3hop1__773623_87694_124169",
+      "hop_count": 3,
+      "status": "answer",
+      "f1": 1.0,
+      "main_cause": "correct_or_no_observed_failure",
+      "secondary_causes": [],
+      "labels": [
+        {
+          "label": "correct_or_no_observed_failure",
+          "inference_rule": "No listed failure rule fired and official F1 is 1.0.",
+          "evidence": {
+            "status": "answer",
+            "f1": 1.0
+          }
+        }
+      ]
+    },
+    {
+      "qid": "3hop1__816887_127905_80286",
+      "hop_count": 3,
+      "status": "answer",
+      "f1": 1.0,
+      "main_cause": "correct_or_no_observed_failure",
+      "secondary_causes": [],
+      "labels": [
+        {
+          "label": "correct_or_no_observed_failure",
+          "inference_rule": "No listed failure rule fired and official F1 is 1.0.",
+          "evidence": {
+            "status": "answer",
+            "f1": 1.0
+          }
+        }
+      ]
+    },
+    {
+      "qid": "3hop1__838590_831637_91775",
+      "hop_count": 3,
+      "status": "answer",
+      "f1": 1.0,
+      "main_cause": "type_or_binding_mismatch",
+      "secondary_causes": [],
+      "labels": [
+        {
+          "label": "type_or_binding_mismatch",
+          "inference_rule": "The official variable_binding_accuracy is below 1.0.",
+          "evidence": {
+            "variable_binding_accuracy": 0.0
+          }
+        }
+      ]
+    },
+    {
+      "qid": "3hop1__857_846_7888",
+      "hop_count": 3,
+      "status": "budget_exhausted",
+      "f1": 0.0,
+      "main_cause": "claim_extraction_miss",
+      "secondary_causes": [
+        "type_or_binding_mismatch",
+        "join_expressivity_failure",
+        "evc_misallocation",
+        "budget_exhaustion"
+      ],
+      "labels": [
+        {
+          "label": "claim_extraction_miss",
+          "inference_rule": "The answer occurs in retrieved context but no gold-answer candidate was materialized.",
+          "evidence": {
+            "answer_in_context": true,
+            "candidate_presence": false,
+            "verified_claim_count": 1
+          }
+        },
+        {
+          "label": "type_or_binding_mismatch",
+          "inference_rule": "The official variable_binding_accuracy is below 1.0.",
+          "evidence": {
+            "variable_binding_accuracy": 0.0
+          }
+        },
+        {
+          "label": "join_expressivity_failure",
+          "inference_rule": "A 3/4-hop example lacks a full chain and materialized fewer than hop_count-1 JOIN states.",
+          "evidence": {
+            "hop_count": 3,
+            "join_count": 0,
+            "full_chain_complete": false
+          }
+        },
+        {
+          "label": "evc_misallocation",
+          "inference_rule": "Budget was exhausted before candidate/chain completion; this is an allocation symptom, not proof of sole causality.",
+          "evidence": {
+            "allocation_count": 10,
+            "candidate_presence": false,
+            "full_chain_complete": false,
+            "termination_reason": "selected_computation_exhausted_safety_cap"
+          }
+        },
+        {
+          "label": "budget_exhaustion",
+          "inference_rule": "The terminal status is budget_exhausted.",
+          "evidence": {
+            "llm_calls": 8,
+            "total_tokens": 14356,
+            "retrieval_calls": 3,
+            "allocation_count": 10
+          }
+        }
+      ]
+    },
+    {
+      "qid": "3hop2__127483_19639_10557",
+      "hop_count": 3,
+      "status": "budget_exhausted",
+      "f1": 0.0,
+      "main_cause": "type_or_binding_mismatch",
+      "secondary_causes": [
+        "join_expressivity_failure",
+        "final_synthesis_failure",
+        "evc_misallocation",
+        "budget_exhaustion"
+      ],
+      "labels": [
+        {
+          "label": "type_or_binding_mismatch",
+          "inference_rule": "The official variable_binding_accuracy is below 1.0.",
+          "evidence": {
+            "variable_binding_accuracy": 0.0
+          }
+        },
+        {
+          "label": "join_expressivity_failure",
+          "inference_rule": "A 3/4-hop example lacks a full chain and materialized fewer than hop_count-1 JOIN states.",
+          "evidence": {
+            "hop_count": 3,
+            "join_count": 1,
+            "full_chain_complete": false
+          }
+        },
+        {
+          "label": "final_synthesis_failure",
+          "inference_rule": "A gold-answer candidate survived but the terminal answer was absent or not fully correct.",
+          "evidence": {
+            "status": "budget_exhausted",
+            "f1": 0.0,
+            "stop_reason": "selected_computation_exhausted_safety_cap"
+          }
+        },
+        {
+          "label": "evc_misallocation",
+          "inference_rule": "Budget was exhausted before candidate/chain completion; this is an allocation symptom, not proof of sole causality.",
+          "evidence": {
+            "allocation_count": 15,
+            "candidate_presence": true,
+            "full_chain_complete": false,
+            "termination_reason": "selected_computation_exhausted_safety_cap"
+          }
+        },
+        {
+          "label": "budget_exhaustion",
+          "inference_rule": "The terminal status is budget_exhausted.",
+          "evidence": {
+            "llm_calls": 10,
+            "total_tokens": 13746,
+            "retrieval_calls": 4,
+            "allocation_count": 15
+          }
+        }
+      ]
+    },
+    {
+      "qid": "3hop2__89048_228_66294",
+      "hop_count": 3,
+      "status": "abstain",
+      "f1": 0.0,
+      "main_cause": "retrieval_miss",
+      "secondary_causes": [
+        "join_expressivity_failure"
+      ],
+      "labels": [
+        {
+          "label": "retrieval_miss",
+          "inference_rule": "The official per-example metric reports all_gold_recalled=false.",
+          "evidence": {
+            "retrieval_calls": 2,
+            "retrieval_queries": [
+              "what movie is titled 'the who influenced beyoncé'?",
+              "who sang 'is she really going out with him'?"
+            ],
+            "ordered_evidence_path_recall": 0.6666666666666666
+          }
+        },
+        {
+          "label": "join_expressivity_failure",
+          "inference_rule": "A 3/4-hop example lacks a full chain and materialized fewer than hop_count-1 JOIN states.",
+          "evidence": {
+            "hop_count": 3,
+            "join_count": 0,
+            "full_chain_complete": false
+          }
+        }
+      ]
+    },
+    {
+      "qid": "4hop1__236903_153080_159767_81096",
+      "hop_count": 4,
+      "status": "answer",
+      "f1": 0.0,
+      "main_cause": "claim_extraction_miss",
+      "secondary_causes": [
+        "type_or_binding_mismatch"
+      ],
+      "labels": [
+        {
+          "label": "claim_extraction_miss",
+          "inference_rule": "The answer occurs in retrieved context but no gold-answer candidate was materialized.",
+          "evidence": {
+            "answer_in_context": true,
+            "candidate_presence": false,
+            "verified_claim_count": 3
+          }
+        },
+        {
+          "label": "type_or_binding_mismatch",
+          "inference_rule": "The official variable_binding_accuracy is below 1.0.",
+          "evidence": {
+            "variable_binding_accuracy": 0.6666666666666666
+          }
+        }
+      ]
+    },
+    {
+      "qid": "4hop1__711307_49925_13759_736921",
+      "hop_count": 4,
+      "status": "abstain",
+      "f1": 0.0,
+      "main_cause": "type_or_binding_mismatch",
+      "secondary_causes": [
+        "join_expressivity_failure",
+        "final_synthesis_failure",
+        "premature_stop"
+      ],
+      "labels": [
+        {
+          "label": "type_or_binding_mismatch",
+          "inference_rule": "The official variable_binding_accuracy is below 1.0.",
+          "evidence": {
+            "variable_binding_accuracy": 0.0
+          }
+        },
+        {
+          "label": "join_expressivity_failure",
+          "inference_rule": "A 3/4-hop example lacks a full chain and materialized fewer than hop_count-1 JOIN states.",
+          "evidence": {
+            "hop_count": 4,
+            "join_count": 0,
+            "full_chain_complete": false
+          }
+        },
+        {
+          "label": "final_synthesis_failure",
+          "inference_rule": "A gold-answer candidate survived but the terminal answer was absent or not fully correct.",
+          "evidence": {
+            "status": "abstain",
+            "f1": 0.0,
+            "stop_reason": "no_executable_computation_with_certificate"
+          }
+        },
+        {
+          "label": "premature_stop",
+          "inference_rule": "The run abstained despite retrieved answer text or a gold-answer candidate.",
+          "evidence": {
+            "answer_in_context": true,
+            "candidate_presence": true,
+            "termination_reason": "no_executable_computation_with_certificate"
+          }
+        }
+      ]
+    },
+    {
+      "qid": "4hop2__161602_474028_88460_63559",
+      "hop_count": 4,
+      "status": "budget_exhausted",
+      "f1": 0.0,
+      "main_cause": "retrieval_miss",
+      "secondary_causes": [
+        "claim_extraction_miss",
+        "type_or_binding_mismatch",
+        "join_expressivity_failure",
+        "evc_misallocation",
+        "budget_exhaustion"
+      ],
+      "labels": [
+        {
+          "label": "retrieval_miss",
+          "inference_rule": "The official per-example metric reports all_gold_recalled=false.",
+          "evidence": {
+            "retrieval_calls": 4,
+            "retrieval_queries": [
+              "which country is a don from?",
+              "which country hosted the tournament?",
+              "when was burma's name changed to the country between india and laos? original objective: when was burma's name changed to the country between the country that hosted the tournament and the country where a don is from?",
+              "when was burma's name changed to the country between sri lanka and laos? original objective: when was burma's name changed to the country between the country that hosted the tournament and the country where a don is from?"
+            ],
+            "ordered_evidence_path_recall": 0.5
+          }
+        },
+        {
+          "label": "claim_extraction_miss",
+          "inference_rule": "The answer occurs in retrieved context but no gold-answer candidate was materialized.",
+          "evidence": {
+            "answer_in_context": true,
+            "candidate_presence": false,
+            "verified_claim_count": 3
+          }
+        },
+        {
+          "label": "type_or_binding_mismatch",
+          "inference_rule": "The official variable_binding_accuracy is below 1.0.",
+          "evidence": {
+            "variable_binding_accuracy": 0.6666666666666666
+          }
+        },
+        {
+          "label": "join_expressivity_failure",
+          "inference_rule": "A 3/4-hop example lacks a full chain and materialized fewer than hop_count-1 JOIN states.",
+          "evidence": {
+            "hop_count": 4,
+            "join_count": 0,
+            "full_chain_complete": false
+          }
+        },
+        {
+          "label": "evc_misallocation",
+          "inference_rule": "Budget was exhausted before candidate/chain completion; this is an allocation symptom, not proof of sole causality.",
+          "evidence": {
+            "allocation_count": 13,
+            "candidate_presence": false,
+            "full_chain_complete": false,
+            "termination_reason": "selected_computation_exhausted_safety_cap"
+          }
+        },
+        {
+          "label": "budget_exhaustion",
+          "inference_rule": "The terminal status is budget_exhausted.",
+          "evidence": {
+            "llm_calls": 9,
+            "total_tokens": 15099,
+            "retrieval_calls": 4,
+            "allocation_count": 13
+          }
+        }
+      ]
+    },
+    {
+      "qid": "4hop3__275416_24325_125104_10557",
+      "hop_count": 4,
+      "status": "answer",
+      "f1": 1.0,
+      "main_cause": "type_or_binding_mismatch",
+      "secondary_causes": [],
+      "labels": [
+        {
+          "label": "type_or_binding_mismatch",
+          "inference_rule": "The official variable_binding_accuracy is below 1.0.",
+          "evidence": {
+            "variable_binding_accuracy": 0.0
+          }
+        }
+      ]
+    },
+    {
+      "qid": "4hop3__316459_41402_146281_13584",
+      "hop_count": 4,
+      "status": "abstain",
+      "f1": 0.0,
+      "main_cause": "claim_extraction_miss",
+      "secondary_causes": [
+        "type_or_binding_mismatch",
+        "join_expressivity_failure",
+        "premature_stop"
+      ],
+      "labels": [
+        {
+          "label": "claim_extraction_miss",
+          "inference_rule": "The answer occurs in retrieved context but no gold-answer candidate was materialized.",
+          "evidence": {
+            "answer_in_context": true,
+            "candidate_presence": false,
+            "verified_claim_count": 2
+          }
+        },
+        {
+          "label": "type_or_binding_mismatch",
+          "inference_rule": "The official variable_binding_accuracy is below 1.0.",
+          "evidence": {
+            "variable_binding_accuracy": 0.0
+          }
+        },
+        {
+          "label": "join_expressivity_failure",
+          "inference_rule": "A 3/4-hop example lacks a full chain and materialized fewer than hop_count-1 JOIN states.",
+          "evidence": {
+            "hop_count": 4,
+            "join_count": 0,
+            "full_chain_complete": false
+          }
+        },
+        {
+          "label": "premature_stop",
+          "inference_rule": "The run abstained despite retrieved answer text or a gold-answer candidate.",
+          "evidence": {
+            "answer_in_context": true,
+            "candidate_presence": false,
+            "termination_reason": "no_executable_computation_with_certificate"
+          }
+        }
+      ]
+    }
+  ]
+}

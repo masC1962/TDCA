@@ -215,6 +215,12 @@ class DynamicV2ResearchConfig(DynamicResearchConfig):
     # over scalar fragments while leaving every other JOIN order untouched.
     grounded_interval_projection_priority: bool = False
 
+    # v2.4.3.15 keeps the raw grounding channel independent and evidence-local:
+    # an extracted dependent claim must literally anchor both tuple endpoints in
+    # its own cited evidence span/title.  JOIN claims are
+    # excluded because their support is audited through premise closure instead.
+    evidence_endpoint_grounding: bool = False
+
     # Terminal acceptance is a conjunctive readout over independent belief
     # channels.  These are initial development values, never learned weights.
     terminal_min_absolute_support: float = 0.70

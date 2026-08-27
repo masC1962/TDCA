@@ -66,6 +66,10 @@ def main() -> None:
         "--audit_join_frontier_selection", action="store_true",
         help="Emit diagnostic-only JOIN discovery/selection traces",
     )
+    parser.add_argument(
+        "--evidence_endpoint_grounding", action="store_true",
+        help="Require evidence-local tuple endpoint anchors for dependent extracted claims",
+    )
     args = parser.parse_args()
     loaded = _load_config(args.config, args.method)
     dynamic_overrides = {}
@@ -80,6 +84,9 @@ def main() -> None:
             "campaign_provider_token_cap": args.campaign_provider_token_cap,
             "audit_join_frontier_selection": (
                 True if args.audit_join_frontier_selection else None
+            ),
+            "evidence_endpoint_grounding": (
+                True if args.evidence_endpoint_grounding else None
             ),
         }
     elif isinstance(loaded, DynamicResearchConfig):
