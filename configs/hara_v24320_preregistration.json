@@ -1,0 +1,71 @@
+{
+  "schema_version": "hara-v2.4.3.20-preregistration-v1",
+  "frozen_at": "2026-08-27",
+  "training": false,
+  "seed": 20260820,
+  "source_commit": "86e05483",
+  "parent_experiment": "hara-v2.4.3.19",
+  "parent_runs": {
+    "opened_causal_diagnostic": "research_outputs/musique_distractor_smoke_hara_1787830648527320744",
+    "development_canary_5": "research_outputs/musique_distractor_smoke_hara_1787835431320224258"
+  },
+  "parent_decision": "REJECT_UNCONDITIONAL_ALIGNMENT_CALL_AMPLIFICATION_AND_CUE_GATED_GROUNDING",
+  "observed_failure_before_design": {
+    "v24319_canary_f1": 0.0,
+    "v24319_canary_full_chain": 0.4,
+    "v24319_canary_candidate_presence": 0.4,
+    "v24319_canary_provider_calls": 49,
+    "v24317_control_canary_f1": 0.6,
+    "v24317_control_canary_full_chain": 0.8,
+    "causal_wrong_candidate_support": 0.775,
+    "root_causes": [
+      "Every evidence VERIFY unconditionally incurred a second alignment provider call, so exact resource accounting correctly suppressed or exhausted computations before answer materialization.",
+      "Generic endpoint grounding depended on a short cue list in the extraction span; a paraphrased universal statement escaped the raw tuple-endpoint audit."
+    ]
+  },
+  "architectural_delta": {
+    "evidence_pass": "Exact legacy evidence-only verifier remains unchanged and cannot see compiled query constraints.",
+    "alignment_certificate": "Relation target, subject binding, dependency binding, qualifier coverage, output slot, and full coverage are independently recorded from compiled query constraints, typed endpoints, dependency lineage, and target-excluded graph reachability.",
+    "non_circularity": "A candidate is excluded from the local binding graph used to prove its own bound endpoint.",
+    "resource_accounting": "A controller certificate has zero provider calls; VERIFY prediction returns to the exact evidence sample count.",
+    "grounding": "All extracted dependent tuples, not only cue-matched generic statements, must anchor both endpoints in their own cited span/title. Derived JOIN claims remain governed by proof-leaf closure.",
+    "threshold_changed": false,
+    "training": false,
+    "per_question_or_answer_patch": false
+  },
+  "frozen_config": "configs/hara_v24320_qwen.yaml",
+  "frozen_manifests": {
+    "opened_causal_diagnostic": "configs/splits/musique_dynamic_v24317_opened_shadow_diagnostic.json",
+    "development_canary": "configs/splits/musique_dynamic_v24317_dev_canary_seed20260820.json",
+    "smoke_a": "configs/splits/musique_dynamic_seed20260820.json",
+    "shadow_c": "configs/splits/musique_hara_v24318_shadow_c_seed20260820.json",
+    "shadow_c_sha256": "167697c8924e3b5616f507aec6f7ab1cfb46be9de2cfce2589fafb79f8d3bd3c"
+  },
+  "execution_order": [
+    "opened causal diagnostic",
+    "development canary 5",
+    "Smoke-A20 regression if development passes",
+    "paired control/HARA Shadow-C20 without between-arm inspection if Smoke-A passes"
+  ],
+  "development_gate": {
+    "causal_correct_answer": "Minas Gerais",
+    "causal_correct_support_min": 0.70,
+    "causal_generic_false_support_max": 0.5025,
+    "causal_complete_separate_query_alignment_trace": true,
+    "canary_f1_min": 0.60,
+    "canary_full_chain_min": 0.80,
+    "canary_candidate_presence_min": 0.60,
+    "canary_graph_proof_completion_min": 0.80,
+    "unsupported_answer_count_max": 0,
+    "infrastructure_failure_count_max": 0
+  },
+  "smoke_and_shadow_gate": "Unchanged from configs/hara_v24318_preregistration.json; Shadow-C remains untouched.",
+  "campaign_budget_before_run": {
+    "campaign_id": "hara-v24318-iclr2027-20260827",
+    "provider_attempts": 108,
+    "provider_reported_tokens": 123142,
+    "hard_attempt_cap": 2000,
+    "hard_token_cap": 2000000
+  },
+  "stop_condition": "Continue generic no-training diagnosis and iteration after any development failure. Stop only on the full preregistered HARA gate plus committed safe-stop report, or before the next call would exceed the shared 2000-attempt/2000000-token hard cap."
+}
