@@ -46,6 +46,10 @@ def main() -> None:
     parser.add_argument("--max_total_tokens", type=int)
     parser.add_argument("--max_retrieval_calls", type=int)
     parser.add_argument("--max_graph_operations", type=int)
+    parser.add_argument("--campaign_id")
+    parser.add_argument("--campaign_ledger_path")
+    parser.add_argument("--campaign_provider_call_cap", type=int)
+    parser.add_argument("--campaign_provider_token_cap", type=int)
     parser.add_argument(
         "--allocator_mode", choices=["adaptive_evc", "uniform", "fixed_order"],
     )
@@ -70,6 +74,10 @@ def main() -> None:
             "allocator_mode": args.allocator_mode,
             "max_retrieval_calls": args.max_retrieval_calls,
             "max_graph_operations": args.max_graph_operations,
+            "campaign_id": args.campaign_id,
+            "campaign_ledger_path": args.campaign_ledger_path,
+            "campaign_provider_call_cap": args.campaign_provider_call_cap,
+            "campaign_provider_token_cap": args.campaign_provider_token_cap,
             "audit_join_frontier_selection": (
                 True if args.audit_join_frontier_selection else None
             ),
