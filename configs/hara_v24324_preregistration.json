@@ -1,0 +1,66 @@
+{
+  "schema_version": "hara-v2.4.3.24-preregistration-v1",
+  "frozen_at": "2026-08-27",
+  "training": false,
+  "seed": 20260820,
+  "source_commit": "391db2df",
+  "parent_experiment": "hara-v2.4.3.23",
+  "parent_runs": {
+    "opened_causal_diagnostic": "research_outputs/musique_distractor_smoke_hara_1787838257179716795",
+    "development_canary_5": "research_outputs/musique_distractor_smoke_hara_1787838336077982468"
+  },
+  "parent_decision": "CAUSAL_PASS_CANARY_REJECT_HORIZON_RESERVE_AND_REFLEXIVE_BINDING",
+  "observed_failure_before_design": {
+    "causal_gate_passed": true,
+    "canary_f1": 0.2,
+    "canary_candidate_presence": 0.6,
+    "canary_graph_proof_completion": 0.6,
+    "canary_complete_separate_alignment": 0.6,
+    "root_causes": [
+      "Early high-fidelity verification packets were individually affordable but critical-obligation reserves still used output-only constants, leaving later frontiers unverified.",
+      "A valid reflexive relation whose bound input and output text are identical was rejected because both tuple endpoints were marked bound."
+    ]
+  },
+  "architectural_delta": {
+    "horizon_reserve": "Critical reserves for future extraction, verification, and JOIN obligations now include deterministic prompt context plus completion bounds.",
+    "adaptive_samples": "No fixed one-sample rule is introduced; high fidelity remains available only when its marginal EVC is positive and its full downstream reserve is feasible.",
+    "reflexive_projection": "An identical subject/value tuple may project the value slot only when the target relation is certified, the endpoint is bound, and the value type matches the compiled output type.",
+    "threshold_changed": false,
+    "training": false,
+    "per_question_or_answer_patch": false
+  },
+  "frozen_config": "configs/hara_v24324_qwen.yaml",
+  "frozen_manifests": {
+    "opened_causal_diagnostic": "configs/splits/musique_dynamic_v24317_opened_shadow_diagnostic.json",
+    "development_canary": "configs/splits/musique_dynamic_v24317_dev_canary_seed20260820.json",
+    "smoke_a": "configs/splits/musique_dynamic_seed20260820.json",
+    "shadow_c": "configs/splits/musique_hara_v24318_shadow_c_seed20260820.json",
+    "shadow_c_sha256": "167697c8924e3b5616f507aec6f7ab1cfb46be9de2cfce2589fafb79f8d3bd3c"
+  },
+  "execution_order": [
+    "opened causal diagnostic",
+    "development canary 5 if causal gate passes",
+    "Smoke-A20 regression if development passes",
+    "paired control/HARA Shadow-C20 without between-arm inspection if Smoke-A passes"
+  ],
+  "development_gate": {
+    "causal_correct_answer": "Minas Gerais",
+    "causal_correct_support_min": 0.70,
+    "causal_generic_false_support_max": 0.5025,
+    "causal_complete_separate_query_alignment_trace": true,
+    "canary_f1_min": 0.60,
+    "canary_full_chain_min": 0.80,
+    "canary_candidate_presence_min": 0.60,
+    "canary_graph_proof_completion_min": 0.80,
+    "unsupported_answer_count_max": 0,
+    "infrastructure_failure_count_max": 0
+  },
+  "campaign_budget_before_run": {
+    "campaign_id": "hara-v24318-iclr2027-20260827",
+    "provider_attempts": 230,
+    "provider_reported_tokens": 260037,
+    "hard_attempt_cap": 2000,
+    "hard_token_cap": 2000000
+  },
+  "stop_condition": "Continue generic no-training diagnosis and iteration after any development failure. Stop only on the full preregistered HARA gate plus committed safe-stop report, or before the next call would exceed the shared 2000-attempt/2000000-token hard cap."
+}
