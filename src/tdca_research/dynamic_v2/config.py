@@ -221,6 +221,10 @@ class DynamicV2ResearchConfig(DynamicResearchConfig):
     # excluded because their support is audited through premise closure instead.
     evidence_endpoint_grounding: bool = False
 
+    # v2.4.3.17 applies the endpoint audit only when an extraction turns a
+    # universal/generic statement into an entity-specific dependent tuple.
+    generic_evidence_endpoint_grounding: bool = False
+
     # Terminal acceptance is a conjunctive readout over independent belief
     # channels.  These are initial development values, never learned weights.
     terminal_min_absolute_support: float = 0.70

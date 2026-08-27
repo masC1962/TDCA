@@ -70,6 +70,10 @@ def main() -> None:
         "--evidence_endpoint_grounding", action="store_true",
         help="Require evidence-local tuple endpoint anchors for dependent extracted claims",
     )
+    parser.add_argument(
+        "--generic_evidence_endpoint_grounding", action="store_true",
+        help="Reject entity-specific tuples inferred from unanchored generic evidence",
+    )
     args = parser.parse_args()
     loaded = _load_config(args.config, args.method)
     dynamic_overrides = {}
@@ -87,6 +91,9 @@ def main() -> None:
             ),
             "evidence_endpoint_grounding": (
                 True if args.evidence_endpoint_grounding else None
+            ),
+            "generic_evidence_endpoint_grounding": (
+                True if args.generic_evidence_endpoint_grounding else None
             ),
         }
     elif isinstance(loaded, DynamicResearchConfig):

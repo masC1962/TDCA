@@ -83,6 +83,7 @@ from tdca_research.dynamic_v2.recovery import (
 from tdca_research.dynamic_v2.verifier import (
     MultiSampleIndependentVerifier,
     _evidence_endpoint_grounding,
+    _generic_evidence_endpoint_grounding,
     _projection_type_compatible,
     _type_corrected_projection,
 )
@@ -1631,6 +1632,13 @@ def test_evidence_endpoint_grounding_requires_bound_and_answer_anchors():
     generic_graph.node("e2").title = "Municipalities of Brazil"
     generic_graph.node("e2").source_span = generic.provenance.metadata["source_spans"][0]
     assert _evidence_endpoint_grounding(generic, generic_graph) == 0.0
+    assert _generic_evidence_endpoint_grounding(generic, generic_graph) == 0.0
+
+    nongeneric = deepcopy(generic)
+    nongeneric.provenance.metadata["source_spans"] = [
+        "Municipalities have their own legislative council."
+    ]
+    assert _generic_evidence_endpoint_grounding(nongeneric, generic_graph) == 1.0
 
     missing_answer = deepcopy(grounded)
     missing_answer.value = "Delta Country"

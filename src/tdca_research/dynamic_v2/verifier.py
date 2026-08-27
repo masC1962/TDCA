@@ -152,6 +152,14 @@ class MultiSampleIndependentVerifier:
                     deterministic.reasons.append(
                         "evidence_local_tuple_endpoint_grounding"
                     )
+                elif self.config.generic_evidence_endpoint_grounding:
+                    deterministic.grounding = min(
+                        deterministic.grounding,
+                        _generic_evidence_endpoint_grounding(candidate, graph),
+                    )
+                    deterministic.reasons.append(
+                        "generic_evidence_entity_endpoint_grounding"
+                    )
                 row = returned.get(candidate.node_id)
                 if row is None:
                     raw = deterministic
@@ -355,6 +363,27 @@ def _lexical_endpoint_anchored(endpoint: str, normalized_evidence: str) -> bool:
     }
     evidence_tokens = set(re.findall(r"[a-z0-9]+", normalized_evidence))
     return bool(tokens.intersection(evidence_tokens))
+
+
+def _generic_evidence_endpoint_grounding(
+    candidate: ClaimNode,
+    graph: DynamicReasoningHypergraphV2,
+) -> float:
+    spans = [
+        str(value).strip()
+        for value in candidate.provenance.metadata.get("source_spans", [])
+        if str(value).strip()
+    ]
+    if not spans or not candidate.dependency_claim_ids:
+        return 1.0
+    generic_cue = re.search(
+        r"\b(?:all|any|each|every|generally|typically|usually)\b",
+        " ".join(spans),
+        re.IGNORECASE,
+    )
+    if generic_cue is None:
+        return 1.0
+    return _evidence_endpoint_grounding(candidate, graph)
 
 
 def _projection_vote(rows: list[str], fallback: str) -> str:
