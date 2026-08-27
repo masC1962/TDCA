@@ -59,6 +59,7 @@ from tdca_research.dynamic_v2.extraction import (
     _fit_completion_to_remaining_budget,
     _enumerated_sibling_values,
     _grounded_temporal_projection_rows,
+    _grounded_role_origin_projection_rows,
     _strip_named_constraint_suffix,
 )
 from tdca_research.dynamic_v2.graph import (
@@ -2363,6 +2364,31 @@ def test_v24328_named_constraint_suffix_and_temporal_projection_are_evidence_loc
     assert rows[0]["subject"] == "Gamma Country"
     assert rows[0]["value"] == "13 December 1642"
     assert rows[0]["evidence_refs"] == ["e_date"]
+
+    graph = controller.apply(graph, operation(392, OperationType.RETRIEVE, payload={
+        "query": "Border troops of East Germany are from what country?",
+        "evidence": [{
+            "node_id": "e_role", "document_id": "p_role", "passage_id": "p_role",
+            "title": "Border guards",
+            "source_span": (
+                "An East German (GDR) worker was stopped by GDR border guards."
+            ),
+            "retrieval_rank": 1, "retrieval_score": 1.0,
+            "retrieval_query": "Border troops of East Germany are from what country?",
+            "retriever_identity": "hybrid",
+        }],
+    }))
+    graph.node("c2").value = "East Germany"
+    graph.node("s_root").answer_type = "country"
+    role_rows = _grounded_role_origin_projection_rows(
+        graph, "s_root", "branch_root",
+        "Border troops of East Germany are from what country?", ["c2"],
+        graph.evidence("s_root", "branch_root"), set(), 2,
+    )
+    assert len(role_rows) == 1
+    assert role_rows[0]["subject"] == "East Germany"
+    assert role_rows[0]["value"] == "GDR"
+    assert role_rows[0]["relation"] == "border_troops_from"
 
 
 def test_v24328_symbolic_join_requires_verified_projection_when_enabled():

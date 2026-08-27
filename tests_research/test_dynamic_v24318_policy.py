@@ -432,6 +432,85 @@ def test_controller_exact_output_type_can_certify_type_consistency():
     assert "controller_typed_output_consistency" in updated.reasons
 
 
+def test_independent_reachability_can_expose_non_base_typed_output():
+    cfg = config(
+        query_conditioned_semantic_alignment=True,
+        controller_query_alignment_certificates=True,
+    )
+    controller = V2GraphController(cfg)
+    graph = empty_graph(cfg)
+    graph = controller.apply(graph, operation(
+        150, OperationType.EXPAND, payload={"subgoals": [{
+            "node_id": "s_root",
+            "question_template": "What state is Beyoncé Knowles from?",
+            "instantiated_question": "What state is Beyoncé Knowles from?",
+            "dependencies": [], "variable_bindings": {},
+            "answer_type": "state", "terminal": True,
+        }]},
+    ))
+    graph = controller.apply(graph, operation(
+        151, OperationType.RETRIEVE, target="s_root", payload={
+            "query": "What state is Beyoncé Knowles from?",
+            "evidence": [{
+                "node_id": "e_reach", "document_id": "p_reach",
+                "passage_id": "p_reach", "title": "Beyoncé Knowles",
+                "source_span": "Beyoncé Knowles was born in Houston, Texas.",
+                "retrieval_rank": 1, "retrieval_score": 1.0,
+                "retrieval_query": "What state is Beyoncé Knowles from?",
+                "retriever_identity": "hybrid",
+            }],
+        },
+    ))
+    graph = controller.apply(graph, operation(
+        152, OperationType.BRANCH, target="s_root", payload={
+            "mode": "candidates", "candidates": [
+                {
+                    "node_id": "c_target", "subject": "Beyoncé Knowles",
+                    "relation": "is_from", "value": "Texas",
+                    "subject_type": "person", "value_type": "state",
+                    "answer_type": "state", "evidence_refs": ["e_reach"],
+                    "source_spans": ["Beyoncé Knowles was born in Houston, Texas"],
+                    "dependency_claim_ids": [], "extraction_confidence": 1.0,
+                },
+                {
+                    "node_id": "c_birth", "subject": "Beyoncé Knowles",
+                    "relation": "born_in", "value": "Houston",
+                    "subject_type": "person", "value_type": "city",
+                    "answer_type": "city", "evidence_refs": ["e_reach"],
+                    "source_spans": ["Beyoncé Knowles was born in Houston"],
+                    "dependency_claim_ids": [], "extraction_confidence": 1.0,
+                },
+                {
+                    "node_id": "c_located", "subject": "Houston",
+                    "relation": "located_in", "value": "Texas",
+                    "subject_type": "city", "value_type": "state",
+                    "answer_type": "state", "evidence_refs": ["e_reach"],
+                    "source_spans": ["Houston, Texas"],
+                    "dependency_claim_ids": [], "extraction_confidence": 1.0,
+                },
+            ],
+        },
+    ))
+    claims = graph.claims("s_root", "branch_root")
+    profiles = {
+        claim.node_id: VerificationSignals(
+            1.0, 1.0, 1.0, 1.0, 1.0, 0.0, 1.0,
+        ) for claim in claims
+    }
+    legacy = _controller_query_alignment_certificates(
+        claims, graph, "s_root", profiles, strict_endpoint_identity=True,
+    )
+    certified = _controller_query_alignment_certificates(
+        claims, graph, "s_root", profiles,
+        strict_endpoint_identity=True,
+        independent_reachability_projection=True,
+    )
+    assert legacy["c_target"]["answer_position"] == "none"
+    assert certified["c_target"]["answer_position"] == "value"
+    assert certified["c_target"]["certificate"]["subject_base_bound"] is True
+    assert certified["c_target"]["certificate"]["value_base_bound"] is False
+
+
 def test_prompt_inclusive_verifier_packets_do_not_fit_only_on_output_tokens():
     base, _, graph = chain_graph()
     cfg = replace(

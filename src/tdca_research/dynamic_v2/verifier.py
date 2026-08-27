@@ -268,6 +268,9 @@ class MultiSampleIndependentVerifier:
             certificates = _controller_query_alignment_certificates(
                 comparison_candidates, graph, subgoal_id, evidence_profiles,
                 strict_endpoint_identity=self.config.strict_query_endpoint_identity,
+                independent_reachability_projection=(
+                    self.config.independent_reachability_projection
+                ),
             )
             for candidate in candidates:
                 certificate = certificates[candidate.node_id]
@@ -597,6 +600,7 @@ def _controller_query_alignment_certificates(
     evidence_profiles: dict[str, VerificationSignals],
     *,
     strict_endpoint_identity: bool = False,
+    independent_reachability_projection: bool = False,
 ) -> dict[str, dict[str, Any]]:
     """Certify query satisfaction without a second provider judgment.
 
@@ -694,6 +698,12 @@ def _controller_query_alignment_certificates(
         value_bound = _endpoint_in_anchors(
             target.value, reachable, strict_identity=strict_endpoint_identity,
         )
+        subject_base_bound = _endpoint_in_anchors(
+            target.subject, base_anchors, strict_identity=strict_endpoint_identity,
+        )
+        value_base_bound = _endpoint_in_anchors(
+            target.value, base_anchors, strict_identity=strict_endpoint_identity,
+        )
         semantics = graph.claim_semantics[target.node_id]
         relation = _relation_target_certificate(
             description, target.relation, expected_type,
@@ -722,6 +732,25 @@ def _controller_query_alignment_certificates(
             # a certified target relation is sufficient; no extraction label or
             # answer value is consulted.
             answer_position = "value"
+        elif (
+            independent_reachability_projection
+            and subject_bound and value_bound
+            and relation >= 1.0 - 1e-9
+        ):
+            if (
+                subject_base_bound and not value_base_bound
+                and _projection_type_compatible(
+                    semantics.value_type, expected_type, numeric_aliases=True,
+                )
+            ):
+                answer_position = "value"
+            elif (
+                value_base_bound and not subject_base_bound
+                and _projection_type_compatible(
+                    semantics.subject_type, expected_type, numeric_aliases=True,
+                )
+            ):
+                answer_position = "subject"
         if answer_position == "none" and (
             subject_bound and not value_bound
             and relation >= 1.0 - 1e-9
@@ -767,6 +796,8 @@ def _controller_query_alignment_certificates(
                 "excluded_parallel_tuple_edges": excluded_parallel_edges,
                 "subject_bound": subject_bound,
                 "value_bound": value_bound,
+                "subject_base_bound": subject_base_bound,
+                "value_base_bound": value_base_bound,
                 "required_qualifiers": list(
                     constraint.get("required_qualifiers", [])
                 ),

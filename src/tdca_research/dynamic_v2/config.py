@@ -264,6 +264,12 @@ class DynamicV2ResearchConfig(DynamicResearchConfig):
     # and hoists the projection-premise requirement before JOIN allocation.
     strict_query_endpoint_identity: bool = False
     controller_typed_output_consistency: bool = False
+
+    # v2.4.3.30 lets an independently grounded alternate path expose a typed
+    # output already reachable from a fixed input, and preserves acronym role
+    # modifiers as evidence-local origin candidates.
+    independent_reachability_projection: bool = False
+    deterministic_role_origin_projection: bool = False
     terminal_min_relation_target_alignment: float = 0.70
     terminal_min_subject_binding_coverage: float = 0.70
     terminal_min_dependency_binding_coverage: float = 0.70

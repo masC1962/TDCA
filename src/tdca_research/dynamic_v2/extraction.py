@@ -272,6 +272,17 @@ class TypedClaimExtractor:
                 existing,
                 cap - len(rows),
             ))
+        if self.config.deterministic_role_origin_projection and len(rows) < cap:
+            rows.extend(_grounded_role_origin_projection_rows(
+                graph,
+                subgoal_id,
+                branch_id,
+                instantiated_question,
+                dependency_claim_ids,
+                evidence,
+                existing,
+                cap - len(rows),
+            ))
         if self.config.grounded_numeric_interval_consolidation:
             rows = _consolidate_grounded_numeric_intervals(rows)
         if self.config.deterministic_enumeration_expansion and len(rows) < cap:
@@ -557,6 +568,120 @@ def _grounded_temporal_projection_rows(
                     },
                     "extraction_evidence_count": len(evidence),
                     "extraction_mode": "deterministic_temporal_projection",
+                    "extraction_focus_mode": "coverage",
+                })
+                if len(rows) >= remaining_cap:
+                    return rows
+    return rows
+
+
+def _grounded_role_origin_projection_rows(
+    graph: DynamicReasoningHypergraphV2,
+    subgoal_id: str,
+    branch_id: str,
+    question: str,
+    dependency_claim_ids: list[str],
+    evidence: list[EvidenceNode],
+    existing_signatures: set[tuple[str, str, str]],
+    remaining_cap: int,
+) -> list[dict[str, Any]]:
+    """Project an explicit acronym modifier attached to a queried role noun.
+
+    Example form: a query asks where the ``border troops of X`` are from and
+    evidence literally names ``ABC border guards`` while also defining ``ABC``
+    parenthetically.  The rule is label-free, requires a bound dependency and
+    same-sentence lexical role overlap, and leaves truth scoring to the
+    independent verifier.
+    """
+    if remaining_cap <= 0 or not dependency_claim_ids:
+        return []
+    expected = canonical_type(graph.node(subgoal_id, SubgoalNode).answer_type)
+    if expected not in {"country", "state", "province", "region", "location"}:
+        return []
+    match = re.search(
+        r"^\s*(.+?)\s+of\s+.+?\s+(?:is|are|was|were)\s+from\s+"
+        r"(?:what|which)\s+(?:country|state|place|region)\b",
+        question,
+        flags=re.IGNORECASE,
+    )
+    if not match:
+        return []
+    role_tokens = {
+        token for token in re.findall(r"[a-z0-9]+", normalize_text(match.group(1)))
+        if len(token) >= 4 and token not in {"what", "which", "where"}
+    }
+    if not role_tokens:
+        return []
+    dependencies = []
+    for claim_id in dependency_claim_ids:
+        claim = graph.nodes.get(claim_id)
+        if isinstance(claim, ClaimNode):
+            dependencies.append((claim.value, claim.answer_type))
+    rows = []
+    for node in evidence:
+        for sentence in re.split(r"(?<=[.!?])\s+|\n+", node.source_span):
+            sentence = sentence.strip()
+            if not sentence:
+                continue
+            sentence_tokens = set(re.findall(r"[a-z0-9]+", normalize_text(sentence)))
+            for acronym, role_surface in re.findall(
+                r"\b([A-Z][A-Z0-9]{1,9})\s+([A-Za-z-]+(?:\s+[A-Za-z-]+){0,3})",
+                sentence,
+            ):
+                surface_tokens = set(re.findall(
+                    r"[a-z0-9]+", normalize_text(role_surface),
+                ))
+                if not (surface_tokens & role_tokens):
+                    continue
+                if not re.search(
+                    rf"\(\s*{re.escape(acronym)}\s*\)", sentence,
+                    flags=re.IGNORECASE,
+                ):
+                    continue
+                dependency = next((
+                    row for row in dependencies
+                    if {
+                        token for token in re.findall(
+                            r"[a-z0-9]+", normalize_text(row[0]),
+                        ) if len(token) >= 4
+                    } & sentence_tokens
+                ), None)
+                if dependency is None:
+                    continue
+                subject, subject_type = dependency
+                relation = "_".join(sorted(role_tokens)) + "_from"
+                signature = (
+                    normalize_text(subject), normalize_text(relation),
+                    normalize_text(acronym),
+                )
+                if signature in existing_signatures:
+                    continue
+                existing_signatures.add(signature)
+                rows.append({
+                    "node_id": (
+                        f"claim_v2_{graph.step + 1}_{subgoal_id}_role_{len(rows) + 1}"
+                    ),
+                    "subject": subject,
+                    "relation": relation,
+                    "value": acronym,
+                    "subject_type": canonical_type(subject_type),
+                    "value_type": expected,
+                    "answer_type": expected,
+                    "qualifiers": {
+                        "role_origin_projection": "parenthetical_acronym_and_role_overlap",
+                        "role_surface": role_surface.strip(),
+                    },
+                    "evidence_refs": [node.node_id],
+                    "source_spans": [sentence],
+                    "dependency_claim_ids": list(dependency_claim_ids),
+                    "extraction_confidence": 0.95,
+                    "answers_subgoal": True,
+                    "answer_position": "value",
+                    "source_triple": {
+                        "subject": subject, "relation": relation, "value": acronym,
+                    },
+                    "extraction_evidence_count": len(evidence),
+                    "extraction_mode": "deterministic_role_origin_projection",
                     "extraction_focus_mode": "coverage",
                 })
                 if len(rows) >= remaining_cap:
