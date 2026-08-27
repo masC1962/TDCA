@@ -851,7 +851,7 @@ class AdaptiveComputationAllocator:
             OperationType.VERIFY: float(
                 self.config.max_independent_verifications
                 if self.config.exact_fidelity_resource_accounting else 1
-            ),
+            ) * _verification_pass_multiplier(self.config),
             OperationType.MERGE: float(
                 _provider_backed_operation(operation, self.config)
             ),
@@ -1015,8 +1015,11 @@ class AdaptiveComputationAllocator:
             OperationType.MERGE: self.config.join_validation_max_tokens,
         }[operation.operation_type]
         if operation.operation_type == OperationType.VERIFY:
-            maximum = max(1, int(self.config.max_independent_verifications))
-            requested = max(1, int(round(maximum * fraction)))
+            pass_multiplier = _verification_pass_multiplier(self.config)
+            maximum = max(1, int(self.config.max_independent_verifications)) * pass_multiplier
+            requested = max(
+                1, int(round(self.config.max_independent_verifications * fraction))
+            ) * pass_multiplier
             schema_floor = 260 + 90 * max(1, len(operation.source_ids))
             per_call = min(max_tokens, max(int(max_tokens * fraction), schema_floor))
             token_scale = per_call * requested / max(1, max_tokens * maximum)
@@ -1181,14 +1184,19 @@ class AdaptiveComputationAllocator:
         if self.config.exact_fidelity_resource_accounting:
             provider_backed = _provider_backed_operation(operation, self.config)
             packet["llm_calls"] = (
-                verifications if operation.operation_type == OperationType.VERIFY
+                verifications * _verification_pass_multiplier(self.config)
+                if operation.operation_type == OperationType.VERIFY
                 else int(provider_backed)
             )
             packet["token_upper_bound"] = (
-                tokens * verifications
+                tokens * verifications * _verification_pass_multiplier(self.config)
                 if operation.operation_type == OperationType.VERIFY else tokens
             )
         return packet
+
+
+def _verification_pass_multiplier(config: DynamicV2ResearchConfig) -> int:
+    return 2 if config.query_conditioned_semantic_alignment else 1
 
 
 def _provider_backed_operation(

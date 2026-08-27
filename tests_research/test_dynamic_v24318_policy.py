@@ -10,6 +10,7 @@ from tdca_research.dynamic_v2.query_graph import canonical_type, types_compatibl
 from tdca_research.dynamic_v2.termination import TerminalBeliefReadout
 from tdca_research.dynamic_v2.verifier import (
     MultiSampleIndependentVerifier,
+    _query_conditioned_signals,
     _structural_dependency_binding_coverage,
 )
 from tdca_research.llm import DeterministicMockLLM
@@ -22,6 +23,16 @@ from tests_research.test_dynamic_v2_core import (
     operation,
     terminal_operation,
 )
+
+
+class CapturingMock(DeterministicMockLLM):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.requests = []
+
+    def generate_json(self, messages, schema_name, max_tokens, temperature=0.0):
+        self.requests.append((schema_name, messages))
+        return super().generate_json(messages, schema_name, max_tokens, temperature)
 
 
 def _alignment_row(candidate_id: str, *, relation: float = 0.95) -> dict:
@@ -80,6 +91,27 @@ def test_structural_binding_requires_every_declared_dependency():
     assert _structural_dependency_binding_coverage(
         claim, graph, claim.target_subgoal,
     ) == 0.0
+
+
+def test_structural_lineage_does_not_raise_ungrounded_tuple_support_channel():
+    _, _, graph = chain_graph()
+    claim = graph.node("c2")
+    raw = replace(
+        claim.score.raw,
+        grounding=0.0,
+        dependency_consistency=0.25,
+        relation_target_alignment=1.0,
+        subject_binding_coverage=1.0,
+        dependency_binding_coverage=1.0,
+        qualifier_coverage=1.0,
+        output_slot_coverage=1.0,
+    )
+    updated = _query_conditioned_signals(
+        raw, claim, graph, claim.target_subgoal, "value",
+        structural_dependency=True,
+    )
+    assert updated.dependency_binding_coverage == 1.0
+    assert updated.dependency_consistency == 0.25
 
 
 def test_query_alignment_separates_true_tuple_from_subgoal_coverage_and_repairs_binding():
@@ -167,12 +199,12 @@ def test_query_alignment_separates_true_tuple_from_subgoal_coverage_and_repairs_
             }]},
         ),
     )
-    verifier = MultiSampleIndependentVerifier(
-        DeterministicMockLLM(json_responses=[{
-            "scores": [_alignment_row("c_state")],
-        }]),
-        Budget(16, 6000, 200, Usage()), cfg,
-    )
+    mock = CapturingMock(json_responses=[
+        {"scores": [_alignment_row("c_state")]},
+        {"scores": [_alignment_row("c_state")]},
+    ])
+    budget = Budget(16, 6000, 200, Usage())
+    verifier = MultiSampleIndependentVerifier(mock, budget, cfg)
     proposal = verifier.propose(
         graph, "s_root", "branch_root",
         "What administrative territorial entity contains Darley Ramon Torres's place of birth?",
@@ -189,6 +221,12 @@ def test_query_alignment_separates_true_tuple_from_subgoal_coverage_and_repairs_
     assert claim.score.raw.full_subgoal_coverage >= 0.95
     assert claim.score.absolute_support >= cfg.terminal_min_absolute_support
     assert claim.provenance.metadata["verified_answer_position"] == "value"
+    assert budget.usage.llm_calls == 2
+    assert mock.requests[0][0] == "dynamic_v2_independent_verification_v1_pass_1"
+    assert "Compiled query constraint" not in mock.requests[0][1][1]["content"]
+    assert mock.requests[1][0] == "hara_v24319_independent_query_alignment_pass_1"
+    assert "Compiled query constraint" in mock.requests[1][1][1]["content"]
+    assert "Shared evidence" not in mock.requests[1][1][1]["content"]
 
 
 def test_terminal_query_alignment_is_conjunctive_not_fused_into_support():

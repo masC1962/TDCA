@@ -300,7 +300,7 @@ class V2GraphController(GraphController):
         query_graph = compile_query_graph(graph.question, graph.subgoals())
         graph.query_graph = query_graph.to_payload()
         if self.config.query_conditioned_semantic_alignment:
-            graph.query_alignment_version = "hara-query-alignment-v2.4.3.18"
+            graph.query_alignment_version = "hara-separate-query-alignment-v2.4.3.19"
 
     @staticmethod
     def _rewrite_terminal_target(graph, operation, changes, rewrite) -> None:

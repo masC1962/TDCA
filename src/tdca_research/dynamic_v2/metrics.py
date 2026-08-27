@@ -175,6 +175,31 @@ def dynamic_v2_metrics(
             and len(complete_alignment_claims) == len(alignment_claim_rows)
             and len(complete_alignment_terminals) == len(terminal_beliefs)
         )
+        independently_verified_claims = [
+            value for node_id, value in claims.items()
+            if node_id in active
+            and value.get("score", {}).get("scoring_version") == "dh-independent-v1"
+        ]
+        separate_alignment_claims = [
+            value for value in independently_verified_claims
+            if (
+                value.get("provenance", {}).get("metadata", {})
+                .get("verification_scoring_audit", {})
+                .get("independent_passes_completed", 0)
+            ) > 0
+            and (
+                value.get("provenance", {}).get("metadata", {})
+                .get("verification_scoring_audit", {})
+                .get("query_alignment_passes_completed", 0)
+            ) > 0
+            and value.get("provenance", {}).get("metadata", {})
+            .get("verification_scoring_audit", {}).get("query_alignment_passes")
+        ]
+        complete_separate_query_alignment_trace = bool(
+            query_alignment_enabled
+            and independently_verified_claims
+            and len(separate_alignment_claims) == len(independently_verified_claims)
+        )
         invalid_edges = set(graph.get("invalidated_hyperedges", []))
         unsupported = [
             value for value in accepted_answers
@@ -311,6 +336,9 @@ def dynamic_v2_metrics(
                 for raw in complete_alignment_claims
             ) if complete_alignment_claims else 0.0,
             "complete_query_alignment_trace": complete_query_alignment_trace,
+            "complete_separate_query_alignment_trace": (
+                complete_separate_query_alignment_trace
+            ),
             "complete_terminal_belief_readout": complete_terminal_readout,
             "complete_terminal_gap_trace": terminal_gap_trace,
             "termination_outcome": terminations[-1].get("outcome") if terminations else "MISSING",
@@ -393,6 +421,7 @@ def _aggregate(rows: list[dict[str, Any]]) -> dict[str, Any]:
         "complete_proof_obligation_trace", "abstain_has_exhaustion_evidence",
         "query_graph_present",
         "query_alignment_enabled", "complete_query_alignment_trace",
+        "complete_separate_query_alignment_trace",
         "complete_terminal_belief_readout", "complete_terminal_gap_trace",
         "graph_proof_completion", "proof_connected",
     ):

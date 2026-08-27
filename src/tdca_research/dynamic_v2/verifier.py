@@ -39,21 +39,17 @@ List contradiction IDs only for logically mutually exclusive claims, never merel
 multi-valued relation. Do not rank, normalize, omit candidates, explain, or add reasons."""
 
 
-HARA_VERIFY_SYSTEM = """Independently score each Candidate using two strictly separate channel families.
-Evidence channels judge whether the cited evidence supports the tuple itself. Query-alignment channels judge
-whether that independently supported tuple satisfies the current subgoal constraint. Return JSON only as
+HARA_ALIGNMENT_SYSTEM = """Judge only whether each Candidate satisfies the compiled query constraint. Do not
+judge evidence truth, grounding, entailment, confidence, or contradictions in this pass. Return JSON only as
 {scores:[...]}, one compact row per Candidate and no rows for Existing comparison claims. Each row contains
-exactly candidate_id, grounding, entailment, type_match, dependency_consistency, contradiction_risk,
-raw_model_confidence, relation_target_alignment, subject_binding_coverage, dependency_binding_coverage,
-qualifier_coverage, output_slot_coverage, answer_position, and contradiction_candidate_ids. Every score is in
-[0,1]. Do not lower evidence entailment merely because a true tuple is question-irrelevant; express that only
-in the query-alignment channels. relation_target_alignment asks whether the tuple expresses the requested
-relation. subject_binding_coverage asks whether it is about the entity fixed by the question/current branch.
-dependency_binding_coverage asks whether every declared bridge value is correctly used. qualifier_coverage
-asks whether all explicit temporal/comparison/cardinality/set/negation constraints are covered; use 1 when
-none are declared. output_slot_coverage asks whether the selected endpoint has the requested semantic role
-and type. answer_position is subject, value, or none. List contradiction IDs only for logically mutually
-exclusive claims. Do not rank, normalize, omit candidates, fuse evidence with relevance, or explain."""
+exactly candidate_id, relation_target_alignment, subject_binding_coverage, dependency_binding_coverage,
+qualifier_coverage, output_slot_coverage, and answer_position. Every score is in [0,1].
+relation_target_alignment asks whether the tuple expresses the requested relation. subject_binding_coverage
+asks whether it is about the entity fixed by the current subgoal/branch. dependency_binding_coverage asks
+whether every declared bridge output is correctly used. qualifier_coverage asks whether all explicit
+temporal/comparison/cardinality/set/negation constraints are covered; use 1 when none are declared.
+output_slot_coverage asks whether the selected endpoint has the requested semantic role and type.
+answer_position is subject, value, or none. Do not rank, normalize, omit candidates, or explain."""
 
 
 ALIGNMENT_FIELDS = (
@@ -134,21 +130,19 @@ class MultiSampleIndependentVerifier:
         raw_samples: dict[str, list[VerificationSignals]] = defaultdict(list)
         audits: dict[str, list[dict[str, Any]]] = defaultdict(list)
         projection_votes: dict[str, list[str]] = defaultdict(list)
+        alignment_samples: dict[str, list[dict[str, float]]] = defaultdict(list)
+        alignment_audits: dict[str, list[dict[str, Any]]] = defaultdict(list)
+        alignment_projection_votes: dict[str, list[str]] = defaultdict(list)
         contradiction_votes: dict[str, list[str]] = defaultdict(list)
-        total_prompt = total_completion = calls = 0
+        total_prompt = total_completion = calls = evidence_calls = alignment_calls = 0
         sample_count = max(1, min(int(samples), self.config.max_independent_verifications))
         per_call_tokens = max(128, min(int(token_budget), self.config.soft_verifier_max_tokens))
         for sample_index in range(sample_count):
             messages = [
-                {"role": "system", "content": (
-                    HARA_VERIFY_SYSTEM
-                    if self.config.query_conditioned_semantic_alignment
-                    else V2_VERIFY_SYSTEM
-                )},
+                {"role": "system", "content": V2_VERIFY_SYSTEM},
                 {"role": "user", "content": (
                     f"Independent scoring pass: {sample_index + 1}/{sample_count}. Do not infer scores from "
                     f"another pass.\nRoot question: {graph.question}\nSubgoal: {instantiated_question}\n"
-                    f"Compiled query constraint: {constraint_text}\n"
                     f"Dependency claims:\n{dependency_text}\n\nCandidate claims:\n"
                     + "\n".join(blocks) + f"\n\nShared evidence:\n{evidence_text}"
                 )},
@@ -157,11 +151,7 @@ class MultiSampleIndependentVerifier:
             try:
                 data, generation = self.llm.generate_json(
                     messages,
-                    (
-                        f"hara_v24318_independent_evidence_query_alignment_pass_{sample_index + 1}"
-                        if self.config.query_conditioned_semantic_alignment else
-                        f"dynamic_v2_independent_verification_v1_pass_{sample_index + 1}"
-                    ),
+                    f"dynamic_v2_independent_verification_v1_pass_{sample_index + 1}",
                     per_call_tokens,
                     self.config.temperature,
                 )
@@ -183,6 +173,7 @@ class MultiSampleIndependentVerifier:
                 break
             self.budget.record_generation(generation)
             calls += 1
+            evidence_calls += 1
             total_prompt += generation.prompt_tokens
             total_completion += generation.completion_tokens
             returned = {
@@ -224,11 +215,6 @@ class MultiSampleIndependentVerifier:
                         retrieval_support=deterministic.retrieval_support,
                         contradiction_risk=model_contradiction,
                         raw_model_confidence=_unit(row.get("raw_model_confidence")),
-                        relation_target_alignment=_unit(row.get("relation_target_alignment")),
-                        subject_binding_coverage=_unit(row.get("subject_binding_coverage")),
-                        dependency_binding_coverage=_unit(row.get("dependency_binding_coverage")),
-                        qualifier_coverage=_unit(row.get("qualifier_coverage")),
-                        output_slot_coverage=_unit(row.get("output_slot_coverage")),
                         reasons=[str(value) for value in row.get("reasons", [])][:5],
                     )
                     weight = self.config.soft_verifier_model_weight
@@ -245,11 +231,6 @@ class MultiSampleIndependentVerifier:
                         raw_model_confidence=_blend(
                             deterministic.raw_model_confidence, model.raw_model_confidence, weight,
                         ),
-                        relation_target_alignment=model.relation_target_alignment,
-                        subject_binding_coverage=model.subject_binding_coverage,
-                        dependency_binding_coverage=model.dependency_binding_coverage,
-                        qualifier_coverage=model.qualifier_coverage,
-                        output_slot_coverage=model.output_slot_coverage,
                         reasons=model.reasons,
                     )
                     mode = "deterministic_prior_plus_independent_model_residual"
@@ -264,26 +245,119 @@ class MultiSampleIndependentVerifier:
                             str(value) for value in row.get("contradiction_candidate_ids", [])
                             if str(value) in known_ids and str(value) != candidate.node_id
                         )
-                if self.config.query_conditioned_semantic_alignment:
-                    raw = _query_conditioned_signals(
-                        raw, candidate, graph, subgoal_id, answer_position,
-                        structural_dependency=self.config.structural_dependency_binding_coverage,
-                    )
                 raw_samples[candidate.node_id].append(raw)
                 projection_votes[candidate.node_id].append(answer_position)
                 audits[candidate.node_id].append({
                     "pass": sample_index + 1, "mode": mode, "raw": raw.__dict__,
                 })
-        if calls == 0:
+        if evidence_calls == 0:
             return None
+        if self.config.query_conditioned_semantic_alignment:
+            for sample_index in range(sample_count):
+                messages = [
+                    {"role": "system", "content": HARA_ALIGNMENT_SYSTEM},
+                    {"role": "user", "content": (
+                        f"Independent alignment pass: {sample_index + 1}/{sample_count}. "
+                        f"Do not infer evidence scores.\nRoot question: {graph.question}\n"
+                        f"Subgoal: {instantiated_question}\n"
+                        f"Compiled query constraint: {constraint_text}\n"
+                        f"Dependency claims:\n{dependency_text}\n\nCandidate claims:\n"
+                        + "\n".join(blocks)
+                    )},
+                ]
+                self.budget.require(
+                    per_call_tokens,
+                    estimated_prompt_tokens=estimate_message_tokens(messages),
+                )
+                try:
+                    data, generation = self.llm.generate_json(
+                        messages,
+                        f"hara_v24319_independent_query_alignment_pass_{sample_index + 1}",
+                        per_call_tokens,
+                        self.config.temperature,
+                    )
+                except (ProviderRefusalError, StructuredOutputError) as exc:
+                    if sample_index == 0:
+                        raise
+                    if isinstance(exc, ProviderRefusalError):
+                        self.budget.record_provider_failure(exc)
+                    else:
+                        try:
+                            self.budget.record_generation(exc.generation)
+                        except BudgetExceeded:
+                            pass
+                    self.last_diagnostics = {
+                        **self.last_diagnostics,
+                        "query_alignment_partial_failure": type(exc).__name__,
+                        "query_alignment_failed_pass": sample_index + 1,
+                    }
+                    break
+                self.budget.record_generation(generation)
+                calls += 1
+                alignment_calls += 1
+                total_prompt += generation.prompt_tokens
+                total_completion += generation.completion_tokens
+                returned = {
+                    str(row.get("candidate_id")): row
+                    for row in data.get("scores", []) if isinstance(row, dict)
+                }
+                for candidate in candidates:
+                    row = returned.get(candidate.node_id, {})
+                    alignment = {
+                        name: _unit(row.get(name)) for name in ALIGNMENT_FIELDS
+                    }
+                    alignment_samples[candidate.node_id].append(alignment)
+                    answer_position = str(row.get("answer_position", "none")).strip().lower()
+                    if answer_position not in {"subject", "value", "none"}:
+                        answer_position = "none"
+                    alignment_projection_votes[candidate.node_id].append(answer_position)
+                    alignment_audits[candidate.node_id].append({
+                        "pass": sample_index + 1,
+                        "mode": "independent_query_constraint_only",
+                        "raw": alignment,
+                        "answer_position": answer_position,
+                    })
         self.last_diagnostics = {
             **self.last_diagnostics,
             "independent_passes_requested": sample_count,
-            "independent_passes_completed": calls,
+            "independent_passes_completed": evidence_calls,
+            "query_alignment_passes_requested": (
+                sample_count if self.config.query_conditioned_semantic_alignment else 0
+            ),
+            "query_alignment_passes_completed": alignment_calls,
         }
         aggregated = {
             candidate.node_id: _average(raw_samples[candidate.node_id]) for candidate in candidates
         }
+        if self.config.query_conditioned_semantic_alignment:
+            for candidate in candidates:
+                base = aggregated[candidate.node_id]
+                alignment = {
+                    name: mean(row[name] for row in alignment_samples[candidate.node_id])
+                    for name in ALIGNMENT_FIELDS
+                }
+                alignment_position = _projection_vote(
+                    alignment_projection_votes[candidate.node_id],
+                    _projection_vote(
+                        projection_votes[candidate.node_id],
+                        _preserved_projection(candidate),
+                    ),
+                )
+                aggregated[candidate.node_id] = _query_conditioned_signals(
+                    VerificationSignals(
+                        grounding=base.grounding,
+                        entailment=base.entailment,
+                        type_match=base.type_match,
+                        dependency_consistency=base.dependency_consistency,
+                        retrieval_support=base.retrieval_support,
+                        contradiction_risk=base.contradiction_risk,
+                        raw_model_confidence=base.raw_model_confidence,
+                        **alignment,
+                        reasons=base.reasons,
+                    ),
+                    candidate, graph, subgoal_id, alignment_position,
+                    structural_dependency=self.config.structural_dependency_binding_coverage,
+                )
         for candidate in comparison_candidates:
             aggregated.setdefault(candidate.node_id, candidate.score.raw)
         expected_type = graph.node(subgoal_id, SubgoalNode).answer_type
@@ -338,7 +412,11 @@ class MultiSampleIndependentVerifier:
                 "answer_position": projection_by_id[candidate.node_id],
                 "scoring_audit": {
                     "independent_passes_requested": sample_count,
-                    "independent_passes_completed": calls,
+                    "independent_passes_completed": evidence_calls,
+                    "query_alignment_passes_requested": (
+                        sample_count if self.config.query_conditioned_semantic_alignment else 0
+                    ),
+                    "query_alignment_passes_completed": alignment_calls,
                     "aggregation": "componentwise_arithmetic_mean_before_fusion",
                     "comparison_group": (
                         "slot_answer_alternatives"
@@ -348,6 +426,7 @@ class MultiSampleIndependentVerifier:
                         "mode": "preserved_prior_independent_raw_scores",
                         "raw": candidate.score.raw.__dict__,
                     }],
+                    "query_alignment_passes": alignment_audits[candidate.node_id],
                 },
             }
         return GraphOperation(
@@ -472,7 +551,10 @@ def _query_conditioned_signals(
     )
     dependency_consistency = raw.dependency_consistency
     reasons = list(raw.reasons)
-    if structural_dependency and dependency is not None:
+    if (
+        structural_dependency and dependency is not None
+        and raw.grounding >= 1.0 - 1e-9
+    ):
         dependency_consistency = dependency
         reasons.append("controller_structural_dependency_binding")
 

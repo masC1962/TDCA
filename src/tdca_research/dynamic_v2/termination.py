@@ -301,7 +301,7 @@ class TerminalBeliefReadout:
             **alignment,
             query_alignment_gaps=alignment_gaps,
             scoring_version=(
-                "hara-query-alignment-terminal-v2.4.3.18"
+                "hara-separate-query-alignment-terminal-v2.4.3.19"
                 if self.config.query_conditioned_semantic_alignment
                 else "terminal-belief-readout-v2.2"
             ),
