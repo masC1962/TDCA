@@ -1,0 +1,60 @@
+{
+  "schema_version": "hara-v2.4.3.29-preregistration-v1",
+  "frozen_at": "2026-08-28",
+  "training": false,
+  "seed": 20260820,
+  "source_commit": "bafc8a79",
+  "parent_experiment": "hara-v2.4.3.28",
+  "parent_runs": {
+    "development_canary_5": "research_outputs/musique_distractor_smoke_hara_1787846173507817646"
+  },
+  "parent_decision": "PARTIAL_PASS_REJECT_FALSE_ENDPOINT_ALIAS_AND_JOIN_SPEND",
+  "observed_failure_before_design": {
+    "canary_f1": 0.4,
+    "canary_full_chain": 0.4,
+    "canary_candidate_presence": 0.8,
+    "canary_graph_proof_completion": 0.8,
+    "selective_accuracy": 1.0,
+    "mechanism_failures": [
+      "The endpoint matcher treated Mississippi River Delta as the same entity as the bound Mississippi River by unrestricted substring containment, so the correct output was marked already bound.",
+      "Four projection-free JOIN candidates passed the cheap feasibility check, consumed provider calls, and were rejected, exhausting the per-question budget before a valid projection-preserving JOIN.",
+      "The independent verifier assigned 0.75 type confidence despite an exact controller-owned location-to-location schema match."
+    ]
+  },
+  "architectural_delta": {
+    "strict_endpoint_identity": "Controller query certificates use exact normalized identity plus the existing possessive normalization, without generic substring aliases.",
+    "typed_output_consistency": "An exact controller-owned output schema match certifies the type-consistency channel while evidence entailment and grounding remain independent.",
+    "join_preallocation": "A relational JOIN lacking a verified output projection premise is rejected before provider allocation.",
+    "threshold_changed": false,
+    "training": false,
+    "per_question_or_answer_patch": false
+  },
+  "frozen_config": "configs/hara_v24329_qwen.yaml",
+  "frozen_manifests": {
+    "development_canary": "configs/splits/musique_dynamic_v24317_dev_canary_seed20260820.json",
+    "smoke_a": "configs/splits/musique_dynamic_seed20260820.json",
+    "shadow_c": "configs/splits/musique_hara_v24318_shadow_c_seed20260820.json"
+  },
+  "execution_order": [
+    "development canary 5",
+    "opened causal diagnostic if any query-frontier regression appears",
+    "Smoke-A20 if development passes",
+    "paired control/HARA Shadow-C20 without between-arm inspection if Smoke-A passes"
+  ],
+  "development_gate": {
+    "canary_f1_min": 0.60,
+    "canary_full_chain_min": 0.80,
+    "canary_candidate_presence_min": 0.60,
+    "canary_graph_proof_completion_min": 0.80,
+    "unsupported_answer_count_max": 0,
+    "infrastructure_failure_count_max": 0
+  },
+  "campaign_budget_before_run": {
+    "campaign_id": "hara-v24318-iclr2027-20260827",
+    "provider_attempts": 410,
+    "provider_reported_tokens": 457296,
+    "hard_attempt_cap": 2000,
+    "hard_token_cap": 2000000
+  },
+  "stop_condition": "Continue generic no-training diagnosis and iteration after any development failure. Stop only on the full preregistered HARA gate plus committed safe-stop report, or before the next call would exceed the shared 2000-attempt/2000000-token hard cap."
+}
