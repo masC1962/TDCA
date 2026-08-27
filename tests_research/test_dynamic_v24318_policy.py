@@ -12,6 +12,7 @@ from tdca_research.dynamic_v2.recovery import claim_projects_target
 from tdca_research.dynamic_v2.termination import TerminalBeliefReadout
 from tdca_research.dynamic_v2.verifier import (
     MultiSampleIndependentVerifier,
+    _controller_query_alignment_certificates,
     _query_conditioned_signals,
     _relation_target_certificate,
     _structural_dependency_binding_coverage,
@@ -263,6 +264,39 @@ def test_query_alignment_separates_true_tuple_from_subgoal_coverage_and_repairs_
     assert audit["query_alignment_passes"][0]["mode"] == (
         "controller_query_graph_certificate"
     )
+
+    parallel_graph = controller.apply(preverify, operation(
+        108, OperationType.BRANCH, target="s_root", payload={
+            "mode": "candidates", "candidates": [{
+                "node_id": "c_parallel", "subject": "Pedro Leopoldo",
+                "relation": "administrative_territorial_entity",
+                "value": "Minas Gerais", "subject_type": "location",
+                "value_type": "state",
+                "answer_type": "administrative_territorial_entity",
+                "evidence_refs": ["e_state"],
+                "source_spans": ["Pedro Leopoldo is in the state of Minas Gerais."],
+                "dependency_claim_ids": ["c_birth"],
+                "extraction_confidence": 0.95,
+                "answers_subgoal": False, "answer_position": "none",
+            }]},
+    ))
+    parallel_claims = parallel_graph.claims("s_root", "branch_root")
+    profiles = {
+        claim.node_id: VerificationSignals(
+            grounding=1.0, entailment=1.0, type_match=1.0,
+            dependency_consistency=1.0, retrieval_support=1.0,
+            contradiction_risk=0.0, raw_model_confidence=1.0,
+        )
+        for claim in parallel_claims
+    }
+    parallel_certificates = _controller_query_alignment_certificates(
+        parallel_claims, parallel_graph, "s_root", profiles,
+    )
+    assert parallel_certificates["c_state"]["subject_binding_coverage"] == 1.0
+    assert parallel_certificates["c_state"]["output_slot_coverage"] == 1.0
+    assert parallel_certificates["c_state"]["certificate"][
+        "excluded_parallel_tuple_edges"
+    ] == 1
 
 
 def test_controller_relation_certificate_rejects_output_type_as_predicate():

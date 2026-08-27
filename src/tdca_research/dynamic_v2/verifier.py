@@ -612,11 +612,28 @@ def _controller_query_alignment_certificates(
     result: dict[str, dict[str, Any]] = {}
     for target in candidates:
         reachable = set(base_anchors)
+        target_endpoint_pair = frozenset(filter(None, (
+            normalize_text(target.subject), normalize_text(target.value),
+        )))
+        excluded_parallel_edges = sum(
+            edge.node_id != target.node_id
+            and frozenset(filter(None, (
+                normalize_text(edge.subject), normalize_text(edge.value),
+            ))) == target_endpoint_pair
+            for edge in candidates
+        )
         changed = True
         while changed:
             changed = False
             for edge in candidates:
-                if edge.node_id == target.node_id or not edge.evidence_refs:
+                edge_endpoint_pair = frozenset(filter(None, (
+                    normalize_text(edge.subject), normalize_text(edge.value),
+                )))
+                if (
+                    edge.node_id == target.node_id
+                    or edge_endpoint_pair == target_endpoint_pair
+                    or not edge.evidence_refs
+                ):
                     continue
                 raw = evidence_profiles.get(edge.node_id, edge.score.raw)
                 if (
@@ -681,6 +698,7 @@ def _controller_query_alignment_certificates(
                     _candidate_relation_concepts(target.relation)
                 ),
                 "reachable_anchor_count_excluding_target": len(reachable),
+                "excluded_parallel_tuple_edges": excluded_parallel_edges,
                 "subject_bound": subject_bound,
                 "value_bound": value_bound,
                 "required_qualifiers": list(
