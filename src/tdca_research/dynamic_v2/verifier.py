@@ -398,7 +398,12 @@ class MultiSampleIndependentVerifier:
         projection_by_id = {}
         for candidate in comparison_candidates:
             position = _projection_vote(
-                projection_votes[candidate.node_id],
+                (
+                    alignment_projection_votes[candidate.node_id]
+                    if controller_alignment
+                    and alignment_projection_votes[candidate.node_id]
+                    else projection_votes[candidate.node_id]
+                ),
                 _preserved_projection(candidate),
             )
             structural_position = _structural_projection(
@@ -687,6 +692,22 @@ def _controller_query_alignment_certificates(
             # a certified target relation is sufficient; no extraction label or
             # answer value is consulted.
             answer_position = "value"
+        if answer_position == "none" and (
+            subject_bound and not value_bound
+            and relation >= 1.0 - 1e-9
+            and _projection_type_compatible(
+                semantics.subject_type, expected_type, numeric_aliases=True,
+            )
+            and _inverse_bound_output_role_certificate(
+                target.relation, target.value, description,
+            )
+        ):
+            # Some relational questions name the output country as a bound
+            # descriptor (e.g. an organization *of* that country) and ask for
+            # the inverse affiliation.  A typed possession/affiliation edge and
+            # an explicit query-role match certify the subject slot without
+            # trusting an extraction answer label.
+            answer_position = "subject"
         subject_binding = float(
             subject_bound != value_bound or answer_position != "none"
         )
@@ -733,6 +754,14 @@ def _endpoint_in_anchors(endpoint: str, anchors: set[str]) -> bool:
         if not normalized:
             continue
         if value == normalized:
+            return True
+        if (
+            " " in value and len(value) >= 6
+            and normalized == f"{value}s"
+        ) or (
+            " " in normalized and len(normalized) >= 6
+            and value == f"{normalized}s"
+        ):
             return True
         # Possessive normalization and harmless title decoration are common in
         # planner anchors.  Containment is allowed only for a multi-token name.
@@ -786,7 +815,7 @@ def _candidate_relation_concepts(relation: str) -> set[str]:
         "capital": r"\bcapital\b",
         "arrival": r"\b(?:came|come|arrive|settle)\w*\b",
         "location": r"\b(?:located|lies|contain|within|part of)\w*\b",
-        "origin": r"\b(?:from|origin|belong to)\b",
+        "origin": r"\b(?:from|origin|belong to|has [a-z0-9 ]*(?:troop|guard))\w*\b",
     }
     for name, pattern in patterns.items():
         if re.search(pattern, text):
@@ -822,6 +851,23 @@ def _relation_target_certificate(
     query_tokens = _relation_tokens(description) - excluded
     relation_tokens = _relation_tokens(relation) - {"inverse", "of"}
     return float(bool(query_tokens & relation_tokens))
+
+
+def _inverse_bound_output_role_certificate(
+    relation: str, unbound_endpoint: str, description: str,
+) -> bool:
+    relation_text = normalize_text(re.sub(r"[_:\-/]+", " ", str(relation)))
+    if not (
+        relation_text.startswith("has ")
+        or " belong " in f" {relation_text} "
+        or relation_text.startswith("inverse of ")
+    ):
+        return False
+    endpoint_tokens = _relation_tokens(unbound_endpoint) - {
+        "the", "group", "organization", "entity", "gdr",
+    }
+    question_tokens = _relation_tokens(description)
+    return bool(endpoint_tokens & question_tokens)
 
 
 def _relation_tokens(text: str) -> set[str]:

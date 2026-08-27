@@ -13,6 +13,9 @@ from tdca_research.dynamic_v2.termination import TerminalBeliefReadout
 from tdca_research.dynamic_v2.verifier import (
     MultiSampleIndependentVerifier,
     _controller_query_alignment_certificates,
+    _candidate_relation_concepts,
+    _endpoint_in_anchors,
+    _inverse_bound_output_role_certificate,
     _query_conditioned_signals,
     _relation_target_certificate,
     _structural_dependency_binding_coverage,
@@ -340,6 +343,12 @@ def test_controller_relation_certificate_rejects_output_type_as_predicate():
         question, "administrative_territorial_entity",
         "administrative_territorial_entity", known_entities=["Pedro Leopoldo"],
     ) == 0.0
+    assert _endpoint_in_anchors("Elizabeth Berg", {"elizabeth bergs"})
+    assert "origin" in _candidate_relation_concepts("has_border_troops")
+    assert _inverse_bound_output_role_certificate(
+        "has_border_troops", "GDR border guards",
+        "Border troops of East Germany are from what country?",
+    )
 
 
 def test_conjunctive_grounding_prevents_additive_support_compensation():
