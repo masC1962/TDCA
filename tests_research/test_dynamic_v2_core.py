@@ -1611,6 +1611,17 @@ def test_evidence_endpoint_grounding_requires_bound_and_answer_anchors():
     grounded.dependency_claim_ids = ["c1"]
     assert _evidence_endpoint_grounding(grounded, graph) == 1.0
 
+    surname = deepcopy(grounded)
+    surname.subject = "Warren Hastings"
+    surname.value = "1786"
+    surname.provenance.metadata["source_spans"] = [
+        "In 1786 the charges against Hastings were presented."
+    ]
+    surname_graph = deepcopy(graph)
+    surname_graph.node("e2").title = "Impeachment"
+    surname_graph.node("e2").source_span = surname.provenance.metadata["source_spans"][0]
+    assert _evidence_endpoint_grounding(surname, surname_graph) == 1.0
+
     generic = deepcopy(grounded)
     generic.value = "municipalities"
     generic.provenance.metadata["source_spans"] = [

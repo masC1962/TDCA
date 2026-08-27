@@ -336,8 +336,25 @@ def _evidence_endpoint_grounding(
         + [node.source_span for node in cited_evidence]
     ))
 
-    subject_endpoint = normalize_text(candidate.subject)
-    return float(bool(subject_endpoint) and subject_endpoint in binding_text)
+    return float(_lexical_endpoint_anchored(candidate.subject, binding_text))
+
+
+def _lexical_endpoint_anchored(endpoint: str, normalized_evidence: str) -> bool:
+    normalized = normalize_text(endpoint)
+    if not normalized:
+        return False
+    if normalized in normalized_evidence:
+        return True
+    generic = {
+        "city", "country", "county", "district", "division", "region",
+        "state", "province", "territory", "area", "part", "true", "false",
+    }
+    tokens = {
+        token for token in re.findall(r"[a-z0-9]+", normalized)
+        if len(token) >= 4 and token not in generic
+    }
+    evidence_tokens = set(re.findall(r"[a-z0-9]+", normalized_evidence))
+    return bool(tokens.intersection(evidence_tokens))
 
 
 def _projection_vote(rows: list[str], fallback: str) -> str:
