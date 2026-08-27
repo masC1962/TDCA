@@ -1,0 +1,63 @@
+{
+  "schema_version": "hara-v2.4.3.32-preregistration-v1",
+  "frozen_at": "2026-08-28",
+  "training": false,
+  "seed": 20260820,
+  "source_commit": "cf0bb3c5",
+  "parent_experiment": "hara-v2.4.3.31",
+  "parent_run": "research_outputs/musique_distractor_smoke_hara_1787850503675118690",
+  "parent_decision": "REJECT_CAUSAL_CANARY_INCOMPLETE_CHAIN_TRANSITION",
+  "observed_failure_before_design": {
+    "causal_canary_candidate_presence": 0.14285714285714285,
+    "causal_canary_full_chain": 0.0,
+    "unsupported_answer_count": 0,
+    "structural_findings": [
+      "A temporal qualifier on a bound input was incorrectly required to have a date-typed output.",
+      "Acting paraphrases played and portrayed were absent from the compact controller relation ontology.",
+      "JOIN projection discovery still trusted the legacy extractor answers_subgoal label and ignored controller-certified output slots, making dependency-completing JOINs impossible."
+    ]
+  },
+  "architectural_delta": {
+    "embedded_qualifier_certificate": "A temporal constraint may be certified by an explicit temporal relation, typed qualifier, or year on the bound input while the answer remains a non-temporal entity.",
+    "acting_relation_equivalence": "Played, portrayed, and acting forms share the existing performance relation concept only for query alignment.",
+    "controller_projection_join": "A controller-certified output-slot premise with independently adequate grounding, entailment, type, gap, and contradiction channels may enter a JOIN that supplies its missing dependency binding.",
+    "threshold_changed": false,
+    "training": false,
+    "per_question_or_answer_patch": false
+  },
+  "frozen_config": "configs/hara_v24332_qwen.yaml",
+  "frozen_manifests": {
+    "causal_canary_7": "configs/splits/musique_hara_v24331_query_binding_canary_seed20260820.json",
+    "regression_canary_5": "configs/splits/musique_dynamic_v24317_dev_canary_seed20260820.json",
+    "smoke_a_20": "configs/splits/musique_dynamic_seed20260820.json"
+  },
+  "execution_order": [
+    "causal canary 7",
+    "regression canary 5 if causal gate passes",
+    "Smoke-A20 if both canaries pass",
+    "paired control/HARA Shadow-C20 only if Smoke-A passes"
+  ],
+  "causal_gate": {
+    "completed_first_dependency_count_min": 6,
+    "controller_projection_join_count_min": 1,
+    "candidate_presence_rate_min": 0.30,
+    "graph_proof_completion_rate_min": 0.50,
+    "unsupported_answer_count_max": 0,
+    "infrastructure_failure_count_max": 0
+  },
+  "regression_gate": {
+    "f1_min": 0.60,
+    "full_chain_min": 0.80,
+    "candidate_presence_min": 0.60,
+    "graph_proof_completion_min": 0.80,
+    "unsupported_answer_count_max": 0,
+    "infrastructure_failure_count_max": 0
+  },
+  "campaign_budget_before_run": {
+    "provider_attempts": 689,
+    "provider_reported_tokens": 773453,
+    "hard_attempt_cap": 2000,
+    "hard_token_cap": 2000000
+  },
+  "stop_condition": "Continue generic no-training diagnosis and iteration after failure. Stop only on the full preregistered HARA gate plus committed safe-stop report, or before the next call would exceed the shared hard cap."
+}
