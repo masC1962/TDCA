@@ -236,6 +236,10 @@ class DynamicV2ResearchConfig(DynamicResearchConfig):
     # scoring remains an independent provider pass; relation, binding, output
     # and qualifier coverage are computed without reading evidence scores.
     controller_query_alignment_certificates: bool = False
+
+    # v2.4.3.21 makes evidence grounding a necessary condition of absolute
+    # support.  The original additive fusion remains frozen by default.
+    grounding_conjunctive_absolute_support: bool = False
     terminal_min_relation_target_alignment: float = 0.70
     terminal_min_subject_binding_coverage: float = 0.70
     terminal_min_dependency_binding_coverage: float = 0.70

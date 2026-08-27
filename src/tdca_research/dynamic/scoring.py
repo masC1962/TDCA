@@ -39,6 +39,11 @@ def fuse_candidate_scores(
     for candidate_id, raw in raw_by_id.items():
         weighted = sum(getattr(raw, name) * weight for name, weight in positive_weights.items()) / denominator
         support = weighted - config.score_weight_contradiction * raw.contradiction_risk
+        if getattr(config, "grounding_conjunctive_absolute_support", False):
+            # A claim with no evidence-local grounding cannot recover high
+            # absolute support by accumulating unrelated additive channels.
+            # The raw components and evidence gap remain separately visible.
+            support = min(support, raw.grounding)
         absolute[candidate_id] = _unit(support)
         # Evidence insufficiency remains inspectable rather than being hidden in
         # the fused support score.

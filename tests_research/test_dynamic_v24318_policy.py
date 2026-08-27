@@ -16,6 +16,8 @@ from tdca_research.dynamic_v2.verifier import (
 )
 from tdca_research.llm import DeterministicMockLLM
 from tdca_research.models import Usage
+from tdca_research.dynamic.scoring import fuse_candidate_scores
+from tdca_research.dynamic.graph import VerificationSignals
 
 from tests_research.test_dynamic_v2_core import (
     chain_graph,
@@ -271,6 +273,22 @@ def test_controller_relation_certificate_rejects_output_type_as_predicate():
         question, "administrative_territorial_entity",
         "administrative_territorial_entity", known_entities=["Pedro Leopoldo"],
     ) == 0.0
+
+
+def test_conjunctive_grounding_prevents_additive_support_compensation():
+    base = config()
+    raw = VerificationSignals(
+        grounding=0.0, entailment=1.0, type_match=1.0,
+        dependency_consistency=1.0, retrieval_support=1.0,
+        contradiction_risk=0.0, raw_model_confidence=1.0,
+    )
+    legacy, _ = fuse_candidate_scores({"c": raw}, base)
+    guarded, _ = fuse_candidate_scores({"c": raw}, replace(
+        base, grounding_conjunctive_absolute_support=True,
+    ))
+    assert legacy["c"].absolute_support > 0.0
+    assert guarded["c"].absolute_support == 0.0
+    assert guarded["c"].evidence_gap == legacy["c"].evidence_gap
 
 
 def test_terminal_query_alignment_is_conjunctive_not_fused_into_support():
