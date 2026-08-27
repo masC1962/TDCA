@@ -1,5 +1,6 @@
 import json
 from copy import deepcopy
+from dataclasses import replace
 from pathlib import Path
 
 import pytest
@@ -2408,6 +2409,45 @@ def test_v24328_symbolic_join_requires_verified_projection_when_enabled():
     ).check_feasible(graph, candidate)
     assert not feasibility.feasible
     assert feasibility.reason_codes == ("missing_verified_projection_premise",)
+
+
+def test_controller_projection_can_enter_dependency_completing_join():
+    cfg, _, graph = chain_graph()
+    cfg = cfg.merged(
+        join_requires_verified_projection_premise=True,
+        controller_projection_join_premise=True,
+    )
+    graph.query_alignment_version = "hara-controller-query-certificate-v2.4.3.20"
+    projection = graph.node("c2")
+    projection.provenance.metadata["answers_subgoal"] = False
+    projection.dependency_claim_ids = ["c1"]
+    projection.status = CandidateStatus.PROPOSED
+    projection.score = replace(
+        projection.score,
+        absolute_support=0.66,
+        evidence_gap=0.30,
+        raw=replace(
+            projection.score.raw,
+            grounding=1.0,
+            entailment=0.95,
+            type_match=1.0,
+            dependency_consistency=0.0,
+            contradiction_risk=0.0,
+            relation_target_alignment=1.0,
+            output_slot_coverage=1.0,
+            full_subgoal_coverage=0.0,
+        ),
+    )
+    engine = MultiHopJoinEngine(
+        DeterministicMockLLM(), Budget(16, 6000, 200, Usage()), cfg,
+    )
+    candidate = next(
+        row for row in engine.discover(graph, "branch_root", "s_root")
+        if set(row.premise_ids) == {"c1", "c2"}
+    )
+    assert candidate.projection_premise_id == "c2"
+    assert engine.check_feasible(graph, candidate).feasible
+    assert engine.propose(graph, candidate, "op_controller_projection", 500) is not None
 
 
 def test_v24_region_retrieval_gate_requires_material_query_novelty():

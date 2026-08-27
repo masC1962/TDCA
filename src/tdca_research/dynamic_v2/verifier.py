@@ -274,6 +274,12 @@ class MultiSampleIndependentVerifier:
                 query_mentioned_endpoint_binding=(
                     self.config.query_mentioned_endpoint_binding
                 ),
+                constraint_embedded_qualifier_certificate=(
+                    self.config.constraint_embedded_qualifier_certificate
+                ),
+                acting_relation_equivalence=(
+                    self.config.acting_relation_equivalence
+                ),
             )
             for candidate in candidates:
                 certificate = certificates[candidate.node_id]
@@ -605,6 +611,8 @@ def _controller_query_alignment_certificates(
     strict_endpoint_identity: bool = False,
     independent_reachability_projection: bool = False,
     query_mentioned_endpoint_binding: bool = False,
+    constraint_embedded_qualifier_certificate: bool = False,
+    acting_relation_equivalence: bool = False,
 ) -> dict[str, dict[str, Any]]:
     """Certify query satisfaction without a second provider judgment.
 
@@ -724,6 +732,7 @@ def _controller_query_alignment_certificates(
         relation = _relation_target_certificate(
             description, target.relation, expected_type,
             known_entities=constraint.get("known_entities", []),
+            acting_relation_equivalence=acting_relation_equivalence,
         )
         answer_position = "none"
         if subject_bound != value_bound:
@@ -794,6 +803,7 @@ def _controller_query_alignment_certificates(
         qualifier = _qualifier_certificate(
             tuple(str(value) for value in constraint.get("required_qualifiers", [])),
             target, semantics, answer_position,
+            constraint_embedded=constraint_embedded_qualifier_certificate,
         )
         result[target.node_id] = {
             "relation_target_alignment": relation,
@@ -911,15 +921,24 @@ _RELATION_INTENT_PATTERNS = (
 )
 
 
-def _relation_intent(description: str) -> str:
+def _relation_intent(
+    description: str, *, acting_relation_equivalence: bool = False,
+) -> str:
     normalized = normalize_text(description)
+    if acting_relation_equivalence and re.search(
+        r"\b(?:play(?:ed|s|ing)?|portray(?:ed|s|ing)?|act(?:ed|or|ress|ing)?)\b",
+        normalized,
+    ):
+        return "perform"
     for name, pattern in _RELATION_INTENT_PATTERNS:
         if re.search(pattern, normalized):
             return name
     return ""
 
 
-def _candidate_relation_concepts(relation: str) -> set[str]:
+def _candidate_relation_concepts(
+    relation: str, *, acting_relation_equivalence: bool = False,
+) -> set[str]:
     text = re.sub(r"([a-z])([A-Z])", r"\1 \2", str(relation))
     text = normalize_text(re.sub(r"[_:\-/]+", " ", text))
     concepts = set()
@@ -941,6 +960,11 @@ def _candidate_relation_concepts(relation: str) -> set[str]:
     for name, pattern in patterns.items():
         if re.search(pattern, text):
             concepts.add(name)
+    if acting_relation_equivalence and re.search(
+        r"\b(?:play|played|playing|portray|portrayed|portraying|act|acted|acting)\b",
+        text,
+    ):
+        concepts.add("perform")
     return concepts
 
 
@@ -950,9 +974,14 @@ def _relation_target_certificate(
     expected_type: str,
     *,
     known_entities: Any,
+    acting_relation_equivalence: bool = False,
 ) -> float:
-    intent = _relation_intent(description)
-    concepts = _candidate_relation_concepts(relation)
+    intent = _relation_intent(
+        description, acting_relation_equivalence=acting_relation_equivalence,
+    )
+    concepts = _candidate_relation_concepts(
+        relation, acting_relation_equivalence=acting_relation_equivalence,
+    )
     if intent:
         return float(intent in concepts)
 
@@ -1013,6 +1042,8 @@ def _qualifier_certificate(
     candidate: ClaimNode,
     semantics: Any,
     answer_position: str,
+    *,
+    constraint_embedded: bool = False,
 ) -> float:
     if not required:
         return 1.0
@@ -1029,9 +1060,24 @@ def _qualifier_certificate(
     checks = []
     for family in required:
         if family == "temporal":
-            checks.append(_projection_type_compatible(
+            output_is_temporal = _projection_type_compatible(
                 selected_type, "date", numeric_aliases=True,
-            ))
+            )
+            embedded_temporal = bool(
+                constraint_embedded
+                and (
+                    relation_tokens & {
+                        "after", "before", "during", "since", "until",
+                        "year", "date", "dissolve", "charter",
+                    }
+                    or re.search(
+                        r"\b(?:1[0-9]{3}|20[0-9]{2})\b",
+                        f"{candidate.subject} {candidate.value}",
+                    )
+                    or bool({"date", "year", "time", "temporal"} & qualifier_metadata)
+                )
+            )
+            checks.append(output_is_temporal or embedded_temporal)
         elif family == "cardinality":
             checks.append(_projection_type_compatible(
                 selected_type, "number", numeric_aliases=True,

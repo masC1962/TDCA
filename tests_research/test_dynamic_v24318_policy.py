@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from dataclasses import replace
+from types import SimpleNamespace
 
 from tdca_research.budget import Budget
 from tdca_research.dynamic.graph import OperationType
@@ -17,6 +18,7 @@ from tdca_research.dynamic_v2.verifier import (
     _endpoint_in_anchors,
     _endpoint_mentioned_in_description,
     _inverse_bound_output_role_certificate,
+    _qualifier_certificate,
     _query_conditioned_signals,
     _relation_target_certificate,
     _structural_dependency_binding_coverage,
@@ -373,6 +375,31 @@ def test_controller_relation_certificate_rejects_output_type_as_predicate():
         "has_border_troops", "GDR border guards",
         "Border troops of East Germany are from what country?",
     )
+    assert _relation_target_certificate(
+        "Who played the little girl?", "portrayed", "person",
+        known_entities=[],
+    ) == 0.0
+    assert _relation_target_certificate(
+        "Who played the little girl?", "portrayed", "person",
+        known_entities=[], acting_relation_equivalence=True,
+    ) == 1.0
+
+
+def test_temporal_qualifier_can_be_certified_on_bound_input_relation():
+    _, _, graph = chain_graph()
+    claim = graph.node("c2")
+    claim.subject = "Indian Rebellion of 1857"
+    claim.relation = "inverse_of:was_dissolved_after"
+    claim.value = "British East India Company"
+    semantics = SimpleNamespace(
+        subject_type="event", value_type="organization", qualifiers={},
+    )
+    assert _qualifier_certificate(
+        ("temporal",), claim, semantics, "value",
+    ) == 0.0
+    assert _qualifier_certificate(
+        ("temporal",), claim, semantics, "value", constraint_embedded=True,
+    ) == 1.0
 
 
 def test_query_mentioned_endpoint_binding_handles_titles_and_connectors():

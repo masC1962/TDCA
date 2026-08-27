@@ -276,6 +276,14 @@ class DynamicV2ResearchConfig(DynamicResearchConfig):
     # lower-case creative-work titles and connector-rich names without using
     # an extractor answer label or a gold answer.
     query_mentioned_endpoint_binding: bool = False
+
+    # v2.4.3.32 permits an explicit qualifier to be satisfied on a bound input
+    # endpoint, recognizes acting-role relation paraphrases, and lets a
+    # controller-certified output premise enter a JOIN whose purpose is to
+    # complete that premise's dependency binding.
+    constraint_embedded_qualifier_certificate: bool = False
+    acting_relation_equivalence: bool = False
+    controller_projection_join_premise: bool = False
     terminal_min_relation_target_alignment: float = 0.70
     terminal_min_subject_binding_coverage: float = 0.70
     terminal_min_dependency_binding_coverage: float = 0.70

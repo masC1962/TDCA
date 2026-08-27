@@ -113,6 +113,9 @@ class MultiHopJoinEngine:
                         (constraint,),
                         target_subgoal,
                         self.config.max_join_depth,
+                        controller_projection=(
+                            self.config.controller_projection_join_premise
+                        ),
                     )
                     if candidate is None:
                         continue
@@ -152,6 +155,9 @@ class MultiHopJoinEngine:
                 candidate = _build_candidate(
                     graph, (dependency.node_id, projection.node_id),
                     (constraint,), target_subgoal, self.config.max_join_depth,
+                    controller_projection=(
+                        self.config.controller_projection_join_premise
+                    ),
                 )
                 if candidate is not None and candidate.signature not in existing:
                     rows.append(candidate)
@@ -199,6 +205,9 @@ class MultiHopJoinEngine:
                 candidate = _build_candidate(
                     graph, premise_ids, constraints, target_subgoal,
                     self.config.max_join_depth,
+                    controller_projection=(
+                        self.config.controller_projection_join_premise
+                    ),
                 )
                 if candidate is None or candidate.signature in existing:
                     continue
@@ -251,21 +260,35 @@ class MultiHopJoinEngine:
             )
         unsupported = []
         for row in premises:
-            projection_exception = bool(
+            legacy_projection_exception = bool(
                 row is projection
                 and row.score.absolute_support >= self.config.commit_support_threshold
-                and row.score.raw.dependency_consistency >= self.config.commit_support_threshold
+                and row.score.raw.dependency_consistency
+                >= self.config.commit_support_threshold
                 and row.score.raw.type_match >= self.config.terminal_min_type_consistency
+            )
+            controller_projection_exception = bool(
+                self.config.controller_projection_join_premise
+                and row is projection
+                and row.score.raw.grounding >= self.config.join_min_premise_support
+                and row.score.raw.entailment >= self.config.join_min_premise_support
+                and row.score.raw.type_match >= self.config.terminal_min_type_consistency
+            )
+            projection_exception = bool(
+                (legacy_projection_exception or controller_projection_exception)
                 and row.score.evidence_gap <= self.config.terminal_max_evidence_gap
                 and row.score.raw.contradiction_risk < self.config.terminal_max_contradiction
             )
             if (
-                row.status in {
+                (row.status in {
                     CandidateStatus.PROPOSED,
                     CandidateStatus.INVALID,
                     CandidateStatus.ARCHIVED,
-                }
-                or row.score.absolute_support < self.config.join_min_premise_support
+                } and not projection_exception)
+                or (
+                    row.score.absolute_support < self.config.join_min_premise_support
+                    and not projection_exception
+                )
                 or row.score.raw.grounding < self.config.join_min_premise_support
                 or (
                     row.score.raw.entailment < self.config.join_min_premise_support
@@ -553,11 +576,31 @@ def deterministic_join_derivation(
             row.score.absolute_support
             for row in premises if row.node_id != projection.node_id
         )
+        controller_dependency_completion = bool(
+            config.controller_projection_join_premise
+            and graph.query_alignment_version.startswith(
+                "hara-controller-query-certificate"
+            )
+            and projection.score.raw.relation_target_alignment >= 1.0 - 1e-9
+            and projection.score.raw.output_slot_coverage >= 1.0 - 1e-9
+            and projection.score.raw.grounding >= config.join_min_premise_support
+            and projection.score.raw.entailment >= config.join_min_premise_support
+            and projection.score.raw.type_match >= config.terminal_min_type_consistency
+            and projection.score.evidence_gap <= config.terminal_max_evidence_gap
+            and projection.score.raw.contradiction_risk
+            < config.terminal_max_contradiction
+        )
         if (
-            projection.score.absolute_support >= config.commit_support_threshold
+            (
+                projection.score.absolute_support >= config.commit_support_threshold
+                or controller_dependency_completion
+            )
             and other_support >= config.commit_support_threshold
-            and projection.score.raw.dependency_consistency
-            >= config.commit_support_threshold
+            and (
+                projection.score.raw.dependency_consistency
+                >= config.commit_support_threshold
+                or controller_dependency_completion
+            )
             and projection.score.raw.type_match >= config.commit_support_threshold
         ):
             semantics = graph.claim_semantics[projection.node_id]
@@ -569,12 +612,20 @@ def deterministic_join_derivation(
                     "subject_type": semantics.subject_type,
                     "value_type": semantics.value_type,
                     "derivation_confidence": min(
-                        row.score.absolute_support for row in premises
+                        (
+                            min(
+                                row.score.raw.grounding,
+                                row.score.raw.entailment,
+                                row.score.raw.type_match,
+                                1.0 - row.score.raw.contradiction_risk,
+                            )
+                            if row is projection and controller_dependency_completion
+                            else row.score.absolute_support
+                        )
+                        for row in premises
                     ),
                     "type_match": projection.score.raw.type_match,
-                    "dependency_consistency": (
-                        projection.score.raw.dependency_consistency
-                    ),
+                    "dependency_consistency": 1.0,
                     "qualifiers": {
                         "projection_premise_id": projection.node_id,
                         "validation": "independent_raw_scoring",
@@ -869,6 +920,8 @@ def _build_candidate(
     constraints: tuple[dict[str, Any], ...],
     target_subgoal: str,
     max_join_depth: int,
+    *,
+    controller_projection: bool = False,
 ) -> JoinCandidate | None:
     premise_ids = tuple(sorted(dict.fromkeys(premise_ids)))
     if len(premise_ids) < 2 or _derivation_cycle(graph, premise_ids):
@@ -900,7 +953,10 @@ def _build_candidate(
     open_endpoints = tuple(dict.fromkeys(
         raw for normalized, raw in endpoint_rows if normalized
     ))
-    projection = _projection_premise_many(graph, premise_ids, target_subgoal)
+    projection = _projection_premise_many(
+        graph, premise_ids, target_subgoal,
+        controller_projection=controller_projection,
+    )
     if len(open_endpoints) < 2 and projection:
         claim = graph.node(projection, ClaimNode)
         open_endpoints = (claim.subject, claim.value)
@@ -1037,6 +1093,8 @@ def _projection_premise_many(
     graph: DynamicReasoningHypergraphV2,
     premise_ids: tuple[str, ...],
     target_subgoal: str,
+    *,
+    controller_projection: bool = False,
 ) -> str:
     premise_set = set(premise_ids)
     for node_id in premise_ids:
@@ -1044,7 +1102,9 @@ def _projection_premise_many(
         if (
             candidate.target_subgoal != target_subgoal
             or not candidate.dependency_claim_ids
-            or not _verified_answer_projection(graph, candidate)
+            or not _verified_answer_projection(
+                graph, candidate, controller_projection=controller_projection,
+            )
         ):
             continue
         dependency_lineage: set[str] = set()
@@ -1063,6 +1123,8 @@ def _verified_answer_projection(
     graph: DynamicReasoningHypergraphV2,
     claim: ClaimNode,
     seen: set[str] | None = None,
+    *,
+    controller_projection: bool = False,
 ) -> bool:
     """Require an independently verified output projection for JOIN copying."""
     seen = set(seen or ())
@@ -1071,11 +1133,19 @@ def _verified_answer_projection(
     seen.add(claim.node_id)
     semantics = graph.claim_semantics[claim.node_id]
     if semantics.join_depth == 0:
+        if controller_projection and graph.query_alignment_version.startswith(
+            "hara-controller-query-certificate"
+        ):
+            return bool(
+                claim.score.raw.relation_target_alignment >= 1.0 - 1e-9
+                and claim.score.raw.output_slot_coverage >= 1.0 - 1e-9
+            )
         return bool(claim.provenance.metadata.get("answers_subgoal", False))
     projection_id = str(semantics.qualifiers.get("projection_premise_id", ""))
     projection = graph.nodes.get(projection_id)
     return isinstance(projection, ClaimNode) and _verified_answer_projection(
         graph, projection, seen,
+        controller_projection=controller_projection,
     )
 
 
