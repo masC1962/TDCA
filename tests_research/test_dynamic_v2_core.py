@@ -60,7 +60,11 @@ from tdca_research.dynamic_v2.graph import (
     RetrievalAttemptRecord,
     TerminationKind,
 )
-from tdca_research.dynamic_v2.join import MultiHopJoinEngine
+from tdca_research.dynamic_v2.join import (
+    JoinCandidate,
+    MultiHopJoinEngine,
+    _dominance_prune,
+)
 from tdca_research.dynamic_v2.memory import RelationLightCorpusMemory
 from tdca_research.dynamic_v2.query_graph import compile_query_graph, types_compatible
 from tdca_research.dynamic_v2.revision import BeliefRevisionDetector
@@ -1471,6 +1475,32 @@ def test_v24311_does_not_merge_dates_or_unrelated_numeric_claims():
         },
     ]
     assert _consolidate_grounded_numeric_intervals(different_spans) == different_spans
+
+
+def test_v24312_dominance_pruning_preserves_semantic_frontier_priority_when_enabled():
+    preferred = JoinCandidate(
+        premise_ids=("dependency", "range_claim"),
+        binding="preferred",
+        target_subgoal="s_answer",
+        signature="ffff",
+        join_depth=1,
+        projection_premise_id="range_claim",
+        deterministic_validation={"goal_alignment": 1.0},
+    )
+    hash_earlier = JoinCandidate(
+        premise_ids=("dependency", "scalar_claim"),
+        binding="fallback",
+        target_subgoal="s_answer",
+        signature="0000",
+        join_depth=1,
+        projection_premise_id="scalar_claim",
+        deterministic_validation={"goal_alignment": 1.0},
+    )
+    candidates = [preferred, hash_earlier]
+    assert _dominance_prune(candidates)[0] == hash_earlier
+    assert _dominance_prune(
+        candidates, preserve_policy_order=True,
+    ) == candidates
 
 
 def test_dependency_identity_exception_requires_literal_parenthetical_alias():

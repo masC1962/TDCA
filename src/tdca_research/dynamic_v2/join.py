@@ -217,7 +217,10 @@ class MultiHopJoinEngine:
                 row.premise_ids,
             ),
         )
-        return _dominance_prune(candidates)[: self.config.max_join_frontier_candidates]
+        return _dominance_prune(
+            candidates,
+            preserve_policy_order=self.config.stable_join_frontier_priority,
+        )[: self.config.max_join_frontier_candidates]
 
     def check_feasible(
         self,
@@ -1266,10 +1269,12 @@ def _deterministic_numeric_comparison_claim(
     }
 
 
-def _dominance_prune(candidates: list[JoinCandidate]) -> list[JoinCandidate]:
+def _dominance_prune(
+    candidates: list[JoinCandidate], *, preserve_policy_order: bool = False,
+) -> list[JoinCandidate]:
     """Remove only structurally equivalent candidates; never drop extra constraints."""
-    best: dict[tuple[Any, ...], JoinCandidate] = {}
-    for row in candidates:
+    best: dict[tuple[Any, ...], tuple[int, JoinCandidate]] = {}
+    for index, row in enumerate(candidates):
         key = (
             row.target_subgoal,
             row.premise_ids,
@@ -1277,9 +1282,17 @@ def _dominance_prune(candidates: list[JoinCandidate]) -> list[JoinCandidate]:
             _constraint_signature(row.constraints),
         )
         current = best.get(key)
-        if current is None or (row.join_depth, row.signature) < (current.join_depth, current.signature):
-            best[key] = row
-    return sorted(best.values(), key=lambda row: (
+        if current is None:
+            best[key] = (index, row)
+        elif (row.join_depth, row.signature) < (
+            current[1].join_depth, current[1].signature,
+        ):
+            # Keep the structural group's original position even if a later
+            # representative is canonically preferable.
+            best[key] = (current[0], row)
+    if preserve_policy_order:
+        return [row for _, row in sorted(best.values(), key=lambda value: value[0])]
+    return sorted((row for _, row in best.values()), key=lambda row: (
         -float(row.deterministic_validation.get("goal_alignment", 0.0)),
         -int(bool(row.projection_premise_id)),
         len(row.premise_ids),

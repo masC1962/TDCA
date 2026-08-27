@@ -199,6 +199,10 @@ class DynamicV2ResearchConfig(DynamicResearchConfig):
     # explicitly states their interval and all relational provenance agrees.
     grounded_numeric_interval_consolidation: bool = False
 
+    # v2.4.3.12 prevents structural deduplication from replacing the semantic
+    # JOIN frontier order with an arbitrary stable-hash order.
+    stable_join_frontier_priority: bool = False
+
     # Terminal acceptance is a conjunctive readout over independent belief
     # channels.  These are initial development values, never learned weights.
     terminal_min_absolute_support: float = 0.70
