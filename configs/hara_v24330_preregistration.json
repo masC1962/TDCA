@@ -1,0 +1,60 @@
+{
+  "schema_version": "hara-v2.4.3.30-preregistration-v1",
+  "frozen_at": "2026-08-28",
+  "training": false,
+  "seed": 20260820,
+  "source_commit": "bf14c325",
+  "parent_experiment": "hara-v2.4.3.29",
+  "parent_runs": {
+    "development_canary_5": "research_outputs/musique_distractor_smoke_hara_1787846953584734105"
+  },
+  "parent_decision": "PARTIAL_PASS_FULL_CHAIN_BELOW_GATE",
+  "observed_failure_before_design": {
+    "canary_f1": 0.6,
+    "canary_full_chain": 0.6,
+    "canary_candidate_presence": 0.8,
+    "canary_graph_proof_completion": 0.8,
+    "selective_accuracy": 1.0,
+    "mechanism_failures": [
+      "A correct Beyonce Knowles-to-Texas candidate was not exposed because both candidate endpoints were reachable through the existing graph, even though only Beyonce Knowles was fixed by the dependency and Texas was independently derived evidence.",
+      "The East Germany border-troops item had local evidence explicitly tying East German, GDR, and GDR border guards, but the extractor lacked a generic evidence-local role-to-origin projection.",
+      "The two failures left root objectives pending and full-chain completion at 0.60 despite zero unsupported answers and selective accuracy 1.0."
+    ]
+  },
+  "architectural_delta": {
+    "independent_path_projection": "When both endpoints are graph-reachable, the query certificate may expose the typed non-base endpoint only if the opposite endpoint is fixed by base dependencies and relation alignment is independently satisfied.",
+    "role_origin_projection": "Evidence-local parenthetical abbreviations may produce a role-to-origin candidate only when the acronym, role modifier, bound dependency, and expected geographical output type are all present in the same sentence.",
+    "independent_raw_scoring": "All deterministic proposals still pass the independent verifier; deterministic generation does not assign final support.",
+    "threshold_changed": false,
+    "training": false,
+    "per_question_or_answer_patch": false
+  },
+  "frozen_config": "configs/hara_v24330_qwen.yaml",
+  "frozen_manifests": {
+    "development_canary": "configs/splits/musique_dynamic_v24317_dev_canary_seed20260820.json",
+    "smoke_a": "configs/splits/musique_dynamic_seed20260820.json",
+    "shadow_c": "configs/splits/musique_hara_v24318_shadow_c_seed20260820.json"
+  },
+  "execution_order": [
+    "development canary 5",
+    "opened causal diagnostic if any query-frontier regression appears",
+    "Smoke-A20 if development passes",
+    "paired control/HARA Shadow-C20 without between-arm inspection if Smoke-A passes"
+  ],
+  "development_gate": {
+    "canary_f1_min": 0.60,
+    "canary_full_chain_min": 0.80,
+    "canary_candidate_presence_min": 0.60,
+    "canary_graph_proof_completion_min": 0.80,
+    "unsupported_answer_count_max": 0,
+    "infrastructure_failure_count_max": 0
+  },
+  "campaign_budget_before_run": {
+    "campaign_id": "hara-v24318-iclr2027-20260827",
+    "provider_attempts": 451,
+    "provider_reported_tokens": 502082,
+    "hard_attempt_cap": 2000,
+    "hard_token_cap": 2000000
+  },
+  "stop_condition": "Continue generic no-training diagnosis and iteration after any development failure. Stop only on the full preregistered HARA gate plus committed safe-stop report, or before the next call would exceed the shared 2000-attempt/2000000-token hard cap."
+}
