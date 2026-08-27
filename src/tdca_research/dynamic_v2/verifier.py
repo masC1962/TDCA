@@ -267,6 +267,7 @@ class MultiSampleIndependentVerifier:
         if controller_alignment:
             certificates = _controller_query_alignment_certificates(
                 comparison_candidates, graph, subgoal_id, evidence_profiles,
+                strict_endpoint_identity=self.config.strict_query_endpoint_identity,
             )
             for candidate in candidates:
                 certificate = certificates[candidate.node_id]
@@ -391,6 +392,9 @@ class MultiSampleIndependentVerifier:
                     candidate, graph, subgoal_id, alignment_position,
                     structural_dependency=self.config.structural_dependency_binding_coverage,
                     controller_certificate=controller_alignment,
+                    controller_typed_output=(
+                        self.config.controller_typed_output_consistency
+                    ),
                 )
         for candidate in comparison_candidates:
             aggregated.setdefault(candidate.node_id, candidate.score.raw)
@@ -591,6 +595,8 @@ def _controller_query_alignment_certificates(
     graph: DynamicReasoningHypergraphV2,
     subgoal_id: str,
     evidence_profiles: dict[str, VerificationSignals],
+    *,
+    strict_endpoint_identity: bool = False,
 ) -> dict[str, dict[str, Any]]:
     """Certify query satisfaction without a second provider judgment.
 
@@ -667,19 +673,27 @@ def _controller_query_alignment_certificates(
                 value = normalize_text(edge.value)
                 if not subject or not value:
                     continue
-                if _endpoint_in_anchors(subject, reachable) and not _endpoint_in_anchors(
-                    value, reachable,
+                if _endpoint_in_anchors(
+                    subject, reachable, strict_identity=strict_endpoint_identity,
+                ) and not _endpoint_in_anchors(
+                    value, reachable, strict_identity=strict_endpoint_identity,
                 ):
                     reachable.add(value)
                     changed = True
-                elif _endpoint_in_anchors(value, reachable) and not _endpoint_in_anchors(
-                    subject, reachable,
+                elif _endpoint_in_anchors(
+                    value, reachable, strict_identity=strict_endpoint_identity,
+                ) and not _endpoint_in_anchors(
+                    subject, reachable, strict_identity=strict_endpoint_identity,
                 ):
                     reachable.add(subject)
                     changed = True
 
-        subject_bound = _endpoint_in_anchors(target.subject, reachable)
-        value_bound = _endpoint_in_anchors(target.value, reachable)
+        subject_bound = _endpoint_in_anchors(
+            target.subject, reachable, strict_identity=strict_endpoint_identity,
+        )
+        value_bound = _endpoint_in_anchors(
+            target.value, reachable, strict_identity=strict_endpoint_identity,
+        )
         semantics = graph.claim_semantics[target.node_id]
         relation = _relation_target_certificate(
             description, target.relation, expected_type,
@@ -761,7 +775,9 @@ def _controller_query_alignment_certificates(
     return result
 
 
-def _endpoint_in_anchors(endpoint: str, anchors: set[str]) -> bool:
+def _endpoint_in_anchors(
+    endpoint: str, anchors: set[str], *, strict_identity: bool = False,
+) -> bool:
     value = normalize_text(endpoint).removesuffix(" s").strip()
     if not value:
         return False
@@ -779,6 +795,8 @@ def _endpoint_in_anchors(endpoint: str, anchors: set[str]) -> bool:
             and value == f"{normalized}s"
         ):
             return True
+        if strict_identity:
+            continue
         # Possessive normalization and harmless title decoration are common in
         # planner anchors.  Containment is allowed only for a multi-token name.
         shorter, longer = sorted((value, normalized), key=len)
@@ -950,6 +968,7 @@ def _query_conditioned_signals(
     *,
     structural_dependency: bool,
     controller_certificate: bool = False,
+    controller_typed_output: bool = False,
 ) -> VerificationSignals:
     """Keep evidence truth and query satisfaction as independent raw channels.
 
@@ -1008,10 +1027,22 @@ def _query_conditioned_signals(
         "qualifier_coverage": qualifier,
         "output_slot_coverage": output_slot,
     }
+    type_match = raw.type_match
+    if controller_typed_output and answer_position in {"subject", "value"}:
+        semantics = graph.claim_semantics[candidate.node_id]
+        selected_type = (
+            semantics.subject_type if answer_position == "subject"
+            else semantics.value_type
+        )
+        if _projection_type_compatible(
+            selected_type, expected_type, numeric_aliases=True,
+        ):
+            type_match = 1.0
+            reasons.append("controller_typed_output_consistency")
     return VerificationSignals(
         grounding=raw.grounding,
         entailment=raw.entailment,
-        type_match=raw.type_match,
+        type_match=type_match,
         dependency_consistency=_unit(dependency_consistency),
         retrieval_support=raw.retrieval_support,
         contradiction_risk=raw.contradiction_risk,

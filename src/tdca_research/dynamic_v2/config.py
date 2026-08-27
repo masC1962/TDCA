@@ -258,6 +258,12 @@ class DynamicV2ResearchConfig(DynamicResearchConfig):
     deterministic_temporal_projection: bool = False
     constraint_projection_canonicalization: bool = False
     join_requires_verified_projection_premise: bool = False
+
+    # v2.4.3.29 prevents lexical containment from conflating an entity with a
+    # derived place (River != River Delta), certifies an exact typed wh-slot,
+    # and hoists the projection-premise requirement before JOIN allocation.
+    strict_query_endpoint_identity: bool = False
+    controller_typed_output_consistency: bool = False
     terminal_min_relation_target_alignment: float = 0.70
     terminal_min_subject_binding_coverage: float = 0.70
     terminal_min_dependency_binding_coverage: float = 0.70

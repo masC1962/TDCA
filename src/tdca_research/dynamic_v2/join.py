@@ -237,6 +237,18 @@ class MultiHopJoinEngine:
         projection = next((
             row for row in premises if row.node_id == candidate.projection_premise_id
         ), None)
+        if (
+            self.config.join_requires_verified_projection_premise
+            and candidate.join_kind in {
+                "relational_path", "conjunctive_relational_path",
+            }
+            and projection is None
+        ):
+            return JoinFeasibilityResult(
+                False,
+                ("missing_verified_projection_premise",),
+                tuple(candidate.premise_ids),
+            )
         unsupported = []
         for row in premises:
             projection_exception = bool(

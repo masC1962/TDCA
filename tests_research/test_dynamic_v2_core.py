@@ -2377,6 +2377,11 @@ def test_v24328_symbolic_join_requires_verified_projection_when_enabled():
         deterministic_validation={"goal_alignment": 1.0},
     )
     assert deterministic_join_derivation(graph, candidate, cfg) is None
+    feasibility = MultiHopJoinEngine(
+        DeterministicMockLLM(), Budget(16, 6000, 200, Usage()), cfg,
+    ).check_feasible(graph, candidate)
+    assert not feasibility.feasible
+    assert feasibility.reason_codes == ("missing_verified_projection_premise",)
 
 
 def test_v24_region_retrieval_gate_requires_material_query_novelty():

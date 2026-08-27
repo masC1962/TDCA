@@ -363,6 +363,10 @@ def test_controller_relation_certificate_rejects_output_type_as_predicate():
         "administrative_territorial_entity", known_entities=["Pedro Leopoldo"],
     ) == 0.0
     assert _endpoint_in_anchors("Elizabeth Berg", {"elizabeth bergs"})
+    assert _endpoint_in_anchors("Mississippi River Delta", {"mississippi river"})
+    assert not _endpoint_in_anchors(
+        "Mississippi River Delta", {"mississippi river"}, strict_identity=True,
+    )
     assert "origin" in _candidate_relation_concepts("has_border_troops")
     assert _inverse_bound_output_role_certificate(
         "has_border_troops", "GDR border guards",
@@ -404,6 +408,28 @@ def test_controller_certificate_is_not_overwritten_by_weaker_legacy_binding():
     assert updated.subject_binding_coverage == 1.0
     assert updated.output_slot_coverage == 1.0
     assert updated.full_subgoal_coverage == 1.0
+
+
+def test_controller_exact_output_type_can_certify_type_consistency():
+    _, _, graph = chain_graph()
+    claim = graph.node("c2")
+    raw = replace(
+        claim.score.raw,
+        type_match=0.75,
+        relation_target_alignment=1.0,
+        subject_binding_coverage=1.0,
+        dependency_binding_coverage=1.0,
+        qualifier_coverage=1.0,
+        output_slot_coverage=1.0,
+    )
+    updated = _query_conditioned_signals(
+        raw, claim, graph, claim.target_subgoal, "value",
+        structural_dependency=True,
+        controller_certificate=True,
+        controller_typed_output=True,
+    )
+    assert updated.type_match == 1.0
+    assert "controller_typed_output_consistency" in updated.reasons
 
 
 def test_prompt_inclusive_verifier_packets_do_not_fit_only_on_output_tokens():
