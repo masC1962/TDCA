@@ -211,6 +211,10 @@ class DynamicV2ResearchConfig(DynamicResearchConfig):
     # before using raw endpoint overlap as a tie breaker.
     prefer_minimal_join_open_frontier: bool = False
 
+    # v2.4.3.14 gives a lossless, evidence-exact interval projection priority
+    # over scalar fragments while leaving every other JOIN order untouched.
+    grounded_interval_projection_priority: bool = False
+
     # Terminal acceptance is a conjunctive readout over independent belief
     # channels.  These are initial development values, never learned weights.
     terminal_min_absolute_support: float = 0.70

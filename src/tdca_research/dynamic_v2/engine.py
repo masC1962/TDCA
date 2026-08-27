@@ -812,6 +812,10 @@ class DynamicHypergraphV2Reasoner:
                         -float(row.deterministic_validation.get("goal_alignment", 0.0)),
                         -len(_premise_closure(graph, row.premise_ids) & dependency_ids),
                         -int(bool(_premise_closure(graph, row.premise_ids) & direct_ids)),
+                        _grounded_interval_projection_rank(
+                            graph, row,
+                            self.config.grounded_interval_projection_priority,
+                        ),
                         _join_frontier_compactness(
                             row, self.config.prefer_minimal_join_open_frontier,
                         ),
@@ -1820,6 +1824,28 @@ def _join_frontier_compactness(
 ) -> int:
     """Rank fewer unresolved endpoints first without rejecting a proof path."""
     return len(candidate.open_endpoints) if enabled else 0
+
+
+def _grounded_interval_projection_rank(
+    graph: DynamicReasoningHypergraphV2,
+    candidate: JoinCandidate,
+    enabled: bool,
+) -> int:
+    """Prefer only lossless interval projections; preserve all other ordering."""
+    if not enabled or not candidate.projection_premise_id:
+        return 0
+    semantics = graph.claim_semantics.get(candidate.projection_premise_id)
+    if semantics is None or semantics.extraction_mode != (
+        "grounded_numeric_interval_consolidation"
+    ):
+        return 0
+    claim = graph.nodes.get(candidate.projection_premise_id)
+    if not isinstance(claim, ClaimNode):
+        return 0
+    audit = claim.provenance.metadata.get("typed_qualifiers", {}).get(
+        "numeric_interval_consolidation", {}
+    )
+    return -1 if audit.get("evidence_exact") is True else 0
 
 
 def _extraction_state_fingerprint(

@@ -8,6 +8,7 @@ from tdca_research.dynamic.graph import (
     BranchState,
     BranchStatus,
     CandidateStatus,
+    ClaimNode,
     GraphInvariantError,
     GraphLimits,
     GraphOperation,
@@ -40,6 +41,7 @@ from tdca_research.dynamic_v2.engine import (
     _extraction_state_fingerprint,
     _join_attempt_key,
     _join_frontier_compactness,
+    _grounded_interval_projection_rank,
     _join_can_answer_subgoal,
     _missing_binding_query,
     _novel_retrieval_hits_for_region,
@@ -1521,6 +1523,23 @@ def test_v24313_prefers_minimal_unresolved_join_frontier_only_when_enabled():
     assert _join_frontier_compactness(loose_declared_binding, False) == 0
     assert _join_frontier_compactness(explicit_binding, True) == 2
     assert _join_frontier_compactness(loose_declared_binding, True) == 4
+
+
+def test_v24314_interval_projection_priority_requires_evidence_exact_provenance():
+    _, _, graph = chain_graph()
+    graph.claim_semantics["c1"].extraction_mode = (
+        "grounded_numeric_interval_consolidation"
+    )
+    graph.node("c1", ClaimNode).provenance.metadata["typed_qualifiers"] = {
+        "numeric_interval_consolidation": {"evidence_exact": True}
+    }
+    candidate = JoinCandidate(
+        premise_ids=("c1", "c2"), binding="x",
+        target_subgoal="s_root", signature="interval", join_depth=1,
+        projection_premise_id="c1",
+    )
+    assert _grounded_interval_projection_rank(graph, candidate, False) == 0
+    assert _grounded_interval_projection_rank(graph, candidate, True) == -1
 
 
 def test_dependency_identity_exception_requires_literal_parenthetical_alias():
