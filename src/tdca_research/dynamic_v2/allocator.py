@@ -1196,7 +1196,10 @@ class AdaptiveComputationAllocator:
 
 
 def _verification_pass_multiplier(config: DynamicV2ResearchConfig) -> int:
-    return 2 if config.query_conditioned_semantic_alignment else 1
+    return 2 if (
+        config.query_conditioned_semantic_alignment
+        and not config.controller_query_alignment_certificates
+    ) else 1
 
 
 def _provider_backed_operation(

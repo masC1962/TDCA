@@ -191,6 +191,9 @@ def dynamic_v2_metrics(
                 value.get("provenance", {}).get("metadata", {})
                 .get("verification_scoring_audit", {})
                 .get("query_alignment_passes_completed", 0)
+                or value.get("provenance", {}).get("metadata", {})
+                .get("verification_scoring_audit", {})
+                .get("query_alignment_certificates_completed", 0)
             ) > 0
             and value.get("provenance", {}).get("metadata", {})
             .get("verification_scoring_audit", {}).get("query_alignment_passes")

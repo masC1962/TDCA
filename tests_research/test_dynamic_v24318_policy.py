@@ -11,6 +11,7 @@ from tdca_research.dynamic_v2.termination import TerminalBeliefReadout
 from tdca_research.dynamic_v2.verifier import (
     MultiSampleIndependentVerifier,
     _query_conditioned_signals,
+    _relation_target_certificate,
     _structural_dependency_binding_coverage,
 )
 from tdca_research.llm import DeterministicMockLLM
@@ -203,6 +204,7 @@ def test_query_alignment_separates_true_tuple_from_subgoal_coverage_and_repairs_
         {"scores": [_alignment_row("c_state")]},
         {"scores": [_alignment_row("c_state")]},
     ])
+    preverify = graph
     budget = Budget(16, 6000, 200, Usage())
     verifier = MultiSampleIndependentVerifier(mock, budget, cfg)
     proposal = verifier.propose(
@@ -227,6 +229,48 @@ def test_query_alignment_separates_true_tuple_from_subgoal_coverage_and_repairs_
     assert mock.requests[1][0] == "hara_v24319_independent_query_alignment_pass_1"
     assert "Compiled query constraint" in mock.requests[1][1][1]["content"]
     assert "Shared evidence" not in mock.requests[1][1][1]["content"]
+
+    certificate_cfg = replace(
+        cfg, controller_query_alignment_certificates=True,
+    )
+    certificate_mock = CapturingMock(json_responses=[
+        {"scores": [_alignment_row("c_state")]},
+    ])
+    certificate_budget = Budget(16, 6000, 200, Usage())
+    certificate_verifier = MultiSampleIndependentVerifier(
+        certificate_mock, certificate_budget, certificate_cfg,
+    )
+    certificate_proposal = certificate_verifier.propose(
+        preverify, "s_root", "branch_root",
+        "What administrative territorial entity contains Darley Ramon Torres's place of birth?",
+        "op_v2_107", 1, 800,
+    )
+    assert certificate_proposal is not None
+    certificate_graph = V2GraphController(certificate_cfg).apply(
+        preverify, certificate_proposal,
+    )
+    certificate_claim = certificate_graph.node("c_state")
+    assert certificate_claim.score.raw.relation_target_alignment == 1.0
+    assert certificate_claim.score.raw.full_subgoal_coverage == 1.0
+    assert certificate_budget.usage.llm_calls == 1
+    audit = certificate_proposal.payload["scores"]["c_state"]["scoring_audit"]
+    assert audit["query_alignment_passes_completed"] == 0
+    assert audit["query_alignment_certificates_completed"] == 1
+    assert audit["query_alignment_passes"][0]["mode"] == (
+        "controller_query_graph_certificate"
+    )
+
+
+def test_controller_relation_certificate_rejects_output_type_as_predicate():
+    question = "What administrative territorial entity is Pedro Leopoldo located in?"
+    assert _relation_target_certificate(
+        question, "located_in", "administrative_territorial_entity",
+        known_entities=["Pedro Leopoldo"],
+    ) == 1.0
+    assert _relation_target_certificate(
+        question, "administrative_territorial_entity",
+        "administrative_territorial_entity", known_entities=["Pedro Leopoldo"],
+    ) == 0.0
 
 
 def test_terminal_query_alignment_is_conjunctive_not_fused_into_support():

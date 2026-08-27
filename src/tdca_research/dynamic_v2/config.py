@@ -231,6 +231,11 @@ class DynamicV2ResearchConfig(DynamicResearchConfig):
     # the binding from candidate endpoints and declared dependency lineage.
     query_conditioned_semantic_alignment: bool = False
     structural_dependency_binding_coverage: bool = False
+    # v2.4.3.20 replaces the unconditional second verifier request with a
+    # controller-owned certificate over the compiled query graph.  Evidence
+    # scoring remains an independent provider pass; relation, binding, output
+    # and qualifier coverage are computed without reading evidence scores.
+    controller_query_alignment_certificates: bool = False
     terminal_min_relation_target_alignment: float = 0.70
     terminal_min_subject_binding_coverage: float = 0.70
     terminal_min_dependency_binding_coverage: float = 0.70

@@ -252,7 +252,40 @@ class MultiSampleIndependentVerifier:
                 })
         if evidence_calls == 0:
             return None
-        if self.config.query_conditioned_semantic_alignment:
+        aggregated = {
+            candidate.node_id: _average(raw_samples[candidate.node_id])
+            for candidate in candidates
+        }
+        evidence_profiles = {
+            candidate.node_id: aggregated.get(candidate.node_id, candidate.score.raw)
+            for candidate in comparison_candidates
+        }
+        controller_alignment = bool(
+            self.config.query_conditioned_semantic_alignment
+            and self.config.controller_query_alignment_certificates
+        )
+        if controller_alignment:
+            certificates = _controller_query_alignment_certificates(
+                comparison_candidates, graph, subgoal_id, evidence_profiles,
+            )
+            for candidate in candidates:
+                certificate = certificates[candidate.node_id]
+                alignment_samples[candidate.node_id].append({
+                    name: float(certificate[name]) for name in ALIGNMENT_FIELDS
+                })
+                alignment_projection_votes[candidate.node_id].append(
+                    str(certificate["answer_position"])
+                )
+                alignment_audits[candidate.node_id].append({
+                    "pass": 0,
+                    "mode": "controller_query_graph_certificate",
+                    "raw": {
+                        name: float(certificate[name]) for name in ALIGNMENT_FIELDS
+                    },
+                    "answer_position": str(certificate["answer_position"]),
+                    "certificate": certificate["certificate"],
+                })
+        elif self.config.query_conditioned_semantic_alignment:
             for sample_index in range(sample_count):
                 messages = [
                     {"role": "system", "content": HARA_ALIGNMENT_SYSTEM},
@@ -325,9 +358,9 @@ class MultiSampleIndependentVerifier:
                 sample_count if self.config.query_conditioned_semantic_alignment else 0
             ),
             "query_alignment_passes_completed": alignment_calls,
-        }
-        aggregated = {
-            candidate.node_id: _average(raw_samples[candidate.node_id]) for candidate in candidates
+            "query_alignment_certificates_completed": (
+                1 if controller_alignment else 0
+            ),
         }
         if self.config.query_conditioned_semantic_alignment:
             for candidate in candidates:
@@ -417,6 +450,9 @@ class MultiSampleIndependentVerifier:
                         sample_count if self.config.query_conditioned_semantic_alignment else 0
                     ),
                     "query_alignment_passes_completed": alignment_calls,
+                    "query_alignment_certificates_completed": (
+                        1 if controller_alignment else 0
+                    ),
                     "aggregation": "componentwise_arithmetic_mean_before_fusion",
                     "comparison_group": (
                         "slot_answer_alternatives"
@@ -526,6 +562,287 @@ def _generic_evidence_endpoint_grounding(
     if generic_cue is None:
         return 1.0
     return _evidence_endpoint_grounding(candidate, graph)
+
+
+def _controller_query_alignment_certificates(
+    candidates: list[ClaimNode],
+    graph: DynamicReasoningHypergraphV2,
+    subgoal_id: str,
+    evidence_profiles: dict[str, VerificationSignals],
+) -> dict[str, dict[str, Any]]:
+    """Certify query satisfaction without a second provider judgment.
+
+    The certificate reads only the compiled query constraint, typed tuple
+    endpoints, controller-owned dependency lineage and independently produced
+    evidence-channel scores.  Evidence scores are used solely to decide which
+    *other* tuple edges may carry a binding; they never become an alignment
+    value.  Excluding the target tuple from its own reachability proof prevents
+    circular subject binding.
+    """
+    constraint = next((
+        row for row in graph.query_graph.get("constraints", [])
+        if str(row.get("subgoal_id")) == subgoal_id
+    ), {})
+    description = str(constraint.get("description") or graph.node(
+        subgoal_id, SubgoalNode,
+    ).instantiated_question)
+    expected_type = graph.node(subgoal_id, SubgoalNode).answer_type
+    base_anchors = {
+        normalize_text(str(value))
+        for value in constraint.get("known_entities", [])
+        if normalize_text(str(value))
+    }
+    subgoal = graph.node(subgoal_id, SubgoalNode)
+    branch_ids = {candidate.branch_id for candidate in candidates}
+    for branch_id in branch_ids:
+        branch = graph.branches.get(branch_id)
+        if branch is None:
+            continue
+        for dependency_id in subgoal.dependencies:
+            claim = graph.nodes.get(str(branch.assignments.get(dependency_id, "")))
+            if isinstance(claim, ClaimNode) and normalize_text(claim.value):
+                base_anchors.add(normalize_text(claim.value))
+    for candidate in candidates:
+        for dependency_id in candidate.dependency_claim_ids:
+            dependency = graph.nodes.get(dependency_id)
+            if isinstance(dependency, ClaimNode) and normalize_text(dependency.value):
+                base_anchors.add(normalize_text(dependency.value))
+
+    result: dict[str, dict[str, Any]] = {}
+    for target in candidates:
+        reachable = set(base_anchors)
+        changed = True
+        while changed:
+            changed = False
+            for edge in candidates:
+                if edge.node_id == target.node_id or not edge.evidence_refs:
+                    continue
+                raw = evidence_profiles.get(edge.node_id, edge.score.raw)
+                if (
+                    raw.grounding < 0.70
+                    or raw.entailment < 0.70
+                    or raw.contradiction_risk >= 0.70
+                ):
+                    continue
+                subject = normalize_text(edge.subject)
+                value = normalize_text(edge.value)
+                if not subject or not value:
+                    continue
+                if _endpoint_in_anchors(subject, reachable) and not _endpoint_in_anchors(
+                    value, reachable,
+                ):
+                    reachable.add(value)
+                    changed = True
+                elif _endpoint_in_anchors(value, reachable) and not _endpoint_in_anchors(
+                    subject, reachable,
+                ):
+                    reachable.add(subject)
+                    changed = True
+
+        subject_bound = _endpoint_in_anchors(target.subject, reachable)
+        value_bound = _endpoint_in_anchors(target.value, reachable)
+        semantics = graph.claim_semantics[target.node_id]
+        answer_position = "none"
+        if subject_bound != value_bound:
+            if subject_bound and _projection_type_compatible(
+                semantics.value_type, expected_type, numeric_aliases=True,
+            ):
+                answer_position = "value"
+            elif value_bound and _projection_type_compatible(
+                semantics.subject_type, expected_type, numeric_aliases=True,
+            ):
+                answer_position = "subject"
+        subject_binding = float(subject_bound != value_bound)
+        output_slot = float(answer_position != "none")
+        dependency = _structural_dependency_binding_coverage(
+            target, graph, subgoal_id,
+        )
+        dependency_coverage = 0.0 if dependency is None else dependency
+        relation = _relation_target_certificate(
+            description, target.relation, expected_type,
+            known_entities=constraint.get("known_entities", []),
+        )
+        qualifier = _qualifier_certificate(
+            tuple(str(value) for value in constraint.get("required_qualifiers", [])),
+            target, semantics, answer_position,
+        )
+        result[target.node_id] = {
+            "relation_target_alignment": relation,
+            "subject_binding_coverage": subject_binding,
+            "dependency_binding_coverage": dependency_coverage,
+            "qualifier_coverage": qualifier,
+            "output_slot_coverage": output_slot,
+            "answer_position": answer_position,
+            "certificate": {
+                "version": "controller-query-constraint-v1",
+                "relation_intent": _relation_intent(description),
+                "candidate_relation_concepts": sorted(
+                    _candidate_relation_concepts(target.relation)
+                ),
+                "reachable_anchor_count_excluding_target": len(reachable),
+                "subject_bound": subject_bound,
+                "value_bound": value_bound,
+                "required_qualifiers": list(
+                    constraint.get("required_qualifiers", [])
+                ),
+            },
+        }
+    return result
+
+
+def _endpoint_in_anchors(endpoint: str, anchors: set[str]) -> bool:
+    value = normalize_text(endpoint).removesuffix(" s").strip()
+    if not value:
+        return False
+    for anchor in anchors:
+        normalized = normalize_text(anchor).removesuffix(" s").strip()
+        if not normalized:
+            continue
+        if value == normalized:
+            return True
+        # Possessive normalization and harmless title decoration are common in
+        # planner anchors.  Containment is allowed only for a multi-token name.
+        shorter, longer = sorted((value, normalized), key=len)
+        if len(shorter) >= 6 and " " in shorter and re.search(
+            rf"\b{re.escape(shorter)}\b", longer,
+        ):
+            return True
+    return False
+
+
+_RELATION_INTENT_PATTERNS = (
+    ("birth_date", r"\b(?:birth date|date of birth)\b|\bwhen\b[^?]*\bborn\b"),
+    ("border", r"\b(?:share[sd]? (?:a )?border|border(?:s|ed|ing)? with|adjoin|adjacent)\b"),
+    ("empty", r"\b(?:empt(?:y|ies|ied|ying)|flows? into|mouth|discharg(?:e|es|ed))\b"),
+    ("capital", r"\b(?:became?|become|made) (?:the )?capital\b|\bcapital of\b"),
+    ("location", r"\b(?:located? in|lies? in|contains?|within|part of)\b"),
+    ("citizenship", r"\b(?:citizenship|nationality)\b"),
+    ("literature", r"\b(?:country|place) of literature\b|\bliterature\b"),
+    ("production", r"\b(?:produc(?:e|ed|er|ers|ing|tion)|made)\b"),
+    ("proximity", r"\b(?:river is by|river by|nearby river|has (?:a )?river)\b"),
+    ("arrival", r"\b(?:came?|come|arriv(?:e|ed|al)|settle[dr]?)\b"),
+    ("origin", r"\b(?:is|are|was|were) from\b|\bfrom what (?:country|state|place)\b"),
+    ("perform", r"\b(?:perform(?:ed|er|ers|ing|s)?|sang|singer|artist)\b"),
+    ("birth_place", r"\b(?:birthplace|place of birth)\b|\bwhere\b[^?]*\bborn\b"),
+)
+
+
+def _relation_intent(description: str) -> str:
+    normalized = normalize_text(description)
+    for name, pattern in _RELATION_INTENT_PATTERNS:
+        if re.search(pattern, normalized):
+            return name
+    return ""
+
+
+def _candidate_relation_concepts(relation: str) -> set[str]:
+    text = re.sub(r"([a-z])([A-Z])", r"\1 \2", str(relation))
+    text = normalize_text(re.sub(r"[_:\-/]+", " ", text))
+    concepts = set()
+    patterns = {
+        "birth_date": r"\b(?:birth date|date of birth|born on)\b",
+        "birth_place": r"\b(?:birth place|birthplace|born in)\b",
+        "border": r"\b(?:border|adjoin|adjacent|neighbor|neighbour)\w*\b",
+        "perform": r"\b(?:perform|sing|sang|artist|record)\w*\b",
+        "citizenship": r"\b(?:citizen|nationality)\w*\b",
+        "literature": r"\bliterature\b",
+        "production": r"\b(?:produce|produced|production|made)\b",
+        "empty": r"\b(?:empty|empties|flow|mouth|discharge)\w*\b",
+        "proximity": r"\b(?:is by|has river|near|beside)\b",
+        "capital": r"\bcapital\b",
+        "arrival": r"\b(?:came|come|arrive|settle)\w*\b",
+        "location": r"\b(?:located|lies|contain|within|part of)\w*\b",
+        "origin": r"\b(?:from|origin|belong to)\b",
+    }
+    for name, pattern in patterns.items():
+        if re.search(pattern, text):
+            concepts.add(name)
+    return concepts
+
+
+def _relation_target_certificate(
+    description: str,
+    relation: str,
+    expected_type: str,
+    *,
+    known_entities: Any,
+) -> float:
+    intent = _relation_intent(description)
+    concepts = _candidate_relation_concepts(relation)
+    if intent:
+        return float(intent in concepts)
+
+    # Auditable lexical fallback for relations outside the compact ontology.
+    # Entity and output-type words are removed so a type label cannot satisfy
+    # the requested predicate (the failure exposed by the causal diagnostic).
+    excluded = {
+        token for value in known_entities
+        for token in _relation_tokens(str(value))
+    }
+    excluded.update(_relation_tokens(expected_type))
+    excluded.update({
+        "what", "which", "who", "where", "when", "how", "the", "a", "an",
+        "of", "to", "in", "on", "for", "with", "does", "did", "is", "are",
+        "was", "were", "entity", "thing", "person", "country", "city", "state",
+    })
+    query_tokens = _relation_tokens(description) - excluded
+    relation_tokens = _relation_tokens(relation) - {"inverse", "of"}
+    return float(bool(query_tokens & relation_tokens))
+
+
+def _relation_tokens(text: str) -> set[str]:
+    value = re.sub(r"([a-z])([A-Z])", r"\1 \2", str(text))
+    value = normalize_text(re.sub(r"[_:\-/]+", " ", value))
+    aliases = {
+        "performed": "perform", "performer": "perform", "performs": "perform",
+        "located": "locate", "location": "locate", "contains": "contain",
+        "produced": "produce", "producer": "produce", "empties": "empty",
+        "bordering": "border", "borders": "border", "settled": "settle",
+        "arrived": "arrive", "literary": "literature",
+    }
+    return {
+        aliases.get(token, token)
+        for token in re.findall(r"[a-z0-9]+", value)
+        if len(token) >= 3
+    }
+
+
+def _qualifier_certificate(
+    required: tuple[str, ...],
+    candidate: ClaimNode,
+    semantics: Any,
+    answer_position: str,
+) -> float:
+    if not required:
+        return 1.0
+    selected_type = ""
+    if answer_position == "subject":
+        selected_type = semantics.subject_type
+    elif answer_position == "value":
+        selected_type = semantics.value_type
+    relation_tokens = _relation_tokens(candidate.relation)
+    qualifier_metadata = {
+        normalize_text(str(key))
+        for key, value in (semantics.qualifiers or {}).items() if value
+    }
+    checks = []
+    for family in required:
+        if family == "temporal":
+            checks.append(_projection_type_compatible(
+                selected_type, "date", numeric_aliases=True,
+            ))
+        elif family == "cardinality":
+            checks.append(_projection_type_compatible(
+                selected_type, "number", numeric_aliases=True,
+            ))
+        elif family == "comparison":
+            checks.append(bool(relation_tokens & {
+                "more", "less", "greater", "largest", "smallest", "higher",
+                "lower", "older", "younger", "compare",
+            }) or "comparison" in qualifier_metadata)
+        else:
+            checks.append(family in qualifier_metadata)
+    return float(all(checks))
 
 
 def _query_conditioned_signals(
