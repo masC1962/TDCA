@@ -1,0 +1,62 @@
+{
+  "schema_version": "hara-v2.4.3.23-preregistration-v1",
+  "frozen_at": "2026-08-27",
+  "training": false,
+  "seed": 20260820,
+  "source_commit": "92f86af8",
+  "parent_experiment": "hara-v2.4.3.22",
+  "parent_runs": {
+    "opened_causal_diagnostic": "research_outputs/musique_distractor_smoke_hara_1787837939390214808"
+  },
+  "parent_decision": "REJECT_NODE_LOCAL_NON_CIRCULARITY",
+  "observed_failure_before_design": {
+    "status": "abstain",
+    "correct_candidate_support": 0.8610416666666667,
+    "correct_candidate_relation_alignment": 1.0,
+    "correct_candidate_subject_binding": 0.0,
+    "correct_candidate_output_slot": 0.0,
+    "root_cause": "Excluding only the target node still allowed an equivalent parallel tuple with the same unordered endpoint pair to make both endpoints reachable."
+  },
+  "only_architectural_delta": {
+    "parallel_class_exclusion": "A binding certificate excludes the complete unordered endpoint-pair equivalence class of its target from reachability propagation.",
+    "audit": "Every certificate records excluded_parallel_tuple_edges.",
+    "prompt_accounting_preserved": true,
+    "threshold_changed": false,
+    "training": false,
+    "per_question_or_answer_patch": false
+  },
+  "frozen_config": "configs/hara_v24323_qwen.yaml",
+  "frozen_manifests": {
+    "opened_causal_diagnostic": "configs/splits/musique_dynamic_v24317_opened_shadow_diagnostic.json",
+    "development_canary": "configs/splits/musique_dynamic_v24317_dev_canary_seed20260820.json",
+    "smoke_a": "configs/splits/musique_dynamic_seed20260820.json",
+    "shadow_c": "configs/splits/musique_hara_v24318_shadow_c_seed20260820.json",
+    "shadow_c_sha256": "167697c8924e3b5616f507aec6f7ab1cfb46be9de2cfce2589fafb79f8d3bd3c"
+  },
+  "execution_order": [
+    "opened causal diagnostic",
+    "development canary 5 if causal gate passes",
+    "Smoke-A20 regression if development passes",
+    "paired control/HARA Shadow-C20 without between-arm inspection if Smoke-A passes"
+  ],
+  "development_gate": {
+    "causal_correct_answer": "Minas Gerais",
+    "causal_correct_support_min": 0.70,
+    "causal_generic_false_support_max": 0.5025,
+    "causal_complete_separate_query_alignment_trace": true,
+    "canary_f1_min": 0.60,
+    "canary_full_chain_min": 0.80,
+    "canary_candidate_presence_min": 0.60,
+    "canary_graph_proof_completion_min": 0.80,
+    "unsupported_answer_count_max": 0,
+    "infrastructure_failure_count_max": 0
+  },
+  "campaign_budget_before_run": {
+    "campaign_id": "hara-v24318-iclr2027-20260827",
+    "provider_attempts": 178,
+    "provider_reported_tokens": 200350,
+    "hard_attempt_cap": 2000,
+    "hard_token_cap": 2000000
+  },
+  "stop_condition": "Continue generic no-training diagnosis and iteration after any development failure. Stop only on the full preregistered HARA gate plus committed safe-stop report, or before the next call would exceed the shared 2000-attempt/2000000-token hard cap."
+}
