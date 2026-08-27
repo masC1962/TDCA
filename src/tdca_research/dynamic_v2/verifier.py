@@ -829,7 +829,7 @@ def _candidate_relation_concepts(relation: str) -> set[str]:
         "empty": r"\b(?:empty|empties|flow|mouth|discharge)\w*\b",
         "proximity": r"\b(?:is by|has river|near|beside)\b",
         "capital": r"\bcapital\b",
-        "arrival": r"\b(?:came|come|arrive|settle)\w*\b",
+        "arrival": r"\b(?:came|come|arrive|settle|sight|discover|explor)\w*\b",
         "location": r"\b(?:located|lies|contain|within|part of)\w*\b",
         "origin": r"\b(?:from|origin|belong to|has [a-z0-9 ]*(?:troop|guard))\w*\b",
     }

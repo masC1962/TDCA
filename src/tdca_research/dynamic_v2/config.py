@@ -251,6 +251,13 @@ class DynamicV2ResearchConfig(DynamicResearchConfig):
     semantic_extraction_fingerprint: bool = False
     constraint_aware_query_entities: bool = False
     constraint_aware_direct_projection: bool = False
+
+    # v2.4.3.28 preserves event-time arguments that a binary LLM extraction
+    # can otherwise omit, canonicalizes only named constraint suffixes, and
+    # forbids a composed path from inventing a different terminal output slot.
+    deterministic_temporal_projection: bool = False
+    constraint_projection_canonicalization: bool = False
+    join_requires_verified_projection_premise: bool = False
     terminal_min_relation_target_alignment: float = 0.70
     terminal_min_subject_binding_coverage: float = 0.70
     terminal_min_dependency_binding_coverage: float = 0.70

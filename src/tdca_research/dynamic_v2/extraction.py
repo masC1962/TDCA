@@ -178,6 +178,17 @@ class TypedClaimExtractor:
             value_type = canonical_type(raw.get("value_type"))
             expected_type = canonical_type(graph.node(subgoal_id, SubgoalNode).answer_type)
             value, canonicalization = _canonicalize_typed_value(value, expected_type)
+            if (
+                self.config.constraint_projection_canonicalization
+                and focus_mode == "direct_answer"
+            ):
+                value, constraint_canonicalization = _strip_named_constraint_suffix(
+                    value, query_constraint.get("known_entities", []),
+                )
+                canonicalization = {
+                    **canonicalization,
+                    **constraint_canonicalization,
+                }
             answer_position = str(raw.get("answer_position", "")).strip().lower()
             if answer_position not in {"subject", "value", "none"}:
                 answer_position = "value" if bool(raw.get("answers_subgoal", False)) else "none"
@@ -250,6 +261,17 @@ class TypedClaimExtractor:
                 "extraction_mode": "typed_evidence_extraction",
                 "extraction_focus_mode": focus_mode,
             })
+        if self.config.deterministic_temporal_projection and len(rows) < cap:
+            rows.extend(_grounded_temporal_projection_rows(
+                graph,
+                subgoal_id,
+                branch_id,
+                instantiated_question,
+                dependency_claim_ids,
+                evidence,
+                existing,
+                cap - len(rows),
+            ))
         if self.config.grounded_numeric_interval_consolidation:
             rows = _consolidate_grounded_numeric_intervals(rows)
         if self.config.deterministic_enumeration_expansion and len(rows) < cap:
@@ -395,6 +417,151 @@ def _cooccurring_sentence(text: str, subject: str, value: str) -> str:
         if normalized_subject in normalized and normalized_value in normalized:
             return sentence.strip()
     return ""
+
+
+def _strip_named_constraint_suffix(
+    value: str, known_entities: Any,
+) -> tuple[str, dict[str, str]]:
+    """Remove a trailing named input constraint from a projected wh-value.
+
+    The removed entity must be present verbatim in the model value and only a
+    closed set of locative prepositions may introduce it.  This is display and
+    slot canonicalization; the original tuple and exact evidence quote remain
+    in provenance.
+    """
+    text = str(value).strip()
+    for entity in sorted(
+        {str(row).strip() for row in known_entities if str(row).strip()},
+        key=len,
+        reverse=True,
+    ):
+        match = re.match(
+            rf"^(.+?)\s+(?:at|in|on|near|within|by)\s+(?:the\s+)?{re.escape(entity)}$",
+            text,
+            flags=re.IGNORECASE,
+        )
+        if match and match.group(1).strip():
+            return match.group(1).strip(), {
+                "kind": "named_constraint_suffix",
+                "original_value": text,
+                "constraint_entity": entity,
+            }
+    return text, {}
+
+
+_FULL_DATE_RE = re.compile(
+    r"\b(?:\d{1,2}\s+)?(?:January|February|March|April|May|June|July|August|"
+    r"September|October|November|December)\s+\d{4}\b",
+    re.IGNORECASE,
+)
+_YEAR_RE = re.compile(r"\b(?:1[0-9]{3}|20[0-9]{2})\b")
+
+
+def _grounded_temporal_projection_rows(
+    graph: DynamicReasoningHypergraphV2,
+    subgoal_id: str,
+    branch_id: str,
+    question: str,
+    dependency_claim_ids: list[str],
+    evidence: list[EvidenceNode],
+    existing_signatures: set[tuple[str, str, str]],
+    remaining_cap: int,
+) -> list[dict[str, Any]]:
+    """Preserve an explicit event date as an atomic, evidence-local output.
+
+    This provider-free projection is deliberately narrow: the query must ask
+    for a date, a dependency endpoint must occur in the same sentence, and a
+    query-relation cue must occur beside the date. It never joins sentences or
+    supplies a date from prior knowledge.
+    """
+    if remaining_cap <= 0:
+        return []
+    expected = canonical_type(graph.node(subgoal_id, SubgoalNode).answer_type)
+    normalized_question = normalize_text(question)
+    if expected not in {"date", "year"} or not re.search(
+        r"\b(?:when|date|year)\b", normalized_question,
+    ):
+        return []
+    relation = ""
+    sentence_cue = None
+    if re.search(r"\bcapital\b", normalized_question):
+        relation = "capital_designation_on"
+        sentence_cue = re.compile(r"\bcapital\b", re.IGNORECASE)
+    elif re.search(r"\b(?:came?|come|arriv|settle|reach)\w*\b", normalized_question):
+        relation = "first_sighted_or_arrived_on"
+        sentence_cue = re.compile(
+            r"\b(?:came?|come|arriv\w*|settle\w*|reach\w*|sight\w*|"
+            r"discover\w*|explor\w*)\b",
+            re.IGNORECASE,
+        )
+    elif re.search(r"\b(?:born|birth)\b", normalized_question):
+        relation = "born_on"
+        sentence_cue = re.compile(r"\b(?:born|birth)\b", re.IGNORECASE)
+    if not relation or sentence_cue is None:
+        return []
+
+    dependency_values: list[tuple[str, str]] = []
+    for claim_id in dependency_claim_ids:
+        claim = graph.nodes.get(claim_id)
+        if isinstance(claim, ClaimNode) and normalize_text(claim.value):
+            dependency_values.append((claim.value, claim.answer_type))
+    dependency_values = sorted(
+        dict.fromkeys(dependency_values), key=lambda row: len(row[0]), reverse=True,
+    )
+    rows = []
+    for node in evidence:
+        for sentence in re.split(r"(?<=[.!?])\s+|\n+", node.source_span):
+            sentence = sentence.strip()
+            normalized_sentence = normalize_text(sentence)
+            if not sentence or not sentence_cue.search(sentence):
+                continue
+            subject_row = next((
+                row for row in dependency_values
+                for value in [row[0]]
+                if normalize_text(value) in normalized_sentence
+            ), None)
+            if subject_row is None:
+                continue
+            subject, subject_type = subject_row
+            dates = _FULL_DATE_RE.findall(sentence)
+            if not dates:
+                dates = _YEAR_RE.findall(sentence)
+            for date in dict.fromkeys(value.strip() for value in dates):
+                signature = (
+                    normalize_text(subject), normalize_text(relation), normalize_text(date),
+                )
+                if signature in existing_signatures:
+                    continue
+                existing_signatures.add(signature)
+                rows.append({
+                    "node_id": (
+                        f"claim_v2_{graph.step + 1}_{subgoal_id}_temporal_{len(rows) + 1}"
+                    ),
+                    "subject": subject,
+                    "relation": relation,
+                    "value": date,
+                    "subject_type": canonical_type(subject_type),
+                    "value_type": expected,
+                    "answer_type": expected,
+                    "qualifiers": {
+                        "temporal_projection": "same_sentence_dependency_and_relation_cue",
+                    },
+                    "evidence_refs": [node.node_id],
+                    "source_spans": [sentence],
+                    "dependency_claim_ids": list(dependency_claim_ids),
+                    "extraction_confidence": 0.95,
+                    "answers_subgoal": True,
+                    "answer_position": "value",
+                    "source_triple": {
+                        "subject": subject, "relation": relation, "value": date,
+                    },
+                    "extraction_evidence_count": len(evidence),
+                    "extraction_mode": "deterministic_temporal_projection",
+                    "extraction_focus_mode": "coverage",
+                })
+                if len(rows) >= remaining_cap:
+                    return rows
+    return rows
 
 
 def _canonicalize_typed_value(value: str, expected_type: str) -> tuple[str, dict[str, str]]:

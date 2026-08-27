@@ -757,6 +757,11 @@ def _deterministic_path_claim(
     # paths from consuming the proof frontier.
     if float(candidate.deterministic_validation.get("goal_alignment", 0.0)) < 0.45:
         return None
+    projection = next((
+        row for row in premises if row.node_id == candidate.projection_premise_id
+    ), None)
+    if config.join_requires_verified_projection_premise and projection is None:
+        return None
     if any(
         row.score.absolute_support < config.commit_support_threshold
         or row.score.raw.grounding < config.commit_support_threshold
@@ -766,6 +771,12 @@ def _deterministic_path_claim(
     ):
         return None
     left, right = candidate.open_endpoints
+    if config.join_requires_verified_projection_premise:
+        projected_output = normalize_text(projection.value)
+        if normalize_text(left) == projected_output:
+            left, right = right, left
+        elif normalize_text(right) != projected_output:
+            return None
     constraint = next((
         row for row in graph.query_graph.get("constraints", [])
         if str(row.get("subgoal_id")) == candidate.target_subgoal

@@ -58,6 +58,8 @@ from tdca_research.dynamic_v2.extraction import (
     _consolidate_grounded_numeric_intervals,
     _fit_completion_to_remaining_budget,
     _enumerated_sibling_values,
+    _grounded_temporal_projection_rows,
+    _strip_named_constraint_suffix,
 )
 from tdca_research.dynamic_v2.graph import (
     DynamicReasoningHypergraphV2,
@@ -68,6 +70,7 @@ from tdca_research.dynamic_v2.join import (
     JoinCandidate,
     MultiHopJoinEngine,
     _dominance_prune,
+    deterministic_join_derivation,
 )
 from tdca_research.dynamic_v2.memory import RelationLightCorpusMemory
 from tdca_research.dynamic_v2.query_graph import compile_query_graph, types_compatible
@@ -2327,6 +2330,53 @@ def test_v24327_semantic_extraction_fingerprint_ignores_diffusion_only_versions(
     assert legacy != _extraction_state_fingerprint(
         graph, "s_root", "branch_root", evidence, ["c1"],
     )
+
+
+def test_v24328_named_constraint_suffix_and_temporal_projection_are_evidence_local():
+    projected, audit = _strip_named_constraint_suffix(
+        "Mississippi River Delta at the Gulf of Mexico", ["Gulf of Mexico"],
+    )
+    assert projected == "Mississippi River Delta"
+    assert audit["constraint_entity"] == "Gulf of Mexico"
+
+    cfg, controller, graph = chain_graph()
+    root = graph.node("s_root")
+    root.answer_type = "date"
+    root.question_template = "When did travelers arrive in Gamma Country?"
+    root.instantiated_question = root.question_template
+    graph.seal_controller_state()
+    graph = controller.apply(graph, operation(391, OperationType.RETRIEVE, payload={
+        "query": root.question_template,
+        "evidence": [{
+            "node_id": "e_date", "document_id": "p_date", "passage_id": "p_date",
+            "title": "Gamma Country",
+            "source_span": "The first explorers sighted Gamma Country on 13 December 1642.",
+            "retrieval_rank": 1, "retrieval_score": 1.0,
+            "retrieval_query": root.question_template, "retriever_identity": "hybrid",
+        }],
+    }))
+    rows = _grounded_temporal_projection_rows(
+        graph, "s_root", "branch_root", root.question_template, ["c2"],
+        graph.evidence("s_root", "branch_root"), set(), 2,
+    )
+    assert len(rows) == 1
+    assert rows[0]["subject"] == "Gamma Country"
+    assert rows[0]["value"] == "13 December 1642"
+    assert rows[0]["evidence_refs"] == ["e_date"]
+
+
+def test_v24328_symbolic_join_requires_verified_projection_when_enabled():
+    cfg, _, graph = chain_graph()
+    cfg = cfg.merged(
+        deterministic_goal_path_join=True,
+        join_requires_verified_projection_premise=True,
+    )
+    candidate = JoinCandidate(
+        ("c1", "c2"), "beta city", "s_root", "unprojected", 1,
+        open_endpoints=("Alpha", "Gamma Country"),
+        deterministic_validation={"goal_alignment": 1.0},
+    )
+    assert deterministic_join_derivation(graph, candidate, cfg) is None
 
 
 def test_v24_region_retrieval_gate_requires_material_query_novelty():
