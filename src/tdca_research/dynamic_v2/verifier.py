@@ -397,20 +397,36 @@ class MultiSampleIndependentVerifier:
         expected_type = graph.node(subgoal_id, SubgoalNode).answer_type
         projection_by_id = {}
         for candidate in comparison_candidates:
+            certified_alignment_position = bool(
+                controller_alignment
+                and alignment_projection_votes[candidate.node_id]
+                and aggregated.get(candidate.node_id, candidate.score.raw)
+                .full_subgoal_coverage
+                >= self.config.terminal_min_full_subgoal_coverage
+            )
             position = _projection_vote(
                 (
                     alignment_projection_votes[candidate.node_id]
-                    if controller_alignment
-                    and alignment_projection_votes[candidate.node_id]
+                    if certified_alignment_position
                     else projection_votes[candidate.node_id]
                 ),
                 _preserved_projection(candidate),
             )
+            if (
+                controller_alignment
+                and alignment_projection_votes[candidate.node_id]
+                and not certified_alignment_position
+            ):
+                position = "none"
             structural_position = _structural_projection(
                 graph, subgoal_id, candidate, expected_type,
                 numeric_aliases=self.config.numeric_output_type_normalization,
             )
-            if structural_position != "none" and projection_votes[candidate.node_id]:
+            if (
+                not controller_alignment
+                and structural_position != "none"
+                and projection_votes[candidate.node_id]
+            ):
                 # Query-graph bindings are a harder constraint than an LLM's
                 # answer-position label.  A missing model projection can be
                 # recovered deterministically, but two explicit, conflicting

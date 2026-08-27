@@ -300,6 +300,25 @@ def test_query_alignment_separates_true_tuple_from_subgoal_coverage_and_repairs_
     assert parallel_certificates["c_state"]["certificate"][
         "excluded_parallel_tuple_edges"
     ] == 1
+    competition_mock = CapturingMock(json_responses=[{
+        "scores": [_alignment_row("c_state"), _alignment_row("c_parallel")],
+    }])
+    competition_proposal = MultiSampleIndependentVerifier(
+        competition_mock, Budget(16, 6000, 200, Usage()), certificate_cfg,
+    ).propose(
+        parallel_graph, "s_root", "branch_root",
+        "What administrative territorial entity contains Darley Ramon Torres's place of birth?",
+        "op_v2_108_verify", 1, 800,
+    )
+    assert competition_proposal is not None
+    competition_graph = V2GraphController(certificate_cfg).apply(
+        parallel_graph, competition_proposal,
+    )
+    assert competition_graph.node("c_state").score.relative_weight == 1.0
+    assert competition_graph.node("c_state").score.set_entropy == 0.0
+    assert competition_graph.node("c_parallel").provenance.metadata[
+        "verified_answer_position"
+    ] == "none"
 
     reflexive_graph = controller.apply(preverify, operation(
         109, OperationType.BRANCH, target="s_root", payload={
