@@ -1068,13 +1068,28 @@ class AdaptiveComputationAllocator:
             graph, operation,
             strict=self.config.operation_conditioned_obligation_closure,
         ))
+        if self.config.prompt_inclusive_verifier_resource_accounting:
+            extraction_reserve = (
+                self.config.typed_extraction_max_tokens
+                + (self.config.evidence_char_budget + 3) // 4 + 500
+            )
+            verification_reserve = (
+                self.config.soft_verifier_max_tokens
+                + (self.config.evidence_char_budget + 3) // 4 + 420
+            )
+            join_reserve = (
+                self.config.join_validation_max_tokens
+                + (self.config.evidence_char_budget + 5) // 6 + 350
+            )
+        else:
+            extraction_reserve, verification_reserve, join_reserve = 530, 260, 400
         requirements = {
-            "missing_evidence": (1, 530),
-            "missing_claim": (1, 260),
-            "missing_binding": (1, 530),
-            "missing_verification": (1, 260),
-            "missing_join_premise": (1, 400),
-            "terminal_disconnected_join": (1, 500),
+            "missing_evidence": (1, extraction_reserve),
+            "missing_claim": (1, extraction_reserve),
+            "missing_binding": (1, extraction_reserve),
+            "missing_verification": (1, verification_reserve),
+            "missing_join_premise": (1, join_reserve),
+            "terminal_disconnected_join": (1, join_reserve),
             "contradiction": (0, 0),
         }
         by_region: dict[tuple[str, str], tuple[int, int]] = {}
@@ -1092,9 +1107,9 @@ class AdaptiveComputationAllocator:
         # Preserve one causal continuation after the selected operation closes
         # its immediate target (retrieve->extract, extract->verify, verify->join).
         continuation = {
-            OperationType.RETRIEVE: (1, 530),
-            OperationType.BRANCH: (1, 260),
-            OperationType.VERIFY: (1, 400),
+            OperationType.RETRIEVE: (1, extraction_reserve),
+            OperationType.BRANCH: (1, verification_reserve),
+            OperationType.VERIFY: (1, join_reserve),
             OperationType.MERGE: (0, 0),
         }.get(operation.operation_type, (0, 0))
         return {

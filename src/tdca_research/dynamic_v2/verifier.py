@@ -660,6 +660,10 @@ def _controller_query_alignment_certificates(
         subject_bound = _endpoint_in_anchors(target.subject, reachable)
         value_bound = _endpoint_in_anchors(target.value, reachable)
         semantics = graph.claim_semantics[target.node_id]
+        relation = _relation_target_certificate(
+            description, target.relation, expected_type,
+            known_entities=constraint.get("known_entities", []),
+        )
         answer_position = "none"
         if subject_bound != value_bound:
             if subject_bound and _projection_type_compatible(
@@ -670,16 +674,27 @@ def _controller_query_alignment_certificates(
                 semantics.subject_type, expected_type, numeric_aliases=True,
             ):
                 answer_position = "subject"
-        subject_binding = float(subject_bound != value_bound)
+        elif (
+            subject_bound and value_bound
+            and normalize_text(target.subject) == normalize_text(target.value)
+            and relation >= 1.0 - 1e-9
+            and _projection_type_compatible(
+                semantics.value_type, expected_type, numeric_aliases=True,
+            )
+        ):
+            # A reflexive relation may legitimately map a bound input entity to
+            # the same entity in the typed output slot.  Endpoint identity plus
+            # a certified target relation is sufficient; no extraction label or
+            # answer value is consulted.
+            answer_position = "value"
+        subject_binding = float(
+            subject_bound != value_bound or answer_position != "none"
+        )
         output_slot = float(answer_position != "none")
         dependency = _structural_dependency_binding_coverage(
             target, graph, subgoal_id,
         )
         dependency_coverage = 0.0 if dependency is None else dependency
-        relation = _relation_target_certificate(
-            description, target.relation, expected_type,
-            known_entities=constraint.get("known_entities", []),
-        )
         qualifier = _qualifier_certificate(
             tuple(str(value) for value in constraint.get("required_qualifiers", [])),
             target, semantics, answer_position,

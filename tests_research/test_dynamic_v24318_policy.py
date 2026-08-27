@@ -298,6 +298,37 @@ def test_query_alignment_separates_true_tuple_from_subgoal_coverage_and_repairs_
         "excluded_parallel_tuple_edges"
     ] == 1
 
+    reflexive_graph = controller.apply(preverify, operation(
+        109, OperationType.BRANCH, target="s_root", payload={
+            "mode": "candidates", "candidates": [{
+                "node_id": "c_reflexive", "subject": "Pedro Leopoldo",
+                "relation": "located_in", "value": "Pedro Leopoldo",
+                "subject_type": "location", "value_type": "state",
+                "answer_type": "administrative_territorial_entity",
+                "evidence_refs": ["e_state"],
+                "source_spans": ["Pedro Leopoldo is in the state of Minas Gerais."],
+                "dependency_claim_ids": ["c_birth"],
+                "extraction_confidence": 0.95,
+                "answers_subgoal": False, "answer_position": "none",
+            }]},
+    ))
+    reflexive_claims = reflexive_graph.claims("s_root", "branch_root")
+    reflexive_profiles = {
+        claim.node_id: VerificationSignals(
+            grounding=1.0, entailment=1.0, type_match=1.0,
+            dependency_consistency=1.0, retrieval_support=1.0,
+            contradiction_risk=0.0, raw_model_confidence=1.0,
+        )
+        for claim in reflexive_claims
+    }
+    reflexive_certificate = _controller_query_alignment_certificates(
+        reflexive_claims, reflexive_graph, "s_root", reflexive_profiles,
+    )["c_reflexive"]
+    assert reflexive_certificate["relation_target_alignment"] == 1.0
+    assert reflexive_certificate["subject_binding_coverage"] == 1.0
+    assert reflexive_certificate["output_slot_coverage"] == 1.0
+    assert reflexive_certificate["answer_position"] == "value"
+
 
 def test_controller_relation_certificate_rejects_output_type_as_predicate():
     question = "What administrative territorial entity is Pedro Leopoldo located in?"
