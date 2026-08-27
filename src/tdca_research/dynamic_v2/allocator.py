@@ -318,6 +318,18 @@ class AdaptiveComputationAllocator:
                 ), remaining, prior,
                 fidelity_fraction=fidelity_fraction,
             )
+            resource_feasible = (
+                requested.get("llm_calls", 0) <= remaining["llm_calls"]
+                and requested.get(
+                    "token_upper_bound", requested.get("max_tokens", 0),
+                ) <= remaining["tokens"]
+            )
+            if (
+                self.config.exact_fidelity_resource_accounting
+                and self.config.prompt_inclusive_verifier_resource_accounting
+                and not resource_feasible
+            ):
+                continue
             estimate = (
                 operation_conditioned_closure_value(graph, operation)
                 if self.config.operation_conditioned_obligation_closure else {}
@@ -335,8 +347,11 @@ class AdaptiveComputationAllocator:
                 remaining["llm_calls"] - requested.get("llm_calls", 0)
                 >= reserve["llm_calls"]
                 and remaining["tokens"]
-                - requested.get("max_tokens", 0) * max(
-                    1, requested.get("verification_samples", 1),
+                - requested.get(
+                    "token_upper_bound",
+                    requested.get("max_tokens", 0) * max(
+                        1, requested.get("verification_samples", 1),
+                    ),
                 )
                 >= reserve["tokens"]
             )
@@ -1022,7 +1037,15 @@ class AdaptiveComputationAllocator:
             ) * pass_multiplier
             schema_floor = 260 + 90 * max(1, len(operation.source_ids))
             per_call = min(max_tokens, max(int(max_tokens * fraction), schema_floor))
-            token_scale = per_call * requested / max(1, max_tokens * maximum)
+            prompt_upper = (
+                (self.config.evidence_char_budget + 3) // 4
+                + 320 + 100 * max(1, len(operation.source_ids))
+                if self.config.prompt_inclusive_verifier_resource_accounting else 0
+            )
+            token_scale = (
+                (per_call + prompt_upper) * requested
+                / max(1, (max_tokens + prompt_upper) * maximum)
+            )
             return requested / maximum, token_scale
         schema_floor = {
             OperationType.BRANCH: 260 + 90 * max(1, int(round(
@@ -1188,10 +1211,25 @@ class AdaptiveComputationAllocator:
                 if operation.operation_type == OperationType.VERIFY
                 else int(provider_backed)
             )
-            packet["token_upper_bound"] = (
-                tokens * verifications * _verification_pass_multiplier(self.config)
-                if operation.operation_type == OperationType.VERIFY else tokens
-            )
+            if (
+                operation.operation_type == OperationType.VERIFY
+                and self.config.prompt_inclusive_verifier_resource_accounting
+            ):
+                prompt_upper = (
+                    (self.config.evidence_char_budget + 3) // 4
+                    + 320 + 100 * max(1, len(operation.source_ids))
+                )
+                packet["estimated_prompt_tokens_per_call"] = prompt_upper
+                packet["token_upper_bound"] = (
+                    (tokens + prompt_upper)
+                    * verifications
+                    * _verification_pass_multiplier(self.config)
+                )
+            else:
+                packet["token_upper_bound"] = (
+                    tokens * verifications * _verification_pass_multiplier(self.config)
+                    if operation.operation_type == OperationType.VERIFY else tokens
+                )
         return packet
 
 

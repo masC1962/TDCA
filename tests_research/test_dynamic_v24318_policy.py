@@ -5,8 +5,10 @@ from dataclasses import replace
 from tdca_research.budget import Budget
 from tdca_research.dynamic.graph import OperationType
 from tdca_research.dynamic_v2.config import DynamicV2ResearchConfig
+from tdca_research.dynamic_v2.allocator import AdaptiveComputationAllocator
 from tdca_research.dynamic_v2.controller import V2GraphController
 from tdca_research.dynamic_v2.query_graph import canonical_type, types_compatible
+from tdca_research.dynamic_v2.recovery import claim_projects_target
 from tdca_research.dynamic_v2.termination import TerminalBeliefReadout
 from tdca_research.dynamic_v2.verifier import (
     MultiSampleIndependentVerifier,
@@ -289,6 +291,66 @@ def test_conjunctive_grounding_prevents_additive_support_compensation():
     assert legacy["c"].absolute_support > 0.0
     assert guarded["c"].absolute_support == 0.0
     assert guarded["c"].evidence_gap == legacy["c"].evidence_gap
+
+
+def test_controller_certificate_is_not_overwritten_by_weaker_legacy_binding():
+    _, _, graph = chain_graph()
+    claim = graph.node("c2")
+    raw = replace(
+        claim.score.raw,
+        relation_target_alignment=1.0,
+        subject_binding_coverage=1.0,
+        dependency_binding_coverage=1.0,
+        qualifier_coverage=1.0,
+        output_slot_coverage=1.0,
+    )
+    updated = _query_conditioned_signals(
+        raw, claim, graph, claim.target_subgoal, "none",
+        structural_dependency=True, controller_certificate=True,
+    )
+    assert updated.subject_binding_coverage == 1.0
+    assert updated.output_slot_coverage == 1.0
+    assert updated.full_subgoal_coverage == 1.0
+
+
+def test_prompt_inclusive_verifier_packets_do_not_fit_only_on_output_tokens():
+    base, _, graph = chain_graph()
+    cfg = replace(
+        base,
+        absolute_resource_cost=True,
+        exact_fidelity_resource_accounting=True,
+        prompt_inclusive_verifier_resource_accounting=True,
+        controller_query_alignment_certificates=True,
+    )
+    allocator = AdaptiveComputationAllocator(cfg)
+    verify = operation(
+        140, OperationType.VERIFY,
+        sources=[f"candidate_{index}" for index in range(6)],
+    )
+    no_room = Budget(16, 6000, 0, Usage(prompt_tokens=4000))
+    assert allocator.allocate(graph, [verify], no_room) == []
+
+    packets = allocator.allocate(
+        graph, [verify], Budget(16, 6000, 0, Usage(prompt_tokens=1500)),
+    )
+    assert packets
+    assert all(
+        row.requested_budget["token_upper_bound"]
+        > row.requested_budget["max_tokens"]
+        * row.requested_budget["verification_samples"]
+        for row in packets
+    )
+
+
+def test_controller_full_coverage_is_the_projection_certificate():
+    _, _, graph = chain_graph()
+    claim = graph.node("c2")
+    claim.provenance.metadata["answers_subgoal"] = False
+    claim.score.raw.full_subgoal_coverage = 1.0
+    graph.query_alignment_version = "hara-controller-query-certificate-v2.4.3.20"
+    assert claim_projects_target(graph, claim)
+    claim.score.raw.full_subgoal_coverage = 0.0
+    assert not claim_projects_target(graph, claim)
 
 
 def test_terminal_query_alignment_is_conjunctive_not_fused_into_support():

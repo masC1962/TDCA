@@ -390,6 +390,7 @@ class MultiSampleIndependentVerifier:
                     ),
                     candidate, graph, subgoal_id, alignment_position,
                     structural_dependency=self.config.structural_dependency_binding_coverage,
+                    controller_certificate=controller_alignment,
                 )
         for candidate in comparison_candidates:
             aggregated.setdefault(candidate.node_id, candidate.score.raw)
@@ -853,6 +854,7 @@ def _query_conditioned_signals(
     answer_position: str,
     *,
     structural_dependency: bool,
+    controller_certificate: bool = False,
 ) -> VerificationSignals:
     """Keep evidence truth and query satisfaction as independent raw channels.
 
@@ -862,10 +864,12 @@ def _query_conditioned_signals(
     dependency = _structural_dependency_binding_coverage(
         candidate, graph, subgoal_id,
     )
-    dependency_coverage = (
-        dependency if dependency is not None
-        else raw.dependency_binding_coverage
-    )
+    dependency_coverage = raw.dependency_binding_coverage
+    if not controller_certificate:
+        dependency_coverage = (
+            dependency if dependency is not None
+            else raw.dependency_binding_coverage
+        )
     dependency_consistency = raw.dependency_consistency
     reasons = list(raw.reasons)
     if (
@@ -875,13 +879,15 @@ def _query_conditioned_signals(
         dependency_consistency = dependency
         reasons.append("controller_structural_dependency_binding")
 
-    subject_binding = _structural_subject_binding_coverage(
-        candidate, graph, subgoal_id, answer_position,
-    )
-    if subject_binding is None:
-        subject_binding = raw.subject_binding_coverage
-    else:
-        reasons.append("controller_structural_subject_binding")
+    subject_binding = raw.subject_binding_coverage
+    if not controller_certificate:
+        subject_binding = _structural_subject_binding_coverage(
+            candidate, graph, subgoal_id, answer_position,
+        )
+        if subject_binding is None:
+            subject_binding = raw.subject_binding_coverage
+        else:
+            reasons.append("controller_structural_subject_binding")
 
     expected_type = graph.node(subgoal_id, SubgoalNode).answer_type
     structural_projection = _structural_projection(
@@ -889,7 +895,7 @@ def _query_conditioned_signals(
         numeric_aliases=True,
     )
     output_slot = raw.output_slot_coverage
-    if structural_projection != "none":
+    if not controller_certificate and structural_projection != "none":
         output_slot = 1.0 if answer_position in {"none", structural_projection} else 0.0
         reasons.append("controller_structural_output_slot")
 
@@ -897,10 +903,9 @@ def _query_conditioned_signals(
         row for row in graph.query_graph.get("constraints", [])
         if str(row.get("subgoal_id")) == subgoal_id
     ), {})
-    qualifier = (
-        raw.qualifier_coverage
-        if constraint.get("required_qualifiers") else 1.0
-    )
+    qualifier = raw.qualifier_coverage
+    if not controller_certificate and not constraint.get("required_qualifiers"):
+        qualifier = 1.0
     components = {
         "relation_target_alignment": raw.relation_target_alignment,
         "subject_binding_coverage": subject_binding,

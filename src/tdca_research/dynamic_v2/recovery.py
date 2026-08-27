@@ -108,6 +108,8 @@ def claim_projects_target(
     seen.add(claim.node_id)
     semantics = graph.claim_semantics[claim.node_id]
     if semantics.join_depth == 0:
+        if "controller-query-certificate" in graph.query_alignment_version:
+            return claim.score.raw.full_subgoal_coverage >= 1.0 - 1e-9
         return bool(claim.provenance.metadata.get("answers_subgoal", False))
 
     projection_id = str(semantics.qualifiers.get("projection_premise_id", ""))

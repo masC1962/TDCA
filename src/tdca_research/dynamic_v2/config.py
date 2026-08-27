@@ -240,6 +240,11 @@ class DynamicV2ResearchConfig(DynamicResearchConfig):
     # v2.4.3.21 makes evidence grounding a necessary condition of absolute
     # support.  The original additive fusion remains frozen by default.
     grounding_conjunctive_absolute_support: bool = False
+
+    # v2.4.3.22 prices verifier prompt context as well as its completion cap.
+    # This prevents a high-fidelity multi-sample packet from fitting on paper
+    # while exhausting the real per-question token budget mid-operation.
+    prompt_inclusive_verifier_resource_accounting: bool = False
     terminal_min_relation_target_alignment: float = 0.70
     terminal_min_subject_binding_coverage: float = 0.70
     terminal_min_dependency_binding_coverage: float = 0.70
