@@ -1,0 +1,77 @@
+{
+  "schema_version": "hara-v2.4.3.31-preregistration-v1",
+  "frozen_at": "2026-08-28",
+  "training": false,
+  "seed": 20260820,
+  "source_commit": "e20f8d80",
+  "parent_experiment": "hara-v2.4.3.30",
+  "parent_runs": {
+    "development_canary_5": "research_outputs/musique_distractor_smoke_hara_1787847881287157279",
+    "smoke_a_20": "research_outputs/musique_distractor_smoke_hara_1787848281218753919",
+    "historical_reference_v24314": "research_outputs/musique_distractor_smoke_dynamic_hypergraph_tdca_v2_1787808301164120861"
+  },
+  "parent_decision": "REJECT_SMOKE_QUERY_BASE_BINDING_RECALL_COLLAPSE",
+  "observed_failure_before_design": {
+    "smoke_f1": 0.05,
+    "smoke_full_chain": 0.05,
+    "smoke_candidate_presence": 0.15,
+    "smoke_graph_proof_completion": 0.20,
+    "selective_accuracy": 1.0,
+    "unsupported_answer_count": 0,
+    "paired_structural_regression": {
+      "candidate_cases_lost_vs_v24314": 10,
+      "long_chain_cases_lost_vs_v24314": 9,
+      "mean_allocation_count_v24314": 12.15,
+      "mean_allocation_count_v24330": 8.30
+    },
+    "mechanism_failure": "The controller query compiler retained only capitalized spans, so lower-case titles and connector-rich or numeric names were truncated. Independently supported first-hop tuples consequently had no base-bound endpoint, output_slot_coverage zero, no COMMIT, and no downstream allocation."
+  },
+  "gold_free_offline_audit": {
+    "selection_rule": "Query certificates changed only when a tuple endpoint is literally present in the subgoal text; no answers or gold support were inspected.",
+    "changed_certificate_count": 12,
+    "changed_qid_count": 7,
+    "independently_supported_changed_certificate_count": 11
+  },
+  "architectural_delta": {
+    "query_mentioned_endpoint_binding": "Before reachability, bind a candidate endpoint only when its normalized phrase or all non-generic informative tokens occur in the current subgoal text.",
+    "separation_of_channels": "Literal query binding affects only the controller alignment certificate; independent evidence grounding, entailment, type, contradiction, support, relative weight, entropy, and evidence gap are unchanged.",
+    "threshold_changed": false,
+    "training": false,
+    "per_question_or_answer_patch": false
+  },
+  "frozen_config": "configs/hara_v24331_qwen.yaml",
+  "frozen_manifests": {
+    "causal_canary_7": "configs/splits/musique_hara_v24331_query_binding_canary_seed20260820.json",
+    "regression_canary_5": "configs/splits/musique_dynamic_v24317_dev_canary_seed20260820.json",
+    "smoke_a": "configs/splits/musique_dynamic_seed20260820.json"
+  },
+  "execution_order": [
+    "causal canary 7",
+    "regression canary 5 if the causal transition gate passes",
+    "independent Smoke-A20 if both canaries pass",
+    "paired control/HARA Shadow-C20 only if Smoke-A passes"
+  ],
+  "causal_canary_gate": {
+    "query_binding_transition_qid_count_min": 5,
+    "independently_supported_transition_count_min": 7,
+    "candidate_presence_rate_min": 0.50,
+    "unsupported_answer_count_max": 0,
+    "infrastructure_failure_count_max": 0
+  },
+  "regression_canary_gate": {
+    "f1_min": 0.60,
+    "full_chain_min": 0.80,
+    "candidate_presence_min": 0.60,
+    "graph_proof_completion_min": 0.80,
+    "unsupported_answer_count_max": 0,
+    "infrastructure_failure_count_max": 0
+  },
+  "campaign_budget_before_run": {
+    "campaign_id": "hara-v24318-iclr2027-20260827",
+    "provider_attempts": 634,
+    "provider_reported_tokens": 712001,
+    "hard_attempt_cap": 2000,
+    "hard_token_cap": 2000000
+  },
+  "stop_condition": "Continue generic no-training diagnosis and iteration after failure. Stop only on the full preregistered HARA gate plus committed safe-stop report, or before the next call would exceed the shared 2000-attempt/2000000-token hard cap."
+}
