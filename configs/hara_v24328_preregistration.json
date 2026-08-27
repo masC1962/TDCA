@@ -1,0 +1,59 @@
+{
+  "schema_version": "hara-v2.4.3.28-preregistration-v1",
+  "frozen_at": "2026-08-27",
+  "training": false,
+  "seed": 20260820,
+  "source_commit": "e6eea869",
+  "parent_experiment": "hara-v2.4.3.27",
+  "parent_runs": {
+    "development_canary_5": "research_outputs/musique_distractor_smoke_hara_1787845069607944269"
+  },
+  "parent_decision": "REJECT_TERMINAL_PROJECTION_LOSS_AND_TEMPORAL_ARGUMENT_LOSS",
+  "observed_failure_before_design": {
+    "canary_f1": 0.2,
+    "canary_full_chain": 0.4,
+    "canary_candidate_presence": 0.4,
+    "canary_graph_proof_completion": 1.0,
+    "mechanism_failures": [
+      "A direct extraction recovered Mississippi River Delta at the Gulf of Mexico, but a projection-free symbolic JOIN composed unrelated inverse edges and projected Saint Paul from the remote end of the proof path.",
+      "Binary extraction repeatedly omitted explicit event dates written as sentence modifiers even when the bound dependency, relation cue, and date co-occurred in one evidence sentence.",
+      "A correct locative output retained its trailing named input constraint, preventing atomic answer comparison."
+    ]
+  },
+  "architectural_delta": {
+    "projection_preserving_join": "Provider-free symbolic path JOINs require a verified target projection premise; the derived terminal value cannot switch to another open endpoint.",
+    "temporal_projection": "A provider-free date candidate is added only when a date query, bound dependency endpoint, matching relation cue, and explicit date co-occur in one evidence sentence.",
+    "constraint_canonicalization": "A trailing named locative constraint is removed from a direct wh-projection while the original tuple and exact evidence quote remain in provenance.",
+    "threshold_changed": false,
+    "training": false,
+    "per_question_or_answer_patch": false
+  },
+  "frozen_config": "configs/hara_v24328_qwen.yaml",
+  "frozen_manifests": {
+    "development_canary": "configs/splits/musique_dynamic_v24317_dev_canary_seed20260820.json",
+    "smoke_a": "configs/splits/musique_dynamic_seed20260820.json",
+    "shadow_c": "configs/splits/musique_hara_v24318_shadow_c_seed20260820.json"
+  },
+  "execution_order": [
+    "development canary 5",
+    "opened causal diagnostic if any query-frontier regression appears",
+    "Smoke-A20 if development passes",
+    "paired control/HARA Shadow-C20 without between-arm inspection if Smoke-A passes"
+  ],
+  "development_gate": {
+    "canary_f1_min": 0.60,
+    "canary_full_chain_min": 0.80,
+    "canary_candidate_presence_min": 0.60,
+    "canary_graph_proof_completion_min": 0.80,
+    "unsupported_answer_count_max": 0,
+    "infrastructure_failure_count_max": 0
+  },
+  "campaign_budget_before_run": {
+    "campaign_id": "hara-v24318-iclr2027-20260827",
+    "provider_attempts": 362,
+    "provider_reported_tokens": 404788,
+    "hard_attempt_cap": 2000,
+    "hard_token_cap": 2000000
+  },
+  "stop_condition": "Continue generic no-training diagnosis and iteration after any development failure. Stop only on the full preregistered HARA gate plus committed safe-stop report, or before the next call would exceed the shared 2000-attempt/2000000-token hard cap."
+}
