@@ -363,6 +363,16 @@ class TerminalBeliefState:
     accepted: bool
     rejection_reasons: list[str] = field(default_factory=list)
     scoring_version: str = "terminal-belief-readout-v2.2"
+    # v2.4.3.18/HARA keeps query satisfaction separate from epistemic support.
+    # Defaults preserve old serialized terminal states; the gates are enabled
+    # only by the corresponding frozen experiment flag.
+    relation_target_alignment: float = 0.0
+    subject_binding_coverage: float = 0.0
+    dependency_binding_coverage: float = 0.0
+    qualifier_coverage: float = 0.0
+    output_slot_coverage: float = 0.0
+    full_subgoal_coverage: float = 0.0
+    query_alignment_gaps: dict[str, float] = field(default_factory=dict)
 
 
 @dataclass
@@ -396,10 +406,13 @@ class DynamicReasoningHypergraphV2(DynamicReasoningHypergraph):
     activated_entities: dict[str, ActivatedEntityState] = field(default_factory=dict)
     cross_layer_edges: list[CrossLayerEdge] = field(default_factory=list)
     proof_obligation_version: str = ""
+    query_alignment_version: str = ""
     controller_state_hash: str = ""
 
     def state_payload(self) -> dict[str, Any]:
         payload = super().state_payload()
+        if not self.query_alignment_version:
+            _strip_query_alignment_claim_channels(payload.get("nodes", {}))
         payload.update({
             "claim_semantics": {
                 key: _primitive(value) for key, value in sorted(self.claim_semantics.items())
@@ -425,9 +438,9 @@ class DynamicReasoningHypergraphV2(DynamicReasoningHypergraph):
             "termination_history": _v243_compatible_terminations(
                 self.termination_history, bool(self.proof_obligation_version)
             ),
-            "terminal_beliefs": {
-                key: _primitive(value) for key, value in sorted(self.terminal_beliefs.items())
-            },
+            "terminal_beliefs": _query_alignment_compatible_terminal_beliefs(
+                self.terminal_beliefs, bool(self.query_alignment_version)
+            ),
             "terminal_readout_version": self.terminal_readout_version,
             "corpus_memory_fingerprint": self.corpus_memory_fingerprint,
             "query_graph": _primitive(self.query_graph),
@@ -448,6 +461,8 @@ class DynamicReasoningHypergraphV2(DynamicReasoningHypergraph):
                 },
                 "proof_obligation_history": _primitive(self.proof_obligation_history),
             })
+        if self.query_alignment_version:
+            payload["query_alignment_version"] = self.query_alignment_version
         return payload
 
     def to_dict(self) -> dict[str, Any]:
@@ -836,6 +851,7 @@ class DynamicReasoningHypergraphV2(DynamicReasoningHypergraph):
             CrossLayerEdge(**row) for row in value.get("cross_layer_edges", [])
         ]
         graph.proof_obligation_version = str(value.get("proof_obligation_version", ""))
+        graph.query_alignment_version = str(value.get("query_alignment_version", ""))
         graph.controller_state_hash = str(value.get("controller_state_hash", ""))
         graph.validate()
         return graph
@@ -909,4 +925,35 @@ def _v243_compatible_terminations(
         return payload
     for row in payload:
         row.pop("dead_end_certificate", None)
+    return payload
+
+
+_QUERY_ALIGNMENT_FIELDS = {
+    "relation_target_alignment",
+    "subject_binding_coverage",
+    "dependency_binding_coverage",
+    "qualifier_coverage",
+    "output_slot_coverage",
+    "full_subgoal_coverage",
+}
+
+
+def _strip_query_alignment_claim_channels(nodes: dict[str, Any]) -> None:
+    """Keep frozen pre-HARA state payloads and hashes byte-compatible."""
+
+    for node in nodes.values():
+        raw = node.get("score", {}).get("raw", {}) if isinstance(node, dict) else {}
+        for name in _QUERY_ALIGNMENT_FIELDS:
+            raw.pop(name, None)
+
+
+def _query_alignment_compatible_terminal_beliefs(
+    beliefs: dict[str, TerminalBeliefState], enabled: bool,
+) -> dict[str, dict[str, Any]]:
+    payload = {key: _primitive(value) for key, value in sorted(beliefs.items())}
+    if enabled:
+        return payload
+    for row in payload.values():
+        for name in _QUERY_ALIGNMENT_FIELDS | {"query_alignment_gaps"}:
+            row.pop(name, None)
     return payload

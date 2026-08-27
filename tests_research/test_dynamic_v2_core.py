@@ -310,6 +310,12 @@ def test_terminal_readout_preserves_channels_and_controller_stores_passing_profi
         "retrieval_support": graph.node("c2").score.raw.retrieval_support,
         "contradiction_risk": graph.node("c2").score.raw.contradiction_risk,
         "raw_model_confidence": graph.node("c2").score.raw.raw_model_confidence,
+        "relation_target_alignment": graph.node("c2").score.raw.relation_target_alignment,
+        "subject_binding_coverage": graph.node("c2").score.raw.subject_binding_coverage,
+        "dependency_binding_coverage": graph.node("c2").score.raw.dependency_binding_coverage,
+        "qualifier_coverage": graph.node("c2").score.raw.qualifier_coverage,
+        "output_slot_coverage": graph.node("c2").score.raw.output_slot_coverage,
+        "full_subgoal_coverage": graph.node("c2").score.raw.full_subgoal_coverage,
     }
     updated = controller.apply(graph, proposals[0])
     assert updated.terminal_beliefs["answer_30"].accepted

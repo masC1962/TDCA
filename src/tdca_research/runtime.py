@@ -190,7 +190,7 @@ def run(
         retriever_kind, corpus, config.dense_model, config.dense_fallback, config.dense_index_path,
     ) if corpus is not None else None
     global_corpus_memory = None
-    if global_retriever is not None and config.method == "dynamic_hypergraph_tdca_v2":
+    if global_retriever is not None and config.method in {"dynamic_hypergraph_tdca_v2", "hara"}:
         from .dynamic_v2.memory import RelationLightCorpusMemory
 
         global_corpus_memory = RelationLightCorpusMemory.from_retriever(global_retriever)
@@ -216,12 +216,12 @@ def run(
                     config.evidence_char_budget,
                 )
                 retrieval_trace, reasoning_trace = [], []
-            elif config.method == "dynamic_hypergraph_tdca_v2":
+            elif config.method in {"dynamic_hypergraph_tdca_v2", "hara"}:
                 from .dynamic_v2.config import DynamicV2ResearchConfig
                 from .dynamic_v2.engine import DynamicHypergraphV2Reasoner
 
                 if not isinstance(config, DynamicV2ResearchConfig):
-                    raise TypeError("dynamic_hypergraph_tdca_v2 requires DynamicV2ResearchConfig")
+                    raise TypeError("HARA/dynamic_hypergraph_tdca_v2 requires DynamicV2ResearchConfig")
                 prediction, retrieval_trace, reasoning_trace = DynamicHypergraphV2Reasoner(
                     llm, retriever, config, corpus_memory=global_corpus_memory,
                 ).solve(example.inference_view())
@@ -272,7 +272,7 @@ def run(
         writer.write_rows("dynamic_per_example_metrics.jsonl", dynamic_rows)
         write_json(run_dir / "dynamic_metrics.json", dynamic_metrics)
         write_json(run_dir / "dynamic_metrics_by_hop.json", dynamic_by_hop)
-    elif config.method == "dynamic_hypergraph_tdca_v2":
+    elif config.method in {"dynamic_hypergraph_tdca_v2", "hara"}:
         from .dynamic_v2.metrics import dynamic_v2_metrics
 
         v2_metrics, v2_by_hop, graph_rows, v2_rows = dynamic_v2_metrics(selected, reasoning_rows)

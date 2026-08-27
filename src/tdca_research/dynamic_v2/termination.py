@@ -155,6 +155,20 @@ class TerminalBeliefReadout:
                 claim.score.raw.type_match >= self.config.terminal_min_type_consistency,
                 claim.score.raw.contradiction_risk < self.config.terminal_max_contradiction,
                 bool(claim.evidence_refs),
+                not self.config.query_conditioned_semantic_alignment or all((
+                    claim.score.raw.relation_target_alignment
+                    >= self.config.terminal_min_relation_target_alignment,
+                    claim.score.raw.subject_binding_coverage
+                    >= self.config.terminal_min_subject_binding_coverage,
+                    claim.score.raw.dependency_binding_coverage
+                    >= self.config.terminal_min_dependency_binding_coverage,
+                    claim.score.raw.qualifier_coverage
+                    >= self.config.terminal_min_qualifier_coverage,
+                    claim.score.raw.output_slot_coverage
+                    >= self.config.terminal_min_output_slot_coverage,
+                    claim.score.raw.full_subgoal_coverage
+                    >= self.config.terminal_min_full_subgoal_coverage,
+                )),
             )):
                 return True
         return False
@@ -167,6 +181,10 @@ class TerminalBeliefReadout:
         initial_claims = [str(value) for value in answer.get("supporting_claims", [])]
         claim_ids = claim_closure(graph, initial_claims)
         claims = [graph.node(node_id, ClaimNode) for node_id in claim_ids]
+        answer_claims = [
+            graph.node(node_id, ClaimNode) for node_id in initial_claims
+            if node_id in graph.nodes
+        ]
         evidence_ids = list(dict.fromkeys(
             evidence_id for claim in claims for evidence_id in claim.evidence_refs
             if evidence_id in graph.nodes
@@ -184,6 +202,12 @@ class TerminalBeliefReadout:
                 "retrieval_support": float(claim.score.raw.retrieval_support),
                 "contradiction_risk": float(claim.score.raw.contradiction_risk),
                 "raw_model_confidence": float(claim.score.raw.raw_model_confidence),
+                "relation_target_alignment": float(claim.score.raw.relation_target_alignment),
+                "subject_binding_coverage": float(claim.score.raw.subject_binding_coverage),
+                "dependency_binding_coverage": float(claim.score.raw.dependency_binding_coverage),
+                "qualifier_coverage": float(claim.score.raw.qualifier_coverage),
+                "output_slot_coverage": float(claim.score.raw.output_slot_coverage),
+                "full_subgoal_coverage": float(claim.score.raw.full_subgoal_coverage),
             }
             for claim in claims
         }
@@ -218,6 +242,38 @@ class TerminalBeliefReadout:
             and statuses_valid and evidence_complete and proof_connected
             and chain_coverage >= self.config.terminal_min_chain_coverage
         )
+        alignment_names = (
+            "relation_target_alignment", "subject_binding_coverage",
+            "dependency_binding_coverage", "qualifier_coverage",
+            "output_slot_coverage", "full_subgoal_coverage",
+        )
+        alignment = (
+            {
+                name: min(
+                    (float(getattr(claim.score.raw, name)) for claim in answer_claims),
+                    default=0.0,
+                )
+                for name in alignment_names
+            }
+            if self.config.query_conditioned_semantic_alignment
+            else {name: 0.0 for name in alignment_names}
+        )
+        alignment_thresholds = {
+            "relation_target_alignment": self.config.terminal_min_relation_target_alignment,
+            "subject_binding_coverage": self.config.terminal_min_subject_binding_coverage,
+            "dependency_binding_coverage": self.config.terminal_min_dependency_binding_coverage,
+            "qualifier_coverage": self.config.terminal_min_qualifier_coverage,
+            "output_slot_coverage": self.config.terminal_min_output_slot_coverage,
+            "full_subgoal_coverage": self.config.terminal_min_full_subgoal_coverage,
+        }
+        alignment_gaps = (
+            {
+                name: _below_gap(alignment[name], threshold)
+                for name, threshold in alignment_thresholds.items()
+            }
+            if self.config.query_conditioned_semantic_alignment
+            else {}
+        )
         profile = TerminalBeliefState(
             answer_node_id=str(answer.get("node_id", "")),
             candidate_answer=str(answer.get("candidate_answer", "")).strip(),
@@ -242,6 +298,13 @@ class TerminalBeliefReadout:
             raw_claim_channels=raw_channels,
             sufficient_chain=sufficient_chain,
             accepted=False,
+            **alignment,
+            query_alignment_gaps=alignment_gaps,
+            scoring_version=(
+                "hara-query-alignment-terminal-v2.4.3.18"
+                if self.config.query_conditioned_semantic_alignment
+                else "terminal-belief-readout-v2.2"
+            ),
         )
         return {"operation": operation, "profile": profile}
 
@@ -268,6 +331,18 @@ class TerminalBeliefReadout:
             reasons.append("answer_type_consistency_below_minimum")
         if profile.chain_coverage < self.config.terminal_min_chain_coverage:
             reasons.append("chain_coverage_below_minimum")
+        if self.config.query_conditioned_semantic_alignment:
+            thresholds = {
+                "relation_target_alignment": self.config.terminal_min_relation_target_alignment,
+                "subject_binding_coverage": self.config.terminal_min_subject_binding_coverage,
+                "dependency_binding_coverage": self.config.terminal_min_dependency_binding_coverage,
+                "qualifier_coverage": self.config.terminal_min_qualifier_coverage,
+                "output_slot_coverage": self.config.terminal_min_output_slot_coverage,
+                "full_subgoal_coverage": self.config.terminal_min_full_subgoal_coverage,
+            }
+            for name, threshold in thresholds.items():
+                if float(getattr(profile, name)) < float(threshold):
+                    reasons.append(f"{name}_below_minimum")
         return reasons
 
     def _terminal_gap(self, profile: TerminalBeliefState) -> float:
@@ -283,6 +358,8 @@ class TerminalBeliefReadout:
             0.0 if profile.sufficient_chain else 1.0,
             1.0 if "unresolved_competing_branches" in profile.rejection_reasons else 0.0,
         ]
+        if self.config.query_conditioned_semantic_alignment:
+            gaps.extend(profile.query_alignment_gaps.values())
         return _unit(max(gaps))
 
 
@@ -446,7 +523,7 @@ class MetaStopPolicy:
         ), default=None)
 
     def _terminal_belief_rejected(self, terminal: TerminalBeliefState) -> bool:
-        return any((
+        rejected = any((
             not terminal.sufficient_chain,
             terminal.absolute_support < self.config.terminal_min_absolute_support,
             terminal.relative_margin < self.config.terminal_min_relative_margin,
@@ -455,6 +532,16 @@ class MetaStopPolicy:
             terminal.contradiction_pressure >= self.config.terminal_max_contradiction,
             terminal.answer_type_consistency < self.config.terminal_min_type_consistency,
             terminal.chain_coverage < self.config.terminal_min_chain_coverage,
+        ))
+        if rejected or not self.config.query_conditioned_semantic_alignment:
+            return rejected
+        return any((
+            terminal.relation_target_alignment < self.config.terminal_min_relation_target_alignment,
+            terminal.subject_binding_coverage < self.config.terminal_min_subject_binding_coverage,
+            terminal.dependency_binding_coverage < self.config.terminal_min_dependency_binding_coverage,
+            terminal.qualifier_coverage < self.config.terminal_min_qualifier_coverage,
+            terminal.output_slot_coverage < self.config.terminal_min_output_slot_coverage,
+            terminal.full_subgoal_coverage < self.config.terminal_min_full_subgoal_coverage,
         ))
 
     @staticmethod

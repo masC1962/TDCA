@@ -15,7 +15,7 @@ from .runtime import run
 def _load_config(path: str, method_override: str | None) -> ResearchConfig:
     raw = yaml.safe_load(Path(path).read_text(encoding="utf-8")) or {}
     method = method_override or str(raw.get("method", "structured_tdca"))
-    if method == "dynamic_hypergraph_tdca_v2":
+    if method in {"dynamic_hypergraph_tdca_v2", "hara"}:
         allowed = {field.name for field in fields(DynamicV2ResearchConfig)}
         unknown = sorted(set(raw) - allowed)
         if unknown:

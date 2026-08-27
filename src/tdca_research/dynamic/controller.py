@@ -312,6 +312,12 @@ class GraphController:
                 retrieval_support=_unit(row.get("retrieval_support")),
                 contradiction_risk=_unit(row.get("contradiction_risk")),
                 raw_model_confidence=_unit(row.get("raw_model_confidence")),
+                relation_target_alignment=_unit(row.get("relation_target_alignment")),
+                subject_binding_coverage=_unit(row.get("subject_binding_coverage")),
+                dependency_binding_coverage=_unit(row.get("dependency_binding_coverage")),
+                qualifier_coverage=_unit(row.get("qualifier_coverage")),
+                output_slot_coverage=_unit(row.get("output_slot_coverage")),
+                full_subgoal_coverage=_unit(row.get("full_subgoal_coverage")),
                 reasons=[str(value) for value in row.get("reasons", [])][:5],
             )
             claim.score = CandidateScoreProfile(

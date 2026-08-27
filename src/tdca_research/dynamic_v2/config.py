@@ -225,6 +225,19 @@ class DynamicV2ResearchConfig(DynamicResearchConfig):
     # universal/generic statement into an entity-specific dependent tuple.
     generic_evidence_endpoint_grounding: bool = False
 
+    # v2.4.3.18 / HARA separates evidence truth from complete satisfaction of
+    # the current query-graph constraint.  Structural dependency coverage may
+    # override an unreliable model residual only when the controller can prove
+    # the binding from candidate endpoints and declared dependency lineage.
+    query_conditioned_semantic_alignment: bool = False
+    structural_dependency_binding_coverage: bool = False
+    terminal_min_relation_target_alignment: float = 0.70
+    terminal_min_subject_binding_coverage: float = 0.70
+    terminal_min_dependency_binding_coverage: float = 0.70
+    terminal_min_qualifier_coverage: float = 0.70
+    terminal_min_output_slot_coverage: float = 0.70
+    terminal_min_full_subgoal_coverage: float = 0.70
+
     # Terminal acceptance is a conjunctive readout over independent belief
     # channels.  These are initial development values, never learned weights.
     terminal_min_absolute_support: float = 0.70
@@ -266,7 +279,7 @@ class DynamicV2ResearchConfig(DynamicResearchConfig):
     natural_revision_precision_threshold: float = 0.80
 
     def validate(self) -> None:
-        self._validate_common({"dynamic_hypergraph_tdca_v2"})
+        self._validate_common({"dynamic_hypergraph_tdca_v2", "hara"})
         if self.oracle_evidence or self.oracle_decomposition:
             raise ValueError("Dynamic Hypergraph v2 forbids oracle inference fields")
         positive = {
@@ -299,6 +312,12 @@ class DynamicV2ResearchConfig(DynamicResearchConfig):
                 "terminal_max_entropy", "terminal_max_evidence_gap",
                 "terminal_max_contradiction", "terminal_min_type_consistency",
                 "terminal_min_chain_coverage",
+                "terminal_min_relation_target_alignment",
+                "terminal_min_subject_binding_coverage",
+                "terminal_min_dependency_binding_coverage",
+                "terminal_min_qualifier_coverage",
+                "terminal_min_output_slot_coverage",
+                "terminal_min_full_subgoal_coverage",
                 "evc_immediate_horizon_weight", "evc_delayed_horizon_weight",
                 "delayed_credit_gamma",
                 "delayed_structural_signal_weight",

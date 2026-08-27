@@ -299,6 +299,8 @@ class V2GraphController(GraphController):
             return
         query_graph = compile_query_graph(graph.question, graph.subgoals())
         graph.query_graph = query_graph.to_payload()
+        if self.config.query_conditioned_semantic_alignment:
+            graph.query_alignment_version = "hara-query-alignment-v2.4.3.18"
 
     @staticmethod
     def _rewrite_terminal_target(graph, operation, changes, rewrite) -> None:
@@ -827,6 +829,12 @@ class V2GraphController(GraphController):
             retrieval_support=min(source.score.raw.retrieval_support for source in sources),
             contradiction_risk=max(source.score.raw.contradiction_risk for source in sources),
             raw_model_confidence=_unit(row.get("derivation_confidence", 0.0)),
+            relation_target_alignment=float(self.config.query_conditioned_semantic_alignment),
+            subject_binding_coverage=float(self.config.query_conditioned_semantic_alignment),
+            dependency_binding_coverage=float(self.config.query_conditioned_semantic_alignment),
+            qualifier_coverage=float(self.config.query_conditioned_semantic_alignment),
+            output_slot_coverage=float(self.config.query_conditioned_semantic_alignment),
+            full_subgoal_coverage=float(self.config.query_conditioned_semantic_alignment),
             reasons=["typed_multi_premise_join"],
         )
         absolute_support = min(
@@ -987,6 +995,23 @@ class V2GraphController(GraphController):
                     terminal.chain_coverage < self.config.terminal_min_chain_coverage,
                 )):
                     raise GraphInvariantError("answer COMMIT terminal channels violate configured gate")
+                if self.config.query_conditioned_semantic_alignment and any((
+                    terminal.relation_target_alignment
+                    < self.config.terminal_min_relation_target_alignment,
+                    terminal.subject_binding_coverage
+                    < self.config.terminal_min_subject_binding_coverage,
+                    terminal.dependency_binding_coverage
+                    < self.config.terminal_min_dependency_binding_coverage,
+                    terminal.qualifier_coverage
+                    < self.config.terminal_min_qualifier_coverage,
+                    terminal.output_slot_coverage
+                    < self.config.terminal_min_output_slot_coverage,
+                    terminal.full_subgoal_coverage
+                    < self.config.terminal_min_full_subgoal_coverage,
+                )):
+                    raise GraphInvariantError(
+                        "answer COMMIT query-alignment channels violate configured gate"
+                    )
                 if set(terminal.supporting_claims) != set(answer_row.get("supporting_claims", [])):
                     raise GraphInvariantError("answer COMMIT terminal claim support mismatch")
                 if set(terminal.supporting_evidence) != set(answer_row.get("supporting_evidence", [])):

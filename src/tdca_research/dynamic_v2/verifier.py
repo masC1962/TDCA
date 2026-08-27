@@ -39,6 +39,32 @@ List contradiction IDs only for logically mutually exclusive claims, never merel
 multi-valued relation. Do not rank, normalize, omit candidates, explain, or add reasons."""
 
 
+HARA_VERIFY_SYSTEM = """Independently score each Candidate using two strictly separate channel families.
+Evidence channels judge whether the cited evidence supports the tuple itself. Query-alignment channels judge
+whether that independently supported tuple satisfies the current subgoal constraint. Return JSON only as
+{scores:[...]}, one compact row per Candidate and no rows for Existing comparison claims. Each row contains
+exactly candidate_id, grounding, entailment, type_match, dependency_consistency, contradiction_risk,
+raw_model_confidence, relation_target_alignment, subject_binding_coverage, dependency_binding_coverage,
+qualifier_coverage, output_slot_coverage, answer_position, and contradiction_candidate_ids. Every score is in
+[0,1]. Do not lower evidence entailment merely because a true tuple is question-irrelevant; express that only
+in the query-alignment channels. relation_target_alignment asks whether the tuple expresses the requested
+relation. subject_binding_coverage asks whether it is about the entity fixed by the question/current branch.
+dependency_binding_coverage asks whether every declared bridge value is correctly used. qualifier_coverage
+asks whether all explicit temporal/comparison/cardinality/set/negation constraints are covered; use 1 when
+none are declared. output_slot_coverage asks whether the selected endpoint has the requested semantic role
+and type. answer_position is subject, value, or none. List contradiction IDs only for logically mutually
+exclusive claims. Do not rank, normalize, omit candidates, fuse evidence with relevance, or explain."""
+
+
+ALIGNMENT_FIELDS = (
+    "relation_target_alignment",
+    "subject_binding_coverage",
+    "dependency_binding_coverage",
+    "qualifier_coverage",
+    "output_slot_coverage",
+)
+
+
 class MultiSampleIndependentVerifier:
     """Independent raw scoring passes followed by one deterministic fusion."""
 
@@ -93,6 +119,18 @@ class MultiSampleIndependentVerifier:
             f"{graph.node(node_id, ClaimNode).relation}, {graph.node(node_id, ClaimNode).value})"
             for node_id in dependency_ids
         ) or "(none)"
+        query_constraint = next((
+            dict(row) for row in graph.query_graph.get("constraints", [])
+            if str(row.get("subgoal_id")) == subgoal_id
+        ), {})
+        constraint_text = (
+            f"description={query_constraint.get('description', instantiated_question)!r}; "
+            f"known_entities={query_constraint.get('known_entities', [])}; "
+            f"input_variables={query_constraint.get('input_variables', [])}; "
+            f"output_variable={query_constraint.get('output_variable', '')!r}; "
+            f"expected_output_type={graph.node(subgoal_id, SubgoalNode).answer_type!r}; "
+            f"required_qualifiers={query_constraint.get('required_qualifiers', [])}"
+        )
         raw_samples: dict[str, list[VerificationSignals]] = defaultdict(list)
         audits: dict[str, list[dict[str, Any]]] = defaultdict(list)
         projection_votes: dict[str, list[str]] = defaultdict(list)
@@ -102,10 +140,15 @@ class MultiSampleIndependentVerifier:
         per_call_tokens = max(128, min(int(token_budget), self.config.soft_verifier_max_tokens))
         for sample_index in range(sample_count):
             messages = [
-                {"role": "system", "content": V2_VERIFY_SYSTEM},
+                {"role": "system", "content": (
+                    HARA_VERIFY_SYSTEM
+                    if self.config.query_conditioned_semantic_alignment
+                    else V2_VERIFY_SYSTEM
+                )},
                 {"role": "user", "content": (
                     f"Independent scoring pass: {sample_index + 1}/{sample_count}. Do not infer scores from "
                     f"another pass.\nRoot question: {graph.question}\nSubgoal: {instantiated_question}\n"
+                    f"Compiled query constraint: {constraint_text}\n"
                     f"Dependency claims:\n{dependency_text}\n\nCandidate claims:\n"
                     + "\n".join(blocks) + f"\n\nShared evidence:\n{evidence_text}"
                 )},
@@ -114,7 +157,11 @@ class MultiSampleIndependentVerifier:
             try:
                 data, generation = self.llm.generate_json(
                     messages,
-                    f"dynamic_v2_independent_verification_v1_pass_{sample_index + 1}",
+                    (
+                        f"hara_v24318_independent_evidence_query_alignment_pass_{sample_index + 1}"
+                        if self.config.query_conditioned_semantic_alignment else
+                        f"dynamic_v2_independent_verification_v1_pass_{sample_index + 1}"
+                    ),
                     per_call_tokens,
                     self.config.temperature,
                 )
@@ -177,6 +224,11 @@ class MultiSampleIndependentVerifier:
                         retrieval_support=deterministic.retrieval_support,
                         contradiction_risk=model_contradiction,
                         raw_model_confidence=_unit(row.get("raw_model_confidence")),
+                        relation_target_alignment=_unit(row.get("relation_target_alignment")),
+                        subject_binding_coverage=_unit(row.get("subject_binding_coverage")),
+                        dependency_binding_coverage=_unit(row.get("dependency_binding_coverage")),
+                        qualifier_coverage=_unit(row.get("qualifier_coverage")),
+                        output_slot_coverage=_unit(row.get("output_slot_coverage")),
                         reasons=[str(value) for value in row.get("reasons", [])][:5],
                     )
                     weight = self.config.soft_verifier_model_weight
@@ -193,6 +245,11 @@ class MultiSampleIndependentVerifier:
                         raw_model_confidence=_blend(
                             deterministic.raw_model_confidence, model.raw_model_confidence, weight,
                         ),
+                        relation_target_alignment=model.relation_target_alignment,
+                        subject_binding_coverage=model.subject_binding_coverage,
+                        dependency_binding_coverage=model.dependency_binding_coverage,
+                        qualifier_coverage=model.qualifier_coverage,
+                        output_slot_coverage=model.output_slot_coverage,
                         reasons=model.reasons,
                     )
                     mode = "deterministic_prior_plus_independent_model_residual"
@@ -207,6 +264,11 @@ class MultiSampleIndependentVerifier:
                             str(value) for value in row.get("contradiction_candidate_ids", [])
                             if str(value) in known_ids and str(value) != candidate.node_id
                         )
+                if self.config.query_conditioned_semantic_alignment:
+                    raw = _query_conditioned_signals(
+                        raw, candidate, graph, subgoal_id, answer_position,
+                        structural_dependency=self.config.structural_dependency_binding_coverage,
+                    )
                 raw_samples[candidate.node_id].append(raw)
                 projection_votes[candidate.node_id].append(answer_position)
                 audits[candidate.node_id].append({
@@ -306,6 +368,7 @@ def _average(rows: list[VerificationSignals]) -> VerificationSignals:
     names = (
         "grounding", "entailment", "type_match", "dependency_consistency",
         "retrieval_support", "contradiction_risk", "raw_model_confidence",
+        *ALIGNMENT_FIELDS, "full_subgoal_coverage",
     )
     return VerificationSignals(
         **{name: mean(float(getattr(row, name)) for row in rows) for name in names},
@@ -386,6 +449,149 @@ def _generic_evidence_endpoint_grounding(
     return _evidence_endpoint_grounding(candidate, graph)
 
 
+def _query_conditioned_signals(
+    raw: VerificationSignals,
+    candidate: ClaimNode,
+    graph: DynamicReasoningHypergraphV2,
+    subgoal_id: str,
+    answer_position: str,
+    *,
+    structural_dependency: bool,
+) -> VerificationSignals:
+    """Keep evidence truth and query satisfaction as independent raw channels.
+
+    Only controller-provable binding facts override a model residual. Relation
+    and qualifier semantics remain independent and never enter absolute support.
+    """
+    dependency = _structural_dependency_binding_coverage(
+        candidate, graph, subgoal_id,
+    )
+    dependency_coverage = (
+        dependency if dependency is not None
+        else raw.dependency_binding_coverage
+    )
+    dependency_consistency = raw.dependency_consistency
+    reasons = list(raw.reasons)
+    if structural_dependency and dependency is not None:
+        dependency_consistency = dependency
+        reasons.append("controller_structural_dependency_binding")
+
+    subject_binding = _structural_subject_binding_coverage(
+        candidate, graph, subgoal_id, answer_position,
+    )
+    if subject_binding is None:
+        subject_binding = raw.subject_binding_coverage
+    else:
+        reasons.append("controller_structural_subject_binding")
+
+    expected_type = graph.node(subgoal_id, SubgoalNode).answer_type
+    structural_projection = _structural_projection(
+        graph, subgoal_id, candidate, expected_type,
+        numeric_aliases=True,
+    )
+    output_slot = raw.output_slot_coverage
+    if structural_projection != "none":
+        output_slot = 1.0 if answer_position in {"none", structural_projection} else 0.0
+        reasons.append("controller_structural_output_slot")
+
+    constraint = next((
+        row for row in graph.query_graph.get("constraints", [])
+        if str(row.get("subgoal_id")) == subgoal_id
+    ), {})
+    qualifier = (
+        raw.qualifier_coverage
+        if constraint.get("required_qualifiers") else 1.0
+    )
+    components = {
+        "relation_target_alignment": raw.relation_target_alignment,
+        "subject_binding_coverage": subject_binding,
+        "dependency_binding_coverage": dependency_coverage,
+        "qualifier_coverage": qualifier,
+        "output_slot_coverage": output_slot,
+    }
+    return VerificationSignals(
+        grounding=raw.grounding,
+        entailment=raw.entailment,
+        type_match=raw.type_match,
+        dependency_consistency=_unit(dependency_consistency),
+        retrieval_support=raw.retrieval_support,
+        contradiction_risk=raw.contradiction_risk,
+        raw_model_confidence=raw.raw_model_confidence,
+        **{name: _unit(value) for name, value in components.items()},
+        full_subgoal_coverage=min(_unit(value) for value in components.values()),
+        reasons=list(dict.fromkeys(reasons))[:8],
+    )
+
+
+def _structural_dependency_binding_coverage(
+    candidate: ClaimNode,
+    graph: DynamicReasoningHypergraphV2,
+    subgoal_id: str,
+) -> float | None:
+    """Prove declared bridge use from controller-owned lineage and endpoints."""
+    subgoal = graph.node(subgoal_id, SubgoalNode)
+    if not subgoal.dependencies:
+        return 1.0
+    dependency_claims = [
+        graph.nodes.get(node_id) for node_id in candidate.dependency_claim_ids
+    ]
+    dependency_claims = [
+        row for row in dependency_claims if isinstance(row, ClaimNode)
+    ]
+    if not dependency_claims:
+        return 0.0
+    endpoints = {normalize_text(candidate.subject), normalize_text(candidate.value)}
+    endpoints.discard("")
+    covered = []
+    for required_subgoal in subgoal.dependencies:
+        matching = [
+            dependency for dependency in dependency_claims
+            if dependency.target_subgoal == required_subgoal
+        ]
+        covered.append(float(any(
+            normalize_text(dependency.value) in endpoints
+            for dependency in matching
+            if normalize_text(dependency.value)
+        )))
+    return min(covered) if covered else None
+
+
+def _structural_subject_binding_coverage(
+    candidate: ClaimNode,
+    graph: DynamicReasoningHypergraphV2,
+    subgoal_id: str,
+    answer_position: str,
+) -> float | None:
+    query_anchors = {
+        normalize_text(str(value))
+        for row in graph.query_graph.get("constraints", [])
+        if str(row.get("subgoal_id")) == subgoal_id
+        for value in row.get("known_entities", [])
+        if normalize_text(str(value))
+    }
+    dependency_anchors = set()
+    for dependency_id in candidate.dependency_claim_ids:
+        dependency = graph.nodes.get(dependency_id)
+        if isinstance(dependency, ClaimNode):
+            dependency_anchors.update(filter(None, (
+                normalize_text(dependency.value),
+            )))
+    subgoal = graph.node(subgoal_id, SubgoalNode)
+    # A dependent subgoal is bound to the bridge output, not merely to any
+    # entity mentioned by the original question.
+    anchors = dependency_anchors if subgoal.dependencies else query_anchors
+    if not anchors:
+        return None
+    bound_endpoint = (
+        candidate.value if answer_position == "subject" else candidate.subject
+    )
+    if answer_position == "none":
+        return float(bool({
+            normalize_text(candidate.subject), normalize_text(candidate.value),
+        } & anchors))
+    return float(normalize_text(bound_endpoint) in anchors)
+
+
 def _projection_vote(rows: list[str], fallback: str) -> str:
     if not rows:
         return fallback
@@ -430,7 +636,9 @@ def _projection_type_compatible(
         "human": "person", "actor": "person", "actress": "person", "individual": "person",
         "city": "location", "county": "location", "country": "location", "nation": "location",
         "province": "location", "state": "location", "district": "location",
-        "administrative_district": "location", "region": "location",
+        "administrative_district": "location", "administrative_entity": "location",
+        "administrative_territorial_entity": "location", "municipality": "location",
+        "region": "location",
         "geographic_entity": "location", "body_of_water": "location", "place": "location",
         "year": "date", "time": "date",
         "count": "number", "quantity": "number", "percentage": "number",
@@ -489,6 +697,15 @@ def _structural_projection(
                 value = normalize_text(dependency.value)
                 if value:
                     anchors.add(value)
+    # A freshly extracted dependent claim may be verified before the branch
+    # assignment transition materializes. Its controller-recorded lineage is
+    # already sufficient to expose the bound bridge endpoint.
+    for dependency_id in candidate.dependency_claim_ids:
+        dependency = graph.nodes.get(dependency_id)
+        if isinstance(dependency, ClaimNode):
+            value = normalize_text(dependency.value)
+            if value:
+                anchors.add(value)
     subject_bound = normalize_text(candidate.subject) in anchors
     value_bound = normalize_text(candidate.value) in anchors
     if subject_bound == value_bound:
@@ -550,6 +767,7 @@ def _max_signals(rows: list[VerificationSignals]) -> VerificationSignals:
     names = (
         "grounding", "entailment", "type_match", "dependency_consistency",
         "retrieval_support", "raw_model_confidence",
+        *ALIGNMENT_FIELDS, "full_subgoal_coverage",
     )
     return VerificationSignals(
         **{name: max(float(getattr(row, name)) for row in rows) for name in names},

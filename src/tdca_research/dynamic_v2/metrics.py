@@ -11,6 +11,16 @@ from .graph import DynamicReasoningHypergraphV2
 from .proof import audit_graph_proof
 
 
+QUERY_ALIGNMENT_FIELDS = (
+    "relation_target_alignment",
+    "subject_binding_coverage",
+    "dependency_binding_coverage",
+    "qualifier_coverage",
+    "output_slot_coverage",
+    "full_subgoal_coverage",
+)
+
+
 def dynamic_v2_metrics(
     examples: list[QAExample], reasoning_rows: list[dict[str, Any]],
 ) -> tuple[dict[str, Any], dict[str, Any], list[dict[str, Any]], list[dict[str, Any]]]:
@@ -136,6 +146,35 @@ def dynamic_v2_metrics(
         known_labels = [value for value in revision_labels if value in {"correct", "wrong"}]
         accepted_answers = [value for value in answers.values() if value.get("status") == "accepted"]
         terminal_beliefs = graph.get("terminal_beliefs", {})
+        query_alignment_enabled = bool(graph.get("query_alignment_version"))
+        alignment_claim_rows = [
+            value.get("score", {}).get("raw", {})
+            for node_id, value in claims.items()
+            if node_id in active and value.get("status") in {"scored", "committed"}
+        ]
+        complete_alignment_claims = [
+            raw for raw in alignment_claim_rows
+            if all(name in raw for name in QUERY_ALIGNMENT_FIELDS)
+        ]
+        complete_alignment_terminals = [
+            value for value in terminal_beliefs.values()
+            if all(name in value for name in QUERY_ALIGNMENT_FIELDS)
+            and all(name in (value.get("query_alignment_gaps") or {})
+                    for name in QUERY_ALIGNMENT_FIELDS)
+        ]
+        alignment_rejections = [
+            reason
+            for value in terminal_beliefs.values()
+            for reason in value.get("rejection_reasons", [])
+            if str(reason).endswith("_below_minimum")
+            and str(reason).removesuffix("_below_minimum") in QUERY_ALIGNMENT_FIELDS
+        ]
+        complete_query_alignment_trace = bool(
+            query_alignment_enabled
+            and alignment_claim_rows
+            and len(complete_alignment_claims) == len(alignment_claim_rows)
+            and len(complete_alignment_terminals) == len(terminal_beliefs)
+        )
         invalid_edges = set(graph.get("invalidated_hyperedges", []))
         unsupported = [
             value for value in accepted_answers
@@ -259,6 +298,19 @@ def dynamic_v2_metrics(
             ),
             "unsupported_answer_count": len(unsupported),
             "terminal_belief_count": len(terminal_beliefs),
+            "query_alignment_enabled": query_alignment_enabled,
+            "query_alignment_scored_claim_count": len(alignment_claim_rows),
+            "query_alignment_complete_claim_count": len(complete_alignment_claims),
+            "query_alignment_rejection_count": len(alignment_rejections),
+            "mean_dependency_binding_coverage": mean(
+                float(raw["dependency_binding_coverage"])
+                for raw in complete_alignment_claims
+            ) if complete_alignment_claims else 0.0,
+            "mean_full_subgoal_coverage": mean(
+                float(raw["full_subgoal_coverage"])
+                for raw in complete_alignment_claims
+            ) if complete_alignment_claims else 0.0,
+            "complete_query_alignment_trace": complete_query_alignment_trace,
             "complete_terminal_belief_readout": complete_terminal_readout,
             "complete_terminal_gap_trace": terminal_gap_trace,
             "termination_outcome": terminations[-1].get("outcome") if terminations else "MISSING",
@@ -323,6 +375,9 @@ def _aggregate(rows: list[dict[str, Any]]) -> dict[str, Any]:
         "natural_revision_count", "natural_revision_correct", "natural_revision_wrong",
         "natural_revision_unknown", "unsupported_answer_count",
         "terminal_belief_count",
+        "query_alignment_scored_claim_count", "query_alignment_complete_claim_count",
+        "query_alignment_rejection_count", "mean_dependency_binding_coverage",
+        "mean_full_subgoal_coverage",
         "join_preallocation_filtered_count", "selected_infeasible_join_count",
         "repeated_same_fingerprint_extraction_count", "region_retrieval_gate_count",
         "region_retrieval_allowed_count", "dependency_coverage",
@@ -337,6 +392,7 @@ def _aggregate(rows: list[dict[str, Any]]) -> dict[str, Any]:
         "complete_delayed_credit_trace",
         "complete_proof_obligation_trace", "abstain_has_exhaustion_evidence",
         "query_graph_present",
+        "query_alignment_enabled", "complete_query_alignment_trace",
         "complete_terminal_belief_readout", "complete_terminal_gap_trace",
         "graph_proof_completion", "proof_connected",
     ):

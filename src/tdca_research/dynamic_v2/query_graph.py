@@ -10,6 +10,9 @@ from ..utils import normalize_text, stable_hash
 TYPE_PARENTS = {
     "city": "location", "country": "location", "state": "location",
     "province": "location", "region": "location", "continent": "location",
+    "county": "location", "district": "location", "municipality": "location",
+    "administrative_district": "location", "administrative_entity": "location",
+    "administrative_territorial_entity": "location",
     "river": "location", "mountain": "location",
     "person": "entity", "organization": "entity", "company": "organization",
     "university": "organization", "team": "organization",
@@ -35,6 +38,7 @@ class QueryConstraint:
     input_variables: tuple[str, ...]
     output_variable: str
     known_entities: tuple[str, ...]
+    required_qualifiers: tuple[str, ...] = ()
 
 
 @dataclass(frozen=True)
@@ -51,6 +55,7 @@ class QueryGraph:
                 **row.__dict__,
                 "input_variables": list(row.input_variables),
                 "known_entities": list(row.known_entities),
+                "required_qualifiers": list(row.required_qualifiers),
             } for row in self.constraints],
         }
 
@@ -77,6 +82,9 @@ def compile_query_graph(question: str, subgoals: list[SubgoalNode]) -> QueryGrap
             input_variables=inputs,
             output_variable=variable_id,
             known_entities=known,
+            required_qualifiers=tuple(_constraint_qualifiers(
+                subgoal.instantiated_question or subgoal.question_template
+            )),
         ))
     return QueryGraph(question, tuple(variables), tuple(constraints))
 
@@ -122,4 +130,33 @@ def _question_entities(text: str) -> list[str]:
     return [
         value for value in dict.fromkeys(rows)
         if normalize_text(value) not in stop
+    ]
+
+
+def _constraint_qualifiers(text: str) -> list[str]:
+    """Extract only explicit, label-free constraint families from a subgoal.
+
+    The values are audit descriptors for the independent verifier.  They do
+    not identify an answer, dataset, entity, or hidden hop count.
+    """
+    normalized = normalize_text(text)
+    patterns = {
+        "temporal": (
+            " before ", " after ", " during ", " when ", " earliest ",
+            " latest ", " first ", " last ", " year ", " date ",
+        ),
+        "comparison": (
+            " more ", " less ", " fewer ", " greater ", " largest ",
+            " smallest ", " highest ", " lowest ", " older ", " younger ",
+        ),
+        "cardinality": (
+            "how many", " number of ", " total ", " percentage ", " percent ",
+        ),
+        "set": (" both ", " common ", " intersection ", " either ", " all "),
+        "negation": (" not ", " never ", " except ", " without "),
+    }
+    padded = f" {normalized} "
+    return [
+        family for family, cues in patterns.items()
+        if any(cue in padded for cue in cues)
     ]

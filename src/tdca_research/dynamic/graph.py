@@ -101,6 +101,16 @@ class VerificationSignals:
     retrieval_support: float = 0.0
     contradiction_risk: float = 0.0
     raw_model_confidence: float = 0.0
+    # Query-conditioned coverage is intentionally kept outside the fused
+    # evidence-support score.  A tuple can be independently entailed by its
+    # evidence while still failing to answer the current relation, binding, or
+    # qualifier constraint.  Frozen configurations ignore these opt-in fields.
+    relation_target_alignment: float = 0.0
+    subject_binding_coverage: float = 0.0
+    dependency_binding_coverage: float = 0.0
+    qualifier_coverage: float = 0.0
+    output_slot_coverage: float = 0.0
+    full_subgoal_coverage: float = 0.0
     reasons: list[str] = field(default_factory=list)
 
 
