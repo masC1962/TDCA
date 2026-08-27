@@ -1,0 +1,67 @@
+{
+  "schema_version": "hara-v2.4.3.22-preregistration-v1",
+  "frozen_at": "2026-08-27",
+  "training": false,
+  "seed": 20260820,
+  "source_commit": "d8f25bab",
+  "parent_experiment": "hara-v2.4.3.21",
+  "parent_runs": {
+    "opened_causal_diagnostic": "research_outputs/musique_distractor_smoke_hara_1787837002865721579",
+    "development_canary_5": "research_outputs/musique_distractor_smoke_hara_1787837090616613940"
+  },
+  "parent_decision": "PARTIAL_PASS_FIX_PROJECTION_AUTHORITY_AND_PROMPT_COST",
+  "observed_failure_before_design": {
+    "causal_gate_passed": true,
+    "canary_f1": 0.4,
+    "canary_full_chain": 0.6,
+    "canary_candidate_presence": 0.4,
+    "canary_graph_proof_completion": 1.0,
+    "unsupported_answer_count": 0,
+    "root_causes": [
+      "The complete controller certificate for an implicit local multi-hop binding was overwritten by the older exact-anchor helper, so branch assignment preferred a high-support relation that did not answer the subgoal.",
+      "Verifier fidelity priced only completion caps. A six-candidate two-sample VERIFY was predicted as 1800 tokens but consumed 4662 prompt-plus-completion tokens and ended before graph mutation."
+    ]
+  },
+  "architectural_delta": {
+    "projection_authority": "For controller-certificate graphs, full_subgoal_coverage is the sole direct-claim projection certificate used by proof recovery and branch commitment; weaker legacy extraction booleans cannot overwrite it.",
+    "prompt_inclusive_cost": "Verifier resource packets include a deterministic upper bound for evidence context, tuple schema, candidate count, and completion tokens for every requested sample.",
+    "feasibility": "Any exact-accounting packet whose prompt-plus-completion upper bound exceeds remaining tokens is removed before selection; high fidelity also preserves the existing critical-obligation reserve.",
+    "threshold_changed": false,
+    "training": false,
+    "per_question_or_answer_patch": false
+  },
+  "frozen_config": "configs/hara_v24322_qwen.yaml",
+  "frozen_manifests": {
+    "opened_causal_diagnostic": "configs/splits/musique_dynamic_v24317_opened_shadow_diagnostic.json",
+    "development_canary": "configs/splits/musique_dynamic_v24317_dev_canary_seed20260820.json",
+    "smoke_a": "configs/splits/musique_dynamic_seed20260820.json",
+    "shadow_c": "configs/splits/musique_hara_v24318_shadow_c_seed20260820.json",
+    "shadow_c_sha256": "167697c8924e3b5616f507aec6f7ab1cfb46be9de2cfce2589fafb79f8d3bd3c"
+  },
+  "execution_order": [
+    "opened causal diagnostic",
+    "development canary 5 if causal gate passes",
+    "Smoke-A20 regression if development passes",
+    "paired control/HARA Shadow-C20 without between-arm inspection if Smoke-A passes"
+  ],
+  "development_gate": {
+    "causal_correct_answer": "Minas Gerais",
+    "causal_correct_support_min": 0.70,
+    "causal_generic_false_support_max": 0.5025,
+    "causal_complete_separate_query_alignment_trace": true,
+    "canary_f1_min": 0.60,
+    "canary_full_chain_min": 0.80,
+    "canary_candidate_presence_min": 0.60,
+    "canary_graph_proof_completion_min": 0.80,
+    "unsupported_answer_count_max": 0,
+    "infrastructure_failure_count_max": 0
+  },
+  "campaign_budget_before_run": {
+    "campaign_id": "hara-v24318-iclr2027-20260827",
+    "provider_attempts": 167,
+    "provider_reported_tokens": 187395,
+    "hard_attempt_cap": 2000,
+    "hard_token_cap": 2000000
+  },
+  "stop_condition": "Continue generic no-training diagnosis and iteration after any development failure. Stop only on the full preregistered HARA gate plus committed safe-stop report, or before the next call would exceed the shared 2000-attempt/2000000-token hard cap."
+}
