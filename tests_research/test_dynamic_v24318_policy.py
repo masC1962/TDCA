@@ -15,6 +15,7 @@ from tdca_research.dynamic_v2.verifier import (
     _controller_query_alignment_certificates,
     _candidate_relation_concepts,
     _endpoint_in_anchors,
+    _endpoint_mentioned_in_description,
     _inverse_bound_output_role_certificate,
     _query_conditioned_signals,
     _relation_target_certificate,
@@ -372,6 +373,83 @@ def test_controller_relation_certificate_rejects_output_type_as_predicate():
         "has_border_troops", "GDR border guards",
         "Border troops of East Germany are from what country?",
     )
+
+
+def test_query_mentioned_endpoint_binding_handles_titles_and_connectors():
+    assert _endpoint_mentioned_in_description(
+        "La fida ninfa", "Who composed La fida ninfa?",
+    )
+    assert _endpoint_mentioned_in_description(
+        "Indian Rebellion of 1857",
+        "Which entity was dissolved after the Indian Rebellion in 1857?",
+    )
+    assert _endpoint_mentioned_in_description(
+        "palitaw", "What country does palitaw come from?",
+    )
+    assert not _endpoint_mentioned_in_description(
+        "British East India Company",
+        "Which entity was dissolved after the Indian Rebellion in 1857?",
+    )
+    assert not _endpoint_mentioned_in_description(
+        "country", "What country does palitaw come from?",
+    )
+
+
+def test_query_mentioned_title_becomes_controller_base_binding():
+    cfg = config(
+        query_conditioned_semantic_alignment=True,
+        controller_query_alignment_certificates=True,
+    )
+    controller = V2GraphController(cfg)
+    graph = empty_graph(cfg)
+    graph = controller.apply(graph, operation(
+        160, OperationType.EXPAND, payload={"subgoals": [{
+            "node_id": "s_root",
+            "question_template": "Who composed La fida ninfa?",
+            "instantiated_question": "Who composed La fida ninfa?",
+            "dependencies": [], "variable_bindings": {},
+            "answer_type": "person", "terminal": True,
+        }]},
+    ))
+    graph = controller.apply(graph, operation(
+        161, OperationType.RETRIEVE, target="s_root", payload={
+            "query": "Who composed La fida ninfa?",
+            "evidence": [{
+                "node_id": "e_title", "document_id": "p_title",
+                "passage_id": "p_title", "title": "La fida ninfa",
+                "source_span": "La fida ninfa was composed by Antonio Vivaldi.",
+                "retrieval_rank": 1, "retrieval_score": 1.0,
+                "retrieval_query": "Who composed La fida ninfa?",
+                "retriever_identity": "hybrid",
+            }],
+        },
+    ))
+    graph = controller.apply(graph, operation(
+        162, OperationType.BRANCH, target="s_root", payload={
+            "mode": "candidates", "candidates": [{
+                "node_id": "c_title", "subject": "La fida ninfa",
+                "relation": "composed_by", "value": "Antonio Vivaldi",
+                "subject_type": "creative_work", "value_type": "person",
+                "answer_type": "person", "evidence_refs": ["e_title"],
+                "source_spans": ["La fida ninfa was composed by Antonio Vivaldi."],
+                "dependency_claim_ids": [], "extraction_confidence": 1.0,
+            }]},
+    ))
+    claim = graph.node("c_title")
+    profiles = {"c_title": VerificationSignals(
+        1.0, 1.0, 1.0, 1.0, 1.0, 0.0, 1.0,
+    )}
+    legacy = _controller_query_alignment_certificates(
+        [claim], graph, "s_root", profiles, strict_endpoint_identity=True,
+    )["c_title"]
+    certified = _controller_query_alignment_certificates(
+        [claim], graph, "s_root", profiles, strict_endpoint_identity=True,
+        query_mentioned_endpoint_binding=True,
+    )["c_title"]
+    assert legacy["answer_position"] == "none"
+    assert certified["answer_position"] == "value"
+    assert certified["certificate"]["subject_base_bound"] is True
+    assert certified["certificate"]["value_base_bound"] is False
 
 
 def test_conjunctive_grounding_prevents_additive_support_compensation():

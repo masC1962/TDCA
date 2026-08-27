@@ -270,6 +270,12 @@ class DynamicV2ResearchConfig(DynamicResearchConfig):
     # modifiers as evidence-local origin candidates.
     independent_reachability_projection: bool = False
     deterministic_role_origin_projection: bool = False
+
+    # v2.4.3.31 binds tuple endpoints that are explicitly mentioned by the
+    # current subgoal before graph reachability is computed.  This repairs
+    # lower-case creative-work titles and connector-rich names without using
+    # an extractor answer label or a gold answer.
+    query_mentioned_endpoint_binding: bool = False
     terminal_min_relation_target_alignment: float = 0.70
     terminal_min_subject_binding_coverage: float = 0.70
     terminal_min_dependency_binding_coverage: float = 0.70

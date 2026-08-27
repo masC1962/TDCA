@@ -271,6 +271,9 @@ class MultiSampleIndependentVerifier:
                 independent_reachability_projection=(
                     self.config.independent_reachability_projection
                 ),
+                query_mentioned_endpoint_binding=(
+                    self.config.query_mentioned_endpoint_binding
+                ),
             )
             for candidate in candidates:
                 certificate = certificates[candidate.node_id]
@@ -601,6 +604,7 @@ def _controller_query_alignment_certificates(
     *,
     strict_endpoint_identity: bool = False,
     independent_reachability_projection: bool = False,
+    query_mentioned_endpoint_binding: bool = False,
 ) -> dict[str, dict[str, Any]]:
     """Certify query satisfaction without a second provider judgment.
 
@@ -624,6 +628,18 @@ def _controller_query_alignment_certificates(
         for value in constraint.get("known_entities", [])
         if normalize_text(str(value))
     }
+    if query_mentioned_endpoint_binding:
+        # The capitalized-span query compiler intentionally stays conservative,
+        # but that means titles such as "La fida ninfa" and names containing
+        # connectors or numbers can be truncated.  Candidate endpoints that
+        # are independently present in the literal subgoal are fixed inputs,
+        # not predicted answers.  Add only those endpoints to the controller's
+        # initial bindings; evidence scores and extractor projection labels are
+        # deliberately not consulted here.
+        for candidate in candidates:
+            for endpoint in (candidate.subject, candidate.value):
+                if _endpoint_mentioned_in_description(endpoint, description):
+                    base_anchors.add(normalize_text(endpoint))
     subgoal = graph.node(subgoal_id, SubgoalNode)
     branch_ids = {candidate.branch_id for candidate in candidates}
     for branch_id in branch_ids:
@@ -836,6 +852,46 @@ def _endpoint_in_anchors(
         ):
             return True
     return False
+
+
+def _endpoint_mentioned_in_description(endpoint: str, description: str) -> bool:
+    """Return whether a tuple endpoint is explicitly fixed by query text.
+
+    Exact normalized phrase containment is preferred.  A connector-insensitive
+    fallback handles only multi-token endpoints (or one distinctive token),
+    and requires every informative token to occur in the description.  This
+    permits "Indian Rebellion of 1857" to match "Indian Rebellion in 1857"
+    while preventing a generic token such as ``country`` from becoming a
+    controller binding.
+    """
+    value = normalize_text(endpoint)
+    query = normalize_text(description)
+    if not value or not query:
+        return False
+    connectors = {
+        "of", "in", "on", "at", "for", "to", "and", "or", "by", "from",
+        "with", "de", "del", "la", "van", "von",
+    }
+    generic = {
+        "city", "country", "county", "district", "division", "region",
+        "state", "province", "territory", "area", "entity", "person",
+        "organization", "company", "film", "song", "book", "work",
+    }
+    if value in generic:
+        return False
+    padded_query = f" {query} "
+    if f" {value} " in padded_query:
+        return True
+    endpoint_tokens = [
+        token for token in re.findall(r"[\w]+", value, re.UNICODE)
+        if token not in connectors and token not in generic
+    ]
+    if not endpoint_tokens:
+        return False
+    if len(endpoint_tokens) == 1 and len(endpoint_tokens[0]) < 5:
+        return False
+    query_tokens = set(re.findall(r"[\w]+", query, re.UNICODE))
+    return all(token in query_tokens for token in endpoint_tokens)
 
 
 _RELATION_INTENT_PATTERNS = (
